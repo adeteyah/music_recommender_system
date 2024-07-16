@@ -4,7 +4,7 @@ def load_data():
 def generate_recommendations():
     pass
 
-def write_log():
+def write_recommendations():
     pass
 
 def hf_cf_cbf_result(ids):
