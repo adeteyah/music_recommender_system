@@ -1,4 +1,3 @@
-import os
 import sqlite3
 import configparser
 import spotipy
@@ -12,14 +11,14 @@ config.read('config.cfg')
 SPOTIPY_CLIENT_ID = config['spotify']['client_id']
 SPOTIPY_CLIENT_SECRET = config['spotify']['client_secret']
 
-user_ids = ['p5hbktou7i2jh8ym7ulgs60uj']
+user_ids = ['fjg0qizm720wpo1n90suz089y']
 
 client_credentials_manager = SpotifyClientCredentials(
     client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 # SQLite database file path
-db_file = r'C:\Users\Adeteyah\Documents\music_recommender_system\data\db\playlists_details.db'
+db_file = config['db']['playlists_db']
 
 # Function to connect to SQLite database
 
@@ -32,23 +31,6 @@ def create_connection(db_file):
     except sqlite3.Error as e:
         print(e)
     return conn
-
-# Create table if not exists
-
-
-def create_table(conn):
-    try:
-        cursor = conn.cursor()
-        cursor.execute('''CREATE TABLE IF NOT EXISTS playlists (
-                            user_id TEXT,
-                            playlist_id TEXT,
-                            spotify_id TEXT,
-                            artists_id TEXT,
-                            PRIMARY KEY (user_id, playlist_id, spotify_id)
-                        )''')
-        conn.commit()
-    except sqlite3.Error as e:
-        print(e)
 
 # Function to save playlist details to SQLite database
 
@@ -111,8 +93,6 @@ for user_id in user_ids:
 
     conn = create_connection(db_file)
     if conn is not None:
-        create_table(conn)
-
         try:
             playlists = sp.user_playlists(user_id)
 
