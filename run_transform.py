@@ -139,6 +139,7 @@ def fill_songs_db_with_spotify():
     cursor.execute(
         "SELECT artist_id FROM artists WHERE artist_name = '' OR artist_genres = ''")
     artists_to_update = cursor.fetchall()
+    print(f"Artist To Update: {len(artists_to_update)} rows.")
     for artist_id_tuple in artists_to_update:
         artist_id = artist_id_tuple[0]
         artist_info = sp.artist(artist_id)
@@ -148,6 +149,7 @@ def fill_songs_db_with_spotify():
     # Fill missing track_name
     cursor.execute("SELECT track_id FROM tracks WHERE track_name = ''")
     tracks_to_update = cursor.fetchall()
+    print(f"Artist To Update: {len(tracks_to_update)} rows.")
     for track_id_tuple in tracks_to_update:
         track_id = track_id_tuple[0]
         track_info = sp.track(track_id)
