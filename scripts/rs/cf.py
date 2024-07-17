@@ -15,5 +15,5 @@ def cf_result(ids):
 
 
 if __name__ == "__main__":
-    ids = ['id1', 'id2']
+    ids = ['1uCDg9WDXzG5j1tVqnFNBR']
     cf_result(ids)
