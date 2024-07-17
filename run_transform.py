@@ -1,5 +1,4 @@
 import os
-import csv
 import pandas as pd
 import configparser
 
@@ -10,6 +9,7 @@ raw_path = config['dir']['raw']
 transformed_path = config['dir']['transformed']
 
 os.makedirs(transformed_path, exist_ok=True)
+
 
 def clean_csv(file_path, output_path):
 
@@ -23,6 +23,7 @@ def clean_csv(file_path, output_path):
         print(f"Saved cleaned data to {output_path}")
     else:
         print(f"Skipped {file_path}, less than {num} tracks.")
+
 
 for filename in os.listdir(raw_path):
     if filename.endswith('.csv'):
