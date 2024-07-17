@@ -83,7 +83,7 @@ def fill_tracks_table():
         for track in tracks:
             track_id = track[0]
             try:
-                track_info = sp.track(track_id)
+                track_info = sp.track(track_id, market='ID', limit=1)
                 track_name = track_info['name']
                 cursor.execute(
                     "UPDATE tracks SET track_name = ? WHERE track_id = ?", (track_name, track_id))
