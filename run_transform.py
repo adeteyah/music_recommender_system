@@ -13,9 +13,7 @@ transformed_path = config['dir']['transformed']
 
 
 def transform_raw_csv(file_path, output_path):
-
     df = pd.read_csv(file_path)
-
     df.drop_duplicates(subset=['spotify_id'], inplace=True)
 
     num = 5
@@ -35,7 +33,9 @@ for filename in os.listdir(raw_path):
 # Process transformed data to JSON Database
 
 
-def load_json(file_path):
+def load_json(file_path, default_data):
+    if not os.path.exists(file_path) or os.path.getsize(file_path) == 0:
+        return default_data
     with open(file_path, 'r', encoding='utf-8') as file:
         return json.load(file)
 
@@ -57,8 +57,7 @@ def update_json(csv_file, tracks_json, artists_json):
             if track['id'] == track_id:
                 track_exists = True
                 track['artist_ids'].extend(artist_ids)
-                track['artist_ids'] = list(
-                    set(track['artist_ids']))
+                track['artist_ids'] = list(set(track['artist_ids']))
                 break
 
         if not track_exists:
@@ -78,7 +77,6 @@ def update_json(csv_file, tracks_json, artists_json):
             if not artist_exists:
                 artists_json['artists'].append({
                     "id": artist_id,
-
                     "name": f"{artist_id}",
                     "genres": []
                 })
@@ -88,8 +86,12 @@ playlists_json_path = config['file']['playlists_json']
 artists_json_path = config['file']['artists_json']
 tracks_json_path = config['file']['tracks_json']
 
-tracks_json = load_json(tracks_json_path)
-artists_json = load_json(artists_json_path)
+# Initialize default structures
+default_tracks_json = {"tracks": []}
+default_artists_json = {"artists": []}
+
+tracks_json = load_json(tracks_json_path, default_tracks_json)
+artists_json = load_json(artists_json_path, default_artists_json)
 
 for filename in os.listdir(transformed_path):
     if filename.endswith('.csv'):
