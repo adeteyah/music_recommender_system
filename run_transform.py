@@ -71,7 +71,7 @@ def process_transformed_csv(transformed_path, artists_db_path, tracks_db_path):
             track_data = [
                 {
                     "track_id": row['spotify_id'],
-                    "track_name": row['spotify_id'],
+                    "track_name": "",
                     "artist_ids": json.dumps(row['artists_id'].split(','))
                 }
                 for _, row in df.iterrows()
@@ -87,17 +87,13 @@ def process_transformed_csv(transformed_path, artists_db_path, tracks_db_path):
             artist_data = [
                 {
                     "artist_id": artist_id,
-                    "artist_name": "",  # Placeholder, adjust as necessary
-                    # Placeholder, adjust as necessary
-                    "artist_genres": json.dumps([])
+                    "artist_name": "",
+                    "artist_genres": ""
                 }
                 for artist_id in artists
             ]
             insert_data_into_db(artists_db_path, 'artists', artist_data)
 
-
-# Create the tables if they don't exist
-create_tables()
 
 # Process the transformed CSV files and insert data into the databases
 process_transformed_csv(transformed_path, artists_db_path, tracks_db_path)
