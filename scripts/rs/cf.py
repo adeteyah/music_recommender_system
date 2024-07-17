@@ -100,6 +100,7 @@ def cf_result(ids):
 
 
 if __name__ == "__main__":
-    ids = ['5xNUR50KxswPRAvx7S163g', '66y7x28jXOPrcmu3D5Zjh6']
+    ids = ['5xNUR50KxswPRAvx7S163g', '66y7x28jXOPrcmu3D5Zjh6',
+           '05BNReYSRjMs0gL2Nq9DX6', '05eqt8RvGphc7EpuAR0e20']
     result = cf_result(ids)
     print(f'CF Recommendation is stored in {output_path}')
