@@ -155,9 +155,8 @@ def process_transformed_csv(transformed_path, artists_db_path, tracks_db_path):
             artist_data = [
                 {
                     "id": artist_id,
-                    "name": "",  # Assuming you have a way to get the artist name
-                    # Assuming you have a way to get the artist genres
-                    "genres": json.dumps([])
+                    "name": "",
+                    "genres": ""
                 }
                 for artist_id in artists
             ]
