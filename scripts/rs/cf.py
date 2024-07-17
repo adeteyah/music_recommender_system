@@ -5,7 +5,8 @@ import configparser
 config = configparser.ConfigParser()
 config.read('config.cfg')
 
-src = config['dir']['transformed']
+db_playlist = config['db']['playlists_db']
+db_songs = config['db']['songs_db']
 
 
 def load_data(src):
