@@ -166,7 +166,7 @@ def choose_process():
 
         return_to_menu = input(
             "Return to menu or exit program (Y/N)? ").strip().upper()
-        if return_to_menu != 'Y' or 'y':
+        if return_to_menu != 'Y':
             print("Exiting the program.")
             break
 
