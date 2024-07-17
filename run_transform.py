@@ -86,27 +86,36 @@ def fill_database_with_spotify_api(songs_db_path):
     # Function to update track names
     def update_track_names():
         query = "SELECT track_id FROM tracks WHERE track_name = ''"
+        print('Running query...')
         cursor.execute(query)
+        print('Fetching all cursor...')
         tracks_to_update = cursor.fetchall()
         updated_tracks = []
+        print('Iterating tracks id...')
         for track_id in tracks_to_update:
             try:
+                print(f'Fetching track name for {track_id}')
                 track_info = sp.track(track_id[0])
                 track_name = track_info['name']
                 updated_tracks.append((track_id[0], track_name, 1))
             except:
                 # Track name not found
+                print(f'Track name not found for {track_id}')
                 updated_tracks.append((track_id[0], '', 0))
         return updated_tracks
 
     # Function to update artist names and genres
     def update_artist_info():
         query = "SELECT artist_id FROM artists WHERE artist_name = '' OR artist_genres = ''"
+        print('Running query...')
         cursor.execute(query)
+        print('Fetching all cursor...')
         artists_to_update = cursor.fetchall()
         updated_artists = []
+        print('Iterating artists id...')
         for artist_id in artists_to_update:
             try:
+                print(f'Fetching track name for {artist_id}')
                 artist_info = sp.artist(artist_id[0])
                 artist_name = artist_info['name']
                 artist_genres = ",".join(artist_info['genres'])
@@ -114,6 +123,7 @@ def fill_database_with_spotify_api(songs_db_path):
                     (artist_id[0], artist_name, artist_genres, 1))
             except:
                 # Artist info not found
+                print(f'Track name not found for {artist_id}')
                 updated_artists.append((artist_id[0], '', '', 0))
         return updated_artists
 
