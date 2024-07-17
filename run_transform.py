@@ -1,4 +1,3 @@
-import json
 import sqlite3
 import os
 import pandas as pd
@@ -72,7 +71,7 @@ def process_transformed_csv(transformed_path, artists_db_path, tracks_db_path):
                 {
                     "track_id": row['spotify_id'],
                     "track_name": "",
-                    "artist_ids": json.dumps(row['artists_id'].split(','))
+                    "artist_ids": ",".join(row['artists_id'].split(','))
                 }
                 for _, row in df.iterrows()
             ]
