@@ -68,6 +68,12 @@ CREATE TABLE IF NOT EXISTS playlists (
 
 CREATE INDEX IF NOT EXISTS idx_playlist_id ON playlists (playlist_id);
 CREATE INDEX IF NOT EXISTS idx_creator_id ON playlists (creator_id);
+
+CREATE TABLE IF NOT EXISTS tracks (
+    playlist_id TEXT PRIMARY KEY,
+    creator_id TEXT,
+    playlist_track_count INTEGER
+);
 """
 
 create_database("data/db/songs_details.db", songs_schema)
