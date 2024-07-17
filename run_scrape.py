@@ -18,7 +18,7 @@ client_credentials_manager = SpotifyClientCredentials(
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 # SQLite database file path
-db_file = r'C:\Users\Adeteyah\Documents\music_recommender_system\data\db\playlists_details.db'
+db_file = config['db']['playlists_db']
 
 # Function to connect to SQLite database
 
@@ -35,7 +35,7 @@ def create_connection(db_file):
 # Function to save playlist details to SQLite database
 
 
-def save_playlist_to_database(user_id, playlist_id, fetched_artists, conn):
+def save_playlist_to_database(user_id, playlist_id, conn):
     try:
         # Fetch playlist details
         playlist = sp.playlist(playlist_id)
@@ -98,7 +98,7 @@ for user_id in user_ids:
             for playlist in playlists['items']:
                 playlist_id = playlist['id']
                 save_playlist_to_database(
-                    user_id, playlist_id, fetched_artists, conn)
+                    user_id, playlist_id, conn)
 
             fetched_users.add(user_id)
 
