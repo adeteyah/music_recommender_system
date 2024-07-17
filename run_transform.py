@@ -137,6 +137,7 @@ def choose_process():
     print("1. Transform raw CSV files")
     print("2. Insert data into database")
     print("3. Fill playlist database")
+    print("4. Fill songs database")
     choice = input("Enter your choice (1, 2, or 3): ")
 
     if choice == '1':
