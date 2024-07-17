@@ -55,8 +55,7 @@ CREATE TABLE IF NOT EXISTS tracks (
 playlist_schema = """
 CREATE TABLE IF NOT EXISTS playlists (
     playlist_id TEXT PRIMARY KEY,
-    creator_id TEXT,
-    playlist_genres TEXT
+    creator_id TEXT
 );
 """
 
