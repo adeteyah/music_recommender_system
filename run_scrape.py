@@ -130,4 +130,4 @@ with open(fetched_artists_file, 'w') as f:
     for artist_id in fetched_artists:
         f.write(artist_id + '\n')
 
-print("Data import completed.")
+print("Scrape completed.")
