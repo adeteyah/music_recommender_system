@@ -94,8 +94,17 @@ def fill_database_with_spotify_api(songs_db_path):
             cursor.execute(
                 "UPDATE tracks SET track_name = ? WHERE track_id = ?", (track_name, track_id[0]))
             print(f"Updated track {track_id[0]} with name: {track_name}")
-        except:
-            print(f"Failed to fetch track info for track ID: {track_id[0]}")
+        except spotipy.SpotifyException as e:
+            if e.http_status == 429:
+                print(f"Rate limit exceeded. Last processed track: {
+                      track_id[0]}")
+                break  # Stop further processing
+            else:
+                print(f"Spotify error: {e}")
+                break  # Stop further processing
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            break  # Stop further processing
 
     # Fetch artists with null artist_name and artist_genres
     cursor.execute("SELECT artist_id FROM artists WHERE artist_name IS NULL")
@@ -110,8 +119,17 @@ def fill_database_with_spotify_api(songs_db_path):
                            (artist_name, artist_genres, artist_id[0]))
             print(f"Updated artist {artist_id[0]} with name: {
                   artist_name} and genres: {artist_genres}")
-        except:
-            print(f"Failed to fetch artist info for artist ID: {artist_id[0]}")
+        except spotipy.SpotifyException as e:
+            if e.http_status == 429:
+                print(f"Rate limit exceeded. Last processed artist: {
+                      artist_id[0]}")
+                break  # Stop further processing
+            else:
+                print(f"Spotify error: {e}")
+                break  # Stop further processing
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            break  # Stop further processing
 
     conn.commit()
     conn.close()
