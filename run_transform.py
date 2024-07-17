@@ -11,6 +11,7 @@ config = configparser.ConfigParser()
 config.read('config.cfg')
 
 songs_db_path = config['db']['songs_db']
+playlists_db_path = config['db']['playlists_db']
 SPOTIPY_CLIENT_ID = config['spotify']['client_id']
 SPOTIPY_CLIENT_SECRET = config['spotify']['client_secret']
 
@@ -127,7 +128,8 @@ def fill_playlist_db():
                 "playlist_id": playlist_id,
                 "playlist_track_count": len(df)
             }
-            insert_data_into_db(songs_db_path, 'playlists', [playlist_data])
+            insert_data_into_db(playlists_db_path,
+                                'playlists', [playlist_data])
 
 
 def choose_process():
