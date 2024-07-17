@@ -19,7 +19,7 @@ def cf_result(ids):
     cursor_songs = conn_songs.cursor()
 
     # Find all playlists that contain the given track IDs
-    query = "SELECT playlist_id, playlist_items FROM playlists"
+    query = "SELECT playlist_id, playlist_items FROM items"
     cursor_playlist.execute(query)
     playlists = cursor_playlist.fetchall()
 
