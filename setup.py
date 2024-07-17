@@ -17,6 +17,7 @@ def install_directories():
         "data/cache/fetched_users.txt",
         "data/cache/fetched_artists.txt"
         "data/cache/track_details.json"
+        "data/cache/artists_details.json"
     ]
 
     for directory in directories:
