@@ -1,96 +1,146 @@
-import sqlite3
 import time
-import subprocess
-import sys
-from pathlib import Path
+import sqlite3
+import configparser
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+from spotipy.exceptions import SpotifyException
 
-start = time.time()
+# Load configuration
+config = configparser.ConfigParser()
+config.read('config.cfg')
 
+SPOTIPY_CLIENT_ID = config['spotify']['client_id']
+SPOTIPY_CLIENT_SECRET = config['spotify']['client_secret']
 
-def install_directories():
-    directories = [
-        "data/cache",
-        "data/db",
-        "result/"
-    ]
+user_ids = ['qcrlh1oc77h7lhhk7qxvwk1j1']
 
-    files = [
-        "data/cache/fetched_users.txt",  # store scraped users
-        "data/cache/fetched_artists.txt",  # store scraped artists
-        "data/db/playlists_details.db",  # store playlist characteristic
-        "data/db/songs_details.db",  # store title and artists id, artist name and genres
-    ]
+client_credentials_manager = SpotifyClientCredentials(
+    client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-    for directory in directories:
-        path = Path(directory)
-        path.mkdir(parents=True, exist_ok=True)
+# SQLite database file path
+db_file = config['db']['playlists_db']
 
-    for file in files:
-        path = Path(file)
-        if not path.exists():
-            path.touch()
+# Function to connect to SQLite database
 
 
-def create_database(db_path, schema):
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    cursor.executescript(schema)
-    conn.commit()
-    conn.close()
+def create_connection(db_file):
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+        return conn
+    except sqlite3.Error as e:
+        print(e)
+    return conn
+
+# Function to save playlist details to SQLite database
 
 
-songs_schema = """
-CREATE TABLE IF NOT EXISTS artists (
-    artist_id TEXT PRIMARY KEY,
-    artist_name TEXT,
-    artist_genres TEXT
-);
+def save_playlist_to_database(user_id, playlist_id, conn):
+    try:
+        # Fetch playlist details
+        playlist = sp.playlist(playlist_id)
 
-CREATE INDEX IF NOT EXISTS idx_artists_artist_id ON artists (artist_id);
+        # Only process playlists with more than 15 tracks
+        if playlist['tracks']['total'] <= 15:
+            print(f"Skipping playlist {playlist_id}, not enough tracks.")
+            return
 
-CREATE TABLE IF NOT EXISTS tracks (
-    track_id TEXT PRIMARY KEY,
-    track_name TEXT,
-    artist_ids TEXT
-);
+        # Insert or update playlists table
+        cursor = conn.cursor()
+        cursor.execute('''INSERT OR IGNORE INTO playlists (playlist_id, creator_id, playlist_track_count)
+                          VALUES (?, ?, ?)''',
+                       (playlist_id, user_id, playlist['tracks']['total']))
+        conn.commit()
 
-CREATE INDEX IF NOT EXISTS idx_tracks_track_id ON tracks (track_id);
-"""
+        # Insert items into items table
+        tracks = playlist['tracks']['items'][:50]  # Fetch only 50 tracks
+        playlist_items = ','.join([track['track']['id'] for track in tracks])
 
-playlist_schema = """
-CREATE TABLE IF NOT EXISTS playlists (
-    playlist_id TEXT PRIMARY KEY,
-    creator_id TEXT,
-    playlist_track_count INTEGER
-);
+        cursor.execute('''INSERT OR REPLACE INTO items (playlist_id, playlist_items)
+                          VALUES (?, ?)''',
+                       (playlist_id, playlist_items))
+        conn.commit()
 
-CREATE INDEX IF NOT EXISTS idx_playlist_id ON playlists (playlist_id);
-CREATE INDEX IF NOT EXISTS idx_creator_id ON playlists (creator_id);
+        print(f"Saved playlist details for {playlist_id}")
+        time.sleep(2.5)
 
-CREATE TABLE IF NOT EXISTS items (
-    playlist_id TEXT PRIMARY KEY,
-    playlist_items TEXT
-);
-
-CREATE INDEX IF NOT EXISTS idx_playlist_id ON items (playlist_id);
-CREATE INDEX IF NOT EXISTS idx_playlist_items ON items (playlist_items);
-"""
-
-create_database("data/db/songs_details.db", songs_schema)
-create_database("data/db/playlists_details.db", playlist_schema)
+    except SpotifyException as e:
+        if e.http_status == 429:
+            print(f"Rate limit exceeded. Last processed playlist: {
+                  playlist_id}")
+        else:
+            print(f"Spotify error: {e}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 
-def install_packages(packages):
-    for package in packages:
-        subprocess.check_call(
-            [sys.executable, "-m", "pip", "install", package])
+# Load fetched user IDs from file
+fetched_users_file = config['file']['fetched_users']
+try:
+    with open(fetched_users_file, 'r') as f:
+        fetched_users = set(f.read().splitlines())
+except FileNotFoundError:
+    fetched_users = set()
 
+# Load fetched artist IDs from file
+fetched_artists_file = config['file']['fetched_artists']
+try:
+    with open(fetched_artists_file, 'r') as f:
+        fetched_artists = set(f.read().splitlines())
+except FileNotFoundError:
+    fetched_artists = set()
 
-if __name__ == "__main__":
-    install_directories()
-    packages = ["configparser", "requests", "spotipy",
-                "pandas", "sqlalchemy", "matplotlib", "seaborn"]
-    install_packages(packages)
+# Process each user
+for user_id in user_ids:
+    if user_id in fetched_users:
+        print(f"Skipping {user_id}, already fetched.")
+        continue
 
-end = time.time()
-print("\nExecution time: ", end - start)
+    conn = create_connection(db_file)
+    if conn is not None:
+        try:
+            offset = 0
+            limit = 50
+            while True:
+                playlists = sp.user_playlists(
+                    user_id, offset=offset, limit=limit)
+                if not playlists['items']:
+                    break
+
+                for playlist in playlists['items']:
+                    # Only process public playlists
+                    if playlist['public']:
+                        playlist_id = playlist['id']
+                        save_playlist_to_database(user_id, playlist_id, conn)
+
+                if len(playlists['items']) < limit:
+                    break
+
+                offset += limit
+
+            fetched_users.add(user_id)
+
+        except SpotifyException as e:
+            if e.http_status == 429:
+                print(f"Rate limit exceeded. Last processed user: {user_id}")
+            else:
+                print(f"Spotify error: {e}")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+        conn.close()
+    else:
+        print("Error! Cannot create the database connection.")
+
+# Save updated fetched user IDs to file
+with open(fetched_users_file, 'w') as f:
+    for user_id in fetched_users:
+        f.write(user_id + '\n')
+
+# Save updated fetched artist IDs to file
+with open(fetched_artists_file, 'w') as f:
+    for artist_id in fetched_artists:
+        f.write(artist_id + '\n')
+
+print("Scrape completed.")
