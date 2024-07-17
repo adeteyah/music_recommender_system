@@ -125,8 +125,7 @@ def fill_playlist_db():
             playlist_data = {
                 "creator_id": creator_id,
                 "playlist_id": playlist_id,
-                "playlist_name": "",
-                "track_count": len(df)
+                "playlist_track_count": len(df)
             }
             insert_data_into_db(songs_db_path, 'playlists', [playlist_data])
 

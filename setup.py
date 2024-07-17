@@ -62,7 +62,8 @@ CREATE INDEX IF NOT EXISTS idx_tracks_track_id ON tracks (track_id);
 playlist_schema = """
 CREATE TABLE IF NOT EXISTS playlists (
     playlist_id TEXT PRIMARY KEY,
-    creator_id TEXT
+    creator_id TEXT,
+    playlist_track_count TEXT, 
 );
 
 CREATE INDEX IF NOT EXISTS idx_playlist_id ON playlists (playlist_id);
