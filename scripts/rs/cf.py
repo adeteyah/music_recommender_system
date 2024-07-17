@@ -43,9 +43,16 @@ def cf_result(ids):
         print(playlist)
 
     matched_playlists = generate_recommendations(playlists, ids)
+
+    # Prepare formatted recommendation text
+    formatted_recommendations = []
     for playlist in matched_playlists:
-        print(f"Matched playlist: {
-              playlist['playlist_id']} (Spotify ID: {playlist['spotify_id']})")
+        formatted_recommendations.append(f"{playlist['creator_id']} - {playlist['spotify_id']} | Playlist {
+                                         playlist['playlist_id']} by Creator {playlist['creator_id']}")
+
+    # Write formatted recommendations to a text file
+    with open('cf_recommendation.txt', 'w') as file:
+        file.write("\n".join(formatted_recommendations))
 
     return f"Stored result on {ids}!"
 
