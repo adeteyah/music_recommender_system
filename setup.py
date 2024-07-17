@@ -17,9 +17,9 @@ def install_directories():
     files = [
         "data/cache/fetched_users.txt",  # store scraped users
         "data/cache/fetched_artists.txt",  # store scraped artists
-        "data/cache/playlists_details.db",  # store playlist characteristic
-        "data/cache/tracks_details.db",  # store title and artists id
-        "data/cache/artists_details.db"  # store artist name and genres
+        "data/db/playlists_details.db",  # store playlist characteristic
+        "data/db/tracks_details.db",  # store title and artists id
+        "data/db/artists_details.db"  # store artist name and genres
     ]
 
     for directory in directories:
@@ -56,8 +56,8 @@ CREATE TABLE IF NOT EXISTS tracks (
 );
 """
 
-create_database("data/cache/artists_details.db", artist_schema)
-create_database("data/cache/tracks_details.db", track_schema)
+create_database("data/db/artists_details.db", artist_schema)
+create_database("data/db/tracks_details.db", track_schema)
 
 
 def install_packages(packages):
