@@ -11,7 +11,7 @@ config.read('config.cfg')
 SPOTIPY_CLIENT_ID = config['spotify']['client_id']
 SPOTIPY_CLIENT_SECRET = config['spotify']['client_secret']
 
-user_ids = ['hyxtvqg8fbh2fa6k2rgugfun2']
+user_ids = ['qcrlh1oc77h7lhhk7qxvwk1j1']
 
 client_credentials_manager = SpotifyClientCredentials(
     client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
