@@ -133,7 +133,7 @@ def fill_songs_db_with_spotify():
 
     # Updating tracks
     while True:
-        cursor.execute("SELECT * FROM tracks WHERE track_name = '' LIMIT 100")
+        cursor.execute("SELECT * FROM tracks WHERE track_name = '' LIMIT 5")
         tracks = cursor.fetchall()
         if not tracks:
             break
@@ -154,7 +154,7 @@ def fill_songs_db_with_spotify():
     # Updating artists
     while True:
         cursor.execute(
-            "SELECT * FROM artists WHERE artist_name = '' LIMIT 100")
+            "SELECT * FROM artists WHERE artist_name = '' LIMIT 5")
         artists = cursor.fetchall()
         if not artists:
             break
