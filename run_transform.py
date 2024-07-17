@@ -145,6 +145,7 @@ def fill_songs_db_with_spotify():
         artist_info = sp.artist(artist_id)
         cursor.execute("UPDATE artists SET artist_name = ?, artist_genres = ? WHERE artist_id = ?",
                        (artist_info['name'], ','.join(artist_info['genres']), artist_id))
+        print(f'Updated track name to {artist_id}')
 
     # Fill missing track_name
     cursor.execute("SELECT track_id FROM tracks WHERE track_name = ''")
@@ -155,6 +156,7 @@ def fill_songs_db_with_spotify():
         track_info = sp.track(track_id)
         cursor.execute("UPDATE tracks SET track_name = ? WHERE track_id = ?",
                        (track_info['name'], track_id))
+        print(f'Updated track name to {track_id}')
 
     conn.commit()
     conn.close()
