@@ -12,16 +12,16 @@ config.read('config.cfg')
 SPOTIPY_CLIENT_ID = config['spotify']['client_id']
 SPOTIPY_CLIENT_SECRET = config['spotify']['client_secret']
 
-user_ids = ['qcrlh1oc77h7lhhk7qxvwk1j1']
+user_ids = ['mfahmihdyt', '5kiix74ac3smhdwhd3rot5trq', 'r1mwtxwamwam6y3wngtlpbp8f', '31zrjhao6y2bchstgqzuvlj6gxru', '31eux5j4xfx45bpenuabhwm7ig64', '315yinp5n6muslkat2ertawswlsa', 'mav946uiwcow86or660mp3xk5', 'e20w0n5qg1jlp0x400oy5w89v', 'ufnooj8rw6femcbkbuzyn4cbd', '21pqwmpmcutzemesmqlx2nibi', 'x5eijockr7nni1ul6voobw25w', 'alencdds', 'lqsgdj8cbtsieuuneyx6dqpl1', '31a7243toh5tgcgzr74xrthdoe5q', '11iuk5uvfcupr3y347ptii20a', 'aderizkyputri', '21vxtd4uv2wte6r64r476ccyq', 'cmgjyapu6niye85lasaht8acq', 'edgardomenic', '21pwax2j6lg7c7nf3lu5bi7ga', 'rmwqd50o99rmd6thg8zd99w9q',
+            '31m66xdbx5u3ct5dhydhrakjfimi', 'thelorgorenk', '313jkbzmyb2sbpvq55c6pvl67lcm', 'az10shokjxa5lnbg2iuymr7yt', '21ofvvkw6dr52jjcpucv3fgna', '04sza9infee7w11b213snaek3', '31kqdaxzao3ik62c25v3gdpivpae', '9agwjftrhb05vrpgkykb5jd4h', 'diatyo', '01f3ueieht1cs6l3azpll97v4', 'u12mt9hqrpl8suxpuoahb5agv', '31ho4muai7tzdertxq76nfri3ab4', 'khatamiy', '21o6lrhhvcawki7hwp4b6jpeq', '8nipm520gxvxon8ze0s3zblgi', 'qjvwdfnldn27ro7713yxb00pb', '21x53g3wuugdyfrcbyjf7jtyqhttps', '21buf45wkhxocbtmqospmilfa', '31bwpmybiyutryd3l3rug4lbvvxu', '4xr9iteppqf6b8d3w0u3mrdwt']
 
 client_credentials_manager = SpotifyClientCredentials(
     client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-# SQLite database file path
-db_file = config['db']['playlists_db']
-
-# Function to connect to SQLite database
+# SQLite database file paths
+playlists_db_path = config['db']['playlists_db']
+songs_db_path = config['db']['songs_db']
 
 
 def create_connection(db_file):
@@ -33,28 +33,22 @@ def create_connection(db_file):
         print(e)
     return conn
 
-# Function to save playlist details to SQLite database
-
 
 def save_playlist_to_database(user_id, playlist_id, conn):
     try:
-        # Fetch playlist details
         playlist = sp.playlist(playlist_id)
 
-        # Only process playlists with more than 15 tracks
-        if playlist['tracks']['total'] <= 15:
+        if playlist['tracks']['total'] <= 5:
             print(f"Skipping playlist {playlist_id}, not enough tracks.")
             return
 
-        # Insert or update playlists table
         cursor = conn.cursor()
         cursor.execute('''INSERT OR IGNORE INTO playlists (playlist_id, creator_id, playlist_track_count)
                           VALUES (?, ?, ?)''',
                        (playlist_id, user_id, playlist['tracks']['total']))
         conn.commit()
 
-        # Insert items into items table
-        tracks = playlist['tracks']['items'][:50]  # Fetch only 50 tracks
+        tracks = playlist['tracks']['items'][:66]
         playlist_items = ','.join([track['track']['id'] for track in tracks])
 
         cursor.execute('''INSERT OR REPLACE INTO items (playlist_id, playlist_items)
@@ -62,8 +56,11 @@ def save_playlist_to_database(user_id, playlist_id, conn):
                        (playlist_id, playlist_items))
         conn.commit()
 
+        insert_track_ids_into_tracks(tracks)
+        insert_artist_ids_into_artists(tracks)
+
         print(f"Saved playlist details for {playlist_id}")
-        time.sleep(2.5)
+        time.sleep(float(config['api']['delay_time']))
 
     except SpotifyException as e:
         if e.http_status == 429:
@@ -75,7 +72,34 @@ def save_playlist_to_database(user_id, playlist_id, conn):
         print(f"An error occurred: {e}")
 
 
-# Load fetched user IDs from file
+def insert_track_ids_into_tracks(tracks):
+    conn = create_connection(songs_db_path)
+    cursor = conn.cursor()
+
+    for track_item in tracks:
+        track_id = track_item['track']['id']
+        cursor.execute(
+            "INSERT OR IGNORE INTO tracks (track_id) VALUES (?)", (track_id,))
+
+    conn.commit()
+    conn.close()
+
+
+def insert_artist_ids_into_artists(tracks):
+    conn = create_connection(songs_db_path)
+    cursor = conn.cursor()
+
+    for track_item in tracks:
+        artists = track_item['track']['artists']
+        for artist in artists:
+            artist_id = artist['id']
+            cursor.execute(
+                "INSERT OR IGNORE INTO artists (artist_id) VALUES (?)", (artist_id,))
+
+    conn.commit()
+    conn.close()
+
+
 fetched_users_file = config['file']['fetched_users']
 try:
     with open(fetched_users_file, 'r') as f:
@@ -83,28 +107,28 @@ try:
 except FileNotFoundError:
     fetched_users = set()
 
-# Load fetched artist IDs from file
-fetched_artists_file = config['file']['fetched_artists']
-try:
-    with open(fetched_artists_file, 'r') as f:
-        fetched_artists = set(f.read().splitlines())
-except FileNotFoundError:
-    fetched_artists = set()
-
-# Process each user
 for user_id in user_ids:
     if user_id in fetched_users:
         print(f"Skipping {user_id}, already fetched.")
         continue
 
-    conn = create_connection(db_file)
+    conn = create_connection(playlists_db_path)
     if conn is not None:
         try:
-            playlists = sp.user_playlists(user_id)
+            offset = 0
+            limit = 50  # Spotify API maximum limit per request is 50
+            while True:
+                playlists = sp.user_playlists(
+                    user_id, offset=offset, limit=limit)
+                if not playlists['items']:
+                    break
 
-            for playlist in playlists['items']:
-                playlist_id = playlist['id']
-                save_playlist_to_database(user_id, playlist_id, conn)
+                for playlist in playlists['items']:
+                    if playlist['public']:
+                        playlist_id = playlist['id']
+                        save_playlist_to_database(user_id, playlist_id, conn)
+
+                offset += limit  # Move to the next batch of playlists
 
             fetched_users.add(user_id)
 
@@ -120,14 +144,8 @@ for user_id in user_ids:
     else:
         print("Error! Cannot create the database connection.")
 
-# Save updated fetched user IDs to file
 with open(fetched_users_file, 'w') as f:
     for user_id in fetched_users:
         f.write(user_id + '\n')
-
-# Save updated fetched artist IDs to file
-with open(fetched_artists_file, 'w') as f:
-    for artist_id in fetched_artists:
-        f.write(artist_id + '\n')
 
 print("Scrape completed.")
