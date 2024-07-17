@@ -21,7 +21,6 @@ client_credentials_manager = SpotifyClientCredentials(
 )
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-
 raw_path = config['dir']['raw']
 transformed_path = config['dir']['transformed']
 
@@ -132,13 +131,41 @@ def fill_playlist_db():
                                 'playlists', [playlist_data])
 
 
+def fill_songs_db_with_spotify():
+    conn = sqlite3.connect(songs_db_path)
+    cursor = conn.cursor()
+
+    # Fill missing artist_name and artist_genres
+    cursor.execute(
+        "SELECT artist_id FROM artists WHERE artist_name = '' OR artist_genres = ''")
+    artists_to_update = cursor.fetchall()
+    for artist_id_tuple in artists_to_update:
+        artist_id = artist_id_tuple[0]
+        artist_info = sp.artist(artist_id)
+        cursor.execute("UPDATE artists SET artist_name = ?, artist_genres = ? WHERE artist_id = ?",
+                       (artist_info['name'], ','.join(artist_info['genres']), artist_id))
+
+    # Fill missing track_name
+    cursor.execute("SELECT track_id FROM tracks WHERE track_name = ''")
+    tracks_to_update = cursor.fetchall()
+    for track_id_tuple in tracks_to_update:
+        track_id = track_id_tuple[0]
+        track_info = sp.track(track_id)
+        cursor.execute("UPDATE tracks SET track_name = ? WHERE track_id = ?",
+                       (track_info['name'], track_id))
+
+    conn.commit()
+    conn.close()
+    print("Songs database filled with Spotify data.")
+
+
 def choose_process():
     print("Choose a process to run:")
     print("1. Transform raw CSV files")
     print("2. Insert data into database")
     print("3. Fill playlist database")
-    print("4. Fill songs database")
-    choice = input("Enter your choice (1, 2, or 3): ")
+    print("4. Fill songs database with Spotify data")
+    choice = input("Enter your choice (1, 2, 3, or 4): ")
 
     if choice == '1':
         for filename in os.listdir(raw_path):
@@ -153,8 +180,11 @@ def choose_process():
     elif choice == '3':
         fill_playlist_db()
         print("Playlist DB filled with current data.")
+    elif choice == '4':
+        fill_songs_db_with_spotify()
+        print("Songs DB filled with Spotify data.")
     else:
-        print("Invalid choice. Please enter '1', '2', or '3'.")
+        print("Invalid choice. Please enter '1', '2', '3', or '4'.")
 
 
 if __name__ == "__main__":
