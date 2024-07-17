@@ -34,6 +34,7 @@ def write_recommendations():
 
 
 def cf_result(ids):
+    matched_playlists = generate_recommendations(playlists, ids)
     return print(f"Stored result on {ids}!")
 
 
