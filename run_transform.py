@@ -146,10 +146,10 @@ def fill_songs_db_with_spotify():
                 track_name = track_info['name']
                 cursor.execute(
                     "UPDATE tracks SET track_name = ? WHERE track_id = ?", (track_name, track_id))
-                print(f'Updated track name for {track_info}: {track_name}')
+                print(f'Updated track name for {track_id}: {track_name}')
             except SpotifyException as e:
                 print(f"Error fetching track {track_id}: {e}")
-        time.sleep(0.1)
+        time.sleep(2)
         conn.commit()
 
     # Updating artists
@@ -169,10 +169,10 @@ def fill_songs_db_with_spotify():
                 cursor.execute("UPDATE artists SET artist_name = ?, artist_genres = ? WHERE artist_id = ?",
                                (artist_name, artist_genres, artist_id))
                 print(f'Updated artist name, genres for {
-                      artist_info}: {artist_name}, {artist_genres}')
+                      artist_id}: {artist_name}, {artist_genres}')
             except SpotifyException as e:
                 print(f"Error fetching artist {artist_id}: {e}")
-        time.sleep(0.1)
+        time.sleep(2)
         conn.commit()
 
     conn.close()
