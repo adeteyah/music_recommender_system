@@ -3,7 +3,9 @@ import sqlite3
 import os
 import pandas as pd
 import configparser
-import time
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+from spotipy.exceptions import SpotifyException
 
 config = configparser.ConfigParser()
 config.read('config.cfg')
@@ -13,6 +15,14 @@ transformed_path = config['dir']['transformed']
 
 songs_db_path = config['db']['songs_db']
 playlists_db_path = config['db']['playlists_db']
+
+SPOTIPY_CLIENT_ID = config['spotify']['client_id']
+SPOTIPY_CLIENT_SECRET = config['spotify']['client_secret']
+
+
+client_credentials_manager = SpotifyClientCredentials(
+    client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 
 def transform_raw_csv(file_path, output_path):
