@@ -1,29 +1,18 @@
-import csv
-import requests
+
 import sqlite3
 import os
 import pandas as pd
 import configparser
-import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
 import time
 
 config = configparser.ConfigParser()
 config.read('config.cfg')
 
-songs_db_path = config['db']['songs_db']
-playlists_db_path = config['db']['playlists_db']
-SPOTIPY_CLIENT_ID = config['spotify']['client_id']
-SPOTIPY_CLIENT_SECRET = config['spotify']['client_secret']
-
-client_credentials_manager = SpotifyClientCredentials(
-    client_id=SPOTIPY_CLIENT_ID,
-    client_secret=SPOTIPY_CLIENT_SECRET
-)
-sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-
 raw_path = config['dir']['raw']
 transformed_path = config['dir']['transformed']
+
+songs_db_path = config['db']['songs_db']
+playlists_db_path = config['db']['playlists_db']
 
 
 def transform_raw_csv(file_path, output_path):
@@ -133,57 +122,8 @@ def fill_playlist_db():
 
 
 def fill_songs_db_with_spotify():
-    conn = sqlite3.connect(songs_db_path)
-    cursor = conn.cursor()
-
-    # Fill missing artist_name and artist_genres
-    cursor.execute(
-        "SELECT artist_id FROM artists WHERE artist_name = '' OR artist_genres = ''")
-    artists_to_update = cursor.fetchall()
-    print(f"Artists to Update: {len(artists_to_update)} rows.")
-    for artist_id_tuple in artists_to_update:
-        artist_id = artist_id_tuple[0]
-        artist_info = None
-        while artist_info is None:
-            try:
-                artist_info = sp.artist(artist_id)
-            except spotipy.SpotifyException as e:
-                if e.http_status == 429:
-                    retry_after = int(e.headers.get("Retry-After", 1))
-                    print(f"Rate limit exceeded. Retrying after {
-                          retry_after} seconds.")
-                    time.sleep(retry_after)
-                else:
-                    raise e
-        cursor.execute("UPDATE artists SET artist_name = ?, artist_genres = ? WHERE artist_id = ?",
-                       (artist_info['name'], ','.join(artist_info['genres']), artist_id))
-        print(f'Updated artist {artist_id}')
-
-    # Fill missing track_name
-    cursor.execute("SELECT track_id FROM tracks WHERE track_name = ''")
-    tracks_to_update = cursor.fetchall()
-    print(f"Tracks to Update: {len(tracks_to_update)} rows.")
-    for track_id_tuple in tracks_to_update:
-        track_id = track_id_tuple[0]
-        track_info = None
-        while track_info is None:
-            try:
-                track_info = sp.track(track_id)
-            except spotipy.SpotifyException as e:
-                if e.http_status == 429:
-                    retry_after = int(e.headers.get("Retry-After", 1))
-                    print(f"Rate limit exceeded. Retrying after {
-                          retry_after} seconds.")
-                    time.sleep(retry_after)
-                else:
-                    raise e
-        cursor.execute("UPDATE tracks SET track_name = ? WHERE track_id = ?",
-                       (track_info['name'], track_id))
-        print(f'Updated track name for {track_id}')
-
-    conn.commit()
-    conn.close()
-    print("Songs database filled with Spotify data.")
+    # TODO
+    pass
 
 
 def choose_process():
