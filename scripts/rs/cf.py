@@ -20,8 +20,13 @@ def load_data(directory_path):
     return data
 
 
-def generate_recommendations():
-    pass
+def generate_recommendations(playlists, ids):
+    matched_playlists = []
+    for playlist in playlists:
+        if playlist.get('spotify_id') in ids:
+            matched_playlists.append(playlist)
+
+    return matched_playlists
 
 
 def write_recommendations():
@@ -37,4 +42,5 @@ print(f"Loaded {len(playlists_data)} rows of data from playlists CSV.")
 
 if __name__ == "__main__":
     ids = ['1uCDg9WDXzG5j1tVqnFNBR']
+
     cf_result(ids)
