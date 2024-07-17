@@ -1,4 +1,5 @@
 import csv
+import requests
 import sqlite3
 import os
 import pandas as pd
@@ -79,93 +80,20 @@ def process_transformed_csv(transformed_path, songs_db_path):
             insert_data_into_db(songs_db_path, 'artists', artist_data)
 
 
-def fill_database_with_spotify_api(songs_db_path):
-    conn = sqlite3.connect(songs_db_path)
-    cursor = conn.cursor()
-
-    # Function to update track names
-    def update_track_names():
-        query = "SELECT track_id FROM tracks WHERE track_name = ''"
-        print('Running query...')
-        cursor.execute(query)
-        print('Fetching all cursor...')
-        tracks_to_update = cursor.fetchall()
-        updated_tracks = []
-        print('Iterating tracks id...')
-        for track_id in tracks_to_update:
-            try:
-                print(f'Fetching track name for {track_id}')
-                track_info = sp.track(track_id[0])
-                track_name = track_info['name']
-                updated_tracks.append((track_id[0], track_name, 1))
-            except:
-                # Track name not found
-                print(f'Track name not found for {track_id}')
-                updated_tracks.append((track_id[0], '', 0))
-        return updated_tracks
-
-    # Function to update artist names and genres
-    def update_artist_info():
-        query = "SELECT artist_id FROM artists WHERE artist_name = '' OR artist_genres = ''"
-        print('Running query...')
-        cursor.execute(query)
-        print('Fetching all cursor...')
-        artists_to_update = cursor.fetchall()
-        updated_artists = []
-        print('Iterating artists id...')
-        for artist_id in artists_to_update:
-            try:
-                print(f'Fetching track name for {artist_id}')
-                artist_info = sp.artist(artist_id[0])
-                artist_name = artist_info['name']
-                artist_genres = ",".join(artist_info['genres'])
-                updated_artists.append(
-                    (artist_id[0], artist_name, artist_genres, 1))
-            except:
-                # Artist info not found
-                print(f'Track name not found for {artist_id}')
-                updated_artists.append((artist_id[0], '', '', 0))
-        return updated_artists
-
-    # Updating tracks
-    tracks_cache = update_track_names()
-    with open('data/cache/tracks_table_cache.csv', 'w') as file:
-        writer = csv.writer(file)
-        writer.writerow(['spotify_id', 'track_name', 'success'])
-        writer.writerows(tracks_cache)
-
-    # Updating artists
-    artists_cache = update_artist_info()
-    with open('data/cache/artists_table_cache.csv', 'w') as file:
-        writer = csv.writer(file)
-        writer.writerow(['artist_id', 'artist_name',
-                        'artist_genres', 'success'])
-        writer.writerows(artists_cache)
-
-    # Updating database with successful results
-    for track_id, track_name, success in tracks_cache:
-        if success == 1:
-            cursor.execute(
-                "UPDATE tracks SET track_name = ? WHERE track_id = ?", (track_name, track_id))
-
-    for artist_id, artist_name, artist_genres, success in artists_cache:
-        if success == 1:
-            cursor.execute("UPDATE artists SET artist_name = ?, artist_genres = ? WHERE artist_id = ?",
-                           (artist_name, artist_genres, artist_id))
-
-    conn.commit()
-    conn.close()
-
-    # Summary
-    total_tracks_updated = sum(
-        1 for _, _, success in tracks_cache if success == 1)
-    total_artists_updated = sum(
-        1 for _, _, _, success in artists_cache if success == 1)
-    offset = 0  # Assuming no pagination for simplicity
-
-    print(f"Total tracks updated: {total_tracks_updated}")
-    print(f"Total artists updated: {total_artists_updated}")
-    print(f"Last offset processed: {offset}")
+def get_track_title(track_id):
+    url = f"https://api.spotify.com/v1/tracks/{track_id}"
+    headers = {
+        "Authorization": "Bearer YOUR_ACCESS_TOKEN_HERE"
+    }
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        track_title = data['name']
+        return track_title
+    else:
+        print(f"Failed to fetch track details. Status code: {
+              response.status_code}")
+        return None
 
 
 def choose_process():
