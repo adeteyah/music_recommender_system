@@ -42,5 +42,4 @@ print(f"Loaded {len(playlists_data)} rows of data from playlists CSV.")
 
 if __name__ == "__main__":
     ids = ['1uCDg9WDXzG5j1tVqnFNBR']
-
     cf_result(ids)
