@@ -10,14 +10,19 @@ from spotipy.oauth2 import SpotifyClientCredentials
 config = configparser.ConfigParser()
 config.read('config.cfg')
 
+songs_db_path = config['db']['songs_db']
+SPOTIPY_CLIENT_ID = config['spotify']['client_id']
+SPOTIPY_CLIENT_SECRET = config['spotify']['client_secret']
+
+client_credentials_manager = SpotifyClientCredentials(
+    client_id=SPOTIPY_CLIENT_ID,
+    client_secret=SPOTIPY_CLIENT_SECRET
+)
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+
+
 raw_path = config['dir']['raw']
 transformed_path = config['dir']['transformed']
-songs_db_path = config['db']['songs_db']
-spotify_client_id = config['spotify']['client_id']
-spotify_client_secret = config['spotify']['client_secret']
-
-sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=spotify_client_id,
-                                                           client_secret=spotify_client_secret))
 
 
 def transform_raw_csv(file_path, output_path):
@@ -81,19 +86,9 @@ def process_transformed_csv(transformed_path, songs_db_path):
 
 
 def get_track_title(track_id):
-    url = f"https://api.spotify.com/v1/tracks/{track_id}"
-    headers = {
-        "Authorization": "Bearer YOUR_ACCESS_TOKEN_HERE"
-    }
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        data = response.json()
-        track_title = data['name']
-        return track_title
-    else:
-        print(f"Failed to fetch track details. Status code: {
-              response.status_code}")
-        return None
+    track_info = sp.track(track_id)
+    track_title = track_info['name']
+    return track_title
 
 
 def choose_process():
@@ -114,7 +109,7 @@ def choose_process():
         process_transformed_csv(transformed_path, songs_db_path)
         print("Data insertion process completed.")
     elif choice == '3':
-        fill_database_with_spotify_api(songs_db_path)
+        get_track_title('4SPCiUgZpYj80m5qVNwe17')
         print("Database filled with Spotify API data.")
     else:
         print("Invalid choice. Please enter '1', '2', or '3'.")
