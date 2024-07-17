@@ -47,8 +47,8 @@ def cf_result(ids):
     # Prepare formatted recommendation text
     formatted_recommendations = []
     for playlist in matched_playlists:
-        formatted_recommendations.append(f"{playlist['creator_id']} - {playlist['spotify_id']} | Playlist {
-                                         playlist['playlist_id']} by Creator {playlist['creator_id']}")
+        formatted_recommendations.append(f"https://open.spotify.com/artist/{playlist['creator_id']} - https://open.spotify.com/track/{
+                                         playlist['spotify_id']} | Playlist https://open.spotify.com/playlist/{playlist['playlist_id']} by Creator https://open.spotify.com/user/{playlist['creator_id']}")
 
     # Write formatted recommendations to a text file
     with open('cf_recommendation.txt', 'w') as file:
