@@ -13,7 +13,8 @@ def cf_result(ids):
             if filename.endswith(".csv"):
                 file_path = os.path.join(directory_path, filename)
                 with open(file_path, 'r', newline='') as csvfile:
-                    csvreader = csv.reader(csvfile)
+                    # Use DictReader to directly get dictionaries
+                    csvreader = csv.DictReader(csvfile)
                     for row in csvreader:
                         data.append(row)
         return data
@@ -30,6 +31,12 @@ def cf_result(ids):
 
     playlists = load_data(config['dir']['transformed'])
     print(f"Loaded {len(playlists)} rows of data from playlists CSV.")
+
+    # Print the first few playlists to check their structure
+    print("Sample playlist data:")
+    for playlist in playlists[:5]:  # Print the first 5 playlists as a sample
+        print(playlist)
+
     matched_playlists = generate_recommendations(playlists, ids)
     for playlist in matched_playlists:
         print(f"Matched playlist: {
