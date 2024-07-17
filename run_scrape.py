@@ -18,8 +18,6 @@ client_credentials_manager = SpotifyClientCredentials(
     client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-# Function to save playlist tracks to CSV
-
 
 def save_playlist_to_csv(user_id, playlist_id, fetched_artists):
     path = config['dir']['raw']
