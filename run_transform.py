@@ -63,7 +63,7 @@ def update_json(csv_file, tracks_json, artists_json):
         if not track_exists:
             tracks_json['tracks'].append({
                 "id": track_id,
-                "title": track_id,
+                "title": '',
                 "artist_ids": artist_ids
             })
 
@@ -77,7 +77,7 @@ def update_json(csv_file, tracks_json, artists_json):
             if not artist_exists:
                 artists_json['artists'].append({
                     "id": artist_id,
-                    "name": f"{artist_id}",
+                    "name": '',
                     "genres": []
                 })
 
