@@ -53,38 +53,6 @@ def insert_data_into_db(db_path, table_name, data):
     conn.close()
 
 
-def process_transformed_csv(transformed_path, songs_db_path):
-    for filename in os.listdir(transformed_path):
-        if filename.endswith('.csv'):
-            file_path = os.path.join(transformed_path, filename)
-            df = pd.read_csv(file_path)
-
-            track_data = [
-                {
-                    "track_id": row['spotify_id'],
-                    "track_name": "",
-                    "artist_ids": ",".join(row['artists_id'].split(','))
-                }
-                for _, row in df.iterrows()
-            ]
-            insert_data_into_db(songs_db_path, 'tracks', track_data)
-
-            artists = set()
-            for _, row in df.iterrows():
-                for artist_id in row['artists_id'].split(','):
-                    artists.add(artist_id)
-
-            artist_data = [
-                {
-                    "artist_id": artist_id,
-                    "artist_name": "",
-                    "artist_genres": ""
-                }
-                for artist_id in artists
-            ]
-            insert_data_into_db(songs_db_path, 'artists', artist_data)
-
-
 def fill_playlist_db():
     for filename in os.listdir(transformed_path):
         if filename.endswith('.csv'):
@@ -182,37 +150,24 @@ def fill_songs_db_with_spotify():
 def choose_process():
     while True:
         print("\nChoose a process to run:")
-        print("1. Transform raw CSV files")
-        print("2. Insert data into database")
-        print("3. Fill playlist database")
-        print("4. Fill songs database with Spotify data")
-        print("5. Exit")
-        choice = input("Enter your choice (1, 2, 3, 4, or 5): ")
+        print("1. Fill playlist database")
+        print("2. Fill songs database with Spotify data")
+        print("3. Exit")
+        choice = input("Enter your choice (1, 2, or 3): ")
 
         if choice == '1':
-            for filename in os.listdir(raw_path):
-                if filename.endswith('.csv'):
-                    file_path = os.path.join(raw_path, filename)
-                    output_path = os.path.join(transformed_path, filename)
-                    transform_raw_csv(file_path, output_path)
-            print("Transformation process completed.")
-        elif choice == '2':
-            process_transformed_csv(transformed_path, songs_db_path)
-            print("Data insertion process completed.")
-        elif choice == '3':
             fill_playlist_db()
             print("Playlist DB filled with current data.")
-        elif choice == '4':
+        elif choice == '2':
             fill_songs_db_with_spotify()
             print("Songs DB filled with Spotify data.")
-        elif choice == '5':
+        elif choice == '3':
             print("Exiting the program.")
             break
         else:
-            print("Invalid choice. Please enter '1', '2', '3', '4', or '5'.")
+            print("Invalid choice. Please enter '1', '2', or '3'.")
 
-        return_to_menu = input(
-            "Return to menu (Y/N)? ").strip().lower()
+        return_to_menu = input("Return to menu (Y/N)? ").strip().lower()
         if return_to_menu != 'y':
             print("Exiting the program.")
             break
