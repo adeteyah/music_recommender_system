@@ -32,8 +32,8 @@ def cf_result(ids):
     return print(f"Getting recommendation from {ids}!")
 
 
-all_data = load_data(config['dir']['transformed'])
-print(f"Loaded {len(all_data)} rows of data from CSV files.")
+playlists_data = load_data(config['dir']['transformed'])
+print(f"Loaded {len(playlists_data)} rows of data from playlists CSV.")
 
 if __name__ == "__main__":
     ids = ['1uCDg9WDXzG5j1tVqnFNBR']
