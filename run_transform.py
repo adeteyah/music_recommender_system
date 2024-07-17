@@ -104,12 +104,9 @@ save_json(artists_json, artists_json_path)
 
 print(f"Updated JSON files: {tracks_json_path} and {artists_json_path}")
 
-# Create SQLite databases and tables
-
-
 # Create the databases
-artists_db_path = 'artists_details.db'
-tracks_db_path = 'tracks_details.db'
+artists_db_path = config['db']['artists_details.db']
+tracks_db_path = config['db']['tracks_details.db']
 
 # Function to parse and insert data into SQLite
 
