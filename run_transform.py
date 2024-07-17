@@ -83,56 +83,78 @@ def fill_database_with_spotify_api(songs_db_path):
     conn = sqlite3.connect(songs_db_path)
     cursor = conn.cursor()
 
-    # Fetch tracks with null track_name
-    cursor.execute("SELECT track_id FROM tracks WHERE track_name IS ''")
-    tracks_to_update = cursor.fetchall()
+    batch_size = 10
+    offset = 0
+    total_tracks_updated = 0
+    total_artists_updated = 0
 
-    for track_id in tracks_to_update:
-        try:
-            track_info = sp.track(track_id[0])
-            track_name = track_info['name']
-            cursor.execute(
-                "UPDATE tracks SET track_name = ? WHERE track_id = ?", (track_name, track_id[0]))
-            print(f"Updated track {track_id[0]} with name: {track_name}")
-        except spotipy.SpotifyException as e:
-            if e.http_status == 429:
-                print(f"Rate limit exceeded. Last processed track: {
-                      track_id[0]}")
-                break  # Stop further processing
-            else:
-                print(f"Spotify error: {e}")
-                break  # Stop further processing
-        except Exception as e:
-            print(f"An error occurred: {e}")
-            break  # Stop further processing
+    while True:
+        # Fetch tracks with null track_name
+        cursor.execute(f"SELECT track_id FROM tracks WHERE track_name IS '' LIMIT {
+                       batch_size} OFFSET {offset}")
+        tracks_to_update = cursor.fetchall()
 
-    # Fetch artists with null artist_name and artist_genres
-    cursor.execute("SELECT artist_id FROM artists WHERE artist_name IS ''")
-    artists_to_update = cursor.fetchall()
+        if not tracks_to_update:
+            break  # No more tracks to update
 
-    for artist_id in artists_to_update:
-        try:
-            artist_info = sp.artist(artist_id[0])
-            artist_name = artist_info['name']
-            artist_genres = ",".join(artist_info['genres'])
-            cursor.execute("UPDATE artists SET artist_name = ?, artist_genres = ? WHERE artist_id = ?",
-                           (artist_name, artist_genres, artist_id[0]))
-            print(f"Updated artist {artist_id[0]} with name: {
-                  artist_name} and genres: {artist_genres}")
-        except spotipy.SpotifyException as e:
-            if e.http_status == 429:
-                print(f"Rate limit exceeded. Last processed artist: {
-                      artist_id[0]}")
+        for track_id in tracks_to_update:
+            try:
+                track_info = sp.track(track_id[0])
+                track_name = track_info['name']
+                cursor.execute(
+                    "UPDATE tracks SET track_name = ? WHERE track_id = ?", (track_name, track_id[0]))
+                print(f"Updated track {track_id[0]} with name: {track_name}")
+                total_tracks_updated += 1
+            except spotipy.SpotifyException as e:
+                if e.http_status == 429:
+                    print(f"Rate limit exceeded. Last processed track: {
+                          track_id[0]}")
+                    break  # Stop further processing
+                else:
+                    print(f"Spotify error: {e}")
+                    break  # Stop further processing
+            except Exception as e:
+                print(f"An error occurred: {e}")
                 break  # Stop further processing
-            else:
-                print(f"Spotify error: {e}")
+
+        # Fetch artists with null artist_name and artist_genres
+        cursor.execute(f"SELECT artist_id FROM artists WHERE artist_name IS '' LIMIT {
+                       batch_size} OFFSET {offset}")
+        artists_to_update = cursor.fetchall()
+
+        if not artists_to_update:
+            break  # No more artists to update
+
+        for artist_id in artists_to_update:
+            try:
+                artist_info = sp.artist(artist_id[0])
+                artist_name = artist_info['name']
+                artist_genres = ",".join(artist_info['genres'])
+                cursor.execute("UPDATE artists SET artist_name = ?, artist_genres = ? WHERE artist_id = ?",
+                               (artist_name, artist_genres, artist_id[0]))
+                print(f"Updated artist {artist_id[0]} with name: {
+                      artist_name} and genres: {artist_genres}")
+                total_artists_updated += 1
+            except spotipy.SpotifyException as e:
+                if e.http_status == 429:
+                    print(f"Rate limit exceeded. Last processed artist: {
+                          artist_id[0]}")
+                    break  # Stop further processing
+                else:
+                    print(f"Spotify error: {e}")
+                    break  # Stop further processing
+            except Exception as e:
+                print(f"An error occurred: {e}")
                 break  # Stop further processing
-        except Exception as e:
-            print(f"An error occurred: {e}")
-            break  # Stop further processing
+
+        offset += batch_size
 
     conn.commit()
     conn.close()
+
+    print(f"Total tracks updated: {total_tracks_updated}")
+    print(f"Total artists updated: {total_artists_updated}")
+    print(f"Last offset processed: {offset}")
 
 
 # Function to choose process based on user input
