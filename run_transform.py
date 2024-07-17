@@ -85,17 +85,57 @@ def process_transformed_csv(transformed_path, songs_db_path):
             insert_data_into_db(songs_db_path, 'artists', artist_data)
 
 
-def get_track_title(track_id):
-    track_info = sp.track(track_id)
-    track_title = track_info['name']
-    return track_title
+def fill_playlist_db():
+    for filename in os.listdir(transformed_path):
+        if filename.endswith('.csv'):
+            file_path = os.path.join(transformed_path, filename)
+            creator_id, playlist_id = filename.split(
+                '_')[0], filename.split('_')[1].split('.')[0]
+
+            df = pd.read_csv(file_path)
+
+            # Example: Inserting track data into 'tracks' table
+            track_data = [
+                {
+                    "track_id": row['spotify_id'],
+                    "track_name": "",  # You might fetch track names from Spotify API
+                    "artist_ids": ",".join(row['artists_id'].split(','))
+                }
+                for _, row in df.iterrows()
+            ]
+            insert_data_into_db(songs_db_path, 'tracks', track_data)
+
+            # Example: Inserting artist data into 'artists' table
+            artists = set()
+            for _, row in df.iterrows():
+                for artist_id in row['artists_id'].split(','):
+                    artists.add(artist_id)
+
+            artist_data = [
+                {
+                    "artist_id": artist_id,
+                    "artist_name": "",  # You might fetch artist names from Spotify API
+                    "artist_genres": ""
+                }
+                for artist_id in artists
+            ]
+            insert_data_into_db(songs_db_path, 'artists', artist_data)
+
+            # Inserting playlist metadata into 'playlists' table
+            playlist_data = {
+                "creator_id": creator_id,
+                "playlist_id": playlist_id,
+                "playlist_name": "",
+                "track_count": len(df)
+            }
+            insert_data_into_db(songs_db_path, 'playlists', [playlist_data])
 
 
 def choose_process():
     print("Choose a process to run:")
     print("1. Transform raw CSV files")
     print("2. Insert data into database")
-    print("3. Fill database with Spotify API")
+    print("3. Fill playlist database")
     choice = input("Enter your choice (1, 2, or 3): ")
 
     if choice == '1':
@@ -109,8 +149,8 @@ def choose_process():
         process_transformed_csv(transformed_path, songs_db_path)
         print("Data insertion process completed.")
     elif choice == '3':
-        get_track_title('4SPCiUgZpYj80m5qVNwe17')
-        print("Database filled with Spotify API data.")
+        fill_playlist_db()
+        print("Playlist DB filled with current data.")
     else:
         print("Invalid choice. Please enter '1', '2', or '3'.")
 
