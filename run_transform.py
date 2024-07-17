@@ -36,8 +36,7 @@ for filename in os.listdir(raw_path):
 # Load the configuration
 
 transformed_path = config['dir']['transformed']
-artists_db_path = config['db']['artists_db']
-tracks_db_path = config['db']['tracks_db']
+songs_db_path = config['db']['songs_db']
 
 # Function to insert data into the database
 
@@ -60,7 +59,7 @@ def insert_data_into_db(db_path, table_name, data):
 # Function to process the transformed CSV files
 
 
-def process_transformed_csv(transformed_path, artists_db_path, tracks_db_path):
+def process_transformed_csv(transformed_path, songs_db_path):
     for filename in os.listdir(transformed_path):
         if filename.endswith('.csv'):
             file_path = os.path.join(transformed_path, filename)
@@ -75,7 +74,7 @@ def process_transformed_csv(transformed_path, artists_db_path, tracks_db_path):
                 }
                 for _, row in df.iterrows()
             ]
-            insert_data_into_db(tracks_db_path, 'tracks', track_data)
+            insert_data_into_db(songs_db_path, 'tracks', track_data)
 
             # Insert into artists_details.db
             artists = set()
@@ -91,8 +90,8 @@ def process_transformed_csv(transformed_path, artists_db_path, tracks_db_path):
                 }
                 for artist_id in artists
             ]
-            insert_data_into_db(artists_db_path, 'artists', artist_data)
+            insert_data_into_db(songs_db_path, 'artists', artist_data)
 
 
 # Process the transformed CSV files and insert data into the databases
-process_transformed_csv(transformed_path, artists_db_path, tracks_db_path)
+process_transformed_csv(transformed_path, songs_db_path)

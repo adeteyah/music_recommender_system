@@ -34,7 +34,7 @@ def install_directories():
 def create_database(db_path, schema):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    cursor.execute(schema)
+    cursor.executescript(schema)
     conn.commit()
     conn.close()
 
