@@ -75,7 +75,7 @@ def process_transformed_csv(transformed_path, songs_db_path):
 def choose_process():
     print("Choose a process to run:")
     print("1. Transform raw CSV files")
-    print("2. Insert data into database")
+    print("2. Insert transformed data into database")
     choice = input("Enter your choice (1 or 2): ")
 
     if choice == '1':
@@ -91,6 +91,8 @@ def choose_process():
     else:
         print("Invalid choice. Please enter '1' or '2'.")
 
+
+2
 
 # Run the script
 if __name__ == "__main__":
