@@ -29,7 +29,7 @@ def cf_result(ids):
         if track_row:
             track_name, artist_ids = track_row
             if not track_name:
-                track_name = "(Unknown)"
+                track_name = "Unknown"
             artist_names = []
             for artist_id in artist_ids.split(', '):
                 cursor_songs.execute(
@@ -38,10 +38,10 @@ def cf_result(ids):
                 if artist_row:
                     artist_name = artist_row[0]
                     if not artist_name:
-                        artist_name = "(Unknown)"
+                        artist_name = "Unknown"
                     artist_names.append(artist_name)
             if not artist_names:
-                artist_names.append("(Unknown)")
+                artist_names.append("Unknown")
             input_ids_info.append({
                 'track_id': track_id,
                 'track_name': track_name,
@@ -74,7 +74,7 @@ def cf_result(ids):
         if track_row:
             track_name, artist_ids = track_row
             if not track_name:
-                track_name = "(Unknown)"
+                track_name = "Unknown"
             artist_names = []
             for artist_id in artist_ids.split(', '):
                 cursor_songs.execute(
@@ -83,10 +83,10 @@ def cf_result(ids):
                 if artist_row:
                     artist_name = artist_row[0]
                     if not artist_name:
-                        artist_name = "(Unknown)"
+                        artist_name = "Unknown"
                     artist_names.append(artist_name)
             if not artist_names:
-                artist_names.append("(Unknown)")
+                artist_names.append("Unknown")
             track_info[track_id] = {
                 'track_name': track_name,
                 'artists': ', '.join(artist_names),
