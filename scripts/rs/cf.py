@@ -35,12 +35,7 @@ def cf_result(ids):
         return matched_playlists
 
     playlists = load_data(config['dir']['transformed'])
-    print(f"Loaded {len(playlists)} rows of data from playlists CSV.")
-
-    # Print the first few playlists to check their structure
-    print("Sample playlist data:")
-    for playlist in playlists[:5]:  # Print the first 5 playlists as a sample
-        print(playlist)
+    # print(f"Loaded {len(playlists)} rows of data from playlists CSV.")
 
     matched_playlists = generate_recommendations(playlists, ids)
 
@@ -58,6 +53,6 @@ def cf_result(ids):
 
 
 if __name__ == "__main__":
-    ids = ['1uCDg9WDXzG5j1tVqnFNBR']
+    ids = ['4XTP6QLsMZ1GQe0c1i1Oze']
     result = cf_result(ids)
     print(result)
