@@ -1,5 +1,6 @@
 import sqlite3
 import os
+import time
 import pandas as pd
 import configparser
 import spotipy
@@ -133,7 +134,7 @@ def fill_songs_db_with_spotify():
 
     # Updating tracks
     while True:
-        cursor.execute("SELECT * FROM tracks WHERE track_name = '' LIMIT 5")
+        cursor.execute("SELECT * FROM tracks WHERE track_name = '' LIMIT 10")
         tracks = cursor.fetchall()
         if not tracks:
             break
@@ -148,13 +149,13 @@ def fill_songs_db_with_spotify():
                 print(f'Updated track name for {track_info}: {track_name}')
             except SpotifyException as e:
                 print(f"Error fetching track {track_id}: {e}")
-
+        time.sleep(0.1)
         conn.commit()
 
     # Updating artists
     while True:
         cursor.execute(
-            "SELECT * FROM artists WHERE artist_name = '' LIMIT 5")
+            "SELECT * FROM artists WHERE artist_name = '' LIMIT 10")
         artists = cursor.fetchall()
         if not artists:
             break
@@ -171,7 +172,7 @@ def fill_songs_db_with_spotify():
                       artist_info}: {artist_name}, {artist_genres}')
             except SpotifyException as e:
                 print(f"Error fetching artist {artist_id}: {e}")
-
+        time.sleep(0.1)
         conn.commit()
 
     conn.close()
