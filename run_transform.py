@@ -8,6 +8,7 @@ config.read('config.cfg')
 
 raw_path = config['dir']['raw']
 transformed_path = config['dir']['transformed']
+songs_db_path = config['db']['songs_db']
 
 
 def transform_raw_csv(file_path, output_path):
@@ -20,16 +21,6 @@ def transform_raw_csv(file_path, output_path):
         print(f"Saved cleaned data to {output_path}")
     else:
         print(f"Skipped {file_path}, less than {num} tracks.")
-
-
-for filename in os.listdir(raw_path):
-    if filename.endswith('.csv'):
-        file_path = os.path.join(raw_path, filename)
-        output_path = os.path.join(transformed_path, filename)
-        transform_raw_csv(file_path, output_path)
-
-transformed_path = config['dir']['transformed']
-songs_db_path = config['db']['songs_db']
 
 
 def insert_data_into_db(db_path, table_name, data):
@@ -80,4 +71,27 @@ def process_transformed_csv(transformed_path, songs_db_path):
             insert_data_into_db(songs_db_path, 'artists', artist_data)
 
 
-process_transformed_csv(transformed_path, songs_db_path)
+# Function to choose process based on user input
+def choose_process():
+    print("Choose a process to run:")
+    print("1. Transform raw CSV files")
+    print("2. Insert data into database")
+    choice = input("Enter your choice (1 or 2): ")
+
+    if choice == '1':
+        for filename in os.listdir(raw_path):
+            if filename.endswith('.csv'):
+                file_path = os.path.join(raw_path, filename)
+                output_path = os.path.join(transformed_path, filename)
+                transform_raw_csv(file_path, output_path)
+        print("Transformation process completed.")
+    elif choice == '2':
+        process_transformed_csv(transformed_path, songs_db_path)
+        print("Data insertion process completed.")
+    else:
+        print("Invalid choice. Please enter '1' or '2'.")
+
+
+# Run the script
+if __name__ == "__main__":
+    choose_process()
