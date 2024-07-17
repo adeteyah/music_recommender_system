@@ -132,26 +132,6 @@ def fill_songs_db_with_spotify():
     conn = sqlite3.connect(songs_db_path)
     cursor = conn.cursor()
 
-    # Updating tracks
-    while True:
-        cursor.execute("SELECT * FROM tracks WHERE track_name = '' LIMIT 10")
-        tracks = cursor.fetchall()
-        if not tracks:
-            break
-
-        for track in tracks:
-            track_id = track[0]
-            try:
-                track_info = sp.track(track_id)
-                track_name = track_info['name']
-                cursor.execute(
-                    "UPDATE tracks SET track_name = ? WHERE track_id = ?", (track_name, track_id))
-                print(f'Updated track name for {track_id}: {track_name}')
-            except SpotifyException as e:
-                print(f"Error fetching track {track_id}: {e}")
-        time.sleep(2)
-        conn.commit()
-
     # Updating artists
     while True:
         cursor.execute(
@@ -172,6 +152,26 @@ def fill_songs_db_with_spotify():
                       artist_id}: {artist_name}, {artist_genres}')
             except SpotifyException as e:
                 print(f"Error fetching artist {artist_id}: {e}")
+        time.sleep(2)
+        conn.commit()
+
+    # Updating tracks
+    while True:
+        cursor.execute("SELECT * FROM tracks WHERE track_name = '' LIMIT 10")
+        tracks = cursor.fetchall()
+        if not tracks:
+            break
+
+        for track in tracks:
+            track_id = track[0]
+            try:
+                track_info = sp.track(track_id)
+                track_name = track_info['name']
+                cursor.execute(
+                    "UPDATE tracks SET track_name = ? WHERE track_id = ?", (track_name, track_id))
+                print(f'Updated track name for {track_id}: {track_name}')
+            except SpotifyException as e:
+                print(f"Error fetching track {track_id}: {e}")
         time.sleep(2)
         conn.commit()
 
