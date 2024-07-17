@@ -34,12 +34,12 @@ def write_recommendations():
 
 
 def cf_result(ids):
-    matched_playlists = generate_recommendations(playlists, ids)
     return print(f"Stored result on {ids}!")
 
 
 playlists_data = load_data(config['dir']['transformed'])
 print(f"Loaded {len(playlists_data)} rows of data from playlists CSV.")
+
 
 if __name__ == "__main__":
     ids = ['1uCDg9WDXzG5j1tVqnFNBR']
