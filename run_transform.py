@@ -165,8 +165,8 @@ def choose_process():
             print("Invalid choice. Please enter '1', '2', '3', '4', or '5'.")
 
         return_to_menu = input(
-            "Return to menu or exit program (Y/N)? ").strip().upper()
-        if return_to_menu != 'Y':
+            "Return to menu (Y/N)? ").strip().lower()
+        if return_to_menu != 'y':
             print("Exiting the program.")
             break
 
