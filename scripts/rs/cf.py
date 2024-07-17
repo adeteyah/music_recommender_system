@@ -26,17 +26,21 @@ def load_data(directory_path):
     return data
 
 
+def generate_recommendations(playlists, exclude_ids, limit=10):
+    # Example: Exclude specified IDs, or implement your own logic to filter recommendations
+    recommendations = []
+    for playlist in playlists:
+        if playlist['spotify_id'] not in exclude_ids:
+            recommendations.append(playlist)
+            if len(recommendations) >= limit:
+                break
+    return recommendations
+
+
 def cf_result(ids):
-    def generate_recommendations(playlists, ids):
-        matched_playlists = []
-        for playlist in playlists:
-            if playlist.get('spotify_id') in ids:
-                matched_playlists.append(playlist)
-        return matched_playlists
-
     playlists = load_data(config['dir']['transformed'])
-    # print(f"Loaded {len(playlists)} rows of data from playlists CSV.")
 
+    # Generate recommendations excluding the input IDs
     matched_playlists = generate_recommendations(playlists, ids)
 
     # Prepare formatted recommendation text
@@ -49,10 +53,11 @@ def cf_result(ids):
     with open('cf_recommendation.txt', 'w') as file:
         file.write("\n".join(formatted_recommendations))
 
-    return f"Stored result on {ids}!"
+    return f"Stored result on {len(matched_playlists)} recommendations!"
 
 
 if __name__ == "__main__":
+    # Input IDs to exclude from recommendations
     ids = ['4XTP6QLsMZ1GQe0c1i1Oze']
     result = cf_result(ids)
     print(result)
