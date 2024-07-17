@@ -71,14 +71,16 @@ def cf_result(ids):
     results = "Playlist Contributed\n"
     rank = 1
     for playlist_id, count in sorted_playlists:
-        results += f"{rank}. {count} Tracks | Playlist ID: {playlist_id}\n"
+        playlist_url = f"https://open.spotify.com/playlist/{playlist_id}"
+        results += f"{rank}. {count} Tracks | Playlist ID: {playlist_url}\n"
         rank += 1
 
     results += "\nSongs Recommendation\n"
     rank = 1
     for track_id, info in sorted_tracks:
+        track_url = f"https://open.spotify.com/track/{track_id}"
         results += f"{rank}. {info['artists']} - {info['track_name']
-                                                  } [{track_id}] | Rank: {info['count']}\n"
+                                                  } [{track_url}] | Rank: {info['count']}\n"
         rank += 1
 
     # Write the results to a text file
