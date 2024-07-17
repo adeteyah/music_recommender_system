@@ -10,7 +10,8 @@ start = time.time()
 def install_directories():
     directories = [
         "data/cache",
-        "data/db"
+        "data/db",
+        "result/"
     ]
 
     files = [

@@ -8,6 +8,8 @@ config.read('config.cfg')
 db_playlist = config['db']['playlists_db']
 db_songs = config['db']['songs_db']
 
+output_path = config['output']['cf_output']
+
 
 def cf_result(ids):
     # Connect to the playlists database
@@ -43,13 +45,20 @@ def cf_result(ids):
         track_row = cursor_songs.fetchone()
         if track_row:
             track_name, artist_ids = track_row
+            if not track_name:
+                track_name = "(Unknown)"
             artist_names = []
             for artist_id in artist_ids.split(', '):
                 cursor_songs.execute(
                     "SELECT artist_name FROM artists WHERE artist_id=?", (artist_id,))
                 artist_row = cursor_songs.fetchone()
                 if artist_row:
-                    artist_names.append(artist_row[0])
+                    artist_name = artist_row[0]
+                    if not artist_name:
+                        artist_name = "(Unknown)"
+                    artist_names.append(artist_name)
+            if not artist_names:
+                artist_names.append("(Unknown)")
             track_info[track_id] = {
                 'track_name': track_name,
                 'artists': ', '.join(artist_names),
@@ -84,7 +93,7 @@ def cf_result(ids):
         rank += 1
 
     # Write the results to a text file
-    with open('recommendations.txt', 'w') as f:
+    with open(output_path, 'w') as f:
         f.write(results)
 
     return results
@@ -93,4 +102,4 @@ def cf_result(ids):
 if __name__ == "__main__":
     ids = ['5xNUR50KxswPRAvx7S163g', '66y7x28jXOPrcmu3D5Zjh6']
     result = cf_result(ids)
-    print(result)
+    print(f'CF Recommendation is stored in {output_path}')
