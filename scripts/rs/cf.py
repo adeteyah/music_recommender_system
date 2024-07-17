@@ -6,19 +6,27 @@ config = configparser.ConfigParser()
 config.read('config.cfg')
 
 
-def cf_result(ids):
-    def load_data(directory_path):
-        data = []
-        for filename in os.listdir(directory_path):
-            if filename.endswith(".csv"):
-                file_path = os.path.join(directory_path, filename)
-                with open(file_path, 'r', newline='') as csvfile:
-                    # Use DictReader to directly get dictionaries
-                    csvreader = csv.DictReader(csvfile)
-                    for row in csvreader:
-                        data.append(row)
-        return data
+def load_data(directory_path):
+    data = []
+    for filename in os.listdir(directory_path):
+        if filename.endswith(".csv"):
+            file_path = os.path.join(directory_path, filename)
 
+            # Extract creator_id and playlist_id from the filename
+            base_filename = os.path.splitext(filename)[0]
+            creator_id, playlist_id = base_filename.split('_')
+
+            with open(file_path, 'r', newline='') as csvfile:
+                csvreader = csv.DictReader(csvfile)
+                for row in csvreader:
+                    # Add creator_id and playlist_id to each row dictionary
+                    row['creator_id'] = creator_id
+                    row['playlist_id'] = playlist_id
+                    data.append(row)
+    return data
+
+
+def cf_result(ids):
     def generate_recommendations(playlists, ids):
         matched_playlists = []
         for playlist in playlists:
@@ -33,19 +41,19 @@ def cf_result(ids):
     print(f"Loaded {len(playlists)} rows of data from playlists CSV.")
 
     # Print the first few playlists to check their structure
-    print("Recommendations:")
-    for playlist in playlists[:50]:  # Print the first 5 playlists as a sample
+    print("Sample playlist data:")
+    for playlist in playlists[:5]:  # Print the first 5 playlists as a sample
         print(playlist)
 
     matched_playlists = generate_recommendations(playlists, ids)
     for playlist in matched_playlists:
         print(f"Matched playlist: {
-              playlist['name']} (Spotify ID: {playlist['spotify_id']})")
+              playlist['playlist_id']} (Spotify ID: {playlist['spotify_id']})")
 
     return f"Stored result on {ids}!"
 
 
 if __name__ == "__main__":
-    ids = ['7rRKhAve6D9RtIZdk5qtX8']
+    ids = ['1uCDg9WDXzG5j1tVqnFNBR']
     result = cf_result(ids)
     print(result)
