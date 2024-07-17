@@ -8,6 +8,10 @@ config.read('config.cfg')
 raw_path = config['dir']['raw']
 transformed_path = config['dir']['transformed']
 
+playlists_json_path = config['dir']['playlists_json']
+artists_json_path = config['dir']['artists_json']
+tracks_json_path = config['dir']['tracks_json']
+
 os.makedirs(transformed_path, exist_ok=True)
 
 
