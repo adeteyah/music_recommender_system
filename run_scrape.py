@@ -1,3 +1,4 @@
+import time
 import sqlite3
 import configparser
 import spotipy
@@ -62,6 +63,7 @@ def save_playlist_to_database(user_id, playlist_id, conn):
         conn.commit()
 
         print(f"Saved playlist details for {playlist_id}")
+        time.sleep(2.5)
 
     except SpotifyException as e:
         if e.http_status == 429:
