@@ -128,8 +128,51 @@ def fill_playlist_db():
 
 
 def fill_songs_db_with_spotify():
-    # TODO
-    pass
+    conn = sqlite3.connect(songs_db_path)
+    cursor = conn.cursor()
+
+    # Updating tracks
+    while True:
+        cursor.execute("SELECT * FROM tracks WHERE track_name = '' LIMIT 100")
+        tracks = cursor.fetchall()
+        if not tracks:
+            break
+
+        for track in tracks:
+            track_id = track[0]
+            try:
+                track_info = sp.track(track_id)
+                track_name = track_info['name']
+                cursor.execute(
+                    "UPDATE tracks SET track_name = ? WHERE track_id = ?", (track_name, track_id))
+            except SpotifyException as e:
+                print(f"Error fetching track {track_id}: {e}")
+
+        conn.commit()
+
+    # Updating artists
+    while True:
+        cursor.execute(
+            "SELECT * FROM artists WHERE artist_name = '' LIMIT 100")
+        artists = cursor.fetchall()
+        if not artists:
+            break
+
+        for artist in artists:
+            artist_id = artist[0]
+            try:
+                artist_info = sp.artist(artist_id)
+                artist_name = artist_info['name']
+                artist_genres = ",".join(artist_info['genres'])
+                cursor.execute("UPDATE artists SET artist_name = ?, artist_genres = ? WHERE artist_id = ?",
+                               (artist_name, artist_genres, artist_id))
+            except SpotifyException as e:
+                print(f"Error fetching artist {artist_id}: {e}")
+
+        conn.commit()
+
+    conn.close()
+    print("Finished updating tracks and artists with Spotify data.")
 
 
 def choose_process():
