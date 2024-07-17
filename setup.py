@@ -5,16 +5,18 @@ from pathlib import Path
 
 start = time.time()
 
+
 def install_directories():
     directories = [
         "data/cache",
         "data/raw",
         "data/transformed"
     ]
-    
+
     files = [
         "data/cache/fetched_users.txt",
         "data/cache/fetched_artists.txt"
+        "data/cache/track_details.json"
     ]
 
     for directory in directories:
@@ -26,9 +28,12 @@ def install_directories():
         if not path.exists():
             path.touch()
 
+
 def install_packages(packages):
     for package in packages:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+        subprocess.check_call(
+            [sys.executable, "-m", "pip", "install", package])
+
 
 if __name__ == "__main__":
     install_directories()
