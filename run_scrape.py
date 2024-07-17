@@ -11,7 +11,7 @@ config.read('config.cfg')
 SPOTIPY_CLIENT_ID = config['spotify']['client_id']
 SPOTIPY_CLIENT_SECRET = config['spotify']['client_secret']
 
-user_ids = ['fjg0qizm720wpo1n90suz089y']
+user_ids = ['hyxtvqg8fbh2fa6k2rgugfun2']
 
 client_credentials_manager = SpotifyClientCredentials(
     client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
@@ -40,6 +40,11 @@ def save_playlist_to_database(user_id, playlist_id, conn):
         # Fetch playlist details
         playlist = sp.playlist(playlist_id)
 
+        # Only process playlists with more than 15 tracks
+        if playlist['tracks']['total'] <= 15:
+            print(f"Skipping playlist {playlist_id}, not enough tracks.")
+            return
+
         # Insert or update playlists table
         cursor = conn.cursor()
         cursor.execute('''INSERT OR IGNORE INTO playlists (playlist_id, creator_id, playlist_track_count)
@@ -48,7 +53,7 @@ def save_playlist_to_database(user_id, playlist_id, conn):
         conn.commit()
 
         # Insert items into items table
-        tracks = playlist['tracks']['items']
+        tracks = playlist['tracks']['items'][:50]  # Fetch only 50 tracks
         playlist_items = ','.join([track['track']['id'] for track in tracks])
 
         cursor.execute('''INSERT OR REPLACE INTO items (playlist_id, playlist_items)
@@ -97,8 +102,7 @@ for user_id in user_ids:
 
             for playlist in playlists['items']:
                 playlist_id = playlist['id']
-                save_playlist_to_database(
-                    user_id, playlist_id, conn)
+                save_playlist_to_database(user_id, playlist_id, conn)
 
             fetched_users.add(user_id)
 
