@@ -10,9 +10,6 @@ from spotipy.exceptions import SpotifyException
 config = configparser.ConfigParser()
 config.read('config.cfg')
 
-raw_path = config['dir']['raw']
-transformed_path = config['dir']['transformed']
-
 songs_db_path = config['db']['songs_db']
 playlists_db_path = config['db']['playlists_db']
 
@@ -23,18 +20,6 @@ SPOTIPY_CLIENT_SECRET = config['spotify']['client_secret']
 client_credentials_manager = SpotifyClientCredentials(
     client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-
-
-def transform_raw_csv(file_path, output_path):
-    df = pd.read_csv(file_path)
-    df.drop_duplicates(subset=['spotify_id'], inplace=True)
-
-    num = 5
-    if len(df) >= num:
-        df.to_csv(output_path, index=False)
-        print(f"Saved cleaned data to {output_path}")
-    else:
-        print(f"Skipped {file_path}, less than {num} tracks.")
 
 
 def insert_data_into_db(db_path, table_name, data):
@@ -153,7 +138,7 @@ def choose_process():
         print("1. Fill playlist database")
         print("2. Fill songs database with Spotify data")
         print("3. Exit")
-        choice = input("Enter your choice (1, 2, or 3): ")
+        choice = input("Enter your choice (1 or 2): ")
 
         if choice == '1':
             fill_playlist_db()
@@ -165,7 +150,7 @@ def choose_process():
             print("Exiting the program.")
             break
         else:
-            print("Invalid choice. Please enter '1', '2', or '3'.")
+            print("Invalid choice. Please enter '1' or '2'.")
 
         return_to_menu = input("Return to menu (Y/N)? ").strip().lower()
         if return_to_menu != 'y':
