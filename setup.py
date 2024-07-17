@@ -88,7 +88,8 @@ def install_packages(packages):
 
 if __name__ == "__main__":
     install_directories()
-    packages = ["configparser", "requests", "spotipy", "pandas"]
+    packages = ["configparser", "requests", "spotipy",
+                "pandas", "sqlalchemy", "matplotlib", "seaborn"]
     install_packages(packages)
 
 end = time.time()
