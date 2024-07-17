@@ -2,6 +2,8 @@ import sqlite3
 import os
 import pandas as pd
 import configparser
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
 
 config = configparser.ConfigParser()
 config.read('config.cfg')
@@ -9,6 +11,12 @@ config.read('config.cfg')
 raw_path = config['dir']['raw']
 transformed_path = config['dir']['transformed']
 songs_db_path = config['db']['songs_db']
+spotify_client_id = config['spotify']['client_id']
+spotify_client_secret = config['spotify']['client_secret']
+
+# Initialize Spotify API client
+sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=spotify_client_id,
+                                                           client_secret=spotify_client_secret))
 
 
 def transform_raw_csv(file_path, output_path):
@@ -71,13 +79,51 @@ def process_transformed_csv(transformed_path, songs_db_path):
             insert_data_into_db(songs_db_path, 'artists', artist_data)
 
 
+def fill_database_with_spotify_api(songs_db_path):
+    conn = sqlite3.connect(songs_db_path)
+    cursor = conn.cursor()
+
+    # Fetch tracks with null track_name
+    cursor.execute("SELECT track_id FROM tracks WHERE track_name IS NULL")
+    tracks_to_update = cursor.fetchall()
+
+    for track_id in tracks_to_update:
+        try:
+            track_info = sp.track(track_id[0])
+            track_name = track_info['name']
+            cursor.execute(
+                "UPDATE tracks SET track_name = ? WHERE track_id = ?", (track_name, track_id[0]))
+            print(f"Updated track {track_id[0]} with name: {track_name}")
+        except:
+            print(f"Failed to fetch track info for track ID: {track_id[0]}")
+
+    # Fetch artists with null artist_name and artist_genres
+    cursor.execute("SELECT artist_id FROM artists WHERE artist_name IS NULL")
+    artists_to_update = cursor.fetchall()
+
+    for artist_id in artists_to_update:
+        try:
+            artist_info = sp.artist(artist_id[0])
+            artist_name = artist_info['name']
+            artist_genres = ",".join(artist_info['genres'])
+            cursor.execute("UPDATE artists SET artist_name = ?, artist_genres = ? WHERE artist_id = ?",
+                           (artist_name, artist_genres, artist_id[0]))
+            print(f"Updated artist {artist_id[0]} with name: {
+                  artist_name} and genres: {artist_genres}")
+        except:
+            print(f"Failed to fetch artist info for artist ID: {artist_id[0]}")
+
+    conn.commit()
+    conn.close()
+
+
 # Function to choose process based on user input
 def choose_process():
     print("Choose a process to run:")
     print("1. Transform raw CSV files")
-    print("2. Insert transformed data into database")
+    print("2. Insert data into database")
     print("3. Fill database with Spotify API")
-    choice = input("Enter your choice (1 or 2): ")
+    choice = input("Enter your choice (1, 2, or 3): ")
 
     if choice == '1':
         for filename in os.listdir(raw_path):
@@ -89,11 +135,12 @@ def choose_process():
     elif choice == '2':
         process_transformed_csv(transformed_path, songs_db_path)
         print("Data insertion process completed.")
+    elif choice == '3':
+        fill_database_with_spotify_api(songs_db_path)
+        print("Database filled with Spotify API data.")
     else:
-        print("Invalid choice. Please enter '1' or '2'.")
+        print("Invalid choice. Please enter '1', '2', or '3'.")
 
-
-2
 
 # Run the script
 if __name__ == "__main__":
