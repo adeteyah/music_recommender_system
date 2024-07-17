@@ -135,7 +135,7 @@ def fill_songs_db_with_spotify():
     # Updating artists
     while True:
         cursor.execute(
-            "SELECT * FROM artists WHERE artist_name = '' LIMIT 10")
+            "SELECT * FROM artists WHERE artist_name = '' LIMIT 5")
         artists = cursor.fetchall()
         if not artists:
             break
@@ -152,12 +152,12 @@ def fill_songs_db_with_spotify():
                       artist_id}: {artist_name}, {artist_genres}')
             except SpotifyException as e:
                 print(f"Error fetching artist {artist_id}: {e}")
-        time.sleep(2)
+        time.sleep(5)
         conn.commit()
 
     # Updating tracks
     while True:
-        cursor.execute("SELECT * FROM tracks WHERE track_name = '' LIMIT 10")
+        cursor.execute("SELECT * FROM tracks WHERE track_name = '' LIMIT 5")
         tracks = cursor.fetchall()
         if not tracks:
             break
@@ -172,7 +172,7 @@ def fill_songs_db_with_spotify():
                 print(f'Updated track name for {track_id}: {track_name}')
             except SpotifyException as e:
                 print(f"Error fetching track {track_id}: {e}")
-        time.sleep(2)
+        time.sleep(5)
         conn.commit()
 
     conn.close()
