@@ -34,9 +34,6 @@ def cf_result(ids):
                 matched_playlists.append(playlist)
         return matched_playlists
 
-    def write_recommendations():
-        pass
-
     playlists = load_data(config['dir']['transformed'])
     print(f"Loaded {len(playlists)} rows of data from playlists CSV.")
 
