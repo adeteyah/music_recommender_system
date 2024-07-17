@@ -9,8 +9,6 @@ config.read('config.cfg')
 raw_path = config['dir']['raw']
 transformed_path = config['dir']['transformed']
 
-# Transform raw data
-
 
 def transform_raw_csv(file_path, output_path):
     df = pd.read_csv(file_path)
@@ -30,15 +28,8 @@ for filename in os.listdir(raw_path):
         output_path = os.path.join(transformed_path, filename)
         transform_raw_csv(file_path, output_path)
 
-#
-
-
-# Load the configuration
-
 transformed_path = config['dir']['transformed']
 songs_db_path = config['db']['songs_db']
-
-# Function to insert data into the database
 
 
 def insert_data_into_db(db_path, table_name, data):
@@ -56,8 +47,6 @@ def insert_data_into_db(db_path, table_name, data):
     conn.commit()
     conn.close()
 
-# Function to process the transformed CSV files
-
 
 def process_transformed_csv(transformed_path, songs_db_path):
     for filename in os.listdir(transformed_path):
@@ -65,7 +54,6 @@ def process_transformed_csv(transformed_path, songs_db_path):
             file_path = os.path.join(transformed_path, filename)
             df = pd.read_csv(file_path)
 
-            # Insert into tracks_details.db
             track_data = [
                 {
                     "track_id": row['spotify_id'],
@@ -76,7 +64,6 @@ def process_transformed_csv(transformed_path, songs_db_path):
             ]
             insert_data_into_db(songs_db_path, 'tracks', track_data)
 
-            # Insert into artists_details.db
             artists = set()
             for _, row in df.iterrows():
                 for artist_id in row['artists_id'].split(','):
@@ -93,5 +80,4 @@ def process_transformed_csv(transformed_path, songs_db_path):
             insert_data_into_db(songs_db_path, 'artists', artist_data)
 
 
-# Process the transformed CSV files and insert data into the databases
 process_transformed_csv(transformed_path, songs_db_path)
