@@ -1,3 +1,4 @@
+import sqlite3
 import time
 import subprocess
 import sys
@@ -29,6 +30,34 @@ def install_directories():
         path = Path(file)
         if not path.exists():
             path.touch()
+
+
+def create_database(db_path, schema):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    cursor.execute(schema)
+    conn.commit()
+    conn.close()
+
+
+artist_schema = """
+CREATE TABLE IF NOT EXISTS artists (
+    id TEXT PRIMARY KEY,
+    name TEXT,
+    genres TEXT
+);
+"""
+
+track_schema = """
+CREATE TABLE IF NOT EXISTS tracks (
+    id TEXT PRIMARY KEY,
+    title TEXT,
+    artist_ids TEXT
+);
+"""
+
+create_database("data/cache/artists_details.db", artist_schema)
+create_database("data/cache/tracks_details.db", track_schema)
 
 
 def install_packages(packages):

@@ -1,3 +1,4 @@
+import sqlite3
 import json
 import os
 import pandas as pd
@@ -102,3 +103,68 @@ save_json(tracks_json, tracks_json_path)
 save_json(artists_json, artists_json_path)
 
 print(f"Updated JSON files: {tracks_json_path} and {artists_json_path}")
+
+# Create SQLite databases and tables
+
+
+# Create the databases
+artists_db_path = 'artists_details.db'
+tracks_db_path = 'tracks_details.db'
+
+# Function to parse and insert data into SQLite
+
+
+def insert_data_into_db(db_path, table_name, data):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    placeholders = ", ".join(["?"] * len(data[0]))
+    columns = ", ".join(data[0].keys())
+    sql = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
+
+    for row in data:
+        cursor.execute(sql, list(row.values()))
+
+    conn.commit()
+    conn.close()
+
+# Function to process the transformed CSV files
+
+
+def process_transformed_csv(transformed_path, artists_db_path, tracks_db_path):
+    for filename in os.listdir(transformed_path):
+        if filename.endswith('.csv'):
+            file_path = os.path.join(transformed_path, filename)
+            df = pd.read_csv(file_path)
+
+            # Insert into tracks_details.db
+            track_data = [
+                {
+                    "id": row['spotify_id'],
+                    # Assuming the title is the same as spotify_id, you might need to adjust this
+                    "title": row['spotify_id'],
+                    "artist_ids": json.dumps(row['artists_id'].split(','))
+                }
+                for _, row in df.iterrows()
+            ]
+            insert_data_into_db(tracks_db_path, 'tracks', track_data)
+
+            # Insert into artists_details.db
+            artists = set()
+            for _, row in df.iterrows():
+                for artist_id in row['artists_id'].split(','):
+                    artists.add(artist_id)
+
+            artist_data = [
+                {
+                    "id": artist_id,
+                    "name": "",  # Assuming you have a way to get the artist name
+                    # Assuming you have a way to get the artist genres
+                    "genres": json.dumps([])
+                }
+                for artist_id in artists
+            ]
+            insert_data_into_db(artists_db_path, 'artists', artist_data)
+
+
+process_transformed_csv(transformed_path, artists_db_path, tracks_db_path)
