@@ -34,7 +34,7 @@ def write_recommendations():
 
 
 def cf_result(ids):
-    return print(f"Getting recommendation from {ids}!")
+    return print(f"Stored result on {ids}!")
 
 
 playlists_data = load_data(config['dir']['transformed'])
