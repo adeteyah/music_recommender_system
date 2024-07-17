@@ -42,16 +42,16 @@ def create_database(db_path, schema):
 
 artist_schema = """
 CREATE TABLE IF NOT EXISTS artists (
-    id TEXT PRIMARY KEY,
-    name TEXT,
-    genres TEXT
+    artist_id TEXT PRIMARY KEY,
+    artist_name TEXT,
+    artist_genres TEXT
 );
 """
 
 track_schema = """
 CREATE TABLE IF NOT EXISTS tracks (
-    id TEXT PRIMARY KEY,
-    title TEXT,
+    track_id TEXT PRIMARY KEY,
+    track_name TEXT,
     artist_ids TEXT
 );
 """
