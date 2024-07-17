@@ -40,10 +40,11 @@ for filename in os.listdir(csv_directory):
         # Extract playlist_id from filename
         playlist_id = filename.split('_')[-1].split('.')[0]
 
-        # Read Spotify IDs from CSV file
+        # Read Spotify IDs from CSV file, skipping header
         spotify_ids = []
         with open(os.path.join(csv_directory, filename), newline='') as csvfile:
             reader = csv.reader(csvfile)
+            next(reader)  # Skip header row
             for row in reader:
                 if len(row) >= 2:
                     # Assuming first column is spotify_id
