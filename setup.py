@@ -17,8 +17,8 @@ def install_directories():
     files = [
         "data/cache/fetched_users.txt",  # store scraped users
         "data/cache/fetched_artists.txt",  # store scraped artists
-        "data/cache/db_songs_cache.csv",  # store cache when fill songs db
-        "data/cache/db_playlists_cache.csv",  # store cache when fill playlists db
+        "data/cache/artists_table_cache.csv",  # store cache when fill songs db
+        "data/cache/tracks_table_cache.csv",  # store cache when fill playlists db
         "data/db/playlists_details.db",  # store playlist characteristic
         "data/db/songs_details.db",  # store title and artists id, artist name and genres
     ]
