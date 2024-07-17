@@ -18,8 +18,7 @@ def install_directories():
         "data/cache/fetched_users.txt",  # store scraped users
         "data/cache/fetched_artists.txt",  # store scraped artists
         "data/db/playlists_details.db",  # store playlist characteristic
-        "data/db/tracks_details.db",  # store title and artists id
-        "data/db/artists_details.db"  # store artist name and genres
+        "data/db/songs_details.db",  # store title and artists id, artist name and genres
     ]
 
     for directory in directories:
@@ -40,15 +39,12 @@ def create_database(db_path, schema):
     conn.close()
 
 
-artist_schema = """
+songs_schema = """
 CREATE TABLE IF NOT EXISTS artists (
     artist_id TEXT PRIMARY KEY,
     artist_name TEXT,
     artist_genres TEXT
 );
-"""
-
-track_schema = """
 CREATE TABLE IF NOT EXISTS tracks (
     track_id TEXT PRIMARY KEY,
     track_name TEXT,
@@ -56,8 +52,16 @@ CREATE TABLE IF NOT EXISTS tracks (
 );
 """
 
-create_database("data/db/artists_details.db", artist_schema)
-create_database("data/db/tracks_details.db", track_schema)
+playlist_schema = """
+CREATE TABLE IF NOT EXISTS playlists (
+    playlist_id TEXT PRIMARY KEY,
+    creator_id TEXT,
+    playlist_genres TEXT
+);
+"""
+
+create_database("data/db/songs_details.db", songs_schema)
+create_database("data/db/playlists_details.db", playlist_schema)
 
 
 def install_packages(packages):
