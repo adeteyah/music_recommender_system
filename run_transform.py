@@ -84,7 +84,7 @@ def fill_database_with_spotify_api(songs_db_path):
     cursor = conn.cursor()
 
     # Fetch tracks with null track_name
-    cursor.execute("SELECT track_id FROM tracks WHERE track_name IS NULL")
+    cursor.execute("SELECT track_id FROM tracks WHERE track_name IS ''")
     tracks_to_update = cursor.fetchall()
 
     for track_id in tracks_to_update:
@@ -107,7 +107,7 @@ def fill_database_with_spotify_api(songs_db_path):
             break  # Stop further processing
 
     # Fetch artists with null artist_name and artist_genres
-    cursor.execute("SELECT artist_id FROM artists WHERE artist_name IS NULL")
+    cursor.execute("SELECT artist_id FROM artists WHERE artist_name IS ''")
     artists_to_update = cursor.fetchall()
 
     for artist_id in artists_to_update:
