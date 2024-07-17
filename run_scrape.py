@@ -11,14 +11,14 @@ config.read('config.cfg')
 SPOTIPY_CLIENT_ID = config['spotify']['client_id']
 SPOTIPY_CLIENT_SECRET = config['spotify']['client_secret']
 
-user_ids = ['fjg0qizm720wpo1n90suz089y']
+user_ids = ['p5hbktou7i2jh8ym7ulgs60uj']
 
 client_credentials_manager = SpotifyClientCredentials(
     client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 # SQLite database file path
-db_file = config['db']['playlists_db']
+db_file = r'C:\Users\Adeteyah\Documents\music_recommender_system\data\db\playlists_details.db'
 
 # Function to connect to SQLite database
 
@@ -37,32 +37,31 @@ def create_connection(db_file):
 
 def save_playlist_to_database(user_id, playlist_id, fetched_artists, conn):
     try:
-        results = sp.playlist_tracks(playlist_id)
-        tracks = results['items']
+        # Fetch playlist details
+        playlist = sp.playlist(playlist_id)
 
+        # Insert or update playlists table
         cursor = conn.cursor()
-        for item in tracks:
-            track = item['track']
-            track_id = track['id']
-            artist_ids = ','.join([artist['id']
-                                  for artist in track['artists']])
-
-            # Add artist IDs to fetched_artists set
-            for artist_id in artist_ids.split(','):
-                fetched_artists.add(artist_id)
-
-            # Insert data into SQLite table
-            cursor.execute('''INSERT OR IGNORE INTO playlists (user_id, playlist_id, spotify_id, artists_id)
-                              VALUES (?, ?, ?, ?)''',
-                           (user_id, playlist_id, track_id, artist_ids))
+        cursor.execute('''INSERT OR IGNORE INTO playlists (playlist_id, creator_id, playlist_track_count)
+                          VALUES (?, ?, ?)''',
+                       (playlist_id, user_id, playlist['tracks']['total']))
         conn.commit()
 
-        print(f"Saved playlist details for {user_id}_{playlist_id}")
+        # Insert items into items table
+        tracks = playlist['tracks']['items']
+        playlist_items = ','.join([track['track']['id'] for track in tracks])
+
+        cursor.execute('''INSERT OR REPLACE INTO items (playlist_id, playlist_items)
+                          VALUES (?, ?)''',
+                       (playlist_id, playlist_items))
+        conn.commit()
+
+        print(f"Saved playlist details for {playlist_id}")
 
     except SpotifyException as e:
         if e.http_status == 429:
             print(f"Rate limit exceeded. Last processed playlist: {
-                  user_id}_{playlist_id}")
+                  playlist_id}")
         else:
             print(f"Spotify error: {e}")
     except Exception as e:
