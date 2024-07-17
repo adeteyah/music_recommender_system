@@ -14,10 +14,10 @@ def install_directories():
     ]
 
     files = [
-        "data/cache/fetched_users.txt",
-        "data/cache/fetched_artists.txt"
-        "data/cache/track_details.json"
-        "data/cache/artists_details.json"
+        "data/cache/fetched_users.txt",  # store scraped users
+        "data/cache/fetched_artists.txt"  # store scraped artists
+        "data/cache/track_details.json"  # store title and artists id
+        "data/cache/artists_details.json"  # store artist name and genres
     ]
 
     for directory in directories:
