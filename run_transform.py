@@ -76,6 +76,7 @@ def choose_process():
     print("Choose a process to run:")
     print("1. Transform raw CSV files")
     print("2. Insert transformed data into database")
+    print("3. Fill database with Spotify API")
     choice = input("Enter your choice (1 or 2): ")
 
     if choice == '1':
