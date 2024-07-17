@@ -130,6 +130,7 @@ def cf_result(ids):
     with open(output_path, 'w') as f:
         f.write(results)
 
+    print(f'CF Recommendation is stored in {output_path}')
     return results
 
 
@@ -137,4 +138,3 @@ if __name__ == "__main__":
     ids = ['5xNUR50KxswPRAvx7S163g', '66y7x28jXOPrcmu3D5Zjh6',
            '2s7X9H1e4yrfiShhnPS9S8']
     result = cf_result(ids)
-    print(f'CF Recommendation is stored in {output_path}')
