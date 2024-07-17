@@ -24,14 +24,16 @@ def cf_result(ids):
     playlists = cursor_playlist.fetchall()
 
     track_counts = {}
+    playlist_contributions = {}
     for playlist_id, playlist_items in playlists:
         items = playlist_items.split(', ')
-        for track_id in items:
-            if track_id in ids:
-                for item in items:
-                    if item not in track_counts:
-                        track_counts[item] = 0
-                    track_counts[item] += 1
+        match_count = sum(1 for track_id in items if track_id in ids)
+        if match_count > 0:
+            playlist_contributions[playlist_id] = match_count
+            for item in items:
+                if item not in track_counts:
+                    track_counts[item] = 0
+                track_counts[item] += 1
 
     # Retrieve track and artist information from the songs database
     track_info = {}
@@ -61,12 +63,22 @@ def cf_result(ids):
     sorted_tracks = sorted(
         track_info.items(), key=lambda item: item[1]['count'], reverse=True)
 
+    # Sort playlists by contribution
+    sorted_playlists = sorted(
+        playlist_contributions.items(), key=lambda item: item[1], reverse=True)
+
     # Format the results
-    results = "Contribution Rank:\n"
+    results = "Playlist Contributed\n"
+    rank = 1
+    for playlist_id, count in sorted_playlists:
+        results += f"{rank}. {count} Tracks | Playlist ID: {playlist_id}\n"
+        rank += 1
+
+    results += "\nSongs Recommendation\n"
     rank = 1
     for track_id, info in sorted_tracks:
-        results += f"{rank}. {info['artists']
-                              } - {info['track_name']} | Rank: {info['count']}\n"
+        results += f"{rank}. {info['artists']} - {info['track_name']
+                                                  } [{track_id}] | Rank: {info['count']}\n"
         rank += 1
 
     # Write the results to a text file
