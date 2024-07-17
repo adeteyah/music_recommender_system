@@ -16,9 +16,9 @@ def install_directories():
     files = [
         "data/cache/fetched_users.txt",  # store scraped users
         "data/cache/fetched_artists.txt",  # store scraped artists
-        "data/cache/playlists_details.json",  # store playlist characteristic
-        "data/cache/tracks_details.json",  # store title and artists id
-        "data/cache/artists_details.json"  # store artist name and genres
+        "data/cache/playlists_details.db",  # store playlist characteristic
+        "data/cache/tracks_details.db",  # store title and artists id
+        "data/cache/artists_details.db"  # store artist name and genres
     ]
 
     for directory in directories:
