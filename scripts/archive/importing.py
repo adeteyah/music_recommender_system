@@ -127,7 +127,7 @@ def import_data(batch_size=1000):
     playlists_df = pd.DataFrame({
         'playlist_id': [],
         'creator_id': [],
-        'playlist_track_count': [],
+        'original_track_count': [],
         'min_duration_ms': [],
         'max_duration_ms': [],
         'min_popularity': [],

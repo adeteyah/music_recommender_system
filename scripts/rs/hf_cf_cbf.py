@@ -54,7 +54,7 @@ def get_track_details(track_id):
 
 def hf_cf_cbf_result(ids):
     join_playlist_query = """
-        SELECT p.playlist_id, p.creator_id, p.playlist_track_count,
+        SELECT p.playlist_id, p.creator_id, p.original_track_count,
             i.playlist_items
         FROM playlists p
         JOIN items i ON p.playlist_id = i.playlist_id
@@ -87,7 +87,7 @@ def hf_cf_cbf_result(ids):
         for row in rows_playlist:
             playlist_id = row[0]
             creator_id = row[1]
-            playlist_track_count = row[2]
+            original_track_count = row[2]
             # Split playlist_items by comma
             playlist_items = row[-1].split(',')
 

@@ -66,12 +66,19 @@ def fill_tracks_table():
             track_id = track[0]
             try:
                 track_info = sp.track(track_id)
-                audio_features = sp.audio_features(track_id)[0]
+                audio_features_list = sp.audio_features(track_id)
+
+                # Check if audio_features_list is not empty and contains valid data
+                if audio_features_list and audio_features_list[0]:
+                    audio_features = audio_features_list[0]
+                else:
+                    raise SpotifyException(
+                        f"No audio features available for track {track_id}")
 
                 track_name = track_info['name']
                 artist_ids = ",".join([artist['id']
                                       for artist in track_info['artists']])
-                duration_ms = audio_features['duration_ms']
+                duration_ms = track_info['duration_ms']
                 popularity = track_info['popularity']
                 acousticness = audio_features['acousticness']
                 danceability = audio_features['danceability']
@@ -103,6 +110,8 @@ def fill_tracks_table():
                 print(f'Updated track info for {track_id}: {track_name}')
             except SpotifyException as e:
                 print(f"Error fetching track {track_id}: {e}")
+            except Exception as e:
+                print(f"Unexpected error for track {track_id}: {e}")
         conn.commit()
         time.sleep(float(config['api']['delay_time']))
 
@@ -272,16 +281,16 @@ def fill_playlists_table():
 def choose_process():
     while True:
         print("\nChoose a process to run:")
-        print("1. Fill artists information table")
-        print("2. Fill tracks information table")
+        print("1. Fill tracks information table")
+        print("2. Fill artists information table")
         print("3. Process playlist items")
         print("4. Exit")
         choice = input("Enter your choice (1, 2, 3, or 4): ")
 
         if choice == '1':
-            fill_artists_table()
-        elif choice == '2':
             fill_tracks_table()
+        elif choice == '2':
+            fill_artists_table()
         elif choice == '3':
             fill_playlists_table()
         elif choice == '4':

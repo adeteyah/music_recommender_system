@@ -74,7 +74,8 @@ playlist_schema = """
 CREATE TABLE IF NOT EXISTS playlists (
     playlist_id TEXT PRIMARY KEY,
     creator_id TEXT,
-    playlist_track_count INTEGER,
+    original_track_count INTEGER,
+    fetched_track_count INTEGER,
     min_duration_ms INTEGER,
     max_duration_ms INTEGER,
     min_popularity REAL,
@@ -128,7 +129,7 @@ def install_packages(packages):
 
 if __name__ == "__main__":
     install_directories()
-    packages = ["sqlite3", "configparser", "requests", "spotipy",
+    packages = ["configparser", "requests", "spotipy",
                 "pandas", "numpy", "matplotlib", "seaborn"]
     install_packages(packages)
     create_database("data/db/songs_details.db", songs_schema)

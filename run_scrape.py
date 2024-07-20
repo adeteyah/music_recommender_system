@@ -43,7 +43,7 @@ def save_playlist_to_database(user_id, playlist_id, conn):
             return
 
         cursor = conn.cursor()
-        cursor.execute('''INSERT OR IGNORE INTO playlists (playlist_id, creator_id, playlist_track_count)
+        cursor.execute('''INSERT OR IGNORE INTO playlists (playlist_id, creator_id, original_track_count)
                           VALUES (?, ?, ?)''',
                        (playlist_id, user_id, playlist['tracks']['total']))
         conn.commit()

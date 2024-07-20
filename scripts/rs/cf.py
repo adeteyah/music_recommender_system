@@ -54,7 +54,7 @@ def get_track_details(track_id):
 
 def cf_result(ids):
     join_playlist_query = """
-        SELECT p.playlist_id, p.creator_id, p.playlist_track_count,
+        SELECT p.playlist_id, p.creator_id, p.original_track_count,
             i.playlist_items
         FROM playlists p
         JOIN items i ON p.playlist_id = i.playlist_id
