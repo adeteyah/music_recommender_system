@@ -52,6 +52,25 @@ def get_track_details(track_id):
     return {'artist_name': artist_name, 'track_name': track_name}
 
 
+def calculate_relationship(ids, playlist_tracks):
+    relationships = {}
+    for i in range(len(ids)):
+        for j in range(i + 1, len(ids)):
+            id1, id2 = ids[i], ids[j]
+            common_playlists = 0
+            for tracks in playlist_tracks:
+                if id1 in tracks and id2 in tracks:
+                    common_playlists += 1
+            if common_playlists >= 2:
+                relationship = 'High'
+            elif common_playlists == 1:
+                relationship = 'Medium'
+            else:
+                relationship = 'Low'
+            relationships[(id1, id2)] = relationship
+    return relationships
+
+
 def cf_result(ids):
     join_playlist_query = """
         SELECT p.playlist_id, p.creator_id, p.original_track_count,
@@ -71,6 +90,7 @@ def cf_result(ids):
     # Store track details in a dictionary for easy access
     track_details = {}
     track_count = {}
+    playlist_tracks = []
 
     # Write the results to a file
     with open(output_path, 'w', encoding='utf-8') as file:
@@ -86,6 +106,8 @@ def cf_result(ids):
         for row in rows_playlist:
             # Split playlist_items by comma
             playlist_items = row[-1].split(',')
+            playlist_tracks.append(set(item.strip()
+                                   for item in playlist_items))
             for item in playlist_items:
                 item = item.strip()
                 if item not in track_ids:  # Check if item is not in track_ids
@@ -137,9 +159,19 @@ def cf_result(ids):
             file.write(f"{idx}. {count} Tracks from [https://open.spotify.com/playlist/{
                        playlist_id}] by [https://open.spotify.com/user/{creator_id}]\n")
 
+        # Calculate relationships between inputted IDs
+        relationships = calculate_relationship(ids, playlist_tracks)
+        file.write("\nTrack Relationships:\n")
+        for idx, ((id1, id2), relationship) in enumerate(relationships.items(), start=1):
+            details1 = get_track_details(id1)
+            details2 = get_track_details(id2)
+            file.write(f"{idx}. {details1['track_name']} [https://open.spotify.com/track/{id1}] & {
+                       details2['track_name']} [https://open.spotify.com/track/{id2}] have a {relationship} relationship\n")
+
     print(f'CF Result written to: {output_path}')
 
 
 if __name__ == "__main__":
-    ids = ['5XeFesFbtLpXzIVDNQP22n']  # Example input with track_ids
+    ids = ['01beCqR9wsVnwzkAJZyTqq', '5XeFesFbtLpXzIVDNQP22n', '0yc6Gst2xkRu0eMLeRMGCX', '0Eqg0CQ7bK3RQIMPw1A7pl',
+           '4SqWKzw0CbA05TGszDgMlc', '5drW6PGRxkE6MxttzVLNk5', '6ilc4vQcwMPlvAHFfsTGng', '1SKPmfSYaPsETbRHaiA18G']
     cf_result(ids)

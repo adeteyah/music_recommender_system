@@ -3,7 +3,7 @@ import pandas as pd
 import os
 
 # File to store the last processed batch
-PROGRESS_FILE = 'progress.txt'
+PROGRESS_FILE = r'C:\Users\Adeteyah\Documents\progress.txt'
 
 
 def save_progress(start):
@@ -24,7 +24,7 @@ def import_data(batch_size=1000):
 
     # Connect to the source database
     source_conn = sqlite3.connect(
-        r'C:\Users\Adeteyah\Documents\music_recommender_system\data\db\source_tracks.db')
+        r'C:\Users\Adeteyah\Documents\source_tracks.db')
 
     # Read data from source tables
     audio_features_df = pd.read_sql_query(
@@ -127,7 +127,7 @@ def import_data(batch_size=1000):
     playlists_df = pd.DataFrame({
         'playlist_id': [],
         'creator_id': [],
-        'original_track_count': [],
+        'playlist_track_count': [],
         'min_duration_ms': [],
         'max_duration_ms': [],
         'min_popularity': [],
