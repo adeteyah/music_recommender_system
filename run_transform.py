@@ -1,9 +1,5 @@
 import sqlite3
-import time
 import configparser
-import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
-from spotipy.exceptions import SpotifyException
 from collections import Counter
 
 config = configparser.ConfigParser()
@@ -11,112 +7,6 @@ config.read('config.cfg')
 
 songs_db_path = config['db']['songs_db']
 playlists_db_path = config['db']['playlists_db']
-
-SPOTIPY_CLIENT_ID = config['spotify']['client_id']
-SPOTIPY_CLIENT_SECRET = config['spotify']['client_secret']
-
-client_credentials_manager = SpotifyClientCredentials(
-    client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
-sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-
-
-def fill_artists_table():
-    conn = sqlite3.connect(songs_db_path)
-    cursor = conn.cursor()
-
-    # Updating artists
-    while True:
-        cursor.execute(
-            "SELECT * FROM artists WHERE artist_name IS NULL LIMIT 15")
-        artists = cursor.fetchall()
-        if not artists:
-            break
-
-        for artist in artists:
-            artist_id = artist[0]
-            try:
-                artist_info = sp.artist(artist_id)
-                artist_name = artist_info['name']
-                artist_genres = ",".join(artist_info['genres'])
-                cursor.execute("UPDATE artists SET artist_name = ?, artist_genres = ? WHERE artist_id = ?",
-                               (artist_name, artist_genres, artist_id))
-                print(f'Updated artist name, genres for {
-                      artist_id}: {artist_name}, {artist_genres}')
-            except SpotifyException as e:
-                print(f"Error fetching artist {artist_id}: {e}")
-        conn.commit()
-        time.sleep(float(config['api']['delay_time']))
-
-    conn.close()
-    print("Finished updating artists with Spotify data.")
-
-
-def fill_tracks_table():
-    conn = sqlite3.connect(songs_db_path)
-    cursor = conn.cursor()
-
-    # Updating tracks
-    while True:
-        cursor.execute("SELECT * FROM tracks WHERE track_name IS NULL LIMIT 5")
-        tracks = cursor.fetchall()
-        if not tracks:
-            break
-
-        for track in tracks:
-            track_id = track[0]
-            try:
-                track_info = sp.track(track_id)
-                audio_features_list = sp.audio_features(track_id)
-
-                # Check if audio_features_list is not empty and contains valid data
-                if audio_features_list and audio_features_list[0]:
-                    audio_features = audio_features_list[0]
-                else:
-                    raise SpotifyException(
-                        f"No audio features available for track {track_id}")
-
-                track_name = track_info['name']
-                artist_ids = ",".join([artist['id']
-                                      for artist in track_info['artists']])
-                duration_ms = track_info['duration_ms']
-                popularity = track_info['popularity']
-                acousticness = audio_features['acousticness']
-                danceability = audio_features['danceability']
-                energy = audio_features['energy']
-                instrumentalness = audio_features['instrumentalness']
-                key = audio_features['key']
-                liveness = audio_features['liveness']
-                loudness = audio_features['loudness']
-                mode = audio_features['mode']
-                speechiness = audio_features['speechiness']
-                tempo = audio_features['tempo']
-                time_signature = audio_features['time_signature']
-                valence = audio_features['valence']
-
-                cursor.execute("""
-                    UPDATE tracks SET
-                        track_name = ?, artist_ids = ?, duration_ms = ?, popularity = ?, 
-                        acousticness = ?, danceability = ?, energy = ?,
-                        instrumentalness = ?, key = ?, liveness = ?, loudness = ?, mode = ?,
-                        speechiness = ?, tempo = ?, time_signature = ?, valence = ?
-                    WHERE track_id = ?
-                """, (
-                    track_name, artist_ids, duration_ms, popularity,
-                    acousticness, danceability, energy,
-                    instrumentalness, key, liveness, loudness, mode,
-                    speechiness, tempo, time_signature, valence, track_id
-                ))
-
-                print(f'Updated track info for {track_id}: {track_name}')
-            except SpotifyException as e:
-                print(f"Error fetching track {track_id}: {e}")
-            except Exception as e:
-                print(f"Unexpected error for track {track_id}: {e}")
-        conn.commit()
-        time.sleep(float(config['api']['delay_time']))
-
-    conn.close()
-    print("Finished updating tracks with Spotify data.")
 
 
 def fill_playlists_table():
@@ -206,7 +96,7 @@ def fill_playlists_table():
                     min_loudness = ?, max_loudness = ?, min_mode = ?, max_mode = ?, 
                     min_speechiness = ?, max_speechiness = ?, min_tempo = ?, max_tempo = ?, 
                     min_time_signature = ?, max_time_signature = ?, min_valence = ?, max_valence = ?, 
-                    most_artist_id = ?, most_genres = ?
+                    most_artist_id = ?, most_genres = ?, fetched_track_count = ?
                 WHERE playlist_id = ?
             """, (
                 min(min_max_values['duration_ms']), max(
@@ -232,7 +122,7 @@ def fill_playlists_table():
                 min(min_max_values['time_signature']), max(
                     min_max_values['time_signature']),
                 min(min_max_values['valence']), max(min_max_values['valence']),
-                most_artist_id, most_genres, playlist_id
+                most_artist_id, most_genres, len(track_ids), playlist_id
             ))
         else:
             print(f"No track information found for playlist {playlist_id}")
@@ -244,34 +134,7 @@ def fill_playlists_table():
     print("Finished updating playlists with audio feature data.")
 
 
-def choose_process():
-    while True:
-        print("\nChoose a process to run:")
-        print("1. Fill tracks information table")
-        print("2. Fill artists information table")
-        print("3. Process playlist items")
-        print("4. Exit")
-        choice = input("Enter your choice (1, 2, 3, or 4): ")
-
-        if choice == '1':
-            fill_tracks_table()
-        elif choice == '2':
-            fill_artists_table()
-        elif choice == '3':
-            fill_playlists_table()
-        elif choice == '4':
-            print("Exiting the program.")
-            break
-        else:
-            print("Invalid choice. Please enter '1', '2', '3', or '4'.")
-
-        return_to_menu = input("Return to menu (Y/N)? ").strip().lower()
-        if return_to_menu != 'y':
-            print("Exiting the program.")
-            break
-
-
 if __name__ == "__main__":
-    choose_process()
+    fill_playlists_table()
 
 print("Scrape completed.")

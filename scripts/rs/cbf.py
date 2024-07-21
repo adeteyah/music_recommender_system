@@ -81,6 +81,7 @@ def cbf_result(ids):
         input_features = {}
         input_genres = set()
         invalid_tracks = []
+        playlist_ids_shown = []
 
         for track_id in ids:
             details = get_track_details(track_id)
@@ -122,26 +123,71 @@ def cbf_result(ids):
                     (playlist_id, creator_id, combined_score))
 
         sorted_playlists = sorted(playlist_distances, key=lambda x: x[2])
+        top_playlists = sorted_playlists[:5]
 
-        with open(output_path, 'w') as file:
+        with open(output_path, 'w', encoding='utf-8') as file:
             file.write("Inputted IDs:\n")
             for idx, track_id in enumerate(ids, start=1):
                 details = get_track_details(track_id)
                 if track_id in invalid_tracks:
-                    file.write(f"{idx}. {details['artist_name']} - {details['track_name']} [https://open.spotify.com/track/{
-                        track_id}] (Unfetched Audio Features)\n")
+                    file.write(f"{idx}. {details['artist_name']} - {details['track_name']
+                                                                    } [https://open.spotify.com/track/{track_id}] (Unfetched Audio Features)\n")
                 else:
                     file.write(f"{idx}. {details['artist_name']} - {
-                        details['track_name']} [https://open.spotify.com/track/{track_id}]\n")
+                               details['track_name']} [https://open.spotify.com/track/{track_id}]\n")
 
             file.write("\nRecommendation Result:\n")
-            for idx, (playlist_id, creator_id, score) in enumerate(sorted_playlists[:5], start=1):
+            for idx, (playlist_id, creator_id, score) in enumerate(top_playlists, start=1):
                 file.write(f"{idx}. [https://open.spotify.com/user/{
-                    creator_id}] - [https://open.spotify.com/playlist/{playlist_id}] | Combined Score: {score:.2f}\n")
+                           creator_id}] - [https://open.spotify.com/playlist/{playlist_id}] | Combined Score: {score:.2f}\n")
+                playlist_ids_shown.append(playlist_id)
+
+            # Gather tracks from the top playlists
+            track_counts = {}
+            for playlist_id in playlist_ids_shown:
+                cur_playlist.execute(
+                    "SELECT playlist_items FROM items WHERE playlist_id = ?", (playlist_id,))
+                playlist_items = cur_playlist.fetchone()
+                if playlist_items:
+                    track_ids = playlist_items[0].split(',')
+                    for track_id in track_ids:
+                        track_id = track_id.strip()
+                        if track_id in track_counts:
+                            track_counts[track_id] += 1
+                        else:
+                            track_counts[track_id] = 1
+
+            # Fetch details for these tracks
+            track_details = {}
+            for track_id in track_counts.keys():
+                details = get_track_details(track_id)
+                track_details[track_id] = {
+                    'artist_name': details['artist_name'],
+                    'track_name': details['track_name']
+                }
+
+            file.write("\nSongs Recommendations:\n")
+            sorted_tracks = sorted(track_counts.items(),
+                                   key=lambda x: x[1], reverse=True)
+            for idx, (track_id, count) in enumerate(sorted_tracks, start=1):
+                details = track_details.get(
+                    track_id, {'artist_name': 'Unknown Artist', 'track_name': 'Unknown Track'})
+                file.write(f"{idx}. {details['artist_name']} - {details['track_name']
+                                                                } [https://open.spotify.com/track/{track_id}] | count: {count}\n")
 
         print(f'Result written to: {output_path}')
     except Exception as e:
         print(f"Error details: {e}")
+
+
+if __name__ == "__main__":
+    ids = ['5E30LdtzQTGqRvNd7l6kG5']  # Example input with track_ids
+    cbf_result(ids)
+
+
+if __name__ == "__main__":
+    ids = ['5E30LdtzQTGqRvNd7l6kG5']  # Example input with track_ids
+    cbf_result(ids)
 
 
 if __name__ == "__main__":
