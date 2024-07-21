@@ -119,40 +119,6 @@ def fill_tracks_table():
     print("Finished updating tracks with Spotify data.")
 
 
-def fetch_playlist_items():
-    conn = sqlite3.connect(playlists_db_path)
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT playlist_items FROM items")
-    playlist_items = cursor.fetchone()
-
-    conn.close()
-
-    if playlist_items:
-        # Splitting comma-separated track_ids
-        track_ids = playlist_items[0].split(',')
-        return track_ids
-    else:
-        return []
-
-
-def fetch_track_info(track_id):
-    conn = sqlite3.connect(songs_db_path)
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        SELECT track_name, duration_ms, popularity, acousticness, danceability,
-        energy, instrumentalness, key, liveness, loudness, mode,
-        speechiness, tempo, time_signature, valence
-        FROM tracks
-        WHERE track_id = ?
-    """, (track_id,))
-    track_info = cursor.fetchone()
-
-    conn.close()
-    return track_info
-
-
 def fill_playlists_table():
     conn_playlists = sqlite3.connect(playlists_db_path)
     cursor_playlists = conn_playlists.cursor()

@@ -1,215 +1,82 @@
 Inputted IDs:
-1. Unknown Artist - Unknown Track [https://open.spotify.com/track/01beCqR9wsVnwzkAJZyTqq]
+1. Unknown Artist - Unknown Track [https://open.spotify.com/track/3pCt2wRdBDa2kCisIdHWgF]
 2. Unknown Artist - Unknown Track [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n]
 3. Unknown Artist - Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX]
-4. Unknown Artist - Unknown Track [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl]
+4. Artist Not In Database - Track Not In Database [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl]
 5. Unknown Artist - Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc]
 6. Unknown Artist - Unknown Track [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5]
-7. Unknown Artist - Unknown Track [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng]
-8. Unknown Artist - Unknown Track [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G]
+7. Artist Not In Database - Track Not In Database [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng]
+8. Artist Not In Database - Track Not In Database [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G]
 
 Recommendation Result:
-1. Unknown Artist - Unknown Track [https://open.spotify.com/track/3CBxVM0zGj41BQtE6m7gwb] | Count: 12
-2. Unknown Artist - Unknown Track [https://open.spotify.com/track/1FWsomP9StpCcXNWmJk8Cl] | Count: 11
-3. Unknown Artist - Unknown Track [https://open.spotify.com/track/2TRGNVokPnC2a2oHg5iv1H] | Count: 11
-4. Unknown Artist - Unknown Track [https://open.spotify.com/track/086myS9r57YsLbJpU0TgK9] | Count: 10
-5. Unknown Artist - Unknown Track [https://open.spotify.com/track/4xqrdfXkTW4T0RauPLv3WA] | Count: 10
-6. Unknown Artist - Unknown Track [https://open.spotify.com/track/5FVd6KXrgO9B3JPmC8OPst] | Count: 9
-7. Unknown Artist - Unknown Track [https://open.spotify.com/track/2wAiFWjRupWmnDkQcu91MF] | Count: 9
-8. Unknown Artist - Unknown Track [https://open.spotify.com/track/0SpkyS1Q4MD8GaVcP5YjT4] | Count: 9
-9. Unknown Artist - Unknown Track [https://open.spotify.com/track/4EWBhKf1fOFnyMtUzACXEc] | Count: 9
-10. Unknown Artist - Unknown Track [https://open.spotify.com/track/3p4hRhMcb6ch8OLtATMaLw] | Count: 8
-11. Unknown Artist - Unknown Track [https://open.spotify.com/track/1fDFHXcykq4iw8Gg7s5hG9] | Count: 8
-12. Unknown Artist - Unknown Track [https://open.spotify.com/track/2dIBMHByUGcNPzmYBJ6OAj] | Count: 8
-13. Unknown Artist - Unknown Track [https://open.spotify.com/track/3ymuBMTviroWLuf1jMsMVf] | Count: 8
-14. Unknown Artist - Unknown Track [https://open.spotify.com/track/4gW0fnArZ93uAElSkuw0PG] | Count: 8
-15. Unknown Artist - Unknown Track [https://open.spotify.com/track/630DpnzdfjdVqv2yLfPbAX] | Count: 8
-16. Unknown Artist - Unknown Track [https://open.spotify.com/track/6A5tlFsbty5iJkSqMFWNFs] | Count: 8
-17. Unknown Artist - Unknown Track [https://open.spotify.com/track/5AkV53fo1u01mi8r22JNeF] | Count: 8
-18. Unknown Artist - Unknown Track [https://open.spotify.com/track/3AJwUDP919kvQ9QcozQPxg] | Count: 8
-19. Unknown Artist - Unknown Track [https://open.spotify.com/track/1ZMiCix7XSAbfAJlEZWMCp] | Count: 8
-20. Unknown Artist - Unknown Track [https://open.spotify.com/track/0BxE4FqsDD1Ot4YuBXwAPp] | Count: 7
-21. Unknown Artist - Unknown Track [https://open.spotify.com/track/2AT8iROs4FQueDv2c8q2KE] | Count: 7
-22. Unknown Artist - Unknown Track [https://open.spotify.com/track/2yynRDKYqTLVTcP7FqoyVE] | Count: 7
-23. Unknown Artist - Unknown Track [https://open.spotify.com/track/0urpBLpcm6DOGzs86rcKd8] | Count: 7
-24. Unknown Artist - Unknown Track [https://open.spotify.com/track/30QNjcM3Q1GnLFIIJjWQL1] | Count: 7
-25. Unknown Artist - Unknown Track [https://open.spotify.com/track/7Gju1wbqklcglziqjPIDVM] | Count: 7
-26. Unknown Artist - Unknown Track [https://open.spotify.com/track/7iTF9T1jum3Km6H6WMZpDC] | Count: 7
-27. Unknown Artist - Unknown Track [https://open.spotify.com/track/7zxLkZbUxITHabPzGN8Xgc] | Count: 7
-28. Unknown Artist - Unknown Track [https://open.spotify.com/track/51lPx6ZCSalL2kvSrDUyJc] | Count: 7
-29. Unknown Artist - Unknown Track [https://open.spotify.com/track/2QB8FwOszur18Ai7t2XnNi] | Count: 7
-30. Unknown Artist - Unknown Track [https://open.spotify.com/track/18UsAG7SfOQ5sxJEdjAMH0] | Count: 7
-31. Unknown Artist - Unknown Track [https://open.spotify.com/track/3pCt2wRdBDa2kCisIdHWgF] | Count: 7
-32. Unknown Artist - Unknown Track [https://open.spotify.com/track/5TTGoX70AFrTvuEtqHK37S] | Count: 6
-33. Unknown Artist - Unknown Track [https://open.spotify.com/track/2rXVtoLBHuXcNB5DVfIc9p] | Count: 6
-34. Unknown Artist - Unknown Track [https://open.spotify.com/track/4zvHZWOGyL7WcmqHOgtGCW] | Count: 6
-35. Unknown Artist - Unknown Track [https://open.spotify.com/track/2mdEsXPu8ZmkHRRtAdC09e] | Count: 6
-36. Unknown Artist - Unknown Track [https://open.spotify.com/track/1tS1dRfxIV9FzqdYTbJgMn] | Count: 6
-37. Unknown Artist - Unknown Track [https://open.spotify.com/track/6L68DyIsn6SqEN9rStOXb9] | Count: 6
-38. Unknown Artist - Unknown Track [https://open.spotify.com/track/0nJW01T7XtvILxQgC5J7Wh] | Count: 6
-39. Unknown Artist - Unknown Track [https://open.spotify.com/track/0M3HkE321xpCbCYqVKzr1q] | Count: 6
-40. Unknown Artist - Unknown Track [https://open.spotify.com/track/7mjO4RbTZIb1SfE8G673Lm] | Count: 6
-41. Unknown Artist - Unknown Track [https://open.spotify.com/track/2qgjqbi96IAOBzZFC6H57U] | Count: 6
-42. Unknown Artist - Unknown Track [https://open.spotify.com/track/4BLpx15uqj0UykcYPXALGO] | Count: 6
-43. Unknown Artist - Unknown Track [https://open.spotify.com/track/7iPlcFvOMOzt6v0QvcAueZ] | Count: 6
-44. Unknown Artist - Unknown Track [https://open.spotify.com/track/7LVHVU3tWfcxj5aiPFEW4Q] | Count: 6
-45. Unknown Artist - Unknown Track [https://open.spotify.com/track/2LBqCSwhJGcFQeTHMVGwy3] | Count: 6
-46. Unknown Artist - Unknown Track [https://open.spotify.com/track/7nzsY8vlnKdvGOEE0rjAXZ] | Count: 5
-47. Unknown Artist - Unknown Track [https://open.spotify.com/track/2x8evxqUlF0eRabbW2JBJd] | Count: 5
-48. Unknown Artist - Unknown Track [https://open.spotify.com/track/2LGdO5MtFdyphi2EihANZG] | Count: 5
-49. Unknown Artist - Unknown Track [https://open.spotify.com/track/7gGBgh0bVxHPgZjA505bo9] | Count: 5
-50. Unknown Artist - Unknown Track [https://open.spotify.com/track/5Y35SjAfXjjG0sFQ3KOxmm] | Count: 5
-51. Unknown Artist - Unknown Track [https://open.spotify.com/track/3FPlY1uqTe1oFfIgI0BnoA] | Count: 5
-52. Unknown Artist - Unknown Track [https://open.spotify.com/track/6EviFqpmuvHfQaExMKmt0A] | Count: 5
-53. Unknown Artist - Unknown Track [https://open.spotify.com/track/4ZG4aqyBvKk3V3yZBoLToK] | Count: 5
-54. Unknown Artist - Unknown Track [https://open.spotify.com/track/2IAR0DziHCjSu16gR4ihvy] | Count: 5
-55. Unknown Artist - Unknown Track [https://open.spotify.com/track/70YTBH8vOGJNMhy6186yFm] | Count: 5
-56. Unknown Artist - Unknown Track [https://open.spotify.com/track/3TgMcrV32NUKjEG2ujn9eh] | Count: 5
-57. Unknown Artist - Unknown Track [https://open.spotify.com/track/5WkCcSa78lM1Ym4LXzJUiN] | Count: 5
-58. Unknown Artist - Unknown Track [https://open.spotify.com/track/0rOLFkjY5DSIViVBNnzOuK] | Count: 5
-59. Unknown Artist - Unknown Track [https://open.spotify.com/track/2VyWEOCnjt3C5ukKqXkGAF] | Count: 5
-60. Unknown Artist - Unknown Track [https://open.spotify.com/track/13sOb9V6Y3uCnRxY9HIZqP] | Count: 5
-61. Unknown Artist - Unknown Track [https://open.spotify.com/track/5EcGSkkNBMAWOePvLgKde1] | Count: 5
-62. Unknown Artist - Unknown Track [https://open.spotify.com/track/2bdVgAQgosGUJoViVDNeOV] | Count: 5
-63. Unknown Artist - Unknown Track [https://open.spotify.com/track/2tGvwE8GcFKwNdAXMnlbfl] | Count: 5
-64. Unknown Artist - Unknown Track [https://open.spotify.com/track/7vl2YjHnDNGzTnyZdTf4p9] | Count: 5
-65. Unknown Artist - Unknown Track [https://open.spotify.com/track/2ayIgfvWo3SfYP2pVOr4pC] | Count: 5
-66. Unknown Artist - Unknown Track [https://open.spotify.com/track/6CcJMwBtXByIz4zQLzFkKc] | Count: 5
-67. Unknown Artist - Unknown Track [https://open.spotify.com/track/5E30LdtzQTGqRvNd7l6kG5] | Count: 5
-68. Unknown Artist - Unknown Track [https://open.spotify.com/track/5CZ40GBx1sQ9agT82CLQCT] | Count: 5
-69. Unknown Artist - Unknown Track [https://open.spotify.com/track/5bsnLiT00hG37qd8p2jdVl] | Count: 4
-70. Unknown Artist - Unknown Track [https://open.spotify.com/track/0eDQj41kzBhMKQIkTt6OJR] | Count: 4
-71. Unknown Artist - Unknown Track [https://open.spotify.com/track/2vQQfWTanvD99OeHLAoyhW] | Count: 4
-72. Unknown Artist - Unknown Track [https://open.spotify.com/track/0S6CXA5LpRDX6b4akgrOot] | Count: 4
-73. Unknown Artist - Unknown Track [https://open.spotify.com/track/4dtP86vkhzwNXCFpCtizce] | Count: 4
-74. Unknown Artist - Unknown Track [https://open.spotify.com/track/47Bg6IrMed1GPbxRgwH2aC] | Count: 4
-75. Unknown Artist - Unknown Track [https://open.spotify.com/track/6TodWdTSDfzwgYynTZSvJn] | Count: 4
-76. Unknown Artist - Unknown Track [https://open.spotify.com/track/75ls0gurX68lUmMjE7QcsE] | Count: 4
-77. Unknown Artist - Unknown Track [https://open.spotify.com/track/47EWMOElkkbMp5m9SBkx7d] | Count: 4
-78. Unknown Artist - Unknown Track [https://open.spotify.com/track/0MAIxtXWimwhAAQOST9jp7] | Count: 4
-79. Unknown Artist - Unknown Track [https://open.spotify.com/track/4R2kfaDFhslZEMJqAFNpdd] | Count: 4
-80. Unknown Artist - Unknown Track [https://open.spotify.com/track/3GYlZ7tbxLOxe6ewMNVTkw] | Count: 4
-81. Unknown Artist - Unknown Track [https://open.spotify.com/track/6IPwKM3fUUzlElbvKw2sKl] | Count: 4
-82. Unknown Artist - Unknown Track [https://open.spotify.com/track/3vkCueOmm7xQDoJ17W1Pm3] | Count: 4
-83. Unknown Artist - Unknown Track [https://open.spotify.com/track/0otRX6Z89qKkHkQ9OqJpKt] | Count: 4
-84. Unknown Artist - Unknown Track [https://open.spotify.com/track/0NdTUS4UiNYCNn5FgVqKQY] | Count: 4
-85. Unknown Artist - Unknown Track [https://open.spotify.com/track/2fyIS6GXMgUcSv4oejx63f] | Count: 4
-86. Unknown Artist - Unknown Track [https://open.spotify.com/track/0SzvmWfOhoxZVGrmvb56YL] | Count: 4
-87. Unknown Artist - Unknown Track [https://open.spotify.com/track/5xw2cHVLw1rlDPp3cL9Zuv] | Count: 4
-88. Unknown Artist - Unknown Track [https://open.spotify.com/track/6wVWJl64yoTzU27EI8ep20] | Count: 4
-89. Unknown Artist - Unknown Track [https://open.spotify.com/track/0PZdciSUErxre3yK8gxxeQ] | Count: 4
-90. Unknown Artist - Unknown Track [https://open.spotify.com/track/7D0RhFcb3CrfPuTJ0obrod] | Count: 4
-91. Unknown Artist - Unknown Track [https://open.spotify.com/track/1bcIiU5FWRa2IYBqx0bk67] | Count: 4
-92. Unknown Artist - Unknown Track [https://open.spotify.com/track/0ROj512WvJ1eqeELd7MEdJ] | Count: 4
-93. Unknown Artist - Unknown Track [https://open.spotify.com/track/28r2ClCmnKAclZZYqE0LTg] | Count: 4
-94. Unknown Artist - Unknown Track [https://open.spotify.com/track/0O0bttAxJKKWqAqY2Nq4mC] | Count: 4
-95. Unknown Artist - Unknown Track [https://open.spotify.com/track/1lusH0zFDRV1ThaFYsUgfi] | Count: 4
-96. Unknown Artist - Unknown Track [https://open.spotify.com/track/5TTXEcfsYLh6fTarLaevTi] | Count: 4
-97. Unknown Artist - Unknown Track [https://open.spotify.com/track/5vPO5ouEv8iedKWxzmSv7b] | Count: 4
-98. Unknown Artist - Unknown Track [https://open.spotify.com/track/1xK59OXxi2TAAAbmZK0kBL] | Count: 4
-99. Unknown Artist - Unknown Track [https://open.spotify.com/track/0u2P5u6lvoDfwTYjAADbn4] | Count: 4
-100. Unknown Artist - Unknown Track [https://open.spotify.com/track/2XqpHPNlK9KbeIVqfSeLMO] | Count: 4
+1. Unknown Artist - Unknown Track [https://open.spotify.com/track/1mruWrUwAVe2XkksUQiaHK] | Count: 2
+2. Unknown Artist - Unknown Track [https://open.spotify.com/track/6vFsBXYczYsP0H3lgunZOm] | Count: 1
+3. Unknown Artist - Unknown Track [https://open.spotify.com/track/0kFFvTvmSgJeNkVKPFaplu] | Count: 1
+4. Unknown Artist - Unknown Track [https://open.spotify.com/track/6sHsXIJoEN5JpdkGMQDJxt] | Count: 1
+5. Unknown Artist - Unknown Track [https://open.spotify.com/track/7rdnB5DAyPbaj51TCQRcqW] | Count: 1
+6. Unknown Artist - Unknown Track [https://open.spotify.com/track/0O0bttAxJKKWqAqY2Nq4mC] | Count: 1
+7. Unknown Artist - Unknown Track [https://open.spotify.com/track/3Zo3daLfpwdTzdIW6gBER1] | Count: 1
+8. Unknown Artist - Unknown Track [https://open.spotify.com/track/2RHm5IDIZ8fYRGzBIo7exV] | Count: 1
+9. Unknown Artist - Unknown Track [https://open.spotify.com/track/5rFNflUKMTsOlBVdGv1ahL] | Count: 1
+10. Unknown Artist - Unknown Track [https://open.spotify.com/track/1QLZjY2AUftrVR7I3E0c4J] | Count: 1
+11. Unknown Artist - Unknown Track [https://open.spotify.com/track/7J0isBrUxhIYZVdrBOOlIh] | Count: 1
+12. Unknown Artist - Unknown Track [https://open.spotify.com/track/2wAiFWjRupWmnDkQcu91MF] | Count: 1
+13. Unknown Artist - Unknown Track [https://open.spotify.com/track/6embPWj9qvusLg9JpbAmCQ] | Count: 1
+14. Unknown Artist - Unknown Track [https://open.spotify.com/track/0epYQ0yLA5RUYyrhADkF0j] | Count: 1
+15. Unknown Artist - Unknown Track [https://open.spotify.com/track/72sfmdpuO5r8cBDgs7MqZZ] | Count: 1
+16. Unknown Artist - Unknown Track [https://open.spotify.com/track/2LBqCSwhJGcFQeTHMVGwy3] | Count: 1
+17. Unknown Artist - Unknown Track [https://open.spotify.com/track/5gDWsRxpJ2lZAffh5p7K0w] | Count: 1
+18. Unknown Artist - Unknown Track [https://open.spotify.com/track/7ipqVwkp2MhZv0Ojzqy1NV] | Count: 1
+19. Unknown Artist - Unknown Track [https://open.spotify.com/track/6L68DyIsn6SqEN9rStOXb9] | Count: 1
+20. Unknown Artist - Unknown Track [https://open.spotify.com/track/2QB8FwOszur18Ai7t2XnNi] | Count: 1
+21. Unknown Artist - Unknown Track [https://open.spotify.com/track/3ugnFd1DTD9ZiisYFrtf7T] | Count: 1
+22. Unknown Artist - Unknown Track [https://open.spotify.com/track/7s5VQqrjBtrBgZL4pEa46S] | Count: 1
+23. Unknown Artist - Unknown Track [https://open.spotify.com/track/2UgCs0i0rNHUH2jKE5NZHE] | Count: 1
+24. Unknown Artist - Unknown Track [https://open.spotify.com/track/01beCqR9wsVnwzkAJZyTqq] | Count: 1
+25. Unknown Artist - Unknown Track [https://open.spotify.com/track/4kfjA6WfgKBt7I7YKuDCkU] | Count: 1
+26. Unknown Artist - Unknown Track [https://open.spotify.com/track/2hHeGD57S0BcopfVcmehdl] | Count: 1
+27. Unknown Artist - Unknown Track [https://open.spotify.com/track/630DpnzdfjdVqv2yLfPbAX] | Count: 1
+28. Unknown Artist - Unknown Track [https://open.spotify.com/track/5MIpcd16T59wFeqAChSYwC] | Count: 1
+29. Unknown Artist - Unknown Track [https://open.spotify.com/track/5FVd6KXrgO9B3JPmC8OPst] | Count: 1
+30. Unknown Artist - Unknown Track [https://open.spotify.com/track/7cs7MLtAWvsdf3w5kBvfK2] | Count: 1
+31. Unknown Artist - Unknown Track [https://open.spotify.com/track/1j9rezdE3YeC7yktZXC1em] | Count: 1
+32. Unknown Artist - Unknown Track [https://open.spotify.com/track/2AT8iROs4FQueDv2c8q2KE] | Count: 1
+33. Unknown Artist - Unknown Track [https://open.spotify.com/track/086myS9r57YsLbJpU0TgK9] | Count: 1
 
 Contributed Playlists:
-1. 19 Tracks from [https://open.spotify.com/playlist/2hYLhg0TOGQT8lmDUSzQte] by [https://open.spotify.com/user/aderizkyputri]
-2. 19 Tracks from [https://open.spotify.com/playlist/7dvoAO6bKLE2TcdL0zBzpX] by [https://open.spotify.com/user/21pwax2j6lg7c7nf3lu5bi7ga]
-3. 18 Tracks from [https://open.spotify.com/playlist/6I2Ll9Fq5ImO3DbBsbuEy4] by [https://open.spotify.com/user/thelorgorenk]
-4. 17 Tracks from [https://open.spotify.com/playlist/1pOFZ5rlB07cOIpyvdWKzE] by [https://open.spotify.com/user/31eux5j4xfx45bpenuabhwm7ig64]
-5. 17 Tracks from [https://open.spotify.com/playlist/7A2nNva04bMRzbXoZzFsKb] by [https://open.spotify.com/user/e20w0n5qg1jlp0x400oy5w89v]
-6. 16 Tracks from [https://open.spotify.com/playlist/2QsEccxTeSunPRhcxTotR1] by [https://open.spotify.com/user/x5eijockr7nni1ul6voobw25w]
-7. 16 Tracks from [https://open.spotify.com/playlist/03T9q5Rq3EvJWLl3CneQTy] by [https://open.spotify.com/user/x5eijockr7nni1ul6voobw25w]
-8. 15 Tracks from [https://open.spotify.com/playlist/1RkRtYlrjHBXhLpFqtaXLi] by [https://open.spotify.com/user/lqsgdj8cbtsieuuneyx6dqpl1]
-9. 15 Tracks from [https://open.spotify.com/playlist/5g1aFlp4Z3oaW4R1yK38xG] by [https://open.spotify.com/user/lqsgdj8cbtsieuuneyx6dqpl1]
-10. 15 Tracks from [https://open.spotify.com/playlist/5S6kHRyXk1GAPcLYVlBByU] by [https://open.spotify.com/user/21pwax2j6lg7c7nf3lu5bi7ga]
-11. 15 Tracks from [https://open.spotify.com/playlist/0LSr6rVhitwyNAlim8pgs3] by [https://open.spotify.com/user/21pwax2j6lg7c7nf3lu5bi7ga]
-12. 13 Tracks from [https://open.spotify.com/playlist/5MqmXehG2uDjKOs9jMRSvh] by [https://open.spotify.com/user/5kiix74ac3smhdwhd3rot5trq]
-13. 13 Tracks from [https://open.spotify.com/playlist/0W9Igocy6SHXW5ep0yGNjc] by [https://open.spotify.com/user/aderizkyputri]
-14. 13 Tracks from [https://open.spotify.com/playlist/4wi2vA2DlztHxcbhv8wWvL] by [https://open.spotify.com/user/rmwqd50o99rmd6thg8zd99w9q]
-15. 12 Tracks from [https://open.spotify.com/playlist/5KJQYGwFusI2j2kKYjXcnp] by [https://open.spotify.com/user/e20w0n5qg1jlp0x400oy5w89v]
-16. 12 Tracks from [https://open.spotify.com/playlist/4FeIkmQc8JZ4Vjvkv3KxGR] by [https://open.spotify.com/user/x5eijockr7nni1ul6voobw25w]
-17. 12 Tracks from [https://open.spotify.com/playlist/1o6rzXpGSQi2E9um5uNu0o] by [https://open.spotify.com/user/31a7243toh5tgcgzr74xrthdoe5q]
-18. 12 Tracks from [https://open.spotify.com/playlist/37i9dQZF1E4nASGPZrgnxL] by [https://open.spotify.com/user/31a7243toh5tgcgzr74xrthdoe5q]
-19. 12 Tracks from [https://open.spotify.com/playlist/7x5h0jpQoz60Qv1Cyl8GLv] by [https://open.spotify.com/user/21pwax2j6lg7c7nf3lu5bi7ga]
-20. 12 Tracks from [https://open.spotify.com/playlist/65jqU5Z8fDmnWWiKbMEKZT] by [https://open.spotify.com/user/thelorgorenk]
-21. 12 Tracks from [https://open.spotify.com/playlist/4AKw8kMcRZJn5f0hT7eTVd] by [https://open.spotify.com/user/az10shokjxa5lnbg2iuymr7yt]
-22. 12 Tracks from [https://open.spotify.com/playlist/3zJpVmBn97Qq9bReUDMoYQ] by [https://open.spotify.com/user/az10shokjxa5lnbg2iuymr7yt]
-23. 12 Tracks from [https://open.spotify.com/playlist/2a8lcBcmj56xzbOJOWy3aY] by [https://open.spotify.com/user/01f3ueieht1cs6l3azpll97v4]
-24. 11 Tracks from [https://open.spotify.com/playlist/37i9dQZF1E8OHyiovmKIXC] by [https://open.spotify.com/user/31a7243toh5tgcgzr74xrthdoe5q]
-25. 10 Tracks from [https://open.spotify.com/playlist/5AaLJmHTENFHyZ6qsGepYX] by [https://open.spotify.com/user/31zrjhao6y2bchstgqzuvlj6gxru]
-26. 10 Tracks from [https://open.spotify.com/playlist/37i9dQZF1E4sa1kOvRGgMb] by [https://open.spotify.com/user/31a7243toh5tgcgzr74xrthdoe5q]
-27. 10 Tracks from [https://open.spotify.com/playlist/37i9dQZF1E8OYdEI9x2Nsr] by [https://open.spotify.com/user/31a7243toh5tgcgzr74xrthdoe5q]
-28. 10 Tracks from [https://open.spotify.com/playlist/5msh5rbC72ulX3AGNSw8Lq] by [https://open.spotify.com/user/aderizkyputri]
-29. 9 Tracks from [https://open.spotify.com/playlist/6we3jY6rDm59rO0eeS2GDo] by [https://open.spotify.com/user/r1mwtxwamwam6y3wngtlpbp8f]
-30. 9 Tracks from [https://open.spotify.com/playlist/27GbJTngnd3FDpMULZXP7t] by [https://open.spotify.com/user/e20w0n5qg1jlp0x400oy5w89v]
-31. 9 Tracks from [https://open.spotify.com/playlist/7fNyU0RxlnnP83qY1HCc1E] by [https://open.spotify.com/user/ufnooj8rw6femcbkbuzyn4cbd]
-32. 9 Tracks from [https://open.spotify.com/playlist/570mhr8NwiADq8fyeAHPhG] by [https://open.spotify.com/user/x5eijockr7nni1ul6voobw25w]
-33. 9 Tracks from [https://open.spotify.com/playlist/2A1drhI2JDFsud0I4V2xxv] by [https://open.spotify.com/user/21vxtd4uv2wte6r64r476ccyq]
-34. 9 Tracks from [https://open.spotify.com/playlist/3tLemQJMfvUO6ISgePi7QI] by [https://open.spotify.com/user/rmwqd50o99rmd6thg8zd99w9q]
-35. 8 Tracks from [https://open.spotify.com/playlist/3Woub9ZP7CBxzMgRD5dVKl] by [https://open.spotify.com/user/ufnooj8rw6femcbkbuzyn4cbd]
-36. 7 Tracks from [https://open.spotify.com/playlist/5iQlLFxPZIhYEMe4bNKMWr] by [https://open.spotify.com/user/x5eijockr7nni1ul6voobw25w]
-37. 7 Tracks from [https://open.spotify.com/playlist/23wZ8zUjY4ZLM8OAQ7hVuQ] by [https://open.spotify.com/user/cmgjyapu6niye85lasaht8acq]
-38. 7 Tracks from [https://open.spotify.com/playlist/4wB7RB8AujA4dB1F4koF91] by [https://open.spotify.com/user/qjvwdfnldn27ro7713yxb00pb]
-39. 6 Tracks from [https://open.spotify.com/playlist/6AxZsfvvs4tLVPBZrsqBNh] by [https://open.spotify.com/user/e20w0n5qg1jlp0x400oy5w89v]
-40. 6 Tracks from [https://open.spotify.com/playlist/2rayRvSuFF3GovMZeNrl2q] by [https://open.spotify.com/user/alencdds]
-41. 6 Tracks from [https://open.spotify.com/playlist/3cLL0S0xiN7PBMPUgpyH8Z] by [https://open.spotify.com/user/21vxtd4uv2wte6r64r476ccyq]
-42. 6 Tracks from [https://open.spotify.com/playlist/0sdJ46WMQqkyYdbTvM85nQ] by [https://open.spotify.com/user/21vxtd4uv2wte6r64r476ccyq]
-43. 6 Tracks from [https://open.spotify.com/playlist/2zgNMxIJ3Qv2Upw3NcuQXC] by [https://open.spotify.com/user/21pwax2j6lg7c7nf3lu5bi7ga]
-44. 5 Tracks from [https://open.spotify.com/playlist/70feV39nnyWzL3zGgjK9zO] by [https://open.spotify.com/user/aderizkyputri]
-45. 5 Tracks from [https://open.spotify.com/playlist/4skDZjFgVkPMhexazSgJTf] by [https://open.spotify.com/user/aderizkyputri]
-46. 5 Tracks from [https://open.spotify.com/playlist/11RyKd511pbOLhyd3L5cu0] by [https://open.spotify.com/user/aderizkyputri]
-47. 5 Tracks from [https://open.spotify.com/playlist/20eeJ24fv8Yd1ejMhild8o] by [https://open.spotify.com/user/az10shokjxa5lnbg2iuymr7yt]
-48. 5 Tracks from [https://open.spotify.com/playlist/2coWopvnoSlXeVPjHnPdnJ] by [https://open.spotify.com/user/az10shokjxa5lnbg2iuymr7yt]
-49. 5 Tracks from [https://open.spotify.com/playlist/0XY1pG3K3EZfuyQbNCdDZX] by [https://open.spotify.com/user/qjvwdfnldn27ro7713yxb00pb]
-50. 4 Tracks from [https://open.spotify.com/playlist/6e2MCWQSzIH5txO7t6XBim] by [https://open.spotify.com/user/x5eijockr7nni1ul6voobw25w]
-51. 4 Tracks from [https://open.spotify.com/playlist/6iVy7jAlkF2D3OitQAJHDO] by [https://open.spotify.com/user/aderizkyputri]
-52. 4 Tracks from [https://open.spotify.com/playlist/2AuQIAZFKrs0ax2YSzUzCC] by [https://open.spotify.com/user/aderizkyputri]
-53. 4 Tracks from [https://open.spotify.com/playlist/2rDwBi9XGGwGtXAa0J0iCd] by [https://open.spotify.com/user/az10shokjxa5lnbg2iuymr7yt]
-54. 4 Tracks from [https://open.spotify.com/playlist/7C9I5ONND2dAkpEQpdRlZF] by [https://open.spotify.com/user/az10shokjxa5lnbg2iuymr7yt]
-55. 4 Tracks from [https://open.spotify.com/playlist/73vqw3CGPrd5xnjXLAlyyI] by [https://open.spotify.com/user/u12mt9hqrpl8suxpuoahb5agv]
-56. 3 Tracks from [https://open.spotify.com/playlist/2PL6655Pwe96VaZSyFAJTV] by [https://open.spotify.com/user/x5eijockr7nni1ul6voobw25w]
-57. 3 Tracks from [https://open.spotify.com/playlist/0LMBgb2zyHWHcWxKpkdf1M] by [https://open.spotify.com/user/lqsgdj8cbtsieuuneyx6dqpl1]
-58. 3 Tracks from [https://open.spotify.com/playlist/2UmxA2pwguK7EKzMpw2QIM] by [https://open.spotify.com/user/31a7243toh5tgcgzr74xrthdoe5q]
-59. 3 Tracks from [https://open.spotify.com/playlist/37i9dQZF1EQn4jwNIohw50] by [https://open.spotify.com/user/31a7243toh5tgcgzr74xrthdoe5q]
-60. 3 Tracks from [https://open.spotify.com/playlist/3rTfseK69XPyB1br4cvpbr] by [https://open.spotify.com/user/aderizkyputri]
-61. 3 Tracks from [https://open.spotify.com/playlist/2gjLJPOn1A9TfMMMm9oSvI] by [https://open.spotify.com/user/313jkbzmyb2sbpvq55c6pvl67lcm]
-62. 2 Tracks from [https://open.spotify.com/playlist/4efHxpz0qQ8FjH8yDMCcWF] by [https://open.spotify.com/user/31a7243toh5tgcgzr74xrthdoe5q]
-63. 2 Tracks from [https://open.spotify.com/playlist/0cD7LpgsRVzou5DlZrrK5D] by [https://open.spotify.com/user/21vxtd4uv2wte6r64r476ccyq]
-64. 2 Tracks from [https://open.spotify.com/playlist/7lPrhDoX265tLnyIsnEt1N] by [https://open.spotify.com/user/313jkbzmyb2sbpvq55c6pvl67lcm]
-65. 2 Tracks from [https://open.spotify.com/playlist/6FxXkhqDd6lWC1N1ey6DmU] by [https://open.spotify.com/user/az10shokjxa5lnbg2iuymr7yt]
-66. 2 Tracks from [https://open.spotify.com/playlist/3msO9lr94tTig66DKlVzy1] by [https://open.spotify.com/user/diatyo]
-67. 1 Tracks from [https://open.spotify.com/playlist/0I8XTps3chIQhnkCe2chws] by [https://open.spotify.com/user/31zrjhao6y2bchstgqzuvlj6gxru]
-68. 1 Tracks from [https://open.spotify.com/playlist/38rYU5mOmOyYbezJOT6WDq] by [https://open.spotify.com/user/31a7243toh5tgcgzr74xrthdoe5q]
-69. 1 Tracks from [https://open.spotify.com/playlist/1yfd7qn9YH47komdpM8t3S] by [https://open.spotify.com/user/21vxtd4uv2wte6r64r476ccyq]
-70. 1 Tracks from [https://open.spotify.com/playlist/2cA3S8vcm5wweEePFUoZ89] by [https://open.spotify.com/user/21vxtd4uv2wte6r64r476ccyq]
-71. 1 Tracks from [https://open.spotify.com/playlist/02h694neRjZPiKY7SQvA2y] by [https://open.spotify.com/user/313jkbzmyb2sbpvq55c6pvl67lcm]
-72. 1 Tracks from [https://open.spotify.com/playlist/54Bb5RrpF59eQJxJuf8AHw] by [https://open.spotify.com/user/az10shokjxa5lnbg2iuymr7yt]
+1. 6 Tracks from [https://open.spotify.com/playlist/5Ah6P0lpCsRovA2pC49q1k] by [https://open.spotify.com/user/pn2vesv93a5q269r34lccpkez]
+2. 6 Tracks from [https://open.spotify.com/playlist/0jiL5N5swUJ3G3fkMv8wZ4] by [https://open.spotify.com/user/31ylxjygzhuin4zf2ptxugttz4ay]
+3. 6 Tracks from [https://open.spotify.com/playlist/1C7hli1CwlQ3yXc1roFUbK] by [https://open.spotify.com/user/31tx2wbxwjo7e73exgl2q5as4xha]
+4. 6 Tracks from [https://open.spotify.com/playlist/66TJ8tXMyN9wTv0VA9n2Ck] by [https://open.spotify.com/user/31tx2wbxwjo7e73exgl2q5as4xha]
+5. 5 Tracks from [https://open.spotify.com/playlist/1wDDDhgAnqyxjZXN8zPTRc] by [https://open.spotify.com/user/31ey7pwluroi2jtsqicezjeh2m34]
+6. 5 Tracks from [https://open.spotify.com/playlist/0zRH7M5IQZXmbcjz1APPXm] by [https://open.spotify.com/user/31vfqi547vy26k7g6pahinzseude]
 
 Track Relationships:
-1. Unknown Track [https://open.spotify.com/track/01beCqR9wsVnwzkAJZyTqq] & Unknown Track [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] have a Low relationship
-2. Unknown Track [https://open.spotify.com/track/01beCqR9wsVnwzkAJZyTqq] & Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] have a High relationship
-3. Unknown Track [https://open.spotify.com/track/01beCqR9wsVnwzkAJZyTqq] & Unknown Track [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl] have a High relationship
-4. Unknown Track [https://open.spotify.com/track/01beCqR9wsVnwzkAJZyTqq] & Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] have a High relationship
-5. Unknown Track [https://open.spotify.com/track/01beCqR9wsVnwzkAJZyTqq] & Unknown Track [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] have a High relationship
-6. Unknown Track [https://open.spotify.com/track/01beCqR9wsVnwzkAJZyTqq] & Unknown Track [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] have a Low relationship
-7. Unknown Track [https://open.spotify.com/track/01beCqR9wsVnwzkAJZyTqq] & Unknown Track [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] have a High relationship
-8. Unknown Track [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] & Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] have a High relationship
-9. Unknown Track [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] & Unknown Track [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl] have a Medium relationship
-10. Unknown Track [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] & Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] have a High relationship
+1. Unknown Track [https://open.spotify.com/track/3pCt2wRdBDa2kCisIdHWgF] & Unknown Track [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] have a Low relationship
+2. Unknown Track [https://open.spotify.com/track/3pCt2wRdBDa2kCisIdHWgF] & Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] have a Low relationship
+3. Unknown Track [https://open.spotify.com/track/3pCt2wRdBDa2kCisIdHWgF] & Track Not In Database [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl] have a Low relationship
+4. Unknown Track [https://open.spotify.com/track/3pCt2wRdBDa2kCisIdHWgF] & Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] have a Medium relationship
+5. Unknown Track [https://open.spotify.com/track/3pCt2wRdBDa2kCisIdHWgF] & Unknown Track [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] have a Low relationship
+6. Unknown Track [https://open.spotify.com/track/3pCt2wRdBDa2kCisIdHWgF] & Track Not In Database [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] have a Low relationship
+7. Unknown Track [https://open.spotify.com/track/3pCt2wRdBDa2kCisIdHWgF] & Track Not In Database [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] have a Low relationship
+8. Unknown Track [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] & Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] have a Medium relationship
+9. Unknown Track [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] & Track Not In Database [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl] have a Low relationship
+10. Unknown Track [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] & Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] have a Low relationship
 11. Unknown Track [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] & Unknown Track [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] have a Low relationship
-12. Unknown Track [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] & Unknown Track [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] have a High relationship
-13. Unknown Track [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] & Unknown Track [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] have a Medium relationship
-14. Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] & Unknown Track [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl] have a High relationship
-15. Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] & Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] have a High relationship
-16. Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] & Unknown Track [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] have a Medium relationship
-17. Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] & Unknown Track [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] have a High relationship
-18. Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] & Unknown Track [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] have a High relationship
-19. Unknown Track [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl] & Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] have a Medium relationship
-20. Unknown Track [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl] & Unknown Track [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] have a Low relationship
-21. Unknown Track [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl] & Unknown Track [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] have a High relationship
-22. Unknown Track [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl] & Unknown Track [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] have a High relationship
-23. Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] & Unknown Track [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] have a Medium relationship
-24. Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] & Unknown Track [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] have a High relationship
-25. Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] & Unknown Track [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] have a High relationship
-26. Unknown Track [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] & Unknown Track [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] have a Low relationship
-27. Unknown Track [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] & Unknown Track [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] have a High relationship
-28. Unknown Track [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] & Unknown Track [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] have a Low relationship
+12. Unknown Track [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] & Track Not In Database [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] have a Low relationship
+13. Unknown Track [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] & Track Not In Database [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] have a Low relationship
+14. Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] & Track Not In Database [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl] have a Low relationship
+15. Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] & Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] have a Low relationship
+16. Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] & Unknown Track [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] have a Low relationship
+17. Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] & Track Not In Database [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] have a Low relationship
+18. Unknown Track [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] & Track Not In Database [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] have a Low relationship
+19. Track Not In Database [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl] & Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] have a Low relationship
+20. Track Not In Database [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl] & Unknown Track [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] have a Low relationship
+21. Track Not In Database [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl] & Track Not In Database [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] have a Low relationship
+22. Track Not In Database [https://open.spotify.com/track/0Eqg0CQ7bK3RQIMPw1A7pl] & Track Not In Database [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] have a Low relationship
+23. Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] & Unknown Track [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] have a Low relationship
+24. Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] & Track Not In Database [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] have a Low relationship
+25. Unknown Track [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] & Track Not In Database [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] have a Low relationship
+26. Unknown Track [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] & Track Not In Database [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] have a Low relationship
+27. Unknown Track [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] & Track Not In Database [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] have a Low relationship
+28. Track Not In Database [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] & Track Not In Database [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] have a Low relationship
