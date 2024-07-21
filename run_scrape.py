@@ -54,7 +54,7 @@ def fetch_playlists():
         if conn is not None:
             try:
                 offset = 0
-                limit = 50  # Spotify API maximum limit per request is 50
+                limit = 10  # Spotify API maximum limit per request is 50
                 while True:
                     playlists = sp.user_playlists(
                         user_id, offset=offset, limit=limit)
