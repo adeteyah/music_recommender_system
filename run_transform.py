@@ -27,7 +27,7 @@ def fill_artists_table():
     # Updating artists
     while True:
         cursor.execute(
-            "SELECT * FROM artists WHERE artist_name IS NULL LIMIT 5")
+            "SELECT * FROM artists WHERE artist_name IS NULL LIMIT 15")
         artists = cursor.fetchall()
         if not artists:
             break
