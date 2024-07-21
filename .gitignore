@@ -3,3 +3,4 @@ result/
 source.db
 source_*.*
 progress.txt
+.vscode/
