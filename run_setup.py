@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS items (
     playlist_items TEXT
 );
 
-CREATE TABLE IF NOT EXISTS track_weights (
+CREATE TABLE IF NOT EXISTS weights (
     track_id TEXT PRIMARY KEY,
     weight INTEGER DEFAULT 0
 );

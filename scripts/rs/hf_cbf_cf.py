@@ -159,7 +159,7 @@ def hfcbfcf_result(ids):
 
             # Fetch details for these tracks and their weights
             track_details = {}
-            track_weights = {}
+            weights = {}
             for track_id in track_counts.keys():
                 details = get_track_details(track_id)
                 track_details[track_id] = {
@@ -167,18 +167,18 @@ def hfcbfcf_result(ids):
                     'track_name': details['track_name']
                 }
                 cur_playlist.execute(
-                    "SELECT weight FROM track_weights WHERE track_id = ?", (track_id,))
+                    "SELECT weight FROM weights WHERE track_id = ?", (track_id,))
                 weight_result = cur_playlist.fetchone()
-                track_weights[track_id] = weight_result[0] if weight_result else 1
+                weights[track_id] = weight_result[0] if weight_result else 1
 
             file.write("\nSongs Recommendations:\n")
             sorted_tracks = sorted(track_counts.items(),
-                                   key=lambda x: (x[1] * track_weights.get(x[0], 1)), reverse=True)
+                                   key=lambda x: (x[1] * weights.get(x[0], 1)), reverse=True)
             for idx, (track_id, count) in enumerate(sorted_tracks, start=1):
                 details = track_details.get(
                     track_id, {'artist_name': 'Unknown Artist', 'track_name': 'Unknown Track'})
                 file.write(f"{idx}. {details['artist_name']} - {details['track_name']
-                                                                } [https://open.spotify.com/track/{track_id}] | count: {count}, weight: {track_weights.get(track_id, 1)}\n")
+                                                                } [https://open.spotify.com/track/{track_id}] | count: {count}, weight: {weights.get(track_id, 1)}\n")
 
         print(f'Result written to: {output_path}')
     except Exception as e:
