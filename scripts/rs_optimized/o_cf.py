@@ -145,7 +145,7 @@ def o_cf_result(ids):
                         track_count[item] = 0
                     track_count[item] += 1
 
-        cur_playlist.execute("SELECT track_id, weight FROM track_weights")
+        cur_playlist.execute("SELECT track_id, weight FROM weights")
         weight_results = cur_playlist.fetchall()
         weights = {track_id: weight for track_id, weight in weight_results}
 
