@@ -178,7 +178,7 @@ def hfcbfcf_result(ids):
                 details = track_details.get(
                     track_id, {'artist_name': 'Unknown Artist', 'track_name': 'Unknown Track'})
                 file.write(f"{idx}. {details['artist_name']} - {details['track_name']} [https://open.spotify.com/track/{
-                           track_id}] | count: {count}, weight: {weights.get(track_id, 1)}\n")
+                           track_id}] | Count: {count}, Weight: {weights.get(track_id, 1)}\n")
 
         print(f'Result written to: {output_path}')
     except Exception as e:
