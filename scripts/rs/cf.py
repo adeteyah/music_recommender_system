@@ -172,6 +172,5 @@ def cf_result(ids):
 
 
 if __name__ == "__main__":
-    ids = ['01beCqR9wsVnwzkAJZyTqq', '5XeFesFbtLpXzIVDNQP22n', '0yc6Gst2xkRu0eMLeRMGCX', '0Eqg0CQ7bK3RQIMPw1A7pl',
-           '4SqWKzw0CbA05TGszDgMlc', '5drW6PGRxkE6MxttzVLNk5', '6ilc4vQcwMPlvAHFfsTGng', '1SKPmfSYaPsETbRHaiA18G']
+    ids = ['5drW6PGRxkE6MxttzVLNk5',]
     cf_result(ids)
