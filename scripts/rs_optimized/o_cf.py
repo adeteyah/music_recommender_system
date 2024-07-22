@@ -70,16 +70,18 @@ def calculate_relationship(ids, playlist_tracks):
     return relationships
 
 
-def fitness_function(track_count, weights):
-    return sum(weights.get(track_id, 1) * count for track_id, count in track_count.items())
+def fitness_function(track_counts, weights):
+    return sum(weights.get(track_id, 1) * count for track_id, count in track_counts.items())
 
 
 def bat_algorithm(track_counts, weights, n_bats=20, n_iterations=100, A=0.5, r=0.5, Qmin=0, Qmax=2):
     D = len(track_counts)
+    track_keys = list(track_counts.keys())
     bats = [np.random.rand(D) for _ in range(n_bats)]
     velocities = [np.zeros(D) for _ in range(n_bats)]
     frequencies = np.zeros(n_bats)
-    fitness = [fitness_function(track_counts, weights) for _ in bats]
+    fitness = [fitness_function(
+        dict(zip(track_keys, bat)), weights) for bat in bats]
     best_bat = bats[np.argmax(fitness)]
     best_fitness = max(fitness)
 
@@ -92,8 +94,7 @@ def bat_algorithm(track_counts, weights, n_bats=20, n_iterations=100, A=0.5, r=0
             if random.random() > r:
                 solution = best_bat + 0.001 * np.random.randn(D)
 
-            f_new = fitness_function(
-                dict(zip(track_counts.keys(), solution)), weights)
+            f_new = fitness_function(dict(zip(track_keys, solution)), weights)
 
             if (f_new > fitness[i]) and (random.random() < A):
                 bats[i] = solution
@@ -103,7 +104,7 @@ def bat_algorithm(track_counts, weights, n_bats=20, n_iterations=100, A=0.5, r=0
                 best_bat = solution
                 best_fitness = f_new
 
-    return best_bat
+    return dict(zip(track_keys, best_bat))
 
 
 def o_cf_result(ids):
