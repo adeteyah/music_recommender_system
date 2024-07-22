@@ -9,7 +9,7 @@ config.read('config.cfg')
 
 db_playlist = config['db']['playlists_db']
 db_songs = config['db']['songs_db']
-output_path = config['output']['cf_output']
+output_path = config['output']['o_cf_output']
 
 # Connect to the playlists database
 conn_playlist = sqlite3.connect(db_playlist)
