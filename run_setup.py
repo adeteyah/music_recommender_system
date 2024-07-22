@@ -116,6 +116,11 @@ CREATE TABLE IF NOT EXISTS items (
     playlist_items TEXT
 );
 
+CREATE TABLE IF NOT EXISTS track_weights (
+    track_id TEXT PRIMARY KEY,
+    weight INTEGER DEFAULT 0
+);
+
 CREATE INDEX IF NOT EXISTS idx_playlist_id ON items (playlist_id);
 CREATE INDEX IF NOT EXISTS idx_playlist_items ON items (playlist_items);
 """

@@ -76,6 +76,12 @@ def calculate_genre_similarity(input_genres, playlist_genres):
     return len(intersection) / len(union) if union else 0
 
 
+def update_track_weight(track_id):
+    query = "INSERT INTO track_weights (track_id, weight) VALUES (?, 1) ON CONFLICT(track_id) DO UPDATE SET weight = weight + 1"
+    cur_playlist.execute(query, (track_id,))
+    conn_playlist.commit()
+
+
 def hfcbfcf_result(ids):
     try:
         input_features = {}
