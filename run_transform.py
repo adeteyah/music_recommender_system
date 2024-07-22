@@ -127,6 +127,10 @@ def fill_playlists_table():
         else:
             print(f"No track information found for playlist {playlist_id}")
 
+    query = "INSERT INTO track_weights (track_id, weight) VALUES (?, 1) ON CONFLICT(track_id) DO UPDATE SET weight = weight + 1"
+    cursor_playlists.execute(query, (track_id,))
+    conn_playlist.commit()
+
     conn_playlists.commit()
     conn_playlists.close()
     conn_songs.close()
