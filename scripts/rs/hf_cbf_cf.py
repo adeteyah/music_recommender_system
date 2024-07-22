@@ -76,7 +76,7 @@ def calculate_genre_similarity(input_genres, playlist_genres):
     return len(intersection) / len(union) if union else 0
 
 
-def cbf_result(ids):
+def hfcbfcf_result(ids):
     try:
         input_features = {}
         input_genres = set()
