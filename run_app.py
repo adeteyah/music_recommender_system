@@ -1,4 +1,5 @@
 import time
+import scripts.seed as seed
 
 from scripts.rs import cbf
 from scripts.rs import cf
@@ -8,6 +9,8 @@ from scripts.rs import hf_cf_cbf
 # from scripts.rs_optimized import o_cf
 # from scripts.rs_optimized import o_hf_cbf_cf
 # from scripts.rs_optimized import o_hf_cf_cbf
+
+seed.fill_playlists_table()
 
 ids = [
     '1r6qzxz77Tvbrvqd1Q1MIN',
@@ -37,7 +40,7 @@ hf_cf_cbf.hfcfcbf_result(ids)
 end = time.time()
 print("HFCFCBF execution time: ", end - start, "\n")
 
-print('=' * 100)
+# print('=' * 100)
 
 # print("\n# Generating Optimized CBF Result")
 # start = time.time()

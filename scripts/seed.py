@@ -139,10 +139,7 @@ def fill_playlists_table():
     conn_playlists.close()
     conn_songs.close()
 
-    print("Finished updating playlists with audio feature data.")
-
 
 if __name__ == "__main__":
     fill_playlists_table()
-
-print("Scrape completed.")
+    print("Finished updating playlists data.")

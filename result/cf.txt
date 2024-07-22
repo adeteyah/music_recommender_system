@@ -1,46 +1,21 @@
 Inputted IDs:
-1. Hindia - Secukupnya [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5]
+1. Justine Skye, Tyga - Collide (Sped Up Remix) [https://open.spotify.com/track/1r6qzxz77Tvbrvqd1Q1MIN]
 
 Recommendation Result:
-1. Hindia - Evaluasi [https://open.spotify.com/track/2dIBMHByUGcNPzmYBJ6OAj] | Count: 5
-2. Hindia - Rumah Ke Rumah [https://open.spotify.com/track/2wAiFWjRupWmnDkQcu91MF] | Count: 4
-3. Hindia, Rara Sekar - Membasuh [https://open.spotify.com/track/3CBxVM0zGj41BQtE6m7gwb] | Count: 3
-4. Hindia - Evakuasi [https://open.spotify.com/track/1bcIiU5FWRa2IYBqx0bk67] | Count: 3
-5. Hindia - Besok Mungkin Kita Sampai [https://open.spotify.com/track/08OPqLv99g8avzmxQepmiw] | Count: 2
-6. Pamungkas - Monolog [https://open.spotify.com/track/77vx7sGjdqwdnQL968t8oY] | Count: 2
-7. RAN, Hindia - Si Lemah [https://open.spotify.com/track/4TPIAnmVnouoZuwB6blHWl] | Count: 2
-8. Tulus - Monokrom [https://open.spotify.com/track/4GfK1qOF3uBWidbPlTCQRL] | Count: 2
-9. Kunto Aji - Rehat [https://open.spotify.com/track/7mjO4RbTZIb1SfE8G673Lm] | Count: 2
-10. Nadin Amizah - Bertaut [https://open.spotify.com/track/630DpnzdfjdVqv2yLfPbAX] | Count: 2
-11. Kunto Aji - Pilu Membiru [https://open.spotify.com/track/6A5tlFsbty5iJkSqMFWNFs] | Count: 2
-12. Nadin Amizah - Rumpang [https://open.spotify.com/track/2TRGNVokPnC2a2oHg5iv1H] | Count: 2
-13. Hindia - Untuk Apa / Untuk Apa? [https://open.spotify.com/track/2LQZ32XuFlkcoEUDSG6BMT] | Count: 1
-14. Hindia, Natasha Udu, Kamga - Mata Air [https://open.spotify.com/track/3kj14iUwv0rvTweOr9P2ut] | Count: 1
-15. Hindia - Apapun Yang Terjadi [https://open.spotify.com/track/4YSOlJJoFu4vfZYJUiewl9] | Count: 1
-16. Pamungkas - One Only [https://open.spotify.com/track/7iTF9T1jum3Km6H6WMZpDC] | Count: 1
-17. Pamungkas - Sorry [https://open.spotify.com/track/4gW0fnArZ93uAElSkuw0PG] | Count: 1
-18. Rex Orange County - Pluto Projector [https://open.spotify.com/track/4EWBhKf1fOFnyMtUzACXEc] | Count: 1
-19. Coyote Theory - This Side of Paradise [https://open.spotify.com/track/79EkGysjP2dL5GdpeQjRxT] | Count: 1
-20. Ardhito Pramono, Aurélie - I Just Couldn't Save You Tonight - Story of Kale - Original Motion Picture Soundtrack [https://open.spotify.com/track/5AkV53fo1u01mi8r22JNeF] | Count: 1
-21. Arash Buana, raissa anggiani - if u could see me cryin' in my room [https://open.spotify.com/track/13sOb9V6Y3uCnRxY9HIZqP] | Count: 1
-22. Ardhito Pramono - Sudah - Story of Kale - Original Motion Picture Soundtrack [https://open.spotify.com/track/5QGdWvXwXMK2Zx6eKagyue] | Count: 1
-23. Rex Orange County - Happiness [https://open.spotify.com/track/2rXVtoLBHuXcNB5DVfIc9p] | Count: 1
-24. Rex Orange County - Always [https://open.spotify.com/track/3SxSrUogj4LpAkLKXeTtTQ] | Count: 1
-25. John Mayer - You're Gonna Live Forever in Me [https://open.spotify.com/track/51lPx6ZCSalL2kvSrDUyJc] | Count: 1
-26. Hindia, Matter Mos - Jam Makan Siang [https://open.spotify.com/track/730A0eY4odaHzGEDpA8b9K] | Count: 1
-27. Nosstress, Dadang Sh Pranoto, Deny Surya - Semoga, Ya [https://open.spotify.com/track/6wHnwqvtNdQicSPTTkYRQN] | Count: 1
-28. Nosstress - Pegang Tanganku [https://open.spotify.com/track/6xHRfpo0kMRNuZ3v1e3xYF] | Count: 1
-29. Kunto Aji - Bungsu [https://open.spotify.com/track/1UsbPppKnnSE5J46kWPkBE] | Count: 1
-30. Biru Baru - Sejenak [https://open.spotify.com/track/46PSRrHcJ9BVXIypjbq3KF] | Count: 1
-31. Figura Renata - Hingga Tenang [https://open.spotify.com/track/2fNL9yWEz0ue4NTmr5VKqy] | Count: 1
-32. Float - Sementara [https://open.spotify.com/track/73srNQeD29AhhJJjh69jsE] | Count: 1
-33. Kerabat Kerja - Al [https://open.spotify.com/track/02p2erj92o5PvGAlUM0KPR] | Count: 1
+1. jaddie$death - C0Ps! [https://open.spotify.com/track/32GlzGcVmgk66m42MVsiLU] | Count: 1
+2. Yeck - Reduce Your Expectations to 0 [https://open.spotify.com/track/4iOmkCzLcE5X5dAqeWjXkR] | Count: 1
+3. Sqmbo, dkj - Houston Texas bitch [https://open.spotify.com/track/5yVXFRKouVuGDzWi4eHRGb] | Count: 1
+4. Cash!* - 1mmortal (Slowed + Reverb) [https://open.spotify.com/track/08Ngx5ytbb9jLGdR5nbvwI] | Count: 1
+5. ViralityX, Bloomy. - Wine Pon You (Sped Up + Reverb) - Remix [https://open.spotify.com/track/4T3uC3g5TRRVMLVAqlatGF] | Count: 1
+6. Loosevinci, Ramzoid - 435am [https://open.spotify.com/track/5OtoaDlWIdhTjetFbgEydt] | Count: 1
+7. Atiø - hesa [https://open.spotify.com/track/6AyXQ8szpf2jrYygQitwST] | Count: 1
+8. NASAYA, MARO - MIDNIGHT PURPLE [https://open.spotify.com/track/1uFKaOBb1RWOX9TX4nT6Bg] | Count: 1
+9. Muppet DJ, SECA Records - obsessed (speed up) - Remix [https://open.spotify.com/track/1onQUQZMGAO3hWT9qv24cP] | Count: 1
+10. Scammacist - Reflections - Sped Up [https://open.spotify.com/track/3Pt8yidavDcsoxdONqwMvw] | Count: 1
+11. C3N6 - Genexix - Speed Up [https://open.spotify.com/track/20mE2aBPBg33RI5egPt6sK] | Count: 1
+12. C3N6 - Glorious Time [https://open.spotify.com/track/4KfMxRWjJEt0VlIF1PqmdP] | Count: 1
 
 Contributed Playlists:
-1. 23 Tracks from [https://open.spotify.com/playlist/46FmfNNEVHaFk0z6wJXElH] by [https://open.spotify.com/user/31njh6ntuiy77cf2dh7lyitgo534]
-2. 15 Tracks from [https://open.spotify.com/playlist/11RBIPcoFteED2s9D8QK8Z] by [https://open.spotify.com/user/j3mdta31m57uvb40esx9s2fw1]
-3. 8 Tracks from [https://open.spotify.com/playlist/3u2e6MuVsxWhokINfbOtJF] by [https://open.spotify.com/user/315twcasrzhy5b5rnsda2xquhwmu]
-4. 3 Tracks from [https://open.spotify.com/playlist/5jnAsBUOXTVYNd4H7OQqHr] by [https://open.spotify.com/user/3efroa16urbct6yb1y9vu4e62]
-5. 3 Tracks from [https://open.spotify.com/playlist/6FDKV1MblZRJhLmzwWrIS2] by [https://open.spotify.com/user/31urcn63lgmglthj2667sbjeisya]
+1. 12 Tracks from [https://open.spotify.com/playlist/5dIvbZINmQ6PcxWj3ux3uv] by [https://open.spotify.com/user/31new6z6imibvytvgxvxf3qgdr4u]
 
 Track Relationships:
