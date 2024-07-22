@@ -173,12 +173,12 @@ def hfcbfcf_result(ids):
 
             file.write("\nSongs Recommendations:\n")
             sorted_tracks = sorted(track_counts.items(),
-                                   key=lambda x: (x[1] * weights.get(x[0], 1)), reverse=True)
+                                   key=lambda x: weights.get(x[0], 1), reverse=True)
             for idx, (track_id, count) in enumerate(sorted_tracks, start=1):
                 details = track_details.get(
                     track_id, {'artist_name': 'Unknown Artist', 'track_name': 'Unknown Track'})
-                file.write(f"{idx}. {details['artist_name']} - {details['track_name']
-                                                                } [https://open.spotify.com/track/{track_id}] | count: {count}, weight: {weights.get(track_id, 1)}\n")
+                file.write(f"{idx}. {details['artist_name']} - {details['track_name']} [https://open.spotify.com/track/{
+                           track_id}] | count: {count}, weight: {weights.get(track_id, 1)}\n")
 
         print(f'Result written to: {output_path}')
     except Exception as e:
