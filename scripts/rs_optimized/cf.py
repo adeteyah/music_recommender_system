@@ -1,6 +1,8 @@
 import os
 import sqlite3
 import configparser
+import numpy as np
+import random
 
 config = configparser.ConfigParser()
 config.read('config.cfg')
@@ -19,7 +21,6 @@ cur_songs = conn_songs.cursor()
 
 
 def get_track_details(track_id):
-    # Query the tracks database to get the track name and artist IDs
     query = "SELECT track_name, artist_ids FROM tracks WHERE track_id = ?"
     cur_songs.execute(query, (track_id,))
     result = cur_songs.fetchone()
@@ -29,14 +30,12 @@ def get_track_details(track_id):
 
     track_name, artist_ids = result
 
-    # Handle the case where artist_ids might be None
     if track_name is None:
         track_name = "Unknown Track"
 
     if artist_ids is None:
         artist_ids = ""
 
-    # Query the artists database to get the artist names
     artist_names = []
     for artist_id in artist_ids.split(','):
         artist_query = "SELECT artist_name FROM artists WHERE artist_id = ?"
@@ -71,7 +70,43 @@ def calculate_relationship(ids, playlist_tracks):
     return relationships
 
 
-def cf_result(ids):
+def fitness_function(track_count, weights):
+    return sum(weights.get(track_id, 1) * count for track_id, count in track_count.items())
+
+
+def bat_algorithm(track_counts, weights, n_bats=20, n_iterations=100, A=0.5, r=0.5, Qmin=0, Qmax=2):
+    D = len(track_counts)
+    bats = [np.random.rand(D) for _ in range(n_bats)]
+    velocities = [np.zeros(D) for _ in range(n_bats)]
+    frequencies = np.zeros(n_bats)
+    fitness = [fitness_function(track_counts, weights) for _ in bats]
+    best_bat = bats[np.argmax(fitness)]
+    best_fitness = max(fitness)
+
+    for t in range(n_iterations):
+        for i in range(n_bats):
+            frequencies[i] = Qmin + (Qmax - Qmin) * random.random()
+            velocities[i] += (bats[i] - best_bat) * frequencies[i]
+            solution = bats[i] + velocities[i]
+
+            if random.random() > r:
+                solution = best_bat + 0.001 * np.random.randn(D)
+
+            f_new = fitness_function(
+                dict(zip(track_counts.keys(), solution)), weights)
+
+            if (f_new > fitness[i]) and (random.random() < A):
+                bats[i] = solution
+                fitness[i] = f_new
+
+            if f_new > best_fitness:
+                best_bat = solution
+                best_fitness = f_new
+
+    return best_bat
+
+
+def ocf_result(ids):
     join_playlist_query = """
         SELECT p.playlist_id, p.creator_id, p.original_track_count,
             i.playlist_items
@@ -84,44 +119,39 @@ def cf_result(ids):
 
     rows_playlist = cur_playlist.fetchall()
 
-    # Extract track_ids from ids list for comparison
     track_ids = set(ids)
-
-    # Store track details in a dictionary for easy access
     track_details = {}
     track_count = {}
     playlist_tracks = []
 
-    # Write the results to a file
     with open(output_path, 'w', encoding='utf-8') as file:
-        # Write the inputted IDs list
         file.write("Inputted IDs:\n")
         for idx, track_id in enumerate(ids, start=1):
             details = get_track_details(track_id)
             file.write(f"{idx}. {details['artist_name']} - {
                        details['track_name']} [https://open.spotify.com/track/{track_id}]\n")
 
-        # Write the recommendation list
         file.write("\nRecommendation Result:\n")
         for row in rows_playlist:
-            # Split playlist_items by comma
             playlist_items = row[-1].split(',')
             playlist_tracks.append(set(item.strip()
                                    for item in playlist_items))
             for item in playlist_items:
                 item = item.strip()
-                if item not in track_ids:  # Check if item is not in track_ids
+                if item not in track_ids:
                     if item not in track_details:
                         track_details[item] = get_track_details(item)
                     if item not in track_count:
                         track_count[item] = 0
                     track_count[item] += 1
 
-        # Sort the tracks by count in descending order
-        sorted_tracks = sorted(track_count.items(),
-                               key=lambda x: x[1], reverse=True)
+        cur_playlist.execute("SELECT track_id, weight FROM track_weights")
+        weight_results = cur_playlist.fetchall()
+        weights = {track_id: weight for track_id, weight in weight_results}
 
-        # Limit the recommendations to 100
+        optimized_track_counts = bat_algorithm(track_count, weights)
+        sorted_tracks = sorted(
+            optimized_track_counts.items(), key=lambda x: x[1], reverse=True)
         limited_tracks = sorted_tracks[:100]
 
         for idx, (item, count) in enumerate(limited_tracks, start=1):
@@ -129,18 +159,14 @@ def cf_result(ids):
             file.write(f"{idx}. {details['artist_name']} - {details['track_name']
                                                             } [https://open.spotify.com/track/{item}] | Count: {count}\n")
 
-        # Update contributed playlists based on the limited recommendations
         limited_track_ids = {item for item, count in limited_tracks}
-
         file.write("\nContributed Playlists:\n")
         playlist_contributions = {}
         for row in rows_playlist:
             playlist_id = row[0]
             creator_id = row[1]
-            # Split playlist_items by comma
             playlist_items = row[-1].split(',')
 
-            # Count the number of contributed tracks that are in the limited recommendations
             contribution_count = sum(
                 1 for item in playlist_items if item.strip() in limited_track_ids)
 
@@ -151,7 +177,6 @@ def cf_result(ids):
                 else:
                     playlist_contributions[playlist_key] += contribution_count
 
-        # Sort the playlist contributions by count in descending order
         sorted_contributions = sorted(
             playlist_contributions.items(), key=lambda x: x[1], reverse=True)
 
@@ -159,7 +184,6 @@ def cf_result(ids):
             file.write(f"{idx}. {count} Tracks from [https://open.spotify.com/playlist/{
                        playlist_id}] by [https://open.spotify.com/user/{creator_id}]\n")
 
-        # Calculate relationships between inputted IDs
         relationships = calculate_relationship(ids, playlist_tracks)
         file.write("\nTrack Relationships:\n")
         for idx, ((id1, id2), relationship) in enumerate(relationships.items(), start=1):
@@ -174,4 +198,4 @@ def cf_result(ids):
 if __name__ == "__main__":
     ids = ['01beCqR9wsVnwzkAJZyTqq', '5XeFesFbtLpXzIVDNQP22n', '0yc6Gst2xkRu0eMLeRMGCX', '0Eqg0CQ7bK3RQIMPw1A7pl',
            '4SqWKzw0CbA05TGszDgMlc', '5drW6PGRxkE6MxttzVLNk5', '6ilc4vQcwMPlvAHFfsTGng', '1SKPmfSYaPsETbRHaiA18G']
-    cf_result(ids)
+    ocf_result(ids)
