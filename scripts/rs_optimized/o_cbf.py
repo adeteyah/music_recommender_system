@@ -76,7 +76,7 @@ def calculate_genre_similarity(input_genres, playlist_genres):
     return len(intersection) / len(union) if union else 0
 
 
-def cbf_result(ids):
+def o_cbf_result(ids):
     try:
         input_features = {}
         input_genres = set()
@@ -182,4 +182,4 @@ def cbf_result(ids):
 
 if __name__ == "__main__":
     ids = ['5E30LdtzQTGqRvNd7l6kG5']  # Example input with track_ids
-    cbf_result(ids)
+    o_cbf_result(ids)

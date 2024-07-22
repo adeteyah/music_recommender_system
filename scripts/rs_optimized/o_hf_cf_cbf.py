@@ -1,15 +1,14 @@
 import os
 import sqlite3
 import configparser
-import numpy as np
-import random
+from math import sqrt
 
 config = configparser.ConfigParser()
 config.read('config.cfg')
 
 db_playlist = config['db']['playlists_db']
 db_songs = config['db']['songs_db']
-output_path = config['output']['o_cf_output']
+output_path = config['output']['hfcfcbf_output']
 
 # Connect to the playlists database
 conn_playlist = sqlite3.connect(db_playlist)
@@ -21,14 +20,18 @@ cur_songs = conn_songs.cursor()
 
 
 def get_track_details(track_id):
-    query = "SELECT track_name, artist_ids FROM tracks WHERE track_id = ?"
+    # Query the tracks database to get the track name, artist IDs, and audio features
+    query = """
+    SELECT track_name, artist_ids, acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence
+    FROM tracks WHERE track_id = ?
+    """
     cur_songs.execute(query, (track_id,))
     result = cur_songs.fetchone()
 
     if not result:
         return {'artist_name': 'Artist Not In Database', 'track_name': 'Track Not In Database'}
 
-    track_name, artist_ids = result
+    track_name, artist_ids, acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence = result
 
     if track_name is None:
         track_name = "Unknown Track"
@@ -36,19 +39,50 @@ def get_track_details(track_id):
     if artist_ids is None:
         artist_ids = ""
 
+    # Query the artists database to get the artist names and genres
     artist_names = []
+    artist_genres = set()
     for artist_id in artist_ids.split(','):
-        artist_query = "SELECT artist_name FROM artists WHERE artist_id = ?"
+        artist_query = "SELECT artist_name, artist_genres FROM artists WHERE artist_id = ?"
         cur_songs.execute(artist_query, (artist_id.strip(),))
         artist_result = cur_songs.fetchone()
         if artist_result:
-            artist_names.append(artist_result[0])
+            artist_name, genres = artist_result
+            artist_names.append(artist_name)
+            if genres:
+                artist_genres.update(genres.split(','))
         else:
             artist_names.append('Unknown Artist')
 
     artist_name = ", ".join(artist_names)
+    genres = ", ".join(artist_genres)
 
-    return {'artist_name': artist_name, 'track_name': track_name}
+    return {
+        'artist_name': artist_name,
+        'track_name': track_name,
+        'acousticness': acousticness,
+        'danceability': danceability,
+        'energy': energy,
+        'instrumentalness': instrumentalness,
+        'liveness': liveness,
+        'loudness': loudness,
+        'speechiness': speechiness,
+        'tempo': tempo,
+        'valence': valence,
+        'genres': genres
+    }
+
+
+def calculate_audio_similarity(track1, track2):
+    features1 = [track1['acousticness'], track1['danceability'], track1['energy'], track1['instrumentalness'],
+                 track1['liveness'], track1['loudness'], track1['speechiness'], track1['tempo'], track1['valence']]
+    features2 = [track2['acousticness'], track2['danceability'], track2['energy'], track2['instrumentalness'],
+                 track2['liveness'], track2['loudness'], track2['speechiness'], track2['tempo'], track2['valence']]
+
+    distance = sqrt(sum((f1 - f2) ** 2 for f1,
+                    f2 in zip(features1, features2)))
+
+    return distance
 
 
 def calculate_relationship(ids, playlist_tracks):
@@ -70,43 +104,7 @@ def calculate_relationship(ids, playlist_tracks):
     return relationships
 
 
-def fitness_function(track_count, weights):
-    return sum(weights.get(track_id, 1) * count for track_id, count in track_count.items())
-
-
-def bat_algorithm(track_counts, weights, n_bats=20, n_iterations=100, A=0.5, r=0.5, Qmin=0, Qmax=2):
-    D = len(track_counts)
-    bats = [np.random.rand(D) for _ in range(n_bats)]
-    velocities = [np.zeros(D) for _ in range(n_bats)]
-    frequencies = np.zeros(n_bats)
-    fitness = [fitness_function(track_counts, weights) for _ in bats]
-    best_bat = bats[np.argmax(fitness)]
-    best_fitness = max(fitness)
-
-    for t in range(n_iterations):
-        for i in range(n_bats):
-            frequencies[i] = Qmin + (Qmax - Qmin) * random.random()
-            velocities[i] += (bats[i] - best_bat) * frequencies[i]
-            solution = bats[i] + velocities[i]
-
-            if random.random() > r:
-                solution = best_bat + 0.001 * np.random.randn(D)
-
-            f_new = fitness_function(
-                dict(zip(track_counts.keys(), solution)), weights)
-
-            if (f_new > fitness[i]) and (random.random() < A):
-                bats[i] = solution
-                fitness[i] = f_new
-
-            if f_new > best_fitness:
-                best_bat = solution
-                best_fitness = f_new
-
-    return best_bat
-
-
-def ocf_result(ids):
+def o_hfcfcbf_result(ids):
     join_playlist_query = """
         SELECT p.playlist_id, p.creator_id, p.original_track_count,
             i.playlist_items
@@ -119,10 +117,15 @@ def ocf_result(ids):
 
     rows_playlist = cur_playlist.fetchall()
 
+    # Extract track_ids from ids list for comparison
     track_ids = set(ids)
+
+    # Store track details in a dictionary for easy access
     track_details = {}
     track_count = {}
     playlist_tracks = []
+
+    input_track_details = [get_track_details(track_id) for track_id in ids]
 
     with open(output_path, 'w', encoding='utf-8') as file:
         file.write("Inputted IDs:\n")
@@ -145,21 +148,32 @@ def ocf_result(ids):
                         track_count[item] = 0
                     track_count[item] += 1
 
-        cur_playlist.execute("SELECT track_id, weight FROM track_weights")
-        weight_results = cur_playlist.fetchall()
-        weights = {track_id: weight for track_id, weight in weight_results}
+        # Calculate similarity and store it with count
+        track_similarity = {}
+        for item, count in track_count.items():
+            details = track_details[item]
+            similarities = [
+                calculate_audio_similarity(details, input_detail)
+                for input_detail in input_track_details
+            ]
+            average_similarity = sum(similarities) / len(similarities)
+            track_similarity[item] = (count, average_similarity)
 
-        optimized_track_counts = bat_algorithm(track_count, weights)
-        sorted_tracks = sorted(
-            optimized_track_counts.items(), key=lambda x: x[1], reverse=True)
+        # Sort tracks by similarity and count
+        sorted_tracks = sorted(track_similarity.items(),
+                               key=lambda x: (x[1][1], x[1][0]), reverse=False)
+
+        # Limit the recommendations to 100
         limited_tracks = sorted_tracks[:100]
 
-        for idx, (item, count) in enumerate(limited_tracks, start=1):
+        for idx, (item, (count, similarity)) in enumerate(limited_tracks, start=1):
             details = track_details[item]
-            file.write(f"{idx}. {details['artist_name']} - {details['track_name']
-                                                            } [https://open.spotify.com/track/{item}] | Count: {count}\n")
+            file.write(f"{idx}. {details['artist_name']} - {details['track_name']} [https://open.spotify.com/track/{
+                       item}] | Count: {count} | Similarity: {similarity:.2f}\n")
 
-        limited_track_ids = {item for item, count in limited_tracks}
+        limited_track_ids = {item for item,
+                             (count, similarity) in limited_tracks}
+
         file.write("\nContributed Playlists:\n")
         playlist_contributions = {}
         for row in rows_playlist:
@@ -192,10 +206,9 @@ def ocf_result(ids):
             file.write(f"{idx}. {details1['track_name']} [https://open.spotify.com/track/{id1}] & {
                        details2['track_name']} [https://open.spotify.com/track/{id2}] have a {relationship} relationship\n")
 
-    print(f'CF Result written to: {output_path}')
+    print(f'HFCFCBF Result written to: {output_path}')
 
 
 if __name__ == "__main__":
-    ids = ['01beCqR9wsVnwzkAJZyTqq', '5XeFesFbtLpXzIVDNQP22n', '0yc6Gst2xkRu0eMLeRMGCX', '0Eqg0CQ7bK3RQIMPw1A7pl',
-           '4SqWKzw0CbA05TGszDgMlc', '5drW6PGRxkE6MxttzVLNk5', '6ilc4vQcwMPlvAHFfsTGng', '1SKPmfSYaPsETbRHaiA18G']
-    ocf_result(ids)
+    ids = ['01beCqR9wsVnwzkAJZyTqq']
+    o_hfcfcbf_result(ids)
