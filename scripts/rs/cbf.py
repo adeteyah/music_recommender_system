@@ -183,13 +183,3 @@ def cbf_result(ids):
 if __name__ == "__main__":
     ids = ['5E30LdtzQTGqRvNd7l6kG5']  # Example input with track_ids
     cbf_result(ids)
-
-
-if __name__ == "__main__":
-    ids = ['5E30LdtzQTGqRvNd7l6kG5']  # Example input with track_ids
-    cbf_result(ids)
-
-
-if __name__ == "__main__":
-    ids = ['5E30LdtzQTGqRvNd7l6kG5']  # Example input with track_ids
-    cbf_result(ids)

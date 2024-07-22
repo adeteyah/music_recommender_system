@@ -27,7 +27,7 @@ print("CF execution time: ", end - start)
 
 print("\nGenerating HF-CBF-CF Result")
 start = time.time()
-hf_cbf_cf.hf_cbf_cf_result(ids)
+hf_cbf_cf.hfcbfcf_result(ids)
 end = time.time()
 print("HFCBFCF execution time: ", end - start)
 
