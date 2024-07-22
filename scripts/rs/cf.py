@@ -122,7 +122,7 @@ def cf_result(ids):
                                key=lambda x: x[1], reverse=True)
 
         # Limit the recommendations to 100
-        limited_tracks = sorted_tracks[:100]
+        limited_tracks = sorted_tracks[:int(config['rs']['n_recommend'])]
 
         for idx, (item, count) in enumerate(limited_tracks, start=1):
             details = track_details[item]

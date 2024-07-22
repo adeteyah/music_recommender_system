@@ -123,7 +123,8 @@ def cbf_result(ids):
                     (playlist_id, creator_id, combined_score))
 
         sorted_playlists = sorted(playlist_distances, key=lambda x: x[2])
-        top_playlists = sorted_playlists[:5]
+        top_playlists = sorted_playlists[:int(
+            config['rs']['n_cbf_playlist_select'])]
 
         with open(output_path, 'w', encoding='utf-8') as file:
             file.write("Inputted IDs:\n")
@@ -169,11 +170,17 @@ def cbf_result(ids):
             file.write("\nSongs Recommendations:\n")
             sorted_tracks = sorted(track_counts.items(),
                                    key=lambda x: x[1], reverse=True)
+            recommendation_count = 0  # Initialize a counter for the number of recommendations
             for idx, (track_id, count) in enumerate(sorted_tracks, start=1):
-                details = track_details.get(
-                    track_id, {'artist_name': 'Unknown Artist', 'track_name': 'Unknown Track'})
-                file.write(f"{idx}. {details['artist_name']} - {details['track_name']
-                                                                } [https://open.spotify.com/track/{track_id}] | Count: {count}\n")
+                if track_id not in ids:  # Exclude inputted track IDs
+                    details = track_details.get(
+                        track_id, {'artist_name': 'Unknown Artist', 'track_name': 'Unknown Track'})
+                    file.write(f"{recommendation_count + 1}. {details['artist_name']} - {
+                               details['track_name']} [https://open.spotify.com/track/{track_id}] | Count: {count}\n")
+                    recommendation_count += 1  # Increment the counter
+                    # Stop after 24 recommendations
+                    if recommendation_count >= int(config['rs']['n_recommend']):
+                        break
 
         print(f'Result written to: {output_path}')
     except Exception as e:

@@ -20,7 +20,6 @@ cur_songs = conn_songs.cursor()
 
 
 def get_track_details(track_id):
-    # Query the tracks database to get the track name, artist IDs, and audio features
     query = """
     SELECT track_name, artist_ids, acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence
     FROM tracks WHERE track_id = ?
@@ -29,15 +28,19 @@ def get_track_details(track_id):
     result = cur_songs.fetchone()
 
     if not result:
-        return {'artist_name': 'Artist Not In Database', 'track_name': 'Track Not In Database'}
+        return {
+            'artist_name': 'Artist Not In Database',
+            'track_name': 'Track Not In Database',
+            'acousticness': 0.0, 'danceability': 0.0, 'energy': 0.0,
+            'instrumentalness': 0.0, 'liveness': 0.0, 'loudness': 0.0,
+            'speechiness': 0.0, 'tempo': 0.0, 'valence': 0.0
+        }
 
-    track_name, artist_ids, acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence = result
+    (track_name, artist_ids, acousticness, danceability, energy,
+     instrumentalness, liveness, loudness, speechiness, tempo, valence) = result
 
-    if track_name is None:
-        track_name = "Unknown Track"
-
-    if artist_ids is None:
-        artist_ids = ""
+    track_name = track_name if track_name is not None else "Unknown Track"
+    artist_ids = artist_ids if artist_ids is not None else ""
 
     # Query the artists database to get the artist names and genres
     artist_names = []
@@ -57,27 +60,29 @@ def get_track_details(track_id):
     artist_name = ", ".join(artist_names)
     genres = ", ".join(artist_genres)
 
-    return {
+    track_details = {
         'artist_name': artist_name,
         'track_name': track_name,
-        'acousticness': acousticness,
-        'danceability': danceability,
-        'energy': energy,
-        'instrumentalness': instrumentalness,
-        'liveness': liveness,
-        'loudness': loudness,
-        'speechiness': speechiness,
-        'tempo': tempo,
-        'valence': valence,
+        'acousticness': acousticness if acousticness is not None else 0.0,
+        'danceability': danceability if danceability is not None else 0.0,
+        'energy': energy if energy is not None else 0.0,
+        'instrumentalness': instrumentalness if instrumentalness is not None else 0.0,
+        'liveness': liveness if liveness is not None else 0.0,
+        'loudness': loudness if loudness is not None else 0.0,
+        'speechiness': speechiness if speechiness is not None else 0.0,
+        'tempo': tempo if tempo is not None else 0.0,
+        'valence': valence if valence is not None else 0.0,
         'genres': genres
     }
 
+    return track_details
+
 
 def calculate_audio_similarity(track1, track2):
-    features1 = [track1['acousticness'], track1['danceability'], track1['energy'], track1['instrumentalness'],
-                 track1['liveness'], track1['loudness'], track1['speechiness'], track1['tempo'], track1['valence']]
-    features2 = [track2['acousticness'], track2['danceability'], track2['energy'], track2['instrumentalness'],
-                 track2['liveness'], track2['loudness'], track2['speechiness'], track2['tempo'], track2['valence']]
+    features1 = [track1.get('acousticness', 0.0), track1.get('danceability', 0.0), track1.get('energy', 0.0), track1.get('instrumentalness', 0.0),
+                 track1.get('liveness', 0.0), track1.get('loudness', 0.0), track1.get('speechiness', 0.0), track1.get('tempo', 0.0), track1.get('valence', 0.0)]
+    features2 = [track2.get('acousticness', 0.0), track2.get('danceability', 0.0), track2.get('energy', 0.0), track2.get('instrumentalness', 0.0),
+                 track2.get('liveness', 0.0), track2.get('loudness', 0.0), track2.get('speechiness', 0.0), track2.get('tempo', 0.0), track2.get('valence', 0.0)]
 
     distance = sqrt(sum((f1 - f2) ** 2 for f1,
                     f2 in zip(features1, features2)))
@@ -164,7 +169,7 @@ def hfcfcbf_result(ids):
                                key=lambda x: (x[1][1], x[1][0]), reverse=False)
 
         # Limit the recommendations to 100
-        limited_tracks = sorted_tracks[:100]
+        limited_tracks = sorted_tracks[:int(config['rs']['n_recommend'])]
 
         for idx, (item, (count, similarity)) in enumerate(limited_tracks, start=1):
             details = track_details[item]

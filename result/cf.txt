@@ -1,118 +1,43 @@
 Inputted IDs:
-1. Tulus - Monokrom [https://open.spotify.com/track/4GfK1qOF3uBWidbPlTCQRL]
-2. Rex Orange County - THE SHADE [https://open.spotify.com/track/1gH1h30wkQdd9zhY3j7a8T]
+1. Justine Skye, Tyga - Collide (Sped Up Remix) [https://open.spotify.com/track/1r6qzxz77Tvbrvqd1Q1MIN]
 
 Recommendation Result:
-1. Hindia - Evaluasi [https://open.spotify.com/track/2dIBMHByUGcNPzmYBJ6OAj] | Count: 3
-2. Tulus - Interaksi [https://open.spotify.com/track/32Pdf9eyXDEMoClEJW6yYP] | Count: 3
-3. Andra & The Backbone - Sempurna [https://open.spotify.com/track/2UgCs0i0rNHUH2jKE5NZHE] | Count: 3
-4. Tulus - Hati-Hati di Jalan [https://open.spotify.com/track/2hHeGD57S0BcopfVcmehdl] | Count: 3
-5. Rex Orange County - Happiness [https://open.spotify.com/track/2rXVtoLBHuXcNB5DVfIc9p] | Count: 2
-6. Ardhito Pramono - Sudah - Story of Kale - Original Motion Picture Soundtrack [https://open.spotify.com/track/5QGdWvXwXMK2Zx6eKagyue] | Count: 2
-7. Dewa - Risalah Hati [https://open.spotify.com/track/0cc9lgdfHqeS8t9BzbFFmj] | Count: 2
-8. Ricky Montgomery - Line Without a Hook [https://open.spotify.com/track/5NvOZCjZaGGGL597exlQWv] | Count: 2
-9. Coyote Theory - This Side of Paradise [https://open.spotify.com/track/79EkGysjP2dL5GdpeQjRxT] | Count: 2
-10. Hindia - Rumah Ke Rumah [https://open.spotify.com/track/2wAiFWjRupWmnDkQcu91MF] | Count: 2
-11. Hindia - Secukupnya [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] | Count: 2
-12. Ardhito Pramono, Aurélie - I Just Couldn't Save You Tonight - Story of Kale - Original Motion Picture Soundtrack [https://open.spotify.com/track/5AkV53fo1u01mi8r22JNeF] | Count: 2
-13. Arash Buana, raissa anggiani - if u could see me cryin' in my room [https://open.spotify.com/track/13sOb9V6Y3uCnRxY9HIZqP] | Count: 2
-14. Rex Orange County - AMAZING [https://open.spotify.com/track/3OM6qQmdFV6uy61GIqpRtf] | Count: 2
-15. Hivi! - Pelangi [https://open.spotify.com/track/3ZwqWrRpylU9nfy99qwKdR] | Count: 2
-16. Fiersa Besari - Garis Terdepan [https://open.spotify.com/track/4JozU4Ud30FGyDYzoUKasI] | Count: 2
-17. The 1975 - Mine [https://open.spotify.com/track/0cnVBn7JsFlShF65EJe2Or] | Count: 1
-18. Cigarettes After Sex - Falling In Love [https://open.spotify.com/track/0O0bttAxJKKWqAqY2Nq4mC] | Count: 1
-19. Cigarettes After Sex - Sweet [https://open.spotify.com/track/3VSYkAf6f46i5ZkXOHORq1] | Count: 1
-20. Celina Sharma, Harris J. - 24/7 [https://open.spotify.com/track/304uzYXYjPulJpLRJzuesX] | Count: 1
-21. boy pablo - i <3 u [https://open.spotify.com/track/5EcGSkkNBMAWOePvLgKde1] | Count: 1
-22. Oscar Lang - you. [https://open.spotify.com/track/7lQUiU7ig8VnBUF0cHZGOH] | Count: 1
-23. LANY - anything 4 u [https://open.spotify.com/track/0Aii1ZdrQwkas2lrRFz6ZY] | Count: 1
-24. Emily Sie - Falling for You [https://open.spotify.com/track/6ckZV3TWitV8Cu6sH3ajLy] | Count: 1
-25. Eyedress, Dent May - Something About You [https://open.spotify.com/track/6RiiSy9GzSwiyDEJDiMuKe] | Count: 1
-26. frad, Esthie - Crush [https://open.spotify.com/track/3PIMCxMtUBChjDNzijWXJE] | Count: 1
-27. boy pablo - honey [https://open.spotify.com/track/6pXe0HxGT1xufKGhZYqweC] | Count: 1
-28. keshi - us [https://open.spotify.com/track/3r9eGg4SVPbhtiPTA9UkmK] | Count: 1
-29. Oscar Lang - fall into u [https://open.spotify.com/track/6d2R5kZDIYs82XdxBNCiCN] | Count: 1
-30. Teddy Adhitya - Just You [https://open.spotify.com/track/6L68DyIsn6SqEN9rStOXb9] | Count: 1
-31. The Walters - I Love You So [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] | Count: 1
-32. keshi - like i need u [https://open.spotify.com/track/7ivYWXqrPLs66YwakDuSim] | Count: 1
-33. Taylor Swift - Lover [https://open.spotify.com/track/1dGr1c8CrMLDpV6mPbImSI] | Count: 1
-34. NIKI - I Like U [https://open.spotify.com/track/6f7BE3VcZScJx6n3wsf5Z3] | Count: 1
-35. Paul Partohap - P.S. I LOVE YOU [https://open.spotify.com/track/1w3azB0VuRFp79AduIwrIy] | Count: 1
-36. Stephen Sanchez - Until I Found You [https://open.spotify.com/track/0T5iIrXA4p5GsubkhuBIKV] | Count: 1
-37. George Benson - Nothing's Gonna Change My Love for You [https://open.spotify.com/track/0vB4Vd6PtkJSEnWsmqATnZ] | Count: 1
-38. The Black Skirts - EVERYTHING [https://open.spotify.com/track/19Hg1UCZaCdpHB37L7x63X] | Count: 1
-39. Panorama Distributor, Koesplus - Andaikan Kau Datang Kembali [https://open.spotify.com/track/55uTC6MdOv8ZpVMcy6YP6Q] | Count: 1
-40. Budi Doremi - Mesin Waktu [https://open.spotify.com/track/4ZX6ww7kJCABHIDQfy9Bmd] | Count: 1
-41. The Junas - Cukup Dikenang Saja [https://open.spotify.com/track/37JVVxcy1KTfs4C8iXvvj2] | Count: 1
-42. Tulus - Jatuh Suka [https://open.spotify.com/track/6PqWdGIYq5xdLaa4zCZfRp] | Count: 1
-43. Tulus - Jatuh Cinta [https://open.spotify.com/track/5qNudLbjQ86iXul64YwKjE] | Count: 1
-44. Juicy Luicy - Lantas [https://open.spotify.com/track/1ZPVEo8RfmrEz8YAD5n6rW] | Count: 1
-45. Lyodra - Pesan Terakhir [https://open.spotify.com/track/3FwQ3RYYEekzjEeL3jdpUZ] | Count: 1
-46. Hal - L [https://open.spotify.com/track/5zsVcDTZEKISPTCLYiTdwb] | Count: 1
-47. Budi Doremi - Tolong [https://open.spotify.com/track/5X5Vj8FcxyoLzq9qxAa45U] | Count: 1
-48. Fiersa Besari - Celengan Rindu [https://open.spotify.com/track/19JvKc2f3ZNblfBSDMDwUF] | Count: 1
-49. Joji - Glimpse of Us [https://open.spotify.com/track/6xGruZOHLs39ZbVccQTuPZ] | Count: 1
-50. Ruth B. - Dandelions [https://open.spotify.com/track/2eAvDnpXP5W0cVtiI0PUxV] | Count: 1
-51. Bruno Mars - It Will Rain [https://open.spotify.com/track/0M3HkE321xpCbCYqVKzr1q] | Count: 1
-52. Conan Gray - Heather [https://open.spotify.com/track/4xqrdfXkTW4T0RauPLv3WA] | Count: 1
-53. One Direction - Strong [https://open.spotify.com/track/3cKM7UXBZmgjEgEBTkaIlU] | Count: 1
-54. Troye Sivan - Angel Baby [https://open.spotify.com/track/3wlLknnMtD8yZ0pCtCeeK4] | Count: 1
-55. Hindia - Untuk Apa / Untuk Apa? [https://open.spotify.com/track/2LQZ32XuFlkcoEUDSG6BMT] | Count: 1
-56. Hindia, Rara Sekar - Membasuh [https://open.spotify.com/track/3CBxVM0zGj41BQtE6m7gwb] | Count: 1
-57. Hindia - Besok Mungkin Kita Sampai [https://open.spotify.com/track/08OPqLv99g8avzmxQepmiw] | Count: 1
-58. Hindia, Natasha Udu, Kamga - Mata Air [https://open.spotify.com/track/3kj14iUwv0rvTweOr9P2ut] | Count: 1
-59. Hindia - Apapun Yang Terjadi [https://open.spotify.com/track/4YSOlJJoFu4vfZYJUiewl9] | Count: 1
-60. Pamungkas - Monolog [https://open.spotify.com/track/77vx7sGjdqwdnQL968t8oY] | Count: 1
-61. Pamungkas - One Only [https://open.spotify.com/track/7iTF9T1jum3Km6H6WMZpDC] | Count: 1
-62. Pamungkas - Sorry [https://open.spotify.com/track/4gW0fnArZ93uAElSkuw0PG] | Count: 1
-63. RAN, Hindia - Si Lemah [https://open.spotify.com/track/4TPIAnmVnouoZuwB6blHWl] | Count: 1
-64. Rex Orange County - Pluto Projector [https://open.spotify.com/track/4EWBhKf1fOFnyMtUzACXEc] | Count: 1
-65. Hindia - Evakuasi [https://open.spotify.com/track/1bcIiU5FWRa2IYBqx0bk67] | Count: 1
-66. Kunto Aji - Rehat [https://open.spotify.com/track/7mjO4RbTZIb1SfE8G673Lm] | Count: 1
-67. Nadin Amizah - Bertaut [https://open.spotify.com/track/630DpnzdfjdVqv2yLfPbAX] | Count: 1
-68. Rex Orange County - Always [https://open.spotify.com/track/3SxSrUogj4LpAkLKXeTtTQ] | Count: 1
-69. John Mayer - You're Gonna Live Forever in Me [https://open.spotify.com/track/51lPx6ZCSalL2kvSrDUyJc] | Count: 1
-70. Harry Styles - Watermelon Sugar [https://open.spotify.com/track/6UelLqGlWMcVH1E5c4H7lY] | Count: 1
-71. Taylor Swift - Shake It Off [https://open.spotify.com/track/0cqRj7pUJDkTCEsJkx8snD] | Count: 1
-72. The Weeknd, Ariana Grande - Die For You (with Ariana Grande) - Remix [https://open.spotify.com/track/4W4fNrZYkobj539TOWsLO2] | Count: 1
-73. Sabrina Carpenter - Nonsense [https://open.spotify.com/track/6dgUya35uo964z7GZXM07g] | Count: 1
-74. Katy Perry - Last Friday Night (T.G.I.F.) [https://open.spotify.com/track/3oHNJECGN3bBoGXejlw2b1] | Count: 1
-75. Denise Julia - NVMD [https://open.spotify.com/track/7ArVzlFsFsQXNseVXmdOyk] | Count: 1
-76. Ariana Grande - One Last Time [https://open.spotify.com/track/7xoUc6faLbCqZO6fQEYprd] | Count: 1
-77. SZA - Kill Bill [https://open.spotify.com/track/3OHfY25tqY28d16oZczHc8] | Count: 1
-78. Charlie Puth - Cheating on You [https://open.spotify.com/track/0ClPIeT6MSgfSgQ9ZrJbAq] | Count: 1
-79. PinkPantheress, Ice Spice - Boy's a liar Pt. 2 [https://open.spotify.com/track/6AQbmUe0Qwf5PZnt4HmTXv] | Count: 1
-80. Bruno Mars - Treasure [https://open.spotify.com/track/55h7vJchibLdUkxdlX3fK7] | Count: 1
-81. Justin Bieber, Daniel Caesar, Giveon - Peaches (feat. Daniel Caesar & Giveon) [https://open.spotify.com/track/4iJyoBOLtHqaGxP12qzhQI] | Count: 1
-82. keshi - LIMBO [https://open.spotify.com/track/2bdVgAQgosGUJoViVDNeOV] | Count: 1
-83. MAX, keshi - IT'S YOU (feat. keshi) [https://open.spotify.com/track/5SMCxRA6hB2jEhroaYfw6N] | Count: 1
-84. Bruno Mars - That's What I Like [https://open.spotify.com/track/0KKkJNfGyhkQ5aFogxQAPU] | Count: 1
-85. Bruno Mars - Grenade [https://open.spotify.com/track/4lLtanYk6tkMvooU0tWzG8] | Count: 1
-86. Justin Bieber - Favorite Girl [https://open.spotify.com/track/4nTjkWK590oBDcnIxTr1mI] | Count: 1
-87. FIFTY FIFTY - Cupid - Twin Ver. [https://open.spotify.com/track/7FbrGaHYVDmfr7KoLIZnQ7] | Count: 1
-88. Bruno Mars, Anderson .Paak, Silk Sonic, Thundercat, Bootsy Collins - After Last Night (with Thundercat & Bootsy Collins) [https://open.spotify.com/track/3jiKUMXqwEodB7gVv1RMZU] | Count: 1
-89. Stacey Ryan - Fall In Love Alone [https://open.spotify.com/track/5xwBIieMMFUmLDgvG4DjFe] | Count: 1
-90. yuji, putri dahlia - Old Love [https://open.spotify.com/track/3W4U7TEgILGpq0EmquurtH] | Count: 1
-91. Marcell - Peri Cintaku [https://open.spotify.com/track/0D8Hr9PWWytjsFcavIp9Au] | Count: 1
-92. Afgan - Bukan Cinta Biasa [https://open.spotify.com/track/7pnySx65jx0qm8ZmV6R56m] | Count: 1
-93. Afgan - Bawalah Cintaku [https://open.spotify.com/track/3xpMytpniCnjXCgy7TcFDw] | Count: 1
-94. Virgoun, Audy - Selamat (Selamat Tinggal) [https://open.spotify.com/track/1mruWrUwAVe2XkksUQiaHK] | Count: 1
-95. Yunan Helmi, Nuca - Crolatte [https://open.spotify.com/track/0jzeistYS2aZZatG0Cpxfx] | Count: 1
-96. Juicy Luicy - Lantas [https://open.spotify.com/track/6iCGpfjYviybL08jXTPW8D] | Count: 1
-97. Naif - Benci Untuk Mencinta [https://open.spotify.com/track/65PjFLm6X567f52At4CI1N] | Count: 1
-98. Afgan - Wajahmu Mengalihkan Duniaku [https://open.spotify.com/track/4z8CduM0gnyJxgLNrEvxEh] | Count: 1
-99. Afgan - Bunga Terakhir [https://open.spotify.com/track/1VcmrQCHKnosYDHhk5kbU4] | Count: 1
-100. Yovie & Nuno - Tanpa Cinta [https://open.spotify.com/track/2e4xYHvEtqSfl70ntZJMp2] | Count: 1
+1. jaddie$death - C0Ps! [https://open.spotify.com/track/32GlzGcVmgk66m42MVsiLU] | Count: 1
+2. Yeck - Reduce Your Expectations to 0 [https://open.spotify.com/track/4iOmkCzLcE5X5dAqeWjXkR] | Count: 1
+3. Sqmbo, dkj - Houston Texas bitch [https://open.spotify.com/track/5yVXFRKouVuGDzWi4eHRGb] | Count: 1
+4. Cash!* - 1mmortal (Slowed + Reverb) [https://open.spotify.com/track/08Ngx5ytbb9jLGdR5nbvwI] | Count: 1
+5. ViralityX, Bloomy. - Wine Pon You (Sped Up + Reverb) - Remix [https://open.spotify.com/track/4T3uC3g5TRRVMLVAqlatGF] | Count: 1
+6. Loosevinci, Ramzoid - 435am [https://open.spotify.com/track/5OtoaDlWIdhTjetFbgEydt] | Count: 1
+7. Atiø - hesa [https://open.spotify.com/track/6AyXQ8szpf2jrYygQitwST] | Count: 1
+8. NASAYA, MARO - MIDNIGHT PURPLE [https://open.spotify.com/track/1uFKaOBb1RWOX9TX4nT6Bg] | Count: 1
+9. Muppet DJ, SECA Records - obsessed (speed up) - Remix [https://open.spotify.com/track/1onQUQZMGAO3hWT9qv24cP] | Count: 1
+10. Scammacist - Reflections - Sped Up [https://open.spotify.com/track/3Pt8yidavDcsoxdONqwMvw] | Count: 1
+11. C3N6 - Genexix - Speed Up [https://open.spotify.com/track/20mE2aBPBg33RI5egPt6sK] | Count: 1
+12. C3N6 - Glorious Time [https://open.spotify.com/track/4KfMxRWjJEt0VlIF1PqmdP] | Count: 1
+13. Tyga - Ice Cream Man - Sped Up [https://open.spotify.com/track/6hOuSnFtAKkVXoL7tZy8qH] | Count: 1
+14. Various Artists -  [https://open.spotify.com/track/5gIyffuhJzf865RJDMTX0n] | Count: 1
+15. Dyan Dxddy - watch this plugg [https://open.spotify.com/track/4PW1bqfNoJoLma87qsBQRE] | Count: 1
+16. ViralityX, Bloomy. - Low (SZA) - Sped Up [https://open.spotify.com/track/3qVSOSK7UPPaNOuBvEEl3K] | Count: 1
+17. EDITKINGS - Drunk & Nasty (TikTok Edit) - Remix [https://open.spotify.com/track/6WDx0CXwLMhrRs2UHVmf7L] | Count: 1
+18. D Cat - streets [https://open.spotify.com/track/0WLxdD0XZchPeWUB3mGPSX] | Count: 1
+19. dalves - Earned It [https://open.spotify.com/track/4oGXpUZzek90qE1kt0ei4P] | Count: 1
+20. KIRA - RACKS GOT ME - sped up [https://open.spotify.com/track/4ngAE83pu58ctTEkXKne8a] | Count: 1
+21. Deacc - Wack Jumper (remix) [https://open.spotify.com/track/23N8tmFcgpw9wD3kTSbHz5] | Count: 1
+22. Dabich sghir - Hell shel instiluuu [https://open.spotify.com/track/0UQRkJy2Z7deQJW9viU39E] | Count: 1
+23. H1TD0WN - Judas (Tiktok Guitar) [https://open.spotify.com/track/1aglC6SwE7cMc0CdG9eeIy] | Count: 1
+24. SZA - Good Days [https://open.spotify.com/track/3YJJjQPAbDT7mGpX3WtQ9A] | Count: 1
+25. Edward Maya, Vika Jigulina - Stereo Love [https://open.spotify.com/track/0gBfLS4aqbrr1ZvVv8dqWB] | Count: 1
+26. SUICIDAL-IDOL - ecstacy (slowed) [https://open.spotify.com/track/1JgknGBbrfmEHeOZH051SS] | Count: 1
+27. Britney Manson - FΛSHION [https://open.spotify.com/track/70jiETKdlLEram2zJSHdHH] | Count: 1
+28. WAYNE FLENORY - SUPARO - SPEED UP [https://open.spotify.com/track/7sf9InBTBA24jMwMHpiq2K] | Count: 1
+29. Rihanna - Kiss It Better [https://open.spotify.com/track/0UHB9METy4VCXNgkcGqHqS] | Count: 1
+30. The Weeknd, JENNIE, Lily-Rose Depp - One Of The Girls - Sped Up [https://open.spotify.com/track/4WfGDkm99oLJSAtELYZYEd] | Count: 1
+31. Pia Mia, Chris Brown, Tyga - Do It Again [https://open.spotify.com/track/72Bz4ciRZPBcVSw0nrZDHi] | Count: 1
+32. TommyMuzzic, ZeddMusique - We Found Love x Stereo Love - TikTok Remix [https://open.spotify.com/track/6ebY3mZqFrizd9ccuSAMEN] | Count: 1
+33. Måneskin - Beggin' [https://open.spotify.com/track/3Wrjm47oTz2sjIgck11l5e] | Count: 1
 
 Contributed Playlists:
-1. 23 Tracks from [https://open.spotify.com/playlist/0kp7wNP78FGiBAz3u2xTM8] by [https://open.spotify.com/user/31w5gibbpyx4h7reoxhmegwpda2q]
-2. 23 Tracks from [https://open.spotify.com/playlist/0l5Zwk5HF2lunvdgY8rSVI] by [https://open.spotify.com/user/31njh6ntuiy77cf2dh7lyitgo534]
-3. 23 Tracks from [https://open.spotify.com/playlist/46FmfNNEVHaFk0z6wJXElH] by [https://open.spotify.com/user/31njh6ntuiy77cf2dh7lyitgo534]
-4. 23 Tracks from [https://open.spotify.com/playlist/2vq6e08zVFer1dCZw2yae7] by [https://open.spotify.com/user/31jcr7plpxv5dsrwjfcl33sapmu4]
-5. 14 Tracks from [https://open.spotify.com/playlist/4IUW4doH5EMB0zMBCOo01Y] by [https://open.spotify.com/user/31rvoblkmg4ywc5vgm5ygpjmxa7q]
-6. 7 Tracks from [https://open.spotify.com/playlist/76V5IiKdSnO2uRIsEP2zu8] by [https://open.spotify.com/user/yye4kc6f4hkd5egc137wr13u4]
-7. 6 Tracks from [https://open.spotify.com/playlist/6FDKV1MblZRJhLmzwWrIS2] by [https://open.spotify.com/user/31urcn63lgmglthj2667sbjeisya]
-8. 1 Tracks from [https://open.spotify.com/playlist/1eawBpE4OqT7IRocvDiaZ6] by [https://open.spotify.com/user/31te56samaiu6senpstsa3lfektu]
+1. 23 Tracks from [https://open.spotify.com/playlist/5dIvbZINmQ6PcxWj3ux3uv] by [https://open.spotify.com/user/31new6z6imibvytvgxvxf3qgdr4u]
+2. 10 Tracks from [https://open.spotify.com/playlist/4ljSSa8wkWHSSstOoPDRSk] by [https://open.spotify.com/user/31te56samaiu6senpstsa3lfektu]
 
 Track Relationships:
-1. Monokrom [https://open.spotify.com/track/4GfK1qOF3uBWidbPlTCQRL] & THE SHADE [https://open.spotify.com/track/1gH1h30wkQdd9zhY3j7a8T] have a Low relationship
