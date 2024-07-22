@@ -41,7 +41,7 @@ hf_cf_cbf.hfcfcbf_result(ids)
 end = time.time()
 print("HFCFCBF execution time: ", end - start, "\n")
 
-print("\n# Generating CBF Result")
+print('😀' * 3)
 
 print("\n# Generating CBF Result")
 start = time.time()
