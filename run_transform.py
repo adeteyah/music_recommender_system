@@ -9,6 +9,11 @@ songs_db_path = config['db']['songs_db']
 playlists_db_path = config['db']['playlists_db']
 
 
+def update_track_weight(cursor, track_id):
+    query = "INSERT INTO track_weights (track_id, weight) VALUES (?, 1) ON CONFLICT(track_id) DO UPDATE SET weight = weight + 1"
+    cursor.execute(query, (track_id,))
+
+
 def fill_playlists_table():
     conn_playlists = sqlite3.connect(playlists_db_path)
     cursor_playlists = conn_playlists.cursor()
@@ -77,6 +82,9 @@ def fill_playlists_table():
                         min_max_values['genres'].extend(
                             artist_genres[0].split(','))
 
+                # Update track weight
+                update_track_weight(cursor_playlists, track_id)
+
         if min_max_values['duration_ms']:
             # Get the most common artist ID
             most_artist_id = max(
@@ -126,10 +134,6 @@ def fill_playlists_table():
             ))
         else:
             print(f"No track information found for playlist {playlist_id}")
-
-    query = "INSERT INTO track_weights (track_id, weight) VALUES (?, 1) ON CONFLICT(track_id) DO UPDATE SET weight = weight + 1"
-    cursor_playlists.execute(query, (track_id,))
-    conn_playlist.commit()
 
     conn_playlists.commit()
     conn_playlists.close()
