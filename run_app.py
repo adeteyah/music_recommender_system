@@ -13,26 +13,26 @@ ids = [
     '2iOgTijjnxjtz7723Xs4sp'
 ]
 
-print("\nGenerating CBF Result")
+print("\n# Generating CBF Result")
 start = time.time()
 cbf.cbf_result(ids)
 end = time.time()
 print("CBF execution time: ", end - start)
 
-print("\nGenerating CF Result")
+print("\n# Generating CF Result")
 start = time.time()
 cf.cf_result(ids)
 end = time.time()
 print("CF execution time: ", end - start)
 
-print("\nGenerating HF-CBF-CF Result")
+print("\n# Generating HF-CBF-CF Result")
 start = time.time()
 hf_cbf_cf.hfcbfcf_result(ids)
 end = time.time()
 print("HFCBFCF execution time: ", end - start)
 
-print("\nGenerating HF-CF-CBF Result")
+print("\n# Generating HF-CF-CBF Result")
 start = time.time()
 hf_cf_cbf.hfcfcbf_result(ids)
 end = time.time()
-print("HFCFCBF execution time: ", end - start)
+print("HFCFCBF execution time: ", end - start, "\n")
