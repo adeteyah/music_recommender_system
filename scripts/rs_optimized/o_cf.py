@@ -150,6 +150,7 @@ def o_cf_result(ids):
         weight_results = cur_playlist.fetchall()
         weights = {track_id: weight for track_id, weight in weight_results}
 
+        # Process bat algorithm first before limiting results to 100
         optimized_track_counts = bat_algorithm(track_count, weights)
         sorted_tracks = sorted(
             optimized_track_counts.items(), key=lambda x: x[1], reverse=True)

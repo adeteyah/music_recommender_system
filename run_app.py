@@ -10,11 +10,8 @@ from scripts.rs_optimized import o_hf_cbf_cf
 from scripts.rs_optimized import o_hf_cf_cbf
 
 ids = [
-    '26WgejlZUG6TxLo8djVxUp',
-    '56tKRucMdMNuslADmaxN9L',
-    '5xuL74G1vQhSGn7WC3L3QL',
-    '7bWHFauPVNfMYUVZnAXbo9',
-    '2iOgTijjnxjtz7723Xs4sp'
+    '4GfK1qOF3uBWidbPlTCQRL',
+    '1gH1h30wkQdd9zhY3j7a8T'
 ]
 
 print("\n# Generating CBF Result")
@@ -41,7 +38,7 @@ hf_cf_cbf.hfcfcbf_result(ids)
 end = time.time()
 print("HFCFCBF execution time: ", end - start, "\n")
 
-print('=' * 10)
+print('=' * 100)
 
 print("\n# Generating Optimized CBF Result")
 start = time.time()

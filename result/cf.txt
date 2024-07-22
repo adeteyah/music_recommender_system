@@ -1,171 +1,118 @@
 Inputted IDs:
-1. Arry Harmoko, Ronald Dewa - Melas [https://open.spotify.com/track/26WgejlZUG6TxLo8djVxUp]
-2. Arry Harmoko, Koncomesra - Cukup [https://open.spotify.com/track/56tKRucMdMNuslADmaxN9L]
-3. Arry Harmoko - Centang Biru [https://open.spotify.com/track/5xuL74G1vQhSGn7WC3L3QL]
-4. Sweety Days, Arry Harmoko - Pamit [https://open.spotify.com/track/7bWHFauPVNfMYUVZnAXbo9]
-5. Arry Harmoko - Jarkoni 2 [https://open.spotify.com/track/2iOgTijjnxjtz7723Xs4sp]
+1. Tulus - Monokrom [https://open.spotify.com/track/4GfK1qOF3uBWidbPlTCQRL]
+2. Rex Orange County - THE SHADE [https://open.spotify.com/track/1gH1h30wkQdd9zhY3j7a8T]
 
 Recommendation Result:
-1. Arry Harmoko, Vica - Sareng [https://open.spotify.com/track/5suV1gtfD3kGj5A3teIVtV] | Count: 49
-2. Arry Harmoko - Kudu Satset [https://open.spotify.com/track/1Y0HqJ0WOyfUX5AvvGlQKF] | Count: 47
-3. Arry Harmoko - Cut Off [https://open.spotify.com/track/6ueq4MrVEcvUwe8E80SPar] | Count: 37
-4. Gildcoustic - SENENG [https://open.spotify.com/track/1drRDlIBhcYUOaeMssBpEr] | Count: 36
-5. Happy Asmara, Royal Music, Gilga Sahid - STM (Sampek Tekane Mati) [https://open.spotify.com/track/2EfZf8CglKPgpa96criANN] | Count: 33
-6. Denny Caknan - LDR "Langgeng Dayaning Rasa" - Live [https://open.spotify.com/track/4mkqoe1yptnwU5S537fYlT] | Count: 30
-7. Happy Asmara, Hasan Toys - Kalah [https://open.spotify.com/track/5kLByP9E1Tf8liXNdcRang] | Count: 28
-8. Pendhoza, Guyon Waton - Mikir Mikir [https://open.spotify.com/track/1ooOKSoRoWapbT3LG88OVT] | Count: 27
-9. Denny Caknan - Sigar [https://open.spotify.com/track/12BUsSyjHbnvmnFw6TObGD] | Count: 25
-10. Ndarboy Genk - Ra Masuk [https://open.spotify.com/track/4IOZoVwAZq9v49R0UZDwFG] | Count: 25
-11. Ndarboy Genk, Masdddho - Nganggur [https://open.spotify.com/track/3glBbAQEi7n0YMUxPo6D1Y] | Count: 24
-12. Guyon Waton - Wirang [https://open.spotify.com/track/2cNjYBMsuNELj4oJjYr0bg] | Count: 24
-13. OMWAWES - Ra Nalar [https://open.spotify.com/track/1w0tTUCXWSyaFSWGZKavzg] | Count: 21
-14. Happy Asmara, Gilga Sahid - Lamunan [https://open.spotify.com/track/2a21vnv7z2u5a1y3Be49PG] | Count: 21
-15. NGATMOMBILUNG - Gagal [https://open.spotify.com/track/4fbtXxvWw1fePAZiasahDn] | Count: 20
-16. Ndarboy Genk - Nona Jelita [https://open.spotify.com/track/0uF0r2nmmM90FefkgsbZ63] | Count: 13
-17. Shinta Arsinta, Ndarboy Genk - Jamu (Janji Muanis) [https://open.spotify.com/track/5k83acEwydxxSN2k9Hc8o8] | Count: 13
-18. Happy Asmara, Gilga Sahid - Demi Kowe [https://open.spotify.com/track/7B6qooHmqiOY7hs8TEF1hP] | Count: 13
-19. Yeni Inka - Iming Iming [https://open.spotify.com/track/73F4oJUncQF885n7U0tJGs] | Count: 12
-20. Shinta Arsinta, ARYA GALIH - LDR "Langgeng Dayaning Rasa" [https://open.spotify.com/track/0Y5539Py31s2CqGYLW9SH3] | Count: 11
-21. Ndarboy Genk, Woro Widowati - Nona Jelita [https://open.spotify.com/track/6zBwNBR8SMEDfPL0eRI9Pp] | Count: 11
-22. Guyon Waton - Gampil [https://open.spotify.com/track/6T03CN5UVnCGPz3muqvpOz] | Count: 10
-23. Happy Asmara, Royal Music, Delva - Lestari [https://open.spotify.com/track/2Ii9DWEQUE4vmo7Ad0W3Cv] | Count: 10
-24. Aftershine - Kalah 2 [https://open.spotify.com/track/1CHQEzT8SY3pPoBz9FuSgb] | Count: 9
-25. Yeni Inka - Lestari [https://open.spotify.com/track/5joCh2esRtIGzGLKtcOS4n] | Count: 9
-26. Happy Asmara, Gilga Sahid - Manot [https://open.spotify.com/track/3D8qYZcWTMp93TCimjrjwO] | Count: 9
-27. Lavora - HTS [https://open.spotify.com/track/6qDtRm3pWLFKFW02FoDHVt] | Count: 8
-28. Happy Asmara, Royal Music - Lintu [https://open.spotify.com/track/2Roxv9l6mrDjJJ0eWwFztt] | Count: 8
-29. Esa Risty - Selendang Biru [https://open.spotify.com/track/4R6DWZXWg8DzJYUMNJmBuU] | Count: 7
-30. Shinta Arsinta - Selendang Biru [https://open.spotify.com/track/1IU1mITWrgXfQrCDTjDgeh] | Count: 7
-31. Denny Caknan - Lamunan [https://open.spotify.com/track/0V5aN3SvcLdyo8ZOhlXYIr] | Count: 7
-32. Sasya Arkhisna - Rungkad 2 [https://open.spotify.com/track/1RLbxKDCyVQj27eUef4njx] | Count: 7
-33. NDX A.K.A. - Jaran Goyang - New Version [https://open.spotify.com/track/5pAkLTEl2WhFxu1fCrNxyD] | Count: 7
-34. Ndarboy Genk - Sayang Sayang [https://open.spotify.com/track/3jQiDKKyALwh4Ir0vCVO9z] | Count: 6
-35. NDX A.K.A. - Piwales Tresno [https://open.spotify.com/track/0Bo51l3LBA1w0cnClTiV4S] | Count: 6
-36. Safira Inema - Jamu [https://open.spotify.com/track/5TW0s4SLgFSPDj1jv15kpb] | Count: 4
-37. Ndarboy Genk - Jamu - Janji Muanis [https://open.spotify.com/track/2GOjF1yNoN2Ifn0PTaB9Eh] | Count: 4
-38. Denny Caknan - Gampil [https://open.spotify.com/track/7KET9JHpqakmnfmP1xSQuD] | Count: 4
-39. Masdddho - SAMAR [https://open.spotify.com/track/7kInuBn9J1a0tXn4hbGJRZ] | Count: 4
-40. Masdddho - KISINAN 2 [https://open.spotify.com/track/69xt31HhLvo0foFpM6iaaJ] | Count: 4
-41. Masdddho - TENANAN [https://open.spotify.com/track/4A30eRqU99sXPfJ0viyqw6] | Count: 4
-42. Gildcoustic - Alum [https://open.spotify.com/track/5RrEK4YF52b5JjVsCir02r] | Count: 4
-43. Happy Asmara, Hasan Toys - Pupusing Nelongso [https://open.spotify.com/track/1jUuu0q3ayQlJMS9TsJZPB] | Count: 4
-44. Guyon Waton - Pelanggaran [https://open.spotify.com/track/7tkOXJNeDNCeX9Jz3K1M3l] | Count: 4
-45. Shinta Arsinta, Arya Galih - Lintang Asmoro [https://open.spotify.com/track/3MNEGhWn4UvR6Dtt6X8J9Y] | Count: 3
-46. Arya galih, Shinta Arsinta - Eling AE [https://open.spotify.com/track/5FKUHuCB44p8LWYYR3EHpW] | Count: 3
-47. Vadesta, Destya Eka - Saktenane 2 [https://open.spotify.com/track/4eotObB3STP9JwjGW6QbWW] | Count: 3
-48. Happy Asmara - Selendang Biru [https://open.spotify.com/track/7br0prWski9dm6VhH5TQa5] | Count: 3
-49. Masdddho - NGANGGUR [https://open.spotify.com/track/6rxFUsLmRp8Z3KQEfZXZQA] | Count: 3
-50. Denny Caknan, Gilga Sahid - Nemen [https://open.spotify.com/track/3s0FeUtAwDFMTCGDubZy8I] | Count: 3
-51. Dangdut Everywhere, Aftershine - Mangan Ra Njaluk Kowe - Music Cover [https://open.spotify.com/track/5O1m8ML17N3cLDNq8OpJ92] | Count: 3
-52. Denny Caknan, Masdddho - Kisinan 1 & 2 [https://open.spotify.com/track/6n2jUIcZiyu05rF3fbA5X5] | Count: 3
-53. Denny Caknan, Masdddho - Wirang [https://open.spotify.com/track/5Q8VArY6Yk6i0ICWQbUuHQ] | Count: 3
-54. OMWAWES, Guyon Waton - Dumes [https://open.spotify.com/track/5IhULiOyG58jL20qWkztEg] | Count: 3
-55. Guyon Waton, Denny Caknan - Sanes [https://open.spotify.com/track/6xbi77Vq9RALnKc59kSXIS] | Count: 3
-56. Denny Caknan, Guyon Waton - Widodari [https://open.spotify.com/track/6NboFmEGgwlzpVG7dFfJUV] | Count: 3
-57. Sasya Arkhisna, Arya Galih, Ageng Music - Lestari [https://open.spotify.com/track/4PmoxIbZbzrcSlqgWKmjvT] | Count: 2
-58. Shinta Arsinta - Sekecewa Itu [https://open.spotify.com/track/0slKR5tWmgMAnqsA405O8O] | Count: 2
-59. Difarina Indra Adella - Selendang Biru [https://open.spotify.com/track/2By82n2fC7fl811AhkoCgX] | Count: 2
-60. Niken Salindry - Selendang Biru [https://open.spotify.com/track/26CX16G8CMLWXBgYB2sYWh] | Count: 2
-61. Safira Inema - Rantas [https://open.spotify.com/track/1AJjHy94O1PrOCLylpcpNg] | Count: 2
-62. Masdddho - KISINAN [https://open.spotify.com/track/26wNc0PJYduNHNQO6nk0xE] | Count: 2
-63. Niken Salindry - Lestari [https://open.spotify.com/track/4bPDzwyOJY4eBkzlZrEqmm] | Count: 2
-64. Arya Galih, Shinta Arsinta - Lestari [https://open.spotify.com/track/4U81RsOgBUEpndCI1ICU2y] | Count: 2
-65. Sasya Arkhisna - Gampil [https://open.spotify.com/track/0B1ZIEvwxVdHZfKs9dRMTq] | Count: 2
-66. Gildcoustic - Kleru [https://open.spotify.com/track/7hIzJE8OOZg4wCcRP74knP] | Count: 2
-67. Gildcoustic - Manot [https://open.spotify.com/track/15HmzLQkPN4S6j1lvXYUJp] | Count: 2
-68. Gildcoustic - Nglarani Ra Kiro - Kiro [https://open.spotify.com/track/0j1W3x1yL3pMpvZ80PDYj3] | Count: 2
-69. Happy Asmara, The Saxo Brothers - Rungkad [https://open.spotify.com/track/1tWrff6vSPkkUQscpldS8F] | Count: 2
-70. Niken Salindry - Lamunan [https://open.spotify.com/track/3qcJp9jySepnPFWY2LyLNZ] | Count: 2
-71. Ndarboy Genk - Anak Lanang - Original [https://open.spotify.com/track/4BpYgcqRrKBkb1bOHjAokU] | Count: 2
-72. Happy Asmara, Delva - Lintang Asmara [https://open.spotify.com/track/3iwfmJzksjhCseYgkTADX7] | Count: 2
-73. Niken Salindry - Iming Iming [https://open.spotify.com/track/50AbDlE1x6r7M6fTspRJNQ] | Count: 2
-74. Shinta Arsinta - Gampil [https://open.spotify.com/track/6b8ld58a8v8HJPLbvfbT7G] | Count: 2
-75. Shinta Arsinta, Ndarboy Genk - Ra Masuk [https://open.spotify.com/track/1PDCqA5s8MzB6TrPo6t8FX] | Count: 2
-76. Denny Caknan - Taman Jurug [https://open.spotify.com/track/7d9ThiF3JkDsTtjewk7HLc] | Count: 2
-77. Denny Caknan - Pelanggaran [https://open.spotify.com/track/0uDlHlpL6xtaB7DnD24Nal] | Count: 2
-78. Denny Caknan - Kawanen Saur [https://open.spotify.com/track/4R638JWfLUYfsTcbVC0yB5] | Count: 2
-79. Guyon Waton, Bravesboy - Sak Dheg Sak Nyet [https://open.spotify.com/track/4nfyju9QoSwzwEZsyn7Tgs] | Count: 2
-80. Guyon Waton - Kok Iso Yo? [https://open.spotify.com/track/38ns4gqe16w0gAGWgvKfLS] | Count: 2
-81. Guyon Waton - Nemen [https://open.spotify.com/track/4cdLiwrmpSlke1IyjBWGJR] | Count: 2
-82. Guyon Waton - Perlahan [https://open.spotify.com/track/01TdkJ0lorIzBsdks8X1Tb] | Count: 2
-83. Guyon Waton - Klebus [https://open.spotify.com/track/6wxZIB1y1HPYifGCsAPGaA] | Count: 2
-84. Guyon Waton - Korban Janji [https://open.spotify.com/track/5AZ41aRMKszALdu5qm4sju] | Count: 2
-85. Guyon Waton - Pingal [https://open.spotify.com/track/7oT80u93j4B5HSs2GBpT2S] | Count: 2
-86. Guyon Waton - Ninggal Cerito (Purwokerto) [https://open.spotify.com/track/1tZMXvm4sgTDpG9BptQei2] | Count: 2
-87. Guyon Waton - Dalan Liyane [https://open.spotify.com/track/6XIKFylohe9nGQlwLAS9zR] | Count: 2
-88. Guyon Waton - Patah Hati [https://open.spotify.com/track/5P86ensnQKHQNfSOdUZ2Vf] | Count: 2
-89. Denny Caknan, Wawes - Dumes [https://open.spotify.com/track/1KNxo8LESrQzkjgV2JM5WP] | Count: 2
-90. Gilga Sahid - Nemu [https://open.spotify.com/track/1IDDrCfk1MedTTX3SIJrX6] | Count: 2
-91. Happy Asmara - Nemu [https://open.spotify.com/track/3ZyKyoQsMwbd01lvT5T3HK] | Count: 2
-92. NDX A.K.A. - Piwales Tresno [https://open.spotify.com/track/1BmyzXsMc04RydakzX9YAO] | Count: 2
-93. NDX A.K.A. - Kimcil Kepolen [https://open.spotify.com/track/1D6XeGykrjmBAYwDS3yXxZ] | Count: 2
-94. NDX A.K.A. - Kelingan Mantan [https://open.spotify.com/track/3w09eeWmgkLz5BISaqcpgm] | Count: 2
-95. Ronald Dewa, Chelsya Reta - Kembang Layu [https://open.spotify.com/track/7FD9EuxskAzxGNNYOVJe4G] | Count: 2
-96. Ponidi - Sekecewa Itu - Sekop [https://open.spotify.com/track/58WWKgLt1tubUtkDaIjTnh] | Count: 1
-97. Aftershine, Restianade - Kalah [https://open.spotify.com/track/6w7wnRZVLdVQGpvAnpI7Wf] | Count: 1
-98. Aftershine - Tutupono [https://open.spotify.com/track/2hSAl1oXLAC0PbTXdRaMee] | Count: 1
-99. Aftershine - Aku Ikhlas [https://open.spotify.com/track/6odjb0tn9wgrMbd7dvzcdL] | Count: 1
-100. Aftershine - Lengo Lan Banyu [https://open.spotify.com/track/7hGRnpcfRRqZjmbEaBJVEK] | Count: 1
+1. Hindia - Evaluasi [https://open.spotify.com/track/2dIBMHByUGcNPzmYBJ6OAj] | Count: 3
+2. Tulus - Interaksi [https://open.spotify.com/track/32Pdf9eyXDEMoClEJW6yYP] | Count: 3
+3. Andra & The Backbone - Sempurna [https://open.spotify.com/track/2UgCs0i0rNHUH2jKE5NZHE] | Count: 3
+4. Tulus - Hati-Hati di Jalan [https://open.spotify.com/track/2hHeGD57S0BcopfVcmehdl] | Count: 3
+5. Rex Orange County - Happiness [https://open.spotify.com/track/2rXVtoLBHuXcNB5DVfIc9p] | Count: 2
+6. Ardhito Pramono - Sudah - Story of Kale - Original Motion Picture Soundtrack [https://open.spotify.com/track/5QGdWvXwXMK2Zx6eKagyue] | Count: 2
+7. Dewa - Risalah Hati [https://open.spotify.com/track/0cc9lgdfHqeS8t9BzbFFmj] | Count: 2
+8. Ricky Montgomery - Line Without a Hook [https://open.spotify.com/track/5NvOZCjZaGGGL597exlQWv] | Count: 2
+9. Coyote Theory - This Side of Paradise [https://open.spotify.com/track/79EkGysjP2dL5GdpeQjRxT] | Count: 2
+10. Hindia - Rumah Ke Rumah [https://open.spotify.com/track/2wAiFWjRupWmnDkQcu91MF] | Count: 2
+11. Hindia - Secukupnya [https://open.spotify.com/track/5drW6PGRxkE6MxttzVLNk5] | Count: 2
+12. Ardhito Pramono, Aurélie - I Just Couldn't Save You Tonight - Story of Kale - Original Motion Picture Soundtrack [https://open.spotify.com/track/5AkV53fo1u01mi8r22JNeF] | Count: 2
+13. Arash Buana, raissa anggiani - if u could see me cryin' in my room [https://open.spotify.com/track/13sOb9V6Y3uCnRxY9HIZqP] | Count: 2
+14. Rex Orange County - AMAZING [https://open.spotify.com/track/3OM6qQmdFV6uy61GIqpRtf] | Count: 2
+15. Hivi! - Pelangi [https://open.spotify.com/track/3ZwqWrRpylU9nfy99qwKdR] | Count: 2
+16. Fiersa Besari - Garis Terdepan [https://open.spotify.com/track/4JozU4Ud30FGyDYzoUKasI] | Count: 2
+17. The 1975 - Mine [https://open.spotify.com/track/0cnVBn7JsFlShF65EJe2Or] | Count: 1
+18. Cigarettes After Sex - Falling In Love [https://open.spotify.com/track/0O0bttAxJKKWqAqY2Nq4mC] | Count: 1
+19. Cigarettes After Sex - Sweet [https://open.spotify.com/track/3VSYkAf6f46i5ZkXOHORq1] | Count: 1
+20. Celina Sharma, Harris J. - 24/7 [https://open.spotify.com/track/304uzYXYjPulJpLRJzuesX] | Count: 1
+21. boy pablo - i <3 u [https://open.spotify.com/track/5EcGSkkNBMAWOePvLgKde1] | Count: 1
+22. Oscar Lang - you. [https://open.spotify.com/track/7lQUiU7ig8VnBUF0cHZGOH] | Count: 1
+23. LANY - anything 4 u [https://open.spotify.com/track/0Aii1ZdrQwkas2lrRFz6ZY] | Count: 1
+24. Emily Sie - Falling for You [https://open.spotify.com/track/6ckZV3TWitV8Cu6sH3ajLy] | Count: 1
+25. Eyedress, Dent May - Something About You [https://open.spotify.com/track/6RiiSy9GzSwiyDEJDiMuKe] | Count: 1
+26. frad, Esthie - Crush [https://open.spotify.com/track/3PIMCxMtUBChjDNzijWXJE] | Count: 1
+27. boy pablo - honey [https://open.spotify.com/track/6pXe0HxGT1xufKGhZYqweC] | Count: 1
+28. keshi - us [https://open.spotify.com/track/3r9eGg4SVPbhtiPTA9UkmK] | Count: 1
+29. Oscar Lang - fall into u [https://open.spotify.com/track/6d2R5kZDIYs82XdxBNCiCN] | Count: 1
+30. Teddy Adhitya - Just You [https://open.spotify.com/track/6L68DyIsn6SqEN9rStOXb9] | Count: 1
+31. The Walters - I Love You So [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] | Count: 1
+32. keshi - like i need u [https://open.spotify.com/track/7ivYWXqrPLs66YwakDuSim] | Count: 1
+33. Taylor Swift - Lover [https://open.spotify.com/track/1dGr1c8CrMLDpV6mPbImSI] | Count: 1
+34. NIKI - I Like U [https://open.spotify.com/track/6f7BE3VcZScJx6n3wsf5Z3] | Count: 1
+35. Paul Partohap - P.S. I LOVE YOU [https://open.spotify.com/track/1w3azB0VuRFp79AduIwrIy] | Count: 1
+36. Stephen Sanchez - Until I Found You [https://open.spotify.com/track/0T5iIrXA4p5GsubkhuBIKV] | Count: 1
+37. George Benson - Nothing's Gonna Change My Love for You [https://open.spotify.com/track/0vB4Vd6PtkJSEnWsmqATnZ] | Count: 1
+38. The Black Skirts - EVERYTHING [https://open.spotify.com/track/19Hg1UCZaCdpHB37L7x63X] | Count: 1
+39. Panorama Distributor, Koesplus - Andaikan Kau Datang Kembali [https://open.spotify.com/track/55uTC6MdOv8ZpVMcy6YP6Q] | Count: 1
+40. Budi Doremi - Mesin Waktu [https://open.spotify.com/track/4ZX6ww7kJCABHIDQfy9Bmd] | Count: 1
+41. The Junas - Cukup Dikenang Saja [https://open.spotify.com/track/37JVVxcy1KTfs4C8iXvvj2] | Count: 1
+42. Tulus - Jatuh Suka [https://open.spotify.com/track/6PqWdGIYq5xdLaa4zCZfRp] | Count: 1
+43. Tulus - Jatuh Cinta [https://open.spotify.com/track/5qNudLbjQ86iXul64YwKjE] | Count: 1
+44. Juicy Luicy - Lantas [https://open.spotify.com/track/1ZPVEo8RfmrEz8YAD5n6rW] | Count: 1
+45. Lyodra - Pesan Terakhir [https://open.spotify.com/track/3FwQ3RYYEekzjEeL3jdpUZ] | Count: 1
+46. Hal - L [https://open.spotify.com/track/5zsVcDTZEKISPTCLYiTdwb] | Count: 1
+47. Budi Doremi - Tolong [https://open.spotify.com/track/5X5Vj8FcxyoLzq9qxAa45U] | Count: 1
+48. Fiersa Besari - Celengan Rindu [https://open.spotify.com/track/19JvKc2f3ZNblfBSDMDwUF] | Count: 1
+49. Joji - Glimpse of Us [https://open.spotify.com/track/6xGruZOHLs39ZbVccQTuPZ] | Count: 1
+50. Ruth B. - Dandelions [https://open.spotify.com/track/2eAvDnpXP5W0cVtiI0PUxV] | Count: 1
+51. Bruno Mars - It Will Rain [https://open.spotify.com/track/0M3HkE321xpCbCYqVKzr1q] | Count: 1
+52. Conan Gray - Heather [https://open.spotify.com/track/4xqrdfXkTW4T0RauPLv3WA] | Count: 1
+53. One Direction - Strong [https://open.spotify.com/track/3cKM7UXBZmgjEgEBTkaIlU] | Count: 1
+54. Troye Sivan - Angel Baby [https://open.spotify.com/track/3wlLknnMtD8yZ0pCtCeeK4] | Count: 1
+55. Hindia - Untuk Apa / Untuk Apa? [https://open.spotify.com/track/2LQZ32XuFlkcoEUDSG6BMT] | Count: 1
+56. Hindia, Rara Sekar - Membasuh [https://open.spotify.com/track/3CBxVM0zGj41BQtE6m7gwb] | Count: 1
+57. Hindia - Besok Mungkin Kita Sampai [https://open.spotify.com/track/08OPqLv99g8avzmxQepmiw] | Count: 1
+58. Hindia, Natasha Udu, Kamga - Mata Air [https://open.spotify.com/track/3kj14iUwv0rvTweOr9P2ut] | Count: 1
+59. Hindia - Apapun Yang Terjadi [https://open.spotify.com/track/4YSOlJJoFu4vfZYJUiewl9] | Count: 1
+60. Pamungkas - Monolog [https://open.spotify.com/track/77vx7sGjdqwdnQL968t8oY] | Count: 1
+61. Pamungkas - One Only [https://open.spotify.com/track/7iTF9T1jum3Km6H6WMZpDC] | Count: 1
+62. Pamungkas - Sorry [https://open.spotify.com/track/4gW0fnArZ93uAElSkuw0PG] | Count: 1
+63. RAN, Hindia - Si Lemah [https://open.spotify.com/track/4TPIAnmVnouoZuwB6blHWl] | Count: 1
+64. Rex Orange County - Pluto Projector [https://open.spotify.com/track/4EWBhKf1fOFnyMtUzACXEc] | Count: 1
+65. Hindia - Evakuasi [https://open.spotify.com/track/1bcIiU5FWRa2IYBqx0bk67] | Count: 1
+66. Kunto Aji - Rehat [https://open.spotify.com/track/7mjO4RbTZIb1SfE8G673Lm] | Count: 1
+67. Nadin Amizah - Bertaut [https://open.spotify.com/track/630DpnzdfjdVqv2yLfPbAX] | Count: 1
+68. Rex Orange County - Always [https://open.spotify.com/track/3SxSrUogj4LpAkLKXeTtTQ] | Count: 1
+69. John Mayer - You're Gonna Live Forever in Me [https://open.spotify.com/track/51lPx6ZCSalL2kvSrDUyJc] | Count: 1
+70. Harry Styles - Watermelon Sugar [https://open.spotify.com/track/6UelLqGlWMcVH1E5c4H7lY] | Count: 1
+71. Taylor Swift - Shake It Off [https://open.spotify.com/track/0cqRj7pUJDkTCEsJkx8snD] | Count: 1
+72. The Weeknd, Ariana Grande - Die For You (with Ariana Grande) - Remix [https://open.spotify.com/track/4W4fNrZYkobj539TOWsLO2] | Count: 1
+73. Sabrina Carpenter - Nonsense [https://open.spotify.com/track/6dgUya35uo964z7GZXM07g] | Count: 1
+74. Katy Perry - Last Friday Night (T.G.I.F.) [https://open.spotify.com/track/3oHNJECGN3bBoGXejlw2b1] | Count: 1
+75. Denise Julia - NVMD [https://open.spotify.com/track/7ArVzlFsFsQXNseVXmdOyk] | Count: 1
+76. Ariana Grande - One Last Time [https://open.spotify.com/track/7xoUc6faLbCqZO6fQEYprd] | Count: 1
+77. SZA - Kill Bill [https://open.spotify.com/track/3OHfY25tqY28d16oZczHc8] | Count: 1
+78. Charlie Puth - Cheating on You [https://open.spotify.com/track/0ClPIeT6MSgfSgQ9ZrJbAq] | Count: 1
+79. PinkPantheress, Ice Spice - Boy's a liar Pt. 2 [https://open.spotify.com/track/6AQbmUe0Qwf5PZnt4HmTXv] | Count: 1
+80. Bruno Mars - Treasure [https://open.spotify.com/track/55h7vJchibLdUkxdlX3fK7] | Count: 1
+81. Justin Bieber, Daniel Caesar, Giveon - Peaches (feat. Daniel Caesar & Giveon) [https://open.spotify.com/track/4iJyoBOLtHqaGxP12qzhQI] | Count: 1
+82. keshi - LIMBO [https://open.spotify.com/track/2bdVgAQgosGUJoViVDNeOV] | Count: 1
+83. MAX, keshi - IT'S YOU (feat. keshi) [https://open.spotify.com/track/5SMCxRA6hB2jEhroaYfw6N] | Count: 1
+84. Bruno Mars - That's What I Like [https://open.spotify.com/track/0KKkJNfGyhkQ5aFogxQAPU] | Count: 1
+85. Bruno Mars - Grenade [https://open.spotify.com/track/4lLtanYk6tkMvooU0tWzG8] | Count: 1
+86. Justin Bieber - Favorite Girl [https://open.spotify.com/track/4nTjkWK590oBDcnIxTr1mI] | Count: 1
+87. FIFTY FIFTY - Cupid - Twin Ver. [https://open.spotify.com/track/7FbrGaHYVDmfr7KoLIZnQ7] | Count: 1
+88. Bruno Mars, Anderson .Paak, Silk Sonic, Thundercat, Bootsy Collins - After Last Night (with Thundercat & Bootsy Collins) [https://open.spotify.com/track/3jiKUMXqwEodB7gVv1RMZU] | Count: 1
+89. Stacey Ryan - Fall In Love Alone [https://open.spotify.com/track/5xwBIieMMFUmLDgvG4DjFe] | Count: 1
+90. yuji, putri dahlia - Old Love [https://open.spotify.com/track/3W4U7TEgILGpq0EmquurtH] | Count: 1
+91. Marcell - Peri Cintaku [https://open.spotify.com/track/0D8Hr9PWWytjsFcavIp9Au] | Count: 1
+92. Afgan - Bukan Cinta Biasa [https://open.spotify.com/track/7pnySx65jx0qm8ZmV6R56m] | Count: 1
+93. Afgan - Bawalah Cintaku [https://open.spotify.com/track/3xpMytpniCnjXCgy7TcFDw] | Count: 1
+94. Virgoun, Audy - Selamat (Selamat Tinggal) [https://open.spotify.com/track/1mruWrUwAVe2XkksUQiaHK] | Count: 1
+95. Yunan Helmi, Nuca - Crolatte [https://open.spotify.com/track/0jzeistYS2aZZatG0Cpxfx] | Count: 1
+96. Juicy Luicy - Lantas [https://open.spotify.com/track/6iCGpfjYviybL08jXTPW8D] | Count: 1
+97. Naif - Benci Untuk Mencinta [https://open.spotify.com/track/65PjFLm6X567f52At4CI1N] | Count: 1
+98. Afgan - Wajahmu Mengalihkan Duniaku [https://open.spotify.com/track/4z8CduM0gnyJxgLNrEvxEh] | Count: 1
+99. Afgan - Bunga Terakhir [https://open.spotify.com/track/1VcmrQCHKnosYDHhk5kbU4] | Count: 1
+100. Yovie & Nuno - Tanpa Cinta [https://open.spotify.com/track/2e4xYHvEtqSfl70ntZJMp2] | Count: 1
 
 Contributed Playlists:
-1. 19 Tracks from [https://open.spotify.com/playlist/0vTGVRM8b1083cf8ed91eL] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-2. 19 Tracks from [https://open.spotify.com/playlist/2JHhAd8aslyL1KxBBRamI0] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-3. 19 Tracks from [https://open.spotify.com/playlist/4EM5O3pnUfoAVNvX7gPEdU] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-4. 19 Tracks from [https://open.spotify.com/playlist/5w3IscuH2QjIp3INGfPvLA] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-5. 19 Tracks from [https://open.spotify.com/playlist/1TydGTkMuaRPQn9RNs6IVA] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-6. 19 Tracks from [https://open.spotify.com/playlist/4YlGGxZujEcBAyTY6WYeV1] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-7. 19 Tracks from [https://open.spotify.com/playlist/3s0JFX3cicz1r7rsQ4c0iB] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-8. 19 Tracks from [https://open.spotify.com/playlist/17XS2kSXhpisYEDmwt0WML] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-9. 19 Tracks from [https://open.spotify.com/playlist/6O9m5voOdrVYPL3QsDMa47] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-10. 19 Tracks from [https://open.spotify.com/playlist/6LC8NbHzqpyrDKsAikmd4W] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-11. 19 Tracks from [https://open.spotify.com/playlist/5gLBusZz4cR3EjnbObjfWx] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-12. 19 Tracks from [https://open.spotify.com/playlist/7M1qSPeevIdW0Q6ach3kxu] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-13. 19 Tracks from [https://open.spotify.com/playlist/5FrzB0poTLW1aCvidDd0Lj] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-14. 19 Tracks from [https://open.spotify.com/playlist/3YjTA8heQKAzaeL60rHhOe] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-15. 19 Tracks from [https://open.spotify.com/playlist/55xeBEeAadLtzb1b6HKAJE] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-16. 19 Tracks from [https://open.spotify.com/playlist/64P5qd4cJ9X21kfO48S5ng] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-17. 19 Tracks from [https://open.spotify.com/playlist/1zTDOvCm6KiUbH18kWQnVT] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-18. 19 Tracks from [https://open.spotify.com/playlist/1IxfmxRbncjvlCtGln6691] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-19. 19 Tracks from [https://open.spotify.com/playlist/0pezreVWNnWU4ylFFwDf9I] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-20. 19 Tracks from [https://open.spotify.com/playlist/4yXkfZl716dnCfWCFSzOhd] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-21. 19 Tracks from [https://open.spotify.com/playlist/0mcQcWi6ryzem0Q4tpccUe] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-22. 19 Tracks from [https://open.spotify.com/playlist/1qaufZUO1KlMhWiXjdq7JP] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-23. 19 Tracks from [https://open.spotify.com/playlist/4BH5bEPwnJ2KwYE5OXjJkV] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-24. 19 Tracks from [https://open.spotify.com/playlist/4mntKCXrEU6bGJ7LMNW1gH] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-25. 18 Tracks from [https://open.spotify.com/playlist/2jBcmM5ReZOOAf3twvTKCq] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-26. 18 Tracks from [https://open.spotify.com/playlist/4TQhdXhk15QQsxF89wICne] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-27. 18 Tracks from [https://open.spotify.com/playlist/39Zx2ZbinjG8n0JK7MzXVa] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-28. 18 Tracks from [https://open.spotify.com/playlist/41N6GL6yw9dCIHuyKmyI46] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-29. 18 Tracks from [https://open.spotify.com/playlist/2juqpHxGInJuPQpyVBvoaw] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-30. 18 Tracks from [https://open.spotify.com/playlist/5WBUiVzvyxDMhpjKxCqYbe] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-31. 18 Tracks from [https://open.spotify.com/playlist/42fqe7wL2ueVJV1TH1BdDR] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-32. 17 Tracks from [https://open.spotify.com/playlist/1P0MWE6Kgm54caQHsRNA7I] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-33. 17 Tracks from [https://open.spotify.com/playlist/12dDq3zjVSYOZbXGObJ4Xf] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-34. 17 Tracks from [https://open.spotify.com/playlist/3iP55sBQF5yzopwGbTUirD] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-35. 16 Tracks from [https://open.spotify.com/playlist/2u1yvZQMtqTzNYPSUQOyKR] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-36. 16 Tracks from [https://open.spotify.com/playlist/4E7vix5RgM4Mc3GyGkLCV3] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-37. 15 Tracks from [https://open.spotify.com/playlist/4KS63qO3PAE5soMsdmIPo3] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-38. 15 Tracks from [https://open.spotify.com/playlist/3WslsV5B0uxLO1QuQnRKfR] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-39. 14 Tracks from [https://open.spotify.com/playlist/2XiURL0DfCuG5Z9ToxgSgt] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-40. 13 Tracks from [https://open.spotify.com/playlist/05ZlKBZheplVXI5RzMKaU0] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-41. 13 Tracks from [https://open.spotify.com/playlist/1SaxTCj5SVpaMEeVXW7OIa] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-42. 8 Tracks from [https://open.spotify.com/playlist/7fag1DIWpShufN9n8jbfZO] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-43. 8 Tracks from [https://open.spotify.com/playlist/1JvuXQEL3A8zfccDDOR4Nf] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-44. 7 Tracks from [https://open.spotify.com/playlist/0Lqqj1VLkxA96HrPY0VOJR] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-45. 7 Tracks from [https://open.spotify.com/playlist/69CSXIZDtnFUmjmQWC93dX] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-46. 6 Tracks from [https://open.spotify.com/playlist/5XKlFLwtUcpwP8Lch4pufF] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-47. 6 Tracks from [https://open.spotify.com/playlist/2vGgV6RwxXSmAXRjLPotkZ] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-48. 5 Tracks from [https://open.spotify.com/playlist/7ha9PQclpz0MAMlSFHAgPI] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
-49. 3 Tracks from [https://open.spotify.com/playlist/7wwCZ7EUJhkSuxcKCbu5kf] by [https://open.spotify.com/user/7quc8v24qvzkf14qfxw0jpapb]
+1. 23 Tracks from [https://open.spotify.com/playlist/0kp7wNP78FGiBAz3u2xTM8] by [https://open.spotify.com/user/31w5gibbpyx4h7reoxhmegwpda2q]
+2. 23 Tracks from [https://open.spotify.com/playlist/0l5Zwk5HF2lunvdgY8rSVI] by [https://open.spotify.com/user/31njh6ntuiy77cf2dh7lyitgo534]
+3. 23 Tracks from [https://open.spotify.com/playlist/46FmfNNEVHaFk0z6wJXElH] by [https://open.spotify.com/user/31njh6ntuiy77cf2dh7lyitgo534]
+4. 23 Tracks from [https://open.spotify.com/playlist/2vq6e08zVFer1dCZw2yae7] by [https://open.spotify.com/user/31jcr7plpxv5dsrwjfcl33sapmu4]
+5. 14 Tracks from [https://open.spotify.com/playlist/4IUW4doH5EMB0zMBCOo01Y] by [https://open.spotify.com/user/31rvoblkmg4ywc5vgm5ygpjmxa7q]
+6. 7 Tracks from [https://open.spotify.com/playlist/76V5IiKdSnO2uRIsEP2zu8] by [https://open.spotify.com/user/yye4kc6f4hkd5egc137wr13u4]
+7. 6 Tracks from [https://open.spotify.com/playlist/6FDKV1MblZRJhLmzwWrIS2] by [https://open.spotify.com/user/31urcn63lgmglthj2667sbjeisya]
+8. 1 Tracks from [https://open.spotify.com/playlist/1eawBpE4OqT7IRocvDiaZ6] by [https://open.spotify.com/user/31te56samaiu6senpstsa3lfektu]
 
 Track Relationships:
-1. Melas [https://open.spotify.com/track/26WgejlZUG6TxLo8djVxUp] & Cukup [https://open.spotify.com/track/56tKRucMdMNuslADmaxN9L] have a High relationship
-2. Melas [https://open.spotify.com/track/26WgejlZUG6TxLo8djVxUp] & Centang Biru [https://open.spotify.com/track/5xuL74G1vQhSGn7WC3L3QL] have a High relationship
-3. Melas [https://open.spotify.com/track/26WgejlZUG6TxLo8djVxUp] & Pamit [https://open.spotify.com/track/7bWHFauPVNfMYUVZnAXbo9] have a High relationship
-4. Melas [https://open.spotify.com/track/26WgejlZUG6TxLo8djVxUp] & Jarkoni 2 [https://open.spotify.com/track/2iOgTijjnxjtz7723Xs4sp] have a High relationship
-5. Cukup [https://open.spotify.com/track/56tKRucMdMNuslADmaxN9L] & Centang Biru [https://open.spotify.com/track/5xuL74G1vQhSGn7WC3L3QL] have a High relationship
-6. Cukup [https://open.spotify.com/track/56tKRucMdMNuslADmaxN9L] & Pamit [https://open.spotify.com/track/7bWHFauPVNfMYUVZnAXbo9] have a High relationship
-7. Cukup [https://open.spotify.com/track/56tKRucMdMNuslADmaxN9L] & Jarkoni 2 [https://open.spotify.com/track/2iOgTijjnxjtz7723Xs4sp] have a High relationship
-8. Centang Biru [https://open.spotify.com/track/5xuL74G1vQhSGn7WC3L3QL] & Pamit [https://open.spotify.com/track/7bWHFauPVNfMYUVZnAXbo9] have a High relationship
-9. Centang Biru [https://open.spotify.com/track/5xuL74G1vQhSGn7WC3L3QL] & Jarkoni 2 [https://open.spotify.com/track/2iOgTijjnxjtz7723Xs4sp] have a High relationship
-10. Pamit [https://open.spotify.com/track/7bWHFauPVNfMYUVZnAXbo9] & Jarkoni 2 [https://open.spotify.com/track/2iOgTijjnxjtz7723Xs4sp] have a High relationship
+1. Monokrom [https://open.spotify.com/track/4GfK1qOF3uBWidbPlTCQRL] & THE SHADE [https://open.spotify.com/track/1gH1h30wkQdd9zhY3j7a8T] have a Low relationship
