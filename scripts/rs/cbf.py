@@ -145,6 +145,7 @@ def cbf_result(ids):
 
             # Gather tracks from the top playlists
             track_counts = {}
+            track_sources = {}
             for playlist_id in playlist_ids_shown:
                 cur_playlist.execute(
                     "SELECT playlist_items FROM items WHERE playlist_id = ?", (playlist_id,))
@@ -155,8 +156,10 @@ def cbf_result(ids):
                         track_id = track_id.strip()
                         if track_id in track_counts:
                             track_counts[track_id] += 1
+                            track_sources[track_id].append(playlist_id)
                         else:
                             track_counts[track_id] = 1
+                            track_sources[track_id] = [playlist_id]
 
             # Fetch details for these tracks
             track_details = {}
@@ -175,8 +178,10 @@ def cbf_result(ids):
                 if track_id not in ids:  # Exclude inputted track IDs
                     details = track_details.get(
                         track_id, {'artist_name': 'Unknown Artist', 'track_name': 'Unknown Track'})
+                    sources = ", ".join(str(playlist_ids_shown.index(pid) + 1)
+                                        for pid in track_sources[track_id])
                     file.write(f"{recommendation_count + 1}. {details['artist_name']} - {
-                               details['track_name']} [https://open.spotify.com/track/{track_id}] | Count: {count}\n")
+                               details['track_name']} [https://open.spotify.com/track/{track_id}] | Count: {count} | From: {sources}\n")
                     recommendation_count += 1  # Increment the counter
                     # Stop after 24 recommendations
                     if recommendation_count >= int(config['rs']['n_recommend']):
