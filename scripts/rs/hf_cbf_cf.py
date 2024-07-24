@@ -14,9 +14,9 @@ n_recommend = int(config['rs']['n_recommend'])
 # Penalty weight for repeated artists
 artist_penalty = float(config['rs'].get('artist_penalty', 5.0))
 # Weight for distance in the final score
-distance_weight = float(config['rs'].get('distance_weight', 0.5))
+distance_weight = float(config['rs'].get('distance_weight', 0.55))
 # Weight for interaction in the final score
-interaction_weight = float(config['rs'].get('interaction_weight', 0.5))
+interaction_weight = float(config['rs'].get('interaction_weight', 0.45))
 
 # Connect to the databases
 conn_playlist = sqlite3.connect(db_playlist)
