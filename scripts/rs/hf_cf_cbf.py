@@ -9,6 +9,12 @@ config.read('config.cfg')
 db_playlist = config['db']['playlists_db']
 db_songs = config['db']['songs_db']
 output_path = config['output']['hfcfcbf_output']
+n_recommend = int(config['rs']['n_recommend'])
+
+# Weights for combining parameters
+distance_weight = float(config['rs'].get('distance_weight', 0.5))
+count_weight = float(config['rs'].get('count_weight', 0.25))
+interaction_weight = float(config['rs'].get('interaction_weight', 0.25))
 
 # Connect to the databases
 conn_playlist = sqlite3.connect(db_playlist)
@@ -102,8 +108,22 @@ def fetch_track_features(track_ids):
     return features
 
 
+def fetch_user_interaction_weights():
+    query = "SELECT track_id, weight FROM weights"
+    cur_playlist.execute(query)
+    weights = cur_playlist.fetchall()
+    weight_dict = {track_id: weight for track_id, weight in weights}
+    return weight_dict
+
+
 def euclidean_distance(vec1, vec2):
     return math.sqrt(sum((a - b) ** 2 for a, b in zip(vec1, vec2)))
+
+
+def normalize_values(values):
+    min_val = min(values)
+    max_val = max(values)
+    return [(val - min_val) / (max_val - min_val) for val in values]
 
 
 def hfcfcbf_result(ids):
@@ -121,11 +141,13 @@ def hfcfcbf_result(ids):
     # Fetch details for all tracks
     track_details = fetch_track_details(all_tracks)
     track_features = fetch_track_features(all_tracks)
+    weight_dict = fetch_user_interaction_weights()
 
     # Calculate distances and prepare recommendations
     track_counts = {}
     track_playlists = {}
     track_distances = {}
+    track_weights = {}
 
     for track_id, features in track_features.items():
         if track_id in input_features:
@@ -138,6 +160,7 @@ def hfcfcbf_result(ids):
                 min_distance = distance
 
         track_distances[track_id] = min_distance
+        track_weights[track_id] = weight_dict.get(track_id, 0)
 
     for playlist_id, matched_ids in playlists.items():
         cur_playlist.execute(
@@ -169,29 +192,40 @@ def hfcfcbf_result(ids):
     eliminated_input_details = fetch_inputted_ids_details(eliminated_input_ids)
     used_input_details = fetch_inputted_ids_details(used_input_ids)
 
+    # Normalize distances, counts, and weights
+    distances = list(track_distances.values())
+    counts = list(track_counts.values())
+    weights = list(track_weights.values())
+
+    norm_distances = normalize_values(distances)
+    norm_counts = normalize_values(counts)
+    norm_weights = normalize_values(weights)
+
+    norm_dist_dict = {track_id: norm for track_id,
+                      norm in zip(track_distances.keys(), norm_distances)}
+    norm_count_dict = {track_id: norm for track_id,
+                       norm in zip(track_counts.keys(), norm_counts)}
+    norm_weight_dict = {track_id: norm for track_id,
+                        norm in zip(track_weights.keys(), norm_weights)}
+
     # Prepare the recommendations for sorting
     recommendations = []
     for track_id, count in track_counts.items():
         distance = track_distances.get(track_id, float('inf'))
+        weight = track_weights.get(track_id, 0)
+        norm_distance = norm_dist_dict[track_id]
+        norm_count = norm_count_dict[track_id]
+        norm_weight = norm_weight_dict[track_id]
+        combined_score = (distance_weight * (1 - norm_distance)) + \
+            (count_weight * norm_count) + (interaction_weight * norm_weight)
         playlists_str = ', '.join(
             f"https://open.spotify.com/playlist/{playlist_id}" for playlist_id in track_playlists[track_id])
         track_name, artist_name, artist_genres = track_details[track_id][1:4]
-        recommendations.append(
-            (track_id, track_name, artist_name, count, distance, playlists_str))
+        recommendations.append((track_id, track_name, artist_name,
+                               count, distance, weight, playlists_str, combined_score))
 
-    # Define the sorting key function
-    def sort_key(rec):
-        track_id, track_name, artist_name, count, distance, playlists_str = rec
-        # Smallest distance is the primary sorting criterion
-        primary = distance
-        # Count is the secondary sorting criterion
-        secondary = -count
-        # Playlist count as tertiary sorting criterion if count > 1
-        tertiary = -len(track_playlists[track_id]) if count > 1 else 0
-        return primary, secondary, tertiary, random.random()
-
-    # Sort recommendations with the defined sorting key
-    recommendations.sort(key=sort_key)
+    # Sort recommendations by combined score
+    recommendations.sort(key=lambda x: -x[7])
 
     with open(output_path, 'w', encoding='utf-8') as file:  # Specify UTF-8 encoding
         file.write("Inputted IDs:\n")
@@ -218,9 +252,9 @@ def hfcfcbf_result(ids):
                        playlist_id} [Inputted IDs: {matched_ids_str}]\n")
 
         file.write("\nSongs Recommendation:\n")
-        for idx, (track_id, track_name, artist_name, count, distance, playlists_str) in enumerate(recommendations, 1):
-            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
-                       track_id}] | Count: {count} | Distance: {distance:.2f} - {playlists_str}\n")
+        for idx, (track_id, track_name, artist_name, count, distance, weight, playlists_str, combined_score) in enumerate(recommendations, 1):
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{track_id}] | Count: {
+                       count} | Distance: {distance:.2f} | Weight: {weight:.2f} | Combined Score: {combined_score:.2f} - {playlists_str}\n")
 
     print(f'CF Result written to: {output_path}')
 
