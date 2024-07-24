@@ -1,51 +1,38 @@
 Inputted IDs:
-1. d4vd - Here With Me [https://open.spotify.com/track/78Sw5GDo6AlGwTwanjXbGh] - Genres: bedroom pop,bedroom r&b
-2. Hal - L [https://open.spotify.com/track/5zsVcDTZEKISPTCLYiTdwb] - Genres: indonesian folk
-3. Billie Eilish - i love you [https://open.spotify.com/track/6CcJMwBtXByIz4zQLzFkKc] - Genres: art pop,pop
+1. Mitski - My Love Mine All Mine [https://open.spotify.com/track/3vkCueOmm7xQDoJ17W1Pm3] - Genres: brooklyn indie,pov: indie
+2. NIKI - Lose [https://open.spotify.com/track/5vPO5ouEv8iedKWxzmSv7b] - Genres: indonesian r&b
+3. Djo - End of Beginning [https://open.spotify.com/track/3qhlB30KknSejmIvZZLjOD] - Genres: pov: indie,psychedelic pop
 
 Eliminated Inputs:
+1. NIKI - Lose [https://open.spotify.com/track/5vPO5ouEv8iedKWxzmSv7b] - Genres: indonesian r&b
+
+Used Inputs:
+1. Mitski - My Love Mine All Mine [https://open.spotify.com/track/3vkCueOmm7xQDoJ17W1Pm3] - Genres: brooklyn indie,pov: indie
+2. Djo - End of Beginning [https://open.spotify.com/track/3qhlB30KknSejmIvZZLjOD] - Genres: pov: indie,psychedelic pop
 
 Matched Playlists:
-1. https://open.spotify.com/user/31sg3vkdzkmiyy4sl2cmvg55fmfa - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT [Inputted IDs: 5zsVcDTZEKISPTCLYiTdwb, 6CcJMwBtXByIz4zQLzFkKc, 78Sw5GDo6AlGwTwanjXbGh]
-2. https://open.spotify.com/user/312i3zlkseufc6km74wncjoaynxq - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO [Inputted IDs: 6CcJMwBtXByIz4zQLzFkKc, 78Sw5GDo6AlGwTwanjXbGh]
+1. https://open.spotify.com/user/0yqfh7h7cratdpgw6slohufou - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE [Inputted IDs: 3qhlB30KknSejmIvZZLjOD, 3vkCueOmm7xQDoJ17W1Pm3]
 
 Songs Recommendation:
-1. Taylor Swift - Lover [https://open.spotify.com/track/1dGr1c8CrMLDpV6mPbImSI] | Count: 2 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO, https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-2. Paul Partohap - P.S. I LOVE YOU [https://open.spotify.com/track/1w3azB0VuRFp79AduIwrIy] | Count: 2 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO, https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-3. boy pablo - i <3 u [https://open.spotify.com/track/5EcGSkkNBMAWOePvLgKde1] | Count: 2 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO, https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-4. Andra & The Backbone - Sempurna [https://open.spotify.com/track/2UgCs0i0rNHUH2jKE5NZHE] | Count: 2 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO, https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-5. The 1975 - Mine [https://open.spotify.com/track/0cnVBn7JsFlShF65EJe2Or] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-6. John Lennon - Beautiful Boy (Darling Boy) - 2010 Remastered [https://open.spotify.com/track/5GMQdzgtI7vtpmtps2YiYx] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-7. Tatiana Manaois - I'm Lucky [https://open.spotify.com/track/4vXZyJV8zAyjXrkiYr9cBK] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-8. Afgan - Bawalah Cintaku [https://open.spotify.com/track/3xpMytpniCnjXCgy7TcFDw] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-9. Joji - SLOW DANCING IN THE DARK [https://open.spotify.com/track/0rKtyWc8bvkriBthvHKY8d] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-10. Charlie Burg - I Don't Wanna Be Okay Without You [https://open.spotify.com/track/5HKv1sFHbXgmXBih203HxT] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-11. Ardhito Pramono - I Can't Stop Loving You [https://open.spotify.com/track/1yBa6FlNKmE9tRkeCF50OV] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-12. Diego Gonzalez - You & I [https://open.spotify.com/track/0epYQ0yLA5RUYyrhADkF0j] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-13. Calvin Harris - Feel So Close - Radio Edit [https://open.spotify.com/track/1gihuPhrLraKYrJMAEONyc] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-14. Cavetown - Home [https://open.spotify.com/track/3XRALl9CNCnjjbCZid2L9w] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-15. Yahya - forever. [https://open.spotify.com/track/5Ud0RjU7EKkUM2k54gb9F0] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-16. たかやん - Love you forever [https://open.spotify.com/track/1itIB4uTRcuzgJUzXqlDsf] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-17. The Walters - I Love You So [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-18. seth arlan - with you [https://open.spotify.com/track/776c5iOQohyPNC3nryvYxC] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-19. Stephanie Poetri - I Love You 3000 [https://open.spotify.com/track/3znQ9i61vfe2E7URHlOiyc] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-20. Rex Orange County - Happiness [https://open.spotify.com/track/7aSyG7cskkG3zhfO2JLxq3] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-21. Arctic Monkeys - I Wanna Be Yours [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-22. The Weeknd - Die For You [https://open.spotify.com/track/2LBqCSwhJGcFQeTHMVGwy3] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-23. John Mayer - You're Gonna Live Forever in Me [https://open.spotify.com/track/51lPx6ZCSalL2kvSrDUyJc] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-24. mrld - An Art Gallery Could Never Be As Unique As You [https://open.spotify.com/track/22Nd3GuO7sHopPjdKccRcq] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-25. yuji - Old Love [https://open.spotify.com/track/3W4U7TEgILGpq0EmquurtH] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-26. The 1975 - About You [https://open.spotify.com/track/1fDFHXcykq4iw8Gg7s5hG9] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-27. Hivi! - Pelangi [https://open.spotify.com/track/3ZwqWrRpylU9nfy99qwKdR] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-28. Shania Yan - First Love [https://open.spotify.com/track/3LxVxF3D7PXqshrijo9Z5N] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-29. Conan Gray - Astronomy [https://open.spotify.com/track/2JN3ugW1cEahbYw0I5mw5U] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-30. Arash Buana - if u could see me cryin' in my room [https://open.spotify.com/track/13sOb9V6Y3uCnRxY9HIZqP] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-31. Troye Sivan - Strawberries & Cigarettes [https://open.spotify.com/track/3afkJSKX0EAMsJXTZnDXXJ] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-32. Shiloh Dynasty - I Miss You [https://open.spotify.com/track/3icSLmnxMhqKwjVoHzMHyj] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-33. Ed Sheeran - Perfect [https://open.spotify.com/track/0tgVpDi06FyKpA1z0VMD4v] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-34. Taylor Swift - Enchanted [https://open.spotify.com/track/3sqrvkNC6IPTIXvvbx9Arw] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-35. Dixzie Cruel - 4 U [https://open.spotify.com/track/2Insq2oQMHiSh0RznSVFfH] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-36. Isabel LaRosa - i'm yours [https://open.spotify.com/track/37vVp2sWHuuIBOSl1NswP6] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
-37. Ariana Grande - Daydreamin' [https://open.spotify.com/track/2CcQDI2IDhHbmBIFup58JE] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-38. Stephen Sanchez - Until I Found You (with Em Beihold) - Em Beihold Version [https://open.spotify.com/track/1Y3LN4zO1Edc2EluIoSPJN] | Count: 1 - https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO
-39. Tulus - Tergila-Gila [https://open.spotify.com/track/1OSju3cy37aguxJrpzcX4Z] | Count: 1 - https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT
+1. The Black Skirts - EVERYTHING [https://open.spotify.com/track/4vb7g4GrE9cOrhEzUWadN8] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+2. The 1975 - About You [https://open.spotify.com/track/1fDFHXcykq4iw8Gg7s5hG9] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+3. Novo Amor - Colourway [https://open.spotify.com/track/2oa53bhiNPCz2CGh26AYxi] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+4. July - Fall Rain [https://open.spotify.com/track/5xwsTCfVGSZlMLQCEKDpOc] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+5. wave to earth - love. [https://open.spotify.com/track/5rDXfGMWI6S8wkXR0MHsvv] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+6. Shin Giwon Piano - Beyond My Dreams [https://open.spotify.com/track/4pPBmDpwMxlz4xSi7VMWVD] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+7. Taylor Swift - "Slut!" (Taylor's Version) (From The Vault) [https://open.spotify.com/track/71BqAINEnezjQfxE4VuJfq] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+8. Lana Del Rey - Chemtrails Over The Country Club [https://open.spotify.com/track/7bPWdJgx8vek7S5i5yAtvG] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+9. Ariana Grande - Winter Things [https://open.spotify.com/track/1jhljxXlHw8K9rezXKrnow] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+10. Aldi Haqq - Peak of Love [https://open.spotify.com/track/1c4FsERA2Jp4TfvuCc2csI] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+11. Luke Morris - My Comfort Zone [https://open.spotify.com/track/3jeZHRBSSPAOFDqmAG09hT] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+12. BEN - 180 Degree - Instrumental [https://open.spotify.com/track/4BPE0NG07cXUg2b1I1kRJD] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+13. PRYVT - blue salvia [https://open.spotify.com/track/4ZKUto3pgjYznFxkjSLdlr] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+14. Strawberry Guy - Sun Outside My Window [https://open.spotify.com/track/5fCqHoueAR1Q790mPKj1HR] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+15. MALIQ & D'Essentials - Senja Teduh Pelita [https://open.spotify.com/track/4jlhUj1aT0IxzaodNEV7xs] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+16. Taylor Swift - Fortnight (feat. Post Malone) [https://open.spotify.com/track/2OzhQlSqBEmt7hmkYxfT6m] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+17. elijah woods - 24/7, 365 [https://open.spotify.com/track/05QUYSOApWLr8oBbpONl7p] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+18. Ariana Grande - intro (end of the world) [https://open.spotify.com/track/2o1pb13quMReXZqE7jWsgq] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+19. DANIEL - Lily of The Valley [https://open.spotify.com/track/4gAIUEY7VkeiKQOPwIYaYb] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+20. wave to earth - pink [https://open.spotify.com/track/2KHXLUeYXiXnasuGzA2f8G] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+21. beabadoobee - Glue Song (feat. Clairo) [https://open.spotify.com/track/0tMMPZEt6Gyrl9FI8zSicm] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+22. Novo Amor - State Lines [https://open.spotify.com/track/7CoMBpPTwQi2wPT0U0Nr9b] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE

@@ -103,12 +103,15 @@ def cf_result(ids):
     # Fetch details for recommended tracks
     track_details = fetch_track_details(track_counts.keys())
 
-    # Identify eliminated inputted IDs
+    # Identify eliminated and used inputted IDs
     matched_track_ids = set(
         track_id for playlist_tracks in playlists.values() for track_id in playlist_tracks)
     eliminated_input_ids = [
         track_id for track_id in ids if track_id not in matched_track_ids]
+    used_input_ids = [
+        track_id for track_id in ids if track_id in matched_track_ids]
     eliminated_input_details = fetch_inputted_ids_details(eliminated_input_ids)
+    used_input_details = fetch_inputted_ids_details(used_input_ids)
 
     # Prepare the recommendations for sorting
     recommendations = []
@@ -140,7 +143,12 @@ def cf_result(ids):
         file.write("\nEliminated Inputs:\n")
         for idx, (track_id, track_name, artist_name, artist_genres) in enumerate(eliminated_input_details, 1):
             file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
-                       track_id}] - Genres: {artist_genres} <- because it's not on any matched playlist\n")
+                       track_id}] - Genres: {artist_genres}\n")
+
+        file.write("\nUsed Inputs:\n")
+        for idx, (track_id, track_name, artist_name, artist_genres) in enumerate(used_input_details, 1):
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
+                       track_id}] - Genres: {artist_genres}\n")
 
         file.write("\nMatched Playlists:\n")
         for idx, (playlist_id, matched_ids) in enumerate(playlists.items(), 1):
@@ -160,12 +168,8 @@ def cf_result(ids):
 
 if __name__ == "__main__":
     ids = [
-        '78Sw5GDo6AlGwTwanjXbGh',
-        '5zsVcDTZEKISPTCLYiTdwb',
-        '6CcJMwBtXByIz4zQLzFkKc',
+        '3vkCueOmm7xQDoJ17W1Pm3',
+        '5vPO5ouEv8iedKWxzmSv7b',
+        '3qhlB30KknSejmIvZZLjOD',
     ]
     cf_result(ids)
-
-# Close database connections
-conn_playlist.close()
-conn_songs.close()

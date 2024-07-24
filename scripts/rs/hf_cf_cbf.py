@@ -1,7 +1,7 @@
-import os
 import sqlite3
 import configparser
-from math import sqrt
+import random
+import math
 
 config = configparser.ConfigParser()
 config.read('config.cfg')
@@ -10,219 +10,225 @@ db_playlist = config['db']['playlists_db']
 db_songs = config['db']['songs_db']
 output_path = config['output']['hfcfcbf_output']
 
-# Connect to the playlists database
+# Connect to the databases
 conn_playlist = sqlite3.connect(db_playlist)
 cur_playlist = conn_playlist.cursor()
-
-# Connect to the songs database
 conn_songs = sqlite3.connect(db_songs)
 cur_songs = conn_songs.cursor()
 
 
-def get_track_details(track_id):
+def fetch_inputted_ids_details(ids):
+    details = []
     query = """
-    SELECT track_name, artist_ids, acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence
-    FROM tracks WHERE track_id = ?
+    SELECT t.track_id, t.track_name, a.artist_name, a.artist_genres, t.acousticness, t.danceability, t.energy,
+           t.instrumentalness, t.key, t.liveness, t.loudness, t.mode, t.speechiness, t.tempo, t.time_signature,
+           t.valence
+    FROM tracks t
+    JOIN artists a ON t.artist_ids LIKE '%' || a.artist_id || '%'
+    WHERE t.track_id = ?
     """
-    cur_songs.execute(query, (track_id,))
-    result = cur_songs.fetchone()
-
-    if not result:
-        return {
-            'artist_name': 'Artist Not In Database',
-            'track_name': 'Track Not In Database',
-            'acousticness': 0.0, 'danceability': 0.0, 'energy': 0.0,
-            'instrumentalness': 0.0, 'liveness': 0.0, 'loudness': 0.0,
-            'speechiness': 0.0, 'tempo': 0.0, 'valence': 0.0
-        }
-
-    (track_name, artist_ids, acousticness, danceability, energy,
-     instrumentalness, liveness, loudness, speechiness, tempo, valence) = result
-
-    track_name = track_name if track_name is not None else "Unknown Track"
-    artist_ids = artist_ids if artist_ids is not None else ""
-
-    # Query the artists database to get the artist names and genres
-    artist_names = []
-    artist_genres = set()
-    for artist_id in artist_ids.split(','):
-        artist_query = "SELECT artist_name, artist_genres FROM artists WHERE artist_id = ?"
-        cur_songs.execute(artist_query, (artist_id.strip(),))
-        artist_result = cur_songs.fetchone()
-        if artist_result:
-            artist_name, genres = artist_result
-            artist_names.append(artist_name)
-            if genres:
-                artist_genres.update(genres.split(','))
-        else:
-            artist_names.append('Unknown Artist')
-
-    artist_name = ", ".join(artist_names)
-    genres = ", ".join(artist_genres)
-
-    track_details = {
-        'artist_name': artist_name,
-        'track_name': track_name,
-        'acousticness': acousticness if acousticness is not None else 0.0,
-        'danceability': danceability if danceability is not None else 0.0,
-        'energy': energy if energy is not None else 0.0,
-        'instrumentalness': instrumentalness if instrumentalness is not None else 0.0,
-        'liveness': liveness if liveness is not None else 0.0,
-        'loudness': loudness if loudness is not None else 0.0,
-        'speechiness': speechiness if speechiness is not None else 0.0,
-        'tempo': tempo if tempo is not None else 0.0,
-        'valence': valence if valence is not None else 0.0,
-        'genres': genres
-    }
-
-    return track_details
+    for track_id in ids:
+        cur_songs.execute(query, (track_id,))
+        track = cur_songs.fetchone()
+        if track:
+            details.append(track)
+    return details
 
 
-def calculate_audio_similarity(track1, track2):
-    features1 = [track1.get('acousticness', 0.0), track1.get('danceability', 0.0), track1.get('energy', 0.0), track1.get('instrumentalness', 0.0),
-                 track1.get('liveness', 0.0), track1.get('loudness', 0.0), track1.get('speechiness', 0.0), track1.get('tempo', 0.0), track1.get('valence', 0.0)]
-    features2 = [track2.get('acousticness', 0.0), track2.get('danceability', 0.0), track2.get('energy', 0.0), track2.get('instrumentalness', 0.0),
-                 track2.get('liveness', 0.0), track2.get('loudness', 0.0), track2.get('speechiness', 0.0), track2.get('tempo', 0.0), track2.get('valence', 0.0)]
+def fetch_playlists_with_tracks(ids):
+    playlists = {}
+    query = """
+    SELECT i.playlist_id, i.playlist_items
+    FROM items i
+    WHERE i.playlist_items LIKE ? OR i.playlist_items LIKE ? OR i.playlist_items LIKE ?
+    """
+    like_patterns = [f"%{track_id}%" for track_id in ids]
 
-    distance = sqrt(sum((f1 - f2) ** 2 for f1,
-                    f2 in zip(features1, features2)))
+    for pattern in like_patterns:
+        cur_playlist.execute(query, (pattern, pattern, pattern))
+        rows = cur_playlist.fetchall()
+        for row in rows:
+            playlist_id, items = row
+            track_ids = set(item.strip() for item in items.split(','))
+            matched_ids = track_ids.intersection(ids)
+            if len(matched_ids) >= 2:
+                if playlist_id not in playlists:
+                    playlists[playlist_id] = set()
+                playlists[playlist_id].update(matched_ids)
 
-    return distance
+    return playlists
 
 
-def calculate_relationship(ids, playlist_tracks):
-    relationships = {}
-    for i in range(len(ids)):
-        for j in range(i + 1, len(ids)):
-            id1, id2 = ids[i], ids[j]
-            common_playlists = 0
-            for tracks in playlist_tracks:
-                if id1 in tracks and id2 in tracks:
-                    common_playlists += 1
-            if common_playlists >= 2:
-                relationship = 'High'
-            elif common_playlists == 1:
-                relationship = 'Medium'
-            else:
-                relationship = 'Low'
-            relationships[(id1, id2)] = relationship
-    return relationships
+def fetch_all_tracks_in_playlists(playlists):
+    all_tracks = set()
+    for playlist_id in playlists.keys():
+        cur_playlist.execute(
+            "SELECT playlist_items FROM items WHERE playlist_id = ?", (playlist_id,))
+        items = cur_playlist.fetchone()[0]
+        track_ids = set(item.strip() for item in items.split(','))
+        all_tracks.update(track_ids)
+    return all_tracks
+
+
+def fetch_track_details(track_ids):
+    details = {}
+    query = """
+    SELECT t.track_id, t.track_name, a.artist_name, a.artist_genres
+    FROM tracks t
+    JOIN artists a ON t.artist_ids LIKE '%' || a.artist_id || '%'
+    WHERE t.track_id = ?
+    """
+    for track_id in track_ids:
+        cur_songs.execute(query, (track_id,))
+        track = cur_songs.fetchone()
+        if track:
+            details[track_id] = track
+    return details
+
+
+def fetch_track_features(track_ids):
+    features = {}
+    query = """
+    SELECT t.track_id, t.acousticness, t.danceability, t.energy, t.instrumentalness, t.key, t.liveness,
+           t.loudness, t.mode, t.speechiness, t.tempo, t.time_signature, t.valence
+    FROM tracks t
+    WHERE t.track_id = ?
+    """
+    for track_id in track_ids:
+        cur_songs.execute(query, (track_id,))
+        feature = cur_songs.fetchone()
+        if feature:
+            features[track_id] = feature[1:]
+    return features
+
+
+def euclidean_distance(vec1, vec2):
+    return math.sqrt(sum((a - b) ** 2 for a, b in zip(vec1, vec2)))
 
 
 def hfcfcbf_result(ids):
-    join_playlist_query = """
-        SELECT p.playlist_id, p.creator_id, p.original_track_count,
-            i.playlist_items
-        FROM playlists p
-        JOIN items i ON p.playlist_id = i.playlist_id
-        WHERE """
+    # Get details for inputted IDs
+    input_details = fetch_inputted_ids_details(ids)
+    input_features = {detail[0]: detail[4:] for detail in input_details}
 
-    join_playlist_query += " OR ".join(["i.playlist_items LIKE ?"] * len(ids))
-    cur_playlist.execute(join_playlist_query, ['%' + id + '%' for id in ids])
+    # Get matched playlists
+    playlists = fetch_playlists_with_tracks(ids)
 
-    rows_playlist = cur_playlist.fetchall()
+    # Collect all tracks from matched playlists, excluding inputted IDs
+    all_tracks = fetch_all_tracks_in_playlists(playlists)
+    all_tracks.discard(None)  # Remove None values if any
 
-    # Extract track_ids from ids list for comparison
-    track_ids = set(ids)
+    # Fetch details for all tracks
+    track_details = fetch_track_details(all_tracks)
+    track_features = fetch_track_features(all_tracks)
 
-    # Store track details in a dictionary for easy access
-    track_details = {}
-    track_count = {}
-    playlist_tracks = []
+    # Calculate distances and prepare recommendations
+    track_counts = {}
+    track_playlists = {}
+    track_distances = {}
 
-    input_track_details = [get_track_details(track_id) for track_id in ids]
+    for track_id, features in track_features.items():
+        if track_id in input_features:
+            continue
 
-    with open(output_path, 'w', encoding='utf-8') as file:
+        min_distance = float('inf')
+        for input_track_id, input_features_values in input_features.items():
+            distance = euclidean_distance(features, input_features_values)
+            if distance < min_distance:
+                min_distance = distance
+
+        track_distances[track_id] = min_distance
+
+    for playlist_id, matched_ids in playlists.items():
+        cur_playlist.execute(
+            "SELECT playlist_items FROM items WHERE playlist_id = ?", (playlist_id,))
+        items = cur_playlist.fetchone()[0]
+        track_ids = set(item.strip() for item in items.split(','))
+
+        for track_id in track_ids - set(ids):
+            if track_id in track_counts:
+                track_counts[track_id] += 1
+            else:
+                track_counts[track_id] = 1
+
+            if track_id in track_playlists:
+                track_playlists[track_id].add(playlist_id)
+            else:
+                track_playlists[track_id] = {playlist_id}
+
+    # Fetch details for recommended tracks
+    track_details = fetch_track_details(track_counts.keys())
+
+    # Identify eliminated and used inputted IDs
+    matched_track_ids = set(
+        track_id for playlist_tracks in playlists.values() for track_id in playlist_tracks)
+    eliminated_input_ids = [
+        track_id for track_id in ids if track_id not in matched_track_ids]
+    used_input_ids = [
+        track_id for track_id in ids if track_id in matched_track_ids]
+    eliminated_input_details = fetch_inputted_ids_details(eliminated_input_ids)
+    used_input_details = fetch_inputted_ids_details(used_input_ids)
+
+    # Prepare the recommendations for sorting
+    recommendations = []
+    for track_id, count in track_counts.items():
+        distance = track_distances.get(track_id, float('inf'))
+        playlists_str = ', '.join(
+            f"https://open.spotify.com/playlist/{playlist_id}" for playlist_id in track_playlists[track_id])
+        track_name, artist_name, artist_genres = track_details[track_id][1:4]
+        recommendations.append(
+            (track_id, track_name, artist_name, count, distance, playlists_str))
+
+    # Define the sorting key function
+    def sort_key(rec):
+        track_id, track_name, artist_name, count, distance, playlists_str = rec
+        # Smallest distance is the primary sorting criterion
+        primary = distance
+        # Count is the secondary sorting criterion
+        secondary = -count
+        # Playlist count as tertiary sorting criterion if count > 1
+        tertiary = -len(track_playlists[track_id]) if count > 1 else 0
+        return primary, secondary, tertiary, random.random()
+
+    # Sort recommendations with the defined sorting key
+    recommendations.sort(key=sort_key)
+
+    with open(output_path, 'w', encoding='utf-8') as file:  # Specify UTF-8 encoding
         file.write("Inputted IDs:\n")
-        for idx, track_id in enumerate(ids, start=1):
-            details = get_track_details(track_id)
-            file.write(f"{idx}. {details['artist_name']} - {
-                       details['track_name']} [https://open.spotify.com/track/{track_id}]\n")
+        for idx, (track_id, track_name, artist_name, artist_genres, *_) in enumerate(input_details, 1):
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
+                       track_id}] - Genres: {artist_genres}\n")
 
-        file.write("\nRecommendation Result:\n")
-        playlist_contributions = {}
-        for row in rows_playlist:
-            playlist_id = row[0]
-            creator_id = row[1]
-            playlist_items = row[-1].split(',')
+        file.write("\nEliminated Inputs:\n")
+        for idx, (track_id, track_name, artist_name, artist_genres, *_) in enumerate(eliminated_input_details, 1):
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
+                       track_id}] - Genres: {artist_genres}\n")
 
-            playlist_tracks.append(set(item.strip()
-                                   for item in playlist_items))
-            for item in playlist_items:
-                item = item.strip()
-                if item not in track_ids:
-                    if item not in track_details:
-                        track_details[item] = get_track_details(item)
-                    if item not in track_count:
-                        track_count[item] = {'count': 0, 'playlists': []}
-                    track_count[item]['count'] += 1
-                    track_count[item]['playlists'].append(playlist_id)
+        file.write("\nUsed Inputs:\n")
+        for idx, (track_id, track_name, artist_name, artist_genres, *_) in enumerate(used_input_details, 1):
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
+                       track_id}] - Genres: {artist_genres}\n")
 
-        # Calculate similarity and store it with count
-        track_similarity = {}
-        for item, data in track_count.items():
-            count = data['count']
-            playlists = data['playlists']
-            details = track_details[item]
-            similarities = [
-                calculate_audio_similarity(details, input_detail)
-                for input_detail in input_track_details
-            ]
-            average_similarity = sum(similarities) / len(similarities)
-            track_similarity[item] = (count, average_similarity, playlists)
+        file.write("\nMatched Playlists:\n")
+        for idx, (playlist_id, matched_ids) in enumerate(playlists.items(), 1):
+            creator_id = cur_playlist.execute(
+                "SELECT creator_id FROM playlists WHERE playlist_id = ?", (playlist_id,)).fetchone()[0]
+            matched_ids_str = ", ".join(matched_ids)
+            file.write(f"{idx}. https://open.spotify.com/user/{creator_id} - https://open.spotify.com/playlist/{
+                       playlist_id} [Inputted IDs: {matched_ids_str}]\n")
 
-        # Sort tracks by similarity and count
-        sorted_tracks = sorted(track_similarity.items(),
-                               key=lambda x: (x[1][1], x[1][0]), reverse=False)
+        file.write("\nSongs Recommendation:\n")
+        for idx, (track_id, track_name, artist_name, count, distance, playlists_str) in enumerate(recommendations, 1):
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
+                       track_id}] | Count: {count} | Distance: {distance:.2f} - {playlists_str}\n")
 
-        # Limit the recommendations to 100
-        limited_tracks = sorted_tracks[:int(config['rs']['n_recommend'])]
-
-        for idx, (item, (count, similarity, playlists)) in enumerate(limited_tracks, start=1):
-            details = track_details[item]
-            file.write(f"{idx}. {details['artist_name']} - {details['track_name']} [https://open.spotify.com/track/{
-                       item}] | Count: {count} | Similarity: {similarity:.2f} | From: {', '.join(playlists)}\n")
-
-        limited_track_ids = {item for item,
-                             (count, similarity, playlists) in limited_tracks}
-
-        file.write("\nContributed Playlists:\n")
-        for row in rows_playlist:
-            playlist_id = row[0]
-            creator_id = row[1]
-            playlist_items = row[-1].split(',')
-
-            contribution_count = sum(
-                1 for item in playlist_items if item.strip() in limited_track_ids)
-
-            if contribution_count > 0:
-                playlist_key = (playlist_id, creator_id)
-                if playlist_key not in playlist_contributions:
-                    playlist_contributions[playlist_key] = contribution_count
-                else:
-                    playlist_contributions[playlist_key] += contribution_count
-
-        sorted_contributions = sorted(
-            playlist_contributions.items(), key=lambda x: x[1], reverse=True)
-
-        for idx, ((playlist_id, creator_id), count) in enumerate(sorted_contributions, start=1):
-            file.write(f"{idx}. {count} Tracks from [https://open.spotify.com/playlist/{
-                       playlist_id}] by [https://open.spotify.com/user/{creator_id}]\n")
-
-        relationships = calculate_relationship(ids, playlist_tracks)
-        file.write("\nTrack Relationships:\n")
-        for idx, ((id1, id2), relationship) in enumerate(relationships.items(), start=1):
-            details1 = get_track_details(id1)
-            details2 = get_track_details(id2)
-            file.write(f"{idx}. {details1['track_name']} [https://open.spotify.com/track/{id1}] & {
-                       details2['track_name']} [https://open.spotify.com/track/{id2}] have a {relationship} relationship\n")
-
-    print(f'HFCFCBF Result written to: {output_path}')
+    print(f'CF Result written to: {output_path}')
 
 
 if __name__ == "__main__":
     ids = [
-        '4GfK1qOF3uBWidbPlTCQRL',
-        '1gH1h30wkQdd9zhY3j7a8T',
+        '3vkCueOmm7xQDoJ17W1Pm3',
+        '5vPO5ouEv8iedKWxzmSv7b',
+        '3qhlB30KknSejmIvZZLjOD',
     ]
     hfcfcbf_result(ids)
