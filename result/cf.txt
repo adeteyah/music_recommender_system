@@ -1,21 +1,178 @@
 Inputted IDs:
-1. Justine Skye, Tyga - Collide (Sped Up Remix) [https://open.spotify.com/track/1r6qzxz77Tvbrvqd1Q1MIN]
+1. Arctic Monkeys - I Wanna Be Yours [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n]
+2. The 1975 - About You [https://open.spotify.com/track/1fDFHXcykq4iw8Gg7s5hG9]
+3. Cigarettes After Sex - Sweet [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng]
+4. The Weeknd - Die For You [https://open.spotify.com/track/2LBqCSwhJGcFQeTHMVGwy3]
 
 Recommendation Result:
-1. jaddie$death - C0Ps! [https://open.spotify.com/track/32GlzGcVmgk66m42MVsiLU] | Count: 1
-2. Yeck - Reduce Your Expectations to 0 [https://open.spotify.com/track/4iOmkCzLcE5X5dAqeWjXkR] | Count: 1
-3. Sqmbo, dkj - Houston Texas bitch [https://open.spotify.com/track/5yVXFRKouVuGDzWi4eHRGb] | Count: 1
-4. Cash!* - 1mmortal (Slowed + Reverb) [https://open.spotify.com/track/08Ngx5ytbb9jLGdR5nbvwI] | Count: 1
-5. ViralityX, Bloomy. - Wine Pon You (Sped Up + Reverb) - Remix [https://open.spotify.com/track/4T3uC3g5TRRVMLVAqlatGF] | Count: 1
-6. Loosevinci, Ramzoid - 435am [https://open.spotify.com/track/5OtoaDlWIdhTjetFbgEydt] | Count: 1
-7. Atiø - hesa [https://open.spotify.com/track/6AyXQ8szpf2jrYygQitwST] | Count: 1
-8. NASAYA, MARO - MIDNIGHT PURPLE [https://open.spotify.com/track/1uFKaOBb1RWOX9TX4nT6Bg] | Count: 1
-9. Muppet DJ, SECA Records - obsessed (speed up) - Remix [https://open.spotify.com/track/1onQUQZMGAO3hWT9qv24cP] | Count: 1
-10. Scammacist - Reflections - Sped Up [https://open.spotify.com/track/3Pt8yidavDcsoxdONqwMvw] | Count: 1
-11. C3N6 - Genexix - Speed Up [https://open.spotify.com/track/20mE2aBPBg33RI5egPt6sK] | Count: 1
-12. C3N6 - Glorious Time [https://open.spotify.com/track/4KfMxRWjJEt0VlIF1PqmdP] | Count: 1
+1. Cigarettes After Sex - Apocalypse [https://open.spotify.com/track/0yc6Gst2xkRu0eMLeRMGCX] | Count: 13 | From: 2CkSMjNxO8SNqCiHDPuwv3, From: 0WduAVIsmHMqnKLDkEWKAf, From: 23kcdUqZIm96gsER1VW51y, From: 4VKLpxKcr4ksigt1AViGqJ, From: 0vXIZugBc9EXKcS4L6Me8o, From: 7qc2zP32GijsjXealj4g7c, From: 54s3dveKsXlWvOIviAa0Wu, From: 4FooxSMDueOnqy8HSnP9ST, From: 1bo2WX8JTS88efsMPUhUpc, From: 6S6dSfAFPI521Us2Cvx8BS, From: 1ktKGMImLt1ojqjVoPulpz, From: 6cApxEzSNRfRATOPe0Wklm, From: 7uQ2CQJIIvlPQFmx4Phf8C
+2. Cigarettes After Sex - K. [https://open.spotify.com/track/1FWsomP9StpCcXNWmJk8Cl] | Count: 13 | From: 2CkSMjNxO8SNqCiHDPuwv3, From: 0WduAVIsmHMqnKLDkEWKAf, From: 23kcdUqZIm96gsER1VW51y, From: 4VKLpxKcr4ksigt1AViGqJ, From: 62jZ9nDN8Qaq8bNL2Uvq7M, From: 7qc2zP32GijsjXealj4g7c, From: 54s3dveKsXlWvOIviAa0Wu, From: 2iGVrAYVZWC2dZjrjUuyW4, From: 6S6dSfAFPI521Us2Cvx8BS, From: 1ktKGMImLt1ojqjVoPulpz, From: 5VxMLcm5MRHOLSFCIaFONf, From: 6cApxEzSNRfRATOPe0Wklm, From: 0ECyY8stX88Bzh1HtKOjQL
+3. Troye Sivan - Strawberries & Cigarettes [https://open.spotify.com/track/3afkJSKX0EAMsJXTZnDXXJ] | Count: 12 | From: 41pkFFia0LgFKLAvSTwCVn, From: 3QQf5t3d5Y9UKNHDdVadzO, From: 29JMJTERlkuO0uPb0Lsye2, From: 1lml4Jsc1Z1EvuolBxYBIr, From: 5bYhskcchUxCl4W6aAS54H, From: 4bnCrHZZ5naaOgUeuZZNWW, From: 70yjTTNWUZaB19cOWn1Hul, From: 7sbZ5NcYl4GPeBfO08PQse, From: 5VxMLcm5MRHOLSFCIaFONf, From: 5dK0gCIdp99sfl6s74ID2n, From: 1ozIhnWafY2fIRH2iGjmqk, From: 7uQ2CQJIIvlPQFmx4Phf8C
+4. Cigarettes After Sex - Sunsetz [https://open.spotify.com/track/0SpkyS1Q4MD8GaVcP5YjT4] | Count: 10 | From: 0WduAVIsmHMqnKLDkEWKAf, From: 23kcdUqZIm96gsER1VW51y, From: 26EIDDmCavPpT6893BecNq, From: 0vXIZugBc9EXKcS4L6Me8o, From: 7IDQNfwXdwRcFsm2ApJ1aW, From: 7qc2zP32GijsjXealj4g7c, From: 54s3dveKsXlWvOIviAa0Wu, From: 2iGVrAYVZWC2dZjrjUuyW4, From: 1ktKGMImLt1ojqjVoPulpz, From: 5dK0gCIdp99sfl6s74ID2n
+5. Andra & The Backbone - Sempurna [https://open.spotify.com/track/2UgCs0i0rNHUH2jKE5NZHE] | Count: 10 | From: 43sQxYGFulhaeLjMFB2whT, From: 3L3ImuRHxl7yGuF8V21nAQ, From: 3QQf5t3d5Y9UKNHDdVadzO, From: 3zYmZCdNUyyumr3pyKEWl9, From: 0Od63n02AE7VkLvi7YzVqa, From: 1EmGPezRHX4MOopyrGuqMQ, From: 70yjTTNWUZaB19cOWn1Hul, From: 5dK0gCIdp99sfl6s74ID2n, From: 03YoCPR1hrtwFgI5VmSf31, From: 2po2BmTHMwDKuZfJ94cq3q
+6. Arctic Monkeys - 505 [https://open.spotify.com/track/0BxE4FqsDD1Ot4YuBXwAPp] | Count: 10 | From: 23kcdUqZIm96gsER1VW51y, From: 2X22t7uvABUf8MjP5P6FFe, From: 3zYmZCdNUyyumr3pyKEWl9, From: 1q3ziv3ytNIKmC7pJUqR1g, From: 79Y2t0FQF2QJSWnNVfpFxo, From: 7IDQNfwXdwRcFsm2ApJ1aW, From: 7qc2zP32GijsjXealj4g7c, From: 6S6dSfAFPI521Us2Cvx8BS, From: 1ozIhnWafY2fIRH2iGjmqk, From: 2Pt21p8VFINvVP2tTcOWEx
+7. The Weeknd, Daft Punk - Starboy [https://open.spotify.com/track/7MXVkk9YMctZqd1Srtv4MB] | Count: 9 | From: 5lNo26brznDInzyItdD0Qc, From: 4aiqfZYKfDmv6l0QOPmjR2, From: 2F6JOcr7H9wDIkyYVVz67y, From: 7od8uvzmAPmW0s17zh1Cnn, From: 6IZkttQ4fHpJRsZmvdUikC, From: 2iGVrAYVZWC2dZjrjUuyW4, From: 7FYSyGTKZCMZxGUnj4dmWi, From: 0wWZ6FvukLIxWJIBJfTJ25, From: 2Pt21p8VFINvVP2tTcOWEx
+8. The Weeknd - Reminder [https://open.spotify.com/track/37F0uwRSrdzkBiuj0D5UHI] | Count: 9 | From: 5lNo26brznDInzyItdD0Qc, From: 26EIDDmCavPpT6893BecNq, From: 2X22t7uvABUf8MjP5P6FFe, From: 4aiqfZYKfDmv6l0QOPmjR2, From: 2F6JOcr7H9wDIkyYVVz67y, From: 238YKxvdkC4QFl3nMnAu8H, From: 7od8uvzmAPmW0s17zh1Cnn, From: 1bo2WX8JTS88efsMPUhUpc, From: 6IZkttQ4fHpJRsZmvdUikC
+9. boy pablo - i <3 u [https://open.spotify.com/track/5EcGSkkNBMAWOePvLgKde1] | Count: 9 | From: 43sQxYGFulhaeLjMFB2whT, From: 3QQf5t3d5Y9UKNHDdVadzO, From: 29JMJTERlkuO0uPb0Lsye2, From: 3zYmZCdNUyyumr3pyKEWl9, From: 0Od63n02AE7VkLvi7YzVqa, From: 5bYhskcchUxCl4W6aAS54H, From: 4bnCrHZZ5naaOgUeuZZNWW, From: 4FooxSMDueOnqy8HSnP9ST, From: 2axBRUNjIYIxa4FhCLq2he
+10. The Weeknd - Is There Someone Else? [https://open.spotify.com/track/0mL82sxCRjrs3br407IdJh] | Count: 9 | From: 2X22t7uvABUf8MjP5P6FFe, From: 238YKxvdkC4QFl3nMnAu8H, From: 79Y2t0FQF2QJSWnNVfpFxo, From: 62jZ9nDN8Qaq8bNL2Uvq7M, From: 7od8uvzmAPmW0s17zh1Cnn, From: 1bo2WX8JTS88efsMPUhUpc, From: 6IZkttQ4fHpJRsZmvdUikC, From: 0wWZ6FvukLIxWJIBJfTJ25, From: 2Pt21p8VFINvVP2tTcOWEx
+11. Chase Atlantic - Swim [https://open.spotify.com/track/3M0lSi5WW79CXQamgSBIjx] | Count: 9 | From: 2X22t7uvABUf8MjP5P6FFe, From: 2F6JOcr7H9wDIkyYVVz67y, From: 79Y2t0FQF2QJSWnNVfpFxo, From: 62jZ9nDN8Qaq8bNL2Uvq7M, From: 7od8uvzmAPmW0s17zh1Cnn, From: 1bo2WX8JTS88efsMPUhUpc, From: 6S6dSfAFPI521Us2Cvx8BS, From: 0wWZ6FvukLIxWJIBJfTJ25, From: 0ECyY8stX88Bzh1HtKOjQL
+12. The 1975 - Robbers [https://open.spotify.com/track/73jVPicY2G9YHmzgjk69ae] | Count: 8 | From: 14Gojsh9YNA7ijriLGqZtF, From: 23kcdUqZIm96gsER1VW51y, From: 41pkFFia0LgFKLAvSTwCVn, From: 2X22t7uvABUf8MjP5P6FFe, From: 4VKLpxKcr4ksigt1AViGqJ, From: 62jZ9nDN8Qaq8bNL2Uvq7M, From: 6IZkttQ4fHpJRsZmvdUikC, From: 7uQ2CQJIIvlPQFmx4Phf8C
+13. Paul Partohap - P.S. I LOVE YOU [https://open.spotify.com/track/1w3azB0VuRFp79AduIwrIy] | Count: 8 | From: 43sQxYGFulhaeLjMFB2whT, From: 3QQf5t3d5Y9UKNHDdVadzO, From: 3zYmZCdNUyyumr3pyKEWl9, From: 0Od63n02AE7VkLvi7YzVqa, From: 1rkw0zzI9PcD9Uq841V4eD, From: 4FooxSMDueOnqy8HSnP9ST, From: 70yjTTNWUZaB19cOWn1Hul, From: 5VxMLcm5MRHOLSFCIaFONf
+14. yuji, putri dahlia - Old Love [https://open.spotify.com/track/3W4U7TEgILGpq0EmquurtH] | Count: 8 | From: 43sQxYGFulhaeLjMFB2whT, From: 6d13yylW6XB5oOGHz8gSNT, From: 0Od63n02AE7VkLvi7YzVqa, From: 5bYhskcchUxCl4W6aAS54H, From: 1EmGPezRHX4MOopyrGuqMQ, From: 70yjTTNWUZaB19cOWn1Hul, From: 7FYSyGTKZCMZxGUnj4dmWi, From: 2po2BmTHMwDKuZfJ94cq3q
+15. Taylor Swift - Lover [https://open.spotify.com/track/1dGr1c8CrMLDpV6mPbImSI] | Count: 8 | From: 43sQxYGFulhaeLjMFB2whT, From: 3QQf5t3d5Y9UKNHDdVadzO, From: 3zYmZCdNUyyumr3pyKEWl9, From: 1lml4Jsc1Z1EvuolBxYBIr, From: 1rkw0zzI9PcD9Uq841V4eD, From: 4FooxSMDueOnqy8HSnP9ST, From: 7sbZ5NcYl4GPeBfO08PQse, From: 2po2BmTHMwDKuZfJ94cq3q
+16. Arctic Monkeys - Do I Wanna Know? [https://open.spotify.com/track/5FVd6KXrgO9B3JPmC8OPst] | Count: 8 | From: 23kcdUqZIm96gsER1VW51y, From: 41pkFFia0LgFKLAvSTwCVn, From: 2X22t7uvABUf8MjP5P6FFe, From: 1q3ziv3ytNIKmC7pJUqR1g, From: 62jZ9nDN8Qaq8bNL2Uvq7M, From: 7qc2zP32GijsjXealj4g7c, From: 6S6dSfAFPI521Us2Cvx8BS, From: 2Pt21p8VFINvVP2tTcOWEx
+17. d4vd - Here With Me [https://open.spotify.com/track/78Sw5GDo6AlGwTwanjXbGh] | Count: 7 | From: 43sQxYGFulhaeLjMFB2whT, From: 0HRIB8p1n6VcjmHmvDEQjg, From: 3QQf5t3d5Y9UKNHDdVadzO, From: 6d13yylW6XB5oOGHz8gSNT, From: 0Od63n02AE7VkLvi7YzVqa, From: 1rkw0zzI9PcD9Uq841V4eD, From: 7FYSyGTKZCMZxGUnj4dmWi
+18. Arctic Monkeys - Why'd You Only Call Me When You're High? [https://open.spotify.com/track/086myS9r57YsLbJpU0TgK9] | Count: 7 | From: 23kcdUqZIm96gsER1VW51y, From: 2X22t7uvABUf8MjP5P6FFe, From: 1q3ziv3ytNIKmC7pJUqR1g, From: 7qc2zP32GijsjXealj4g7c, From: 7od8uvzmAPmW0s17zh1Cnn, From: 6S6dSfAFPI521Us2Cvx8BS, From: 0ECyY8stX88Bzh1HtKOjQL
+19. The Neighbourhood - Sweater Weather [https://open.spotify.com/track/2QjOHCTQ1Jl3zawyYOpxh6] | Count: 7 | From: 23kcdUqZIm96gsER1VW51y, From: 2X22t7uvABUf8MjP5P6FFe, From: 62jZ9nDN8Qaq8bNL2Uvq7M, From: 7IDQNfwXdwRcFsm2ApJ1aW, From: 7od8uvzmAPmW0s17zh1Cnn, From: 6S6dSfAFPI521Us2Cvx8BS, From: 0ECyY8stX88Bzh1HtKOjQL
+20. keshi - like i need u [https://open.spotify.com/track/7ivYWXqrPLs66YwakDuSim] | Count: 7 | From: 4VKLpxKcr4ksigt1AViGqJ, From: 29JMJTERlkuO0uPb0Lsye2, From: 5bYhskcchUxCl4W6aAS54H, From: 7sbZ5NcYl4GPeBfO08PQse, From: 2iGVrAYVZWC2dZjrjUuyW4, From: 6S6dSfAFPI521Us2Cvx8BS, From: 6cApxEzSNRfRATOPe0Wklm
+21. mrld - An Art Gallery Could Never Be As Unique As You [https://open.spotify.com/track/22Nd3GuO7sHopPjdKccRcq] | Count: 7 | From: 3QQf5t3d5Y9UKNHDdVadzO, From: 3zYmZCdNUyyumr3pyKEWl9, From: 4FooxSMDueOnqy8HSnP9ST, From: 1EmGPezRHX4MOopyrGuqMQ, From: 2po2BmTHMwDKuZfJ94cq3q, From: 7uQ2CQJIIvlPQFmx4Phf8C
+22. The 1975 - It's Not Living (If It's Not With You) [https://open.spotify.com/track/3TgMcrV32NUKjEG2ujn9eh] | Count: 6 | From: 23kcdUqZIm96gsER1VW51y, From: 41pkFFia0LgFKLAvSTwCVn, From: 29JMJTERlkuO0uPb0Lsye2, From: 1SysxLxc2Oj9KUBEyQUSMy, From: 6IZkttQ4fHpJRsZmvdUikC, From: 7uQ2CQJIIvlPQFmx4Phf8C
+23. Arctic Monkeys - R U Mine? [https://open.spotify.com/track/2AT8iROs4FQueDv2c8q2KE] | Count: 6 | From: 23kcdUqZIm96gsER1VW51y, From: 2X22t7uvABUf8MjP5P6FFe, From: 1q3ziv3ytNIKmC7pJUqR1g, From: 62jZ9nDN8Qaq8bNL2Uvq7M, From: 7qc2zP32GijsjXealj4g7c, From: 0wWZ6FvukLIxWJIBJfTJ25
+24. Stephen Sanchez, Em Beihold - Until I Found You (with Em Beihold) - Em Beihold Version [https://open.spotify.com/track/1Y3LN4zO1Edc2EluIoSPJN] | Count: 6 | From: 3QQf5t3d5Y9UKNHDdVadzO, From: 6d13yylW6XB5oOGHz8gSNT, From: 1rkw0zzI9PcD9Uq841V4eD, From: 70yjTTNWUZaB19cOWn1Hul, From: 7FYSyGTKZCMZxGUnj4dmWi, From: 2po2BmTHMwDKuZfJ94cq3q
+25. The 1975 - I Couldn't Be More In Love [https://open.spotify.com/track/2HwwGKPcI0rqnsFCqATXuj] | Count: 5 | From: 0gfsrk6zHmnf9r32uzaw0Q, From: 23kcdUqZIm96gsER1VW51y, From: 29JMJTERlkuO0uPb0Lsye2, From: 0Od63n02AE7VkLvi7YzVqa, From: 6cApxEzSNRfRATOPe0Wklm
+26. Cigarettes After Sex - Falling In Love [https://open.spotify.com/track/0O0bttAxJKKWqAqY2Nq4mC] | Count: 5 | From: 0WduAVIsmHMqnKLDkEWKAf, From: 1rkw0zzI9PcD9Uq841V4eD, From: 70yjTTNWUZaB19cOWn1Hul, From: 5VxMLcm5MRHOLSFCIaFONf, From: 6cApxEzSNRfRATOPe0Wklm
+27. wave to earth - bad [https://open.spotify.com/track/5TZKpQFKCbIlWGD8DzHbC6] | Count: 5 | From: 0WduAVIsmHMqnKLDkEWKAf, From: 3L3ImuRHxl7yGuF8V21nAQ, From: 26EIDDmCavPpT6893BecNq, From: 1EmGPezRHX4MOopyrGuqMQ, From: 5VxMLcm5MRHOLSFCIaFONf
+28. Green Day - Last Night on Earth [https://open.spotify.com/track/5TpPSTItCwtZ8Sltr3vdzm] | Count: 5 | From: 14Gojsh9YNA7ijriLGqZtF, From: 41pkFFia0LgFKLAvSTwCVn, From: 0Od63n02AE7VkLvi7YzVqa, From: 54s3dveKsXlWvOIviAa0Wu, From: 5VxMLcm5MRHOLSFCIaFONf
+29. The Walters - I Love You So [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] | Count: 5 | From: 43sQxYGFulhaeLjMFB2whT, From: 5bYhskcchUxCl4W6aAS54H, From: 4FooxSMDueOnqy8HSnP9ST, From: 7FYSyGTKZCMZxGUnj4dmWi, From: 5VxMLcm5MRHOLSFCIaFONf
+30. Rex Orange County - Happiness [https://open.spotify.com/track/7aSyG7cskkG3zhfO2JLxq3] | Count: 5 | From: 43sQxYGFulhaeLjMFB2whT, From: 4aiqfZYKfDmv6l0QOPmjR2, From: 4bnCrHZZ5naaOgUeuZZNWW, From: 5VxMLcm5MRHOLSFCIaFONf, From: 2axBRUNjIYIxa4FhCLq2he
+31. The 1975 - Be My Mistake [https://open.spotify.com/track/18UsAG7SfOQ5sxJEdjAMH0] | Count: 5 | From: 23kcdUqZIm96gsER1VW51y, From: 0Boap8sEckE4BJnOZcI3kV, From: 6IZkttQ4fHpJRsZmvdUikC, From: 2iGVrAYVZWC2dZjrjUuyW4, From: 6cApxEzSNRfRATOPe0Wklm
+32. Beach Weather - Sex, Drugs, Etc. [https://open.spotify.com/track/7DbdUf8aHSYoliSjO6LZv6] | Count: 5 | From: 41pkFFia0LgFKLAvSTwCVn, From: 2X22t7uvABUf8MjP5P6FFe, From: 7od8uvzmAPmW0s17zh1Cnn, From: 6S6dSfAFPI521Us2Cvx8BS, From: 7uQ2CQJIIvlPQFmx4Phf8C
+33. Charlie Burg - I Don't Wanna Be Okay Without You [https://open.spotify.com/track/5HKv1sFHbXgmXBih203HxT] | Count: 5 | From: 41pkFFia0LgFKLAvSTwCVn, From: 3QQf5t3d5Y9UKNHDdVadzO, From: 0Od63n02AE7VkLvi7YzVqa, From: 5bYhskcchUxCl4W6aAS54H, From: 1ozIhnWafY2fIRH2iGjmqk
+34. Aziz Hedra - Somebody's Pleasure [https://open.spotify.com/track/3e1rs346dsDDwpqTRGlRZR] | Count: 5 | From: 5jnAsBUOXTVYNd4H7OQqHr, From: 3L3ImuRHxl7yGuF8V21nAQ, From: 0HRIB8p1n6VcjmHmvDEQjg, From: 26EIDDmCavPpT6893BecNq, From: 6d13yylW6XB5oOGHz8gSNT
+35. The Weeknd, Gesaffelstein - I Was Never There [https://open.spotify.com/track/1cKHdTo9u0ZymJdPGSh6nq] | Count: 5 | From: 26EIDDmCavPpT6893BecNq, From: 62jZ9nDN8Qaq8bNL2Uvq7M, From: 1bo2WX8JTS88efsMPUhUpc, From: 6IZkttQ4fHpJRsZmvdUikC, From: 4rG60xbu34n7E4x0n0zPEo
+36. Mitski - My Love Mine All Mine [https://open.spotify.com/track/3vkCueOmm7xQDoJ17W1Pm3] | Count: 5 | From: 26EIDDmCavPpT6893BecNq, From: 0wMN39dEN6qHBYlrLQJIDE, From: 7sbZ5NcYl4GPeBfO08PQse, From: 1ktKGMImLt1ojqjVoPulpz, From: 5VxMLcm5MRHOLSFCIaFONf
+37. keshi - 2 soon [https://open.spotify.com/track/5SlU0Yhi51jobhEiGE4xDv] | Count: 5 | From: 2X22t7uvABUf8MjP5P6FFe, From: 6IZkttQ4fHpJRsZmvdUikC, From: 2iGVrAYVZWC2dZjrjUuyW4, From: 6S6dSfAFPI521Us2Cvx8BS, From: 6cApxEzSNRfRATOPe0Wklm
+38. TheOvertunes - I Still Love You [https://open.spotify.com/track/4reIsHKw5hUj4pV8zzMjLA] | Count: 5 | From: 4VKLpxKcr4ksigt1AViGqJ, From: 3zYmZCdNUyyumr3pyKEWl9, From: 1rkw0zzI9PcD9Uq841V4eD, From: 4FooxSMDueOnqy8HSnP9ST, From: 1ozIhnWafY2fIRH2iGjmqk
+39. Chase Atlantic - Into It [https://open.spotify.com/track/4HwDCXsMBC7SUdp2WT4MZP] | Count: 5 | From: 2F6JOcr7H9wDIkyYVVz67y, From: 7od8uvzmAPmW0s17zh1Cnn, From: 1bo2WX8JTS88efsMPUhUpc, From: 0wWZ6FvukLIxWJIBJfTJ25, From: 0ECyY8stX88Bzh1HtKOjQL
+40. Cigarettes After Sex - Nothing's Gonna Hurt You Baby [https://open.spotify.com/track/7cs7MLtAWvsdf3w5kBvfK2] | Count: 5 | From: 0vXIZugBc9EXKcS4L6Me8o, From: 3zYmZCdNUyyumr3pyKEWl9, From: 7IDQNfwXdwRcFsm2ApJ1aW, From: 2axBRUNjIYIxa4FhCLq2he, From: 2Pt21p8VFINvVP2tTcOWEx
+41. The Weeknd - Call Out My Name [https://open.spotify.com/track/09mEdoA6zrmBPgTEN5qXmN] | Count: 5 | From: 238YKxvdkC4QFl3nMnAu8H, From: 79Y2t0FQF2QJSWnNVfpFxo, From: 1bo2WX8JTS88efsMPUhUpc, From: 6IZkttQ4fHpJRsZmvdUikC, From: 4rG60xbu34n7E4x0n0zPEo
+42. Taylor Swift - The Way I Loved You (Taylor’s Version) [https://open.spotify.com/track/22bPsP2jCgbLUvh82U0Z3M] | Count: 5 | From: 79Y2t0FQF2QJSWnNVfpFxo, From: 1rkw0zzI9PcD9Uq841V4eD, From: 4FooxSMDueOnqy8HSnP9ST, From: 1EmGPezRHX4MOopyrGuqMQ, From: 2Pt21p8VFINvVP2tTcOWEx
+43. RealestK - Love Me [https://open.spotify.com/track/7naseusM9pguk5GYGzYQCn] | Count: 4 | From: 5lNo26brznDInzyItdD0Qc, From: 1bo2WX8JTS88efsMPUhUpc, From: 70yjTTNWUZaB19cOWn1Hul, From: 5dK0gCIdp99sfl6s74ID2n
+44. The Neighbourhood - Baby Came Home 2 / Valentines [https://open.spotify.com/track/40gvh6jP5qxMJuMmF9lG9A] | Count: 4 | From: 2CkSMjNxO8SNqCiHDPuwv3, From: 62jZ9nDN8Qaq8bNL2Uvq7M, From: 7IDQNfwXdwRcFsm2ApJ1aW, From: 5dK0gCIdp99sfl6s74ID2n
+45. Cigarettes After Sex - Cry [https://open.spotify.com/track/3p4hRhMcb6ch8OLtATMaLw] | Count: 4 | From: 0WduAVIsmHMqnKLDkEWKAf, From: 0vXIZugBc9EXKcS4L6Me8o, From: 2iGVrAYVZWC2dZjrjUuyW4, From: 1ktKGMImLt1ojqjVoPulpz
+46. Conan Gray - Heather [https://open.spotify.com/track/4xqrdfXkTW4T0RauPLv3WA] | Count: 4 | From: 0WduAVIsmHMqnKLDkEWKAf, From: 6d13yylW6XB5oOGHz8gSNT, From: 7IDQNfwXdwRcFsm2ApJ1aW, From: 0Boap8sEckE4BJnOZcI3kV
+47. The Weeknd - After Hours [https://open.spotify.com/track/2p8IUWQDrpjuFltbdgLOag] | Count: 4 | From: 14Gojsh9YNA7ijriLGqZtF, From: 7od8uvzmAPmW0s17zh1Cnn, From: 1bo2WX8JTS88efsMPUhUpc, From: 0wWZ6FvukLIxWJIBJfTJ25
+48. Metro Boomin, The Weeknd, 21 Savage - Creepin' (with The Weeknd & 21 Savage) [https://open.spotify.com/track/2dHHgzDwk4BJdRwy9uXhTO] | Count: 4 | From: 14Gojsh9YNA7ijriLGqZtF, From: 238YKxvdkC4QFl3nMnAu8H, From: 7od8uvzmAPmW0s17zh1Cnn, From: 1bo2WX8JTS88efsMPUhUpc
+49. IV Of Spades - Come Inside Of My Heart [https://open.spotify.com/track/3Eb5sztvEMa0Mqnb8DUAlU] | Count: 4 | From: 41pkFFia0LgFKLAvSTwCVn, From: 1EmGPezRHX4MOopyrGuqMQ, From: 5VxMLcm5MRHOLSFCIaFONf, From: 2po2BmTHMwDKuZfJ94cq3q
+50. keshi - UNDERSTAND [https://open.spotify.com/track/72sfmdpuO5r8cBDgs7MqZZ] | Count: 4 | From: 0HRIB8p1n6VcjmHmvDEQjg, From: 26EIDDmCavPpT6893BecNq, From: 6d13yylW6XB5oOGHz8gSNT, From: 0Boap8sEckE4BJnOZcI3kV
+51. keshi - LIMBO [https://open.spotify.com/track/2bdVgAQgosGUJoViVDNeOV] | Count: 4 | From: 0HRIB8p1n6VcjmHmvDEQjg, From: 4bnCrHZZ5naaOgUeuZZNWW, From: 6IZkttQ4fHpJRsZmvdUikC, From: 36h7q6c8KBbuulrrKIewVe
+52. Reality Club - Alexandra [https://open.spotify.com/track/7JFFMicliyVArHQgwEqVBS] | Count: 4 | From: 26EIDDmCavPpT6893BecNq, From: 2X22t7uvABUf8MjP5P6FFe, From: 1SysxLxc2Oj9KUBEyQUSMy, From: 0Od63n02AE7VkLvi7YzVqa
+53. Coldplay - Sparks [https://open.spotify.com/track/7D0RhFcb3CrfPuTJ0obrod] | Count: 4 | From: 26EIDDmCavPpT6893BecNq, From: 4aiqfZYKfDmv6l0QOPmjR2, From: 7IDQNfwXdwRcFsm2ApJ1aW, From: 6cApxEzSNRfRATOPe0Wklm
+54. Harry Styles - As It Was [https://open.spotify.com/track/4LRPiXqCikLlN15c3yImP7] | Count: 4 | From: 26EIDDmCavPpT6893BecNq, From: 7IDQNfwXdwRcFsm2ApJ1aW, From: 7FYSyGTKZCMZxGUnj4dmWi, From: 1ozIhnWafY2fIRH2iGjmqk
+55. Chase Atlantic, GOON DES GARCONS* - Consume (feat. Goon Des Garcons) [https://open.spotify.com/track/0X2bh8NVQ8svDQIn2AdCbW] | Count: 4 | From: 2X22t7uvABUf8MjP5P6FFe, From: 79Y2t0FQF2QJSWnNVfpFxo, From: 7od8uvzmAPmW0s17zh1Cnn, From: 2iGVrAYVZWC2dZjrjUuyW4
+56. One Direction - Strong [https://open.spotify.com/track/3cKM7UXBZmgjEgEBTkaIlU] | Count: 4 | From: 4aiqfZYKfDmv6l0QOPmjR2, From: 79Y2t0FQF2QJSWnNVfpFxo, From: 4bnCrHZZ5naaOgUeuZZNWW, From: 7uQ2CQJIIvlPQFmx4Phf8C
+57. Pamungkas - One Only [https://open.spotify.com/track/7iTF9T1jum3Km6H6WMZpDC] | Count: 4 | From: 4aiqfZYKfDmv6l0QOPmjR2, From: 54s3dveKsXlWvOIviAa0Wu, From: 7FYSyGTKZCMZxGUnj4dmWi, From: 5VxMLcm5MRHOLSFCIaFONf
+58. Justine Skye, Tyga - Collide (feat. Tyga) [https://open.spotify.com/track/22I3h5AOENlH4CqXJsEbFR] | Count: 4 | From: 238YKxvdkC4QFl3nMnAu8H, From: 7od8uvzmAPmW0s17zh1Cnn, From: 7sbZ5NcYl4GPeBfO08PQse, From: 6S6dSfAFPI521Us2Cvx8BS
+59. Stephen Sanchez - Until I Found You [https://open.spotify.com/track/0T5iIrXA4p5GsubkhuBIKV] | Count: 4 | From: 29JMJTERlkuO0uPb0Lsye2, From: 3zYmZCdNUyyumr3pyKEWl9, From: 1rkw0zzI9PcD9Uq841V4eD, From: 2iGVrAYVZWC2dZjrjUuyW4
+60. Taylor Swift - "Slut!" (Taylor's Version) (From The Vault) [https://open.spotify.com/track/71BqAINEnezjQfxE4VuJfq] | Count: 4 | From: 1lml4Jsc1Z1EvuolBxYBIr, From: 0wMN39dEN6qHBYlrLQJIDE, From: 4bnCrHZZ5naaOgUeuZZNWW, From: 1EmGPezRHX4MOopyrGuqMQ
+61. Taylor Swift - Cruel Summer [https://open.spotify.com/track/1BxfuPKGuaTgP7aM0Bbdwr] | Count: 4 | From: 1lml4Jsc1Z1EvuolBxYBIr, From: 79Y2t0FQF2QJSWnNVfpFxo, From: 5dK0gCIdp99sfl6s74ID2n, From: 2Pt21p8VFINvVP2tTcOWEx
+62. Taylor Swift - Enchanted [https://open.spotify.com/track/04S1pkp1VaIqjg8zZqknR5] | Count: 4 | From: 79Y2t0FQF2QJSWnNVfpFxo, From: 1rkw0zzI9PcD9Uq841V4eD, From: 03YoCPR1hrtwFgI5VmSf31, From: 2po2BmTHMwDKuZfJ94cq3q
+63. Sezairi - It's You [https://open.spotify.com/track/7rdnB5DAyPbaj51TCQRcqW] | Count: 4 | From: 6d13yylW6XB5oOGHz8gSNT, From: 5bYhskcchUxCl4W6aAS54H, From: 4FooxSMDueOnqy8HSnP9ST, From: 70yjTTNWUZaB19cOWn1Hul
+64. keshi - beside you [https://open.spotify.com/track/1Fhb9iJPufNMZSwupsXiRe] | Count: 4 | From: 5bYhskcchUxCl4W6aAS54H, From: 4bnCrHZZ5naaOgUeuZZNWW, From: 6IZkttQ4fHpJRsZmvdUikC, From: 2Pt21p8VFINvVP2tTcOWEx
+65. Reality Club - Anything You Want [https://open.spotify.com/track/2QB8FwOszur18Ai7t2XnNi] | Count: 4 | From: 1rkw0zzI9PcD9Uq841V4eD, From: 7FYSyGTKZCMZxGUnj4dmWi, From: 03YoCPR1hrtwFgI5VmSf31, From: 2po2BmTHMwDKuZfJ94cq3q
+66. Daniel Caesar - Japanese Denim [https://open.spotify.com/track/1boXOL0ua7N2iCOUVI1p9F] | Count: 3 | From: 0gfsrk6zHmnf9r32uzaw0Q, From: 7qc2zP32GijsjXealj4g7c, From: 0Boap8sEckE4BJnOZcI3kV
+67. Nova - Not Around [https://open.spotify.com/track/1Adhz5VVDZxhojOLfQQUxa] | Count: 3 | From: 5lNo26brznDInzyItdD0Qc, From: 0wWZ6FvukLIxWJIBJfTJ25, From: 4rG60xbu34n7E4x0n0zPEo
+68. The 1975 - Fallingforyou [https://open.spotify.com/track/2TgxCUZdHFkPEVmFge1OSd] | Count: 3 | From: 2CkSMjNxO8SNqCiHDPuwv3, From: 1rkw0zzI9PcD9Uq841V4eD, From: 6IZkttQ4fHpJRsZmvdUikC
+69. Cigarettes After Sex - Touch [https://open.spotify.com/track/1l4pW7Tklvcc3k38rDFMkk] | Count: 3 | From: 0WduAVIsmHMqnKLDkEWKAf, From: 7IDQNfwXdwRcFsm2ApJ1aW, From: 2Pt21p8VFINvVP2tTcOWEx
+70. Keane - Somewhere Only We Know [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] | Count: 3 | From: 0WduAVIsmHMqnKLDkEWKAf, From: 41pkFFia0LgFKLAvSTwCVn, From: 7IDQNfwXdwRcFsm2ApJ1aW
+71. The 1975 - Somebody Else [https://open.spotify.com/track/4m0q0xQ2BNl9SCAGKyfiGZ] | Count: 3 | From: 14Gojsh9YNA7ijriLGqZtF, From: 23kcdUqZIm96gsER1VW51y, From: 2iGVrAYVZWC2dZjrjUuyW4
+72. G-Eazy, Christoph Andersson - Tumblr Girls (feat. Christoph Andersson) [https://open.spotify.com/track/4Fv6wNYUixnYkj3Dgfrls8] | Count: 3 | From: 14Gojsh9YNA7ijriLGqZtF, From: 1lml4Jsc1Z1EvuolBxYBIr, From: 1EmGPezRHX4MOopyrGuqMQ
+73. Diego Gonzalez - You & I [https://open.spotify.com/track/0epYQ0yLA5RUYyrhADkF0j] | Count: 3 | From: 43sQxYGFulhaeLjMFB2whT, From: 0Od63n02AE7VkLvi7YzVqa, From: 4FooxSMDueOnqy8HSnP9ST
+74. The 1975 - Mine [https://open.spotify.com/track/0cnVBn7JsFlShF65EJe2Or] | Count: 3 | From: 43sQxYGFulhaeLjMFB2whT, From: 3zYmZCdNUyyumr3pyKEWl9, From: 0Od63n02AE7VkLvi7YzVqa
+75. The 1975 - Fallingforyou [https://open.spotify.com/track/7LbUv7w2z7rEbNqp1uIL9U] | Count: 3 | From: 23kcdUqZIm96gsER1VW51y, From: 2X22t7uvABUf8MjP5P6FFe, From: 3zYmZCdNUyyumr3pyKEWl9
+76. Arctic Monkeys - Arabella [https://open.spotify.com/track/7nzsY8vlnKdvGOEE0rjAXZ] | Count: 3 | From: 23kcdUqZIm96gsER1VW51y, From: 1q3ziv3ytNIKmC7pJUqR1g, From: 62jZ9nDN8Qaq8bNL2Uvq7M
+77. The Weeknd - Blinding Lights [https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b] | Count: 3 | From: 41pkFFia0LgFKLAvSTwCVn, From: 2F6JOcr7H9wDIkyYVVz67y, From: 6IZkttQ4fHpJRsZmvdUikC
+78. Rihanna - Kiss It Better [https://open.spotify.com/track/0UHB9METy4VCXNgkcGqHqS] | Count: 3 | From: 41pkFFia0LgFKLAvSTwCVn, From: 79Y2t0FQF2QJSWnNVfpFxo, From: 7sbZ5NcYl4GPeBfO08PQse
+79. Coldplay - Yellow [https://open.spotify.com/track/3AJwUDP919kvQ9QcozQPxg] | Count: 3 | From: 41pkFFia0LgFKLAvSTwCVn, From: 4aiqfZYKfDmv6l0QOPmjR2, From: 6cApxEzSNRfRATOPe0Wklm
+80. Bruno Major - The Most Beautiful Thing [https://open.spotify.com/track/07koEqsKHZTlGVMC9eoEjO] | Count: 3 | From: 41pkFFia0LgFKLAvSTwCVn, From: 6IZkttQ4fHpJRsZmvdUikC, From: 2axBRUNjIYIxa4FhCLq2he
+81. Hivi! - Pelangi [https://open.spotify.com/track/3ZwqWrRpylU9nfy99qwKdR] | Count: 3 | From: 3L3ImuRHxl7yGuF8V21nAQ, From: 3QQf5t3d5Y9UKNHDdVadzO, From: 2axBRUNjIYIxa4FhCLq2he
+82. Dewa - Risalah Hati [https://open.spotify.com/track/0cc9lgdfHqeS8t9BzbFFmj] | Count: 3 | From: 0HRIB8p1n6VcjmHmvDEQjg, From: 4kD4E5pl3xRzq2eINzghbW, From: 1SysxLxc2Oj9KUBEyQUSMy
+83. MALIQ & D'Essentials - Senja Teduh Pelita [https://open.spotify.com/track/4jlhUj1aT0IxzaodNEV7xs] | Count: 3 | From: 0HRIB8p1n6VcjmHmvDEQjg, From: 0wMN39dEN6qHBYlrLQJIDE, From: 5dK0gCIdp99sfl6s74ID2n
+84. Daniel Caesar, H.E.R. - Best Part (feat. H.E.R.) [https://open.spotify.com/track/1RMJOxR6GRPsBHL8qeC2ux] | Count: 3 | From: 0HRIB8p1n6VcjmHmvDEQjg, From: 5bYhskcchUxCl4W6aAS54H, From: 1EmGPezRHX4MOopyrGuqMQ
+85. girl in red - we fell in love in october [https://open.spotify.com/track/6IPwKM3fUUzlElbvKw2sKl] | Count: 3 | From: 26EIDDmCavPpT6893BecNq, From: 7sbZ5NcYl4GPeBfO08PQse, From: 1ktKGMImLt1ojqjVoPulpz
+86. The Black Skirts - EVERYTHING [https://open.spotify.com/track/19Hg1UCZaCdpHB37L7x63X] | Count: 3 | From: 26EIDDmCavPpT6893BecNq, From: 0Od63n02AE7VkLvi7YzVqa, From: 7IDQNfwXdwRcFsm2ApJ1aW
+87. Eyedress, Dent May - Something About You [https://open.spotify.com/track/6RiiSy9GzSwiyDEJDiMuKe] | Count: 3 | From: 26EIDDmCavPpT6893BecNq, From: 1ktKGMImLt1ojqjVoPulpz, From: 2axBRUNjIYIxa4FhCLq2he
+88. The Weeknd, Ariana Grande - Die For You - Remix [https://open.spotify.com/track/7oDd86yk8itslrA9HRP2ki] | Count: 3 | From: 2X22t7uvABUf8MjP5P6FFe, From: 7FYSyGTKZCMZxGUnj4dmWi, From: 5dK0gCIdp99sfl6s74ID2n
+89. Lauv - Paris in the Rain [https://open.spotify.com/track/41CgzGD7xlgnJe14R4cqkL] | Count: 3 | From: 4VKLpxKcr4ksigt1AViGqJ, From: 3zYmZCdNUyyumr3pyKEWl9, From: 4FooxSMDueOnqy8HSnP9ST
+90. One Direction - 18 [https://open.spotify.com/track/3JjnGLK8IxkNLvo8Lb3KOM] | Count: 3 | From: 4aiqfZYKfDmv6l0QOPmjR2, From: 6d13yylW6XB5oOGHz8gSNT, From: 4bnCrHZZ5naaOgUeuZZNWW
+91. One Direction - Perfect [https://open.spotify.com/track/3NLnwwAQbbFKcEcV8hDItk] | Count: 3 | From: 4aiqfZYKfDmv6l0QOPmjR2, From: 79Y2t0FQF2QJSWnNVfpFxo, From: 4bnCrHZZ5naaOgUeuZZNWW
+92. SZA - Snooze [https://open.spotify.com/track/4iZ4pt7kvcaH6Yo8UoZ4s2] | Count: 3 | From: 4kD4E5pl3xRzq2eINzghbW, From: 6d13yylW6XB5oOGHz8gSNT, From: 1bo2WX8JTS88efsMPUhUpc
+93. The Weeknd, JENNIE, Lily-Rose Depp - One Of The Girls (with JENNIE, Lily Rose Depp) [https://open.spotify.com/track/7CyPwkp0oE8Ro9Dd5CUDjW] | Count: 3 | From: 4kD4E5pl3xRzq2eINzghbW, From: 238YKxvdkC4QFl3nMnAu8H, From: 2iGVrAYVZWC2dZjrjUuyW4
+94. Chase Atlantic - Slow Down [https://open.spotify.com/track/5lT5IZWW3JQErXELJpQgJ9] | Count: 3 | From: 2F6JOcr7H9wDIkyYVVz67y, From: 1bo2WX8JTS88efsMPUhUpc, From: 0wWZ6FvukLIxWJIBJfTJ25
+95. Chase Atlantic - OHMAMI [https://open.spotify.com/track/0HqxMCPnThJ3An1QIeIzJF] | Count: 3 | From: 2F6JOcr7H9wDIkyYVVz67y, From: 1bo2WX8JTS88efsMPUhUpc, From: 2Pt21p8VFINvVP2tTcOWEx
+96. Ariana Grande - Daydreamin' [https://open.spotify.com/track/2CcQDI2IDhHbmBIFup58JE] | Count: 3 | From: 3QQf5t3d5Y9UKNHDdVadzO, From: 70yjTTNWUZaB19cOWn1Hul, From: 2po2BmTHMwDKuZfJ94cq3q
+97. Stephanie Poetri - I Love You 3000 [https://open.spotify.com/track/3znQ9i61vfe2E7URHlOiyc] | Count: 3 | From: 3QQf5t3d5Y9UKNHDdVadzO, From: 5bYhskcchUxCl4W6aAS54H, From: 4FooxSMDueOnqy8HSnP9ST
+98. John Mayer - You're Gonna Live Forever in Me [https://open.spotify.com/track/51lPx6ZCSalL2kvSrDUyJc] | Count: 3 | From: 3QQf5t3d5Y9UKNHDdVadzO, From: 3zYmZCdNUyyumr3pyKEWl9, From: 7FYSyGTKZCMZxGUnj4dmWi
+99. Cigarettes After Sex - Crush [https://open.spotify.com/track/4WfV1CNg91SBp8oG0VY0VB] | Count: 3 | From: 0vXIZugBc9EXKcS4L6Me8o, From: 3zYmZCdNUyyumr3pyKEWl9, From: 4FooxSMDueOnqy8HSnP9ST
+100. George Benson - Nothing's Gonna Change My Love for You [https://open.spotify.com/track/0vB4Vd6PtkJSEnWsmqATnZ] | Count: 3 | From: 29JMJTERlkuO0uPb0Lsye2, From: 4bnCrHZZ5naaOgUeuZZNWW, From: 2axBRUNjIYIxa4FhCLq2he
 
 Contributed Playlists:
-1. 12 Tracks from [https://open.spotify.com/playlist/5dIvbZINmQ6PcxWj3ux3uv] by [https://open.spotify.com/user/31new6z6imibvytvgxvxf3qgdr4u]
+1. 15 Tracks from [https://open.spotify.com/playlist/23kcdUqZIm96gsER1VW51y] by [https://open.spotify.com/user/z3fd1lm8z7soyexpjc8kljwqs]
+2. 15 Tracks from [https://open.spotify.com/playlist/2X22t7uvABUf8MjP5P6FFe] by [https://open.spotify.com/user/31apfbweec34fymxn24bkwx3rasa]
+3. 15 Tracks from [https://open.spotify.com/playlist/3zYmZCdNUyyumr3pyKEWl9] by [https://open.spotify.com/user/31rvoblkmg4ywc5vgm5ygpjmxa7q]
+4. 14 Tracks from [https://open.spotify.com/playlist/6IZkttQ4fHpJRsZmvdUikC] by [https://open.spotify.com/user/31qymrt6ssjz4qud22jg5ksxug2u]
+5. 13 Tracks from [https://open.spotify.com/playlist/41pkFFia0LgFKLAvSTwCVn] by [https://open.spotify.com/user/j3mdta31m57uvb40esx9s2fw1]
+6. 13 Tracks from [https://open.spotify.com/playlist/26EIDDmCavPpT6893BecNq] by [https://open.spotify.com/user/3efroa16urbct6yb1y9vu4e62]
+7. 13 Tracks from [https://open.spotify.com/playlist/3QQf5t3d5Y9UKNHDdVadzO] by [https://open.spotify.com/user/312i3zlkseufc6km74wncjoaynxq]
+8. 13 Tracks from [https://open.spotify.com/playlist/4FooxSMDueOnqy8HSnP9ST] by [https://open.spotify.com/user/31zhyb7dl2tmawani74rmqd3yk5m]
+9. 13 Tracks from [https://open.spotify.com/playlist/1bo2WX8JTS88efsMPUhUpc] by [https://open.spotify.com/user/31fdo6zruwwkzt5akt52iy5mcfiu]
+10. 12 Tracks from [https://open.spotify.com/playlist/0Od63n02AE7VkLvi7YzVqa] by [https://open.spotify.com/user/3123fukgwqpmrvdwjkw2reumlci4]
+11. 12 Tracks from [https://open.spotify.com/playlist/7od8uvzmAPmW0s17zh1Cnn] by [https://open.spotify.com/user/31emd323ajyj4whwymaoan4iwb6i]
+12. 11 Tracks from [https://open.spotify.com/playlist/79Y2t0FQF2QJSWnNVfpFxo] by [https://open.spotify.com/user/31eep6ikww6haw7fmygj7ula2bfm]
+13. 11 Tracks from [https://open.spotify.com/playlist/7IDQNfwXdwRcFsm2ApJ1aW] by [https://open.spotify.com/user/dlil61eki8svtxyu28b5xl7l2]
+14. 11 Tracks from [https://open.spotify.com/playlist/1rkw0zzI9PcD9Uq841V4eD] by [https://open.spotify.com/user/31fxkrmotqxoqhq56lhx7jt7os2q]
+15. 11 Tracks from [https://open.spotify.com/playlist/2iGVrAYVZWC2dZjrjUuyW4] by [https://open.spotify.com/user/31zeq4pe7g7cxqwocb4iat5v3xwy]
+16. 11 Tracks from [https://open.spotify.com/playlist/6S6dSfAFPI521Us2Cvx8BS] by [https://open.spotify.com/user/31zeq4pe7g7cxqwocb4iat5v3xwy]
+17. 11 Tracks from [https://open.spotify.com/playlist/5VxMLcm5MRHOLSFCIaFONf] by [https://open.spotify.com/user/31m2jsu36ucw54kxwpkxupgy4rbu]
+18. 10 Tracks from [https://open.spotify.com/playlist/43sQxYGFulhaeLjMFB2whT] by [https://open.spotify.com/user/31sg3vkdzkmiyy4sl2cmvg55fmfa]
+19. 10 Tracks from [https://open.spotify.com/playlist/62jZ9nDN8Qaq8bNL2Uvq7M] by [https://open.spotify.com/user/3123fukgwqpmrvdwjkw2reumlci4]
+20. 10 Tracks from [https://open.spotify.com/playlist/5bYhskcchUxCl4W6aAS54H] by [https://open.spotify.com/user/ekvoikmvgw9tipyroql28arfm]
+21. 10 Tracks from [https://open.spotify.com/playlist/4bnCrHZZ5naaOgUeuZZNWW] by [https://open.spotify.com/user/9blm8w94czy1h18en6isaxgyv]
+22. 10 Tracks from [https://open.spotify.com/playlist/7FYSyGTKZCMZxGUnj4dmWi] by [https://open.spotify.com/user/31mpiqgdzf76wcvgvlbu7fj55jxu]
+23. 10 Tracks from [https://open.spotify.com/playlist/2Pt21p8VFINvVP2tTcOWEx] by [https://open.spotify.com/user/g7utx93l5a99foqd8cv7hxav9]
+24. 9 Tracks from [https://open.spotify.com/playlist/0WduAVIsmHMqnKLDkEWKAf] by [https://open.spotify.com/user/og0qa76j35j7t1jggg7jfdr65]
+25. 9 Tracks from [https://open.spotify.com/playlist/4aiqfZYKfDmv6l0QOPmjR2] by [https://open.spotify.com/user/31imkhp2uuloxfz6cn2emxe2cnia]
+26. 9 Tracks from [https://open.spotify.com/playlist/6d13yylW6XB5oOGHz8gSNT] by [https://open.spotify.com/user/31t5vikiatu7cvyaxn366swjct4m]
+27. 9 Tracks from [https://open.spotify.com/playlist/1EmGPezRHX4MOopyrGuqMQ] by [https://open.spotify.com/user/31cg3t6fwbdzeenc7kp2vlkiacsq]
+28. 9 Tracks from [https://open.spotify.com/playlist/70yjTTNWUZaB19cOWn1Hul] by [https://open.spotify.com/user/31qymrt6ssjz4qud22jg5ksxug2u]
+29. 9 Tracks from [https://open.spotify.com/playlist/6cApxEzSNRfRATOPe0Wklm] by [https://open.spotify.com/user/0jl6mpt7kz4734wi6zg10mqoj]
+30. 9 Tracks from [https://open.spotify.com/playlist/2po2BmTHMwDKuZfJ94cq3q] by [https://open.spotify.com/user/g7utx93l5a99foqd8cv7hxav9]
+31. 8 Tracks from [https://open.spotify.com/playlist/7qc2zP32GijsjXealj4g7c] by [https://open.spotify.com/user/dlil61eki8svtxyu28b5xl7l2]
+32. 8 Tracks from [https://open.spotify.com/playlist/5dK0gCIdp99sfl6s74ID2n] by [https://open.spotify.com/user/31opmt4jylolc7qhr6ieen5wjzfy]
+33. 8 Tracks from [https://open.spotify.com/playlist/0wWZ6FvukLIxWJIBJfTJ25] by [https://open.spotify.com/user/31opmt4jylolc7qhr6ieen5wjzfy]
+34. 7 Tracks from [https://open.spotify.com/playlist/0HRIB8p1n6VcjmHmvDEQjg] by [https://open.spotify.com/user/3efroa16urbct6yb1y9vu4e62]
+35. 7 Tracks from [https://open.spotify.com/playlist/2F6JOcr7H9wDIkyYVVz67y] by [https://open.spotify.com/user/313tsoyqwkjmuux2yxvxah6fq2ra]
+36. 7 Tracks from [https://open.spotify.com/playlist/29JMJTERlkuO0uPb0Lsye2] by [https://open.spotify.com/user/31rvoblkmg4ywc5vgm5ygpjmxa7q]
+37. 7 Tracks from [https://open.spotify.com/playlist/7sbZ5NcYl4GPeBfO08PQse] by [https://open.spotify.com/user/31zeq4pe7g7cxqwocb4iat5v3xwy]
+38. 7 Tracks from [https://open.spotify.com/playlist/1ktKGMImLt1ojqjVoPulpz] by [https://open.spotify.com/user/31j4icxe27sn75ynppawidcg4zky]
+39. 7 Tracks from [https://open.spotify.com/playlist/2axBRUNjIYIxa4FhCLq2he] by [https://open.spotify.com/user/31jzwbenhhanyskvkn34jwulftvu]
+40. 7 Tracks from [https://open.spotify.com/playlist/7uQ2CQJIIvlPQFmx4Phf8C] by [https://open.spotify.com/user/6q25zsyrzmto5n75e5k3jg44i]
+41. 6 Tracks from [https://open.spotify.com/playlist/14Gojsh9YNA7ijriLGqZtF] by [https://open.spotify.com/user/og0qa76j35j7t1jggg7jfdr65]
+42. 6 Tracks from [https://open.spotify.com/playlist/4VKLpxKcr4ksigt1AViGqJ] by [https://open.spotify.com/user/31apfbweec34fymxn24bkwx3rasa]
+43. 6 Tracks from [https://open.spotify.com/playlist/238YKxvdkC4QFl3nMnAu8H] by [https://open.spotify.com/user/31fbbbz45vpfkmubrqpjxi6vxqvu]
+44. 5 Tracks from [https://open.spotify.com/playlist/0vXIZugBc9EXKcS4L6Me8o] by [https://open.spotify.com/user/31fbbbz45vpfkmubrqpjxi6vxqvu]
+45. 5 Tracks from [https://open.spotify.com/playlist/1q3ziv3ytNIKmC7pJUqR1g] by [https://open.spotify.com/user/31te56samaiu6senpstsa3lfektu]
+46. 5 Tracks from [https://open.spotify.com/playlist/1lml4Jsc1Z1EvuolBxYBIr] by [https://open.spotify.com/user/31te56samaiu6senpstsa3lfektu]
+47. 5 Tracks from [https://open.spotify.com/playlist/54s3dveKsXlWvOIviAa0Wu] by [https://open.spotify.com/user/31emd323ajyj4whwymaoan4iwb6i]
+48. 5 Tracks from [https://open.spotify.com/playlist/0ECyY8stX88Bzh1HtKOjQL] by [https://open.spotify.com/user/31jzwbenhhanyskvkn34jwulftvu]
+49. 5 Tracks from [https://open.spotify.com/playlist/1ozIhnWafY2fIRH2iGjmqk] by [https://open.spotify.com/user/31rl76pkwp6yxkac4zvynfeowd34]
+50. 4 Tracks from [https://open.spotify.com/playlist/5lNo26brznDInzyItdD0Qc] by [https://open.spotify.com/user/77c9lyw4eerc0ak88emzwwztc]
+51. 4 Tracks from [https://open.spotify.com/playlist/2CkSMjNxO8SNqCiHDPuwv3] by [https://open.spotify.com/user/77c9lyw4eerc0ak88emzwwztc]
+52. 4 Tracks from [https://open.spotify.com/playlist/3L3ImuRHxl7yGuF8V21nAQ] by [https://open.spotify.com/user/3efroa16urbct6yb1y9vu4e62]
+53. 4 Tracks from [https://open.spotify.com/playlist/0Boap8sEckE4BJnOZcI3kV] by [https://open.spotify.com/user/cu8f4mx0xj1m84h7ap9n0bkkv]
+54. 3 Tracks from [https://open.spotify.com/playlist/4kD4E5pl3xRzq2eINzghbW] by [https://open.spotify.com/user/31lkuemxalpm5dgupo472sth5znm]
+55. 3 Tracks from [https://open.spotify.com/playlist/1SysxLxc2Oj9KUBEyQUSMy] by [https://open.spotify.com/user/5xksalhkm0kdy46aj0v6hv8ty]
+56. 3 Tracks from [https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE] by [https://open.spotify.com/user/0yqfh7h7cratdpgw6slohufou]
+57. 3 Tracks from [https://open.spotify.com/playlist/03YoCPR1hrtwFgI5VmSf31] by [https://open.spotify.com/user/0jl6mpt7kz4734wi6zg10mqoj]
+58. 3 Tracks from [https://open.spotify.com/playlist/4rG60xbu34n7E4x0n0zPEo] by [https://open.spotify.com/user/31rl76pkwp6yxkac4zvynfeowd34]
+59. 2 Tracks from [https://open.spotify.com/playlist/0gfsrk6zHmnf9r32uzaw0Q] by [https://open.spotify.com/user/77c9lyw4eerc0ak88emzwwztc]
+60. 1 Tracks from [https://open.spotify.com/playlist/5jnAsBUOXTVYNd4H7OQqHr] by [https://open.spotify.com/user/3efroa16urbct6yb1y9vu4e62]
+61. 1 Tracks from [https://open.spotify.com/playlist/36h7q6c8KBbuulrrKIewVe] by [https://open.spotify.com/user/g7utx93l5a99foqd8cv7hxav9]
 
 Track Relationships:
+1. I Wanna Be Yours [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] & About You [https://open.spotify.com/track/1fDFHXcykq4iw8Gg7s5hG9] have a High relationship
+2. I Wanna Be Yours [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] & Sweet [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] have a High relationship
+3. I Wanna Be Yours [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] & Die For You [https://open.spotify.com/track/2LBqCSwhJGcFQeTHMVGwy3] have a High relationship
+4. About You [https://open.spotify.com/track/1fDFHXcykq4iw8Gg7s5hG9] & Sweet [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] have a High relationship
+5. About You [https://open.spotify.com/track/1fDFHXcykq4iw8Gg7s5hG9] & Die For You [https://open.spotify.com/track/2LBqCSwhJGcFQeTHMVGwy3] have a High relationship
+6. Sweet [https://open.spotify.com/track/6ilc4vQcwMPlvAHFfsTGng] & Die For You [https://open.spotify.com/track/2LBqCSwhJGcFQeTHMVGwy3] have a High relationship

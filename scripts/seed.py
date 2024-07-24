@@ -14,6 +14,11 @@ def update_track_weight(cursor, track_id):
     cursor.execute(query, (track_id,))
 
 
+def delete_empty_playlist_feature(cursor):
+    query = "DELETE FROM playlists WHERE min_duration_ms is NULL"
+    cursor.execute(query)
+
+
 def fill_playlists_table():
     conn_playlists = sqlite3.connect(playlists_db_path)
     cursor_playlists = conn_playlists.cursor()
@@ -93,7 +98,7 @@ def fill_playlists_table():
             # Get the top 5 most common genres
             genre_counts = Counter(min_max_values['genres'])
             most_genres = ",".join(
-                [genre for genre, count in genre_counts.most_common(5)])
+                [genre for genre, count in genre_counts.most_common(42)])
 
             cursor_playlists.execute("""
                 UPDATE playlists SET
@@ -135,6 +140,7 @@ def fill_playlists_table():
         else:
             print(f"No track information found for playlist {playlist_id}")
 
+    delete_empty_playlist_feature(cursor_playlists)
     conn_playlists.commit()
     conn_playlists.close()
     conn_songs.close()

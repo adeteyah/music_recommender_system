@@ -104,7 +104,7 @@ def get_track_weight(track_id):
     return result[0] if result else 1
 
 
-def write_results_to_file(output_path, input_ids, invalid_tracks, top_playlists, track_counts, track_details, weights):
+def write_results_to_file(output_path, input_ids, invalid_tracks, top_playlists, track_counts, track_details, weights, track_sources):
     """Write the results to the output file."""
     with open(output_path, 'w', encoding='utf-8') as file:
         file.write("Inputted IDs:\n")
@@ -125,14 +125,15 @@ def write_results_to_file(output_path, input_ids, invalid_tracks, top_playlists,
         file.write("\nSongs Recommendations:\n")
         sorted_tracks = sorted(track_counts.items(
         ), key=lambda x: weights.get(x[0], 1), reverse=True)
-        count = 0
         for idx, (track_id, count) in enumerate(sorted_tracks, start=1):
             # Ensure inputted track IDs are not shown in recommendations and limit to 24 items
             if track_id not in input_ids and idx <= int(config['rs']['n_recommend']):
                 details = track_details.get(
                     track_id, {'artist_name': 'Unknown Artist', 'track_name': 'Unknown Track'})
+                from_info = ", ".join(
+                    f"From: {playlist_id}" for playlist_id in track_sources.get(track_id, []))
                 file.write(f"{idx}. {details['artist_name']} - {details['track_name']} [https://open.spotify.com/track/{
-                           track_id}] | Count: {count}, Weight: {weights.get(track_id, 1)}\n")
+                           track_id}] | Count: {count}, Weight: {weights.get(track_id, 1)} | {from_info}\n")
 
 
 def hfcbfcf_result(ids):
@@ -177,10 +178,14 @@ def hfcbfcf_result(ids):
 
         # Gather tracks from the top playlists
         track_counts = {}
+        track_sources = {}
         for playlist_id in [p[0] for p in top_playlists]:
             track_ids = get_playlist_tracks(playlist_id)
             for track_id in track_ids:
                 track_id = track_id.strip()
+                if track_id not in track_sources:
+                    track_sources[track_id] = []
+                track_sources[track_id].append(playlist_id)
                 track_counts[track_id] = track_counts.get(track_id, 0) + 1
 
         # Fetch details for these tracks and their weights
@@ -192,8 +197,8 @@ def hfcbfcf_result(ids):
                 'artist_name': details['artist_name'], 'track_name': details['track_name']}
             weights[track_id] = get_track_weight(track_id)
 
-        write_results_to_file(output_path, ids, invalid_tracks,
-                              top_playlists, track_counts, track_details, weights)
+        write_results_to_file(output_path, ids, invalid_tracks, top_playlists,
+                              track_counts, track_details, weights, track_sources)
         print(f'Result written to: {output_path}')
     except Exception as e:
         print(f"Error details: {e}")

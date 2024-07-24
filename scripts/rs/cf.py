@@ -126,8 +126,10 @@ def cf_result(ids):
 
         for idx, (item, count) in enumerate(limited_tracks, start=1):
             details = track_details[item]
+            from_info = ", ".join(
+                f"From: {row[0]}" for row in rows_playlist if item in row[-1].split(','))
             file.write(f"{idx}. {details['artist_name']} - {details['track_name']
-                                                            } [https://open.spotify.com/track/{item}] | Count: {count}\n")
+                                                            } [https://open.spotify.com/track/{item}] | Count: {count} | {from_info}\n")
 
         # Update contributed playlists based on the limited recommendations
         limited_track_ids = {item for item, count in limited_tracks}

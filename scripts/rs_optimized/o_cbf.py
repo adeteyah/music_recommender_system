@@ -9,7 +9,7 @@ config.read('config.cfg')
 
 db_playlist = config['db']['playlists_db']
 db_songs = config['db']['songs_db']
-output_path = config['output']['cbf_output']
+output_path = config['output']['o_cbf_output']
 n_recommend = int(config['rs']['n_recommend'])
 # Penalty weight for repeated artists
 artist_penalty = float(config['rs'].get('artist_penalty', 5.0))
@@ -66,6 +66,11 @@ def fetch_artist_name_and_genres(artist_ids):
     return ", ".join(artist_names), ", ".join(set(artist_genres))
 
 
+def normalize_features(features):
+    """Normalize features to have zero mean and unit variance."""
+    return (features - np.mean(features)) / np.std(features)
+
+
 def one_hot_encode_genres(genres, all_genres):
     encoding = np.zeros(len(all_genres))
     for genre in genres.split(','):
@@ -89,14 +94,15 @@ def calculate_distances(input_tracks, all_tracks, all_genres):
             continue
         all_features = np.array(all_track[4:], dtype=float)
         all_genres_encoding = one_hot_encode_genres(all_track[3], all_genres)
-        all_features = np.concatenate([all_features, all_genres_encoding])
+        all_features = np.concatenate(
+            [normalize_features(all_features), all_genres_encoding])
 
         for input_track in input_tracks:
             input_features = np.array(input_track[4:], dtype=float)
             input_genres_encoding = one_hot_encode_genres(
                 input_track[3], all_genres)
             input_features = np.concatenate(
-                [input_features, input_genres_encoding])
+                [normalize_features(input_features), input_genres_encoding])
             distance = euclidean(input_features, all_features)
 
             # Genre-based filtering
@@ -121,7 +127,7 @@ def calculate_distances(input_tracks, all_tracks, all_genres):
     return distances
 
 
-def cbf_result(ids):
+def o_cbf_result(ids):
     input_tracks = []
     unique_input_ids = set(ids)
 
@@ -181,7 +187,7 @@ def cbf_result(ids):
             file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
                        track_id}] - Distance: {distance:.2f}\n")
 
-    print(f'CBF Result written to: {output_path}')
+    print(f'CBF-O Result written to: {output_path}')
 
 
 if __name__ == "__main__":
@@ -190,4 +196,4 @@ if __name__ == "__main__":
         '2tznHmp70DxMyr2XhWLOW0',
         '2Z5wXgysowvzl0nKGNGU0t',
     ]
-    cbf_result(ids)
+    o_cbf_result(ids)

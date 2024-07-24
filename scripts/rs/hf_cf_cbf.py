@@ -140,8 +140,12 @@ def hfcfcbf_result(ids):
                        details['track_name']} [https://open.spotify.com/track/{track_id}]\n")
 
         file.write("\nRecommendation Result:\n")
+        playlist_contributions = {}
         for row in rows_playlist:
+            playlist_id = row[0]
+            creator_id = row[1]
             playlist_items = row[-1].split(',')
+
             playlist_tracks.append(set(item.strip()
                                    for item in playlist_items))
             for item in playlist_items:
@@ -150,19 +154,22 @@ def hfcfcbf_result(ids):
                     if item not in track_details:
                         track_details[item] = get_track_details(item)
                     if item not in track_count:
-                        track_count[item] = 0
-                    track_count[item] += 1
+                        track_count[item] = {'count': 0, 'playlists': []}
+                    track_count[item]['count'] += 1
+                    track_count[item]['playlists'].append(playlist_id)
 
         # Calculate similarity and store it with count
         track_similarity = {}
-        for item, count in track_count.items():
+        for item, data in track_count.items():
+            count = data['count']
+            playlists = data['playlists']
             details = track_details[item]
             similarities = [
                 calculate_audio_similarity(details, input_detail)
                 for input_detail in input_track_details
             ]
             average_similarity = sum(similarities) / len(similarities)
-            track_similarity[item] = (count, average_similarity)
+            track_similarity[item] = (count, average_similarity, playlists)
 
         # Sort tracks by similarity and count
         sorted_tracks = sorted(track_similarity.items(),
@@ -171,16 +178,15 @@ def hfcfcbf_result(ids):
         # Limit the recommendations to 100
         limited_tracks = sorted_tracks[:int(config['rs']['n_recommend'])]
 
-        for idx, (item, (count, similarity)) in enumerate(limited_tracks, start=1):
+        for idx, (item, (count, similarity, playlists)) in enumerate(limited_tracks, start=1):
             details = track_details[item]
             file.write(f"{idx}. {details['artist_name']} - {details['track_name']} [https://open.spotify.com/track/{
-                       item}] | Count: {count} | Similarity: {similarity:.2f}\n")
+                       item}] | Count: {count} | Similarity: {similarity:.2f} | From: {', '.join(playlists)}\n")
 
         limited_track_ids = {item for item,
-                             (count, similarity) in limited_tracks}
+                             (count, similarity, playlists) in limited_tracks}
 
         file.write("\nContributed Playlists:\n")
-        playlist_contributions = {}
         for row in rows_playlist:
             playlist_id = row[0]
             creator_id = row[1]
