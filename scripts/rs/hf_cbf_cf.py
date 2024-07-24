@@ -3,12 +3,16 @@ import configparser
 import numpy as np
 from scipy.spatial.distance import euclidean
 
+# Read configuration
 config = configparser.ConfigParser()
 config.read('config.cfg')
 
 db_playlist = config['db']['playlists_db']
 db_songs = config['db']['songs_db']
-output_path = config['output']['cbf_output']
+output_path = config['output']['hfcbfcf_output']
+n_recommend = int(config['rs']['n_recommend'])
+# Penalty weight for repeated artists
+artist_penalty = float(config['rs'].get('artist_penalty', 5.0))
 
 # Connect to the databases
 conn_playlist = sqlite3.connect(db_playlist)
@@ -17,14 +21,7 @@ conn_songs = sqlite3.connect(db_songs)
 cur_songs = conn_songs.cursor()
 
 
-def fetch_weights():
-    """Fetch the weights for each track from the playlist database."""
-    cur_playlist.execute("SELECT track_id, weight FROM weights")
-    weights = cur_playlist.fetchall()
-    return dict(weights)
-
-
-def fetch_all_tracks_features(weights):
+def fetch_all_tracks_features():
     query = """
     SELECT
         t.track_id,
@@ -50,12 +47,7 @@ def fetch_all_tracks_features(weights):
     """
     cur_songs.execute(query)
     tracks = cur_songs.fetchall()
-    tracks_with_weights = []
-    for track in tracks:
-        track_id = track[0]
-        weight = weights.get(track_id, 0)  # Get weight or default to 0
-        tracks_with_weights.append(track + (weight,))
-    return tracks_with_weights
+    return tracks
 
 
 def fetch_artist_name_and_genres(artist_ids):
@@ -74,6 +66,11 @@ def fetch_artist_name_and_genres(artist_ids):
     return ", ".join(artist_names), ", ".join(set(artist_genres))
 
 
+def normalize_features(features):
+    """Normalize features to have zero mean and unit variance."""
+    return (features - np.mean(features)) / np.std(features)
+
+
 def one_hot_encode_genres(genres, all_genres):
     encoding = np.zeros(len(all_genres))
     for genre in genres.split(','):
@@ -82,46 +79,59 @@ def one_hot_encode_genres(genres, all_genres):
     return encoding
 
 
-def normalize_features(features):
-    """Normalize features to have zero mean and unit variance."""
-    return (features - np.mean(features, axis=0)) / np.std(features, axis=0)
-
-
 def calculate_distances(input_tracks, all_tracks, all_genres):
     distances = []
-    for all_track in all_tracks:
-        all_track_id = all_track[0]
-        # Exclude track_id, name, artist_ids, genres, and weight
-        all_features = np.array(all_track[4:-1], dtype=float)
-        all_weight = all_track[-1]
+    input_track_ids = {track[0] for track in input_tracks}
+    input_genre_set = set()
+    for track in input_tracks:
+        input_genre_set.update(track[3].split(','))
+
+    all_tracks_dict = {track[0]: track for track in all_tracks}
+    artist_track_count = {}
+
+    for all_track_id, all_track in all_tracks_dict.items():
+        if all_track_id in input_track_ids:
+            continue
+        all_features = np.array(all_track[4:], dtype=float)
         all_genres_encoding = one_hot_encode_genres(all_track[3], all_genres)
-        all_features = np.concatenate([all_features, all_genres_encoding])
-        all_features = normalize_features(all_features)
+        all_features = np.concatenate(
+            [normalize_features(all_features), all_genres_encoding])
 
         for input_track in input_tracks:
-            input_features = np.array(input_track[4:-1], dtype=float)
+            input_features = np.array(input_track[4:], dtype=float)
             input_genres_encoding = one_hot_encode_genres(
                 input_track[3], all_genres)
             input_features = np.concatenate(
-                [input_features, input_genres_encoding])
-            input_features = normalize_features(input_features)
-
+                [normalize_features(input_features), input_genres_encoding])
             distance = euclidean(input_features, all_features)
-            weighted_distance = distance / \
-                (1 + all_weight)  # Incorporate weight
+
+            # Genre-based filtering
+            all_genre_set = set(all_track[3].split(','))
+            if not input_genre_set.intersection(all_genre_set):
+                continue
 
             artist_name, _ = fetch_artist_name_and_genres(all_track[2])
+            artist_id = all_track[2]
+            if artist_id not in artist_track_count:
+                artist_track_count[artist_id] = 0
+            artist_track_count[artist_id] += 1
+
+            # Apply penalty if the artist is already in the recommendations
+            if artist_track_count[artist_id] > 1:
+                distance += artist_penalty
+
             distances.append(
-                (all_track_id, all_track[1], artist_name, weighted_distance))
+                (all_track_id, all_track[1], artist_name, distance))
+
     distances.sort(key=lambda x: x[3])
     return distances
 
 
-def cbf_result(ids):
-    weights = fetch_weights()
-
+def hfcbfcf_result(ids):
     input_tracks = []
-    for track_id in ids:
+    unique_input_ids = set(ids)
+
+    for track_id in unique_input_ids:
         cur_songs.execute("""
         SELECT
             t.track_id,
@@ -148,20 +158,21 @@ def cbf_result(ids):
         """, (track_id,))
         track = cur_songs.fetchone()
         if track:
-            weight = weights.get(track_id, 0)
-            input_tracks.append(track + (weight,))
+            input_tracks.append(track)
 
     if not input_tracks:
         print("No input tracks found in the database.")
         return
 
-    all_tracks = fetch_all_tracks_features(weights)
+    all_tracks = fetch_all_tracks_features()
+    all_tracks_dict = {track[0]: track for track in all_tracks}
     all_genres = set()
     for track in all_tracks:
         all_genres.update(track[3].split(','))
 
     all_genres = list(all_genres)
-    distances = calculate_distances(input_tracks, all_tracks, all_genres)
+    distances = calculate_distances(
+        input_tracks, list(all_tracks_dict.values()), all_genres)
 
     with open(output_path, 'w') as file:
         file.write("Inputted IDs:\n")
@@ -172,17 +183,11 @@ def cbf_result(ids):
                        input_track[0]}] - Genres: {artist_genres}\n")
 
         file.write("\nSongs Recommendation:\n")
-        recommended_artists = set()
-        for idx, (track_id, track_name, artist_name, distance) in enumerate(distances, 1):
-            if artist_name in recommended_artists:
-                continue
-            recommended_artists.add(artist_name)
+        for idx, (track_id, track_name, artist_name, distance) in enumerate(distances[:n_recommend], 1):
             file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
                        track_id}] - Distance: {distance:.2f}\n")
-            if len(recommended_artists) >= int(config['rs']['n_recommend']):
-                break
 
-    print(f'CBF Result written to: {output_path}')
+    print(f'HFCBFCF Result written to: {output_path}')
 
 
 if __name__ == "__main__":
@@ -191,8 +196,4 @@ if __name__ == "__main__":
         '2tznHmp70DxMyr2XhWLOW0',
         '2Z5wXgysowvzl0nKGNGU0t',
     ]
-    cbf_result(ids)
-
-# Close database connections
-conn_playlist.close()
-conn_songs.close()
+    hfcbfcf_result(ids)

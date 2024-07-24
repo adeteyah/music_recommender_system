@@ -35,14 +35,14 @@ cf.cf_result(ids)
 end = time.time()
 print("CF execution time: ", end - start)
 
-# HF CBF CF
+# HF CBF CF (From O_CBF Combined with ???)
 print("\n# Generating HF-CBF-CF Result")
 start = time.time()
 hf_cbf_cf.hfcbfcf_result(ids)
 end = time.time()
 print("HFCBFCF execution time: ", end - start)
 
-# HF CF CBF
+# HF CF CBF (From O_CF Combined with ???)
 print("\n# Generating HF-CF-CBF Result")
 start = time.time()
 hf_cf_cbf.hfcfcbf_result(ids)
