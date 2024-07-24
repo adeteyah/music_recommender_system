@@ -13,6 +13,10 @@ output_path = config['output']['hfcbfcf_output']
 n_recommend = int(config['rs']['n_recommend'])
 # Penalty weight for repeated artists
 artist_penalty = float(config['rs'].get('artist_penalty', 5.0))
+# Weight for distance in the final score
+distance_weight = float(config['rs'].get('distance_weight', 0.5))
+# Weight for interaction in the final score
+interaction_weight = float(config['rs'].get('interaction_weight', 0.5))
 
 # Connect to the databases
 conn_playlist = sqlite3.connect(db_playlist)
@@ -132,8 +136,23 @@ def calculate_distances(input_tracks, all_tracks, all_genres, weight_dict):
             distances.append(
                 (all_track_id, all_track[1], artist_name, distance, weight))
 
-    # Sort by weight descending, then by distance ascending
-    distances.sort(key=lambda x: (-x[4], x[3]))
+    # Normalize distances and weights
+    max_distance = max(distances, key=lambda x: x[3])[3] if distances else 1
+    min_distance = min(distances, key=lambda x: x[3])[3] if distances else 0
+    max_weight = max(distances, key=lambda x: x[4])[4] if distances else 1
+    min_weight = min(distances, key=lambda x: x[4])[4] if distances else 0
+
+    for i, (all_track_id, track_name, artist_name, distance, weight) in enumerate(distances):
+        norm_distance = (distance - min_distance) / (max_distance -
+                                                     min_distance) if max_distance != min_distance else 0
+        norm_weight = (weight - min_weight) / (max_weight -
+                                               min_weight) if max_weight != min_weight else 0
+        combined_score = (distance_weight * (1 - norm_distance)
+                          ) + (interaction_weight * norm_weight)
+        distances[i] = (all_track_id, track_name, artist_name,
+                        distance, weight, combined_score)
+
+    distances.sort(key=lambda x: -x[5])  # Sort by combined score descending
     return distances
 
 
@@ -194,9 +213,9 @@ def hfcbfcf_result(ids):
                        input_track[0]}] - Genres: {artist_genres}\n")
 
         file.write("\nSongs Recommendation:\n")
-        for idx, (track_id, track_name, artist_name, distance, weight) in enumerate(distances[:n_recommend], 1):
-            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
-                       track_id}] - Distance: {distance:.2f} - User Interaction: {weight}\n")
+        for idx, (track_id, track_name, artist_name, distance, weight, combined_score) in enumerate(distances[:n_recommend], 1):
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{track_id}] - Distance: {
+                       distance:.2f} - User Interaction: {weight} - Score: {combined_score:.2f}\n")
 
     print(f'HFCBFCF Result written to: {output_path}')
 
@@ -204,8 +223,9 @@ def hfcbfcf_result(ids):
 if __name__ == "__main__":
     # Example input with track_ids
     ids = [
-        '2tznHmp70DxMyr2XhWLOW0',
-        '2Z5wXgysowvzl0nKGNGU0t',
+        '3vkCueOmm7xQDoJ17W1Pm3',
+        '5vPO5ouEv8iedKWxzmSv7b',
+        '3qhlB30KknSejmIvZZLjOD',
     ]
     hfcbfcf_result(ids)
 
