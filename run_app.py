@@ -2,7 +2,7 @@ import time
 import scripts.seed as seed
 
 from scripts.rs import cbf
-from scripts.rs_optimized import o_cbf
+from scripts.rs import cbf_o
 from scripts.rs import cf
 from scripts.rs import hf_cbf_cf
 from scripts.rs import hf_cf_cbf
@@ -24,7 +24,7 @@ print("CBF execution time: ", end - start)
 # Optimized by Normalization
 print("\n# Generating Optimized CBF Result")
 start = time.time()
-o_cbf.o_cbf_result(ids)
+cbf_o.o_cbf_result(ids)
 end = time.time()
 print("CBF execution time: ", end - start)
 
