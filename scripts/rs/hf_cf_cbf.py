@@ -123,6 +123,9 @@ def euclidean_distance(vec1, vec2):
 def normalize_values(values):
     min_val = min(values)
     max_val = max(values)
+    if min_val == max_val:
+        # or [0] * len(values) if you prefer to neutralize the effect
+        return [0.5] * len(values)
     return [(val - min_val) / (max_val - min_val) for val in values]
 
 
