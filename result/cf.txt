@@ -11,28 +11,16 @@ Used Inputs:
 2. Djo - End of Beginning [https://open.spotify.com/track/3qhlB30KknSejmIvZZLjOD] - Genres: pov: indie,psychedelic pop
 
 Matched Playlists:
-1. https://open.spotify.com/user/0yqfh7h7cratdpgw6slohufou - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE [Inputted IDs: 3qhlB30KknSejmIvZZLjOD, 3vkCueOmm7xQDoJ17W1Pm3]
+1. https://open.spotify.com/user/0yqfh7h7cratdpgw6slohufou - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE [Inputted IDs: 3vkCueOmm7xQDoJ17W1Pm3, 3qhlB30KknSejmIvZZLjOD]
 
 Songs Recommendation:
-1. The Black Skirts - EVERYTHING [https://open.spotify.com/track/4vb7g4GrE9cOrhEzUWadN8] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-2. The 1975 - About You [https://open.spotify.com/track/1fDFHXcykq4iw8Gg7s5hG9] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-3. Novo Amor - Colourway [https://open.spotify.com/track/2oa53bhiNPCz2CGh26AYxi] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-4. July - Fall Rain [https://open.spotify.com/track/5xwsTCfVGSZlMLQCEKDpOc] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-5. wave to earth - love. [https://open.spotify.com/track/5rDXfGMWI6S8wkXR0MHsvv] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-6. Shin Giwon Piano - Beyond My Dreams [https://open.spotify.com/track/4pPBmDpwMxlz4xSi7VMWVD] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+1. Novo Amor - State Lines [https://open.spotify.com/track/7CoMBpPTwQi2wPT0U0Nr9b] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+2. Aldi Haqq - Peak of Love [https://open.spotify.com/track/1c4FsERA2Jp4TfvuCc2csI] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+3. The 1975 - About You [https://open.spotify.com/track/1fDFHXcykq4iw8Gg7s5hG9] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+4. wave to earth - pink [https://open.spotify.com/track/2KHXLUeYXiXnasuGzA2f8G] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+5. DANIEL - Lily of The Valley [https://open.spotify.com/track/4gAIUEY7VkeiKQOPwIYaYb] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+6. July - Fall Rain [https://open.spotify.com/track/5xwsTCfVGSZlMLQCEKDpOc] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
 7. Taylor Swift - "Slut!" (Taylor's Version) (From The Vault) [https://open.spotify.com/track/71BqAINEnezjQfxE4VuJfq] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-8. Lana Del Rey - Chemtrails Over The Country Club [https://open.spotify.com/track/7bPWdJgx8vek7S5i5yAtvG] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-9. Ariana Grande - Winter Things [https://open.spotify.com/track/1jhljxXlHw8K9rezXKrnow] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-10. Aldi Haqq - Peak of Love [https://open.spotify.com/track/1c4FsERA2Jp4TfvuCc2csI] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-11. Luke Morris - My Comfort Zone [https://open.spotify.com/track/3jeZHRBSSPAOFDqmAG09hT] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-12. BEN - 180 Degree - Instrumental [https://open.spotify.com/track/4BPE0NG07cXUg2b1I1kRJD] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-13. PRYVT - blue salvia [https://open.spotify.com/track/4ZKUto3pgjYznFxkjSLdlr] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-14. Strawberry Guy - Sun Outside My Window [https://open.spotify.com/track/5fCqHoueAR1Q790mPKj1HR] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-15. MALIQ & D'Essentials - Senja Teduh Pelita [https://open.spotify.com/track/4jlhUj1aT0IxzaodNEV7xs] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-16. Taylor Swift - Fortnight (feat. Post Malone) [https://open.spotify.com/track/2OzhQlSqBEmt7hmkYxfT6m] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-17. elijah woods - 24/7, 365 [https://open.spotify.com/track/05QUYSOApWLr8oBbpONl7p] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-18. Ariana Grande - intro (end of the world) [https://open.spotify.com/track/2o1pb13quMReXZqE7jWsgq] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-19. DANIEL - Lily of The Valley [https://open.spotify.com/track/4gAIUEY7VkeiKQOPwIYaYb] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-20. wave to earth - pink [https://open.spotify.com/track/2KHXLUeYXiXnasuGzA2f8G] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-21. beabadoobee - Glue Song (feat. Clairo) [https://open.spotify.com/track/0tMMPZEt6Gyrl9FI8zSicm] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
-22. Novo Amor - State Lines [https://open.spotify.com/track/7CoMBpPTwQi2wPT0U0Nr9b] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+8. PRYVT - blue salvia [https://open.spotify.com/track/4ZKUto3pgjYznFxkjSLdlr] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+9. Novo Amor - Colourway [https://open.spotify.com/track/2oa53bhiNPCz2CGh26AYxi] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE
+10. The Black Skirts - EVERYTHING [https://open.spotify.com/track/4vb7g4GrE9cOrhEzUWadN8] | Count: 1 - https://open.spotify.com/playlist/0wMN39dEN6qHBYlrLQJIDE

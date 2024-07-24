@@ -8,6 +8,7 @@ config.read('config.cfg')
 db_playlist = config['db']['playlists_db']
 db_songs = config['db']['songs_db']
 output_path = config['output']['cf_output']
+n_recommend = int(config['rs']['n_recommend'])
 
 # Connect to the databases
 conn_playlist = sqlite3.connect(db_playlist)
@@ -159,7 +160,7 @@ def cf_result(ids):
                        playlist_id} [Inputted IDs: {matched_ids_str}]\n")
 
         file.write("\nSongs Recommendation:\n")
-        for idx, (track_id, track_name, artist_name, count, playlists_str) in enumerate(recommendations, 1):
+        for idx, (track_id, track_name, artist_name, count, playlists_str) in enumerate(recommendations[:n_recommend], 1):
             file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
                        track_id}] | Count: {count} - {playlists_str}\n")
 
