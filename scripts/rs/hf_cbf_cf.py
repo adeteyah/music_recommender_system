@@ -204,6 +204,7 @@ def hfcbfcf_result(ids):
     distances = calculate_distances(input_tracks, list(
         all_tracks_dict.values()), all_genres, weight_dict)
 
+    recommended_track_ids = set()
     with open(output_path, 'w') as file:
         file.write("Inputted IDs:\n")
         for idx, input_track in enumerate(input_tracks, 1):
@@ -213,9 +214,14 @@ def hfcbfcf_result(ids):
                        input_track[0]}] - Genres: {artist_genres}\n")
 
         file.write("\nSongs Recommendation:\n")
-        for idx, (track_id, track_name, artist_name, distance, weight, combined_score) in enumerate(distances[:n_recommend], 1):
-            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{track_id}] - Distance: {
-                       distance:.2f} - User Interaction: {weight} - Score: {combined_score:.2f}\n")
+        for idx, (track_id, track_name, artist_name, distance, weight, combined_score) in enumerate(distances):
+            if track_id in recommended_track_ids:
+                continue
+            file.write(f"{idx+1}. {artist_name} - {track_name} [https://open.spotify.com/track/{
+                       track_id}] - Distance: {distance:.2f} - User Interaction: {weight} - Score: {combined_score:.2f}\n")
+            recommended_track_ids.add(track_id)
+            if len(recommended_track_ids) >= n_recommend:
+                break
 
     print(f'HFCBFCF Result written to: {output_path}')
 
