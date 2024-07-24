@@ -10,10 +10,10 @@ from scripts.rs import hf_cf_cbf
 seed.fill_playlists_table()
 
 ids = [
-    '5XeFesFbtLpXzIVDNQP22n',
-    '1fDFHXcykq4iw8Gg7s5hG9',
-    '6ilc4vQcwMPlvAHFfsTGng',
-    '2LBqCSwhJGcFQeTHMVGwy3',
+    '5ZNdRdZ2inm4ksA8keadDs',
+    '0wEeW8Bwr0fHXuS2zLiDXk',
+    '1LwP9g1Hjbs64jXM2Qsxry',
+    '21iSFtrC2VHP3PfImVTglV',
 ]
 # CBF
 print("\n# Generating CBF Result")
