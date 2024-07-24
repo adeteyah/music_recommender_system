@@ -12,9 +12,9 @@ output_path = config['output']['hfcfcbf_output']
 n_recommend = int(config['rs']['n_recommend'])
 
 # Weights for combining parameters
-distance_weight = float(config['rs'].get('distance_weight', 0.5))
-count_weight = float(config['rs'].get('count_weight', 0.25))
-interaction_weight = float(config['rs'].get('interaction_weight', 0.25))
+distance_weight = float(config['rs'].get('distance_weight', 0.6))
+count_weight = float(config['rs'].get('count_weight', 0.35))
+interaction_weight = float(config['rs'].get('interaction_weight', 0.15))
 
 # Connect to the databases
 conn_playlist = sqlite3.connect(db_playlist)
