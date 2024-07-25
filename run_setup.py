@@ -66,47 +66,47 @@ CREATE TABLE IF NOT EXISTS tracks (
     time_signature INTEGER,
     valence REAL
 );
+/*
+CREATE TABLE IF NOT EXISTS tracks_to_train (
+    track_id TEXT PRIMARY KEY,
+    track_name TEXT,
+    artist_ids TEXT,
+    duration_ms INTEGER,
+    popularity REAL,
+    acousticness REAL,
+    danceability REAL,
+    energy REAL,
+    instrumentalness REAL,
+    key INTEGER,
+    liveness REAL,
+    loudness REAL,
+    mode REAL,
+    speechiness REAL,
+    tempo REAL,
+    time_signature INTEGER,
+    valence REAL
+);
 
-# CREATE TABLE IF NOT EXISTS tracks_to_train (
-#     track_id TEXT PRIMARY KEY,
-#     track_name TEXT,
-#     artist_ids TEXT,
-#     duration_ms INTEGER,
-#     popularity REAL,
-#     acousticness REAL,
-#     danceability REAL,
-#     energy REAL,
-#     instrumentalness REAL,
-#     key INTEGER,
-#     liveness REAL,
-#     loudness REAL,
-#     mode REAL,
-#     speechiness REAL,
-#     tempo REAL,
-#     time_signature INTEGER,
-#     valence REAL
-# );
-
-# CREATE TABLE IF NOT EXISTS tracks_to_test (
-#     track_id TEXT PRIMARY KEY,
-#     track_name TEXT,
-#     artist_ids TEXT,
-#     duration_ms INTEGER,
-#     popularity REAL,
-#     acousticness REAL,
-#     danceability REAL,
-#     energy REAL,
-#     instrumentalness REAL,
-#     key INTEGER,
-#     liveness REAL,
-#     loudness REAL,
-#     mode REAL,
-#     speechiness REAL,
-#     tempo REAL,
-#     time_signature INTEGER,
-#     valence REAL
-# );
-
+CREATE TABLE IF NOT EXISTS tracks_to_test (
+    track_id TEXT PRIMARY KEY,
+    track_name TEXT,
+    artist_ids TEXT,
+    duration_ms INTEGER,
+    popularity REAL,
+    acousticness REAL,
+    danceability REAL,
+    energy REAL,
+    instrumentalness REAL,
+    key INTEGER,
+    liveness REAL,
+    loudness REAL,
+    mode REAL,
+    speechiness REAL,
+    tempo REAL,
+    time_signature INTEGER,
+    valence REAL
+);
+*/
 CREATE INDEX IF NOT EXISTS idx_tracks_track_id ON tracks (track_id);
 """
 
@@ -156,17 +156,18 @@ CREATE TABLE IF NOT EXISTS items (
     playlist_items TEXT
 );
 
+/*
+CREATE TABLE IF NOT EXISTS items_to_train (
+    playlist_id TEXT PRIMARY KEY,
+    playlist_items TEXT
+);
 
-# CREATE TABLE IF NOT EXISTS items_to_train (
-#     playlist_id TEXT PRIMARY KEY,
-#     playlist_items TEXT
-# );
 
-
-# CREATE TABLE IF NOT EXISTS items_to_test (
-#     playlist_id TEXT PRIMARY KEY,
-#     playlist_items TEXT
-# );
+CREATE TABLE IF NOT EXISTS items_to_test (
+    playlist_id TEXT PRIMARY KEY,
+    playlist_items TEXT
+);
+*/
 
 CREATE TABLE IF NOT EXISTS weights (
     track_id TEXT PRIMARY KEY,
