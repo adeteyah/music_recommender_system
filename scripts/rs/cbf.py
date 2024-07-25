@@ -7,6 +7,13 @@ from scipy.spatial.distance import euclidean
 config = configparser.ConfigParser()
 config.read('config.cfg')
 
+if config['program']['run'] == 'test':
+    tracks_table_name = 'tracks_to_test'
+    items_table_name = 'items_to_test'
+elif config['program']['run'] == 'train':
+    tracks_table_name = 'tracks_to_train'
+    items_table_name = 'items_to_train'
+
 db_playlist = config['db']['playlists_db']
 db_songs = config['db']['songs_db']
 output_path = config['output']['cbf_output']
@@ -42,7 +49,7 @@ def fetch_all_tracks_features():
         t.tempo,
         t.time_signature,
         t.valence
-    FROM tracks t
+    FROM {tracks_table_name} t
     JOIN artists a ON t.artist_ids LIKE '%' || a.artist_id || '%'
     """
     cur_songs.execute(query)
@@ -146,7 +153,7 @@ def cbf_result(ids):
             t.tempo,
             t.time_signature,
             t.valence
-        FROM tracks t
+        FROM {tracks_table_name} t
         JOIN artists a ON t.artist_ids LIKE '%' || a.artist_id || '%'
         WHERE t.track_id=?
         """, (track_id,))
