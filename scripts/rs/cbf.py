@@ -29,7 +29,7 @@ cur_songs = conn_songs.cursor()
 
 
 def fetch_all_tracks_features():
-    query = """
+    query = f"""
     SELECT
         t.track_id,
         t.track_name,
@@ -133,7 +133,7 @@ def cbf_result(ids):
     unique_input_ids = set(ids)
 
     for track_id in unique_input_ids:
-        cur_songs.execute("""
+        cur_songs.execute(f"""
         SELECT
             t.track_id,
             t.track_name,
