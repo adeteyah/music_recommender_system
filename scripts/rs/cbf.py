@@ -168,7 +168,7 @@ def cbf_result(ids):
     distances = calculate_distances(
         input_tracks, list(all_tracks_dict.values()), all_genres)
 
-    with open(output_path, 'w') as file:
+    with open(output_path, 'w',  encoding='utf-8') as file:
         file.write("Inputted IDs:\n")
         for idx, input_track in enumerate(input_tracks, 1):
             artist_name, artist_genres = fetch_artist_name_and_genres(

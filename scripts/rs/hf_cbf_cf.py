@@ -205,7 +205,7 @@ def hfcbfcf_result(ids):
         all_tracks_dict.values()), all_genres, weight_dict)
 
     recommended_track_ids = set()
-    with open(output_path, 'w') as file:
+    with open(output_path, 'w',  encoding='utf-8') as file:
         file.write("Inputted IDs:\n")
         for idx, input_track in enumerate(input_tracks, 1):
             artist_name, artist_genres = fetch_artist_name_and_genres(
@@ -234,7 +234,3 @@ if __name__ == "__main__":
         '3qhlB30KknSejmIvZZLjOD',
     ]
     hfcbfcf_result(ids)
-
-# Close database connections
-conn_playlist.close()
-conn_songs.close()
