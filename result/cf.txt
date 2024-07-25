@@ -29,70 +29,70 @@ Used Inputs:
 10. The Beatles - Ob-La-Di, Ob-La-Da - Esher Demo [https://open.spotify.com/track/4xNXqEBx1VXuph56zyUzBg] - Genres: british invasion,classic rock,merseybeat,psychedelic rock,rock
 
 Matched Playlists:
-1. https://open.spotify.com/user/yluff02qnwtul700on69tp1gp - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE [Inputted IDs: 6TYQRlRci6AkVrN9a5C7ne, 0XHWClSz0v6RIaRSGqJH3X, 08mG3Y1vljYA6bvDt4Wqkj, 2d6m2F4I7wCuAKtSsdhh83, 61mWefnWQOLf90gepjOCb3]
-2. https://open.spotify.com/user/77c9lyw4eerc0ak88emzwwztc - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE [Inputted IDs: 4ZfTrSH5UwTqsKVQCaGvi3, 4uxsv9PjV3Yeyn51RdWvGJ, 65EK5h5IS7wCkAeaatbdgg]
-3. https://open.spotify.com/user/77c9lyw4eerc0ak88emzwwztc - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR [Inputted IDs: 4xNXqEBx1VXuph56zyUzBg, 6EdSN1iGtLPhcz43QDRkdK]
+1. https://open.spotify.com/user/yluff02qnwtul700on69tp1gp - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE [Inputted IDs: 6TYQRlRci6AkVrN9a5C7ne, 2d6m2F4I7wCuAKtSsdhh83, 0XHWClSz0v6RIaRSGqJH3X, 61mWefnWQOLf90gepjOCb3, 08mG3Y1vljYA6bvDt4Wqkj]
+2. https://open.spotify.com/user/77c9lyw4eerc0ak88emzwwztc - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE [Inputted IDs: 65EK5h5IS7wCkAeaatbdgg, 4ZfTrSH5UwTqsKVQCaGvi3, 4uxsv9PjV3Yeyn51RdWvGJ]
+3. https://open.spotify.com/user/77c9lyw4eerc0ak88emzwwztc - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR [Inputted IDs: 6EdSN1iGtLPhcz43QDRkdK, 4xNXqEBx1VXuph56zyUzBg]
 
 Songs Recommendation:
-1. Michael Franks - A Robinsong [https://open.spotify.com/track/01TfB0loycceekA0VuLyxJ] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-2. Chet Baker - You Make Me Feel So Young [https://open.spotify.com/track/7C93tC7eggdYwUhC1aGi24] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-3. Tommy Dorsey - I'll Never Smile Again [https://open.spotify.com/track/2Pi0rY9FcbaecqO0AyhXbu] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-4. System Of A Down - Sugar [https://open.spotify.com/track/31RTFPrB7wmYBhlkM2ILXG] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-5. Pink Floyd - The Great Gig in the Sky [https://open.spotify.com/track/2TjdnqlpwOjhijHCwHCP2d] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-6. Nancy Sinatra - Bang Bang (My Baby Shot Me Down) [https://open.spotify.com/track/4JLcAU2xY90qTkTSNM1lUa] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-7. Frank Sinatra - That Old Black Magic (with Walter Gross & His Orchestra) [https://open.spotify.com/track/09RYvNnfqvLQbKJKJh63Af] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-8. Charlie Burg - Title Guide to the Talkies [https://open.spotify.com/track/5yRy1JQHBSRFsW8HL3aG6q] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-9. The Beatles - Golden Slumbers - Remastered 2009 [https://open.spotify.com/track/01SfTM5nfCou5gQL70r6gs] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-10. Nirvana - In Bloom [https://open.spotify.com/track/2mvffzYUJ9Ld9xhsF5DUjU] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-11. The Beatles - I Want To Hold Your Hand - Remastered 2015 [https://open.spotify.com/track/4pbG9SUmWIvsROVLF0zF9s] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-12. Carpenters - (They Long To Be) Close To You [https://open.spotify.com/track/2kyVQg00pphEufGT59M2XH] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+1. The Smiths - Heaven Knows I'm Miserable Now - 2011 Remaster [https://open.spotify.com/track/1H5N26VqHR4JhuaRKY2I0u] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+2. Skeeter Davis - The End of the World [https://open.spotify.com/track/5DTOOkooKFUvWj1XQTFa09] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+3. The Beatles - All My Loving - Live / Remastered [https://open.spotify.com/track/7j021TxcicWprdXpCcMBeH] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+4. Korn - Y'all Want a Single [https://open.spotify.com/track/1AzMYJm6qTAullM3UKuPY9] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+5. The Ovation - The Day We Fell in Love [https://open.spotify.com/track/0bj3AUm7IATitbfoaUjd5D] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+6. The Beatles - Blackbird - Remastered 2009 [https://open.spotify.com/track/5jgFfDIR6FR0gvlA56Nakr] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+7. The Beatles - Yesterday - Remastered 2009 [https://open.spotify.com/track/3BQHpFgAp4l80e1XslIjNI] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+8. Mazzy Star - Look On Down From The Bridge [https://open.spotify.com/track/010ALbbh5KlQ4fKWgSdhRd] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+9. The Beatles - Love Me Do - Remastered 2009 [https://open.spotify.com/track/3VbGCXWRiouAq8VyMYN2MI] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+10. Slipknot - Custer [https://open.spotify.com/track/3GiJq4AQK7324mfIQbpiTf] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+11. Charlie Burg - Title Guide to the Talkies [https://open.spotify.com/track/5yRy1JQHBSRFsW8HL3aG6q] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+12. The Beatles - Don't Let Me Down - Remastered 2009 [https://open.spotify.com/track/3evG0BIqEFMMP7lVJh1cSf] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
 13. Ozzy Osbourne - No More Tears [https://open.spotify.com/track/7w6PJe5KBPyvuRYxFkPssC] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-14. Skeeter Davis - The End of the World [https://open.spotify.com/track/5DTOOkooKFUvWj1XQTFa09] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-15. The Beatles - Yellow Submarine [https://open.spotify.com/track/1tdltVUBkiBCW1C3yB4zyD] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-16. The Beatles - Don't Let Me Down - Remastered 2009 [https://open.spotify.com/track/3evG0BIqEFMMP7lVJh1cSf] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-17. The Beatles - Penny Lane - Stereo Mix 2017 [https://open.spotify.com/track/7k1gXoiBTddulMBVlKuJIs] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-18. Metallica - Master Of Puppets [https://open.spotify.com/track/2MuWTIM3b0YEAskbeeFE1i] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-19. The Beatles - A Hard Day's Night - Remastered 2009 [https://open.spotify.com/track/5J2CHimS7dWYMImCHkEFaJ] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-20. Metallica - Ride The Lightning - Remastered [https://open.spotify.com/track/2O7UGwJPVlix15Wn4sa5vw] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-21. Joe "Bean" Esposito - You're The Best [https://open.spotify.com/track/4zXa17K83Pp6N2yXdVc2sv] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-22. The Beatles - I Should Have Known Better - Remastered 2009 [https://open.spotify.com/track/3pU1CUgPiFfxPCpscwIwQR] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-23. The Beatles - All You Need Is Love - Remastered 2009 [https://open.spotify.com/track/68BTFws92cRztMS1oQ7Ewj] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-24. Mazzy Star - Look On Down From The Bridge [https://open.spotify.com/track/010ALbbh5KlQ4fKWgSdhRd] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-25. Judas Priest - Breaking the Law [https://open.spotify.com/track/2RaA6kIcvomt77qlIgGhCT] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-26. Limp Bizkit - Break Stuff [https://open.spotify.com/track/5cZqsjVs6MevCnAkasbEOX] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-27. The Beatles - Here Comes The Sun - Remastered 2009 [https://open.spotify.com/track/6dGnYIeXmHdcikdzNNDMm2] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-28. Korn - Y'all Want a Single [https://open.spotify.com/track/1AzMYJm6qTAullM3UKuPY9] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-29. The Beatles - She Loves You - Mono / Remastered [https://open.spotify.com/track/6nEkxYIEnrbYH7h1hJ8Xn6] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-30. The Ovation - The Day We Fell in Love [https://open.spotify.com/track/0bj3AUm7IATitbfoaUjd5D] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-31. The Beatles - Strawberry Fields Forever [https://open.spotify.com/track/1J7wMZrvCtWZlXBdMM25Ce] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-32. Aerosmith - Dream On [https://open.spotify.com/track/1xsYj84j7hUDDnTTerGWlH] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-33. Oasis - Champagne Supernova - Remastered [https://open.spotify.com/track/1wo3UYTeizJHkwYIuLuBPF] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-34. The Beatles - Yesterday - Remastered 2009 [https://open.spotify.com/track/3BQHpFgAp4l80e1XslIjNI] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-35. Jim Croce - Time in a Bottle [https://open.spotify.com/track/561F1zqRwGPCTMRsLsXVtL] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-36. The Smiths - Heaven Knows I'm Miserable Now - 2011 Remaster [https://open.spotify.com/track/1H5N26VqHR4JhuaRKY2I0u] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-37. Deftones - Please Please Please Let Me Get What I Want - 2005 Remaster [https://open.spotify.com/track/4HpIh5wWfkq5sSuCLLSwYR] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-38. Paul McCartney - Here Today - Remixed 2015 [https://open.spotify.com/track/0QtnwXDziZN1K55fXuLN6q] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-39. The Beatles - Hey Jude [https://open.spotify.com/track/1eT2CjXwFXNx6oY5ydvzKU] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-40. The Beatles - Here Comes The Sun - 2019 Mix [https://open.spotify.com/track/3CPFHaVEHkkH26hAEPgMMp] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-41. Josephine Foster - I'm a Dreamer [https://open.spotify.com/track/0Gg82ex8NjAl3oNmCk0LTA] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-42. The Beatles - Here Comes The Sun - Take 9 [https://open.spotify.com/track/5M330VM7N8gPrYfia5nf25] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-43. Patsy Cline - Leavin' On Your Mind - Single Version [https://open.spotify.com/track/1D2mV1f9QkklP6vy0sdBI9] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-44. Guns N' Roses - Sweet Child O' Mine [https://open.spotify.com/track/7snQQk1zcKl8gZ92AnueZW] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-45. Dion & The Belmonts - A Teenager In Love [https://open.spotify.com/track/0QGwOFQChzflLAmPq5NwKo] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-46. Slipknot - Custer [https://open.spotify.com/track/3GiJq4AQK7324mfIQbpiTf] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-47. The Beatles - Michelle - Remastered 2009 [https://open.spotify.com/track/5By7Pzgl6TMuVJG168VWzS] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-48. Ricky Nelson - Lonesome Town [https://open.spotify.com/track/0SsYlkXxZ5vkWOTsKxMfMz] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-49. Dusty Springfield - The Windmills of Your Mind [https://open.spotify.com/track/6MUHAvKGAmKXojn8wdFB71] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-50. Kylie Minogue - Where the Wild Roses Grow [https://open.spotify.com/track/4NtVhnFAJNzV9tCIOwdPcX] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-51. Sarah Vaughan - Lullaby Of Birdland [https://open.spotify.com/track/6jxEHkpAm8zZd9NfhQ4ovn] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-52. The Beatles - In My Life - Remastered 2009 [https://open.spotify.com/track/3KfbEIOC7YIv90FIfNSZpo] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-53. The Beatles - Love Me Do - Remastered 2009 [https://open.spotify.com/track/3VbGCXWRiouAq8VyMYN2MI] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-54. Helldorado - The Ballad of Nora Lee [https://open.spotify.com/track/1Dt7eyGkxGI6L8eSyuJD3T] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-55. The Beatles - P.S. I Love You - Remastered 2009 [https://open.spotify.com/track/7Msq9qojB7yORuJvz49iUy] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-56. Led Zeppelin - Stairway to Heaven - Remaster [https://open.spotify.com/track/5CQ30WqJwcep0pYcV4AMNc] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-57. Eddy Arnold - Make the World Go Away [https://open.spotify.com/track/7GafJyGdVj7ahXo96LwFM4] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-58. System Of A Down - Lonely Day [https://open.spotify.com/track/1VNWaY3uNfoeWqb5U8x2QX] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-59. The Beatles - Blackbird - Remastered 2009 [https://open.spotify.com/track/5jgFfDIR6FR0gvlA56Nakr] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-60. The Beatles - All My Loving - Live / Remastered [https://open.spotify.com/track/7j021TxcicWprdXpCcMBeH] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-61. Nirvana - Smells Like Teen Spirit [https://open.spotify.com/track/4CeeEOM32jQcH3eN9Q2dGj] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-62. The Beatles - Something - Remastered 2009 [https://open.spotify.com/track/0pNeVovbiZHkulpGeOx1Gj] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+14. The Beatles - Here Comes The Sun - Remastered 2009 [https://open.spotify.com/track/6dGnYIeXmHdcikdzNNDMm2] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+15. Eddy Arnold - Make the World Go Away [https://open.spotify.com/track/7GafJyGdVj7ahXo96LwFM4] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+16. System Of A Down - Sugar [https://open.spotify.com/track/31RTFPrB7wmYBhlkM2ILXG] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+17. Josephine Foster - I'm a Dreamer [https://open.spotify.com/track/0Gg82ex8NjAl3oNmCk0LTA] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+18. Joe "Bean" Esposito - You're The Best [https://open.spotify.com/track/4zXa17K83Pp6N2yXdVc2sv] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+19. Metallica - Master Of Puppets [https://open.spotify.com/track/2MuWTIM3b0YEAskbeeFE1i] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+20. Frank Sinatra - That Old Black Magic (with Walter Gross & His Orchestra) [https://open.spotify.com/track/09RYvNnfqvLQbKJKJh63Af] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+21. The Beatles - P.S. I Love You - Remastered 2009 [https://open.spotify.com/track/7Msq9qojB7yORuJvz49iUy] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+22. Ricky Nelson - Lonesome Town [https://open.spotify.com/track/0SsYlkXxZ5vkWOTsKxMfMz] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+23. The Beatles - Here Comes The Sun - 2019 Mix [https://open.spotify.com/track/3CPFHaVEHkkH26hAEPgMMp] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+24. The Beatles - I Should Have Known Better - Remastered 2009 [https://open.spotify.com/track/3pU1CUgPiFfxPCpscwIwQR] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+25. Paul McCartney - Here Today - Remixed 2015 [https://open.spotify.com/track/0QtnwXDziZN1K55fXuLN6q] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+26. Carpenters - (They Long To Be) Close To You [https://open.spotify.com/track/2kyVQg00pphEufGT59M2XH] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+27. The Beatles - A Hard Day's Night - Remastered 2009 [https://open.spotify.com/track/5J2CHimS7dWYMImCHkEFaJ] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+28. Dusty Springfield - The Windmills of Your Mind [https://open.spotify.com/track/6MUHAvKGAmKXojn8wdFB71] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+29. The Beatles - Here Comes The Sun - Take 9 [https://open.spotify.com/track/5M330VM7N8gPrYfia5nf25] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+30. Dion & The Belmonts - A Teenager In Love [https://open.spotify.com/track/0QGwOFQChzflLAmPq5NwKo] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+31. Helldorado - The Ballad of Nora Lee [https://open.spotify.com/track/1Dt7eyGkxGI6L8eSyuJD3T] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+32. Guns N' Roses - Sweet Child O' Mine [https://open.spotify.com/track/7snQQk1zcKl8gZ92AnueZW] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+33. Michael Franks - A Robinsong [https://open.spotify.com/track/01TfB0loycceekA0VuLyxJ] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+34. Chet Baker - You Make Me Feel So Young [https://open.spotify.com/track/7C93tC7eggdYwUhC1aGi24] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+35. Judas Priest - Breaking the Law [https://open.spotify.com/track/2RaA6kIcvomt77qlIgGhCT] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+36. The Beatles - Hey Jude [https://open.spotify.com/track/1eT2CjXwFXNx6oY5ydvzKU] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+37. Sarah Vaughan - Lullaby Of Birdland [https://open.spotify.com/track/6jxEHkpAm8zZd9NfhQ4ovn] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+38. Nancy Sinatra - Bang Bang (My Baby Shot Me Down) [https://open.spotify.com/track/4JLcAU2xY90qTkTSNM1lUa] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+39. The Beatles - All You Need Is Love - Remastered 2009 [https://open.spotify.com/track/68BTFws92cRztMS1oQ7Ewj] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+40. System Of A Down - Lonely Day [https://open.spotify.com/track/1VNWaY3uNfoeWqb5U8x2QX] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+41. The Beatles - Something - Remastered 2009 [https://open.spotify.com/track/0pNeVovbiZHkulpGeOx1Gj] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+42. Aerosmith - Dream On [https://open.spotify.com/track/1xsYj84j7hUDDnTTerGWlH] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+43. The Beatles - In My Life - Remastered 2009 [https://open.spotify.com/track/3KfbEIOC7YIv90FIfNSZpo] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+44. The Beatles - Michelle - Remastered 2009 [https://open.spotify.com/track/5By7Pzgl6TMuVJG168VWzS] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+45. Tommy Dorsey - I'll Never Smile Again [https://open.spotify.com/track/2Pi0rY9FcbaecqO0AyhXbu] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+46. Nirvana - In Bloom [https://open.spotify.com/track/2mvffzYUJ9Ld9xhsF5DUjU] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+47. The Beatles - Golden Slumbers - Remastered 2009 [https://open.spotify.com/track/01SfTM5nfCou5gQL70r6gs] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+48. The Beatles - Yellow Submarine [https://open.spotify.com/track/1tdltVUBkiBCW1C3yB4zyD] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+49. Oasis - Champagne Supernova - Remastered [https://open.spotify.com/track/1wo3UYTeizJHkwYIuLuBPF] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+50. Deftones - Please Please Please Let Me Get What I Want - 2005 Remaster [https://open.spotify.com/track/4HpIh5wWfkq5sSuCLLSwYR] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+51. Patsy Cline - Leavin' On Your Mind - Single Version [https://open.spotify.com/track/1D2mV1f9QkklP6vy0sdBI9] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+52. The Beatles - She Loves You - Mono / Remastered [https://open.spotify.com/track/6nEkxYIEnrbYH7h1hJ8Xn6] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+53. Led Zeppelin - Stairway to Heaven - Remaster [https://open.spotify.com/track/5CQ30WqJwcep0pYcV4AMNc] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+54. Pink Floyd - The Great Gig in the Sky [https://open.spotify.com/track/2TjdnqlpwOjhijHCwHCP2d] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+55. The Beatles - I Want To Hold Your Hand - Remastered 2015 [https://open.spotify.com/track/4pbG9SUmWIvsROVLF0zF9s] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+56. Nirvana - Smells Like Teen Spirit [https://open.spotify.com/track/4CeeEOM32jQcH3eN9Q2dGj] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+57. Metallica - Ride The Lightning - Remastered [https://open.spotify.com/track/2O7UGwJPVlix15Wn4sa5vw] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
+58. The Beatles - Penny Lane - Stereo Mix 2017 [https://open.spotify.com/track/7k1gXoiBTddulMBVlKuJIs] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+59. The Beatles - Strawberry Fields Forever [https://open.spotify.com/track/1J7wMZrvCtWZlXBdMM25Ce] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
+60. Kylie Minogue - Where the Wild Roses Grow [https://open.spotify.com/track/4NtVhnFAJNzV9tCIOwdPcX] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+61. Jim Croce - Time in a Bottle [https://open.spotify.com/track/561F1zqRwGPCTMRsLsXVtL] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+62. Limp Bizkit - Break Stuff [https://open.spotify.com/track/5cZqsjVs6MevCnAkasbEOX] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
