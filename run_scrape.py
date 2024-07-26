@@ -38,6 +38,7 @@ def fetch_and_store_playlist_data(user_id, conn_playlists, conn_songs):
         offset = 0
         limit = 1
         fetched_playlist_ids = set()
+        fetched_artist_ids = set()  # Set to store fetched artist IDs
 
         while True:
             playlists = sp.user_playlists(user_id, offset=offset, limit=limit)
@@ -130,6 +131,15 @@ def fetch_and_store_playlist_data(user_id, conn_playlists, conn_songs):
                         # Store artist details
                         for artist in track['artists']:
                             artist_id = artist['id']
+                            if artist_id in fetched_artist_ids:
+                                continue
+
+                            cursor.execute(
+                                'SELECT 1 FROM artists WHERE artist_id = ?', (artist_id,))
+                            if cursor.fetchone():
+                                fetched_artist_ids.add(artist_id)
+                                continue
+
                             artist_info = sp.artist(artist_id)
                             artist_name = artist_info['name']
                             artist_genres = ",".join(artist_info['genres'])
@@ -143,6 +153,7 @@ def fetch_and_store_playlist_data(user_id, conn_playlists, conn_songs):
                                 INSERT OR IGNORE INTO artists (artist_id, artist_name, artist_genres) 
                                 VALUES (?, ?, ?)
                             ''', (artist_id, artist_name, artist_genres))
+                            fetched_artist_ids.add(artist_id)
                             print(f'Updated artist name, genres for {
                                   artist_id}: {artist_name}, {artist_genres}')
 
