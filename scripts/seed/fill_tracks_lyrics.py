@@ -128,6 +128,7 @@ def fetch_and_store_lyrics():
                 result = future.result()
                 if result:
                     results.append(result)
+                    fetched_track_ids.add(result[0])
 
         # Insert fetched lyrics into database in a single transaction
         cursor.executemany("""
@@ -137,8 +138,8 @@ def fetch_and_store_lyrics():
         conn.commit()
 
         # Update fetched lyrics file
-        with open(fetched_lyrics_path, 'a') as f:
-            for track_id, _, _ in results:
+        with open(fetched_lyrics_path, 'w') as f:
+            for track_id in fetched_track_ids:
                 f.write(f"{track_id}\n")
 
 
