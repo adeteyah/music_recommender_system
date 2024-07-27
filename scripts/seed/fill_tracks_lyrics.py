@@ -138,7 +138,7 @@ def fetch_and_store_lyrics():
         conn.commit()
 
         # Update fetched lyrics file
-        with open(fetched_lyrics_path, 'a') as f:
+        with open(fetched_lyrics_path, 'w') as f:
             for track_id in fetched_track_ids:
                 f.write(f"{track_id}\n")
 
