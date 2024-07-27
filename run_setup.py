@@ -45,7 +45,9 @@ CREATE TABLE IF NOT EXISTS lyrics (
     keywords TEXT
 );
 
-CREATE INDEX IF NOT EXISTS idx_artists_artist_id ON artists (artist_id);
+CREATE INDEX IF NOT EXISTS idx_lyrics_track_id ON lyrics (track_id);
+CREATE INDEX IF NOT EXISTS idx_lyrics_lyrics ON lyrics (lyrics);
+CREATE INDEX IF NOT EXISTS idx_lyrics_keywords ON lyrics (keywords);
 
 CREATE TABLE IF NOT EXISTS artists (
     artist_id TEXT PRIMARY KEY,
