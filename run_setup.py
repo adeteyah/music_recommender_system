@@ -42,7 +42,7 @@ songs_schema = """
 CREATE TABLE IF NOT EXISTS lyrics (
     track_id TEXT PRIMARY KEY,
     lyrics TEXT,
-    keyword TEXT,
+    keywords TEXT
 );
 
 CREATE INDEX IF NOT EXISTS idx_artists_artist_id ON artists (artist_id);

@@ -1,5 +1,5 @@
 import time
-import scripts.seed as seed
+import scripts.seed.fill_playlists_attributes as fill_playlists_attributes
 
 from scripts.rs import cbf
 from scripts.rs import cbf_o
@@ -8,7 +8,7 @@ from scripts.rs import hf_cbf_cf
 from scripts.rs import hf_cbf_cf_o
 from scripts.rs import hf_cf_cbf
 
-seed.fill_playlists_table()
+fill_playlists_attributes.fill_playlists_table()
 
 ids = [
     '6uunyBNvRyzQl5imkPYdEb',
