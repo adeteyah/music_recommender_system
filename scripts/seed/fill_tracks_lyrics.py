@@ -4,6 +4,7 @@ import configparser
 from bs4 import BeautifulSoup
 import re
 import os
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Load configuration
 config = configparser.ConfigParser()
@@ -99,11 +100,10 @@ def fetch_and_store_lyrics():
         else:
             fetched_track_ids = set()
 
-        for track_id, track_name, artist_name in tracks:
+        def fetch_lyrics(track):
+            track_id, track_name, artist_name = track
             if track_id in fetched_track_ids:
-                print(f"Skipping {track_name} by {
-                      artist_name}, already fetched.")
-                continue
+                return None
 
             cleaned_track_name = clean_track_title(track_name)
             print(f"Fetching lyrics for {cleaned_track_name} by {artist_name}")
@@ -113,23 +113,33 @@ def fetch_and_store_lyrics():
                 if lyrics:
                     keywords = ', '.join(
                         [word for word in track_name.split()] + [word for word in artist_name.split()])
-                    cursor.execute("""
-                        INSERT OR REPLACE INTO lyrics (track_id, lyrics, keywords)
-                        VALUES (?, ?, ?)
-                    """, (track_id, lyrics, keywords))
-                    conn.commit()
-                    print(f"Lyrics fetched and stored for {
-                          cleaned_track_name}")
-
-                    # Append the track ID to the fetched lyrics file
-                    with open(fetched_lyrics_path, 'a') as f:
-                        f.write(f"{track_id}\n")
-
-                    fetched_track_ids.add(track_id)
+                    return (track_id, lyrics, keywords)
                 else:
                     print(f"Lyrics not found for {cleaned_track_name}")
             else:
                 print(f"Lyrics URL not found for {cleaned_track_name}")
+            return None
+
+        results = []
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            futures = [executor.submit(fetch_lyrics, track)
+                       for track in tracks]
+            for future in as_completed(futures):
+                result = future.result()
+                if result:
+                    results.append(result)
+
+        # Insert fetched lyrics into database in a single transaction
+        cursor.executemany("""
+            INSERT OR REPLACE INTO lyrics (track_id, lyrics, keywords)
+            VALUES (?, ?, ?)
+        """, results)
+        conn.commit()
+
+        # Update fetched lyrics file
+        with open(fetched_lyrics_path, 'a') as f:
+            for track_id, _, _ in results:
+                f.write(f"{track_id}\n")
 
 
 if __name__ == "__main__":
