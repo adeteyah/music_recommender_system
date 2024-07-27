@@ -2,6 +2,8 @@ import sqlite3
 import requests
 import configparser
 from bs4 import BeautifulSoup
+import re
+import os
 
 # Load configuration
 config = configparser.ConfigParser()
@@ -9,6 +11,7 @@ config.read('config.cfg')
 
 GENIUS_API_TOKEN = config['genius']['api_token']
 songs_db_path = config['db']['songs_db']
+fetched_lyrics_path = 'data/cache/fetched_lyrics.txt'
 
 headers = {
     'Authorization': f'Bearer {GENIUS_API_TOKEN}'
@@ -41,14 +44,36 @@ def get_lyrics_from_url(url):
 
     lyrics = soup.find_all('div', class_='lyrics')
     if lyrics:
-        return lyrics[0].get_text().strip()
+        return clean_lyrics(lyrics[0].get_text().strip())
 
     lyrics = soup.find_all(
         'div', class_=lambda x: x and 'Lyrics__Container' in x)
     if lyrics:
-        return '\n'.join([div.get_text().strip() for div in lyrics])
+        return clean_lyrics('\n'.join([div.get_text().strip() for div in lyrics]))
 
     return None
+
+
+def clean_lyrics(lyrics):
+    lyrics = re.sub(r'\[.*?\]', '', lyrics)  # Remove bracketed sections
+    # Replace multiple newlines with a single newline
+    lyrics = re.sub(r'\n+', '\n', lyrics)
+    return lyrics.strip()
+
+
+def clean_track_title(track_title):
+    # Patterns to remove from the track title
+    patterns = [
+        r'\(.*?\)',          # Anything in parentheses
+        r'\[.*?\]',          # Anything in square brackets
+        r' - .*$',           # Anything after ' - '
+        # Words like 'remix', 'remastered', etc.
+        r'\b(remix|remaster(ed)?|version)\b',
+        r'\d{4}',            # Any 4-digit year
+    ]
+    for pattern in patterns:
+        track_title = re.sub(pattern, '', track_title, flags=re.IGNORECASE)
+    return track_title.strip()
 
 
 def fetch_and_store_lyrics():
@@ -66,9 +91,22 @@ def fetch_and_store_lyrics():
 
         tracks = cursor.fetchall()
 
+        # Read fetched track IDs
+        if os.path.exists(fetched_lyrics_path):
+            with open(fetched_lyrics_path, 'r') as f:
+                fetched_track_ids = set(f.read().splitlines())
+        else:
+            fetched_track_ids = set()
+
         for track_id, track_name, artist_name in tracks:
-            print(f"Fetching lyrics for {track_name} by {artist_name}")
-            lyrics_url = get_lyrics_url(track_name, artist_name)
+            if track_id in fetched_track_ids:
+                print(f"Skipping {track_name} by {
+                      artist_name}, already fetched.")
+                continue
+
+            cleaned_track_name = clean_track_title(track_name)
+            print(f"Fetching lyrics for {cleaned_track_name} by {artist_name}")
+            lyrics_url = get_lyrics_url(cleaned_track_name, artist_name)
             if lyrics_url:
                 lyrics = get_lyrics_from_url(lyrics_url)
                 if lyrics:
@@ -79,11 +117,18 @@ def fetch_and_store_lyrics():
                         VALUES (?, ?, ?)
                     """, (track_id, lyrics, keywords))
                     conn.commit()
-                    print(f"Lyrics fetched and stored for {track_name}")
+                    print(f"Lyrics fetched and stored for {
+                          cleaned_track_name}")
+
+                    # Append the track ID to the fetched lyrics file
+                    with open(fetched_lyrics_path, 'a') as f:
+                        f.write(f"{track_id}\n")
+
+                    fetched_track_ids.add(track_id)
                 else:
-                    print(f"Lyrics not found for {track_name}")
+                    print(f"Lyrics not found for {cleaned_track_name}")
             else:
-                print(f"Lyrics URL not found for {track_name}")
+                print(f"Lyrics URL not found for {cleaned_track_name}")
 
 
 if __name__ == "__main__":
