@@ -1,98 +1,39 @@
 Inputted IDs:
-1. My Chemical Romance - Famous Last Words [https://open.spotify.com/track/2d6m2F4I7wCuAKtSsdhh83] - Genres: emo,modern rock,pop punk,pov: indie,rock
-2. Black Sabbath - War Pigs - 2009 Remaster [https://open.spotify.com/track/6TYQRlRci6AkVrN9a5C7ne] - Genres: album rock,alternative metal,birmingham metal,classic rock,hard rock,metal,rock,stoner rock,uk doom metal
-3. Deep Purple - Smoke on the Water [https://open.spotify.com/track/0XHWClSz0v6RIaRSGqJH3X] - Genres: album rock,classic rock,hard rock,metal,rock
-4. Slipknot - Duality [https://open.spotify.com/track/61mWefnWQOLf90gepjOCb3] - Genres: alternative metal,nu metal,rap metal,rock
-5. AC/DC - Back In Black [https://open.spotify.com/track/08mG3Y1vljYA6bvDt4Wqkj] - Genres: australian rock,hard rock,rock
-6. Paolo Nutini - Autumn [https://open.spotify.com/track/65EK5h5IS7wCkAeaatbdgg] - Genres: british soul,neo mellow,scottish singer-songwriter
-7. Johnny Mathis - Misty [https://open.spotify.com/track/4uxsv9PjV3Yeyn51RdWvGJ] - Genres: adult standards,easy listening
-8. The Stylistics - And I'll See You No More [https://open.spotify.com/track/4ZfTrSH5UwTqsKVQCaGvi3] - Genres: classic soul,disco,funk,motown,philly soul,quiet storm,soul
-9. DAY6 (Even of Day) - Hey [https://open.spotify.com/track/7BvjH5QT5Umiq21dgbvLXb] - Genres: 
-10. The Beatles - Help! [https://open.spotify.com/track/6EdSN1iGtLPhcz43QDRkdK] - Genres: british invasion,classic rock,merseybeat,psychedelic rock,rock
-11. The Goo Goo Dolls - Here Is Gone [https://open.spotify.com/track/4KqTGPPmXowMPEoShSVOta] - Genres: neo mellow,permanent wave,pop rock,post-grunge
-12. The Beatles - Ob-La-Di, Ob-La-Da - Esher Demo [https://open.spotify.com/track/4xNXqEBx1VXuph56zyUzBg] - Genres: british invasion,classic rock,merseybeat,psychedelic rock,rock
+1. Tom Waits - Dead and Lovely [https://open.spotify.com/track/6uunyBNvRyzQl5imkPYdEb] - Genres: folk,singer-songwriter
+2. Everybody Loves an Outlaw - I See Red [https://open.spotify.com/track/5MAK1nd8R6PWnle1Q1WJvh] - Genres: modern blues rock
+3. Bastille - World Gone Mad [https://open.spotify.com/track/1ZyQGXH9dZ4AecevHhKUxi] - Genres: metropopolis,modern rock,pop
+4. Sarah Cothran - As the World Caves In [https://open.spotify.com/track/2xXNLutYAOELYVObYb1C1S] - Genres: gen z singer-songwriter
+5. Tom Waits - Time - 2023 Remaster [https://open.spotify.com/track/5eAKNw3ftVX16LYECfmEsw] - Genres: folk,singer-songwriter
 
 Eliminated Inputs:
-1. DAY6 (Even of Day) - Hey [https://open.spotify.com/track/7BvjH5QT5Umiq21dgbvLXb] - Genres: 
-2. The Goo Goo Dolls - Here Is Gone [https://open.spotify.com/track/4KqTGPPmXowMPEoShSVOta] - Genres: neo mellow,permanent wave,pop rock,post-grunge
 
 Used Inputs:
-1. My Chemical Romance - Famous Last Words [https://open.spotify.com/track/2d6m2F4I7wCuAKtSsdhh83] - Genres: emo,modern rock,pop punk,pov: indie,rock
-2. Black Sabbath - War Pigs - 2009 Remaster [https://open.spotify.com/track/6TYQRlRci6AkVrN9a5C7ne] - Genres: album rock,alternative metal,birmingham metal,classic rock,hard rock,metal,rock,stoner rock,uk doom metal
-3. Deep Purple - Smoke on the Water [https://open.spotify.com/track/0XHWClSz0v6RIaRSGqJH3X] - Genres: album rock,classic rock,hard rock,metal,rock
-4. Slipknot - Duality [https://open.spotify.com/track/61mWefnWQOLf90gepjOCb3] - Genres: alternative metal,nu metal,rap metal,rock
-5. AC/DC - Back In Black [https://open.spotify.com/track/08mG3Y1vljYA6bvDt4Wqkj] - Genres: australian rock,hard rock,rock
-6. Paolo Nutini - Autumn [https://open.spotify.com/track/65EK5h5IS7wCkAeaatbdgg] - Genres: british soul,neo mellow,scottish singer-songwriter
-7. Johnny Mathis - Misty [https://open.spotify.com/track/4uxsv9PjV3Yeyn51RdWvGJ] - Genres: adult standards,easy listening
-8. The Stylistics - And I'll See You No More [https://open.spotify.com/track/4ZfTrSH5UwTqsKVQCaGvi3] - Genres: classic soul,disco,funk,motown,philly soul,quiet storm,soul
-9. The Beatles - Help! [https://open.spotify.com/track/6EdSN1iGtLPhcz43QDRkdK] - Genres: british invasion,classic rock,merseybeat,psychedelic rock,rock
-10. The Beatles - Ob-La-Di, Ob-La-Da - Esher Demo [https://open.spotify.com/track/4xNXqEBx1VXuph56zyUzBg] - Genres: british invasion,classic rock,merseybeat,psychedelic rock,rock
+1. Tom Waits - Dead and Lovely [https://open.spotify.com/track/6uunyBNvRyzQl5imkPYdEb] - Genres: folk,singer-songwriter
+2. Everybody Loves an Outlaw - I See Red [https://open.spotify.com/track/5MAK1nd8R6PWnle1Q1WJvh] - Genres: modern blues rock
+3. Bastille - World Gone Mad [https://open.spotify.com/track/1ZyQGXH9dZ4AecevHhKUxi] - Genres: metropopolis,modern rock,pop
+4. Sarah Cothran - As the World Caves In [https://open.spotify.com/track/2xXNLutYAOELYVObYb1C1S] - Genres: gen z singer-songwriter
+5. Tom Waits - Time - 2023 Remaster [https://open.spotify.com/track/5eAKNw3ftVX16LYECfmEsw] - Genres: folk,singer-songwriter
 
 Matched Playlists:
-1. https://open.spotify.com/user/yluff02qnwtul700on69tp1gp - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE [Inputted IDs: 6TYQRlRci6AkVrN9a5C7ne, 2d6m2F4I7wCuAKtSsdhh83, 61mWefnWQOLf90gepjOCb3, 08mG3Y1vljYA6bvDt4Wqkj, 0XHWClSz0v6RIaRSGqJH3X]
-2. https://open.spotify.com/user/77c9lyw4eerc0ak88emzwwztc - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE [Inputted IDs: 65EK5h5IS7wCkAeaatbdgg, 4uxsv9PjV3Yeyn51RdWvGJ, 4ZfTrSH5UwTqsKVQCaGvi3]
-3. https://open.spotify.com/user/77c9lyw4eerc0ak88emzwwztc - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR [Inputted IDs: 4xNXqEBx1VXuph56zyUzBg, 6EdSN1iGtLPhcz43QDRkdK]
+1. https://open.spotify.com/user/p5hbktou7i2jh8ym7ulgs60uj - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg [Inputted IDs: 1ZyQGXH9dZ4AecevHhKUxi, 2xXNLutYAOELYVObYb1C1S, 5MAK1nd8R6PWnle1Q1WJvh, 6uunyBNvRyzQl5imkPYdEb, 5eAKNw3ftVX16LYECfmEsw]
 
 Songs Recommendation:
-1. The Beatles - Strawberry Fields Forever [https://open.spotify.com/track/1J7wMZrvCtWZlXBdMM25Ce] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-2. Guns N' Roses - Sweet Child O' Mine [https://open.spotify.com/track/7snQQk1zcKl8gZ92AnueZW] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-3. The Smiths - Heaven Knows I'm Miserable Now - 2011 Remaster [https://open.spotify.com/track/1H5N26VqHR4JhuaRKY2I0u] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-4. Dion & The Belmonts - A Teenager In Love [https://open.spotify.com/track/0QGwOFQChzflLAmPq5NwKo] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-5. Eddy Arnold - Make the World Go Away [https://open.spotify.com/track/7GafJyGdVj7ahXo96LwFM4] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-6. The Beatles - Here Comes The Sun - Take 9 [https://open.spotify.com/track/5M330VM7N8gPrYfia5nf25] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-7. The Beatles - I Should Have Known Better - Remastered 2009 [https://open.spotify.com/track/3pU1CUgPiFfxPCpscwIwQR] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-8. The Beatles - Here Comes The Sun - 2019 Mix [https://open.spotify.com/track/3CPFHaVEHkkH26hAEPgMMp] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-9. Carpenters - (They Long To Be) Close To You [https://open.spotify.com/track/2kyVQg00pphEufGT59M2XH] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-10. Josephine Foster - I'm a Dreamer [https://open.spotify.com/track/0Gg82ex8NjAl3oNmCk0LTA] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-11. The Ovation - The Day We Fell in Love [https://open.spotify.com/track/0bj3AUm7IATitbfoaUjd5D] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-12. The Beatles - Penny Lane - Stereo Mix 2017 [https://open.spotify.com/track/7k1gXoiBTddulMBVlKuJIs] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-13. Pink Floyd - The Great Gig in the Sky [https://open.spotify.com/track/2TjdnqlpwOjhijHCwHCP2d] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-14. System Of A Down - Sugar [https://open.spotify.com/track/31RTFPrB7wmYBhlkM2ILXG] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-15. The Beatles - Blackbird - Remastered 2009 [https://open.spotify.com/track/5jgFfDIR6FR0gvlA56Nakr] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-16. Metallica - Master Of Puppets [https://open.spotify.com/track/2MuWTIM3b0YEAskbeeFE1i] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-17. Chet Baker - You Make Me Feel So Young [https://open.spotify.com/track/7C93tC7eggdYwUhC1aGi24] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-18. The Beatles - Yellow Submarine [https://open.spotify.com/track/1tdltVUBkiBCW1C3yB4zyD] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-19. Patsy Cline - Leavin' On Your Mind - Single Version [https://open.spotify.com/track/1D2mV1f9QkklP6vy0sdBI9] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-20. Joe "Bean" Esposito - You're The Best [https://open.spotify.com/track/4zXa17K83Pp6N2yXdVc2sv] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-21. Oasis - Champagne Supernova - Remastered [https://open.spotify.com/track/1wo3UYTeizJHkwYIuLuBPF] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-22. Nirvana - In Bloom [https://open.spotify.com/track/2mvffzYUJ9Ld9xhsF5DUjU] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-23. System Of A Down - Lonely Day [https://open.spotify.com/track/1VNWaY3uNfoeWqb5U8x2QX] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-24. Paul McCartney - Here Today - Remixed 2015 [https://open.spotify.com/track/0QtnwXDziZN1K55fXuLN6q] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-25. The Beatles - Michelle - Remastered 2009 [https://open.spotify.com/track/5By7Pzgl6TMuVJG168VWzS] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-26. Skeeter Davis - The End of the World [https://open.spotify.com/track/5DTOOkooKFUvWj1XQTFa09] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-27. The Beatles - Something - Remastered 2009 [https://open.spotify.com/track/0pNeVovbiZHkulpGeOx1Gj] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-28. The Beatles - Don't Let Me Down - Remastered 2009 [https://open.spotify.com/track/3evG0BIqEFMMP7lVJh1cSf] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-29. Mazzy Star - Look On Down From The Bridge [https://open.spotify.com/track/010ALbbh5KlQ4fKWgSdhRd] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-30. Helldorado - The Ballad of Nora Lee [https://open.spotify.com/track/1Dt7eyGkxGI6L8eSyuJD3T] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-31. The Beatles - P.S. I Love You - Remastered 2009 [https://open.spotify.com/track/7Msq9qojB7yORuJvz49iUy] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-32. The Beatles - Here Comes The Sun - Remastered 2009 [https://open.spotify.com/track/6dGnYIeXmHdcikdzNNDMm2] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-33. Charlie Burg - Title Guide to the Talkies [https://open.spotify.com/track/5yRy1JQHBSRFsW8HL3aG6q] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-34. The Beatles - All You Need Is Love - Remastered 2009 [https://open.spotify.com/track/68BTFws92cRztMS1oQ7Ewj] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-35. Korn - Y'all Want a Single [https://open.spotify.com/track/1AzMYJm6qTAullM3UKuPY9] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-36. The Beatles - Hey Jude [https://open.spotify.com/track/1eT2CjXwFXNx6oY5ydvzKU] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-37. Kylie Minogue - Where the Wild Roses Grow [https://open.spotify.com/track/4NtVhnFAJNzV9tCIOwdPcX] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-38. Led Zeppelin - Stairway to Heaven - Remaster [https://open.spotify.com/track/5CQ30WqJwcep0pYcV4AMNc] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-39. Ricky Nelson - Lonesome Town [https://open.spotify.com/track/0SsYlkXxZ5vkWOTsKxMfMz] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-40. The Beatles - I Want To Hold Your Hand - Remastered 2015 [https://open.spotify.com/track/4pbG9SUmWIvsROVLF0zF9s] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-41. Nirvana - Smells Like Teen Spirit [https://open.spotify.com/track/4CeeEOM32jQcH3eN9Q2dGj] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-42. The Beatles - Yesterday - Remastered 2009 [https://open.spotify.com/track/3BQHpFgAp4l80e1XslIjNI] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-43. The Beatles - Love Me Do - Remastered 2009 [https://open.spotify.com/track/3VbGCXWRiouAq8VyMYN2MI] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-44. Slipknot - Custer [https://open.spotify.com/track/3GiJq4AQK7324mfIQbpiTf] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-45. The Beatles - Golden Slumbers - Remastered 2009 [https://open.spotify.com/track/01SfTM5nfCou5gQL70r6gs] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-46. Nancy Sinatra - Bang Bang (My Baby Shot Me Down) [https://open.spotify.com/track/4JLcAU2xY90qTkTSNM1lUa] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-47. The Beatles - She Loves You - Mono / Remastered [https://open.spotify.com/track/6nEkxYIEnrbYH7h1hJ8Xn6] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-48. Sarah Vaughan - Lullaby Of Birdland [https://open.spotify.com/track/6jxEHkpAm8zZd9NfhQ4ovn] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-49. Frank Sinatra - That Old Black Magic (with Walter Gross & His Orchestra) [https://open.spotify.com/track/09RYvNnfqvLQbKJKJh63Af] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-50. Dusty Springfield - The Windmills of Your Mind [https://open.spotify.com/track/6MUHAvKGAmKXojn8wdFB71] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-51. Deftones - Please Please Please Let Me Get What I Want - 2005 Remaster [https://open.spotify.com/track/4HpIh5wWfkq5sSuCLLSwYR] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-52. Ozzy Osbourne - No More Tears [https://open.spotify.com/track/7w6PJe5KBPyvuRYxFkPssC] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-53. Tommy Dorsey - I'll Never Smile Again [https://open.spotify.com/track/2Pi0rY9FcbaecqO0AyhXbu] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-54. Judas Priest - Breaking the Law [https://open.spotify.com/track/2RaA6kIcvomt77qlIgGhCT] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-55. Michael Franks - A Robinsong [https://open.spotify.com/track/01TfB0loycceekA0VuLyxJ] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
-56. The Beatles - All My Loving - Live / Remastered [https://open.spotify.com/track/7j021TxcicWprdXpCcMBeH] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-57. Metallica - Ride The Lightning - Remastered [https://open.spotify.com/track/2O7UGwJPVlix15Wn4sa5vw] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-58. Aerosmith - Dream On [https://open.spotify.com/track/1xsYj84j7hUDDnTTerGWlH] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-59. The Beatles - In My Life - Remastered 2009 [https://open.spotify.com/track/3KfbEIOC7YIv90FIfNSZpo] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-60. The Beatles - A Hard Day's Night - Remastered 2009 [https://open.spotify.com/track/5J2CHimS7dWYMImCHkEFaJ] | Count: 1 - https://open.spotify.com/playlist/2dL4iW0F0tZhvEh4QWkZfR
-61. Limp Bizkit - Break Stuff [https://open.spotify.com/track/5cZqsjVs6MevCnAkasbEOX] | Count: 1 - https://open.spotify.com/playlist/5f5Ki5ViLqRTSDSeVAAMJE
-62. Jim Croce - Time in a Bottle [https://open.spotify.com/track/561F1zqRwGPCTMRsLsXVtL] | Count: 1 - https://open.spotify.com/playlist/7F5fgekZSRbOKgBe4irDwE
+1. Tom Walker - Play Dead [https://open.spotify.com/track/6rzVBHfKNDogRICqjzgGsE] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+2. Logic - Broken People (with Logic & Rag'n'Bone Man) [https://open.spotify.com/track/5rxPi0MiR4miNK0rCmk980] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+3. X Ambassadors - Renegades [https://open.spotify.com/track/0fYVliAYKHuPmECRs1pbRf] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+4. David Kushner - Daylight [https://open.spotify.com/track/1odExI7RdWc4BT515LTAwj] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+5. Rag'n'Bone Man - Skin [https://open.spotify.com/track/6y2Kaz9QI01XBKJ8mTb7Pf] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+6. Imagine Dragons - Whatever It Takes [https://open.spotify.com/track/6Qn5zhYkTa37e91HC1D7lb] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+7. Disturbed - The Sound of Silence [https://open.spotify.com/track/0eZBeB2xFIS65jQHerispi] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+8. Welshly Arms - Legendary [https://open.spotify.com/track/2bDENJyfbxj0neGiXUFvIX] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+9. Tom Waits - Day After Tomorrow [https://open.spotify.com/track/6oMfjYG14uBJjwA661zVxz] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+10. Sigrid - Everybody Knows [https://open.spotify.com/track/34b3PCTLUISY153eb2F72k] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+11. KALEO - Way down We Go [https://open.spotify.com/track/0y1QJc3SJVPKJ1OvFmFqe6] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+12. Imagine Dragons - Radioactive [https://open.spotify.com/track/62yJjFtgkhUrXktIoSjgP2] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+13. Rag'n'Bone Man - Human [https://open.spotify.com/track/58zsLZPvfflaiIbNWoA22O] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+14. Thirty Seconds To Mars - Walk On Water [https://open.spotify.com/track/6FT9FZccFD6nE8dMNslz2n] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+15. Ursine Vulpine - Wicked Game [https://open.spotify.com/track/3cdEXRnb7cZQSvKU7emY1h] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+16. Hozier - Take Me To Church [https://open.spotify.com/track/3dYD57lRAUcMHufyqn9GcI] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+17. Barns Courtney - Glitter & Gold [https://open.spotify.com/track/1Mf27cnAF1Q6Ko83XTM5d1] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+18. RAIGN - Knocking on Heavens Door [https://open.spotify.com/track/20jZ7lf5eqDUQQruuMSKVE] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+19. X Ambassadors - Torches [https://open.spotify.com/track/1p9mCPuPV9FGa0jnJYk0IA] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg

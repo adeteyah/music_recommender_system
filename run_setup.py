@@ -39,6 +39,13 @@ def create_database(db_path, schema):
 
 
 songs_schema = """
+CREATE TABLE IF NOT EXISTS lyrics (
+    track_id TEXT PRIMARY KEY,
+    track_lyrics TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_artists_artist_id ON artists (artist_id);
+
 CREATE TABLE IF NOT EXISTS artists (
     artist_id TEXT PRIMARY KEY,
     artist_name TEXT,
