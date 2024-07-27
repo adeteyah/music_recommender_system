@@ -55,7 +55,8 @@ def get_lyrics_from_url(url):
 
 
 def clean_lyrics(lyrics):
-    lyrics = re.sub(r'\[.*?\]', '', lyrics)  # Remove bracketed sections
+    # Remove bracketed sections and replace with new lines
+    lyrics = re.sub(r'\[.*?\]', '\n', lyrics)
     # Replace multiple newlines with a single newline
     lyrics = re.sub(r'\n+', '\n', lyrics)
     return lyrics.strip()
