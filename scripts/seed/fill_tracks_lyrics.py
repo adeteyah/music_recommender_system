@@ -5,6 +5,15 @@ from bs4 import BeautifulSoup
 import re
 import os
 import time
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from collections import Counter
+
+# Load NLTK resources
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('stopwords')
 
 # Load configuration
 config = configparser.ConfigParser()
@@ -17,6 +26,8 @@ fetched_lyrics_path = 'data/cache/fetched_lyrics.txt'
 headers = {
     'Authorization': f'Bearer {GENIUS_API_TOKEN}'
 }
+
+stop_words = set(stopwords.words('english'))
 
 
 def get_lyrics_url(song_title, artist_name):
@@ -77,7 +88,7 @@ def get_lyrics_from_url(url):
         else:
             print(f"Error fetching lyrics from URL {
                   url}: {response.status_code}")
-            retries -= 1
+            retries -= -1
             time.sleep(1)
     print(f"Failed to fetch lyrics after retries from URL {url}")
     return None
@@ -104,6 +115,18 @@ def clean_track_title(track_title):
     for pattern in patterns:
         track_title = re.sub(pattern, '', track_title, flags=re.IGNORECASE)
     return track_title.strip()
+
+
+def extract_keywords(lyrics):
+    words = word_tokenize(lyrics)
+    # Get all nouns from the lyrics
+    nouns = [word for word, pos in nltk.pos_tag(words) if pos.startswith(
+        'NN') and word.lower() not in stop_words]
+    # Count frequency of each noun
+    freq = Counter(nouns)
+    # Get most common nouns
+    most_common_nouns = [word for word, count in freq.most_common()]
+    return ', '.join(most_common_nouns)
 
 
 def fetch_and_store_lyrics():
@@ -140,8 +163,7 @@ def fetch_and_store_lyrics():
             if lyrics_url:
                 lyrics = get_lyrics_from_url(lyrics_url)
                 if lyrics:
-                    keywords = ', '.join(
-                        [word for word in track_name.split()] + [word for word in artist_name.split()])
+                    keywords = extract_keywords(lyrics)
                     cursor.execute("""
                         INSERT OR REPLACE INTO lyrics (track_id, lyrics, keywords)
                         VALUES (?, ?, ?)
