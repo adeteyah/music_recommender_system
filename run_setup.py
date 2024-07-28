@@ -1,3 +1,4 @@
+import nltk
 import sqlite3
 import time
 import subprocess
@@ -199,10 +200,14 @@ def install_packages(packages):
 if __name__ == "__main__":
     install_directories()
     packages = ["configparser", "requests", "spotipy",
-                "pandas", "numpy", "matplotlib", "seaborn"]
+                "pandas", "numpy", "matplotlib", "seaborn", "nltk"]
     install_packages(packages)
     create_database("data/db/songs_details.db", songs_schema)
     create_database("data/db/playlists_details.db", playlist_schema)
+
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('stopwords')
 
 end = time.time()
 print("\nExecution time: ", end - start)
