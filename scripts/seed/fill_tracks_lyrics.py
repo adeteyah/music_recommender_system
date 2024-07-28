@@ -9,12 +9,6 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.tag import pos_tag
-import json
-
-# Ensure NLTK resources are downloaded
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('stopwords')
 
 # Load configuration
 config = configparser.ConfigParser()
@@ -22,8 +16,7 @@ config.read('config.cfg')
 
 GENIUS_API_TOKEN = config['genius']['api_token']
 songs_db_path = config['db']['songs_db']
-fetched_lyrics_path = 'data/cache/fetched_lyrics.json'
-batch_size = 10
+fetched_lyrics_path = 'data/cache/fetched_lyrics.txt'
 
 headers = {
     'Authorization': f'Bearer {GENIUS_API_TOKEN}'
@@ -35,11 +28,15 @@ def get_lyrics_url(song_title, artist_name):
     params = {'q': f"{song_title} {artist_name}"}
     response = requests.get(search_url, headers=headers, params=params)
 
+    if response.status_code != 200:
+        print(f"Failed to fetch URL for {song_title} by {
+              artist_name}. HTTP Status: {response.status_code}")
+        return None
+
     try:
         response_data = response.json()
     except requests.exceptions.JSONDecodeError:
-        print(f"Error decoding JSON for {song_title} by {artist_name}")
-        print("Response content:", response.text)
+        print(f"Failed to parse JSON for {song_title} by {artist_name}")
         return None
 
     song_info = None
@@ -114,7 +111,7 @@ def extract_keywords(lyrics, max_keywords=50):
     return ', '.join(most_common_keywords)
 
 
-def fetch_and_store_lyrics(offset=0):
+def fetch_and_store_lyrics():
     with sqlite3.connect(songs_db_path) as conn:
         cursor = conn.cursor()
 
@@ -125,26 +122,16 @@ def fetch_and_store_lyrics(offset=0):
             JOIN artists ON tracks.artist_ids = artists.artist_id
             LEFT JOIN lyrics ON tracks.track_id = lyrics.track_id
             WHERE lyrics.lyrics IS NULL
-            LIMIT ? OFFSET ?
-        """, (batch_size, offset))
+        """)
 
         tracks = cursor.fetchall()
 
-        fetched_track_ids = set()
+        # Read fetched track IDs
         if os.path.exists(fetched_lyrics_path):
             with open(fetched_lyrics_path, 'r') as f:
-                try:
-                    fetched_data = json.load(f)
-                    fetched_track_ids = set(fetched_data['fetched_track_ids'])
-                    offset = fetched_data['offset']
-                except json.JSONDecodeError:
-                    print(
-                        "Error decoding JSON from fetched_lyrics.json. Starting from scratch.")
-                    fetched_track_ids = set()
-                    offset = 0
+                fetched_track_ids = set(f.read().splitlines())
         else:
             fetched_track_ids = set()
-            offset = 0
 
         for track_id, track_name, artist_name in tracks:
             if track_id in fetched_track_ids:
@@ -167,16 +154,15 @@ def fetch_and_store_lyrics(offset=0):
                     print(f"Lyrics fetched and stored for {
                           cleaned_track_name}")
 
+                    # Append the track ID to the fetched lyrics file
+                    with open(fetched_lyrics_path, 'a') as f:
+                        f.write(f"{track_id}\n")
+
                     fetched_track_ids.add(track_id)
                 else:
                     print(f"Lyrics not found for {cleaned_track_name}")
             else:
                 print(f"Lyrics URL not found for {cleaned_track_name}")
-
-        # Save the progress
-        with open(fetched_lyrics_path, 'w') as f:
-            json.dump({'fetched_track_ids': list(fetched_track_ids),
-                      'offset': offset + batch_size}, f)
 
 
 if __name__ == "__main__":
