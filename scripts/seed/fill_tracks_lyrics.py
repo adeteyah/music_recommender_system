@@ -4,11 +4,6 @@ import configparser
 from bs4 import BeautifulSoup
 import re
 import os
-import time
-from collections import Counter
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
 
 # Load configuration
 config = configparser.ConfigParser()
@@ -22,32 +17,12 @@ headers = {
     'Authorization': f'Bearer {GENIUS_API_TOKEN}'
 }
 
-stop_words = set(stopwords.words('english'))
-
 
 def get_lyrics_url(song_title, artist_name):
     search_url = "https://api.genius.com/search"
     params = {'q': f"{song_title} {artist_name}"}
-    retries = 3
-    while retries > 0:
-        response = requests.get(search_url, headers=headers, params=params)
-        if response.status_code == 200:
-            try:
-                response_data = response.json()
-                break
-            except requests.exceptions.JSONDecodeError:
-                print("Error decoding JSON, retrying...")
-                retries -= 1
-                time.sleep(1)
-        else:
-            print(f"Error fetching URL for {song_title} by {
-                  artist_name}: {response.status_code}")
-            retries -= 1
-            time.sleep(1)
-    else:
-        print(f"Failed to fetch URL after retries for {
-              song_title} by {artist_name}")
-        return None
+    response = requests.get(search_url, headers=headers, params=params)
+    response_data = response.json()
 
     song_info = None
     if response_data['response']['hits']:
@@ -63,40 +38,30 @@ def get_lyrics_url(song_title, artist_name):
 
 
 def get_lyrics_from_url(url):
-    retries = 3
-    while retries > 0:
-        response = requests.get(url)
-        if response.status_code == 200:
-            soup = BeautifulSoup(response.text, 'html.parser')
-            [h.extract() for h in soup(['script', 'style', 'br'])]
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    [h.extract() for h in soup(['script', 'style', 'br'])]
 
-            lyrics = soup.find_all('div', class_='lyrics')
-            if lyrics:
-                return clean_lyrics(lyrics[0].get_text().strip())
+    lyrics = soup.find_all('div', class_='lyrics')
+    if lyrics:
+        return clean_lyrics(lyrics[0].get_text().strip())
 
-            lyrics = soup.find_all(
-                'div', class_=lambda x: x and 'Lyrics__Container' in x)
-            if lyrics:
-                return clean_lyrics('\n'.join([div.get_text().strip() for div in lyrics]))
+    lyrics = soup.find_all(
+        'div', class_=lambda x: x and 'Lyrics__Container' in x)
+    if lyrics:
+        return clean_lyrics('\n'.join([div.get_text().strip() for div in lyrics]))
 
-            return None
-        else:
-            print(f"Error fetching lyrics from URL {
-                  url}: {response.status_code}")
-            retries -= 1
-            time.sleep(1)
-    print(f"Failed to fetch lyrics after retries from URL {url}")
     return None
 
 
 def clean_lyrics(lyrics):
-   # Remove bracketed sections and replace with a space
+    # Remove bracketed sections and replace with a space
     lyrics = re.sub(r'\[.*?\]', ' ', lyrics)
     # Insert a newline before an uppercase letter that is in the middle of a word
     lyrics = re.sub(r'(?<=[a-z])(?=[A-Z])', '\n', lyrics)
     # Ensure there is a space after punctuation marks
     lyrics = re.sub(r'([?.!,])', r'\1 ', lyrics)
-    # Replace multiple spaces with a single space to clean up any extra spaces left by the replacement
+    # Replace multiple spaces with a single space
     lyrics = re.sub(r'\s+', ' ', lyrics)
     return lyrics.strip()
 
@@ -114,21 +79,6 @@ def clean_track_title(track_title):
     for pattern in patterns:
         track_title = re.sub(pattern, '', track_title, flags=re.IGNORECASE)
     return track_title.strip()
-
-
-def extract_keywords(lyrics):
-    words = word_tokenize(lyrics)
-    words = [word.lower() for word in words if word.isalpha()]
-    filtered_words = [word for word in words if word not in stop_words]
-    tagged_words = nltk.pos_tag(filtered_words)
-    nouns = [word for word, pos in tagged_words if pos.startswith('NN')]
-
-    # Count the most common nouns
-    noun_counts = Counter(nouns)
-    most_common_nouns = noun_counts.most_common(50)
-    keywords = [word for word, count in most_common_nouns]
-
-    return ', '.join(keywords)
 
 
 def fetch_and_store_lyrics():
@@ -165,7 +115,11 @@ def fetch_and_store_lyrics():
             if lyrics_url:
                 lyrics = get_lyrics_from_url(lyrics_url)
                 if lyrics:
-                    keywords = extract_keywords(lyrics)
+                    keywords = ', '.join(
+                        [word for word in track_name.split() if word.lower() not in ['i', 'you', 'me', 'they']] +
+                        [word for word in artist_name.split() if word.lower() not in [
+                            'i', 'you', 'me', 'they']]
+                    )
                     cursor.execute("""
                         INSERT OR REPLACE INTO lyrics (track_id, lyrics, keywords)
                         VALUES (?, ?, ?)
