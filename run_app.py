@@ -11,11 +11,10 @@ from scripts.rs import hf_cf_cbf
 fill_playlists_attributes.fill_playlists_table()
 
 ids = [
-    '6uunyBNvRyzQl5imkPYdEb',
-    '5MAK1nd8R6PWnle1Q1WJvh',
-    '1ZyQGXH9dZ4AecevHhKUxi',
-    '2xXNLutYAOELYVObYb1C1S',
-    '5eAKNw3ftVX16LYECfmEsw',
+    '5AkV53fo1u01mi8r22JNeF',
+    '3Sbova9DAY3pc9GTAACT4b',
+    '2kJwzbxV2ppxnQoYw4GLBZ',
+    '5O2P9iiztwhomNh8xkR9lJ',
 ]
 
 print("\n# Generating CBF Result")
