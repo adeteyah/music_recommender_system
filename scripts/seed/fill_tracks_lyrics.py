@@ -153,13 +153,16 @@ def fetch_and_store_lyrics():
                     conn.commit()
                     print(f"Lyrics fetched and stored for {
                           cleaned_track_name}")
-                    fetched_track_ids.add(track_id)
                 else:
                     print(f"Lyrics not found for {cleaned_track_name}")
-                with open(fetched_lyrics_path, 'a') as f:
-                    f.write(f"{track_id}\n")
             else:
                 print(f"Lyrics URL not found for {cleaned_track_name}")
+
+            # Append the track ID to the fetched lyrics file regardless of success
+            with open(fetched_lyrics_path, 'a') as f:
+                f.write(f"{track_id}\n")
+
+            fetched_track_ids.add(track_id)
 
 
 if __name__ == "__main__":
