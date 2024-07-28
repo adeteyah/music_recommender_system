@@ -32,7 +32,13 @@ def get_lyrics_url(song_title, artist_name):
     search_url = "https://api.genius.com/search"
     params = {'q': f"{song_title} {artist_name}"}
     response = requests.get(search_url, headers=headers, params=params)
-    response_data = response.json()
+
+    try:
+        response_data = response.json()
+    except requests.exceptions.JSONDecodeError:
+        print(f"Error decoding JSON for {song_title} by {artist_name}")
+        print("Response content:", response.text)
+        return None
 
     song_info = None
     if response_data['response']['hits']:
