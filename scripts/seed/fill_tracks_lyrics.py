@@ -90,10 +90,12 @@ def get_lyrics_from_url(url):
 
 
 def clean_lyrics(lyrics):
-    # Remove bracketed sections and replace with a space
+   # Remove bracketed sections and replace with a space
     lyrics = re.sub(r'\[.*?\]', ' ', lyrics)
     # Insert a newline before an uppercase letter that is in the middle of a word
     lyrics = re.sub(r'(?<=[a-z])(?=[A-Z])', '\n', lyrics)
+    # Ensure there is a space after punctuation marks
+    lyrics = re.sub(r'([?.!,])', r'\1 ', lyrics)
     # Replace multiple spaces with a single space to clean up any extra spaces left by the replacement
     lyrics = re.sub(r'\s+', ' ', lyrics)
     return lyrics.strip()
