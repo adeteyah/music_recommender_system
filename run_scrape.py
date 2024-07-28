@@ -13,7 +13,8 @@ SPOTIPY_CLIENT_ID = config['spotify']['client_id']
 SPOTIPY_CLIENT_SECRET = config['spotify']['client_secret']
 DELAY_TIME = float(config['api']['delay_time'])
 
-user_ids = ['']
+user_ids = ['angelakatarina1001', '2oxec3r349m2x7mdwl9u0k7xi', '88qhmnsnyewlgfh4reytf1bqo', '31ryqvo6cyfciehwvqkjtwa3nt44', '31xyna5wagkylrcwc6wiio4tu5ji', '21vzd5cyqwwmnc4usgf24yzjy',
+            'piwz3bc0dmv9z1wduk24z2nn7', '314vs32d6vzvjnxxto7ye4x6tneu', '317t2q2dztovfc2yzufh5ktt5jee', '31pvgypjnvjxyooliqcyarhfeahu', '12162238821', '3154bolg6t7edowci4kbhgwx447u', 'hae3zzfwdxlqb7jhwyxghvqd1']
 
 client_credentials_manager = SpotifyClientCredentials(
     client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
