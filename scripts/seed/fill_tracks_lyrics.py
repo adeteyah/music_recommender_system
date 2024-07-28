@@ -22,7 +22,7 @@ config.read('config.cfg')
 
 GENIUS_API_TOKEN = config['genius']['api_token']
 songs_db_path = config['db']['songs_db']
-fetched_lyrics_path = 'data/cache/fetched_lyrics.txt'
+fetched_lyrics_path = 'data/cache/fetched_lyrics.json'
 batch_size = 10
 
 headers = {
@@ -133,9 +133,15 @@ def fetch_and_store_lyrics(offset=0):
         fetched_track_ids = set()
         if os.path.exists(fetched_lyrics_path):
             with open(fetched_lyrics_path, 'r') as f:
-                fetched_data = json.load(f)
-                fetched_track_ids = set(fetched_data['fetched_track_ids'])
-                offset = fetched_data['offset']
+                try:
+                    fetched_data = json.load(f)
+                    fetched_track_ids = set(fetched_data['fetched_track_ids'])
+                    offset = fetched_data['offset']
+                except json.JSONDecodeError:
+                    print(
+                        "Error decoding JSON from fetched_lyrics.json. Starting from scratch.")
+                    fetched_track_ids = set()
+                    offset = 0
         else:
             fetched_track_ids = set()
             offset = 0
