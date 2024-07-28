@@ -90,12 +90,12 @@ def get_lyrics_from_url(url):
 
 
 def clean_lyrics(lyrics):
-    # Remove bracketed sections and replace with new lines
-    lyrics = re.sub(r'\[.*?\]', '\n', lyrics)
+    # Remove bracketed sections and replace with spaces
+    lyrics = re.sub(r'\[.:?\]', ' ', lyrics)
     # Ensure there are spaces around the replacements to avoid word concatenation
-    lyrics = re.sub(r'(?<=\w)\n(?=\w)', ' \n ', lyrics)
-    # Replace multiple newlines with a single newline
-    lyrics = re.sub(r'\n+', '\n', lyrics)
+    lyrics = re.sub(r'(?<=\w) (?=\w)', ' ', lyrics)
+    # Replace multiple spaces with a single space
+    lyrics = re.sub(r'\s+', ' ', lyrics)
     return lyrics.strip()
 
 
