@@ -5,15 +5,10 @@ from bs4 import BeautifulSoup
 import re
 import os
 import time
-import nltk
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
 from collections import Counter
-
-# Load NLTK resources
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('stopwords')
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
 
 # Load configuration
 config = configparser.ConfigParser()
@@ -88,7 +83,7 @@ def get_lyrics_from_url(url):
         else:
             print(f"Error fetching lyrics from URL {
                   url}: {response.status_code}")
-            retries -= -1
+            retries -= 1
             time.sleep(1)
     print(f"Failed to fetch lyrics after retries from URL {url}")
     return None
@@ -96,7 +91,7 @@ def get_lyrics_from_url(url):
 
 def clean_lyrics(lyrics):
     # Remove bracketed sections and replace with new lines
-    lyrics = re.sub(r'\[.*?\]', '\n', lyrics)
+    lyrics = re.sub(r'\[.*?\]', ' ', lyrics)
     # Replace multiple newlines with a single newline
     lyrics = re.sub(r'\n+', '\n', lyrics)
     return lyrics.strip()
@@ -119,14 +114,17 @@ def clean_track_title(track_title):
 
 def extract_keywords(lyrics):
     words = word_tokenize(lyrics)
-    # Get all nouns from the lyrics
-    nouns = [word for word, pos in nltk.pos_tag(words) if pos.startswith(
-        'NN') and word.lower() not in stop_words]
-    # Count frequency of each noun
-    freq = Counter(nouns)
-    # Get most common nouns
-    most_common_nouns = [word for word, count in freq.most_common()]
-    return ', '.join(most_common_nouns)
+    words = [word.lower() for word in words if word.isalpha()]
+    filtered_words = [word for word in words if word not in stop_words]
+    tagged_words = nltk.pos_tag(filtered_words)
+    nouns = [word for word, pos in tagged_words if pos.startswith('NN')]
+
+    # Count the most common nouns
+    noun_counts = Counter(nouns)
+    most_common_nouns = noun_counts.most_common(50)
+    keywords = [word for word, count in most_common_nouns]
+
+    return ', '.join(keywords)
 
 
 def fetch_and_store_lyrics():
