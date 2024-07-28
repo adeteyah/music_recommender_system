@@ -1,2 +1,2 @@
 # music_recommender_system
- my music recommendation for my thesis
+This is a project for my thesis coded in 2024.
