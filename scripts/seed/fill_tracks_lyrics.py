@@ -4,6 +4,7 @@ import configparser
 from bs4 import BeautifulSoup
 import re
 import os
+import time
 
 # Load configuration
 config = configparser.ConfigParser()
@@ -21,8 +22,26 @@ headers = {
 def get_lyrics_url(song_title, artist_name):
     search_url = "https://api.genius.com/search"
     params = {'q': f"{song_title} {artist_name}"}
-    response = requests.get(search_url, headers=headers, params=params)
-    response_data = response.json()
+    retries = 3
+    while retries > 0:
+        response = requests.get(search_url, headers=headers, params=params)
+        if response.status_code == 200:
+            try:
+                response_data = response.json()
+                break
+            except requests.exceptions.JSONDecodeError:
+                print("Error decoding JSON, retrying...")
+                retries -= 1
+                time.sleep(1)
+        else:
+            print(f"Error fetching URL for {song_title} by {
+                  artist_name}: {response.status_code}")
+            retries -= 1
+            time.sleep(1)
+    else:
+        print(f"Failed to fetch URL after retries for {
+              song_title} by {artist_name}")
+        return None
 
     song_info = None
     if response_data['response']['hits']:
@@ -38,19 +57,29 @@ def get_lyrics_url(song_title, artist_name):
 
 
 def get_lyrics_from_url(url):
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    [h.extract() for h in soup(['script', 'style', 'br'])]
+    retries = 3
+    while retries > 0:
+        response = requests.get(url)
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, 'html.parser')
+            [h.extract() for h in soup(['script', 'style', 'br'])]
 
-    lyrics = soup.find_all('div', class_='lyrics')
-    if lyrics:
-        return clean_lyrics(lyrics[0].get_text().strip())
+            lyrics = soup.find_all('div', class_='lyrics')
+            if lyrics:
+                return clean_lyrics(lyrics[0].get_text().strip())
 
-    lyrics = soup.find_all(
-        'div', class_=lambda x: x and 'Lyrics__Container' in x)
-    if lyrics:
-        return clean_lyrics('\n'.join([div.get_text().strip() for div in lyrics]))
+            lyrics = soup.find_all(
+                'div', class_=lambda x: x and 'Lyrics__Container' in x)
+            if lyrics:
+                return clean_lyrics('\n'.join([div.get_text().strip() for div in lyrics]))
 
+            return None
+        else:
+            print(f"Error fetching lyrics from URL {
+                  url}: {response.status_code}")
+            retries -= 1
+            time.sleep(1)
+    print(f"Failed to fetch lyrics after retries from URL {url}")
     return None
 
 
