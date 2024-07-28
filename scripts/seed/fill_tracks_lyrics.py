@@ -8,7 +8,6 @@ from collections import Counter
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.tag import pos_tag
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Load configuration
 config = configparser.ConfigParser()
@@ -70,20 +69,26 @@ def get_lyrics_from_url(url):
 
 
 def clean_lyrics(lyrics):
+    # Remove bracketed sections and replace with a space
     lyrics = re.sub(r'\[.*?\]', ' ', lyrics)
+    # Ensure there is a space before an uppercase letter that is in the middle of a word
     lyrics = re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', lyrics)
+    # Ensure there is a space after punctuation marks
     lyrics = re.sub(r'([?.!,])', r'\1 ', lyrics)
+    # Replace multiple spaces with a single space
     lyrics = re.sub(r'\s+', ' ', lyrics)
     return lyrics.strip()
 
 
 def clean_track_title(track_title):
+    # Patterns to remove from the track title
     patterns = [
-        r'\(.*?\)',
-        r'\[.*?\]',
-        r' - .*$',
+        r'\(.*?\)',          # Anything in parentheses
+        r'\[.*?\]',          # Anything in square brackets
+        r' - .*$',           # Anything after ' - '
+        # Words like 'remix', 'remastered', etc.
         r'\b(remix|remaster(ed)?|version)\b',
-        r'\d{4}',
+        r'\d{4}',            # Any 4-digit year
     ]
     for pattern in patterns:
         track_title = re.sub(pattern, '', track_title, flags=re.IGNORECASE)
@@ -98,30 +103,18 @@ def extract_keywords(lyrics, max_keywords=50):
     tagged_words = pos_tag(filtered_words)
     keywords = [word for word, pos in tagged_words if pos in [
         'NN', 'NNS', 'NNP', 'NNPS', 'JJ']]
+
+    # Get the most common keywords
     most_common_keywords = [word for word, count in Counter(
         keywords).most_common(max_keywords)]
     return ', '.join(most_common_keywords)
 
 
-def fetch_lyrics_for_track(track_id, track_name, artist_name):
-    cleaned_track_name = clean_track_title(track_name)
-    print(f"Fetching lyrics for {cleaned_track_name} by {artist_name}")
-    lyrics_url = get_lyrics_url(cleaned_track_name, artist_name)
-    if lyrics_url:
-        lyrics = get_lyrics_from_url(lyrics_url)
-        if lyrics:
-            keywords = extract_keywords(lyrics)
-            return track_id, lyrics, keywords
-        else:
-            print(f"Lyrics not found for {cleaned_track_name}")
-    else:
-        print(f"Lyrics URL not found for {cleaned_track_name}")
-    return track_id, None, None
-
-
 def fetch_and_store_lyrics():
     with sqlite3.connect(songs_db_path) as conn:
         cursor = conn.cursor()
+
+        # Fetch tracks that need lyrics
         cursor.execute("""
             SELECT tracks.track_id, tracks.track_name, artists.artist_name
             FROM tracks
@@ -129,37 +122,46 @@ def fetch_and_store_lyrics():
             LEFT JOIN lyrics ON tracks.track_id = lyrics.track_id
             WHERE lyrics.lyrics IS NULL
         """)
+
         tracks = cursor.fetchall()
 
+        # Read fetched track IDs
         if os.path.exists(fetched_lyrics_path):
             with open(fetched_lyrics_path, 'r') as f:
                 fetched_track_ids = set(f.read().splitlines())
         else:
             fetched_track_ids = set()
 
-        track_data_to_insert = []
-        with ThreadPoolExecutor(max_workers=5) as executor:
-            futures = {executor.submit(fetch_lyrics_for_track, track_id, track_name, artist_name)                       : track_id for track_id, track_name, artist_name in tracks if track_id not in fetched_track_ids}
-            for future in as_completed(futures):
-                track_id = futures[future]
-                try:
-                    track_id, lyrics, keywords = future.result()
-                    if lyrics:
-                        track_data_to_insert.append(
-                            (track_id, lyrics, keywords))
-                except Exception as e:
-                    print(f"Error fetching lyrics for track ID {
-                          track_id}: {e}")
-                finally:
-                    with open(fetched_lyrics_path, 'a') as f:
-                        f.write(f"{track_id}\n")
-                    fetched_track_ids.add(track_id)
+        for track_id, track_name, artist_name in tracks:
+            if track_id in fetched_track_ids:
+                print(f"Skipping {track_name} by {
+                      artist_name}, already fetched.")
+                continue
 
-        cursor.executemany("""
-            INSERT OR REPLACE INTO lyrics (track_id, lyrics, keywords)
-            VALUES (?, ?, ?)
-        """, track_data_to_insert)
-        conn.commit()
+            cleaned_track_name = clean_track_title(track_name)
+            print(f"Fetching lyrics for {cleaned_track_name} by {artist_name}")
+            lyrics_url = get_lyrics_url(cleaned_track_name, artist_name)
+            if lyrics_url:
+                lyrics = get_lyrics_from_url(lyrics_url)
+                if lyrics:
+                    keywords = extract_keywords(lyrics)
+                    cursor.execute("""
+                        INSERT OR REPLACE INTO lyrics (track_id, lyrics, keywords)
+                        VALUES (?, ?, ?)
+                    """, (track_id, lyrics, keywords))
+                    conn.commit()
+                    print(f"Lyrics fetched and stored for {
+                          cleaned_track_name}")
+                else:
+                    print(f"Lyrics not found for {cleaned_track_name}")
+            else:
+                print(f"Lyrics URL not found for {cleaned_track_name}")
+
+            # Append the track ID to the fetched lyrics file regardless of success
+            with open(fetched_lyrics_path, 'a') as f:
+                f.write(f"{track_id}\n")
+
+            fetched_track_ids.add(track_id)
 
 
 if __name__ == "__main__":
