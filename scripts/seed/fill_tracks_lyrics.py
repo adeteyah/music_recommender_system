@@ -4,6 +4,16 @@ import configparser
 from bs4 import BeautifulSoup
 import re
 import os
+from collections import Counter
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.tag import pos_tag
+
+# Ensure NLTK resources are downloaded
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('stopwords')
 
 # Load configuration
 config = configparser.ConfigParser()
@@ -81,6 +91,21 @@ def clean_track_title(track_title):
     return track_title.strip()
 
 
+def extract_keywords(lyrics, max_keywords=50):
+    stop_words = set(stopwords.words('english'))
+    words = word_tokenize(lyrics.lower())
+    filtered_words = [word for word in words if word.isalnum()
+                      and word not in stop_words]
+    tagged_words = pos_tag(filtered_words)
+    keywords = [word for word, pos in tagged_words if pos in [
+        'NN', 'NNS', 'NNP', 'NNPS', 'JJ']]
+
+    # Get the most common keywords
+    most_common_keywords = [word for word, count in Counter(
+        keywords).most_common(max_keywords)]
+    return ', '.join(most_common_keywords)
+
+
 def fetch_and_store_lyrics():
     with sqlite3.connect(songs_db_path) as conn:
         cursor = conn.cursor()
@@ -115,11 +140,7 @@ def fetch_and_store_lyrics():
             if lyrics_url:
                 lyrics = get_lyrics_from_url(lyrics_url)
                 if lyrics:
-                    keywords = ', '.join(
-                        [word for word in track_name.split() if word.lower() not in ['i', 'you', 'me', 'they']] +
-                        [word for word in artist_name.split() if word.lower() not in [
-                            'i', 'you', 'me', 'they']]
-                    )
+                    keywords = extract_keywords(lyrics)
                     cursor.execute("""
                         INSERT OR REPLACE INTO lyrics (track_id, lyrics, keywords)
                         VALUES (?, ?, ?)
