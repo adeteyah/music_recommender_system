@@ -24,29 +24,29 @@ ids = [
 # end = time.time()
 # print("CBF execution time: ", end - start)
 
-print("\n# Generating CBF (Optimized) Result")
-start = time.time()
-cbf_o.o_cbf_result(ids)
-end = time.time()
-print("CBF execution time: ", end - start)
-
-print("\n# Generating CF Result")
-start = time.time()
-cf.cf_result(ids)
-end = time.time()
-print("CF execution time: ", end - start)
-
 # print("\n# Generating HF-CBF-CF Result")
 # start = time.time()
 # hf_cbf_cf.hfcbfcf_result(ids)
 # end = time.time()
 # print("HFCBFCF execution time: ", end - start)
 
+print("\n# Generating CBF (Optimized) Result")
+start = time.time()
+cbf_o.o_cbf_result(ids)
+end = time.time()
+print("CBF execution time: ", end - start)
+
 print("\n# Generating HF-CBF-CF (Optimized) Result")
 start = time.time()
 hf_cbf_cf_o.o_hfcbfcf_result(ids)
 end = time.time()
 print("HFCBFCF execution time: ", end - start)
+
+print("\n# Generating CF Result")
+start = time.time()
+cf.cf_result(ids)
+end = time.time()
+print("CF execution time: ", end - start)
 
 print("\n# Generating HF-CF-CBF Result")
 start = time.time()
