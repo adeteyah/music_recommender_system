@@ -1,39 +1,74 @@
 Inputted IDs:
-1. Tom Waits - Dead and Lovely [https://open.spotify.com/track/6uunyBNvRyzQl5imkPYdEb] - Genres: folk,singer-songwriter
-2. Everybody Loves an Outlaw - I See Red [https://open.spotify.com/track/5MAK1nd8R6PWnle1Q1WJvh] - Genres: modern blues rock
-3. Bastille - World Gone Mad [https://open.spotify.com/track/1ZyQGXH9dZ4AecevHhKUxi] - Genres: metropopolis,modern rock,pop
-4. Sarah Cothran - As the World Caves In [https://open.spotify.com/track/2xXNLutYAOELYVObYb1C1S] - Genres: gen z singer-songwriter
-5. Tom Waits - Time - 2023 Remaster [https://open.spotify.com/track/5eAKNw3ftVX16LYECfmEsw] - Genres: folk,singer-songwriter
+1. Ardhito Pramono - I Just Couldn't Save You Tonight - Story of Kale - Original Motion Picture Soundtrack [https://open.spotify.com/track/5AkV53fo1u01mi8r22JNeF] - Genres: indonesian indie,indonesian jazz,indonesian pop,jazz pop
+2. Yahya - keepyousafe [https://open.spotify.com/track/3Sbova9DAY3pc9GTAACT4b] - Genres: indonesian lo-fi pop
+3. JP Saxe - If the World Was Ending (feat. Julia Michaels) [https://open.spotify.com/track/2kJwzbxV2ppxnQoYw4GLBZ] - Genres: alt z,canadian contemporary r&b,singer-songwriter pop
+4. One Direction - Night Changes [https://open.spotify.com/track/5O2P9iiztwhomNh8xkR9lJ] - Genres: boy band,pop,post-teen pop,talent show
 
 Eliminated Inputs:
 
 Used Inputs:
-1. Tom Waits - Dead and Lovely [https://open.spotify.com/track/6uunyBNvRyzQl5imkPYdEb] - Genres: folk,singer-songwriter
-2. Everybody Loves an Outlaw - I See Red [https://open.spotify.com/track/5MAK1nd8R6PWnle1Q1WJvh] - Genres: modern blues rock
-3. Bastille - World Gone Mad [https://open.spotify.com/track/1ZyQGXH9dZ4AecevHhKUxi] - Genres: metropopolis,modern rock,pop
-4. Sarah Cothran - As the World Caves In [https://open.spotify.com/track/2xXNLutYAOELYVObYb1C1S] - Genres: gen z singer-songwriter
-5. Tom Waits - Time - 2023 Remaster [https://open.spotify.com/track/5eAKNw3ftVX16LYECfmEsw] - Genres: folk,singer-songwriter
+1. Ardhito Pramono - I Just Couldn't Save You Tonight - Story of Kale - Original Motion Picture Soundtrack [https://open.spotify.com/track/5AkV53fo1u01mi8r22JNeF] - Genres: indonesian indie,indonesian jazz,indonesian pop,jazz pop
+2. Yahya - keepyousafe [https://open.spotify.com/track/3Sbova9DAY3pc9GTAACT4b] - Genres: indonesian lo-fi pop
+3. JP Saxe - If the World Was Ending (feat. Julia Michaels) [https://open.spotify.com/track/2kJwzbxV2ppxnQoYw4GLBZ] - Genres: alt z,canadian contemporary r&b,singer-songwriter pop
+4. One Direction - Night Changes [https://open.spotify.com/track/5O2P9iiztwhomNh8xkR9lJ] - Genres: boy band,pop,post-teen pop,talent show
 
 Matched Playlists:
-1. https://open.spotify.com/user/p5hbktou7i2jh8ym7ulgs60uj - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg [Inputted IDs: 1ZyQGXH9dZ4AecevHhKUxi, 2xXNLutYAOELYVObYb1C1S, 5MAK1nd8R6PWnle1Q1WJvh, 6uunyBNvRyzQl5imkPYdEb, 5eAKNw3ftVX16LYECfmEsw]
+1. https://open.spotify.com/user/j3mdta31m57uvb40esx9s2fw1 - https://open.spotify.com/playlist/2IxsibaArm0si3MN80wXaY [Inputted IDs: 2kJwzbxV2ppxnQoYw4GLBZ, 5AkV53fo1u01mi8r22JNeF]
+2. https://open.spotify.com/user/31rvoblkmg4ywc5vgm5ygpjmxa7q - https://open.spotify.com/playlist/29JMJTERlkuO0uPb0Lsye2 [Inputted IDs: 3Sbova9DAY3pc9GTAACT4b, 5AkV53fo1u01mi8r22JNeF]
+3. https://open.spotify.com/user/312i5jp6cvhme3gqltehs6mxtloq - https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV [Inputted IDs: 3Sbova9DAY3pc9GTAACT4b, 5AkV53fo1u01mi8r22JNeF]
+4. https://open.spotify.com/user/55p2pkj2zl2ivckxhmjoa4y2x - https://open.spotify.com/playlist/1GStJhzColWtD4WMpdiST3 [Inputted IDs: 2kJwzbxV2ppxnQoYw4GLBZ, 5AkV53fo1u01mi8r22JNeF]
+5. https://open.spotify.com/user/31iddudpyapmpgttadfimg5uudqi - https://open.spotify.com/playlist/7qZ5P9mjuAnJmMjfFL2u2e [Inputted IDs: 5AkV53fo1u01mi8r22JNeF, 5O2P9iiztwhomNh8xkR9lJ]
+6. https://open.spotify.com/user/3167dwpdbsizq6yvinovz4d5rt5e - https://open.spotify.com/playlist/0WJvKfjplBRyJkpQbJkSXq [Inputted IDs: 3Sbova9DAY3pc9GTAACT4b, 5O2P9iiztwhomNh8xkR9lJ]
+7. https://open.spotify.com/user/31y2xw5ptphcrejoronno3yfwsqe - https://open.spotify.com/playlist/2oylVd6xZUHWiwJA8lXCII [Inputted IDs: 3Sbova9DAY3pc9GTAACT4b, 5O2P9iiztwhomNh8xkR9lJ]
 
 Songs Recommendation:
-1. Tom Walker - Play Dead [https://open.spotify.com/track/6rzVBHfKNDogRICqjzgGsE] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-2. Logic - Broken People (with Logic & Rag'n'Bone Man) [https://open.spotify.com/track/5rxPi0MiR4miNK0rCmk980] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-3. X Ambassadors - Renegades [https://open.spotify.com/track/0fYVliAYKHuPmECRs1pbRf] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-4. David Kushner - Daylight [https://open.spotify.com/track/1odExI7RdWc4BT515LTAwj] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-5. Rag'n'Bone Man - Skin [https://open.spotify.com/track/6y2Kaz9QI01XBKJ8mTb7Pf] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-6. Imagine Dragons - Whatever It Takes [https://open.spotify.com/track/6Qn5zhYkTa37e91HC1D7lb] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-7. Disturbed - The Sound of Silence [https://open.spotify.com/track/0eZBeB2xFIS65jQHerispi] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-8. Welshly Arms - Legendary [https://open.spotify.com/track/2bDENJyfbxj0neGiXUFvIX] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-9. Tom Waits - Day After Tomorrow [https://open.spotify.com/track/6oMfjYG14uBJjwA661zVxz] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-10. Sigrid - Everybody Knows [https://open.spotify.com/track/34b3PCTLUISY153eb2F72k] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-11. KALEO - Way down We Go [https://open.spotify.com/track/0y1QJc3SJVPKJ1OvFmFqe6] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-12. Imagine Dragons - Radioactive [https://open.spotify.com/track/62yJjFtgkhUrXktIoSjgP2] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-13. Rag'n'Bone Man - Human [https://open.spotify.com/track/58zsLZPvfflaiIbNWoA22O] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-14. Thirty Seconds To Mars - Walk On Water [https://open.spotify.com/track/6FT9FZccFD6nE8dMNslz2n] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-15. Ursine Vulpine - Wicked Game [https://open.spotify.com/track/3cdEXRnb7cZQSvKU7emY1h] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-16. Hozier - Take Me To Church [https://open.spotify.com/track/3dYD57lRAUcMHufyqn9GcI] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-17. Barns Courtney - Glitter & Gold [https://open.spotify.com/track/1Mf27cnAF1Q6Ko83XTM5d1] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-18. RAIGN - Knocking on Heavens Door [https://open.spotify.com/track/20jZ7lf5eqDUQQruuMSKVE] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
-19. X Ambassadors - Torches [https://open.spotify.com/track/1p9mCPuPV9FGa0jnJYk0IA] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+1. Ed Sheeran - Perfect [https://open.spotify.com/track/0tgVpDi06FyKpA1z0VMD4v] | Count: 3 - https://open.spotify.com/playlist/2oylVd6xZUHWiwJA8lXCII, https://open.spotify.com/playlist/0WJvKfjplBRyJkpQbJkSXq, https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV
+2. Troye Sivan - Strawberries & Cigarettes [https://open.spotify.com/track/3afkJSKX0EAMsJXTZnDXXJ] | Count: 3 - https://open.spotify.com/playlist/2oylVd6xZUHWiwJA8lXCII, https://open.spotify.com/playlist/29JMJTERlkuO0uPb0Lsye2, https://open.spotify.com/playlist/7qZ5P9mjuAnJmMjfFL2u2e
+3. Arctic Monkeys - I Wanna Be Yours [https://open.spotify.com/track/5XeFesFbtLpXzIVDNQP22n] | Count: 3 - https://open.spotify.com/playlist/0WJvKfjplBRyJkpQbJkSXq, https://open.spotify.com/playlist/29JMJTERlkuO0uPb0Lsye2, https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV
+4. Andra & The Backbone - Sempurna [https://open.spotify.com/track/2UgCs0i0rNHUH2jKE5NZHE] | Count: 2 - https://open.spotify.com/playlist/0WJvKfjplBRyJkpQbJkSXq, https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV
+5. GANGGA - Blue Jeans [https://open.spotify.com/track/4kfjA6WfgKBt7I7YKuDCkU] | Count: 2 - https://open.spotify.com/playlist/0WJvKfjplBRyJkpQbJkSXq, https://open.spotify.com/playlist/7qZ5P9mjuAnJmMjfFL2u2e
+6. Justin Bieber - Off My Face [https://open.spotify.com/track/3T03rPwlL8NVk1yIaxeD8U] | Count: 2 - https://open.spotify.com/playlist/2oylVd6xZUHWiwJA8lXCII, https://open.spotify.com/playlist/7qZ5P9mjuAnJmMjfFL2u2e
+7. Ruth B. - Dandelions [https://open.spotify.com/track/2eAvDnpXP5W0cVtiI0PUxV] | Count: 2 - https://open.spotify.com/playlist/2oylVd6xZUHWiwJA8lXCII, https://open.spotify.com/playlist/7qZ5P9mjuAnJmMjfFL2u2e
+8. Pamungkas - I Love You but I'm Letting Go [https://open.spotify.com/track/01beCqR9wsVnwzkAJZyTqq] | Count: 2 - https://open.spotify.com/playlist/1GStJhzColWtD4WMpdiST3, https://open.spotify.com/playlist/2IxsibaArm0si3MN80wXaY
+9. GANGGA - Whiskey Bottle [https://open.spotify.com/track/02lLcrfxGj4XtrpgHGQ66o] | Count: 2 - https://open.spotify.com/playlist/1GStJhzColWtD4WMpdiST3, https://open.spotify.com/playlist/2IxsibaArm0si3MN80wXaY
+10. Paul Partohap - P.S. I LOVE YOU [https://open.spotify.com/track/1w3azB0VuRFp79AduIwrIy] | Count: 2 - https://open.spotify.com/playlist/0WJvKfjplBRyJkpQbJkSXq, https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV
+11. boy pablo - i <3 u [https://open.spotify.com/track/5EcGSkkNBMAWOePvLgKde1] | Count: 2 - https://open.spotify.com/playlist/0WJvKfjplBRyJkpQbJkSXq, https://open.spotify.com/playlist/29JMJTERlkuO0uPb0Lsye2
+12. Pamungkas - One Only [https://open.spotify.com/track/7iTF9T1jum3Km6H6WMZpDC] | Count: 2 - https://open.spotify.com/playlist/0WJvKfjplBRyJkpQbJkSXq, https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV
+13. Justin Bieber - Stuck with U (with Justin Bieber) [https://open.spotify.com/track/4HBZA5flZLE435QTztThqH] | Count: 2 - https://open.spotify.com/playlist/2oylVd6xZUHWiwJA8lXCII, https://open.spotify.com/playlist/29JMJTERlkuO0uPb0Lsye2
+14. Justin Bieber - Love Yourself [https://open.spotify.com/track/1f8zcJPvJKvxAOjEqM0pyc] | Count: 1 - https://open.spotify.com/playlist/7qZ5P9mjuAnJmMjfFL2u2e
+15. The Neighbourhood - Baby Came Home 2 / Valentines [https://open.spotify.com/track/40gvh6jP5qxMJuMmF9lG9A] | Count: 1 - https://open.spotify.com/playlist/0WJvKfjplBRyJkpQbJkSXq
+16. Sam Kim - Love Me Like That [https://open.spotify.com/track/1lhm29o3syw122xynSKaAK] | Count: 1 - https://open.spotify.com/playlist/2oylVd6xZUHWiwJA8lXCII
+17. One Direction - Strong [https://open.spotify.com/track/3cKM7UXBZmgjEgEBTkaIlU] | Count: 1 - https://open.spotify.com/playlist/7qZ5P9mjuAnJmMjfFL2u2e
+18. The Walters - I Love You So [https://open.spotify.com/track/4SqWKzw0CbA05TGszDgMlc] | Count: 1 - https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV
+19. Fourtwnty - Hitam Putih [https://open.spotify.com/track/0O6g2QFUhuLqRzGqhyzrIu] | Count: 1 - https://open.spotify.com/playlist/1GStJhzColWtD4WMpdiST3
+20. Taylor Swift - cardigan [https://open.spotify.com/track/4R2kfaDFhslZEMJqAFNpdd] | Count: 1 - https://open.spotify.com/playlist/1GStJhzColWtD4WMpdiST3
+21. Taylor Swift - Daylight [https://open.spotify.com/track/1fzAuUVbzlhZ1lJAx9PtY6] | Count: 1 - https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV
+22. Maximillian - On My Mind [https://open.spotify.com/track/5NjfO70bhIyNOOFBcXb6ql] | Count: 1 - https://open.spotify.com/playlist/2oylVd6xZUHWiwJA8lXCII
+23. Willy Anggawinata - First Love [https://open.spotify.com/track/32RFjQZ4VPm7ez3Ry9enVw] | Count: 1 - https://open.spotify.com/playlist/29JMJTERlkuO0uPb0Lsye2
+24. Sheila On 7 - Film Favorit [https://open.spotify.com/track/2BCYKFDWnZi9PMkZiemQh1] | Count: 1 - https://open.spotify.com/playlist/2IxsibaArm0si3MN80wXaY
+25. RAN - Pandangan Pertama [https://open.spotify.com/track/7vARkAvliy40kkanvCQvSR] | Count: 1 - https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV
+26. George Benson - Nothing's Gonna Change My Love for You [https://open.spotify.com/track/0vB4Vd6PtkJSEnWsmqATnZ] | Count: 1 - https://open.spotify.com/playlist/29JMJTERlkuO0uPb0Lsye2
+27. Raim Laode - Komang [https://open.spotify.com/track/2AaaE0qvFWtyT8srKNfRhH] | Count: 1 - https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV
+28. Pamungkas - Monolog [https://open.spotify.com/track/77vx7sGjdqwdnQL968t8oY] | Count: 1 - https://open.spotify.com/playlist/2IxsibaArm0si3MN80wXaY
+29. Bazzi - I.F.L.Y. [https://open.spotify.com/track/4a6q8CR2hzLk2plDkSxkfD] | Count: 1 - https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV
+30. The Walters - I Love You So [https://open.spotify.com/track/1175r6ZmkUjX8dRJLz9Ohk] | Count: 1 - https://open.spotify.com/playlist/1GStJhzColWtD4WMpdiST3
+31. Westlife - Swear It Again - Radio Edit [https://open.spotify.com/track/4ekWUsmWMaT5EI3VL0epBk] | Count: 1 - https://open.spotify.com/playlist/0WJvKfjplBRyJkpQbJkSXq
+32. Nuca - Meant 2 Be [https://open.spotify.com/track/35xF6iKiyjohKJgg7dntw4] | Count: 1 - https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV
+33. Daniel Caesar - Best Part (feat. H.E.R.) [https://open.spotify.com/track/1RMJOxR6GRPsBHL8qeC2ux] | Count: 1 - https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV
+34. Taylor Swift - Lover [https://open.spotify.com/track/1dGr1c8CrMLDpV6mPbImSI] | Count: 1 - https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV
+35. Bruno Mars - Please Me [https://open.spotify.com/track/0PG9fbaaHFHfre2gUVo7AN] | Count: 1 - https://open.spotify.com/playlist/7qZ5P9mjuAnJmMjfFL2u2e
+36. Fiersa Besari - Melangkah Tanpamu [https://open.spotify.com/track/29xNJWgROhFKNJpfcqwr09] | Count: 1 - https://open.spotify.com/playlist/2IxsibaArm0si3MN80wXaY
+37. Keane - Somewhere Only We Know [https://open.spotify.com/track/1SKPmfSYaPsETbRHaiA18G] | Count: 1 - https://open.spotify.com/playlist/1GStJhzColWtD4WMpdiST3
+38. Maroon 5 - Sunday Morning [https://open.spotify.com/track/5qII2n90lVdPDcgXEEVHNy] | Count: 1 - https://open.spotify.com/playlist/0WJvKfjplBRyJkpQbJkSXq
+39. The 1975 - It's Not Living (If It's Not With You) [https://open.spotify.com/track/3TgMcrV32NUKjEG2ujn9eh] | Count: 1 - https://open.spotify.com/playlist/29JMJTERlkuO0uPb0Lsye2
+40. Fujii Kaze - 死ぬのがいいわ [https://open.spotify.com/track/0HYAsQwJIO6FLqpyTeD3l6] | Count: 1 - https://open.spotify.com/playlist/7qZ5P9mjuAnJmMjfFL2u2e
+41. My Chemical Romance - Disenchanted [https://open.spotify.com/track/6T7MAQCekVb3UnCykjX3BP] | Count: 1 - https://open.spotify.com/playlist/1GStJhzColWtD4WMpdiST3
+42. Rex Orange County - AMAZING [https://open.spotify.com/track/3OM6qQmdFV6uy61GIqpRtf] | Count: 1 - https://open.spotify.com/playlist/7qZ5P9mjuAnJmMjfFL2u2e
+43. Dewa - Dua Sedjoli [https://open.spotify.com/track/1jdTmewGT2IcFxGnwZgLKa] | Count: 1 - https://open.spotify.com/playlist/5jLBumfzc10pO9uFLBXqiV
+44. Christina Perri - a thousand years [https://open.spotify.com/track/6lanRgr6wXibZr8KgzXxBl] | Count: 1 - https://open.spotify.com/playlist/2oylVd6xZUHWiwJA8lXCII
+45. Olivia Rodrigo - All I Want - From "High School Musical: The Musical: The Series" [https://open.spotify.com/track/4Yxc55NX3tAXC2mHRAhtcW] | Count: 1 - https://open.spotify.com/playlist/1GStJhzColWtD4WMpdiST3
+46. Arash Buana - if u could see me cryin' in my room [https://open.spotify.com/track/13sOb9V6Y3uCnRxY9HIZqP] | Count: 1 - https://open.spotify.com/playlist/2IxsibaArm0si3MN80wXaY
+47. Bruno Mars - Grenade [https://open.spotify.com/track/4lLtanYk6tkMvooU0tWzG8] | Count: 1 - https://open.spotify.com/playlist/1GStJhzColWtD4WMpdiST3
+48. Arctic Monkeys - Baby I'm Yours [https://open.spotify.com/track/0SzvmWfOhoxZVGrmvb56YL] | Count: 1 - https://open.spotify.com/playlist/29JMJTERlkuO0uPb0Lsye2
+49. Harris J. - 24/7 [https://open.spotify.com/track/304uzYXYjPulJpLRJzuesX] | Count: 1 - https://open.spotify.com/playlist/2oylVd6xZUHWiwJA8lXCII
+50. Pamungkas - Kenangan Manis [https://open.spotify.com/track/1tS1dRfxIV9FzqdYTbJgMn] | Count: 1 - https://open.spotify.com/playlist/2IxsibaArm0si3MN80wXaY

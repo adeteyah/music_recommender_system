@@ -22,6 +22,10 @@ headers = {
 }
 
 
+def clean_string(input_string):
+    return re.sub(r'[^a-zA-Z0-9\s]', '', input_string)
+
+
 def get_lyrics_url(song_title, artist_name):
     search_url = "https://api.genius.com/search"
     params = {'q': f"{song_title} {artist_name}"}
@@ -133,14 +137,17 @@ def fetch_and_store_lyrics():
             fetched_track_ids = set()
 
         for track_id, track_name, artist_name in tracks:
-            if track_id in fetched_track_ids:
+            if str(track_id) in fetched_track_ids:
                 print(f"Skipping {track_name} by {
                       artist_name}, already fetched.")
                 continue
 
             cleaned_track_name = clean_track_title(track_name)
-            print(f"Fetching lyrics for {cleaned_track_name} by {artist_name}")
-            lyrics_url = get_lyrics_url(cleaned_track_name, artist_name)
+            cleaned_artist_name = clean_string(artist_name)
+            print(f"Fetching lyrics for {
+                  cleaned_track_name} by {cleaned_artist_name}")
+            lyrics_url = get_lyrics_url(
+                cleaned_track_name, cleaned_artist_name)
             if lyrics_url:
                 lyrics = get_lyrics_from_url(lyrics_url)
                 if lyrics:
@@ -154,14 +161,14 @@ def fetch_and_store_lyrics():
                           cleaned_track_name}")
                 else:
                     print(f"Lyrics not found for {cleaned_track_name}")
+                    # Store track ID in fetched_lyrics.txt
+                    with open(fetched_lyrics_path, 'a') as f:
+                        f.write(f"{track_id}\n")
             else:
                 print(f"Lyrics URL not found for {cleaned_track_name}")
-
-            # Append the track ID to the fetched lyrics file regardless of success
-            with open(fetched_lyrics_path, 'a') as f:
-                f.write(f"{track_id}\n")
-
-            fetched_track_ids.add(track_id)
+                # Store track ID in fetched_lyrics.txt
+                with open(fetched_lyrics_path, 'a') as f:
+                    f.write(f"{track_id}\n")
 
 
 if __name__ == "__main__":
