@@ -129,7 +129,7 @@ def normalize_values(values):
     return [(val - min_val) / (max_val - min_val) for val in values]
 
 
-def hfcfcbf_result(ids):
+def cf_cbf_result(ids):
     # Get details for inputted IDs
     input_details = fetch_inputted_ids_details(ids)
     input_features = {detail[0]: detail[4:] for detail in input_details}
@@ -270,4 +270,4 @@ if __name__ == "__main__":
         '2xXNLutYAOELYVObYb1C1S',
         '5eAKNw3ftVX16LYECfmEsw',
     ]
-    hfcfcbf_result(ids)
+    cf_cbf_result(ids)

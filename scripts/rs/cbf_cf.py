@@ -156,7 +156,7 @@ def calculate_distances(input_tracks, all_tracks, all_genres, weight_dict):
     return distances
 
 
-def hfcbfcf_result(ids):
+def cbf_cf_result(ids):
     input_tracks = []
     unique_input_ids = set(ids)
 
@@ -235,4 +235,4 @@ if __name__ == "__main__":
         '2xXNLutYAOELYVObYb1C1S',
         '5eAKNw3ftVX16LYECfmEsw',
     ]
-    hfcbfcf_result(ids)
+    cbf_cf_result(ids)
