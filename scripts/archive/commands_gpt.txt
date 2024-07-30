@@ -1,0 +1,148 @@
+existing database
+! schema for each tables
+1. songs table
+    song_id TEXT PRIMARY KEY,
+    song_name TEXT,
+    artist_ids TEXT,
+    acousticness REAL,
+    danceability REAL,
+    energy REAL,
+    instrumentalness REAL,
+    key INTEGER,
+    liveness REAL,
+    loudness REAL,
+    mode INTEGER,
+    speechiness REAL,
+    tempo REAL,
+    time_signature INTEGER,
+    valence REAL
+2. playlists table
+    playlist_id TEXT PRIMARY KEY,
+    playlist_creator_id TEXT,
+    playlist_original_items INTEGER,
+    playlist_items_fetched INTEGER,
+    playlist_top_artist_ids TEXT,
+    playlist_top_genres TEXT,
+    playlist_items TEXT,
+    min_acousticness REAL,
+    max_acousticness REAL,
+    min_danceability REAL,
+    max_danceability REAL,
+    min_energy REAL,
+    max_energy REAL,
+    min_instrumentalness REAL,
+    max_instrumentalness REAL,
+    min_key INTEGER,
+    max_key INTEGER,
+    min_liveness REAL,
+    max_liveness REAL,
+    min_loudness REAL,
+    max_loudness REAL,
+    min_mode INTEGER,
+    max_mode INTEGER,
+    min_speechiness REAL,
+    max_speechiness REAL,
+    min_tempo REAL,
+    max_tempo REAL,
+    min_time_signature INTEGER,
+    max_time_signature INTEGER,
+    min_valence REAL,
+    max_valence REAL
+3. artists table
+    artist_id TEXT PRIMARY KEY,
+    artist_name TEXT,
+    artist_genres TEXT
+
+
+i want to continue making Collaborative Filtering song recommendation on my code 5BgnL6gHauuvxe4Ok6W1aC
+1. gather playlists from get_playlists_by_song
+2. gather playlists from get_playlists_by_artist
+3. merge playlists and remove duplicated playlist_id
+4. show playlist result on playlist section
+5. show song result on song section
+
+i want to write result from get_playlists_by_song, get_playlists_by_artist to the recommendation result
+continue this code feel free to add new functions inside cf_functions()
+
+import sqlite3
+import configparser
+from collections import Counter
+
+# Read configuration file
+config = configparser.ConfigParser()
+config.read('config.cfg')
+
+MODEL = 'Collaborative Filtering'
+DB = config['rs']['db_path']
+OUTPUT_PATH = config['rs']['cf_output']
+N_RESULT = int(config['rs']['n_result'])
+
+
+def get_song_info(conn, song_id):
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
+        FROM songs s
+        JOIN artists a ON s.artist_ids = a.artist_id
+        WHERE s.song_id = ?
+    """, (song_id,))
+    return cursor.fetchone()
+
+
+def get_playlists_by_song(conn, song_id):
+    pass
+
+
+def get_playlists_by_artist(conn, artist_id):
+    pass
+
+
+def get_songs_from_playlists(conn, playlist_ids):
+    pass
+
+
+def get_top_songs(song_ids, exclude_ids):
+    pass
+
+
+def read_inputted_ids(ids, conn):
+    pass
+
+
+def merge_playlists(playlists_by_song, playlists_by_artist):
+    pass
+
+
+def get_playlist_info(conn, playlist_ids):
+    pass
+
+
+def get_song_details(conn, song_id):
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
+        FROM songs s
+        JOIN artists a ON s.artist_ids = a.artist_id
+        WHERE s.song_id = ?
+    """, (song_id,))
+    return cursor.fetchone()
+
+
+def cf(ids):
+    # write result here
+    print('Result for', MODEL, 'stored at', OUTPUT_PATH)
+
+
+if __name__ == "__main__":
+    ids = ['10nyNJ6zNy2YVYLrcwLccB', '0Z1bYJWf48NF0kaqMSNbJk', '1FWsomP9StpCcXNWmJk8Cl', '1Eb90nmqTrxylKFhcUzW8P',
+           '5PihYbt4uNnVt68l5D1SGb', '4RAOI1etsgbh5NP3T5R8rN', '0yc6Gst2xkRu0eMLeRMGCX', '22is613WTMG267eVdACLDK', '37l31PrCNsg8baUjarNAi9']
+    cf(ids)
+
+
+RESULT FORMAT
+# BEST PLAYLIST MATCH
+1. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID
+2. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID
+# BEST SONGS MATCH
+1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N}
+2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N}
