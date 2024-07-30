@@ -67,9 +67,9 @@ CREATE TABLE IF NOT EXISTS tracks (
     tempo REAL,
     time_signature INTEGER,
     valence REAL,
-    related_playlist_count INTEGER,
-    related_artist_genres TEXT,
-    related_moods TEXT
+    track_count_in_playlist INTEGER,
+    track_genres TEXT,
+    track_mood TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_tracks_track_id ON tracks (track_id);
 """
