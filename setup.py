@@ -1,3 +1,4 @@
+import nltk
 import sqlite3
 import time
 import subprocess
@@ -40,16 +41,6 @@ def create_database(db_path, schema):
 
 
 songs_schema = """
-CREATE TABLE IF NOT EXISTS lyrics (
-    track_id TEXT PRIMARY KEY,
-    lyrics TEXT,
-    keywords TEXT
-);
-
-CREATE INDEX IF NOT EXISTS idx_lyrics_track_id ON lyrics (track_id);
-CREATE INDEX IF NOT EXISTS idx_lyrics_lyrics ON lyrics (lyrics);
-CREATE INDEX IF NOT EXISTS idx_lyrics_keywords ON lyrics (keywords);
-
 CREATE TABLE IF NOT EXISTS artists (
     artist_id TEXT PRIMARY KEY,
     artist_name TEXT,
@@ -140,7 +131,7 @@ def install_packages(packages):
 if __name__ == "__main__":
     install_directories()
     packages = ["configparser", "requests", "spotipy",
-                "pandas", "numpy", "matplotlib", "seaborn"]
+                "pandas", "numpy", "matplotlib", "seaborn", "nltk"]
     install_packages(packages)
     create_database("data/db/songs_details.db", songs_schema)
     create_database("data/db/playlists_details.db", playlist_schema)
