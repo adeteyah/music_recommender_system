@@ -11,8 +11,8 @@ playlists_db_path = config['db']['playlists_db']
 
 def update_track_weight(cursor, track_id):
     query = """
-        INSERT INTO weights (track_id, weight) VALUES (?, 1)
-        ON CONFLICT(track_id) DO UPDATE SET weight = weight + 1
+        INSERT INTO tracks (track_id, weight) VALUES (?, 1)
+        ON CONFLICT(track_id) DO UPDATE SET in_a_playlists_count = weight + 1
     """
     cursor.execute(query, (track_id,))
 
