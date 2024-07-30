@@ -169,28 +169,10 @@ def cf_result(ids):
 
 if __name__ == "__main__":
     ids = [
-        '2UgCs0i0rNHUH2jKE5NZHE',
-        '1fDFHXcykq4iw8Gg7s5hG9',
-        '6ilc4vQcwMPlvAHFfsTGng',
-        '4SqWKzw0CbA05TGszDgMlc',
-        '0yc6Gst2xkRu0eMLeRMGCX',
-        '1dGr1c8CrMLDpV6mPbImSI',
-        '1FWsomP9StpCcXNWmJk8Cl',
-        '1RMJOxR6GRPsBHL8qeC2ux',
-        '2LBqCSwhJGcFQeTHMVGwy3',
-        '2eAvDnpXP5W0cVtiI0PUxV',
-        '086myS9r57YsLbJpU0TgK9',
-        '26WgejlZUG6TxLo8djVxUp',
-        '3afkJSKX0EAMsJXTZnDXXJ',
-        '4kfjA6WfgKBt7I7YKuDCkU',
-        '56tKRucMdMNuslADmaxN9L',
-        '5CZ40GBx1sQ9agT82CLQCT',
-        '5xuL74G1vQhSGn7WC3L3QL',
-        '7bWHFauPVNfMYUVZnAXbo9',
-        '22Nd3GuO7sHopPjdKccRcq',
-        '2iOgTijjnxjtz7723Xs4sp',
-        '5suV1gtfD3kGj5A3teIVtV',
-        '3AJwUDP919kvQ9QcozQPxg',
-        '0mL82sxCRjrs3br407IdJh',
+        '6uunyBNvRyzQl5imkPYdEb',
+        '5MAK1nd8R6PWnle1Q1WJvh',
+        '1ZyQGXH9dZ4AecevHhKUxi',
+        '2xXNLutYAOELYVObYb1C1S',
+        '5eAKNw3ftVX16LYECfmEsw',
     ]
     cf_result(ids)
