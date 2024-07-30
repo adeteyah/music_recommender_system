@@ -67,9 +67,9 @@ CREATE TABLE IF NOT EXISTS tracks (
     tempo REAL,
     time_signature INTEGER,
     valence REAL,
-    in_playlist_count INTEGER,
-    most_related_artist_genres TEXT,
-
+    related_playlist_count INTEGER,
+    related_artist_genres TEXT,
+    related_moods TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_tracks_track_id ON tracks (track_id);
 """
@@ -109,7 +109,8 @@ CREATE TABLE IF NOT EXISTS playlists (
     min_valence REAL,
     max_valence REAL,
     most_artist_id TEXT,
-    most_genres TEXT
+    most_genres TEXT,
+    most_moods TEXT
 );
 
 CREATE INDEX IF NOT EXISTS idx_playlist_id ON playlists (playlist_id);
