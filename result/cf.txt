@@ -1,0 +1,39 @@
+Inputted IDs:
+1. Tom Waits - Dead and Lovely [https://open.spotify.com/track/6uunyBNvRyzQl5imkPYdEb] - Genres: folk,singer-songwriter
+2. Everybody Loves an Outlaw - I See Red [https://open.spotify.com/track/5MAK1nd8R6PWnle1Q1WJvh] - Genres: modern blues rock
+3. Bastille - World Gone Mad [https://open.spotify.com/track/1ZyQGXH9dZ4AecevHhKUxi] - Genres: metropopolis,modern rock,pop
+4. Sarah Cothran - As the World Caves In [https://open.spotify.com/track/2xXNLutYAOELYVObYb1C1S] - Genres: gen z singer-songwriter
+5. Tom Waits - Time - 2023 Remaster [https://open.spotify.com/track/5eAKNw3ftVX16LYECfmEsw] - Genres: folk,singer-songwriter
+
+Eliminated Inputs:
+
+Used Inputs:
+1. Tom Waits - Dead and Lovely [https://open.spotify.com/track/6uunyBNvRyzQl5imkPYdEb] - Genres: folk,singer-songwriter
+2. Everybody Loves an Outlaw - I See Red [https://open.spotify.com/track/5MAK1nd8R6PWnle1Q1WJvh] - Genres: modern blues rock
+3. Bastille - World Gone Mad [https://open.spotify.com/track/1ZyQGXH9dZ4AecevHhKUxi] - Genres: metropopolis,modern rock,pop
+4. Sarah Cothran - As the World Caves In [https://open.spotify.com/track/2xXNLutYAOELYVObYb1C1S] - Genres: gen z singer-songwriter
+5. Tom Waits - Time - 2023 Remaster [https://open.spotify.com/track/5eAKNw3ftVX16LYECfmEsw] - Genres: folk,singer-songwriter
+
+Matched Playlists:
+1. https://open.spotify.com/user/p5hbktou7i2jh8ym7ulgs60uj - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg [Inputted IDs: 1ZyQGXH9dZ4AecevHhKUxi, 2xXNLutYAOELYVObYb1C1S, 5MAK1nd8R6PWnle1Q1WJvh, 6uunyBNvRyzQl5imkPYdEb, 5eAKNw3ftVX16LYECfmEsw]
+
+Songs Recommendation:
+1. Tom Walker - Play Dead [https://open.spotify.com/track/6rzVBHfKNDogRICqjzgGsE] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+2. Logic - Broken People (with Logic & Rag'n'Bone Man) [https://open.spotify.com/track/5rxPi0MiR4miNK0rCmk980] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+3. X Ambassadors - Renegades [https://open.spotify.com/track/0fYVliAYKHuPmECRs1pbRf] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+4. David Kushner - Daylight [https://open.spotify.com/track/1odExI7RdWc4BT515LTAwj] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+5. Rag'n'Bone Man - Skin [https://open.spotify.com/track/6y2Kaz9QI01XBKJ8mTb7Pf] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+6. Imagine Dragons - Whatever It Takes [https://open.spotify.com/track/6Qn5zhYkTa37e91HC1D7lb] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+7. Disturbed - The Sound of Silence [https://open.spotify.com/track/0eZBeB2xFIS65jQHerispi] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+8. Welshly Arms - Legendary [https://open.spotify.com/track/2bDENJyfbxj0neGiXUFvIX] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+9. Tom Waits - Day After Tomorrow [https://open.spotify.com/track/6oMfjYG14uBJjwA661zVxz] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+10. Sigrid - Everybody Knows [https://open.spotify.com/track/34b3PCTLUISY153eb2F72k] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+11. KALEO - Way down We Go [https://open.spotify.com/track/0y1QJc3SJVPKJ1OvFmFqe6] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+12. Imagine Dragons - Radioactive [https://open.spotify.com/track/62yJjFtgkhUrXktIoSjgP2] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+13. Rag'n'Bone Man - Human [https://open.spotify.com/track/58zsLZPvfflaiIbNWoA22O] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+14. Thirty Seconds To Mars - Walk On Water [https://open.spotify.com/track/6FT9FZccFD6nE8dMNslz2n] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+15. Ursine Vulpine - Wicked Game [https://open.spotify.com/track/3cdEXRnb7cZQSvKU7emY1h] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+16. Hozier - Take Me To Church [https://open.spotify.com/track/3dYD57lRAUcMHufyqn9GcI] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+17. Barns Courtney - Glitter & Gold [https://open.spotify.com/track/1Mf27cnAF1Q6Ko83XTM5d1] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+18. RAIGN - Knocking on Heavens Door [https://open.spotify.com/track/20jZ7lf5eqDUQQruuMSKVE] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
+19. X Ambassadors - Torches [https://open.spotify.com/track/1p9mCPuPV9FGa0jnJYk0IA] | Count: 1 - https://open.spotify.com/playlist/0TwhplVgNXLToxLJGmEvjg
