@@ -204,7 +204,7 @@ def fill_playlists_table():
         conn_playlists.commit()
 
 
-def update_tracks_table():
+def fill_tracks_table():
     with sqlite3.connect(songs_db_path) as conn_songs, \
             sqlite3.connect(playlists_db_path) as conn_playlists:
 
@@ -242,5 +242,5 @@ def update_tracks_table():
 
 if __name__ == "__main__":
     fill_playlists_table()
-    update_tracks_table()
+    fill_tracks_table()
     print("DONE")

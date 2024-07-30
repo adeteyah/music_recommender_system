@@ -171,8 +171,10 @@ def fetch_and_store_playlist_data(user_id, conn_playlists, conn_songs):
 
 
 def finishing():
-    print("Filling tables...")
+    print("Filling playlist tables...")
     fill.fill_playlists_table()
+    print("Filling tracks tables...")
+    fill.fill_tracks_table()
     print("Verifying tables...")
     verify.delete_invalid_playlists()
 
