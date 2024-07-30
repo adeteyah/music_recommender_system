@@ -51,8 +51,8 @@ CREATE INDEX IF NOT EXISTS idx_artists_artist_id ON artists (artist_id);
 
 CREATE TABLE IF NOT EXISTS tracks (
     track_id TEXT PRIMARY KEY,
-    track_name TEXT,
     artist_ids TEXT,
+    track_name TEXT,
     duration_ms INTEGER,
     popularity REAL,
     acousticness REAL,
@@ -66,7 +66,8 @@ CREATE TABLE IF NOT EXISTS tracks (
     speechiness REAL,
     tempo REAL,
     time_signature INTEGER,
-    valence REAL
+    valence REAL,
+    in_playlist_count INTEGER,
 );
 CREATE INDEX IF NOT EXISTS idx_tracks_track_id ON tracks (track_id);
 """

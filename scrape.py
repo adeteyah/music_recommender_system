@@ -27,6 +27,7 @@ songs_db_path = config['db']['songs_db']
 
 
 def create_connection(db_file):
+    """Create and return a database connection."""
     try:
         return sqlite3.connect(db_file)
     except sqlite3.Error as e:
@@ -64,11 +65,10 @@ def store_track_details(cursor, track, audio_features):
         track['id'], track['name'], ",".join(
             [artist['id'] for artist in track['artists']]),
         track['duration_ms'], track['popularity'], audio_features['acousticness'],
-        audio_features['danceability'], audio_features['energy'],
-        audio_features['instrumentalness'], audio_features['key'],
-        audio_features['liveness'], audio_features['loudness'], audio_features['mode'],
-        audio_features['speechiness'], audio_features['tempo'],
-        audio_features['time_signature'], audio_features['valence']
+        audio_features['danceability'], audio_features['energy'], audio_features['instrumentalness'],
+        audio_features['key'], audio_features['liveness'], audio_features['loudness'], audio_features['mode'],
+        audio_features['speechiness'], audio_features['tempo'], audio_features['time_signature'],
+        audio_features['valence']
     ))
     insert_track_id_into_lyrics(cursor, track['id'])
 
@@ -101,61 +101,63 @@ def fetch_and_store_playlist_data(user_id, conn_playlists, conn_songs):
                 break
 
             for playlist in playlists['items']:
-                if playlist['public']:
-                    playlist_id = playlist['id']
-                    if playlist_id in fetched_playlist_ids:
+                if not playlist['public']:
+                    continue
+
+                playlist_id = playlist['id']
+                if playlist_id in fetched_playlist_ids:
+                    continue
+
+                fetched_playlist_ids.add(playlist_id)
+
+                playlist_details = sp.playlist(playlist_id)
+                if playlist_details['tracks']['total'] <= 5:
+                    print(f"Skipping playlist {
+                          playlist_id}, not enough tracks.")
+                    continue
+
+                cursor = conn_playlists.cursor()
+                store_playlist_details(
+                    cursor, playlist_id, user_id, playlist_details['tracks']['total'])
+
+                track_ids = [track['track']['id']
+                             for track in playlist_details['tracks']['items'][:24] if track['track']['id']]
+                if not track_ids:
+                    continue
+
+                store_playlist_items(cursor, playlist_id, track_ids)
+                conn_playlists.commit()
+
+                track_data = sp.tracks(track_ids)
+                audio_features_list = sp.audio_features(track_ids)
+
+                for track, audio_features in zip(track_data['tracks'], audio_features_list):
+                    if track is None or audio_features is None:
                         continue
 
-                    fetched_playlist_ids.add(playlist_id)
-
-                    playlist_details = sp.playlist(playlist_id)
-                    if playlist_details['tracks']['total'] <= 5:
-                        print(f"Skipping playlist {
-                              playlist_id}, not enough tracks.")
+                    if None in [
+                        track['id'], track['name'], track['duration_ms'], track['popularity'],
+                        audio_features['acousticness'], audio_features['danceability'], audio_features['energy'],
+                        audio_features['instrumentalness'], audio_features['key'], audio_features['liveness'],
+                        audio_features['loudness'], audio_features['mode'], audio_features['speechiness'],
+                        audio_features['tempo'], audio_features['time_signature'], audio_features['valence']
+                    ]:
+                        print(f"Skipping track {
+                              track['id']} due to missing data.")
                         continue
 
-                    cursor = conn_playlists.cursor()
-                    store_playlist_details(
-                        cursor, playlist_id, user_id, playlist_details['tracks']['total'])
+                    cursor = conn_songs.cursor()
+                    store_track_details(cursor, track, audio_features)
 
-                    track_ids = [track['track']['id'] for track in playlist_details['tracks']
-                                 ['items'][:24] if track['track']['id'] is not None]
-                    if not track_ids:
-                        continue
+                    for artist in track['artists']:
+                        if artist['id'] not in fetched_artist_ids:
+                            store_artist_details(
+                                cursor, artist, fetched_artist_ids)
 
-                    store_playlist_items(cursor, playlist_id, track_ids)
-                    conn_playlists.commit()
+                    conn_songs.commit()
 
-                    track_data = sp.tracks(track_ids)
-                    audio_features_list = sp.audio_features(track_ids)
-
-                    for track, audio_features in zip(track_data['tracks'], audio_features_list):
-                        if track is None or audio_features is None:
-                            continue
-
-                        if None in [track['id'], track['name'], track['duration_ms'], track['popularity'],
-                                    audio_features['acousticness'], audio_features['danceability'],
-                                    audio_features['energy'], audio_features['instrumentalness'],
-                                    audio_features['key'], audio_features['liveness'],
-                                    audio_features['loudness'], audio_features['mode'],
-                                    audio_features['speechiness'], audio_features['tempo'],
-                                    audio_features['time_signature'], audio_features['valence']]:
-                            print(f"Skipping track {
-                                  track['id']} due to missing data.")
-                            continue
-
-                        cursor = conn_songs.cursor()
-                        store_track_details(cursor, track, audio_features)
-
-                        for artist in track['artists']:
-                            if artist['id'] not in fetched_artist_ids:
-                                store_artist_details(
-                                    cursor, artist, fetched_artist_ids)
-
-                        conn_songs.commit()
-
-                    print(f"Saved playlist details for {playlist_id}")
-                    time.sleep(DELAY_TIME)
+                print(f"Saved playlist details for {playlist_id}")
+                time.sleep(DELAY_TIME)
 
             offset += limit
 
@@ -204,14 +206,15 @@ def main():
             with open(fetched_users_file, 'a') as f:
                 f.write(user_id + '\n')
     except KeyboardInterrupt:
+        print("Interrupted with Keyboard")
         finishing()
     finally:
         if conn_playlists:
             conn_playlists.close()
         if conn_songs:
             conn_songs.close()
-    finishing()
-    print("DONE!")
+        finishing()
+        print("DONE!")
 
 
 if __name__ == "__main__":
