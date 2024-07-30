@@ -35,11 +35,6 @@ def create_connection(db_file):
         return None
 
 
-def insert_track_id_into_lyrics(cursor, track_id):
-    cursor.execute(
-        "INSERT OR IGNORE INTO lyrics (track_id) VALUES (?)", (track_id,))
-
-
 def store_playlist_details(cursor, playlist_id, user_id, track_count):
     cursor.execute('''
         INSERT OR IGNORE INTO playlists (playlist_id, creator_id, original_track_count)
@@ -70,7 +65,6 @@ def store_track_details(cursor, track, audio_features):
         audio_features['speechiness'], audio_features['tempo'], audio_features['time_signature'],
         audio_features['valence']
     ))
-    insert_track_id_into_lyrics(cursor, track['id'])
 
 
 def store_artist_details(cursor, artist, fetched_artist_ids):
