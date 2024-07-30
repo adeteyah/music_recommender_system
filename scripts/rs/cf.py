@@ -2,114 +2,111 @@ import sqlite3
 import random
 import configparser
 
-# Load configuration
+# Read configuration
 config = configparser.ConfigParser()
 config.read('config.cfg')
+
 db_playlist_path = config['db']['playlists_db']
 db_songs_path = config['db']['songs_db']
 output_path = config['output']['cf_output']
 n_recommend = int(config['rs']['n_recommend'])
 
-# Database connections
-conn_playlist = sqlite3.connect(db_playlist_path)
-conn_songs = sqlite3.connect(db_songs_path)
-cursor_playlist = conn_playlist.cursor()
-cursor_songs = conn_songs.cursor()
+
+def get_playlist_containing_tracks(track_ids):
+    query = f"""
+    SELECT DISTINCT playlist_id
+    FROM items
+    WHERE playlist_items LIKE '%{"%' OR playlist_items LIKE '%".join(track_ids)}%'
+    """
+    with sqlite3.connect(db_playlist_path) as conn:
+        return [row[0] for row in conn.execute(query).fetchall()]
 
 
-def get_artist_from_track_id(track_id):
-    cursor_songs.execute(
-        "SELECT artist_ids FROM tracks WHERE track_id = ?", (track_id,))
-    result = cursor_songs.fetchone()
-    if result:
-        return result[0]
-    return None
+def get_tracks_from_playlists(playlist_ids):
+    query = f"""
+    SELECT DISTINCT i.playlist_items
+    FROM items i
+    WHERE i.playlist_id IN ({','.join('?' * len(playlist_ids))})
+    """
+    with sqlite3.connect(db_playlist_path) as conn:
+        return [row[0] for row in conn.execute(query, playlist_ids).fetchall()]
 
 
-def cf_result(track_ids):
-    matched_playlists = {}
-    artist_penalty = {}
+def get_track_details(track_ids):
+    query = f"""
+    SELECT t.track_id, t.track_name, a.artist_name
+    FROM tracks t
+    JOIN artists a ON t.artist_ids LIKE '%' || a.artist_id || '%'
+    WHERE t.track_id IN ({','.join('?' * len(track_ids))})
+    """
+    with sqlite3.connect(db_songs_path) as conn:
+        return conn.execute(query, track_ids).fetchall()
 
-    # Find playlists containing the inputted track IDs
-    for track_id in track_ids:
-        cursor_playlist.execute(
-            "SELECT playlist_id FROM items WHERE playlist_items LIKE ?", (f'%{track_id}%',))
-        playlists = cursor_playlist.fetchall()
-        for playlist in playlists:
-            playlist_id = playlist[0]
-            if playlist_id not in matched_playlists:
-                matched_playlists[playlist_id] = []
-            matched_playlists[playlist_id].append(track_id)
 
-        # Apply artist penalty
-        artist_id = get_artist_from_track_id(track_id)
-        if artist_id:
-            artist_penalty[artist_id] = 0.5
+def recommend_songs(input_track_ids):
+    # Step 1: Find playlists containing inputted track IDs
+    matched_playlists = get_playlist_containing_tracks(input_track_ids)
 
-    # Recommend other songs in the matched playlists
-    recommendations = {}
-    for playlist_id in matched_playlists:
-        cursor_playlist.execute(
-            "SELECT playlist_items FROM items WHERE playlist_id = ?", (playlist_id,))
-        playlist_items = cursor_playlist.fetchone()[0].split(',')
-        for item in playlist_items:
-            if item not in track_ids:
-                artist_id = get_artist_from_track_id(item)
-                if artist_id and artist_id in artist_penalty:
-                    continue
-                if playlist_id not in recommendations:
-                    recommendations[playlist_id] = []
-                recommendations[playlist_id].append(item)
+    # Step 2: Recommend other songs in the matched playlists
+    playlist_tracks = get_tracks_from_playlists(matched_playlists)
+    all_tracks = set(
+        track for sublist in playlist_tracks for track in sublist.split(','))
 
-    # Sort songs randomly and limit the number of recommendations
-    final_recommendations = {}
-    for playlist_id in recommendations:
-        random.shuffle(recommendations[playlist_id])
-        final_recommendations[playlist_id] = recommendations[playlist_id][:n_recommend]
+    # Remove input tracks from recommendations
+    recommended_tracks = all_tracks.difference(set(input_track_ids))
 
-    # Write results to .txt file
-    with open(output_path, 'w') as file:
-        file.write("# Inputted IDs\n")
-        for track_id in track_ids:
-            cursor_songs.execute(
-                "SELECT track_name, artist_ids FROM tracks WHERE track_id = ?", (track_id,))
-            track_name, artist_id = cursor_songs.fetchone()
-            cursor_songs.execute(
-                "SELECT artist_name FROM artists WHERE artist_id = ?", (artist_id,))
-            artist_name = cursor_songs.fetchone()[0]
-            file.write(f"{artist_name} - {track_name} [{track_id}]\n")
+    # Step 3: Apply penalty to prevent the same artist from showing up again
+    track_details = get_track_details(recommended_tracks)
+    artist_penalty = {detail[2]: 0 for detail in track_details}  # Artist names
 
-        file.write("\n# Categorizing IDs (Categorize by MATCHED PLAYLIST)\n")
-        for idx, (playlist_id, matched_tracks) in enumerate(matched_playlists.items()):
-            file.write(f"Group #{idx + 1} : {', '.join(matched_tracks)}\n")
-            cursor_playlist.execute(
-                "SELECT creator_id FROM playlists WHERE playlist_id = ?", (playlist_id,))
-            creator_id = cursor_playlist.fetchone()[0]
-            file.write(f"a. {playlist_id} by {creator_id}\n")
+    final_recommendations = []
+    for detail in track_details:
+        if artist_penalty[detail[2]] < 0.5:
+            final_recommendations.append(detail)
+            artist_penalty[detail[2]] += 0.5
 
-        for idx, (playlist_id, recommended_tracks) in enumerate(final_recommendations.items()):
-            file.write(f"\n# Group #{
-                       idx + 1} (Input: {', '.join(matched_playlists[playlist_id])})\n")
-            for track_id in recommended_tracks:
-                cursor_songs.execute(
-                    "SELECT track_name, artist_ids FROM tracks WHERE track_id = ?", (track_id,))
-                track_name, artist_id = cursor_songs.fetchone()
-                cursor_songs.execute(
-                    "SELECT artist_name FROM artists WHERE artist_id = ?", (artist_id,))
-                artist_name = cursor_songs.fetchone()[0]
-                file.write(f"{artist_name} - {track_name} [{track_id}]\n")
+    # Step 4: Sort songs randomly
+    random.shuffle(final_recommendations)
+
+    # Limit the number of recommendations
+    final_recommendations = final_recommendations[:n_recommend]
+
+    return final_recommendations, matched_playlists
+
+
+def save_recommendations(input_track_ids, recommendations, matched_playlists):
+    with open(output_path, 'w') as f:
+        f.write("# Inputted IDs\n")
+        for track_id in input_track_ids:
+            f.write(f"{track_id}\n")
+
+        f.write("\n# Categorizing IDs (Categorize by MATCHED PLAYLIST)\n")
+        playlist_groups = {}
+        for track_id in input_track_ids:
+            playlist_groups[track_id] = []
+            for playlist_id in matched_playlists:
+                if track_id in playlist_id:
+                    playlist_groups[track_id].append(playlist_id)
+
+        for i, (group, playlists) in enumerate(playlist_groups.items(), 1):
+            f.write(f"1. Group #{i} : {', '.join(group)}\n")
+            for playlist_id in playlists:
+                f.write(f"   a. {playlist_id}\n")
+
+        for i, rec in enumerate(recommendations, 1):
+            f.write(f"\n# Group #{i}\n")
+            for detail in rec:
+                f.write(f"{detail[2]} - {detail[1]} [{detail[0]}]\n")
 
 
 if __name__ == "__main__":
-    ids = [
+    input_track_ids = [
         '6uunyBNvRyzQl5imkPYdEb',
         '5MAK1nd8R6PWnle1Q1WJvh',
         '1ZyQGXH9dZ4AecevHhKUxi',
         '2xXNLutYAOELYVObYb1C1S',
         '5eAKNw3ftVX16LYECfmEsw',
     ]
-    cf_result(ids)
 
-# Close database connections
-conn_playlist.close()
-conn_songs.close()
+    recommendations, matched_playlists = recommend_songs(input_track_ids)
+    save_recommendations(input_track_ids, recommendations, matched_playlists)
