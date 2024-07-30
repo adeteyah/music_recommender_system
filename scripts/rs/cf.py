@@ -74,7 +74,7 @@ def recommend_songs_from_playlists(playlists, exclude_ids):
     return [track_id for track_id, count in recommended_tracks], track_counts
 
 
-def write_result(unqualified, qualified, playlist_matches, recommendations, track_details, artist_details, track_counts):
+def write_result(unqualified, qualified, playlist_matches, recommendations, track_details, artist_details, track_counts, playlist_details):
     with open(output_path, 'w', encoding='utf-8') as file:
         file.write("Unqualified IDs (Doesn't match):\n")
         for track_id in unqualified:
@@ -126,13 +126,16 @@ def cf_result(ids):
             unqualified_ids.difference_update(matching_items)
             playlist_matches[playlist_id] = matching_items
 
+    # Fetch playlist details
+    playlist_details = fetch_playlist_details(list(playlist_matches.keys()))
+
     # Recommend other songs in the qualified playlists
     recommendations, track_counts = recommend_songs_from_playlists(
         playlists, ids)
 
     # Write the result
     write_result(list(unqualified_ids), list(qualified_ids), playlist_matches,
-                 recommendations, track_details, artist_details, track_counts)
+                 recommendations, track_details, artist_details, track_counts, playlist_details)
 
 
 if __name__ == "__main__":
