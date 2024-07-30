@@ -4,8 +4,8 @@ import configparser
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from spotipy.exceptions import SpotifyException
-from scripts.seed import fill
-from scripts.seed import verify
+import scripts.db.fill as fill
+import scripts.db.verify as verify
 
 # Load configuration
 config = configparser.ConfigParser()
@@ -168,6 +168,13 @@ def fetch_and_store_playlist_data(user_id, conn_playlists, conn_songs):
         print(f"An error occurred: {e}")
 
 
+def finishing():
+    print("Filling tables...")
+    fill.fill_playlists_table()
+    print("Verifying tables...")
+    verify.delete_invalid_playlists()
+
+
 def main():
     fetched_users_file = config['file']['fetched_users']
     fetched_users = set()
@@ -197,14 +204,14 @@ def main():
             with open(fetched_users_file, 'a') as f:
                 f.write(user_id + '\n')
     except KeyboardInterrupt:
-        print("Interrupted with Keyboard")
+        finishing()
     finally:
         if conn_playlists:
             conn_playlists.close()
         if conn_songs:
             conn_songs.close()
-
-    print("Playlist scraping completed.")
+    finishing()
+    print("DONE!")
 
 
 if __name__ == "__main__":

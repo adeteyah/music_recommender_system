@@ -44,7 +44,3 @@ def delete_invalid_playlists():
 
 if __name__ == "__main__":
     delete_invalid_playlists()
-
-    # Close the connections
-    conn_playlist.close()
-    conn_songs.close()

@@ -1,5 +1,5 @@
 import time
-import scripts.seed.fill as fill
+import scripts.db.fill as fill
 
 from scripts.rs import cbf
 from scripts.rs import cf
