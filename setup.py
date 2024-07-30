@@ -51,6 +51,9 @@ CREATE INDEX IF NOT EXISTS idx_artists_artist_id ON artists (artist_id);
 
 CREATE TABLE IF NOT EXISTS tracks (
     track_id TEXT PRIMARY KEY,
+    track_count_in_playlist INTEGER,
+    track_genres TEXT,
+    track_moods TEXT,
     artist_ids TEXT,
     track_name TEXT,
     duration_ms INTEGER,
@@ -66,17 +69,18 @@ CREATE TABLE IF NOT EXISTS tracks (
     speechiness REAL,
     tempo REAL,
     time_signature INTEGER,
-    valence REAL,
-    track_count_in_playlist INTEGER,
-    track_genres TEXT,
-    track_mood TEXT
+    valence REAL
 );
+
 CREATE INDEX IF NOT EXISTS idx_tracks_track_id ON tracks (track_id);
 """
 
 playlist_schema = """
 CREATE TABLE IF NOT EXISTS playlists (
     playlist_id TEXT PRIMARY KEY,
+    playlist_most_artist_id TEXT,
+    playlist_most_genres TEXT,
+    playlist_most_moods TEXT,
     creator_id TEXT,
     original_track_count INTEGER,
     fetched_track_count INTEGER,
@@ -107,10 +111,7 @@ CREATE TABLE IF NOT EXISTS playlists (
     min_time_signature INTEGER,
     max_time_signature INTEGER,
     min_valence REAL,
-    max_valence REAL,
-    most_artist_id TEXT,
-    most_genres TEXT,
-    most_moods TEXT
+    max_valence REAL
 );
 
 CREATE INDEX IF NOT EXISTS idx_playlist_id ON playlists (playlist_id);
