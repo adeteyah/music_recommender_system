@@ -119,59 +119,60 @@ def cf_result(ids):
     for track_id, count in track_counts.items():
         playlists_str = ', '.join(
             f"https://open.spotify.com/playlist/{playlist_id}" for playlist_id in track_playlists[track_id])
-        track_name, artist_name, _ = track_details[track_id][1:4]
+        track_name, artist_name, artist_genres = track_details[track_id][1:4]
         recommendations.append(
             (track_id, track_name, artist_name, count, playlists_str))
 
     # Define the sorting key function
     def sort_key(rec):
         track_id, track_name, artist_name, count, playlists_str = rec
+        # Count is the primary sorting criterion
         primary = -count
+        # Playlist count as secondary sorting criterion if count > 1
         secondary = -len(track_playlists[track_id]) if count > 1 else 0
         return primary, secondary, random.random()
 
     # Sort recommendations with the defined sorting key
     recommendations.sort(key=sort_key)
 
-    with open(output_path, 'w', encoding='utf-8') as file:
-        file.write("Unqualified IDs (Doesn't match):\n")
-        for idx, (track_id, track_name, artist_name, _) in enumerate(eliminated_input_details, 1):
-            file.write(f"{idx}. {
-                       artist_name} - {track_name} [https://open.spotify.com/track/{track_id}]\n")
+    with open(output_path, 'w', encoding='utf-8') as file:  # Specify UTF-8 encoding
+        file.write("Inputted IDs:\n")
+        for idx, (track_id, track_name, artist_name, artist_genres) in enumerate(input_details, 1):
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
+                       track_id}] - Genres: {artist_genres}\n")
 
-        file.write("\nQualified IDs (Found match):\n")
-        for idx, (track_id, track_name, artist_name, _) in enumerate(used_input_details, 1):
-            file.write(f"{idx}. {
-                       artist_name} - {track_name} [https://open.spotify.com/track/{track_id}]\n")
+        file.write("\nEliminated Inputs:\n")
+        for idx, (track_id, track_name, artist_name, artist_genres) in enumerate(eliminated_input_details, 1):
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
+                       track_id}] - Genres: {artist_genres}\n")
 
-        file.write("\nQualified Playlist:\n")
+        file.write("\nUsed Inputs:\n")
+        for idx, (track_id, track_name, artist_name, artist_genres) in enumerate(used_input_details, 1):
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
+                       track_id}] - Genres: {artist_genres}\n")
+
+        file.write("\nMatched Playlists:\n")
         for idx, (playlist_id, matched_ids) in enumerate(playlists.items(), 1):
             creator_id = cur_playlist.execute(
                 "SELECT creator_id FROM playlists WHERE playlist_id = ?", (playlist_id,)).fetchone()[0]
             matched_ids_str = ", ".join(matched_ids)
-            file.write(
-                f"- Qualified ID {matched_ids_str} found @ {playlist_id} by {creator_id}\n")
+            file.write(f"{idx}. https://open.spotify.com/user/{creator_id} - https://open.spotify.com/playlist/{
+                       playlist_id} [Inputted IDs: {matched_ids_str}]\n")
 
-        file.write("\nRecommended Songs:\n")
+        file.write("\nSongs Recommendation:\n")
         for idx, (track_id, track_name, artist_name, count, playlists_str) in enumerate(recommendations[:n_recommend], 1):
-            file.write(f"{idx}. {
-                       artist_name} - {track_name} [https://open.spotify.com/track/{track_id}] | Count: {count}\n")
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
+                       track_id}] | Count: {count} - {playlists_str}\n")
 
     print(f'CF Result written to: {output_path}')
 
 
 if __name__ == "__main__":
     ids = [
-        '1FWsomP9StpCcXNWmJk8Cl',
-        '1RMJOxR6GRPsBHL8qeC2ux',
-        '2LBqCSwhJGcFQeTHMVGwy3',
-        '2eAvDnpXP5W0cVtiI0PUxV',
-        '086myS9r57YsLbJpU0TgK9',
-        '3JjnGLK8IxkNLvo8Lb3KOM',
-        '4xqrdfXkTW4T0RauPLv3WA',
-        '0ROj512WvJ1eqeELd7MEdJ',
-        '0SpkyS1Q4MD8GaVcP5YjT4',
-        '3hUxzQpSfdDqwM3ZTFQY0K',
-        '630DpnzdfjdVqv2yLfPbAX',
+        '6uunyBNvRyzQl5imkPYdEb',
+        '5MAK1nd8R6PWnle1Q1WJvh',
+        '1ZyQGXH9dZ4AecevHhKUxi',
+        '2xXNLutYAOELYVObYb1C1S',
+        '5eAKNw3ftVX16LYECfmEsw',
     ]
     cf_result(ids)
