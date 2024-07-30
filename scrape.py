@@ -4,6 +4,8 @@ import configparser
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from spotipy.exceptions import SpotifyException
+from scripts.seed import fill
+from scripts.seed import verify
 
 # Load configuration
 config = configparser.ConfigParser()
@@ -183,19 +185,24 @@ def main():
         print("Error! Cannot create the database connections.")
         return
 
-    for user_id in user_ids:
-        if user_id in fetched_users:
-            print(f"Skipping {user_id}, already fetched.")
-            continue
+    try:
+        for user_id in user_ids:
+            if user_id in fetched_users:
+                print(f"Skipping {user_id}, already fetched.")
+                continue
 
-        fetch_and_store_playlist_data(user_id, conn_playlists, conn_songs)
-        fetched_users.add(user_id)
+            fetch_and_store_playlist_data(user_id, conn_playlists, conn_songs)
+            fetched_users.add(user_id)
 
-        with open(fetched_users_file, 'a') as f:
-            f.write(user_id + '\n')
-
-    conn_playlists.close()
-    conn_songs.close()
+            with open(fetched_users_file, 'a') as f:
+                f.write(user_id + '\n')
+    except KeyboardInterrupt:
+        print("Interrupted with Keyboard")
+    finally:
+        if conn_playlists:
+            conn_playlists.close()
+        if conn_songs:
+            conn_songs.close()
 
     print("Playlist scraping completed.")
 

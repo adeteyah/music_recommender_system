@@ -1,18 +1,17 @@
 import time
-import scripts.seed.fill_playlists_attributes as fill_playlists_attributes
+import scripts.seed.fill as fill
 
 from scripts.rs import cbf
 from scripts.rs import cf
 from scripts.rs import cbf_cf
 from scripts.rs import cf_cbf
 
-fill_playlists_attributes.fill_playlists_table()
+fill.fill_playlists_table()
 
 ids = [
     '5XeFesFbtLpXzIVDNQP22n',
     '1fDFHXcykq4iw8Gg7s5hG9',
 ]
-
 
 print("\n#CF")
 start = time.time()
