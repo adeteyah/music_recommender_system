@@ -1,4 +1,3 @@
-import nltk
 import sqlite3
 import time
 import subprocess
