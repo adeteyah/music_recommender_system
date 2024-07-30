@@ -1,9 +1,7 @@
 import sqlite3
 import configparser
 import random
-from collections import defaultdict
 
-# Read config
 config = configparser.ConfigParser()
 config.read('config.cfg')
 
@@ -19,134 +17,162 @@ conn_songs = sqlite3.connect(db_songs)
 cur_songs = conn_songs.cursor()
 
 
-def fetch_track_details(track_ids):
-    track_details = {}
-    query = f"SELECT track_id, track_name, artist_ids FROM tracks WHERE track_id IN ({
-        ','.join(['?']*len(track_ids))})"
-    cur_songs.execute(query, track_ids)
-    for row in cur_songs.fetchall():
-        track_details[row[0]] = {'track_name': row[1], 'artist_ids': row[2]}
-    return track_details
+def fetch_inputted_ids_details(ids):
+    details = []
+    query = """
+    SELECT t.track_id, t.track_name, a.artist_name, a.artist_genres
+    FROM tracks t
+    JOIN artists a ON t.artist_ids LIKE '%' || a.artist_id || '%'
+    WHERE t.track_id = ?
+    """
+    for track_id in ids:
+        cur_songs.execute(query, (track_id,))
+        track = cur_songs.fetchone()
+        if track:
+            details.append(track)
+    return details
 
 
-def fetch_artist_details(artist_ids):
-    artist_details = {}
-    query = f"SELECT artist_id, artist_name FROM artists WHERE artist_id IN ({
-        ','.join(['?']*len(artist_ids))})"
-    cur_songs.execute(query, artist_ids)
-    for row in cur_songs.fetchall():
-        artist_details[row[0]] = row[1]
-    return artist_details
+def fetch_playlists_with_tracks(ids):
+    playlists = {}
+    query = """
+    SELECT i.playlist_id, i.playlist_items
+    FROM items i
+    WHERE i.playlist_items LIKE ? OR i.playlist_items LIKE ? OR i.playlist_items LIKE ?
+    """
+    like_patterns = [f"%{track_id}%" for track_id in ids]
 
+    for pattern in like_patterns:
+        cur_playlist.execute(query, (pattern, pattern, pattern))
+        rows = cur_playlist.fetchall()
+        for row in rows:
+            playlist_id, items = row
+            track_ids = set(item.strip() for item in items.split(','))
+            matched_ids = track_ids.intersection(ids)
+            if len(matched_ids) >= 2:
+                if playlist_id not in playlists:
+                    playlists[playlist_id] = set()
+                playlists[playlist_id].update(matched_ids)
 
-def fetch_playlists_containing_tracks(track_ids):
-    playlists = defaultdict(list)
-    query = f"SELECT playlist_id, playlist_items FROM items"
-    cur_playlist.execute(query)
-    for row in cur_playlist.fetchall():
-        playlist_id = row[0]
-        playlist_items = row[1].split(',')
-        matching_items = set(track_ids).intersection(set(playlist_items))
-        if matching_items:
-            playlists[playlist_id] = matching_items
     return playlists
 
 
-def fetch_playlist_details(playlist_ids):
-    playlist_details = {}
-    query = f"SELECT playlist_id, creator_id FROM playlists WHERE playlist_id IN ({
-        ','.join(['?']*len(playlist_ids))})"
-    cur_playlist.execute(query, playlist_ids)
-    for row in cur_playlist.fetchall():
-        playlist_details[row[0]] = row[1]
-    return playlist_details
-
-
-def recommend_songs_from_playlists(playlists, exclude_ids):
-    track_counts = defaultdict(int)
-    for items in playlists.values():
-        for item in items:
-            if item not in exclude_ids:
-                track_counts[item] += 1
-    sorted_tracks = sorted(track_counts.items(),
-                           key=lambda x: x[1], reverse=True)
-    recommended_tracks = sorted_tracks[:n_recommend]
-    return [track_id for track_id, count in recommended_tracks], track_counts
-
-
-def write_result(unqualified, qualified, playlist_matches, recommendations, track_details, artist_details, track_counts, playlist_details):
-    with open(output_path, 'w', encoding='utf-8') as file:
-        file.write("Unqualified IDs (Doesn't match):\n")
-        for track_id in unqualified:
-            artists = ', '.join(
-                artist_details[aid] for aid in track_details[track_id]['artist_ids'].split(','))
-            file.write(f"1. {
-                       artists} - {track_details[track_id]['track_name']} [http://open.spotify.com/track/{track_id}]\n")
-
-        file.write("\nQualified IDs (Found match):\n")
-        for track_id in qualified:
-            artists = ', '.join(
-                artist_details[aid] for aid in track_details[track_id]['artist_ids'].split(','))
-            file.write(f"1. {
-                       artists} - {track_details[track_id]['track_name']} [http://open.spotify.com/track/{track_id}]\n")
-
-        file.write("\nQualified Playlist:\n")
-        for playlist_id, match_ids in playlist_matches.items():
-            creator_id = playlist_details[playlist_id]
-            ids_str = ', '.join(match_ids)
-            file.write(
-                f"- Qualified ID {ids_str} found @ {playlist_id} by {creator_id}\n")
-
-        file.write("\nRecommended Songs:\n")
-        for track_id in recommendations:
-            artists = ', '.join(
-                artist_details[aid] for aid in track_details[track_id]['artist_ids'].split(','))
-            file.write(f"1. {artists} - {track_details[track_id]['track_name']} [http://open.spotify.com/track/{
-                       track_id}] | Count: {track_counts[track_id]}\n")
+def fetch_track_details(track_ids):
+    details = {}
+    query = """
+    SELECT t.track_id, t.track_name, a.artist_name, a.artist_genres
+    FROM tracks t
+    JOIN artists a ON t.artist_ids LIKE '%' || a.artist_id || '%'
+    WHERE t.track_id = ?
+    """
+    for track_id in track_ids:
+        cur_songs.execute(query, (track_id,))
+        track = cur_songs.fetchone()
+        if track:
+            details[track_id] = track
+    return details
 
 
 def cf_result(ids):
-    # Fetch track details
-    track_details = fetch_track_details(ids)
-    artist_ids = set(aid for t in track_details.values()
-                     for aid in t['artist_ids'].split(','))
-    artist_details = fetch_artist_details(list(artist_ids))
+    # Get details for inputted IDs
+    input_details = fetch_inputted_ids_details(ids)
 
-    # Fetch playlists containing the inputted track IDs
-    playlists = fetch_playlists_containing_tracks(ids)
+    # Get matched playlists
+    playlists = fetch_playlists_with_tracks(ids)
 
-    # Separate qualified and unqualified IDs
-    qualified_ids = set()
-    unqualified_ids = set(ids)
-    playlist_matches = defaultdict(list)
+    # Collect all tracks from matched playlists, excluding inputted IDs
+    track_counts = {}
+    track_playlists = {}
 
-    for playlist_id, matching_items in playlists.items():
-        if len(matching_items) > 1:
-            qualified_ids.update(matching_items)
-            unqualified_ids.difference_update(matching_items)
-            playlist_matches[playlist_id] = matching_items
+    for playlist_id, matched_ids in playlists.items():
+        cur_playlist.execute(
+            "SELECT playlist_items FROM items WHERE playlist_id = ?", (playlist_id,))
+        items = cur_playlist.fetchone()[0]
+        track_ids = set(item.strip() for item in items.split(','))
 
-    # Fetch playlist details
-    playlist_details = fetch_playlist_details(list(playlist_matches.keys()))
+        for track_id in track_ids - set(ids):
+            if track_id in track_counts:
+                track_counts[track_id] += 1
+            else:
+                track_counts[track_id] = 1
 
-    # Recommend other songs in the qualified playlists
-    recommendations, track_counts = recommend_songs_from_playlists(
-        playlists, ids)
+            if track_id in track_playlists:
+                track_playlists[track_id].add(playlist_id)
+            else:
+                track_playlists[track_id] = {playlist_id}
 
-    # Write the result
-    write_result(list(unqualified_ids), list(qualified_ids), playlist_matches,
-                 recommendations, track_details, artist_details, track_counts, playlist_details)
+    # Fetch details for recommended tracks
+    track_details = fetch_track_details(track_counts.keys())
+
+    # Identify eliminated and used inputted IDs
+    matched_track_ids = set(
+        track_id for playlist_tracks in playlists.values() for track_id in playlist_tracks)
+    eliminated_input_ids = [
+        track_id for track_id in ids if track_id not in matched_track_ids]
+    used_input_ids = [
+        track_id for track_id in ids if track_id in matched_track_ids]
+    eliminated_input_details = fetch_inputted_ids_details(eliminated_input_ids)
+    used_input_details = fetch_inputted_ids_details(used_input_ids)
+
+    # Prepare the recommendations for sorting
+    recommendations = []
+    for track_id, count in track_counts.items():
+        playlists_str = ', '.join(
+            f"https://open.spotify.com/playlist/{playlist_id}" for playlist_id in track_playlists[track_id])
+        track_name, artist_name, artist_genres = track_details[track_id][1:4]
+        recommendations.append(
+            (track_id, track_name, artist_name, count, playlists_str))
+
+    # Define the sorting key function
+    def sort_key(rec):
+        track_id, track_name, artist_name, count, playlists_str = rec
+        # Count is the primary sorting criterion
+        primary = -count
+        # Playlist count as secondary sorting criterion if count > 1
+        secondary = -len(track_playlists[track_id]) if count > 1 else 0
+        return primary, secondary, random.random()
+
+    # Sort recommendations with the defined sorting key
+    recommendations.sort(key=sort_key)
+
+    with open(output_path, 'w', encoding='utf-8') as file:  # Specify UTF-8 encoding
+        file.write("Inputted IDs:\n")
+        for idx, (track_id, track_name, artist_name, artist_genres) in enumerate(input_details, 1):
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
+                       track_id}] - Genres: {artist_genres}\n")
+
+        file.write("\nEliminated Inputs:\n")
+        for idx, (track_id, track_name, artist_name, artist_genres) in enumerate(eliminated_input_details, 1):
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
+                       track_id}] - Genres: {artist_genres}\n")
+
+        file.write("\nUsed Inputs:\n")
+        for idx, (track_id, track_name, artist_name, artist_genres) in enumerate(used_input_details, 1):
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
+                       track_id}] - Genres: {artist_genres}\n")
+
+        file.write("\nMatched Playlists:\n")
+        for idx, (playlist_id, matched_ids) in enumerate(playlists.items(), 1):
+            creator_id = cur_playlist.execute(
+                "SELECT creator_id FROM playlists WHERE playlist_id = ?", (playlist_id,)).fetchone()[0]
+            matched_ids_str = ", ".join(matched_ids)
+            file.write(f"{idx}. https://open.spotify.com/user/{creator_id} - https://open.spotify.com/playlist/{
+                       playlist_id} [Inputted IDs: {matched_ids_str}]\n")
+
+        file.write("\nSongs Recommendation:\n")
+        for idx, (track_id, track_name, artist_name, count, playlists_str) in enumerate(recommendations[:n_recommend], 1):
+            file.write(f"{idx}. {artist_name} - {track_name} [https://open.spotify.com/track/{
+                       track_id}] | Count: {count} - {playlists_str}\n")
+
+    print(f'CF Result written to: {output_path}')
 
 
 if __name__ == "__main__":
     ids = [
-        '1FWsomP9StpCcXNWmJk8Cl',
-        '1RMJOxR6GRPsBHL8qeC2ux',
-        '2LBqCSwhJGcFQeTHMVGwy3',
-        '2eAvDnpXP5W0cVtiI0PUxV',
+        '6uunyBNvRyzQl5imkPYdEb',
+        '5MAK1nd8R6PWnle1Q1WJvh',
+        '1ZyQGXH9dZ4AecevHhKUxi',
+        '2xXNLutYAOELYVObYb1C1S',
+        '5eAKNw3ftVX16LYECfmEsw',
     ]
     cf_result(ids)
-
-# Close connections
-conn_playlist.close()
-conn_songs.close()
