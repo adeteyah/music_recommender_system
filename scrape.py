@@ -121,7 +121,7 @@ def fetch_and_store_playlist_data(user_id, conn_playlists, conn_songs):
                     cursor, playlist_id, user_id, playlist_details['tracks']['total'])
 
                 track_ids = [track['track']['id']
-                             for track in playlist_details['tracks']['items'][:24] if track['track']['id']]
+                             for track in playlist_details['tracks']['items'][:int(config['rs']['n_scrape_from_spotify'])] if track['track']['id']]
                 if not track_ids:
                     continue
 
