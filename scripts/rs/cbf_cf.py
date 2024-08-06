@@ -89,6 +89,18 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     return filtered_songs
 
 
+def find_playlists_with_songs(conn, song_ids):
+    song_ids_sql = ','.join(f"'{song_id}'" for song_id in song_ids)
+    query = f"""
+        SELECT playlist_id, playlist_items
+        FROM playlists
+        WHERE EXISTS (SELECT 1 FROM json_each(playlist_items) WHERE json_each.value IN ({song_ids_sql}))
+    """
+    cursor = conn.cursor()
+    cursor.execute(query)
+    return cursor.fetchall()
+
+
 def cbf_cf(ids):
     conn = sqlite3.connect(DB)
     features = ['s.' + feature for feature in CBF_FEATURES]
@@ -123,6 +135,21 @@ def cbf_cf(ids):
             f.write(f"\n{header}\n")
             similar_songs_info = get_similar_audio_features(
                 conn, features, input_audio_features, inputted_ids_set, songs_info)
+            similar_songs_ids = [song[0]
+                                 for song in similar_songs_info[:N_RESULT]]
+            playlists_with_similar_songs = find_playlists_with_songs(
+                conn, similar_songs_ids + list(inputted_ids_set))
+
+            playlists_by_song = {}
+            for playlist_id, playlist_items in playlists_with_similar_songs:
+                playlist_songs = set(playlist_items.strip(
+                    '[]').replace('"', '').split(', '))
+                for song_id in similar_songs_ids:
+                    if song_id in playlist_songs:
+                        if song_id not in playlists_by_song:
+                            playlists_by_song[song_id] = []
+                        playlists_by_song[song_id].append(playlist_id)
+
             for idx, song_info in enumerate(similar_songs_info[:N_RESULT], start=1):
                 # song_id, song_name, artist_ids, artist_name, artist_genres
                 base_info = song_info[:5]
@@ -133,9 +160,13 @@ def cbf_cf(ids):
                 features_str = ', '.join(
                     [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
 
+                found_in_playlists = ', '.join(
+                    playlists_by_song.get(song_id, []))
+
                 line = (f"{idx}. {song_url} {artist_name} - {song_name} | "
                         f"Genres: {artist_genres} | "
-                        f"{features_str}\n")
+                        f"{features_str} | "
+                        f"Found in: {found_in_playlists}\n")
                 f.write(line)
 
     conn.close()
