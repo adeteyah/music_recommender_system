@@ -34,8 +34,8 @@ def read_inputted_ids(ids, conn):
 def get_related_playlists(conn, inputted_ids):
     cursor = conn.cursor()
     cursor.execute("""
-        SELECT playlist_id, playlist_creator_id, playlist_top_genres, playlist_items
-        FROM playlists
+        SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
+        FROM playlists p
     """)
     playlists = cursor.fetchall()
 
@@ -44,9 +44,23 @@ def get_related_playlists(conn, inputted_ids):
         playlist_id, playlist_creator_id, playlist_top_genres, playlist_items = playlist
         # Assuming playlist_items is a comma-separated string of song_ids
         playlist_items_list = playlist_items.split(',')
+
+        # Check if any inputted IDs are in the playlist
         if any(song_id in inputted_ids for song_id in playlist_items_list):
+            artist_names = []
+            for song_id in playlist_items_list:
+                cursor.execute("""
+                    SELECT a.artist_name
+                    FROM songs s
+                    JOIN artists a ON s.artist_ids = a.artist_id
+                    WHERE s.song_id = ?
+                """, (song_id,))
+                artist_info = cursor.fetchone()
+                if artist_info:
+                    artist_names.append(artist_info[0])
+
             related_playlists.append(
-                (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items_list))
+                (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items_list, artist_names))
 
     return related_playlists
 
@@ -67,10 +81,11 @@ def cf(ids):
 
         f.write('\nRELATED PLAYLISTS\n')
         for idx, playlist in enumerate(related_playlists, 1):
-            playlist_id, playlist_creator_id, playlist_top_genres, playlist_items = playlist
+            playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names = playlist
             playlist_items_str = ', '.join(playlist_items)
-            output_line = f"{idx}. Playlist ID: {playlist_id}, Creator ID: {
-                playlist_creator_id}, Top Genres: {playlist_top_genres}, Items: {playlist_items_str}"
+            artist_names_str = ', '.join(artist_names)
+            output_line = f"{idx}. Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
+                playlist_top_genres}, Items: {playlist_items_str}, Artists: {artist_names_str}"
             f.write(output_line + '\n')
 
     conn.close()
