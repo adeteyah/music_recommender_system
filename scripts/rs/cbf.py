@@ -90,7 +90,7 @@ def get_genre_matched_songs(conn, input_genres, inputted_ids):
     cursor.execute(query)
     songs = cursor.fetchall()
 
-    # Filter songs by matching genres and exclude inputted IDs
+    # Filter songs by matching at least one genre and exclude inputted IDs
     filtered_songs = []
     seen_artists = set()
     for song in songs:
@@ -164,7 +164,8 @@ def cbf(ids):
             f.write(f"\n{header}\n")
             genre_matched_songs_info = get_genre_matched_songs(
                 conn, input_genres, inputted_ids_set)
-            for idx, song_info in enumerate(genre_matched_songs_info[:N_RESULT], start=1):
+            genre_matched_songs_info = genre_matched_songs_info[:N_RESULT]
+            for idx, song_info in enumerate(genre_matched_songs_info, start=1):
                 # song_id, song_name, artist_ids, artist_name, artist_genres
                 base_info = song_info[:5]
                 audio_features = song_info[5:]
