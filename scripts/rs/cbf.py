@@ -87,6 +87,7 @@ def categorize_playlists(playlists, inputted_artists):
 
 def extract_songs_from_playlists(categorized_playlists, conn, inputted_ids):
     artist_song_count = defaultdict(Counter)
+    song_details = {}
 
     for artist, playlists in categorized_playlists:
         for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names in playlists:
@@ -97,8 +98,10 @@ def extract_songs_from_playlists(categorized_playlists, conn, inputted_ids):
                         _, song_name, artist_ids, artist_name, _ = song_info
                         artist_song_count[artist][(
                             song_id, artist_name, song_name)] += 1
+                        # Add to song details for new section
+                        song_details[song_id] = (artist_name, song_name)
 
-    return artist_song_count
+    return artist_song_count, song_details
 
 
 def format_artist_category(artist, songs_info):
@@ -118,7 +121,7 @@ def cbf(ids):
     related_playlists = get_related_playlists(conn, inputted_ids)
     categorized_playlists = categorize_playlists(
         related_playlists, inputted_artists)
-    artist_song_count = extract_songs_from_playlists(
+    artist_song_count, song_details = extract_songs_from_playlists(
         categorized_playlists, conn, inputted_ids)
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
@@ -158,7 +161,7 @@ def cbf(ids):
             unique_artists_written = set()
             for (song_id, artist_name, song_name), count in sorted_songs:
                 if artist_name not in unique_artists_written:  # Only write unique artists
-                    output_line = f"  - https://open.spotify.com/track/{song_id} {artist_name} - {
+                    output_line = f"  - {song_id} {artist_name} - {
                         song_name} | Count: {count}"
                     f.write(output_line + '\n')
                     # Mark this artist as written
