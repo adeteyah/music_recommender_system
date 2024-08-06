@@ -89,25 +89,6 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     return filtered_songs
 
 
-def find_same_playlist(conn, similar_songs, inputted_ids):
-    query = "SELECT playlist_id, playlist_items FROM playlists"
-    cursor = conn.cursor()
-    cursor.execute(query)
-    playlists = cursor.fetchall()
-
-    playlist_map = {playlist_id: set(playlist_items.split(
-        ',')) for playlist_id, playlist_items in playlists}
-
-    song_playlists = {song[0]: [] for song in similar_songs}
-
-    for playlist_id, playlist_items in playlist_map.items():
-        for song_id in song_playlists.keys():
-            if any(inputted_id in playlist_items for inputted_id in inputted_ids) and song_id in playlist_items:
-                song_playlists[song_id].append(playlist_id)
-
-    return song_playlists
-
-
 def cbf_cf(ids):
     conn = sqlite3.connect(DB)
     features = ['s.' + feature for feature in CBF_FEATURES]
@@ -142,7 +123,6 @@ def cbf_cf(ids):
             f.write(f"\n{header}\n")
             similar_songs_info = get_similar_audio_features(
                 conn, features, input_audio_features, inputted_ids_set, songs_info)
-            song_playlists = find_same_playlist(conn, similar_songs_info, ids)
             for idx, song_info in enumerate(similar_songs_info[:N_RESULT], start=1):
                 # song_id, song_name, artist_ids, artist_name, artist_genres
                 base_info = song_info[:5]
@@ -152,12 +132,10 @@ def cbf_cf(ids):
                 song_url = f"https://open.spotify.com/track/{song_id}"
                 features_str = ', '.join(
                     [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
-                found_in_playlists = ', '.join(song_playlists[song_id])
 
                 line = (f"{idx}. {song_url} {artist_name} - {song_name} | "
                         f"Genres: {artist_genres} | "
-                        f"{features_str} | "
-                        f"Found in: {found_in_playlists}\n")
+                        f"{features_str}\n")
                 f.write(line)
 
     conn.close()
