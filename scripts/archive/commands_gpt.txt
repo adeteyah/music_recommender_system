@@ -53,13 +53,32 @@ existing database
     artist_genres TEXT
 
 OUTPUT FORMAT
+Case: 
+- 1,2,3,4,5 artist id is on same playlist
+- 3,4,5 artist id is on same playlist
+- 6 does not have common playlist
+- 7 does not have common playlist
+
 INPUTTED IDS (Inputted IDS)
 1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
 2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+3. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+4. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+5. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+6. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+7. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
 
-PLAYLIST (Playlist that contains artists of inputted ids)
-1. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 8 songs from this playlist
-2. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 2 songs from this playlist
+PLAYLIST CATEGORY (1,2,3,4,5): {array of artists id} (Category Playlist that contains artists of inputted ids)
+1. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 88 songs from this playlist
+2. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 22 songs from this playlist
+
+PLAYLIST CATEGORY: (6) {array of artist id} (Category Playlist that contains artists of inputted ids)
+1. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 63 songs from this playlist
+2. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 1 songs from this playlist
+
+PLAYLIST CATEGORY: (7) {array of artist id} (Category Playlist that contains artists of inputted ids)
+1. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 1 songs from this playlist
+2. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 6 songs from this playlist
 
 SONGS (Recommend Other Artist is in the playlists_result other than Inputted IDS artist)
 1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N} | From:  {array of playlist id that contains this songs}
