@@ -158,7 +158,7 @@ def cf(ids):
             unique_artists_written = set()
             for (song_id, artist_name, song_name), count in sorted_songs:
                 if artist_name not in unique_artists_written:  # Only write unique artists
-                    output_line = f"  - {song_id} {artist_name} - {
+                    output_line = f"  - https://open.spotify.com/track/{song_id} {artist_name} - {
                         song_name} | Count: {count}"
                     f.write(output_line + '\n')
                     # Mark this artist as written
