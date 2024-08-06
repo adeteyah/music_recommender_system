@@ -88,16 +88,25 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
 
 
 def get_playlists_with_songs(conn, song_ids):
-    placeholders = ', '.join('?' for _ in song_ids)
     query = f"""
-        SELECT p.playlist_id, p.playlist_creator_id, pi.song_id
+        SELECT p.playlist_id, p.playlist_creator_id, p.playlist_items
         FROM playlists p
-        JOIN playlist_items pi ON p.playlist_id = pi.playlist_id
-        WHERE pi.song_id IN ({placeholders})
     """
     cursor = conn.cursor()
-    cursor.execute(query, song_ids)
-    return cursor.fetchall()
+    cursor.execute(query)
+    playlists = cursor.fetchall()
+
+    song_id_set = set(song_ids)
+    playlists_with_songs = []
+
+    for playlist_id, creator_id, playlist_items in playlists:
+        # assuming playlist_items is a comma-separated string
+        playlist_songs = set(playlist_items.split(','))
+        if song_id_set & playlist_songs:
+            playlists_with_songs.append(
+                (playlist_id, creator_id, playlist_songs))
+
+    return playlists_with_songs
 
 
 def add_same_playlist_songs_section(conn, f, inputted_ids, similar_songs_info):
@@ -105,21 +114,13 @@ def add_same_playlist_songs_section(conn, f, inputted_ids, similar_songs_info):
     all_song_ids = inputted_ids + [song[0] for song in similar_songs_info]
     playlists_with_songs = get_playlists_with_songs(conn, all_song_ids)
 
-    playlist_dict = {}
-    for playlist_id, creator_id, song_id in playlists_with_songs:
-        if playlist_id not in playlist_dict:
-            playlist_dict[playlist_id] = {
-                'creator_id': creator_id, 'songs': set()}
-        playlist_dict[playlist_id]['songs'].add(song_id)
-
     for input_id in inputted_ids:
         f.write(f"\nInputted ID {input_id}\n")
-        for playlist_id, details in playlist_dict.items():
-            if input_id in details['songs']:
-                for song_id in details['songs']:
+        for playlist_id, creator_id, playlist_songs in playlists_with_songs:
+            if input_id in playlist_songs:
+                for song_id in playlist_songs:
                     if song_id != input_id:
-                        f.write(f"{playlist_id} {
-                                details['creator_id']} | {song_id}\n")
+                        f.write(f"{playlist_id} {creator_id} | {song_id}\n")
 
 
 def cbf_cf(ids):
