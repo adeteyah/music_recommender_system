@@ -148,6 +148,18 @@ existing database
     song_id TEXT PRIMARY KEY,
     song_name TEXT,
     artist_ids TEXT,
+    acousticness REAL,
+    danceability REAL,
+    energy REAL,
+    instrumentalness REAL,
+    key INTEGER,
+    liveness REAL,
+    loudness REAL,
+    mode INTEGER,
+    speechiness REAL,
+    tempo REAL,
+    time_signature INTEGER,
+    valence REAL
 2. playlists table
     playlist_id TEXT PRIMARY KEY,
     playlist_creator_id TEXT,
@@ -160,13 +172,13 @@ existing database
 
 OUTPUT FORMAT
 INPUTTED IDS (Inputted IDS are song_id)
-1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
-2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
-3. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
-4. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
-5. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
-6. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
-7. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+1. https://open.spotify.com/track/song_id artist_name - song_name | acousticness: 0, and more
+2. https://open.spotify.com/track/song_id artist_name - song_name | acousticness: 0, and more
+3. https://open.spotify.com/track/song_id artist_name - song_name | acousticness: 0, and more
+4. https://open.spotify.com/track/song_id artist_name - song_name | acousticness: 0, and more
+5. https://open.spotify.com/track/song_id artist_name - song_name | acousticness: 0, and more
+6. https://open.spotify.com/track/song_id artist_name - song_name | acousticness: 0, and more
+7. https://open.spotify.com/track/song_id artist_name - song_name | acousticness: 0, and more
 continue my code to print desired output
 import sqlite3
 import configparser
@@ -192,7 +204,7 @@ def get_song_info(conn, song_id):
 
 #add procedural function here if needed
 
-cf():
+cbf():
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
     inputted_ids = set(id for id, *_ in songs_info)
@@ -207,11 +219,5 @@ if __name__ == "__main__":
         '4xqrdfXkTW4T0RauPLv3WA',
         '7JIuqL4ZqkpfGKQhYlrirs',
         '5dTHtzHFPyi8TlTtzoz1J9',
-        '4cluDES4hQEUhmXj6TXkSo',
-        '4ZtFanR9U6ndgddUvNcjcG',
-        '2QjOHCTQ1Jl3zawyYOpxh6',
-        '0nJW01T7XtvILxQgC5J7Wh',
-        '7nQoDLkzCcoIpKPQt3eCdN',
-        '72MEldEAmz3WMJ2MkII3kP',
     ]
-    cf(ids)
+    cbf(ids)
