@@ -84,7 +84,7 @@ INPUTTED IDS (Inputted IDS are song_id)
 7. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
 
 PLAYLIST CATEGORY (1,2,3,4,5<-array of playlist_id that has artist_id from inputted ids): {array of artists id} (Category Playlist that contains artists of inputted ids)
-1. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 88 songs from this playlist
+1. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 88 songs from this playlist <- count how many songs in this playlist is filtered to the SONGS
 2. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 22 songs from this playlist
 
 PLAYLIST CATEGORY: (6) {array of artist id} (Category Playlist that contains artists of inputted ids)
@@ -95,9 +95,9 @@ PLAYLIST CATEGORY: (7) {array of artist id} (Category Playlist that contains art
 1. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 1 songs from this playlist
 2. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 6 songs from this playlist
 
-SONGS (Recommend Other Artist is in the playlists_result other than Inputted IDS artist)
-1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N} | From:  {array of playlist id that contains this songs}
-2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N} | From:  {array of playlist id that contains this songs}
+SONGS (Print songs from all playlists_result other than artist_id from the inputted ids)
+1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N <- count this song show up in playlists from PLAYLIST CATEGORY} | From:  {array of playlist id that contains this songs}
+2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N <- count this song show up in playlists from PLAYLIST CATEGORY} | From:  {array of playlist id that contains this songs}
 
 import sqlite3
 import configparser
