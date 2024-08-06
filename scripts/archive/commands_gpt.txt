@@ -54,23 +54,27 @@ existing database
     artist_genres TEXT
 
 
-i want to continue making Collaborative Filtering song recommendation on my code 5BgnL6gHauuvxe4Ok6W1aC
-1. gather playlists from get_playlists_by_song
-2. gather playlists from get_playlists_by_artist
-3. merge playlists and remove duplicated playlist_id
-4. show playlist result on playlist section
-5. show song result on song section
+cf()
+1. read all inputted ids
+2. gather playlists where contains that song_id and artist_id
+3. show playlist result on playlist section
+4. show song result on song section
 
 i want to write result from get_playlists_by_song, get_playlists_by_artist to the recommendation result
 continue this code feel free to add new functions inside cf_functions()
 
-RESULT FORMAT
-# BEST PLAYLIST MATCH
-1. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID
-2. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID
-# BEST SONGS MATCH
-1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N}
-2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N}
+OUTPUT FORMAT
+INPUTTED IDS (Inputted IDS)
+1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+
+PLAYLIST (Playlist that contains artists of inputted ids)
+1. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 8 songs from this playlist
+2. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | 2 songs from this playlist
+
+SONGS (Recommend Other Artist is in the playlists_result other than Inputted IDS artist)
+1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N} | From:  {array of playlist id that contains this songs}
+2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N} | From:  {array of playlist id that contains this songs}
 
 import sqlite3
 import configparser
@@ -101,9 +105,15 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 conn = sqlite3.connect(DB)
 cursor = conn.cursor()
 
+#add procedural function here if needed
+
 cf():
-    # code here
-    # write result with desired format to OUTPUT_PATH (.txt)
+    # read inputted ids
+    # find playlists
+    # read all playlist_items and its songs information
+    # write output format to OUTPUT_PATH (.txt)
+    # write all playlist
+    # write all songs
 
 if __name__ == "__main__":
     ids = [
