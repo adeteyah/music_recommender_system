@@ -90,6 +90,7 @@ CLIENT_SECRET = config['api']['client_secret']
 DELAY_TIME = float(config['api']['delay_time'])
 N_MINIMUM = int(config['rs']['n_minimum_playlist_songs'])
 N_SCRAPE = int(config['rs']['n_scrape'])
+OUTPUT_PATH = int(config['rs']['cf_output'])
 
 # Spotify API credentials
 client_credentials_manager = SpotifyClientCredentials(
@@ -101,7 +102,8 @@ conn = sqlite3.connect(DB)
 cursor = conn.cursor()
 
 cf():
-    #code here
+    # code here
+    # write result with desired format to OUTPUT_PATH (.txt)
 
 if __name__ == "__main__":
     ids = [
