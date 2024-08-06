@@ -84,6 +84,26 @@ def categorize_playlists(playlists, inputted_artists):
     return categorized_playlists
 
 
+def extract_songs_from_playlists(conn, categorized_playlists):
+    artist_to_songs = {}
+
+    for artist, playlists in categorized_playlists:
+        artist_to_songs[artist] = []
+        for playlist_id, playlist_creator_id, playlist_top_genres, artist_names in playlists:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT s.song_id, s.song_name, a.artist_name
+                FROM songs s
+                JOIN artists a ON s.artist_ids = a.artist_id
+                WHERE s.song_id IN (?)
+            """, (', '.join([s for s in playlist_items]),))
+            songs = cursor.fetchall()
+            for song in songs:
+                artist_to_songs[artist].append(song)
+
+    return artist_to_songs
+
+
 def cbf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
@@ -93,6 +113,7 @@ def cbf(ids):
     related_playlists = get_related_playlists(conn, inputted_ids)
     categorized_playlists = categorize_playlists(
         related_playlists, inputted_artists)
+    artist_to_songs = extract_songs_from_playlists(conn, categorized_playlists)
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('INPUTTED IDS\n')
@@ -119,6 +140,13 @@ def cbf(ids):
                 artist_names_str = ', '.join(artist_names)
                 output_line = f"  - Playlist ID: {playlist_id}, Creator ID: {
                     playlist_creator_id}, Top Genres: {playlist_top_genres}, Artists: {artist_names_str}"
+                f.write(output_line + '\n')
+
+        f.write('\nEXTRACTED SONGS FROM CATEGORIZED PLAYLISTS\n')
+        for artist, songs in artist_to_songs.items():
+            f.write(f'Artist: {artist}\n')
+            for song_id, song_name, artist_name in songs:
+                output_line = f"  - {song_id} {artist_name} - {song_name}"
                 f.write(output_line + '\n')
 
     conn.close()
