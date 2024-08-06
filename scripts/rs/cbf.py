@@ -44,7 +44,14 @@ def calculate_similarity(song_features, input_features):
     return sum(abs(song_feature - input_feature) for song_feature, input_feature in zip(song_features, input_features))
 
 
-def get_similar_audio_features(conn, features, input_audio_features, inputted_ids, inputted_songs):
+def genre_similarity(genres1, genres2):
+    set1 = set(genres1.split(','))
+    set2 = set(genres2.split(','))
+    intersection = set1.intersection(set2)
+    return len(intersection) > 0
+
+
+def get_similar_audio_features(conn, features, input_audio_features, input_genres, inputted_ids, inputted_songs):
     feature_conditions = []
     for i, feature in enumerate(features):
         feature_name = feature.split('.')[-1]
@@ -79,6 +86,8 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
             continue
         artist_id = song[2]
         if artist_id in seen_artists:
+            continue
+        if not genre_similarity(song[4], input_genres):
             continue
         seen_artists.add(artist_id)
         filtered_songs.append(song)
@@ -120,9 +129,10 @@ def cbf(ids):
         # SIMILAR AUDIO FEATURES
         f.write('\nSIMILAR AUDIO FEATURES\n')
         for input_audio_features, header in zip(input_audio_features_list, song_headers):
+            input_genres = header.split('| Genres: ')[1]
             f.write(f"\n{header}\n")
             similar_songs_info = get_similar_audio_features(
-                conn, features, input_audio_features, inputted_ids_set, songs_info)
+                conn, features, input_audio_features, input_genres, inputted_ids_set, songs_info)
             for idx, song_info in enumerate(similar_songs_info[:N_RESULT], start=1):
                 # song_id, song_name, artist_ids, artist_name, artist_genres
                 base_info = song_info[:5]
