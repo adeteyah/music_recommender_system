@@ -84,16 +84,18 @@ def categorize_playlists(playlists, inputted_artists):
     return categorized_playlists
 
 
-def extract_songs_from_playlists(categorized_playlists, conn, inputted_ids):
+def extract_songs_from_playlists(categorized_playlists, conn, inputted_ids, inputted_songs):
     artist_song_count = defaultdict(Counter)
+    inputted_songs_set = {(artist_name, song_name)
+                          for _, song_name, _, artist_name, _ in inputted_songs}
 
     for artist, playlists in categorized_playlists:
         for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names in playlists:
             for song_id in playlist_items:
-                if song_id not in inputted_ids:
-                    song_info = get_song_info(conn, song_id)
-                    if song_info:
-                        _, song_name, artist_ids, artist_name, _ = song_info
+                song_info = get_song_info(conn, song_id)
+                if song_info and song_id not in inputted_ids:
+                    _, song_name, artist_ids, artist_name, _ = song_info
+                    if (artist_name, song_name) not in inputted_songs_set:
                         artist_song_count[artist][(
                             song_id, artist_name, song_name)] += 1
 
@@ -118,7 +120,7 @@ def cf(ids):
     categorized_playlists = categorize_playlists(
         related_playlists, inputted_artists)
     artist_song_count = extract_songs_from_playlists(
-        categorized_playlists, conn, inputted_ids)
+        categorized_playlists, conn, inputted_ids, songs_info)
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('\nINPUTTED IDS\n')
@@ -163,8 +165,8 @@ def cf(ids):
             unique_artists_written = set()
             for (song_id, artist_name, song_name), count in sorted_songs:
                 if artist_name not in unique_artists_written:  # Only write unique artists
-                    output_line = f"  - https://open.spotify.com/track/{song_id} {artist_name} - {
-                        song_name} | Count: {count}"
+                    output_line = f"  - https://open.spotify.com/track/{
+                        song_id} {artist_name} - {song_name} | Count: {count}"
                     f.write(output_line + '\n')
                     # Mark this artist as written
                     unique_artists_written.add(artist_name)
