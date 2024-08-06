@@ -35,6 +35,29 @@ def read_inputted_ids(ids, conn, features):
     return song_info_list
 
 
+def get_similar_audio_features(conn, features, input_audio_features):
+    feature_conditions = []
+    for i, feature in enumerate(features):
+        feature = feature.split('.')[-1]
+        lower_bound = input_audio_features[i] - 0.1
+        upper_bound = input_audio_features[i] + 0.1
+        feature_conditions.append(
+            f"{feature} BETWEEN {lower_bound} AND {upper_bound}")
+    conditions_sql = ' AND '.join(feature_conditions)
+
+    features_sql = ', '.join(features)
+    query = f"""
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres,
+               {features_sql}
+        FROM songs s
+        JOIN artists a ON s.artist_ids = a.artist_id
+        WHERE {conditions_sql}
+    """
+    cursor = conn.cursor()
+    cursor.execute(query)
+    return cursor.fetchall()
+
+
 def cbf(ids):
     conn = sqlite3.connect(DB)
     features = ['s.' + feature for feature in CBF_FEATURES]
@@ -42,9 +65,12 @@ def cbf(ids):
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('INPUTTED IDS\n')
+        input_audio_features_list = []
         for idx, song_info in enumerate(songs_info, start=1):
+            # song_id, song_name, artist_ids, artist_name, artist_genres
             base_info = song_info[:5]
             audio_features = song_info[5:]
+            input_audio_features_list.append(audio_features)
 
             song_id, song_name, artist_ids, artist_name, artist_genres = base_info
             song_url = f"https://open.spotify.com/track/{song_id}"
@@ -55,6 +81,26 @@ def cbf(ids):
                     f"Genres: {artist_genres} | "
                     f"{features_str}\n")
             f.write(line)
+
+        # SIMILAR AUDIO FEATURES
+        f.write('\nSIMILAR AUDIO FEATURES\n')
+        for input_audio_features in input_audio_features_list:
+            similar_songs_info = get_similar_audio_features(
+                conn, features, input_audio_features)
+            for idx, song_info in enumerate(similar_songs_info, start=1):
+                # song_id, song_name, artist_ids, artist_name, artist_genres
+                base_info = song_info[:5]
+                audio_features = song_info[5:]
+
+                song_id, song_name, artist_ids, artist_name, artist_genres = base_info
+                song_url = f"https://open.spotify.com/track/{song_id}"
+                features_str = ', '.join(
+                    [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
+
+                line = (f"{idx}. {song_url} {artist_name} - {song_name} | "
+                        f"Genres: {artist_genres} | "
+                        f"{features_str}\n")
+                f.write(line)
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
