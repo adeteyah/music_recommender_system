@@ -40,6 +40,12 @@ def calculate_similarity(song_features, input_features):
     return sum(abs(song_feature - input_feature) for song_feature, input_feature in zip(song_features, input_features))
 
 
+def genre_match(input_genres, song_genres):
+    input_genres_set = set(input_genres.split(', '))
+    song_genres_set = set(song_genres.split(', '))
+    return any(genre in song_genres_set for genre in input_genres_set)
+
+
 def get_similar_audio_features(conn, features, input_audio_features, inputted_ids, input_genres=None):
     feature_conditions = []
     for i, feature in enumerate(features):
@@ -71,10 +77,8 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
         artist_id = song[2]
         if artist_id in seen_artists:
             continue
-        if input_genres:
-            song_genres = song[4].split(', ')
-            if not any(input_genre in genre for genre in song_genres for input_genre in input_genres):
-                continue
+        if input_genres and not genre_match(', '.join(input_genres), song[4]):
+            continue
         seen_artists.add(artist_id)
         filtered_songs.append(song)
 
@@ -100,7 +104,7 @@ def cbf(ids):
             base_info = song_info[:5]
             audio_features = song_info[5:]
             input_audio_features_list.append(audio_features)
-            input_genres_list.append(song_info[4].split(', '))
+            input_genres_list.append(song_info[4])
             song_headers.append(
                 f"{song_info[3]} - {song_info[1]} | Genres: {song_info[4]}")
 
