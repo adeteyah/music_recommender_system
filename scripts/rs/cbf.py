@@ -10,6 +10,7 @@ DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cbf_output']
 N_RESULT = int(config['rs']['n_result'])
 CBF_FEATURES = config['rs']['cbf_features'].split(', ')
+BOUND_VALUE = 0.05
 
 
 def get_song_info(conn, song_id, features):
@@ -43,8 +44,8 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     feature_conditions = []
     for i, feature in enumerate(features):
         feature = feature.split('.')[-1]
-        lower_bound = input_audio_features[i] - 0.05
-        upper_bound = input_audio_features[i] + 0.05
+        lower_bound = input_audio_features[i] - BOUND_VALUE
+        upper_bound = input_audio_features[i] + BOUND_VALUE
         feature_conditions.append(
             f"{feature} BETWEEN {lower_bound} AND {upper_bound}")
     conditions_sql = ' AND '.join(feature_conditions)
