@@ -64,81 +64,6 @@ i want to continue making Collaborative Filtering song recommendation on my code
 i want to write result from get_playlists_by_song, get_playlists_by_artist to the recommendation result
 continue this code feel free to add new functions inside cf_functions()
 
-import sqlite3
-import configparser
-from collections import Counter
-
-# Read configuration file
-config = configparser.ConfigParser()
-config.read('config.cfg')
-
-MODEL = 'Collaborative Filtering'
-DB = config['rs']['db_path']
-OUTPUT_PATH = config['rs']['cf_output']
-N_RESULT = int(config['rs']['n_result'])
-
-
-def get_song_info(conn, song_id):
-    cursor = conn.cursor()
-    cursor.execute("""
-        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
-        FROM songs s
-        JOIN artists a ON s.artist_ids = a.artist_id
-        WHERE s.song_id = ?
-    """, (song_id,))
-    return cursor.fetchone()
-
-
-def get_playlists_by_song(conn, song_id):
-    pass
-
-
-def get_playlists_by_artist(conn, artist_id):
-    pass
-
-
-def get_songs_from_playlists(conn, playlist_ids):
-    pass
-
-
-def get_top_songs(song_ids, exclude_ids):
-    pass
-
-
-def read_inputted_ids(ids, conn):
-    pass
-
-
-def merge_playlists(playlists_by_song, playlists_by_artist):
-    pass
-
-
-def get_playlist_info(conn, playlist_ids):
-    pass
-
-
-def get_song_details(conn, song_id):
-    cursor = conn.cursor()
-    cursor.execute("""
-        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
-        FROM songs s
-        JOIN artists a ON s.artist_ids = a.artist_id
-        WHERE s.song_id = ?
-    """, (song_id,))
-    return cursor.fetchone()
-
-
-def cf(ids):
-    # write result here
-    print('Result for', MODEL, 'stored at', OUTPUT_PATH)
-
-
-if __name__ == "__main__":
-    ids = ['10nyNJ6zNy2YVYLrcwLccB', '0Z1bYJWf48NF0kaqMSNbJk', '1FWsomP9StpCcXNWmJk8Cl', '1Eb90nmqTrxylKFhcUzW8P',
-           '5PihYbt4uNnVt68l5D1SGb', '4RAOI1etsgbh5NP3T5R8rN', '0yc6Gst2xkRu0eMLeRMGCX', '22is613WTMG267eVdACLDK', '37l31PrCNsg8baUjarNAi9']
-    cf(ids)
-
-
 RESULT FORMAT
 # BEST PLAYLIST MATCH
 1. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID
@@ -146,3 +71,37 @@ RESULT FORMAT
 # BEST SONGS MATCH
 1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N}
 2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N}
+
+import sqlite3
+import configparser
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+from spotipy.exceptions import SpotifyException
+import time
+from collections import Counter
+import logging
+
+# Setup logging
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# Load configuration
+config = configparser.ConfigParser()
+config.read('config.cfg')
+
+DB = config['rs']['db_path']
+CLIENT_ID = config['api']['client_id']
+CLIENT_SECRET = config['api']['client_secret']
+DELAY_TIME = float(config['api']['delay_time'])
+N_MINIMUM = int(config['rs']['n_minimum_playlist_songs'])
+N_SCRAPE = int(config['rs']['n_scrape'])
+
+# Spotify API credentials
+client_credentials_manager = SpotifyClientCredentials(
+    client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+
+# Connect to SQLite database
+conn = sqlite3.connect(DB)
+cursor = conn.cursor()
