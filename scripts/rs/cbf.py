@@ -10,7 +10,7 @@ DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cbf_output']
 N_RESULT = int(config['rs']['n_result'])
 CBF_FEATURES = config['rs']['cbf_features'].split(', ')
-BOUND_VAL = 0.1
+BOUND_VAL = 0.05
 
 
 def get_song_info(conn, song_id, features):
@@ -72,8 +72,8 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
         if artist_id in seen_artists:
             continue
         if input_genres:
-            song_genres = set(song[4].split(', '))
-            if not song_genres.intersection(input_genres):
+            song_genres = song[4].split(', ')
+            if not any(input_genre in genre for genre in song_genres for input_genre in input_genres):
                 continue
         seen_artists.add(artist_id)
         filtered_songs.append(song)
@@ -100,7 +100,7 @@ def cbf(ids):
             base_info = song_info[:5]
             audio_features = song_info[5:]
             input_audio_features_list.append(audio_features)
-            input_genres_list.append(set(song_info[4].split(', ')))
+            input_genres_list.append(song_info[4].split(', '))
             song_headers.append(
                 f"{song_info[3]} - {song_info[1]} | Genres: {song_info[4]}")
 
