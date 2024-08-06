@@ -47,7 +47,7 @@ def get_related_playlists(conn, inputted_ids):
 
         # Check if any inputted IDs are in the playlist
         if any(song_id in inputted_ids for song_id in playlist_items_list):
-            artist_names = []
+            artist_names = set()
             for song_id in playlist_items_list:
                 cursor.execute("""
                     SELECT a.artist_name
@@ -57,10 +57,10 @@ def get_related_playlists(conn, inputted_ids):
                 """, (song_id,))
                 artist_info = cursor.fetchone()
                 if artist_info:
-                    artist_names.append(artist_info[0])
+                    artist_names.add(artist_info[0])
 
             related_playlists.append(
-                (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items_list, artist_names))
+                (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items_list, list(artist_names)))
 
     return related_playlists
 
