@@ -10,8 +10,9 @@ DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cbf_cf_output']
 N_RESULT = int(config['rs']['n_result'])
 CBF_FEATURES = config['rs']['cbf_features'].split(', ')
-REAL_BOUND_VAL = 0.25
-INTEGER_BOUND_VAL = 1
+REAL_BOUND_VAL = float(config['rs']['cbf_real_bound'])
+INTEGER_BOUND_VAL = int(config['rs']['cbf_integer_bound'])
+
 # Define which features are integers
 INTEGER_FEATURES = {'tempo', 'time_signature', 'key', 'mode'}
 
