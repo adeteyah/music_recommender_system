@@ -129,6 +129,27 @@ def cbf(ids):
                         f"{features_str}\n")
                 f.write(line)
 
+        # SIMILAR AUDIO FEATURES + GENRES FITLER
+        f.write('\nSIMILAR AUDIO FEATURES + GENRES FITLER\n')
+        for input_audio_features, header in zip(input_audio_features_list, song_headers):
+            f.write(f"\n{header}\n")
+            similar_songs_info = get_similar_audio_features(
+                conn, features, input_audio_features, inputted_ids_set)
+            for idx, song_info in enumerate(similar_songs_info[:N_RESULT], start=1):
+                # song_id, song_name, artist_ids, artist_name, artist_genres
+                base_info = song_info[:5]
+                audio_features = song_info[5:]
+
+                song_id, song_name, artist_ids, artist_name, artist_genres = base_info
+                song_url = f"https://open.spotify.com/track/{song_id}"
+                features_str = ', '.join(
+                    [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
+
+                line = (f"{idx}. {song_url} {artist_name} - {song_name} | "
+                        f"Genres: {artist_genres} | "
+                        f"{features_str}\n")
+                f.write(line)
+
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
 
