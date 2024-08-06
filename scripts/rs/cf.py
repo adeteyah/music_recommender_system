@@ -65,11 +65,31 @@ def get_related_playlists(conn, inputted_ids):
     return related_playlists
 
 
+def categorize_playlists(playlists):
+    artist_to_playlists = {}
+
+    for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names in playlists:
+        for artist in artist_names:
+            if artist not in artist_to_playlists:
+                artist_to_playlists[artist] = []
+            artist_to_playlists[artist].append(
+                (playlist_id, playlist_creator_id, playlist_top_genres))
+
+    categorized_playlists = []
+    for artist, playlists in artist_to_playlists.items():
+        # Remove duplicate playlists
+        unique_playlists = {p[0]: p for p in playlists}.values()
+        categorized_playlists.append((artist, list(unique_playlists)))
+
+    return categorized_playlists
+
+
 def cf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
     inputted_ids = set(id for id, *_ in songs_info)
     related_playlists = get_related_playlists(conn, inputted_ids)
+    categorized_playlists = categorize_playlists(related_playlists)
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('INPUTTED IDS\n')
@@ -87,6 +107,15 @@ def cf(ids):
             output_line = f"{idx}. Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
                 playlist_top_genres}, Items: {playlist_items_str}, Artists: {artist_names_str}"
             f.write(output_line + '\n')
+
+        f.write('\nCATEGORIZED PLAYLISTS\n')
+        for artist, playlists in categorized_playlists:
+            f.write(f'Artist: {artist}\n')
+            for playlist in playlists:
+                playlist_id, playlist_creator_id, playlist_top_genres = playlist
+                output_line = f"  - Playlist ID: {playlist_id}, Creator ID: {
+                    playlist_creator_id}, Top Genres: {playlist_top_genres}"
+                f.write(output_line + '\n')
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
