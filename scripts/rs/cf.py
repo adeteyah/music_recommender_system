@@ -100,6 +100,12 @@ def extract_songs_from_playlists(categorized_playlists, conn):
     return artist_song_count
 
 
+def format_artist_category(artist, songs_info):
+    song_names = [song_name for _, song_name, _, artist_name,
+                  _ in songs_info if artist_name == artist]
+    return f"{artist} - {', '.join(song_names)}"
+
+
 def cf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
@@ -131,7 +137,8 @@ def cf(ids):
 
         f.write('\nCATEGORIZED PLAYLISTS\n')
         for artist, playlists in categorized_playlists:
-            f.write(f'Artist: {artist}\n')
+            category_name = format_artist_category(artist, songs_info)
+            f.write(f'{category_name}\n')
             for playlist in playlists:
                 playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names = playlist
                 artist_names_str = ', '.join(artist_names)
@@ -141,7 +148,8 @@ def cf(ids):
 
         f.write('\nSONGS FROM CATEGORIZED PLAYLISTS\n')
         for artist, songs in artist_song_count.items():
-            f.write(f'Artist: {artist}\n')
+            category_name = format_artist_category(artist, songs_info)
+            f.write(f'{category_name}\n')
             for (song_id, artist_name, song_name), count in songs.items():
                 output_line = f"  - {song_id} {artist_name} - {
                     song_name} | Count: {count}"
