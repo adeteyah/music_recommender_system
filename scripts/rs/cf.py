@@ -150,7 +150,9 @@ def cf(ids):
         for artist, songs in artist_song_count.items():
             category_name = format_artist_category(artist, songs_info)
             f.write(f'{category_name}\n')
-            for (song_id, artist_name, song_name), count in songs.items():
+            sorted_songs = sorted(
+                songs.items(), key=lambda x: x[1], reverse=True)
+            for (song_id, artist_name, song_name), count in sorted_songs:
                 output_line = f"  - {song_id} {artist_name} - {
                     song_name} | Count: {count}"
                 f.write(output_line + '\n')
