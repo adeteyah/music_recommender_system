@@ -8,7 +8,7 @@ config = configparser.ConfigParser()
 config.read('config.cfg')
 
 DB = config['rs']['db_path']
-OUTPUT_PATH = config['rs']['cfcbf_output']
+OUTPUT_PATH = config['rs']['cf_cbf_output']
 
 
 def get_song_details(cursor, track_id):

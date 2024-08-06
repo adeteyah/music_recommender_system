@@ -1,220 +1,150 @@
 import sqlite3
 import configparser
-from collections import defaultdict
-from scipy.spatial import distance
-import numpy as np
 
+# Read configuration file
 config = configparser.ConfigParser()
 config.read('config.cfg')
 
+MODEL = 'Content-based Filtering - Collaborative Filtering'
 DB = config['rs']['db_path']
-OUTPUT_PATH = config['rs']['cbfcf_output']
+OUTPUT_PATH = config['rs']['cbf_cf_output']
+N_RESULT = int(config['rs']['n_result'])
+CBF_FEATURES = config['rs']['cbf_features'].split(', ')
+REAL_BOUND_VAL = 0.25
+INTEGER_BOUND_VAL = 1
+# Define which features are integers
+INTEGER_FEATURES = {'tempo', 'time_signature', 'key', 'mode'}
 
 
-def get_song_details(cursor, track_id):
-    cursor.execute(
-        'SELECT song_name, artist_ids FROM songs WHERE song_id = ?', (track_id,))
-    song = cursor.fetchone()
-    if song:
-        song_name, artist_ids = song
-        artist_ids_list = artist_ids.split(',')
-
-        # Fetch artist names
-        artist_names = []
-        for artist_id in artist_ids_list:
-            cursor.execute(
-                'SELECT artist_name FROM artists WHERE artist_id = ?', (artist_id,))
-            artist = cursor.fetchone()
-            if artist:
-                artist_names.append(artist[0])
-        return song_name, artist_names
-    return None, None
-
-
-def fetch_audio_features(cursor, track_id):
-    cursor.execute(
-        f'SELECT {config["rs"]["selected_features"]} FROM songs WHERE song_id = ?', (track_id,))
+def get_song_info(conn, song_id, features):
+    features_sql = ', '.join(features)
+    query = f"""
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres,
+               {features_sql}
+        FROM songs s
+        JOIN artists a ON s.artist_ids = a.artist_id
+        WHERE s.song_id = ?
+    """
+    cursor = conn.cursor()
+    cursor.execute(query, (song_id,))
     return cursor.fetchone()
 
 
-def fetch_genres(cursor, track_id):
-    cursor.execute(
-        'SELECT artist_ids FROM songs WHERE song_id = ?', (track_id,))
-    artist_ids = cursor.fetchone()[0].split(',')
-    genres = set()
-    for artist_id in artist_ids:
-        cursor.execute(
-            'SELECT artist_genres FROM artists WHERE artist_id = ?', (artist_id,))
-        artist_genres = cursor.fetchone()[0]
-        genres.update(artist_genres.split(','))
-    return genres
+def read_inputted_ids(ids, conn, features):
+    song_info_list = []
+    for song_id in ids:
+        song_info = get_song_info(conn, song_id, features)
+        if song_info:
+            song_info_list.append(song_info)
+    return song_info_list
 
 
-def calculate_similarity(features1, features2):
-    if features1 and features2:
-        return 1 - distance.euclidean(features1, features2)
-    return 0
+def calculate_similarity(song_features, input_features):
+    return sum(abs(song_feature - input_feature) for song_feature, input_feature in zip(song_features, input_features))
 
 
-def calculate_genre_similarity(genres1, genres2):
-    if genres1 and genres2:
-        intersection = len(genres1.intersection(genres2))
-        union = len(genres1.union(genres2))
-        return intersection / union if union != 0 else 0
-    return 0
+def get_similar_audio_features(conn, features, input_audio_features, inputted_ids):
+    feature_conditions = []
+    for i, feature in enumerate(features):
+        feature_name = feature.split('.')[-1]
+        lower_bound = input_audio_features[i] - \
+            REAL_BOUND_VAL if feature_name not in INTEGER_FEATURES else input_audio_features[
+                i] - INTEGER_BOUND_VAL
+        upper_bound = input_audio_features[i] + \
+            REAL_BOUND_VAL if feature_name not in INTEGER_FEATURES else input_audio_features[
+                i] + INTEGER_BOUND_VAL
+        feature_conditions.append(f"{feature_name} BETWEEN {
+                                  lower_bound} AND {upper_bound}")
+    conditions_sql = ' AND '.join(feature_conditions)
 
-
-def cbf(cursor, ids):
-    input_features = []
-    input_genres = set()
-
-    # Fetch audio features and genres for input IDs
-    for track_id in ids:
-        features = fetch_audio_features(cursor, track_id)
-        genres = fetch_genres(cursor, track_id)
-        if features:
-            input_features.append(features)
-        if genres:
-            input_genres.update(genres)
-
-    input_features_array = np.array(input_features)
-
-    # Calculate min and max audio features for input IDs
-    min_max_features = {}
-    feature_names = config['rs']['selected_features'].split(', ')
-    for j, feature in enumerate(feature_names, 1):
-        min_value = np.min(input_features_array[:, j-1])
-        max_value = np.max(input_features_array[:, j-1])
-        min_max_features[feature] = {'min': min_value, 'max': max_value}
-
-    return input_features, input_genres, min_max_features
-
-
-def cf(cursor, ids, input_features, input_genres):
-    matched_playlists = []
-
-    # Find playlists that contain the specified track IDs
-    for playlist_id, creator_id, track_ids in cursor.execute('SELECT playlist_id, playlist_creator_id, playlist_items FROM playlists'):
-        track_ids_list = track_ids.split(',')
-        if any(track_id in track_ids_list for track_id in ids):
-            matched_playlists.append((playlist_id, creator_id))
-
-    song_playlists_count = defaultdict(
-        lambda: {'count': 0, 'playlists': [], 'features': None, 'genres': set()})
-
-    for playlist_id, _ in matched_playlists:
-        cursor.execute(
-            'SELECT playlist_items FROM playlists WHERE playlist_id = ?', (playlist_id,))
-        track_ids = cursor.fetchone()[0].split(',')
-
-        for track_id in track_ids:
-            if track_id not in ids:
-                song_playlists_count[track_id]['count'] += 1
-                song_playlists_count[track_id]['playlists'].append(playlist_id)
-                song_playlists_count[track_id]['features'] = fetch_audio_features(
-                    cursor, track_id)
-                song_playlists_count[track_id]['genres'] = fetch_genres(
-                    cursor, track_id)
-
-    # Calculate similarity scores
-    for track_id, data in song_playlists_count.items():
-        if data['features']:
-            similarities = [calculate_similarity(
-                data['features'], features) for features in input_features]
-            data['average_similarity'] = sum(similarities) / len(similarities)
-        else:
-            data['average_similarity'] = 0
-
-        if data['genres']:
-            data['genre_similarity'] = calculate_genre_similarity(
-                data['genres'], input_genres)
-        else:
-            data['genre_similarity'] = 0
-
-        # Calculate composite score
-        data['composite_score'] = (
-            data['count'] * float(config['rs']['count_weight']) +
-            data['genre_similarity'] * float(config['rs']['genre_weight']) +
-            data['average_similarity'] * float(config['rs']['audio_weight'])
-        )
-
-    return matched_playlists, song_playlists_count
-
-
-def cbfcf(ids):
-    conn = sqlite3.connect(DB)
+    features_sql = ', '.join(features)
+    query = f"""
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres,
+               {features_sql}
+        FROM songs s
+        JOIN artists a ON s.artist_ids = a.artist_id
+        WHERE {conditions_sql}
+    """
     cursor = conn.cursor()
+    cursor.execute(query)
+    songs = cursor.fetchall()
 
-    input_features, input_genres, min_max_features = cbf(cursor, ids)
-    matched_playlists, song_playlists_count = cf(
-        cursor, ids, input_features, input_genres)
+    # Filter out inputted IDs and ensure only one song per artist
+    filtered_songs = []
+    seen_artists = set()
+    for song in songs:
+        if song[0] in inputted_ids:
+            continue
+        artist_id = song[2]
+        if artist_id in seen_artists:
+            continue
+        seen_artists.add(artist_id)
+        filtered_songs.append(song)
+
+    # Sort songs by similarity
+    filtered_songs.sort(key=lambda song: calculate_similarity(
+        song[5:], input_audio_features))
+    return filtered_songs
+
+
+def cbf_cf(ids):
+    conn = sqlite3.connect(DB)
+    features = ['s.' + feature for feature in CBF_FEATURES]
+    songs_info = read_inputted_ids(ids, conn, features)
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
-        # Write inputted IDs with song details
-        f.write('Inputted IDs:\n')
-        for i, track_id in enumerate(ids, 1):
-            song_name, artist_names = get_song_details(cursor, track_id)
-            if song_name and artist_names:
-                f.write(f'{i}. https://open.spotify.com/track/{track_id} {
-                        ", ".join(artist_names)} - {song_name}\n')
-            else:
-                f.write(f'{i}. https://open.spotify.com/track/{track_id}\n')
+        f.write('INPUTTED IDS\n')
+        input_audio_features_list = []
+        inputted_ids_set = set(ids)
+        song_headers = []
+        for idx, song_info in enumerate(songs_info, start=1):
+            # song_id, song_name, artist_ids, artist_name, artist_genres
+            base_info = song_info[:5]
+            audio_features = song_info[5:]
+            input_audio_features_list.append(audio_features)
+            song_headers.append(
+                f"{song_info[3]} - {song_info[1]} | Genres: {song_info[4]}")
 
-        # Write min max audio features of inputted IDs
-        f.write('\nInputted IDs Audio Features:\n')
-        for j, (feature, values) in enumerate(min_max_features.items(), 1):
-            f.write(f'{j}. {feature}: Min={
-                    values["min"]}, Max={values["max"]}\n')
+            song_id, song_name, artist_ids, artist_name, artist_genres = base_info
+            song_url = f"https://open.spotify.com/track/{song_id}"
+            features_str = ', '.join(
+                [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
 
-        # Write matched playlists
-        f.write('\nMatched Playlists:\n')
-        for i, (playlist_id, creator_id) in enumerate(matched_playlists, 1):
-            f.write(f'{i}. https://open.spotify.com/playlist/{
-                    playlist_id} by https://open.spotify.com/user/{creator_id}\n')
+            line = (f"{idx}. {song_url} {artist_name} - {song_name} | "
+                    f"Genres: {artist_genres} | "
+                    f"{features_str}\n")
+            f.write(line)
 
-            # Fetch min/max audio features from the playlist
-            cursor.execute(
-                'SELECT min_acousticness, max_acousticness, min_danceability, max_danceability, min_energy, max_energy, min_instrumentalness, max_instrumentalness, min_liveness, max_liveness, min_loudness, max_loudness, min_speechiness, max_speechiness, min_tempo, max_tempo, min_valence, max_valence FROM playlists WHERE playlist_id = ?', (playlist_id,))
-            min_max_values = cursor.fetchone()
+        # SIMILAR AUDIO FEATURES
+        f.write('\nSIMILAR AUDIO FEATURES\n')
+        for input_audio_features, header in zip(input_audio_features_list, song_headers):
+            f.write(f"\n{header}\n")
+            similar_songs_info = get_similar_audio_features(
+                conn, features, input_audio_features, inputted_ids_set)
+            for idx, song_info in enumerate(similar_songs_info[:N_RESULT], start=1):
+                # song_id, song_name, artist_ids, artist_name, artist_genres
+                base_info = song_info[:5]
+                audio_features = song_info[5:]
 
-            if min_max_values:
-                feature_names_with_min_max = [
-                    ('acousticness', min_max_values[0], min_max_values[1]),
-                    ('danceability', min_max_values[2], min_max_values[3]),
-                    ('energy', min_max_values[4], min_max_values[5]),
-                    ('instrumentalness', min_max_values[6], min_max_values[7]),
-                    ('liveness', min_max_values[8], min_max_values[9]),
-                    ('loudness', min_max_values[10], min_max_values[11]),
-                    ('speechiness', min_max_values[12], min_max_values[13]),
-                    ('tempo', min_max_values[14], min_max_values[15]),
-                    ('valence', min_max_values[16], min_max_values[17])
-                ]
+                song_id, song_name, artist_ids, artist_name, artist_genres = base_info
+                song_url = f"https://open.spotify.com/track/{song_id}"
+                features_str = ', '.join(
+                    [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
 
-                for j, (feature, min_value, max_value) in enumerate(feature_names_with_min_max, 1):
-                    f.write(f'    {j}. {feature.capitalize()}: Min={
-                            min_value}, Max={max_value}\n')
-
-        # Sort results by composite score
-        sorted_songs = sorted(song_playlists_count.items(
-        ), key=lambda item: item[1]['composite_score'], reverse=True)
-
-        # Write results
-        f.write('\nResult:\n')
-        result_index = 1
-        for track_id, data in sorted_songs:
-            song_name, artist_names = get_song_details(cursor, track_id)
-            if song_name and artist_names:
-                playlist_ids_str = ', '.join(data['playlists'])
-                f.write(f'{result_index}. https://open.spotify.com/track/{track_id} {", ".join(artist_names)} - {song_name} [Count: {
-                        data["count"]} | Genre Similarity: {data["genre_similarity"]:.2f} | Audio Similarity: {data["average_similarity"]:.2f}] [{playlist_ids_str}]\n')
-                result_index += 1
+                line = (f"{idx}. {song_url} {artist_name} - {song_name} | "
+                        f"Genres: {artist_genres} | "
+                        f"{features_str}\n")
+                f.write(line)
 
     conn.close()
-    print('CBF-CF: ', OUTPUT_PATH)
+    print('Result for', MODEL, 'stored at', OUTPUT_PATH)
 
 
 if __name__ == "__main__":
     ids = [
-        '7j6eSKC2Hv3lcElPyR1bP3',
+        '1BxfuPKGuaTgP7aM0Bbdwr',
+        '4xqrdfXkTW4T0RauPLv3WA',
+        '7JIuqL4ZqkpfGKQhYlrirs',
+        '5dTHtzHFPyi8TlTtzoz1J9',
     ]
-    cbfcf(ids)
+    cbf_cf(ids)

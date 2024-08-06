@@ -13,20 +13,20 @@ ids = ['6T7MAQCekVb3UnCykjX3BP',
 start = time.time()
 cf.cf(ids)
 end = time.time()
-print("Execution time: ", end - start)
+print("Time: ", end - start)
 
 # start = time.time()
-# cf_cbf.cfcbf(ids)
+# cf_cbf.cf_cbf(ids)
 # end = time.time()
-# print("Execution time: ", end - start)
+# print("Time: ", end - start)
 
 
 start = time.time()
 cbf.cbf(ids)
 end = time.time()
-print("Execution time: ", end - start)
+print("Time: ", end - start)
 
-# start = time.time()
-# cbf_cf.cbfcf(ids)
-# end = time.time()
-# print("Execution time: ", end - start)
+start = time.time()
+cbf_cf.cbf_cf(ids)
+end = time.time()
+print("Time: ", end - start)
