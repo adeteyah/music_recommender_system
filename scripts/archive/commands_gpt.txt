@@ -116,13 +116,7 @@ cursor = conn.cursor()
 #add procedural function here if needed
 
 cf():
-    # read inputted ids
-    # find playlists that has inputted ids artists
-    # categorize inputted ids that has same playlist that has same artist
-    # read all playlist_items and its songs information
-    # write output format to OUTPUT_PATH (.txt)
-    # write all playlist
-    # write all songs
+    # main function to print result to OUTPUT_PATH (.txt with utf-8 encoding)
 
 if __name__ == "__main__":
     ids = [
