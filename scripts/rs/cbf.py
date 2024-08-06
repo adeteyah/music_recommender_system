@@ -35,12 +35,16 @@ def read_inputted_ids(ids, conn, features):
     return song_info_list
 
 
-def get_similar_audio_features(conn, features, input_audio_features):
+def calculate_similarity(song_features, input_features):
+    return sum(abs(song_feature - input_feature) for song_feature, input_feature in zip(song_features, input_features))
+
+
+def get_similar_audio_features(conn, features, input_audio_features, inputted_ids):
     feature_conditions = []
     for i, feature in enumerate(features):
         feature = feature.split('.')[-1]
-        lower_bound = input_audio_features[i] - 0.01
-        upper_bound = input_audio_features[i] + 0.01
+        lower_bound = input_audio_features[i] - 0.1
+        upper_bound = input_audio_features[i] + 0.1
         feature_conditions.append(
             f"{feature} BETWEEN {lower_bound} AND {upper_bound}")
     conditions_sql = ' AND '.join(feature_conditions)
@@ -55,7 +59,24 @@ def get_similar_audio_features(conn, features, input_audio_features):
     """
     cursor = conn.cursor()
     cursor.execute(query)
-    return cursor.fetchall()
+    songs = cursor.fetchall()
+
+    # Filter out inputted IDs and ensure only one song per artist
+    filtered_songs = []
+    seen_artists = set()
+    for song in songs:
+        if song[0] in inputted_ids:
+            continue
+        artist_id = song[2]
+        if artist_id in seen_artists:
+            continue
+        seen_artists.add(artist_id)
+        filtered_songs.append(song)
+
+    # Sort songs by similarity
+    filtered_songs.sort(key=lambda song: calculate_similarity(
+        song[5:], input_audio_features))
+    return filtered_songs
 
 
 def cbf(ids):
@@ -66,6 +87,7 @@ def cbf(ids):
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('INPUTTED IDS\n')
         input_audio_features_list = []
+        inputted_ids_set = set(ids)
         song_headers = []
         for idx, song_info in enumerate(songs_info, start=1):
             # song_id, song_name, artist_ids, artist_name, artist_genres
@@ -89,8 +111,8 @@ def cbf(ids):
         for input_audio_features, header in zip(input_audio_features_list, song_headers):
             f.write(f"\n{header}\n")
             similar_songs_info = get_similar_audio_features(
-                conn, features, input_audio_features)
-            for idx, song_info in enumerate(similar_songs_info, start=1):
+                conn, features, input_audio_features, inputted_ids_set)
+            for idx, song_info in enumerate(similar_songs_info[:N_RESULT], start=1):
                 # song_id, song_name, artist_ids, artist_name, artist_genres
                 base_info = song_info[:5]
                 audio_features = song_info[5:]
