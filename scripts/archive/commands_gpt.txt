@@ -101,7 +101,7 @@ import configparser
 config = configparser.ConfigParser()
 config.read('config.cfg')
 
-MODEL = 'Content-based Filtering'
+MODEL = 'Collaborative Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cbf_output']
 N_RESULT = int(config['rs']['n_result'])
@@ -124,7 +124,7 @@ cf():
     inputted_ids = set(id for id, *_ in songs_info)
 
     # print result to OUTPUT_PATH (.txt with utf-8 encoding)
-    
+
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
 if __name__ == "__main__":
