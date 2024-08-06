@@ -1,10 +1,7 @@
-
 import sqlite3
 import configparser
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
-from spotipy.exceptions import SpotifyException
-import time
 from collections import Counter
 
 # Load configuration
@@ -29,111 +26,104 @@ conn = sqlite3.connect(DB)
 cursor = conn.cursor()
 
 
-def get_artist_ids(song_ids):
-    cursor.execute(
-        "SELECT song_id, artist_ids FROM songs WHERE song_id IN ({})".format(
-            ','.join('?' for _ in song_ids)),
-        song_ids
-    )
-    return {row[0]: row[1].split(',') for row in cursor.fetchall()}
+def get_artist_details(artist_ids):
+    artist_details = {}
+    for artist_id in artist_ids.split(','):
+        artist = sp.artist(artist_id)
+        artist_details[artist_id] = {
+            'name': artist['name'],
+            'genres': ', '.join(artist['genres'])
+        }
+    return artist_details
 
 
-def get_playlists_containing_artists(artist_ids):
-    cursor.execute(
-        "SELECT playlist_id, playlist_top_artist_ids FROM playlists"
-    )
+def get_song_details(song_ids):
+    song_details = {}
+    for song_id in song_ids:
+        song = sp.track(song_id)
+        artist_details = get_artist_details(song['artists'][0]['id'])
+        song_details[song_id] = {
+            'name': song['name'],
+            'artist_name': song['artists'][0]['name'],
+            'genres': artist_details[song['artists'][0]['id']]['genres']
+        }
+    return song_details
+
+
+def get_playlists_by_songs(song_ids):
+    cursor.execute("SELECT playlist_id, playlist_items FROM playlists")
     playlists = cursor.fetchall()
 
-    playlist_artist_map = {}
-    for playlist_id, top_artist_ids in playlists:
-        top_artists = top_artist_ids.split(',')
-        common_artists = set(artist_ids).intersection(top_artists)
-        if common_artists:
-            playlist_artist_map[playlist_id] = common_artists
-    return playlist_artist_map
+    song_to_playlists = {}
+    for song_id in song_ids:
+        song_to_playlists[song_id] = []
+
+    for playlist_id, playlist_items in playlists:
+        items = playlist_items.split(',')
+        for song_id in song_ids:
+            if song_id in items:
+                song_to_playlists[song_id].append(playlist_id)
+
+    return song_to_playlists
 
 
-def categorize_input_ids(artist_playlists, input_ids, artist_map):
-    categories = {'common': {}, 'individual': {}}
+def categorize_playlists(song_to_playlists):
+    playlist_categories = {}
+    all_playlists = set()
 
-    for input_id, artist_ids in artist_map.items():
-        found_playlists = set()
-        for artist_id in artist_ids:
-            found_playlists.update(artist_playlists.get(artist_id, []))
+    for song_id, playlists in song_to_playlists.items():
+        for playlist in playlists:
+            if playlist not in playlist_categories:
+                playlist_categories[playlist] = []
+            playlist_categories[playlist].append(song_id)
+            all_playlists.add(playlist)
 
-        if len(found_playlists) > 0:
-            common_playlists = list(found_playlists)
-            common_artist_ids = list(artist_ids)
-            categories['common'][input_id] = {
-                'playlists': common_playlists,
-                'artists': common_artist_ids
-            }
-        else:
-            categories['individual'][input_id] = list(artist_ids)
-
-    return categories
-
-# add procedural function here if needed
+    return playlist_categories, all_playlists
 
 
-def recommend_songs(input_ids, artist_playlists):
-    playlist_ids = set()
-    for playlists in artist_playlists.values():
-        playlist_ids.update(playlists)
+def format_output(song_details, playlist_categories, all_playlists):
+    output = []
+    categorized_playlists = {}
 
-    cursor.execute(
-        "SELECT song_id, artist_ids, song_name FROM songs WHERE artist_ids NOT IN ({})".format(
-            ','.join('?' for _ in input_ids)
-        )
-    )
-    recommended_songs = []
-    for row in cursor.fetchall():
-        song_id, artist_ids, song_name = row
-        artist_id_list = artist_ids.split(',')
-        song_playlists = set()
-        for artist_id in artist_id_list:
-            song_playlists.update(artist_playlists.get(artist_id, []))
-        if song_playlists.intersection(playlist_ids):
-            recommended_songs.append({
-                'song_id': song_id,
-                'song_name': song_name,
-                'artist_ids': artist_id_list,
-                'playlists': list(song_playlists)
-            })
+    for playlist_id, songs in playlist_categories.items():
+        artists = set()
+        for song_id in songs:
+            song = song_details[song_id]
+            artists.add(song['artist_name'])
+        categorized_playlists[playlist_id] = artists
 
-    return recommended_songs
+    for idx, (playlist_id, artists) in enumerate(categorized_playlists.items(), 1):
+        output.append(f"PLAYLIST CATEGORY ({idx}) {
+                      artists} (Category Playlist that contains artists of inputted ids)")
+        cursor.execute(
+            "SELECT playlist_creator_id, playlist_top_genres, playlist_items FROM playlists WHERE playlist_id = ?", (playlist_id,))
+        playlist = cursor.fetchone()
 
+        creator_id = playlist[0]
+        top_genres = playlist[1]
+        playlist_items = playlist[2].split(',')
+        song_count = len(
+            [item for item in playlist_items if item in song_details])
 
-def output_results(categories, recommended_songs, output_path):
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write("INPUTTED IDS:\n")
-        for category, ids in categories.items():
-            f.write(f"Case: {category}\n")
-            for input_id, data in ids.items():
-                f.write(f"{input_id}:\n")
-                for playlist_id in data.get('playlists', []):
-                    f.write(f"  - {playlist_id}\n")
+        output.append(f"https://open.spotify.com/playlist/{playlist_id} - https://open.spotify.com/user/{
+                      creator_id} | Genres: {top_genres} | {song_count} songs from this playlist")
 
-        f.write(
-            "\nSONGS (Recommend Other Artist is in the playlists_result other than Inputted IDS artist):\n")
-        for song in recommended_songs:
-            f.write(f"{song['song_id']} {song['song_name']} | Count: {
-                    len(song['playlists'])} | From: {', '.join(song['playlists'])}\n")
+    for song_id, details in song_details.items():
+        playlists = [
+            playlist_id for playlist_id in all_playlists if song_id in playlist_categories[playlist_id]]
+        output.append(f"https://open.spotify.com/track/{song_id} {details['artist_name']} - {
+                      details['name']} | Genre: {details['genres']} | Count: {len(playlists)} | From: {playlists}")
+
+    with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(output))
 
 
-def cf(song_ids):
-    artist_map = get_artist_ids(song_ids)
-    artist_playlists = {}
-    for artist_ids in artist_map.values():
-        for artist_id in artist_ids:
-            playlists = get_playlists_containing_artists([artist_id])
-            if artist_id not in artist_playlists:
-                artist_playlists[artist_id] = set()
-            artist_playlists[artist_id].update(playlists.keys())
-
-    categories = categorize_input_ids(artist_playlists, song_ids, artist_map)
-    recommended_songs = recommend_songs(song_ids, artist_playlists)
-    output_results(categories, recommended_songs, OUTPUT_PATH)
+def cf(input_ids):
+    song_details = get_song_details(input_ids)
+    song_to_playlists = get_playlists_by_songs(input_ids)
+    playlist_categories, all_playlists = categorize_playlists(
+        song_to_playlists)
+    format_output(song_details, playlist_categories, all_playlists)
 
 
 if __name__ == "__main__":
