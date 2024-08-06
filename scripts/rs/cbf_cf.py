@@ -70,7 +70,6 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     cursor.execute(query)
     songs = cursor.fetchall()
 
-    # Filter out inputted IDs and ensure only one song per artist, excluding same artist and song names
     filtered_songs = []
     seen_artists = set()
     seen_song_artist_names = {(info[3], info[1]) for info in inputted_songs}
@@ -83,10 +82,44 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
         seen_artists.add(artist_id)
         filtered_songs.append(song)
 
-    # Sort songs by similarity
     filtered_songs.sort(key=lambda song: calculate_similarity(
         song[5:], input_audio_features))
     return filtered_songs
+
+
+def get_playlists_with_songs(conn, song_ids):
+    placeholders = ', '.join('?' for _ in song_ids)
+    query = f"""
+        SELECT p.playlist_id, p.playlist_creator_id, pi.song_id
+        FROM playlists p
+        JOIN playlist_items pi ON p.playlist_id = pi.playlist_id
+        WHERE pi.song_id IN ({placeholders})
+    """
+    cursor = conn.cursor()
+    cursor.execute(query, song_ids)
+    return cursor.fetchall()
+
+
+def add_same_playlist_songs_section(conn, f, inputted_ids, similar_songs_info):
+    f.write('\nSAME PLAYLIST SONGS\n')
+    all_song_ids = inputted_ids + [song[0] for song in similar_songs_info]
+    playlists_with_songs = get_playlists_with_songs(conn, all_song_ids)
+
+    playlist_dict = {}
+    for playlist_id, creator_id, song_id in playlists_with_songs:
+        if playlist_id not in playlist_dict:
+            playlist_dict[playlist_id] = {
+                'creator_id': creator_id, 'songs': set()}
+        playlist_dict[playlist_id]['songs'].add(song_id)
+
+    for input_id in inputted_ids:
+        f.write(f"\nInputted ID {input_id}\n")
+        for playlist_id, details in playlist_dict.items():
+            if input_id in details['songs']:
+                for song_id in details['songs']:
+                    if song_id != input_id:
+                        f.write(f"{playlist_id} {
+                                details['creator_id']} | {song_id}\n")
 
 
 def cbf_cf(ids):
@@ -100,7 +133,6 @@ def cbf_cf(ids):
         inputted_ids_set = set(ids)
         song_headers = []
         for idx, song_info in enumerate(songs_info, start=1):
-            # song_id, song_name, artist_ids, artist_name, artist_genres
             base_info = song_info[:5]
             audio_features = song_info[5:]
             input_audio_features_list.append(audio_features)
@@ -117,14 +149,14 @@ def cbf_cf(ids):
                     f"{features_str}\n")
             f.write(line)
 
-        # SIMILAR AUDIO FEATURES
         f.write('\nSIMILAR AUDIO FEATURES\n')
+        similar_songs_info_list = []
         for input_audio_features, header in zip(input_audio_features_list, song_headers):
             f.write(f"\n{header}\n")
             similar_songs_info = get_similar_audio_features(
                 conn, features, input_audio_features, inputted_ids_set, songs_info)
+            similar_songs_info_list.extend(similar_songs_info)
             for idx, song_info in enumerate(similar_songs_info[:N_RESULT], start=1):
-                # song_id, song_name, artist_ids, artist_name, artist_genres
                 base_info = song_info[:5]
                 audio_features = song_info[5:]
 
@@ -137,6 +169,8 @@ def cbf_cf(ids):
                         f"Genres: {artist_genres} | "
                         f"{features_str}\n")
                 f.write(line)
+
+        add_same_playlist_songs_section(conn, f, ids, similar_songs_info_list)
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
