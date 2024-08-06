@@ -57,7 +57,19 @@ def get_song_info(song_id):
 def cf(ids):
     playlists_result = []
     songs_result = []
+    inputted_songs = []
+    inputted_artists = set()
 
+    # Gather information for inputted IDs
+    for song_id in ids:
+        song_info = get_song_info(song_id)
+        if song_info:
+            song_id, song_name, artist_ids, artist_name, artist_genres = song_info
+            inputted_songs.append(f"https://open.spotify.com/track/{song_id} {
+                                  artist_name} - {song_name} | Genre: {artist_genres}")
+            inputted_artists.add(artist_ids)
+
+    # Find playlists containing the inputted songs and artists
     for song_id in ids:
         playlists = get_playlists_by_song(song_id)
         for playlist in playlists:
@@ -70,7 +82,7 @@ def cf(ids):
             playlists_result.append(
                 f"{playlist_url} - {creator_url} | {songs_count} songs from this playlist")
 
-    for artist_id in ids:
+    for artist_id in inputted_artists:
         playlists = get_playlists_by_artist(artist_id)
         for playlist in playlists:
             playlist_id = playlist[0]
@@ -82,24 +94,49 @@ def cf(ids):
             playlists_result.append(
                 f"{playlist_url} - {creator_url} | {songs_count} songs from this playlist")
 
-    for song_id in ids:
-        song_info = get_song_info(song_id)
-        if song_info:
+    # Find songs by other artists in the playlists
+    for playlist in playlists_result:
+        playlist_id = playlist.split('/')[4].split(' ')[0]
+        cursor.execute("""
+            SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
+            FROM songs s
+            JOIN artists a ON s.artist_ids = a.artist_id
+            WHERE s.song_id IN (
+                SELECT song_id FROM playlists WHERE playlist_id = ?
+            ) AND s.artist_ids NOT IN (?)
+        """, (playlist_id, ','.join(inputted_artists)))
+        songs = cursor.fetchall()
+        song_counter = Counter()
+        playlist_map = {}
+
+        for song in songs:
+            song_id, song_name, artist_ids, artist_name, artist_genres = song
+            song_counter[song_id] += 1
+            if song_id not in playlist_map:
+                playlist_map[song_id] = []
+            playlist_map[song_id].append(playlist_id)
+
+        for song_id, count in song_counter.items():
+            song_info = next(song for song in songs if song[0] == song_id)
             song_id, song_name, artist_ids, artist_name, artist_genres = song_info
-            playlists = get_playlists_by_song(song_id)
-            playlist_ids = [playlist[0] for playlist in playlists]
-            count = len(playlist_ids)
             song_url = f"https://open.spotify.com/track/{song_id}"
+            playlist_ids = playlist_map[song_id]
             songs_result.append(f"{song_url} {artist_name} - {song_name} | Genre: {
                                 artist_genres} | Count: {count} | From: {playlist_ids}")
 
-    with open(OUTPUT_PATH, 'w') as f:
-        f.write("PLAYLIST\n")
-        for line in playlists_result:
-            f.write(line + "\n")
+    # Write to output file
+    with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
+        f.write("INPUTTED IDS\n")
+        for idx, line in enumerate(inputted_songs, start=1):
+            f.write(f"{idx}. {line}\n")
+
+        f.write("\nPLAYLIST\n")
+        for idx, line in enumerate(playlists_result, start=1):
+            f.write(f"{idx}. {line}\n")
+
         f.write("\nSONGS\n")
-        for line in songs_result:
-            f.write(line + "\n")
+        for idx, line in enumerate(songs_result, start=1):
+            f.write(f"{idx}. {line}\n")
 
 
 if __name__ == "__main__":
