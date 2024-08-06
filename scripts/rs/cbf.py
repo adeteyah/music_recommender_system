@@ -41,9 +41,14 @@ def cbf(ids):
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('\nINPUTTED IDS\n')
         for song_info in songs_info:
-            song_id, song_name, artist_ids, artist_name, artist_genres, acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo, time_signature, valence = song_info
+            (song_id, song_name, artist_ids, artist_name, artist_genres,
+             acousticness, danceability, energy, instrumentalness,
+             key, liveness, loudness, mode, speechiness,
+             tempo, time_signature, valence) = song_info
+
             song_url = f"https://open.spotify.com/track/{song_id}"
             line = (f"{song_url} {artist_name} - {song_name} | "
+                    f"Genres: {artist_genres} | "
                     f"acousticness: {acousticness}, "
                     f"danceability: {danceability}, "
                     f"energy: {energy}, "
