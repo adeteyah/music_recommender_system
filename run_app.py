@@ -1,9 +1,9 @@
 import time
 
-from scripts import cf
-from scripts import cf_cbf
-from scripts import cbf
-from scripts import cbf_cf
+from scripts.rs import cf
+from scripts.rs import cf_cbf
+from scripts.rs import cbf
+from scripts.rs import cbf_cf
 
 n_separator = 20
 
