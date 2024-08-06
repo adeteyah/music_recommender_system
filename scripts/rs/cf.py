@@ -4,7 +4,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from spotipy.exceptions import SpotifyException
 import time
-from collections import Counter
+from collections import defaultdict, Counter
 
 # Load configuration
 config = configparser.ConfigParser()
@@ -55,7 +55,7 @@ def get_song_info(song_id):
 
 
 def cf(ids):
-    playlists_result = []
+    playlists_result = defaultdict(list)
     songs_result = []
     inputted_songs = []
     inputted_artists = set()
@@ -70,33 +70,36 @@ def cf(ids):
             inputted_artists.add(artist_ids)
 
     # Find playlists containing the inputted songs and artists
+    artist_playlist_map = defaultdict(set)
     for song_id in ids:
         playlists = get_playlists_by_song(song_id)
         for playlist in playlists:
             playlist_id = playlist[0]
+            artist_playlist_map[playlist_id].update(inputted_artists)
             creator_id = playlist[1]
             playlist_url = f"https://open.spotify.com/playlist/{playlist_id}"
             creator_url = f"https://open.spotify.com/user/{creator_id}"
             # Assuming this is the number of songs in the playlist
             songs_count = playlist[3]
-            playlists_result.append(
+            playlists_result[frozenset(inputted_artists)].append(
                 f"{playlist_url} - {creator_url} | {songs_count} songs from this playlist")
 
     for artist_id in inputted_artists:
         playlists = get_playlists_by_artist(artist_id)
         for playlist in playlists:
             playlist_id = playlist[0]
+            artist_playlist_map[playlist_id].add(artist_id)
             creator_id = playlist[1]
             playlist_url = f"https://open.spotify.com/playlist/{playlist_id}"
             creator_url = f"https://open.spotify.com/user/{creator_id}"
             # Assuming this is the number of songs in the playlist
             songs_count = playlist[3]
-            playlists_result.append(
+            playlists_result[frozenset(artist_playlist_map[playlist_id])].append(
                 f"{playlist_url} - {creator_url} | {songs_count} songs from this playlist")
 
     # Find songs by other artists in the playlists
-    for playlist in playlists_result:
-        playlist_id = playlist.split('/')[4].split(' ')[0]
+    for playlist_id in artist_playlist_map:
+        artists_in_playlist = artist_playlist_map[playlist_id]
         cursor.execute("""
             SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
             FROM songs s
@@ -107,13 +110,11 @@ def cf(ids):
         """, (playlist_id, ','.join(inputted_artists)))
         songs = cursor.fetchall()
         song_counter = Counter()
-        playlist_map = {}
+        playlist_map = defaultdict(list)
 
         for song in songs:
             song_id, song_name, artist_ids, artist_name, artist_genres = song
             song_counter[song_id] += 1
-            if song_id not in playlist_map:
-                playlist_map[song_id] = []
             playlist_map[song_id].append(playlist_id)
 
         for song_id, count in song_counter.items():
@@ -130,9 +131,12 @@ def cf(ids):
         for idx, line in enumerate(inputted_songs, start=1):
             f.write(f"{idx}. {line}\n")
 
-        f.write("\nPLAYLIST\n")
-        for idx, line in enumerate(playlists_result, start=1):
-            f.write(f"{idx}. {line}\n")
+        f.write("\nPLAYLIST CATEGORY\n")
+        for idx, (artist_ids, playlists) in enumerate(playlists_result.items(), start=1):
+            artist_ids_str = ','.join(artist_ids)
+            f.write(f"{idx}. ({artist_ids_str})\n")
+            for playlist_idx, line in enumerate(playlists, start=1):
+                f.write(f"   {playlist_idx}. {line}\n")
 
         f.write("\nSONGS\n")
         for idx, line in enumerate(songs_result, start=1):
