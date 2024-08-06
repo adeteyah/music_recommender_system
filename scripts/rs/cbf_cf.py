@@ -89,16 +89,23 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     return filtered_songs
 
 
-def find_playlists_with_songs(conn, song_ids):
-    song_ids_sql = ','.join(f"'{song_id}'" for song_id in song_ids)
-    query = f"""
-        SELECT playlist_id, playlist_items
-        FROM playlists
-        WHERE EXISTS (SELECT 1 FROM json_each(playlist_items) WHERE json_each.value IN ({song_ids_sql}))
-    """
+def find_same_playlist(conn, similar_songs, inputted_ids):
+    query = "SELECT playlist_id, playlist_items FROM playlists"
     cursor = conn.cursor()
     cursor.execute(query)
-    return cursor.fetchall()
+    playlists = cursor.fetchall()
+
+    playlist_map = {playlist_id: set(playlist_items.split(
+        ',')) for playlist_id, playlist_items in playlists}
+
+    song_playlists = {song[0]: [] for song in similar_songs}
+
+    for playlist_id, playlist_items in playlist_map.items():
+        for song_id in song_playlists.keys():
+            if any(inputted_id in playlist_items for inputted_id in inputted_ids) and song_id in playlist_items:
+                song_playlists[song_id].append(playlist_id)
+
+    return song_playlists
 
 
 def cbf_cf(ids):
@@ -135,21 +142,7 @@ def cbf_cf(ids):
             f.write(f"\n{header}\n")
             similar_songs_info = get_similar_audio_features(
                 conn, features, input_audio_features, inputted_ids_set, songs_info)
-            similar_songs_ids = [song[0]
-                                 for song in similar_songs_info[:N_RESULT]]
-            playlists_with_similar_songs = find_playlists_with_songs(
-                conn, similar_songs_ids + list(inputted_ids_set))
-
-            playlists_by_song = {}
-            for playlist_id, playlist_items in playlists_with_similar_songs:
-                playlist_songs = set(playlist_items.strip(
-                    '[]').replace('"', '').split(', '))
-                for song_id in similar_songs_ids:
-                    if song_id in playlist_songs:
-                        if song_id not in playlists_by_song:
-                            playlists_by_song[song_id] = []
-                        playlists_by_song[song_id].append(playlist_id)
-
+            song_playlists = find_same_playlist(conn, similar_songs_info, ids)
             for idx, song_info in enumerate(similar_songs_info[:N_RESULT], start=1):
                 # song_id, song_name, artist_ids, artist_name, artist_genres
                 base_info = song_info[:5]
@@ -159,9 +152,7 @@ def cbf_cf(ids):
                 song_url = f"https://open.spotify.com/track/{song_id}"
                 features_str = ', '.join(
                     [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
-
-                found_in_playlists = ', '.join(
-                    playlists_by_song.get(song_id, []))
+                found_in_playlists = ', '.join(song_playlists[song_id])
 
                 line = (f"{idx}. {song_url} {artist_name} - {song_name} | "
                         f"Genres: {artist_genres} | "
