@@ -43,8 +43,8 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     feature_conditions = []
     for i, feature in enumerate(features):
         feature = feature.split('.')[-1]
-        lower_bound = input_audio_features[i] - 0.1
-        upper_bound = input_audio_features[i] + 0.1
+        lower_bound = input_audio_features[i] - 0.05
+        upper_bound = input_audio_features[i] + 0.05
         feature_conditions.append(
             f"{feature} BETWEEN {lower_bound} AND {upper_bound}")
     conditions_sql = ' AND '.join(feature_conditions)
