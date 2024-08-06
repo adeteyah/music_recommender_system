@@ -72,7 +72,7 @@ def categorize_playlists(playlists, inputted_artists):
         for artist in artist_names:
             if artist in inputted_artists:
                 artist_to_playlists[artist].append(
-                    (playlist_id, playlist_creator_id, playlist_top_genres))
+                    (playlist_id, playlist_creator_id, playlist_top_genres, artist_names))
 
     categorized_playlists = []
     for artist, playlists in artist_to_playlists.items():
@@ -107,17 +107,21 @@ def cf(ids):
             playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names = playlist
             playlist_items_str = ', '.join(playlist_items)
             artist_names_str = ', '.join(artist_names)
-            output_line = f"{idx}. Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
-                playlist_top_genres}, Items: {playlist_items_str}, Artists: {artist_names_str}"
+            output_line = f"{idx}. Playlist ID: {playlist_id}, Creator ID: {
+                playlist_creator_id}, Artists: {artist_names_str}, Top Genres: {
+                playlist_top_genres},  Items: {playlist_items_str}"
             f.write(output_line + '\n')
 
         f.write('\nCATEGORIZED PLAYLISTS\n')
         for artist, playlists in categorized_playlists:
             f.write(f'Artist: {artist}\n')
             for playlist in playlists:
-                playlist_id, playlist_creator_id, playlist_top_genres = playlist
+                playlist_id, playlist_creator_id, playlist_top_genres, artist_names = playlist
+                playlist_items_str = ', '.join(playlist_items)
+                artist_names_str = ', '.join(artist_names)
                 output_line = f"  - Playlist ID: {playlist_id}, Creator ID: {
-                    playlist_creator_id}, Artists: {artist_names_str}"
+                    playlist_creator_id}, Artists: {artist_names_str}, Top Genres: {
+                    playlist_top_genres},  Items: {playlist_items_str}"
                 f.write(output_line + '\n')
 
     conn.close()
