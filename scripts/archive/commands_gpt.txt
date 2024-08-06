@@ -96,38 +96,37 @@ SONGS (Print songs from all playlists_result other than artist_id from the input
 
 import sqlite3
 import configparser
-import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
-from spotipy.exceptions import SpotifyException
-import time
-from collections import Counter
 
-# Load configuration
+# Read configuration file
 config = configparser.ConfigParser()
 config.read('config.cfg')
 
+MODEL = 'Content-based Filtering'
 DB = config['rs']['db_path']
-CLIENT_ID = config['api']['client_id']
-CLIENT_SECRET = config['api']['client_secret']
-DELAY_TIME = float(config['api']['delay_time'])
-N_MINIMUM = int(config['rs']['n_minimum_playlist_songs'])
-N_SCRAPE = int(config['rs']['n_scrape'])
-OUTPUT_PATH = int(config['rs']['cf_output'])
+OUTPUT_PATH = config['rs']['cbf_output']
+N_RESULT = int(config['rs']['n_result'])
 
-# Spotify API credentials
-client_credentials_manager = SpotifyClientCredentials(
-    client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
-sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-
-# Connect to SQLite database
-conn = sqlite3.connect(DB)
-cursor = conn.cursor()
+def get_song_info(conn, song_id):
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
+        FROM songs s
+        JOIN artists a ON s.artist_ids = a.artist_id
+        WHERE s.song_id = ?
+    """, (song_id,))
+    return cursor.fetchone()
 
 #add procedural function here if needed
 
 cf():
-    # main function to print result to OUTPUT_PATH (.txt with utf-8 encoding)
+    conn = sqlite3.connect(DB)
+    songs_info = read_inputted_ids(ids, conn)
+    inputted_ids = set(id for id, *_ in songs_info)
 
+    # print result to OUTPUT_PATH (.txt with utf-8 encoding)
+    
+    conn.close()
+    print('Result for', MODEL, 'stored at', OUTPUT_PATH)
 if __name__ == "__main__":
     ids = [
         '1BxfuPKGuaTgP7aM0Bbdwr',
