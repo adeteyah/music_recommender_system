@@ -141,3 +141,77 @@ if __name__ == "__main__":
         '72MEldEAmz3WMJ2MkII3kP',
     ]
     cf(ids)
+
+-- CBF --
+existing database
+1. songs table
+    song_id TEXT PRIMARY KEY,
+    song_name TEXT,
+    artist_ids TEXT,
+2. playlists table
+    playlist_id TEXT PRIMARY KEY,
+    playlist_creator_id TEXT,
+    playlist_top_genres TEXT,
+    playlist_items TEXT, (array of song_id)
+3. artists table
+    artist_id TEXT PRIMARY KEY,
+    artist_name TEXT,
+    artist_genres TEXT (genres)
+
+OUTPUT FORMAT
+INPUTTED IDS (Inputted IDS are song_id)
+1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+3. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+4. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+5. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+6. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+7. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+continue my code to print desired output
+import sqlite3
+import configparser
+
+# Read configuration file
+config = configparser.ConfigParser()
+config.read('config.cfg')
+
+MODEL = 'Content-based Filtering'
+DB = config['rs']['db_path']
+OUTPUT_PATH = config['rs']['cbf_output']
+N_RESULT = int(config['rs']['n_result'])
+
+def get_song_info(conn, song_id):
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
+        FROM songs s
+        JOIN artists a ON s.artist_ids = a.artist_id
+        WHERE s.song_id = ?
+    """, (song_id,))
+    return cursor.fetchone()
+
+#add procedural function here if needed
+
+cf():
+    conn = sqlite3.connect(DB)
+    songs_info = read_inputted_ids(ids, conn)
+    inputted_ids = set(id for id, *_ in songs_info)
+
+    # print result to OUTPUT_PATH (.txt with utf-8 encoding)
+    
+    conn.close()
+    print('Result for', MODEL, 'stored at', OUTPUT_PATH)
+if __name__ == "__main__":
+    ids = [
+        '1BxfuPKGuaTgP7aM0Bbdwr',
+        '4xqrdfXkTW4T0RauPLv3WA',
+        '7JIuqL4ZqkpfGKQhYlrirs',
+        '5dTHtzHFPyi8TlTtzoz1J9',
+        '4cluDES4hQEUhmXj6TXkSo',
+        '4ZtFanR9U6ndgddUvNcjcG',
+        '2QjOHCTQ1Jl3zawyYOpxh6',
+        '0nJW01T7XtvILxQgC5J7Wh',
+        '7nQoDLkzCcoIpKPQt3eCdN',
+        '72MEldEAmz3WMJ2MkII3kP',
+    ]
+    cf(ids)
