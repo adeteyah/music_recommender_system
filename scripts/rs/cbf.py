@@ -80,6 +80,16 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     return filtered_songs
 
 
+def filter_songs_by_genres(songs, target_genres):
+    filtered_songs = []
+    target_genres_set = set(target_genres.split(', '))
+    for song in songs:
+        song_genres_set = set(song[4].split(', '))
+        if not target_genres_set.isdisjoint(song_genres_set):
+            filtered_songs.append(song)
+    return filtered_songs
+
+
 def cbf(ids):
     conn = sqlite3.connect(DB)
     features = ['s.' + feature for feature in CBF_FEATURES]
@@ -129,12 +139,15 @@ def cbf(ids):
                         f"{features_str}\n")
                 f.write(line)
 
-        # SIMILAR AUDIO FEATURES + GENRES FITLER
-        f.write('\nSIMILAR AUDIO FEATURES + GENRES FITLER\n')
-        for input_audio_features, header in zip(input_audio_features_list, song_headers):
+        # SIMILAR AUDIO FEATURES + GENRES FILTER
+        f.write('\nSIMILAR AUDIO FEATURES + GENRES FILTER\n')
+        for input_audio_features, header, song_info in zip(input_audio_features_list, song_headers, songs_info):
             f.write(f"\n{header}\n")
+            input_genres = song_info[4]  # Extract genres from input song
             similar_songs_info = get_similar_audio_features(
                 conn, features, input_audio_features, inputted_ids_set)
+            similar_songs_info = filter_songs_by_genres(
+                similar_songs_info, input_genres)
             for idx, song_info in enumerate(similar_songs_info[:N_RESULT], start=1):
                 # song_id, song_name, artist_ids, artist_name, artist_genres
                 base_info = song_info[:5]
