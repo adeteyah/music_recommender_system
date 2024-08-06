@@ -79,12 +79,6 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from spotipy.exceptions import SpotifyException
 import time
 from collections import Counter
-import logging
-
-# Setup logging
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
 
 # Load configuration
 config = configparser.ConfigParser()
@@ -105,3 +99,21 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 # Connect to SQLite database
 conn = sqlite3.connect(DB)
 cursor = conn.cursor()
+
+cf():
+    #code here
+
+if __name__ == "__main__":
+    ids = [
+        '1BxfuPKGuaTgP7aM0Bbdwr',
+        '4xqrdfXkTW4T0RauPLv3WA',
+        '7JIuqL4ZqkpfGKQhYlrirs',
+        '5dTHtzHFPyi8TlTtzoz1J9',
+        '4cluDES4hQEUhmXj6TXkSo',
+        '4ZtFanR9U6ndgddUvNcjcG',
+        '2QjOHCTQ1Jl3zawyYOpxh6',
+        '0nJW01T7XtvILxQgC5J7Wh',
+        '7nQoDLkzCcoIpKPQt3eCdN',
+        '72MEldEAmz3WMJ2MkII3kP',
+    ]
+    cf(ids)
