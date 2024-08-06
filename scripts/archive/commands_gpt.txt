@@ -250,7 +250,7 @@ existing database
     artist_name TEXT,
     artist_genres TEXT (genres)
 
-
+add new section called "SAME PLAYLIST SONGS"
 
 import sqlite3
 import configparser
