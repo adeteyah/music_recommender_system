@@ -10,7 +10,7 @@ DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cbf_output']
 N_RESULT = int(config['rs']['n_result'])
 CBF_FEATURES = config['rs']['cbf_features'].split(', ')
-BOUND_VALUE = 0.05
+BOUND_VAL = 0.05
 
 
 def get_song_info(conn, song_id, features):
@@ -44,8 +44,8 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     feature_conditions = []
     for i, feature in enumerate(features):
         feature = feature.split('.')[-1]
-        lower_bound = input_audio_features[i] - BOUND_VALUE
-        upper_bound = input_audio_features[i] + BOUND_VALUE
+        lower_bound = input_audio_features[i] - BOUND_VAL
+        upper_bound = input_audio_features[i] + BOUND_VAL
         feature_conditions.append(
             f"{feature} BETWEEN {lower_bound} AND {upper_bound}")
     conditions_sql = ' AND '.join(feature_conditions)
@@ -95,7 +95,8 @@ def cbf(ids):
             base_info = song_info[:5]
             audio_features = song_info[5:]
             input_audio_features_list.append(audio_features)
-            song_headers.append(f"{song_info[3]} - {song_info[1]}")
+            song_headers.append(
+                f"{song_info[3]} - {song_info[1]} | Genres: {song_info[4]}")
 
             song_id, song_name, artist_ids, artist_name, artist_genres = base_info
             song_url = f"https://open.spotify.com/track/{song_id}"
