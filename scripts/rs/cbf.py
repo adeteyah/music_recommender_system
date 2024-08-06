@@ -66,11 +66,13 @@ def cbf(ids):
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('INPUTTED IDS\n')
         input_audio_features_list = []
+        song_headers = []
         for idx, song_info in enumerate(songs_info, start=1):
             # song_id, song_name, artist_ids, artist_name, artist_genres
             base_info = song_info[:5]
             audio_features = song_info[5:]
             input_audio_features_list.append(audio_features)
+            song_headers.append(f"{song_info[3]} - {song_info[1]}")
 
             song_id, song_name, artist_ids, artist_name, artist_genres = base_info
             song_url = f"https://open.spotify.com/track/{song_id}"
@@ -84,7 +86,8 @@ def cbf(ids):
 
         # SIMILAR AUDIO FEATURES
         f.write('\nSIMILAR AUDIO FEATURES\n')
-        for input_audio_features in input_audio_features_list:
+        for input_audio_features, header in zip(input_audio_features_list, song_headers):
+            f.write(f"\n{header}\n")
             similar_songs_info = get_similar_audio_features(
                 conn, features, input_audio_features)
             for idx, song_info in enumerate(similar_songs_info, start=1):
