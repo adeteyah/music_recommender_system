@@ -150,9 +150,10 @@ def cbf(ids):
         for artist, songs in artist_song_count.items():
             category_name = format_artist_category(artist, songs_info)
             f.write(f'{category_name}\n')
+            # add Count: {count} if necessary
             for (song_id, artist_name, song_name), count in songs.items():
                 output_line = f"  - {song_id} {artist_name} - {
-                    song_name} | Count: {count}"
+                    song_name}"
                 f.write(output_line + '\n')
 
     conn.close()
