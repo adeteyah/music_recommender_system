@@ -1,5 +1,4 @@
 existing database
-! schema for each tables
 1. songs table
     song_id TEXT PRIMARY KEY,
     song_name TEXT,
@@ -53,16 +52,6 @@ existing database
     artist_name TEXT,
     artist_genres TEXT
 
-
-cf()
-1. read all inputted ids
-2. gather playlists where contains that song_id and artist_id
-3. show playlist result on playlist section
-4. show song result on song section
-
-i want to write result from get_playlists_by_song, get_playlists_by_artist to the recommendation result
-continue this code feel free to add new functions inside cf_functions()
-
 OUTPUT FORMAT
 INPUTTED IDS (Inputted IDS)
 1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
@@ -109,7 +98,7 @@ cursor = conn.cursor()
 
 cf():
     # read inputted ids
-    # find playlists
+    # find playlists that has inputted ids artists
     # read all playlist_items and its songs information
     # write output format to OUTPUT_PATH (.txt)
     # write all playlist
