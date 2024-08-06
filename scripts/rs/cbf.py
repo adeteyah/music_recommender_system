@@ -10,7 +10,10 @@ DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cbf_output']
 N_RESULT = int(config['rs']['n_result'])
 CBF_FEATURES = config['rs']['cbf_features'].split(', ')
-BOUND_VAL = 0.05
+REAL_BOUND_VAL = 0.25
+INTEGER_BOUND_VAL = 1
+# Define which features are integers
+INTEGER_FEATURES = {'tempo', 'time_signature', 'key', 'mode'}
 
 
 def get_song_info(conn, song_id, features):
@@ -43,11 +46,15 @@ def calculate_similarity(song_features, input_features):
 def get_similar_audio_features(conn, features, input_audio_features, inputted_ids):
     feature_conditions = []
     for i, feature in enumerate(features):
-        feature = feature.split('.')[-1]
-        lower_bound = input_audio_features[i] - BOUND_VAL
-        upper_bound = input_audio_features[i] + BOUND_VAL
-        feature_conditions.append(
-            f"{feature} BETWEEN {lower_bound} AND {upper_bound}")
+        feature_name = feature.split('.')[-1]
+        lower_bound = input_audio_features[i] - \
+            REAL_BOUND_VAL if feature_name not in INTEGER_FEATURES else input_audio_features[
+                i] - INTEGER_BOUND_VAL
+        upper_bound = input_audio_features[i] + \
+            REAL_BOUND_VAL if feature_name not in INTEGER_FEATURES else input_audio_features[
+                i] + INTEGER_BOUND_VAL
+        feature_conditions.append(f"{feature_name} BETWEEN {
+                                  lower_bound} AND {upper_bound}")
     conditions_sql = ' AND '.join(feature_conditions)
 
     features_sql = ', '.join(features)
