@@ -90,14 +90,14 @@ def get_genre_matched_songs(conn, input_genres, inputted_ids):
     cursor.execute(query)
     songs = cursor.fetchall()
 
-    # Filter songs by matching at least one genre and exclude inputted IDs
+    # Filter songs by matching at least one genre word and exclude inputted IDs
     filtered_songs = []
     seen_artists = set()
     for song in songs:
         if song[0] in inputted_ids:
             continue
-        song_genres = set(song[4].split(', '))
-        if song_genres & input_genres:  # Check for intersection
+        song_genres = song[4].split(', ')
+        if any(any(word in genre for word in input_genres) for genre in song_genres):
             artist_id = song[2]
             if artist_id in seen_artists:
                 continue
@@ -123,7 +123,7 @@ def cbf(ids):
             base_info = song_info[:5]
             audio_features = song_info[5:]
             input_audio_features_list.append(audio_features)
-            input_genres_list.append(set(song_info[4].split(', ')))
+            input_genres_list.append(song_info[4].split(', '))
             song_headers.append(
                 f"{song_info[3]} - {song_info[1]} | Genres: {song_info[4]}")
 
