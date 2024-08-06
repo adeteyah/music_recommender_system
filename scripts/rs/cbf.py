@@ -43,7 +43,6 @@ def cbf(ids):
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('INPUTTED IDS\n')
         for idx, song_info in enumerate(songs_info, start=1):
-            # song_id, song_name, artist_ids, artist_name, artist_genres
             base_info = song_info[:5]
             audio_features = song_info[5:]
 
