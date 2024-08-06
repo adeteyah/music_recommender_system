@@ -99,6 +99,7 @@ cursor = conn.cursor()
 cf():
     # read inputted ids
     # find playlists that has inputted ids artists
+    # categorize inputted ids that has same playlist that has same artist
     # read all playlist_items and its songs information
     # write output format to OUTPUT_PATH (.txt)
     # write all playlist
