@@ -1,5 +1,6 @@
 import sqlite3
 import configparser
+from collections import defaultdict, Counter
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -72,7 +73,7 @@ def categorize_playlists(playlists, inputted_artists):
         for artist in artist_names:
             if artist in inputted_artists:
                 artist_to_playlists[artist].append(
-                    (playlist_id, playlist_creator_id, playlist_top_genres, artist_names))
+                    (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names))
 
     categorized_playlists = []
     for artist, playlists in artist_to_playlists.items():
@@ -84,6 +85,21 @@ def categorize_playlists(playlists, inputted_artists):
     return categorized_playlists
 
 
+def extract_songs_from_playlists(categorized_playlists, conn):
+    artist_song_count = defaultdict(Counter)
+
+    for artist, playlists in categorized_playlists:
+        for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names in playlists:
+            for song_id in playlist_items:
+                song_info = get_song_info(conn, song_id)
+                if song_info:
+                    _, song_name, artist_ids, artist_name, _ = song_info
+                    artist_song_count[artist][(
+                        song_id, artist_name, song_name)] += 1
+
+    return artist_song_count
+
+
 def cf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
@@ -93,6 +109,8 @@ def cf(ids):
     related_playlists = get_related_playlists(conn, inputted_ids)
     categorized_playlists = categorize_playlists(
         related_playlists, inputted_artists)
+    artist_song_count = extract_songs_from_playlists(
+        categorized_playlists, conn)
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('INPUTTED IDS\n')
@@ -107,21 +125,26 @@ def cf(ids):
             playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names = playlist
             playlist_items_str = ', '.join(playlist_items)
             artist_names_str = ', '.join(artist_names)
-            output_line = f"{idx}. Playlist ID: {playlist_id}, Creator ID: {
-                playlist_creator_id}, Artists: {artist_names_str}, Top Genres: {
-                playlist_top_genres},  Items: {playlist_items_str}"
+            output_line = f"{idx}. Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
+                playlist_top_genres}, Items: {playlist_items_str}, Artists: {artist_names_str}"
             f.write(output_line + '\n')
 
         f.write('\nCATEGORIZED PLAYLISTS\n')
         for artist, playlists in categorized_playlists:
             f.write(f'Artist: {artist}\n')
             for playlist in playlists:
-                playlist_id, playlist_creator_id, playlist_top_genres, artist_names = playlist
-                playlist_items_str = ', '.join(playlist_items)
+                playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names = playlist
                 artist_names_str = ', '.join(artist_names)
                 output_line = f"  - Playlist ID: {playlist_id}, Creator ID: {
-                    playlist_creator_id}, Artists: {artist_names_str}, Top Genres: {
-                    playlist_top_genres},  Items: {playlist_items_str}"
+                    playlist_creator_id}, Top Genres: {playlist_top_genres}, Artists: {artist_names_str}"
+                f.write(output_line + '\n')
+
+        f.write('\nSONGS FROM CATEGORIZED PLAYLISTS\n')
+        for artist, songs in artist_song_count.items():
+            f.write(f'Artist: {artist}\n')
+            for (song_id, artist_name, song_name), count in songs.items():
+                output_line = f"  - {song_id} {artist_name} - {
+                    song_name} | Count: {count}"
                 f.write(output_line + '\n')
 
     conn.close()
