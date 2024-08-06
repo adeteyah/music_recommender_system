@@ -69,12 +69,6 @@ existing database
     artist_genres TEXT (genres)
 
 OUTPUT FORMAT
-Case: 
-- 1,2,3,4,5 artist id is on same playlist
-- 3,4,5 artist id is on same playlist
-- 6 does not have common playlist
-- 7 does not have common playlist
-
 INPUTTED IDS (Inputted IDS are song_id)
 1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
 2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
