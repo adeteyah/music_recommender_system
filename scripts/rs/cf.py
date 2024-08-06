@@ -65,46 +65,34 @@ def get_related_playlists(conn, inputted_ids):
     return related_playlists
 
 
-def categorize_playlists(playlists):
-    artist_to_playlists = {}
+def categorize_playlists(playlists, inputted_artists):
+    artist_to_playlists = {artist: [] for artist in inputted_artists}
 
     for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names in playlists:
         for artist in artist_names:
-            if artist not in artist_to_playlists:
-                artist_to_playlists[artist] = []
-            artist_to_playlists[artist].append(
-                (playlist_id, playlist_creator_id, playlist_top_genres))
+            if artist in inputted_artists:
+                artist_to_playlists[artist].append(
+                    (playlist_id, playlist_creator_id, playlist_top_genres))
 
     categorized_playlists = []
     for artist, playlists in artist_to_playlists.items():
-        # Remove duplicate playlists
-        unique_playlists = {p[0]: p for p in playlists}.values()
-        categorized_playlists.append((artist, list(unique_playlists)))
+        if playlists:  # Only include artists with related playlists
+            # Remove duplicate playlists
+            unique_playlists = {p[0]: p for p in playlists}.values()
+            categorized_playlists.append((artist, list(unique_playlists)))
 
     return categorized_playlists
-
-
-def merge_artist_playlists(categorized_playlists):
-    merged_playlists = {}
-    for artist, playlists in categorized_playlists:
-        for playlist in playlists:
-            playlist_id, playlist_creator_id, playlist_top_genres = playlist
-            if (playlist_id, playlist_creator_id, playlist_top_genres) not in merged_playlists:
-                merged_playlists[(playlist_id, playlist_creator_id,
-                                  playlist_top_genres)] = set()
-            merged_playlists[(playlist_id, playlist_creator_id,
-                              playlist_top_genres)].add(artist)
-
-    return merged_playlists
 
 
 def cf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
     inputted_ids = set(id for id, *_ in songs_info)
+    inputted_artists = set(artist_name for _, _, _,
+                           artist_name, _ in songs_info)
     related_playlists = get_related_playlists(conn, inputted_ids)
-    categorized_playlists = categorize_playlists(related_playlists)
-    merged_playlists = merge_artist_playlists(categorized_playlists)
+    categorized_playlists = categorize_playlists(
+        related_playlists, inputted_artists)
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('INPUTTED IDS\n')
@@ -129,15 +117,8 @@ def cf(ids):
             for playlist in playlists:
                 playlist_id, playlist_creator_id, playlist_top_genres = playlist
                 output_line = f"  - Playlist ID: {playlist_id}, Creator ID: {
-                    playlist_creator_id}, Top Genres: {playlist_top_genres}"
+                    playlist_creator_id}, Artists: {artist_names_str}"
                 f.write(output_line + '\n')
-
-        f.write('\nMERGED ARTIST PLAYLISTS\n')
-        for (playlist_id, playlist_creator_id, playlist_top_genres), artists in merged_playlists.items():
-            artists_str = ', '.join(artists)
-            output_line = f"Playlist ID: {playlist_id}, Creator ID: {
-                playlist_creator_id}, Top Genres: {playlist_top_genres}, Artists: {artists_str}"
-            f.write(output_line + '\n')
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
