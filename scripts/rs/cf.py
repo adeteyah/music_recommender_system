@@ -122,6 +122,12 @@ def cf(ids):
         categorized_playlists, conn, inputted_ids)
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
+        f.write('\nINPUTTED IDS\n')
+        for idx, song_info in enumerate(songs_info, 1):
+            song_id, song_name, artist_ids, artist_name, artist_genres = song_info
+            output_line = f"{idx}. https://open.spotify.com/track/{song_id} {
+                artist_name} - {song_name} | Genre: {artist_genres}"
+            f.write(output_line + '\n')
         f.write('\nRELATED PLAYLISTS\n')
         for idx, playlist in enumerate(related_playlists, 1):
             playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names = playlist
