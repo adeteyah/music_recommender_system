@@ -110,6 +110,8 @@ def cbf_cf(ids):
         input_audio_features_list = []
         inputted_ids_set = set(ids)
         song_headers = []
+        all_playlists = {song_id: [] for song_id in ids}
+
         for idx, song_info in enumerate(songs_info, start=1):
             # song_id, song_name, artist_ids, artist_name, artist_genres
             base_info = song_info[:5]
@@ -155,6 +157,19 @@ def cbf_cf(ids):
                     f.write("Playlists containing this song:\n")
                     for playlist in playlists:
                         f.write(f"- {playlist}\n")
+                    all_playlists[song_info[0]].extend(playlists)
+
+        # Collect all playlists containing similar songs for each input ID
+        f.write('\nALL PLAYLISTS CONTAINING SIMILAR SONGS\n')
+        for idx, song_id in enumerate(ids, start=1):
+            f.write(f"\nInput ID {idx} ({song_id}):\n")
+            similar_songs_info = get_similar_audio_features(
+                conn, features, input_audio_features_list[idx-1], inputted_ids_set, songs_info)
+            for song_idx, song_info in enumerate(similar_songs_info[:N_RESULT], start=1):
+                playlists = get_playlists_containing_song(conn, song_info[0])
+                if playlists:
+                    playlist_str = ', '.join(playlists)
+                    f.write(f"{song_idx}. {playlist_str}\n")
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
