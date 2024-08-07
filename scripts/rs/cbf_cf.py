@@ -232,7 +232,7 @@ def cbf_cf(ids):
                 features_str = ', '.join(
                     [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
 
-                line = (f"{song_idx}. {artist_name} - {song_name} | "
+                line = (f"{song_idx}. https://open.spotify.com/track/{song_id} {artist_name} - {song_name} | "
                         f"Genres: {artist_genres} | "
                         f"Count: {count} | "
                         f"{features_str}\n")
