@@ -89,6 +89,17 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     return filtered_songs
 
 
+def get_playlists_containing_song(conn, song_id):
+    query = """
+        SELECT playlist_id
+        FROM playlists
+        WHERE playlist_items LIKE ?
+    """
+    cursor = conn.cursor()
+    cursor.execute(query, ('%' + song_id + '%',))
+    return [row[0] for row in cursor.fetchall()]
+
+
 def cbf_cf(ids):
     conn = sqlite3.connect(DB)
     features = ['s.' + feature for feature in CBF_FEATURES]
@@ -137,6 +148,12 @@ def cbf_cf(ids):
                         f"Genres: {artist_genres} | "
                         f"{features_str}\n")
                 f.write(line)
+
+                # Find playlists containing this song
+                playlists = get_playlists_containing_song(conn, song_id)
+                if playlists:
+                    f.write(f"Playlists containing this song: {
+                            ', '.join(playlists)}\n")
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
