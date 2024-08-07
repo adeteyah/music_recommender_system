@@ -207,11 +207,18 @@ def cbf_cf(ids):
                 song_counter[song_key] += 1
                 song_details[song_key] = song_info
 
-            for song_idx, (song_key, count) in enumerate(song_counter.items(), start=1):
+            seen_artists = set()
+            sorted_songs = sorted(song_counter.items(),
+                                  key=lambda x: x[1], reverse=True)
+            for song_idx, (song_key, count) in enumerate(sorted_songs, start=1):
                 artist_name, song_name, artist_genres = song_key
+                if artist_name in seen_artists:
+                    continue
+                seen_artists.add(artist_name)
                 audio_features = song_details[song_key][5:]
                 features_str = ', '.join(
                     [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
+
                 line = (f"{song_idx}. {artist_name} - {song_name} | "
                         f"Genres: {artist_genres} | "
                         f"Count: {count} | "
