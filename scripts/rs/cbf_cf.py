@@ -1,5 +1,6 @@
 import sqlite3
 import configparser
+from collections import Counter
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -196,14 +197,24 @@ def cbf_cf(ids):
                 playlist_id for sublist in similar_song_playlists[song_id] for playlist_id in sublist]
             recommended_songs = get_songs_from_playlists(
                 conn, all_playlist_ids, features)
-            for song_idx, song_info in enumerate(recommended_songs, start=1):
+
+            song_counter = Counter()
+            song_details = {}
+            for song_info in recommended_songs:
                 base_info = song_info[:5]
                 song_id, song_name, artist_ids, artist_name, artist_genres = base_info
-                song_url = f"https://open.spotify.com/track/{song_id}"
+                song_key = (artist_name, song_name, artist_genres)
+                song_counter[song_key] += 1
+                song_details[song_key] = song_info
+
+            for song_idx, (song_key, count) in enumerate(song_counter.items(), start=1):
+                artist_name, song_name, artist_genres = song_key
+                audio_features = song_details[song_key][5:]
                 features_str = ', '.join(
-                    [f"{CBF_FEATURES[i]}: {song_info[5 + i]}" for i in range(len(song_info) - 5)])
+                    [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
                 line = (f"{song_idx}. {artist_name} - {song_name} | "
                         f"Genres: {artist_genres} | "
+                        f"Count: {count} | "
                         f"{features_str}\n")
                 f.write(line)
 
