@@ -228,18 +228,6 @@ existing database
     song_id TEXT PRIMARY KEY,
     song_name TEXT,
     artist_ids TEXT,
-    acousticness REAL,
-    danceability REAL,
-    energy REAL,
-    instrumentalness REAL,
-    key INTEGER,
-    liveness REAL,
-    loudness REAL,
-    mode INTEGER,
-    speechiness REAL,
-    tempo REAL,
-    time_signature INTEGER,
-    valence REAL
 2. playlists table
     playlist_id TEXT PRIMARY KEY,
     playlist_creator_id TEXT,
@@ -250,24 +238,10 @@ existing database
     artist_name TEXT,
     artist_genres TEXT (genres)
 
-add new section after SIMILAR AUDIO FEATURES called "SAME PLAYLIST SONGS" where we catch result from SIMILAR AUDIO FEATURES and search thru playlist_id that has inputted id and the similar songs from SIMILAR AUDIO FEATURES like this example
-
-inputted id 1
-1. playlist_id Creator_ID | similar_song_id
-2. playlist_id Creator_ID | similar_song_id
-
-inputted id 2
-1. playlist_id Creator_ID | similar_song_id
-2. playlist_id Creator_ID | similar_song_id
-
-inputted id 3
-1. playlist_id Creator_ID | similar_song_id
-2. playlist_id Creator_ID | similar_song_id
-
-inputted id 4
-1. playlist_id Creator_ID | similar_song_id
-2. playlist_id Creator_ID | similar_song_id
-
+add new section after SIMILAR AUDIO FEATURES called "COLLECTING SIMILAR SONG PLAYLIST"
+1. continue format from SIMILAR AUDIO FEATURES, collect similar songs
+2. find playlists that has similar song id in column playlist_items
+3. print playlist_id and Creator_ID | playlist_top_genres
 
 import sqlite3
 import configparser
