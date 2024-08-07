@@ -152,8 +152,9 @@ def cbf_cf(ids):
                 # Find playlists containing this song
                 playlists = get_playlists_containing_song(conn, song_id)
                 if playlists:
-                    f.write(f"Playlists containing this song: {
-                            ', '.join(playlists)}\n")
+                    f.write("Playlists containing this song:\n")
+                    for playlist in playlists:
+                        f.write(f"- {playlist}\n")
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
