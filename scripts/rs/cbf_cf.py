@@ -90,14 +90,14 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     return filtered_songs
 
 
-def get_playlists_containing_songs(conn, input_song_id, similar_song_id):
+def get_playlists_containing_song(conn, song_id):
     query = """
         SELECT playlist_id
         FROM playlists
-        WHERE playlist_items LIKE ? AND playlist_items LIKE ?
+        WHERE playlist_items LIKE ?
     """
     cursor = conn.cursor()
-    cursor.execute(query, (f'%{input_song_id}%', f'%{similar_song_id}%'))
+    cursor.execute(query, ('%' + song_id + '%',))
     return [row[0] for row in cursor.fetchall()]
 
 
@@ -172,9 +172,8 @@ def cbf_cf(ids):
                         f"{features_str}\n")
                 f.write(line)
 
-                # Find playlists containing both this song and the input song
-                playlists = get_playlists_containing_songs(
-                    conn, ids[input_idx-1], song_id)
+                # Find playlists containing this song
+                playlists = get_playlists_containing_song(conn, song_id)
                 if playlists:
                     f.write("Playlists containing this song:\n")
                     for playlist in playlists:
