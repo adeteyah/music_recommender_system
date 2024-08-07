@@ -100,6 +100,24 @@ def get_playlists_containing_song(conn, song_id):
     return [row[0] for row in cursor.fetchall()]
 
 
+def get_songs_from_playlists(conn, playlist_ids, features):
+    if not playlist_ids:
+        return []
+
+    features_sql = ', '.join(features)
+    query = f"""
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres,
+               {features_sql}
+        FROM playlists p
+        JOIN songs s ON p.playlist_items LIKE '%' || s.song_id || '%'
+        JOIN artists a ON s.artist_ids = a.artist_id
+        WHERE p.playlist_id IN ({','.join(['?' for _ in playlist_ids])})
+    """
+    cursor = conn.cursor()
+    cursor.execute(query, playlist_ids)
+    return cursor.fetchall()
+
+
 def cbf_cf(ids):
     conn = sqlite3.connect(DB)
     features = ['s.' + feature for feature in CBF_FEATURES]
@@ -169,6 +187,25 @@ def cbf_cf(ids):
                 if playlists:
                     playlist_str = ', '.join(playlists)
                     f.write(f"{song_idx}. {playlist_str}\n")
+
+        # SONGS RECOMMENDATIONS
+        f.write('\nSONGS RECOMMENDATIONS\n')
+        for idx, song_id in enumerate(ids, start=1):
+            f.write(f"\nInput ID {idx} ({song_id}):\n")
+            all_playlist_ids = [
+                playlist_id for sublist in similar_song_playlists[song_id] for playlist_id in sublist]
+            recommended_songs = get_songs_from_playlists(
+                conn, all_playlist_ids, features)
+            for song_idx, song_info in enumerate(recommended_songs, start=1):
+                base_info = song_info[:5]
+                song_id, song_name, artist_ids, artist_name, artist_genres = base_info
+                song_url = f"https://open.spotify.com/track/{song_id}"
+                features_str = ', '.join(
+                    [f"{CBF_FEATURES[i]}: {song_info[5 + i]}" for i in range(len(song_info) - 5)])
+                line = (f"{song_idx}. {artist_name} - {song_name} | "
+                        f"Genres: {artist_genres} | "
+                        f"{features_str}\n")
+                f.write(line)
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
