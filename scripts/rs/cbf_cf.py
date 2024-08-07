@@ -89,6 +89,22 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     return filtered_songs
 
 
+def get_playlists_with_similar_songs(conn, song_ids):
+    placeholders = ', '.join('?' * len(song_ids))
+    query = f"""
+        SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres
+        FROM playlists p
+        WHERE EXISTS (
+            SELECT 1
+            FROM json_each(p.playlist_items)
+            WHERE json_each.value IN ({placeholders})
+        )
+    """
+    cursor = conn.cursor()
+    cursor.execute(query, song_ids)
+    return cursor.fetchall()
+
+
 def cbf_cf(ids):
     conn = sqlite3.connect(DB)
     features = ['s.' + feature for feature in CBF_FEATURES]
@@ -119,6 +135,7 @@ def cbf_cf(ids):
 
         # SIMILAR AUDIO FEATURES
         f.write('\nSIMILAR AUDIO FEATURES\n')
+        similar_songs_ids = []
         for input_audio_features, header in zip(input_audio_features_list, song_headers):
             f.write(f"\n{header}\n")
             similar_songs_info = get_similar_audio_features(
@@ -137,6 +154,15 @@ def cbf_cf(ids):
                         f"Genres: {artist_genres} | "
                         f"{features_str}\n")
                 f.write(line)
+                similar_songs_ids.append(song_id)
+
+        # COLLECTING SIMILAR SONG PLAYLIST
+        f.write('\nCOLLECTING SIMILAR SONG PLAYLIST\n')
+        playlists = get_playlists_with_similar_songs(conn, similar_songs_ids)
+        for playlist in playlists:
+            playlist_id, playlist_creator_id, playlist_top_genres = playlist
+            f.write(f"{playlist_id} | Creator_ID: {
+                    playlist_creator_id} | Genres: {playlist_top_genres}\n")
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
