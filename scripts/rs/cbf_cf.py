@@ -183,7 +183,12 @@ def cbf_cf(ids):
         # Collect all playlists containing similar songs for each input ID
         f.write('\nALL PLAYLISTS CONTAINING SIMILAR SONGS\n')
         for idx, song_id in enumerate(ids, start=1):
-            f.write(f"\nInput ID {idx} ({song_id}):\n")
+            song_info = next(
+                (info for info in songs_info if info[0] == song_id), None)
+            if song_info:
+                artist_name, song_name, artist_genres = song_info[3], song_info[1], song_info[4]
+                f.write(
+                    f"\n{artist_name} - {song_name} | Genres: {artist_genres}:\n")
             for song_idx, playlists in enumerate(similar_song_playlists[song_id], start=1):
                 if playlists:
                     playlist_str = ', '.join(playlists)
@@ -192,7 +197,12 @@ def cbf_cf(ids):
         # SONGS RECOMMENDATIONS
         f.write('\nSONGS RECOMMENDATIONS\n')
         for idx, song_id in enumerate(ids, start=1):
-            f.write(f"\nInput ID {idx} ({song_id}):\n")
+            song_info = next(
+                (info for info in songs_info if info[0] == song_id), None)
+            if song_info:
+                artist_name, song_name, artist_genres = song_info[3], song_info[1], song_info[4]
+                f.write(
+                    f"\n{artist_name} - {song_name} | Genres: {artist_genres}:\n")
             all_playlist_ids = [
                 playlist_id for sublist in similar_song_playlists[song_id] for playlist_id in sublist]
             recommended_songs = get_songs_from_playlists(
@@ -207,15 +217,17 @@ def cbf_cf(ids):
                 song_counter[song_key] += 1
                 song_details[song_key] = song_info
 
-            seen_artists = set()
             sorted_songs = sorted(song_counter.items(),
-                                  key=lambda x: x[1], reverse=True)
-            for song_idx, (song_key, count) in enumerate(sorted_songs, start=1):
-                artist_name, song_name, artist_genres = song_key
+                                  key=lambda x: (-x[1], x[0][1]))
+            seen_artists = set()
+
+            song_idx = 1
+            for (artist_name, song_name, artist_genres), count in sorted_songs:
                 if artist_name in seen_artists:
                     continue
                 seen_artists.add(artist_name)
-                audio_features = song_details[song_key][5:]
+                audio_features = song_details[(
+                    artist_name, song_name, artist_genres)][5:]
                 features_str = ', '.join(
                     [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
 
@@ -224,6 +236,7 @@ def cbf_cf(ids):
                         f"Count: {count} | "
                         f"{features_str}\n")
                 f.write(line)
+                song_idx += 1
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
