@@ -132,11 +132,13 @@ def cbf_cf(ids):
 
         # SIMILAR AUDIO FEATURES
         f.write('\nSIMILAR AUDIO FEATURES\n')
-        for input_audio_features, header in zip(input_audio_features_list, song_headers):
+        similar_song_playlists = {song_id: [] for song_id in ids}
+
+        for input_idx, (input_audio_features, header) in enumerate(zip(input_audio_features_list, song_headers), start=1):
             f.write(f"\n{header}\n")
             similar_songs_info = get_similar_audio_features(
                 conn, features, input_audio_features, inputted_ids_set, songs_info)
-            for idx, song_info in enumerate(similar_songs_info[:N_RESULT], start=1):
+            for song_idx, song_info in enumerate(similar_songs_info[:N_RESULT], start=1):
                 # song_id, song_name, artist_ids, artist_name, artist_genres
                 base_info = song_info[:5]
                 audio_features = song_info[5:]
@@ -146,7 +148,7 @@ def cbf_cf(ids):
                 features_str = ', '.join(
                     [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
 
-                line = (f"{idx}. {song_url} {artist_name} - {song_name} | "
+                line = (f"{song_idx}. {song_url} {artist_name} - {song_name} | "
                         f"Genres: {artist_genres} | "
                         f"{features_str}\n")
                 f.write(line)
@@ -157,16 +159,13 @@ def cbf_cf(ids):
                     f.write("Playlists containing this song:\n")
                     for playlist in playlists:
                         f.write(f"- {playlist}\n")
-                    all_playlists[song_info[0]].extend(playlists)
+                    similar_song_playlists[ids[input_idx-1]].append(playlists)
 
         # Collect all playlists containing similar songs for each input ID
         f.write('\nALL PLAYLISTS CONTAINING SIMILAR SONGS\n')
         for idx, song_id in enumerate(ids, start=1):
             f.write(f"\nInput ID {idx} ({song_id}):\n")
-            similar_songs_info = get_similar_audio_features(
-                conn, features, input_audio_features_list[idx-1], inputted_ids_set, songs_info)
-            for song_idx, song_info in enumerate(similar_songs_info[:N_RESULT], start=1):
-                playlists = get_playlists_containing_song(conn, song_info[0])
+            for song_idx, playlists in enumerate(similar_song_playlists[song_id], start=1):
                 if playlists:
                     playlist_str = ', '.join(playlists)
                     f.write(f"{song_idx}. {playlist_str}\n")
