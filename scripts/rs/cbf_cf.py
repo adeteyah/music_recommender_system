@@ -189,10 +189,21 @@ def cbf_cf(ids):
                 artist_name, song_name, artist_genres = song_info[3], song_info[1], song_info[4]
                 f.write(
                     f"\n{artist_name} - {song_name} | Genres: {artist_genres}:\n")
-            for song_idx, playlists in enumerate(similar_song_playlists[song_id], start=1):
-                if playlists:
-                    playlist_str = ', '.join(playlists)
-                    f.write(f"{song_idx}. {playlist_str}\n")
+
+            # Find playlists that contain the input song
+            input_playlists = get_playlists_containing_song(conn, song_id)
+            # Collect similar songs' IDs for comparison
+            all_similar_songs = [info[0] for info in get_similar_audio_features(
+                conn, features, input_audio_features_list[idx-1], inputted_ids_set, songs_info)]
+
+            for playlist_id in input_playlists:
+                # Check if the playlist contains any similar songs
+                playlist_songs = get_songs_from_playlists(
+                    conn, [playlist_id], features)
+                playlist_song_ids = {song[0] for song in playlist_songs}
+
+                if any(similar_song_id in playlist_song_ids for similar_song_id in all_similar_songs):
+                    f.write(f"{idx}. {playlist_id}\n")
 
         # SONGS RECOMMENDATIONS
         f.write('\nSONGS RECOMMENDATIONS\n')
@@ -203,19 +214,22 @@ def cbf_cf(ids):
                 artist_name, song_name, artist_genres = song_info[3], song_info[1], song_info[4]
                 f.write(
                     f"\n{artist_name} - {song_name} | Genres: {artist_genres}:\n")
-            all_playlist_ids = [
-                playlist_id for sublist in similar_song_playlists[song_id] for playlist_id in sublist]
-            recommended_songs = get_songs_from_playlists(
-                conn, all_playlist_ids, features)
 
+            # Collect recommended songs from playlists
             song_counter = Counter()
             song_details = {}
-            for song_info in recommended_songs:
-                base_info = song_info[:5]
-                song_id, song_name, artist_ids, artist_name, artist_genres = base_info
-                song_key = (artist_name, song_name, artist_genres)
-                song_counter[song_key] += 1
-                song_details[song_key] = song_info
+            for playlist_id in all_playlists.get(song_id, []):
+                playlist_songs = get_songs_from_playlists(
+                    conn, [playlist_id], features)
+                for song in playlist_songs:
+                    song_id = song[0]
+                    song_name = song[1]
+                    artist_name = song[3]
+                    artist_genres = song[4]
+                    song_key = (artist_name, song_name, artist_genres)
+                    song_counter[song_key] += 1
+                    if song_key not in song_details:
+                        song_details[song_key] = song
 
             sorted_songs = sorted(song_counter.items(),
                                   key=lambda x: (-x[1], x[0][1]))
@@ -232,7 +246,6 @@ def cbf_cf(ids):
                     [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
 
                 line = (f"{song_idx}. {artist_name} - {song_name} | "
-                        f"https://open.spotify.com/track/{song_id} | "
                         f"Genres: {artist_genres} | "
                         f"Count: {count} | "
                         f"{features_str}\n")
