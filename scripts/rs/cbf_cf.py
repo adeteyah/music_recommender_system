@@ -131,6 +131,10 @@ def cbf_cf(ids):
         song_headers = []
         all_playlists = {song_id: [] for song_id in ids}
 
+        # Collect information on input songs to filter out from recommendations
+        input_songs_set = set((song_info[3], song_info[1])
+                              for song_info in songs_info)
+
         for idx, song_info in enumerate(songs_info, start=1):
             base_info = song_info[:5]
             audio_features = song_info[5:]
@@ -212,6 +216,10 @@ def cbf_cf(ids):
                 song_id, song_name, artist_ids, artist_name, artist_genres = base_info
                 song_key = (artist_name, song_name, artist_genres)
 
+                # Filter out inputted songs and similar duplicates
+                if song_key in input_songs_set:
+                    continue
+
                 if song_key not in song_counter:
                     song_sources[song_key] = set()
 
@@ -229,7 +237,7 @@ def cbf_cf(ids):
 
             song_idx = 1
             for (artist_name, song_name, artist_genres), count in sorted_songs:
-                if artist_name in seen_artists:
+                if artist_name in seen_artists or count <= 1:
                     continue
                 seen_artists.add(artist_name)
                 audio_features = song_details[(
@@ -252,6 +260,15 @@ def cbf_cf(ids):
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
 
+
+if __name__ == "__main__":
+    ids = [
+        '1BxfuPKGuaTgP7aM0Bbdwr',
+        '4xqrdfXkTW4T0RauPLv3WA',
+        '7JIuqL4ZqkpfGKQhYlrirs',
+        '5dTHtzHFPyi8TlTtzoz1J9',
+    ]
+    cbf_cf(ids)
 
 if __name__ == "__main__":
     ids = [
