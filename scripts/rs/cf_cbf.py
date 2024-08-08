@@ -14,7 +14,9 @@ OUTPUT_PATH = config['rs']['cf_cbf_output']
 def get_song_info(conn, song_id):
     cursor = conn.cursor()
     cursor.execute("""
-        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres,
+               s.acousticness, s.danceability, s.energy, s.instrumentalness, s.key,
+               s.liveness, s.loudness, s.mode, s.speechiness, s.tempo, s.time_signature, s.valence
         FROM songs s
         JOIN artists a ON s.artist_ids = a.artist_id
         WHERE s.song_id = ?
@@ -94,10 +96,13 @@ def extract_songs_from_playlists(categorized_playlists, conn, inputted_ids, inpu
             for song_id in playlist_items:
                 song_info = get_song_info(conn, song_id)
                 if song_info and song_id not in inputted_ids:
-                    _, song_name, artist_ids, artist_name, _ = song_info
-                    if (artist_name, song_name) not in inputted_songs_set:
+                    # Keep first 5 columns (song_id, song_name, etc.)
+                    song_data = song_info[:5]
+                    # Keep the rest as audio features
+                    audio_features = song_info[5:]
+                    if (song_data[3], song_data[1]) not in inputted_songs_set:
                         artist_song_count[artist][(
-                            song_id, artist_name, song_name)] += 1
+                            song_data, audio_features)] += 1
 
     return artist_song_count
 
@@ -133,7 +138,6 @@ def cf_cbf(ids):
         for idx, playlist in enumerate(related_playlists, 1):
             playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names = playlist
             playlist_items_str = ', '.join(playlist_items)
-            # Ensure unique artist names
             artist_names_str = ', '.join(set(artist_names))
             output_line = f"{idx}. Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
                 playlist_top_genres}, Items: {playlist_items_str}, Artists: {artist_names_str}"
@@ -146,14 +150,12 @@ def cf_cbf(ids):
             unique_artists_written = set()
             for playlist in playlists:
                 playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names = playlist
-                # Only show unique artists
                 artist_names_str = ', '.join(
                     set(artist_names) - unique_artists_written)
-                if artist_names_str:  # Only write if there's something to write
+                if artist_names_str:
                     output_line = f"  - Playlist ID: {playlist_id}, Creator ID: {
                         playlist_creator_id}, Top Genres: {playlist_top_genres}, Artists: {artist_names_str}"
                     f.write(output_line + '\n')
-                    # Mark these artists as written
                     unique_artists_written.update(artist_names)
 
         f.write('\nSONGS FROM CATEGORIZED PLAYLISTS\n')
@@ -163,12 +165,27 @@ def cf_cbf(ids):
             sorted_songs = sorted(
                 songs.items(), key=lambda x: x[1], reverse=True)
             unique_artists_written = set()
-            for (song_id, artist_name, song_name), count in sorted_songs:
-                if artist_name not in unique_artists_written:  # Only write unique artists
-                    output_line = f"  - https://open.spotify.com/track/{
-                        song_id} {artist_name} - {song_name} | Count: {count}"
+            for ((song_data, audio_features), count) in sorted_songs:
+                song_id, artist_name, song_name = song_data[0], song_data[3], song_data[1]
+                if artist_name not in unique_artists_written:
+                    # Format the audio features as a string
+                    audio_features_str = ', '.join([
+                        f"acousticness: {audio_features[0]:.2f}",
+                        f"danceability: {audio_features[1]:.2f}",
+                        f"energy: {audio_features[2]:.2f}",
+                        f"instrumentalness: {audio_features[3]:.2f}",
+                        f"key: {audio_features[4]}",
+                        f"liveness: {audio_features[5]:.2f}",
+                        f"loudness: {audio_features[6]:.2f}",
+                        f"mode: {audio_features[7]}",
+                        f"speechiness: {audio_features[8]:.2f}",
+                        f"tempo: {audio_features[9]:.2f}",
+                        f"time_signature: {audio_features[10]}",
+                        f"valence: {audio_features[11]:.2f}"
+                    ])
+                    output_line = f"  - https://open.spotify.com/track/{song_id} {
+                        artist_name} - {song_name} | {audio_features_str} | Count: {count}"
                     f.write(output_line + '\n')
-                    # Mark this artist as written
                     unique_artists_written.add(artist_name)
 
     conn.close()
