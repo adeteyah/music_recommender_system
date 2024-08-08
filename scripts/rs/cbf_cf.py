@@ -132,7 +132,6 @@ def cbf_cf(ids):
         all_playlists = {song_id: [] for song_id in ids}
 
         for idx, song_info in enumerate(songs_info, start=1):
-            # song_id, song_name, artist_ids, artist_name, artist_genres
             base_info = song_info[:5]
             audio_features = song_info[5:]
             input_audio_features_list.append(audio_features)
@@ -158,7 +157,6 @@ def cbf_cf(ids):
             similar_songs_info = get_similar_audio_features(
                 conn, features, input_audio_features, inputted_ids_set, songs_info)
             for song_idx, song_info in enumerate(similar_songs_info[:N_RESULT], start=1):
-                # song_id, song_name, artist_ids, artist_name, artist_genres
                 base_info = song_info[:5]
                 audio_features = song_info[5:]
 
@@ -197,15 +195,17 @@ def cbf_cf(ids):
 
         # SONGS RECOMMENDATIONS
         f.write('\nSONGS RECOMMENDATIONS\n')
-        song_counter = Counter()
-        song_details = {}
-        song_sources = {}  # To track playlists where each song appears
 
-        for idx, song_id in enumerate(ids, start=1):
+        for input_idx, song_id in enumerate(ids, start=1):
+            f.write(f"\n{song_headers[input_idx-1]}:\n")
             all_playlist_ids = [
                 playlist_id for sublist in similar_song_playlists[song_id] for playlist_id in sublist]
             recommended_songs = get_songs_from_playlists(
                 conn, all_playlist_ids, features)
+
+            song_counter = Counter()
+            song_details = {}
+            song_sources = {}  # To track playlists where each song appears
 
             for song_info in recommended_songs:
                 base_info = song_info[:5]
@@ -223,31 +223,31 @@ def cbf_cf(ids):
                     playlist_id for playlist_id in all_playlist_ids if song_id in playlist_id]
                 song_sources[song_key].update(playlist_ids)
 
-        sorted_songs = sorted(song_counter.items(),
-                              key=lambda x: (-x[1], x[0][1]))
-        seen_artists = set()
+            sorted_songs = sorted(song_counter.items(),
+                                  key=lambda x: (-x[1], x[0][1]))
+            seen_artists = set()
 
-        song_idx = 1
-        for (artist_name, song_name, artist_genres), count in sorted_songs:
-            if artist_name in seen_artists:
-                continue
-            seen_artists.add(artist_name)
-            audio_features = song_details[(
-                artist_name, song_name, artist_genres)][5:]
-            features_str = ', '.join(
-                [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
-            from_playlists = ', '.join(
-                song_sources[(artist_name, song_name, artist_genres)])
-            song_url = f"https://open.spotify.com/track/{
-                song_details[(artist_name, song_name, artist_genres)][0]}"
+            song_idx = 1
+            for (artist_name, song_name, artist_genres), count in sorted_songs:
+                if artist_name in seen_artists:
+                    continue
+                seen_artists.add(artist_name)
+                audio_features = song_details[(
+                    artist_name, song_name, artist_genres)][5:]
+                features_str = ', '.join(
+                    [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
+                from_playlists = ', '.join(
+                    song_sources[(artist_name, song_name, artist_genres)])
+                song_url = f"https://open.spotify.com/track/{
+                    song_details[(artist_name, song_name, artist_genres)][0]}"
 
-            line = (f"{song_idx}. {song_url} {artist_name} - {song_name} | "
-                    f"Count: {count} | "
-                    f"Genres: {artist_genres} | "
-                    f"Audio Features: {features_str} | "
-                    f"From: {from_playlists}\n")
-            f.write(line)
-            song_idx += 1
+                line = (f"{song_idx}. {song_url} {artist_name} - {song_name} | "
+                        f"Count: {count} | "
+                        f"Genres: {artist_genres} | "
+                        f"Audio Features: {features_str} | "
+                        f"From: {from_playlists}\n")
+                f.write(line)
+                song_idx += 1
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
