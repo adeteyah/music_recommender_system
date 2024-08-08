@@ -395,3 +395,30 @@ if __name__ == "__main__":
         '5dTHtzHFPyi8TlTtzoz1J9',
     ]
     cbf_cf(ids)
+
+-- CF CBF --
+1. songs table
+    song_id TEXT PRIMARY KEY,
+    song_name TEXT,
+    artist_ids TEXT,
+    acousticness REAL,
+    danceability REAL,
+    energy REAL,
+    instrumentalness REAL,
+    key INTEGER,
+    liveness REAL,
+    loudness REAL,
+    mode INTEGER,
+    speechiness REAL,
+    tempo REAL,
+    time_signature INTEGER,
+    valence REAL
+2. playlists table
+    playlist_id TEXT PRIMARY KEY,
+    playlist_creator_id TEXT,
+    playlist_top_genres TEXT,
+    playlist_items TEXT, (array of song_id)
+3. artists table
+    artist_id TEXT PRIMARY KEY,
+    artist_name TEXT,
+    artist_genres TEXT (genres)
