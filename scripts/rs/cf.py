@@ -138,9 +138,10 @@ def cf(ids):
                 songs.items(), key=lambda x: x[1], reverse=True)
             unique_artists_written = set()
             for (song_id, artist_name, song_name), count in sorted_songs:
-                f.write(f"  - https://open.spotify.com/track/{song_id} {
-                    artist_name} - {song_name} | Count: {count}\n")
-                unique_artists_written.add(artist_name)
+                if artist_name not in unique_artists_written:
+                    f.write(f"  - https://open.spotify.com/track/{song_id} {
+                            artist_name} - {song_name} | Count: {count}\n")
+                    unique_artists_written.add(artist_name)
 
     conn.close()
     print(f'Result for {MODEL} stored at {OUTPUT_PATH}')
