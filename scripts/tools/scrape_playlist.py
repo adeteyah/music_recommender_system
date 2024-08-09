@@ -251,6 +251,9 @@ def process_playlist(playlist_id):
             if track_data:
                 for track_details in track_data:
                     song_id, song_name, artist_ids, *track_features = track_details
+                    # Convert artist_ids list to a comma-separated string
+                    artist_ids_str = ','.join(artist_ids)
+
                     cursor.execute('''
                         INSERT OR REPLACE INTO songs (
                             song_id, song_name, artist_ids, acousticness,
@@ -258,7 +261,7 @@ def process_playlist(playlist_id):
                             key, liveness, loudness, mode,
                             speechiness, tempo, time_signature, valence
                         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    ''', (song_id, song_name, ','.join(artist_ids), *track_features))
+                    ''', (song_id, song_name, artist_ids_str, *track_features))
 
                     new_song_ids.add(song_id)
                     valid_track_ids.append(song_id)
@@ -282,10 +285,9 @@ def process_playlist(playlist_id):
 
             cursor.execute('''
                 INSERT OR REPLACE INTO playlists (
-                    playlist_id, playlist_creator_id, playlist_original_items, 
-                    playlist_top_artist_ids
-                ) VALUES (?, ?, ?, ?)
-            ''', (playlist_id, creator_id, total_tracks, ','.join(unique_artist_ids)))
+                    playlist_id, playlist_creator_id, playlist_original_items
+                ) VALUES (?, ?, ?)
+            ''', (playlist_id, creator_id, total_tracks))
             conn.commit()
 
             existing_playlists.add(playlist_id)
