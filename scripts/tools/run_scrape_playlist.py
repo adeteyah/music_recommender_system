@@ -285,6 +285,10 @@ def process_playlist(playlist_id):
 
             existing_playlists.add(playlist_id)
             update_playlist_metrics(playlist_id, valid_track_ids)
+
+            cursor.execute(
+                'DELETE FROM playlists WHERE playlist_items is NULL OR playlist_items is =''')
+            conn.commit()
         else:
             logger.info(f"Playlist {playlist_id} has less than {
                         N_MINIMUM} tracks and will be skipped.")
