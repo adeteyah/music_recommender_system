@@ -1,6 +1,6 @@
 import sqlite3
 import configparser
-from collections import defaultdict, Counter
+from collections import Counter
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -61,10 +61,14 @@ def extract_songs_from_playlists(related_playlists, cursor, inputted_ids):
 
     for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in related_playlists:
         for song_id in playlist_items:
-            if song_id not in inputted_ids:
-                song_info = get_song_info(cursor, song_id)
-                if song_info:
-                    song_count[(song_id, song_info[3], song_info[1])] += 1
+            song_info = get_song_info(cursor, song_id)
+            if song_info:
+                if song_id in inputted_ids:
+                    # Count +2 for same inputted song ID
+                    song_count[(song_id, song_info[3], song_info[1])] += 2
+                elif song_id not in inputted_ids:
+                    song_count[(song_id, song_info[3], song_info[1])
+                               ] += 1  # Count +1 for other songs
 
     return song_count
 
@@ -92,7 +96,7 @@ def cf(ids):
                 f.write("No related playlists found.\n")
             else:
                 for playlist_idx, (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items) in enumerate(related_playlists, 1):
-                    f.write(f"{playlist_idx}. Playlist ID: {playlist_id}, Creator ID: {
+                    f.write(f"{playlist_idx}. https://open.spotify.com/playlist/{playlist_id} by https://open.spotify.com/user/{
                             playlist_creator_id}, Top Genres: {playlist_top_genres}, Items: {', '.join(playlist_items)}\n")
 
         # 3. SONG RECOMMENDATION
