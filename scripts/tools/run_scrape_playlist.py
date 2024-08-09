@@ -293,8 +293,8 @@ def process_playlist(playlist_id):
 
 
 if __name__ == '__main__':
-    playlist_ids = ['1wlcbdQwkltllE502f3uPr', '6MnLPuVGrV1MH0f2s4FkjB', '2nzVCXza1cHdl0jk7vmdNQ', '7qeSVsb8qaRlU49JhlLANt', '49qtYZo1UzUaghvZ2QuQMs', '2IBj89LQ0QR55Gf0HCbEyt',
-                    '4VpMhGgwJ8r8EDGTDTbeer', '1V4QL33vsALvljElabTpxq', '0VTTnJgEPcBYWKddDZ7iwo', '0s6CEeemXPec7wUMStvJQP', '11X76c5MphTG1VgKmC7hgb', '4cIPf8YIp2U9XltRhBox7t', '2ZpSU8WHjNcNqsRWoBqHNg']
+    playlist_ids = ['49Jw0JbNJexKQGo9KpPGsO', '3t9g0zGUYvn91KlEYeg8CN', '0SgyK6Rl58KJH3UGWDhSyc', '5FIczQXxvrVuqiLT8zIw5f', '1BJjVFVmV6kdXDZZpwaxSK',
+                    '7561pRhGID1JY9iylnjTeC', '0EWoCeUOQAEEIVmIkfpMP2', '3AUAs41Vr5wcwbGHq9ksHH', '49Ek1T3Hlr3Znwx8qHHg5g', '6uLsdWljLVNjLuPRlehDt4']
 
     for playlist_id in playlist_ids:
         process_playlist(playlist_id)

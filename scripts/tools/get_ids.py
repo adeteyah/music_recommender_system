@@ -1,8 +1,7 @@
 import re
 
 text = """
-https://open.spotify.com/playlist/0s6CEeemXPec7wUMStvJQP?si=00e34fc997144a14 https://open.spotify.com/playlist/6MnLPuVGrV1MH0f2s4FkjB?si=8804c9811e8a4be9 https://open.spotify.com/playlist/11X76c5MphTG1VgKmC7hgb?si=6218c8a2b83d4fef https://open.spotify.com/playlist/1wlcbdQwkltllE502f3uPr?si=0891b12e59eb42c6 https://open.spotify.com/playlist/4cIPf8YIp2U9XltRhBox7t?si=0a623b325d7344e6 https://open.spotify.com/playlist/2ZpSU8WHjNcNqsRWoBqHNg?si=e24920b21a5a41c4 https://open.spotify.com/playlist/49qtYZo1UzUaghvZ2QuQMs?si=408e155bcca141bf https://open.spotify.com/playlist/4VpMhGgwJ8r8EDGTDTbeer?si=d59f6543ee844659 https://open.spotify.com/playlist/2nzVCXza1cHdl0jk7vmdNQ?si=7a1bec0378fe4fb0 https://open.spotify.com/playlist/1V4QL33vsALvljElabTpxq?si=5588de1fbc8f446f https://open.spotify.com/playlist/7qeSVsb8qaRlU49JhlLANt?si=aed0e4e8723a473f https://open.spotify.com/playlist/0VTTnJgEPcBYWKddDZ7iwo?si=a20750b15e4f4246 https://open.spotify.com/playlist/2IBj89LQ0QR55Gf0HCbEyt?si=ff0a1f7e2832410e
-
+https://open.spotify.com/playlist/7561pRhGID1JY9iylnjTeC?si=01162454632345ef  https://open.spotify.com/playlist/5FIczQXxvrVuqiLT8zIw5f?si=a4c6aece05e9491a https://open.spotify.com/playlist/49Jw0JbNJexKQGo9KpPGsO?si=765b3abf853e48c2 https://open.spotify.com/playlist/0EWoCeUOQAEEIVmIkfpMP2?si=94d4839e50264d07 https://open.spotify.com/playlist/0SgyK6Rl58KJH3UGWDhSyc?si=a3a2237b16924a37 https://open.spotify.com/playlist/6uLsdWljLVNjLuPRlehDt4?si=92e0bec200c44dab https://open.spotify.com/playlist/3t9g0zGUYvn91KlEYeg8CN?si=688c3a172bf5409f https://open.spotify.com/playlist/1BJjVFVmV6kdXDZZpwaxSK?si=eea87ab202094277 https://open.spotify.com/playlist/3AUAs41Vr5wcwbGHq9ksHH?si=dd4d58e50ef94b19 https://open.spotify.com/playlist/49Ek1T3Hlr3Znwx8qHHg5g?si=a3690838cc794fb8 https://open.spotify.com/playlist/0SgyK6Rl58KJH3UGWDhSyc?si=297a40a0d47f479d
 
 
 
