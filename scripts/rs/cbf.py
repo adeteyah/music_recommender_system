@@ -1,5 +1,6 @@
 import sqlite3
 import configparser
+import re
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -40,6 +41,11 @@ def calculate_similarity(song_features, input_features):
     return sum(abs(song_feature - input_feature) for song_feature, input_feature in zip(song_features, input_features))
 
 
+def normalize_song_name(song_name):
+    # Normalize song names by removing any parenthetical text (e.g., "(Remastered)", "(Live)", etc.)
+    return re.sub(r'\(.*?\)', '', song_name).strip().lower()
+
+
 def get_similar_audio_features(conn, features, input_audio_features, inputted_ids, inputted_songs):
     feature_conditions = []
     for i, feature in enumerate(features):
@@ -67,18 +73,21 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
 
     # Filter out inputted IDs and ensure only one song per artist, excluding same artist and song names
     seen_artists = set()
-    # (artist_name, song_name)
-    seen_song_artist_names = {(info[3], info[1]) for info in inputted_songs}
+    seen_song_artist_names = {(normalize_song_name(info[1]), info[3].lower(
+    )) for info in inputted_songs}  # (normalized_song_name, artist_name)
     filtered_songs = []
     seen_song_artist_pairs = set()
 
     for song in songs:
         song_id, song_name, artist_ids, artist_name, artist_genres = song[:5]
-        if song_id in inputted_ids or (artist_name, song_name) in seen_song_artist_names:
+        normalized_name = normalize_song_name(song_name)
+        artist_name_lower = artist_name.lower()
+
+        if song_id in inputted_ids or (normalized_name, artist_name_lower) in seen_song_artist_names:
             continue
 
-        # Case insensitive comparison
-        song_artist_pair = (song_name.lower(), artist_name.lower())
+        # Normalize and use case insensitive comparison
+        song_artist_pair = (normalized_name, artist_name_lower)
         if song_artist_pair in seen_song_artist_pairs:
             continue
 
