@@ -116,8 +116,8 @@ def cf(ids):
                 artist_names_str = ', '.join(
                     set(artist_names) - unique_artists_written)
                 if artist_names_str:
-                    f.write(f"  - Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
-                            playlist_top_genres}, Artists: {artist_names_str}\n")
+                    f.write(f"  - https://open.spotify.com/playlist/{playlist_id} by https://open.spotify.com/user/{playlist_creator_id} | Top Genres: {
+                            playlist_top_genres} | Artists: {artist_names_str}\n")
                     unique_artists_written.update(artist_names)
 
         f.write('\nSONGS FROM CATEGORIZED PLAYLISTS\n')
