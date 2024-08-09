@@ -107,12 +107,13 @@ def cf(ids):
             f.write(f"{idx}. https://open.spotify.com/track/{song_id} {
                     artist_name} - {song_name} | Genre: {artist_genres}\n")
 
-        f.write('\nRELATED PLAYLISTS\n')
+        f.write('\nFIND PLAYLISTS CONTAINS ARTISTS\n')
         for idx, (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names) in enumerate(related_playlists, 1):
-            f.write(f"{idx}. Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
-                    playlist_top_genres}, Items: {', '.join(playlist_items)}, Artists: {', '.join(set(artist_names))}\n")
-
-        f.write('\nCATEGORIZED PLAYLISTS\n')
+            f.write(f"{idx}. https://open.spotify.com/playlist/{
+                    playlist_id} by https://open.spotify.com/user/{playlist_creator_id}\n")
+            # f.write(f"{idx}. https://open.spotify.com/playlist/{playlist_id} by https://open.spotify.com/user/{playlist_creator_id}, Top Genres: {
+            #         playlist_top_genres}, Items: {', '.join(playlist_items)}, Artists: {', '.join(set(artist_names))}\n")
+        f.write('\nSONGS - PLAYLIST RELATION\n')
         for input_id, playlists in categorized_playlists.items():
             song_name = next(
                 (s[1] for s in songs_info if s[0] == input_id), "Unknown")
@@ -122,11 +123,13 @@ def cf(ids):
                 artist_names_str = ', '.join(
                     set(artist_names) - unique_artists_written)
                 if artist_names_str:
-                    f.write(f"  - Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
-                            playlist_top_genres}, Artists: {artist_names_str}\n")
+                    f.write(f"  - https://open.spotify.com/playlist/{
+                            playlist_id} by https://open.spotify.com/user/{playlist_creator_id}\n")
+                    # f.write(f"  - https://open.spotify.com/playlist/{playlist_id} by https://open.spotify.com/user/{playlist_creator_id}, Top Genres: {
+                    #         playlist_top_genres}, Artists: {artist_names_str}\n")
                     unique_artists_written.update(artist_names)
 
-        f.write('\nSONGS FROM CATEGORIZED PLAYLISTS\n')
+        f.write('\nEXTRACTED SONGS (RECOMMENDATION)\n')
         for input_id, songs in songs_by_input.items():
             song_name = next(
                 (s[1] for s in songs_info if s[0] == input_id), "Unknown")
