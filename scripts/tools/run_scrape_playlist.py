@@ -186,20 +186,20 @@ def update_playlist_metrics(playlist_id, track_ids):
                         for feature, values in audio_features.items()}
 
     cursor.execute('''
-        UPDATE playlists SET 
-            playlist_top_artist_ids = ?, 
-            playlist_top_genres = ?, 
-            min_acousticness = ?, max_acousticness = ?, 
-            min_danceability = ?, max_danceability = ?, 
-            min_energy = ?, max_energy = ?, 
-            min_instrumentalness = ?, max_instrumentalness = ?, 
-            min_key = ?, max_key = ?, 
-            min_liveness = ?, max_liveness = ?, 
-            min_loudness = ?, max_loudness = ?, 
-            min_mode = ?, max_mode = ?, 
-            min_speechiness = ?, max_speechiness = ?, 
-            min_tempo = ?, max_tempo = ?, 
-            min_time_signature = ?, max_time_signature = ?, 
+        UPDATE playlists SET
+            playlist_top_artist_ids = ?,
+            playlist_top_genres = ?,
+            min_acousticness = ?, max_acousticness = ?,
+            min_danceability = ?, max_danceability = ?,
+            min_energy = ?, max_energy = ?,
+            min_instrumentalness = ?, max_instrumentalness = ?,
+            min_key = ?, max_key = ?,
+            min_liveness = ?, max_liveness = ?,
+            min_loudness = ?, max_loudness = ?,
+            min_mode = ?, max_mode = ?,
+            min_speechiness = ?, max_speechiness = ?,
+            min_tempo = ?, max_tempo = ?,
+            min_time_signature = ?, max_time_signature = ?,
             min_valence = ?, max_valence = ?,
             playlist_items_fetched = ?,
             playlist_items = ?
@@ -215,6 +215,10 @@ def update_playlist_metrics(playlist_id, track_ids):
         ','.join(filtered_track_ids),
         playlist_id
     ))
+    conn.commit()
+
+    cursor.execute(
+        'DELETE FROM playlists WHERE playlist_items is NULL OR playlist_items is NULL')
     conn.commit()
 
 
@@ -249,9 +253,9 @@ def process_playlist(playlist_id):
                     song_id, song_name, artist_ids, *track_features = track_details
                     cursor.execute('''
                         INSERT OR REPLACE INTO songs (
-                            song_id, song_name, artist_ids, acousticness, 
-                            danceability, energy, instrumentalness, 
-                            key, liveness, loudness, mode, 
+                            song_id, song_name, artist_ids, acousticness,
+                            danceability, energy, instrumentalness,
+                            key, liveness, loudness, mode,
                             speechiness, tempo, time_signature, valence
                         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     ''', (song_id, song_name, ','.join(artist_ids), *track_features))
@@ -285,10 +289,6 @@ def process_playlist(playlist_id):
 
             existing_playlists.add(playlist_id)
             update_playlist_metrics(playlist_id, valid_track_ids)
-
-            cursor.execute(
-                'DELETE FROM playlists WHERE playlist_items is NULL OR playlist_items is =''')
-            conn.commit()
         else:
             logger.info(f"Playlist {playlist_id} has less than {
                         N_MINIMUM} tracks and will be skipped.")

@@ -136,6 +136,7 @@ def record_exists(table_name, record_id):
 
 
 def update_playlist_metrics(playlist_id, track_ids):
+
     logger.info(f'Updating metrics for playlist {playlist_id}')
     if not track_ids:
         return
@@ -226,6 +227,10 @@ def update_playlist_metrics(playlist_id, track_ids):
         ','.join(filtered_track_ids),
         playlist_id
     ))
+    conn.commit()
+
+    cursor.execute(
+        'DELETE FROM playlists WHERE playlist_items is NULL OR playlist_items is NULL')
     conn.commit()
 
 
