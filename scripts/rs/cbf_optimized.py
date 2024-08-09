@@ -29,7 +29,7 @@ def get_song_info(conn, song_id, features):
         SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres,
                {features_sql}
         FROM songs s
-        LEFT JOIN artists a ON s.artist_ids = a.artist_id
+        JOIN artists a ON s.artist_ids = a.artist_id
         WHERE s.song_id = ?
     """
     cursor = conn.cursor()
@@ -78,7 +78,7 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
         SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres,
                {features_sql}
         FROM songs s
-        LEFT JOIN artists a ON s.artist_ids = a.artist_id
+        JOIN artists a ON s.artist_ids = a.artist_id
         WHERE {combined_conditions_sql}
     """
     cursor = conn.cursor()
@@ -87,19 +87,15 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
 
     # Filter out inputted IDs and ensure only two songs per artist, excluding same artist and song names
     seen_artists = {}
-    seen_song_artist_names = {(normalize_song_name(info[1]), (info[3] or 'N/A').lower(
+    seen_song_artist_names = {(normalize_song_name(info[1]), info[3].lower(
     )) for info in inputted_songs}  # (normalized_song_name, artist_name)
     filtered_songs = []
     seen_song_artist_pairs = set()
 
     for song in songs:
         song_id, song_name, artist_ids, artist_name, artist_genres = song[:5]
-
-        # Use placeholders if artist_name or artist_ids is None
-        normalized_name = normalize_song_name(
-            song_name) if song_name else 'N/A'
-        artist_name_lower = (artist_name or 'N/A').lower()
-        artist_ids = artist_ids if artist_ids else 'N/A'
+        normalized_name = normalize_song_name(song_name)
+        artist_name_lower = artist_name.lower()
 
         if song_id in inputted_ids or (normalized_name, artist_name_lower) in seen_song_artist_names:
             continue
@@ -146,17 +142,15 @@ def cbf(ids):
             song_url = f"https://open.spotify.com/track/{base_info[0]}"
             features_str = ', '.join(
                 [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
-            artist_name = base_info[3] if base_info[3] else 'N/A'
-            song_name = base_info[1] if base_info[1] else 'N/A'
-            line = (f"{idx}. {song_url} {artist_name} - {song_name} | "
-                    f"Genres: {base_info[4] if base_info[4] else 'N/A'} | {features_str}\n")
+            line = (f"{idx}. {song_url} {base_info[3]} - {base_info[1]} | "
+                    f"Genres: {base_info[4]} | {features_str}\n")
             f.write(line)
 
         # SIMILAR AUDIO FEATURES
         f.write('\nSIMILAR AUDIO FEATURES\n')
         for input_audio_features, song_info in zip(input_audio_features_list, songs_info):
-            header = f"{song_info[3] if song_info[3] else 'N/A'} - {song_info[1]
-                                                                    if song_info[1] else 'N/A'} | Genres: {song_info[4] if song_info[4] else 'N/A'}"
+            header = f"{song_info[3]} - {song_info[1]
+                                         } | Genres: {song_info[4]}"
             f.write(f"\n{header}\n")
             similar_songs_info = get_similar_audio_features(
                 conn, features, input_audio_features, inputted_ids_set, songs_info)
@@ -166,10 +160,8 @@ def cbf(ids):
                 song_url = f"https://open.spotify.com/track/{base_info[0]}"
                 features_str = ', '.join(
                     [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
-                artist_name = base_info[3] if base_info[3] else 'N/A'
-                song_name = base_info[1] if base_info[1] else 'N/A'
-                line = (f"{idx}. {song_url} {artist_name} - {song_name} | "
-                        f"Genres: {base_info[4] if base_info[4] else 'N/A'} | {features_str}\n")
+                line = (f"{idx}. {song_url} {base_info[3]} - {base_info[1]} | "
+                        f"Genres: {base_info[4]} | {features_str}\n")
                 f.write(line)
 
     conn.close()
