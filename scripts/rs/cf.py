@@ -23,16 +23,14 @@ def get_song_info(cursor, song_id):
 
 def read_inputted_ids(cursor, ids):
     songs_info = []
-    artists = set()
     for song_id in ids:
         info = get_song_info(cursor, song_id)
         if info:
             songs_info.append(info)
-            artists.add(info[3])  # Add artist_name to the artists set
-    return songs_info, artists
+    return songs_info
 
 
-def get_related_playlists(cursor, artists):
+def get_related_playlists(cursor, artist_name):
     cursor.execute("""
         SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
         FROM playlists p
@@ -40,74 +38,44 @@ def get_related_playlists(cursor, artists):
     playlists = cursor.fetchall()
 
     related_playlists = []
-    for playlist in playlists:
-        playlist_id, playlist_creator_id, playlist_top_genres, playlist_items = playlist
+    for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in playlists:
         playlist_items_list = playlist_items.split(',')
 
-        # Find playlists that contain songs by any of the input artists
+        # Find playlists that contain songs by the specific artist
         artist_names = set()
         for song_id in playlist_items_list:
             song_info = get_song_info(cursor, song_id)
-            if song_info and song_info[3] in artists:
+            if song_info and song_info[3] == artist_name:
                 artist_names.add(song_info[3])
 
         if artist_names:
             related_playlists.append(
-                (playlist_id, playlist_creator_id, playlist_top_genres,
-                 playlist_items_list, list(artist_names))
+                (playlist_id, playlist_creator_id,
+                 playlist_top_genres, playlist_items_list)
             )
     return related_playlists
 
 
-def categorize_playlists(related_playlists, inputted_ids, inputted_artists):
-    categorized_playlists = defaultdict(list)
+def extract_songs_from_playlists(related_playlists, cursor, inputted_ids):
+    song_count = Counter()
 
-    for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names in related_playlists:
-        for artist_name in artist_names:
-            if artist_name in inputted_artists:
-                categorized_playlists[artist_name].append(
-                    (playlist_id, playlist_creator_id,
-                     playlist_top_genres, playlist_items, artist_names)
-                )
+    for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in related_playlists:
+        for song_id in playlist_items:
+            if song_id not in inputted_ids:
+                song_info = get_song_info(cursor, song_id)
+                if song_info:
+                    song_count[(song_id, song_info[3], song_info[1])] += 1
 
-    return categorized_playlists
-
-
-def extract_songs_from_playlists(categorized_playlists, cursor, inputted_ids, inputted_artists):
-    song_count_by_input = defaultdict(Counter)
-
-    for artist, playlists in categorized_playlists.items():
-        for _, _, _, playlist_items, artist_names in playlists:
-            for song_id in playlist_items:
-                if song_id not in inputted_ids:
-                    song_info = get_song_info(cursor, song_id)
-                    if song_info:
-                        _, song_name, _, artist_name, _ = song_info
-                        count_increment = 0
-
-                        if song_id in inputted_ids:
-                            count_increment += 2  # Increment by 2 if the same input ID
-                        elif artist_name in inputted_artists:
-                            count_increment += 1  # Increment by 1 if just the same artist
-
-                        if count_increment > 0:
-                            song_count_by_input[artist][(
-                                song_id, artist_name, song_name)] += count_increment
-
-    return song_count_by_input
+    return song_count
 
 
 def cf(ids):
     conn = sqlite3.connect(DB)
     cursor = conn.cursor()
 
-    songs_info, artists = read_inputted_ids(cursor, ids)
+    # 1. INPUTTED IDS
+    songs_info = read_inputted_ids(cursor, ids)
     inputted_ids = {song_id for song_id, *_ in songs_info}
-    related_playlists = get_related_playlists(cursor, artists)
-    categorized_playlists = categorize_playlists(
-        related_playlists, inputted_ids, artists)
-    songs_by_input = extract_songs_from_playlists(
-        categorized_playlists, cursor, inputted_ids, artists)
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('\nINPUTTED IDS\n')
@@ -115,33 +83,35 @@ def cf(ids):
             f.write(f"{idx}. https://open.spotify.com/track/{song_id} {
                     artist_name} - {song_name} | Genre: {artist_genres}\n")
 
+        # 2. RELATED PLAYLISTS
         f.write('\nRELATED PLAYLISTS\n')
-        for idx, (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names) in enumerate(related_playlists, 1):
-            f.write(f"{idx}. Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
-                    playlist_top_genres}, Items: {', '.join(playlist_items)}, Artists: {', '.join(set(artist_names))}\n")
+        for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
+            f.write(f"\nFor Input Song: {artist_name} - {song_name}\n")
+            related_playlists = get_related_playlists(cursor, artist_name)
+            if not related_playlists:
+                f.write("No related playlists found.\n")
+            else:
+                for playlist_idx, (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items) in enumerate(related_playlists, 1):
+                    f.write(f"{playlist_idx}. Playlist ID: {playlist_id}, Creator ID: {
+                            playlist_creator_id}, Top Genres: {playlist_top_genres}, Items: {', '.join(playlist_items)}\n")
 
-        f.write('\nCATEGORIZED PLAYLISTS\n')
-        for artist, playlists in categorized_playlists.items():
-            f.write(f"{artist}\n")
-            unique_artists_written = set()
-            for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names in playlists:
-                artist_names_str = ', '.join(
-                    set(artist_names) - unique_artists_written)
-                f.write(f"  - Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
-                        playlist_top_genres}, Artists: {artist_names_str}\n")
-                unique_artists_written.update(artist_names)
+        # 3. SONG RECOMMENDATION
+        f.write('\nSONG RECOMMENDATION\n')
+        for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
+            f.write(f"\nRecommendations for Input Song: {
+                    artist_name} - {song_name}\n")
+            related_playlists = get_related_playlists(cursor, artist_name)
+            song_count = extract_songs_from_playlists(
+                related_playlists, cursor, inputted_ids)
 
-        f.write('\nSONGS FROM CATEGORIZED PLAYLISTS\n')
-        for artist, songs in songs_by_input.items():
-            f.write(f"{artist}\n")
-            sorted_songs = sorted(
-                songs.items(), key=lambda x: x[1], reverse=True)
-            unique_artists_written = set()
-            for (song_id, artist_name, song_name), count in sorted_songs:
-                if artist_name not in unique_artists_written:
+            if not song_count:
+                f.write("No song recommendations found.\n")
+            else:
+                sorted_songs = sorted(song_count.items(),
+                                      key=lambda x: x[1], reverse=True)
+                for (song_id, artist_name, song_name), count in sorted_songs:
                     f.write(f"  - https://open.spotify.com/track/{song_id} {
                             artist_name} - {song_name} | Count: {count}\n")
-                    unique_artists_written.add(artist_name)
 
     conn.close()
     print(f'Result for {MODEL} stored at {OUTPUT_PATH}')
