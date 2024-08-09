@@ -17,8 +17,8 @@ TIME_SIGNATURE_BOUND_VAL = int(config['rs']['cbf_time_signature_bound'])
 TEMPO_BOUND_VAL = float(config['rs']['cbf_tempo_bound'])
 
 # Weights for audio feature similarity and genre similarity
-AUDIO_FEATURE_WEIGHT = 0.5
-GENRE_WEIGHT = 0.5
+AUDIO_FEATURE_WEIGHT = 0.9
+GENRE_WEIGHT = 0.2
 
 # Define specific bound values for features
 SEPARATE_BOUNDS = {
