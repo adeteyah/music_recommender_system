@@ -67,6 +67,7 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
 
     # Filter out inputted IDs and ensure only one song per artist, excluding same artist and song names
     seen_artists = set()
+    # (artist_name, song_name)
     seen_song_artist_names = {(info[3], info[1]) for info in inputted_songs}
     filtered_songs = [
         song for song in songs
