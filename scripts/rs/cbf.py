@@ -69,12 +69,22 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     seen_artists = set()
     # (artist_name, song_name)
     seen_song_artist_names = {(info[3], info[1]) for info in inputted_songs}
-    filtered_songs = [
-        song for song in songs
-        if song[0] not in inputted_ids and (song[3], song[1]) not in seen_song_artist_names and song[2] not in seen_artists
-    ]
-    for song in filtered_songs:
-        seen_artists.add(song[2])
+    filtered_songs = []
+    seen_song_artist_pairs = set()
+
+    for song in songs:
+        song_id, song_name, artist_ids, artist_name, artist_genres = song[:5]
+        if song_id in inputted_ids or (artist_name, song_name) in seen_song_artist_names:
+            continue
+
+        # Case insensitive comparison
+        song_artist_pair = (song_name.lower(), artist_name.lower())
+        if song_artist_pair in seen_song_artist_pairs:
+            continue
+
+        filtered_songs.append(song)
+        seen_artists.add(artist_ids)
+        seen_song_artist_pairs.add(song_artist_pair)
 
     # Sort songs by similarity
     filtered_songs.sort(key=lambda song: calculate_similarity(
