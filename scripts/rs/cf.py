@@ -59,7 +59,7 @@ def get_related_playlists(cursor, artists):
     return related_playlists
 
 
-def categorize_playlists(related_playlists, inputted_ids):
+def categorize_playlists(related_playlists, inputted_ids, inputted_artists):
     categorized_playlists = defaultdict(list)
 
     for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names in related_playlists:
@@ -73,18 +73,26 @@ def categorize_playlists(related_playlists, inputted_ids):
     return categorized_playlists
 
 
-def extract_songs_from_playlists(categorized_playlists, cursor, inputted_ids):
+def extract_songs_from_playlists(categorized_playlists, cursor, inputted_ids, inputted_artists):
     song_count_by_input = defaultdict(Counter)
 
     for input_id, playlists in categorized_playlists.items():
-        for _, _, _, playlist_items, _ in playlists:
+        for _, _, _, playlist_items, artist_names in playlists:
             for song_id in playlist_items:
                 if song_id not in inputted_ids:
                     song_info = get_song_info(cursor, song_id)
                     if song_info:
                         _, song_name, _, artist_name, _ = song_info
-                        song_count_by_input[input_id][(
-                            song_id, artist_name, song_name)] += 1
+                        count_increment = 0
+
+                        if song_id in inputted_ids:
+                            count_increment += 2  # Increment by 2 if the same input ID
+                        elif artist_name in inputted_artists:
+                            count_increment += 1  # Increment by 1 if just the same artist
+
+                        if count_increment > 0:
+                            song_count_by_input[input_id][(
+                                song_id, artist_name, song_name)] += count_increment
 
     return song_count_by_input
 
@@ -97,9 +105,9 @@ def cf(ids):
     inputted_ids = {song_id for song_id, *_ in songs_info}
     related_playlists = get_related_playlists(cursor, artists)
     categorized_playlists = categorize_playlists(
-        related_playlists, inputted_ids)
+        related_playlists, inputted_ids, artists)
     songs_by_input = extract_songs_from_playlists(
-        categorized_playlists, cursor, inputted_ids)
+        categorized_playlists, cursor, inputted_ids, artists)
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('\nINPUTTED IDS\n')
@@ -107,13 +115,12 @@ def cf(ids):
             f.write(f"{idx}. https://open.spotify.com/track/{song_id} {
                     artist_name} - {song_name} | Genre: {artist_genres}\n")
 
-        f.write('\nFIND PLAYLISTS CONTAINS ARTISTS\n')
+        f.write('\nRELATED PLAYLISTS\n')
         for idx, (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names) in enumerate(related_playlists, 1):
-            f.write(f"{idx}. https://open.spotify.com/playlist/{
-                    playlist_id} by https://open.spotify.com/user/{playlist_creator_id}\n")
-            # f.write(f"{idx}. https://open.spotify.com/playlist/{playlist_id} by https://open.spotify.com/user/{playlist_creator_id}, Top Genres: {
-            #         playlist_top_genres}, Items: {', '.join(playlist_items)}, Artists: {', '.join(set(artist_names))}\n")
-        f.write('\nSONGS - PLAYLIST RELATION\n')
+            f.write(f"{idx}. Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
+                    playlist_top_genres}, Items: {', '.join(playlist_items)}, Artists: {', '.join(set(artist_names))}\n")
+
+        f.write('\nCATEGORIZED PLAYLISTS\n')
         for input_id, playlists in categorized_playlists.items():
             song_name = next(
                 (s[1] for s in songs_info if s[0] == input_id), "Unknown")
@@ -123,13 +130,11 @@ def cf(ids):
                 artist_names_str = ', '.join(
                     set(artist_names) - unique_artists_written)
                 if artist_names_str:
-                    f.write(f"  - https://open.spotify.com/playlist/{
-                            playlist_id} by https://open.spotify.com/user/{playlist_creator_id}\n")
-                    # f.write(f"  - https://open.spotify.com/playlist/{playlist_id} by https://open.spotify.com/user/{playlist_creator_id}, Top Genres: {
-                    #         playlist_top_genres}, Artists: {artist_names_str}\n")
+                    f.write(f"  - Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
+                            playlist_top_genres}, Artists: {artist_names_str}\n")
                     unique_artists_written.update(artist_names)
 
-        f.write('\nEXTRACTED SONGS (RECOMMENDATION)\n')
+        f.write('\nSONGS FROM CATEGORIZED PLAYLISTS\n')
         for input_id, songs in songs_by_input.items():
             song_name = next(
                 (s[1] for s in songs_info if s[0] == input_id), "Unknown")
