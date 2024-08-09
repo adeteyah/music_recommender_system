@@ -85,8 +85,8 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     cursor.execute(query)
     songs = cursor.fetchall()
 
-    # Filter out inputted IDs and ensure only two songs per artist, excluding same artist and song names
-    seen_artists = {}
+    # Filter out inputted IDs and ensure only one song per artist, excluding same artist and song names
+    seen_artists = set()
     seen_song_artist_names = {(normalize_song_name(info[1]), info[3].lower(
     )) for info in inputted_songs}  # (normalized_song_name, artist_name)
     filtered_songs = []
@@ -105,15 +105,8 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
         if song_artist_pair in seen_song_artist_pairs:
             continue
 
-        # Check if the artist has already added two songs
-        if artist_ids in seen_artists:
-            if seen_artists[artist_ids] >= 2:
-                continue
-            seen_artists[artist_ids] += 1
-        else:
-            seen_artists[artist_ids] = 1
-
         filtered_songs.append(song)
+        seen_artists.add(artist_ids)
         seen_song_artist_pairs.add(song_artist_pair)
 
     # Sort songs by similarity
@@ -169,6 +162,6 @@ def cbf(ids):
 
 
 if __name__ == "__main__":
-    ids = ['5Z2DNRAhs6r4VdINVkRhYY', '6YFzL1910P0fRFh865HmI3',
-           '1zxfRSZcaonV1VXcY0PgY5', '6LF44wAs3h0K67RitTAfr5', '65fpYBrI8o2cfrwf2US4gq']
+    ids = ['1yKAqZoi8xWGLCf5vajroL',
+           '5VGlqQANWDKJFl0MBG3sg2', '0lP4HYLmvowOKdsQ7CVkuq']
     cbf(ids)
