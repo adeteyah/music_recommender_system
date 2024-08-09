@@ -59,10 +59,16 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
 
     conditions_sql = ' AND '.join(feature_conditions)
 
-    # Extract first two genres from input song genres
+    # Extract first genre as mandatory and second genre as optional
     input_genres = inputted_songs[0][4].split(',')[:2]  # Take first two genres
-    genre_conditions = ' OR '.join(
-        [f"a.artist_genres LIKE '%{genre.strip()}%'" for genre in input_genres])
+    mandatory_genre = input_genres[0].strip()
+    optional_genre = input_genres[1].strip() if len(input_genres) > 1 else None
+
+    # Genre conditions
+    genre_conditions = f"a.artist_genres LIKE '%{mandatory_genre}%'"
+    if optional_genre:
+        genre_conditions += f" AND (a.artist_genres LIKE '%{
+            mandatory_genre}%' OR a.artist_genres LIKE '%{optional_genre}%')"
 
     # Combine feature conditions with genre filtering
     combined_conditions_sql = f"{conditions_sql} AND ({genre_conditions})"
