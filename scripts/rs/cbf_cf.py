@@ -9,6 +9,7 @@ config.read('config.cfg')
 MODEL = 'Content-based Filtering - Collaborative Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cbf_cf_output']
+N_RESULT = int(config['rs']['cbf_cf_limit_track'])
 CBF_FEATURES = config['rs']['cbf_features'].split(', ')
 REAL_BOUND_VAL = float(config['rs']['cbf_real_bound'])
 INTEGER_BOUND_VAL = int(config['rs']['cbf_integer_bound'])
