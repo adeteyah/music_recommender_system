@@ -293,8 +293,9 @@ def process_playlist(playlist_id):
 
 
 if __name__ == '__main__':
-    playlist_ids = ['4baOzx2YK9GySzMNDLVWUo', '1vjcIxatKz6794oJOZlegn', '5nFFSzOiBIhZIMeT4G8cRA', '208oh1YKszRsSW7Jf3jfcC', '71BHBFtI7gkR7LuUwpDXM9', '7GWUkxZPIep6ldxFeZDBzv', '53PjvXmJwR9f1PyeQJjbTq', '4qskHJgbhpK6PlAwJ827ZX', '3jdDGwd346YV0EEzogVa4S',
-                    '0NVIRzGi5tF0fz7F7uqtRe', '2EoheVFjqIxgJMb8VnDRtZ', '0S2dMUap6RL4C1lv0IntzT', '4fYgp8att0vhdRWZoTUUWu', '0M5ovmRC1KXlHCEf91t2Zj', '5V5dFZI713NfATCULuZNUE', '6Z05FMYGnZxTzxU9AZRsWA', '3Ir5YWemOTGRRfXgROrsDV', '5PoSBkMZayOGwSsqd0eFfh']
+    playlist_ids = ['1wlcbdQwkltllE502f3uPr', '6MnLPuVGrV1MH0f2s4FkjB', '2nzVCXza1cHdl0jk7vmdNQ', '7qeSVsb8qaRlU49JhlLANt', '49qtYZo1UzUaghvZ2QuQMs', '2IBj89LQ0QR55Gf0HCbEyt',
+                    '4VpMhGgwJ8r8EDGTDTbeer', '1V4QL33vsALvljElabTpxq', '0VTTnJgEPcBYWKddDZ7iwo', '0s6CEeemXPec7wUMStvJQP', '11X76c5MphTG1VgKmC7hgb', '4cIPf8YIp2U9XltRhBox7t', '2ZpSU8WHjNcNqsRWoBqHNg']
+
     for playlist_id in playlist_ids:
         process_playlist(playlist_id)
 
