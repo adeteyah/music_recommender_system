@@ -50,6 +50,7 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     feature_conditions = []
     for i, feature in enumerate(features):
         feature_name = feature.split('.')[-1]
+        # Use specific bound if defined, else use general bound
         bound_val = SEPARATE_BOUNDS.get(feature_name, REAL_BOUND_VAL)
         lower_bound = input_audio_features[i] - bound_val
         upper_bound = input_audio_features[i] + bound_val
@@ -64,16 +65,10 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     optional_genre = input_genres[1].strip() if len(input_genres) > 1 else None
 
     # Genre conditions
-    genre_conditions = f"(a.artist_genres LIKE '%,{mandatory_genre},%' OR " \
-        f"a.artist_genres LIKE '{mandatory_genre},%' OR " \
-        f"a.artist_genres LIKE '%,{mandatory_genre}' OR " \
-        f"a.artist_genres = '{mandatory_genre}')"
-
+    genre_conditions = f"a.artist_genres LIKE '%{mandatory_genre}%'"
     if optional_genre:
-        genre_conditions += f" AND (a.artist_genres LIKE '%,{optional_genre},%' OR " \
-            f"a.artist_genres LIKE '{optional_genre},%' OR " \
-            f"a.artist_genres LIKE '%,{optional_genre}' OR " \
-            f"a.artist_genres = '{optional_genre}')"
+        genre_conditions += f" AND (a.artist_genres LIKE '%{
+            mandatory_genre}%' OR a.artist_genres LIKE '%{optional_genre}%')"
 
     # Combine feature conditions with genre filtering
     combined_conditions_sql = f"{conditions_sql} AND ({genre_conditions})"
@@ -100,6 +95,7 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     for song in songs:
         song_id, song_name, artist_ids, artist_name, artist_genres = song[:5]
 
+        # Use placeholders if artist_name or artist_ids is None
         normalized_name = normalize_song_name(
             song_name) if song_name else 'N/A'
         artist_name_lower = (artist_name or 'N/A').lower()
@@ -108,10 +104,12 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
         if song_id in inputted_ids or (normalized_name, artist_name_lower) in seen_song_artist_names:
             continue
 
+        # Normalize and use case insensitive comparison
         song_artist_pair = (normalized_name, artist_name_lower)
         if song_artist_pair in seen_song_artist_pairs:
             continue
 
+        # Check if the artist has already added two songs
         if artist_ids in seen_artists:
             if seen_artists[artist_ids] >= 2:
                 continue
@@ -179,6 +177,6 @@ def cbf(ids):
 
 
 if __name__ == "__main__":
-    ids = ['1ZPVEo8RfmrEz8YAD5n6rW',
-           '1QLZjY2AUftrVR7I3E0c4J', '37HhnXqIRFSSJXWsysl6B7']
+    ids = ['5Z2DNRAhs6r4VdINVkRhYY', '6YFzL1910P0fRFh865HmI3',
+           '1zxfRSZcaonV1VXcY0PgY5', '6LF44wAs3h0K67RitTAfr5', '65fpYBrI8o2cfrwf2US4gq']
     cbf(ids)
