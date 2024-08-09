@@ -127,10 +127,9 @@ def cf(ids):
             for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names in playlists:
                 artist_names_str = ', '.join(
                     set(artist_names) - unique_artists_written)
-                if artist_names_str:
-                    f.write(f"  - Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
-                            playlist_top_genres}, Artists: {artist_names_str}\n")
-                    unique_artists_written.update(artist_names)
+                f.write(f"  - Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
+                        playlist_top_genres}, Artists: {artist_names_str}\n")
+                unique_artists_written.update(artist_names)
 
         f.write('\nSONGS FROM CATEGORIZED PLAYLISTS\n')
         for artist, songs in songs_by_input.items():
@@ -139,10 +138,9 @@ def cf(ids):
                 songs.items(), key=lambda x: x[1], reverse=True)
             unique_artists_written = set()
             for (song_id, artist_name, song_name), count in sorted_songs:
-                if artist_name not in unique_artists_written:
-                    f.write(f"  - https://open.spotify.com/track/{song_id} {
-                            artist_name} - {song_name} | Count: {count}\n")
-                    unique_artists_written.add(artist_name)
+                f.write(f"  - https://open.spotify.com/track/{song_id} {
+                    artist_name} - {song_name} | Count: {count}\n")
+                unique_artists_written.add(artist_name)
 
     conn.close()
     print(f'Result for {MODEL} stored at {OUTPUT_PATH}')
