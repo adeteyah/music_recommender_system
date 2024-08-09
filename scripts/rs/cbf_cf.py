@@ -269,12 +269,3 @@ if __name__ == "__main__":
         '5dTHtzHFPyi8TlTtzoz1J9',
     ]
     cbf_cf(ids)
-
-if __name__ == "__main__":
-    ids = [
-        '1BxfuPKGuaTgP7aM0Bbdwr',
-        '4xqrdfXkTW4T0RauPLv3WA',
-        '7JIuqL4ZqkpfGKQhYlrirs',
-        '5dTHtzHFPyi8TlTtzoz1J9',
-    ]
-    cbf_cf(ids)
