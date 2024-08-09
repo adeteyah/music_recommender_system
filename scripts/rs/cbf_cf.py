@@ -9,7 +9,7 @@ config.read('config.cfg')
 MODEL = 'Content-based Filtering - Collaborative Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cbf_cf_output']
-N_RESULT = int(config['rs']['cbf_cf_limit_track'])
+N_RESULT = int(config['rs']['cbf_n_result'])
 CBF_FEATURES = config['rs']['cbf_features'].split(', ')
 REAL_BOUND_VAL = float(config['rs']['cbf_real_bound'])
 INTEGER_BOUND_VAL = int(config['rs']['cbf_integer_bound'])
@@ -262,6 +262,10 @@ def cbf_cf(ids):
 
 
 if __name__ == "__main__":
-    ids = ['1yKAqZoi8xWGLCf5vajroL',
-           '5VGlqQANWDKJFl0MBG3sg2', '0lP4HYLmvowOKdsQ7CVkuq']
+    ids = [
+        '1BxfuPKGuaTgP7aM0Bbdwr',
+        '4xqrdfXkTW4T0RauPLv3WA',
+        '7JIuqL4ZqkpfGKQhYlrirs',
+        '5dTHtzHFPyi8TlTtzoz1J9',
+    ]
     cbf_cf(ids)

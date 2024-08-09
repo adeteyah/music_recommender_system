@@ -10,7 +10,7 @@ config.read('config.cfg')
 MODEL = 'Content-based Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cbf_output']
-N_RESULT = int(config['rs']['n_result'])
+N_RESULT = int(config['rs']['cbf_n_result'])
 
 # Extract features to use from config
 CBF_FEATURES = config['rs']['cbf_features'].split(',')
