@@ -1,7 +1,19 @@
 import re
 
 text = """
-https://open.spotify.com/playlist/4HR8Y0emDAiE1wM3XILoZP?si=f699ae306e084231  https://open.spotify.com/playlist/5KgQT9YWz3EqhIN4Jh69IU?si=1dbc1a66fe924bbb https://open.spotify.com/playlist/0PtjYd3OYwJ6CvzdLJVoP9?si=6631554bbead4a9d https://open.spotify.com/playlist/4qiS6MsylP3SQhfAre2O9g?si=f2cd31494cf949a4 https://open.spotify.com/playlist/7k30DQOSdd8qIQbhsxzsxV?si=9a7860f6cc7b4f23 https://open.spotify.com/playlist/0RxrVAVY0Bz067UajBMYPS?si=d4a76702455a4728 https://open.spotify.com/playlist/73n5eYkmp0xA46hPXg4AJ5?si=11011d44732f4907 https://open.spotify.com/playlist/6h8B6q9PumfbQFf6gJ2zqI?si=4df1e0814c7b478f https://open.spotify.com/playlist/08VwBRNVGPcF0vT5uKAHtT?si=361efc0c8aac4f9d https://open.spotify.com/playlist/3l5y0IdNtMYFf4YEqQjWj2?si=752c279895424bf1 https://open.spotify.com/playlist/49i2nsUghVlzKOnNJtzhkJ?si=348b718d9323403a https://open.spotify.com/playlist/4wkCgQR6AQ3F1yKfXsVfo6?si=3f7d5457c4b046eb https://open.spotify.com/playlist/4ShulrGSaVc6ZvbLzuegYK?si=5d854845043f40c9 https://open.spotify.com/playlist/6bd0a0UHF8wGthySFrxRFg?si=b397d265e24841ca
+https://open.spotify.com/playlist/7AymJjcD9CtBdMC4ZUuged  https://open.spotify.com/playlist/32ekZ7VXPoIHR7FCNiVECb https://open.spotify.com/playlist/30dp1rWpmhVWEZlkfuqXDv https://open.spotify.com/playlist/1YLFtO5vLHVLYt4i4wsOkx https://open.spotify.com/playlist/15ToYP7ia1JWHSfKwW68to https://open.spotify.com/playlist/2yeKkjKNOdzjIZ2f1Gt6X7 https://open.spotify.com/playlist/69IO1ED0vH69LI7Vl9ZrrN https://open.spotify.com/playlist/37i9dQZF1E4xGmYXXidXaI https://open.spotify.com/playlist/1mIWX9oxhMxd2heXLJsrfA?utm_content=buffer9e0b8&u=&_php=1 https://open.spotify.com/playlist/091MAEH2NKjAQZ9r4SspDs https://open.spotify.com/playlist/637J6DekptsyQe2q2OK3m2 https://open.spotify.com/playlist/4XAmKNfoyCGNt9Z7zTAOmJ https://open.spotify.com/playlist/2jpPcsDR7qb9xgGF1DyGoU https://open.spotify.com/playlist/0DrkxNbmDUz43nIUkMQnEO https://open.spotify.com/playlist/5ijJgOVBwjzHec1Jgexu4t https://open.spotify.com/playlist/3tOHJZkUC4LtqQbREhuDDG https://open.spotify.com/playlist/34N0gsSTrlGM2Hx83f9l1k https://open.spotify.com/playlist/39tv8YyHEVv3KahBgnFgu0 https://open.spotify.com/playlist/55M6sFoow7KjS9tz0CSZxw https://open.spotify.com/playlist/4KfO6J8jj2Jqjlq9YaVyzm https://open.spotify.com/playlist/0dXFgLEEjRr9t8Wa10xEog https://open.spotify.com/playlist/5gos3UzDEqKzFwhHckA3n3
+
+
+
+
+
+
+
+
+
+
+
+
 """
 user_pattern = re.compile(
     r"playlist/([a-zA-Z0-9]+)")
