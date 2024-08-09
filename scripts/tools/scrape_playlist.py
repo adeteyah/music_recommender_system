@@ -282,9 +282,10 @@ def process_playlist(playlist_id):
 
             cursor.execute('''
                 INSERT OR REPLACE INTO playlists (
-                    playlist_id, playlist_creator_id, playlist_original_items
-                ) VALUES (?, ?, ?)
-            ''', (playlist_id, creator_id, total_tracks))
+                    playlist_id, playlist_creator_id, playlist_original_items, 
+                    playlist_top_artist_ids
+                ) VALUES (?, ?, ?, ?)
+            ''', (playlist_id, creator_id, total_tracks, ','.join(unique_artist_ids)))
             conn.commit()
 
             existing_playlists.add(playlist_id)
@@ -297,8 +298,7 @@ def process_playlist(playlist_id):
 
 
 if __name__ == '__main__':
-    playlist_ids = ['50KJWq4mpnUwofCDysvreU', '0tNebzSnS9Ypx4Jj0XuWjC', '04rREDiHtruOKqq4zSl4H8', '5cyDpvbfBQmLSJOQwTqWQk', '5NWD2pOGBYtcOG4kvHM4fu', '5KcSmqijnFDyFTqDdr4QNz', '27guQWIZg4kArVFff7BsjF', '0w5O7O6RVk479XrVyosLSH',
-                    '2aE3crv7lrl4VMdsR7g8Oz', '13CGS5YwiFvMyK3nhV65zH', '4QdDFN4F3GcHllBt2loOw3', '4nw4ZMYkoPoZu4HYdkN7VJ', '7DgPQwzEoUVfQYBiMLER9Z', '3s0PAK76prh5be8UhW7sfD', '2XXdE3Nboq3b6KTuBU47Z2', '1GXRoQWlxTNQiMNkOe7RqA']
+    playlist_ids = []
     for playlist_id in playlist_ids:
         process_playlist(playlist_id)
 
