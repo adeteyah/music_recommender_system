@@ -42,10 +42,8 @@ def get_related_playlists(conn, inputted_ids):
     related_playlists = []
     for playlist in playlists:
         playlist_id, playlist_creator_id, playlist_top_genres, playlist_items = playlist
-        # Assuming playlist_items is a comma-separated string of song_ids
         playlist_items_list = playlist_items.split(',')
 
-        # Check if any inputted IDs are in the playlist
         if any(song_id in inputted_ids for song_id in playlist_items_list):
             artist_names = set()
             for song_id in playlist_items_list:
@@ -65,22 +63,12 @@ def get_related_playlists(conn, inputted_ids):
     return related_playlists
 
 
-def categorize_playlists(playlists, inputted_artists):
-    artist_to_playlists = {artist: [] for artist in inputted_artists}
-
-    for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names in playlists:
-        for artist in artist_names:
-            if artist in inputted_artists:
-                artist_to_playlists[artist].append(
-                    (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names))
-
+def categorize_playlists(playlists):
     categorized_playlists = []
-    for artist, playlists in artist_to_playlists.items():
-        if playlists:  # Only include artists with related playlists
-            # Remove duplicate playlists
-            unique_playlists = {p[0]: p for p in playlists}.values()
-            categorized_playlists.append((artist, list(unique_playlists)))
-
+    for playlist in playlists:
+        playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names = playlist
+        categorized_playlists.append(
+            (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names))
     return categorized_playlists
 
 
@@ -89,15 +77,14 @@ def extract_songs_from_playlists(categorized_playlists, conn, inputted_ids, inpu
     inputted_songs_set = {(artist_name, song_name)
                           for _, song_name, _, artist_name, _ in inputted_songs}
 
-    for artist, playlists in categorized_playlists:
-        for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names in playlists:
-            for song_id in playlist_items:
-                song_info = get_song_info(conn, song_id)
-                if song_info and song_id not in inputted_ids:
-                    _, song_name, artist_ids, artist_name, _ = song_info
-                    if (artist_name, song_name) not in inputted_songs_set:
-                        artist_song_count[artist][(
-                            song_id, artist_name, song_name)] += 1
+    for _, _, _, playlist_items, artist_names in categorized_playlists:
+        for song_id in playlist_items:
+            song_info = get_song_info(conn, song_id)
+            if song_info and song_id not in inputted_ids:
+                _, song_name, artist_ids, artist_name, _ = song_info
+                if (artist_name, song_name) not in inputted_songs_set:
+                    artist_song_count[artist_name][(
+                        song_id, artist_name, song_name)] += 1
 
     return artist_song_count
 
@@ -117,8 +104,7 @@ def cf(ids):
     inputted_artists = set(artist_name for _, _, _,
                            artist_name, _ in songs_info)
     related_playlists = get_related_playlists(conn, inputted_ids)
-    categorized_playlists = categorize_playlists(
-        related_playlists, inputted_artists)
+    categorized_playlists = categorize_playlists(related_playlists)
     artist_song_count = extract_songs_from_playlists(
         categorized_playlists, conn, inputted_ids, songs_info)
 
@@ -129,46 +115,34 @@ def cf(ids):
             output_line = f"{idx}. https://open.spotify.com/track/{song_id} {
                 artist_name} - {song_name} | Genre: {artist_genres}"
             f.write(output_line + '\n')
+
         f.write('\nRELATED PLAYLISTS\n')
         for idx, playlist in enumerate(related_playlists, 1):
             playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names = playlist
             playlist_items_str = ', '.join(playlist_items)
-            # Ensure unique artist names
             artist_names_str = ', '.join(set(artist_names))
             output_line = f"{idx}. Playlist ID: {playlist_id}, Creator ID: {playlist_creator_id}, Top Genres: {
                 playlist_top_genres}, Items: {playlist_items_str}, Artists: {artist_names_str}"
             f.write(output_line + '\n')
 
         f.write('\nCATEGORIZED PLAYLISTS\n')
-        for artist, playlists in categorized_playlists:
-            category_name = format_artist_category(artist, songs_info)
-            f.write(f'{category_name}\n')
-            unique_artists_written = set()
-            for playlist in playlists:
-                playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names = playlist
-                # Only show unique artists
-                artist_names_str = ', '.join(
-                    set(artist_names) - unique_artists_written)
-                if artist_names_str:  # Only write if there's something to write
-                    output_line = f"  - Playlist ID: {playlist_id}, Creator ID: {
-                        playlist_creator_id}, Top Genres: {playlist_top_genres}, Artists: {artist_names_str}"
-                    f.write(output_line + '\n')
-                    # Mark these artists as written
-                    unique_artists_written.update(artist_names)
+        for playlist in categorized_playlists:
+            playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names = playlist
+            output_line = f"  - Playlist ID: {playlist_id}, Creator ID: {
+                playlist_creator_id}, Top Genres: {playlist_top_genres}, Artists: {', '.join(artist_names)}"
+            f.write(output_line + '\n')
 
         f.write('\nSONGS FROM CATEGORIZED PLAYLISTS\n')
         for artist, songs in artist_song_count.items():
-            category_name = format_artist_category(artist, songs_info)
-            f.write(f'{category_name}\n')
+            f.write(f'{artist}\n')
             sorted_songs = sorted(
                 songs.items(), key=lambda x: x[1], reverse=True)
             unique_artists_written = set()
             for (song_id, artist_name, song_name), count in sorted_songs:
-                if artist_name not in unique_artists_written:  # Only write unique artists
+                if artist_name not in unique_artists_written:
                     output_line = f"  - https://open.spotify.com/track/{
                         song_id} {artist_name} - {song_name} | Count: {count}"
                     f.write(output_line + '\n')
-                    # Mark this artist as written
                     unique_artists_written.add(artist_name)
 
     conn.close()
