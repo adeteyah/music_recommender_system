@@ -63,9 +63,9 @@ def categorize_playlists(related_playlists, inputted_ids, inputted_artists):
     categorized_playlists = defaultdict(list)
 
     for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names in related_playlists:
-        for song_id in playlist_items:
-            if song_id in inputted_ids:
-                categorized_playlists[song_id].append(
+        for artist_name in artist_names:
+            if artist_name in inputted_artists:
+                categorized_playlists[artist_name].append(
                     (playlist_id, playlist_creator_id,
                      playlist_top_genres, playlist_items, artist_names)
                 )
@@ -76,7 +76,7 @@ def categorize_playlists(related_playlists, inputted_ids, inputted_artists):
 def extract_songs_from_playlists(categorized_playlists, cursor, inputted_ids, inputted_artists):
     song_count_by_input = defaultdict(Counter)
 
-    for input_id, playlists in categorized_playlists.items():
+    for artist, playlists in categorized_playlists.items():
         for _, _, _, playlist_items, artist_names in playlists:
             for song_id in playlist_items:
                 if song_id not in inputted_ids:
@@ -91,7 +91,7 @@ def extract_songs_from_playlists(categorized_playlists, cursor, inputted_ids, in
                             count_increment += 1  # Increment by 1 if just the same artist
 
                         if count_increment > 0:
-                            song_count_by_input[input_id][(
+                            song_count_by_input[artist][(
                                 song_id, artist_name, song_name)] += count_increment
 
     return song_count_by_input
@@ -121,10 +121,8 @@ def cf(ids):
                     playlist_top_genres}, Items: {', '.join(playlist_items)}, Artists: {', '.join(set(artist_names))}\n")
 
         f.write('\nCATEGORIZED PLAYLISTS\n')
-        for input_id, playlists in categorized_playlists.items():
-            song_name = next(
-                (s[1] for s in songs_info if s[0] == input_id), "Unknown")
-            f.write(f"{input_id} - {song_name}\n")
+        for artist, playlists in categorized_playlists.items():
+            f.write(f"{artist}\n")
             unique_artists_written = set()
             for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items, artist_names in playlists:
                 artist_names_str = ', '.join(
@@ -135,10 +133,8 @@ def cf(ids):
                     unique_artists_written.update(artist_names)
 
         f.write('\nSONGS FROM CATEGORIZED PLAYLISTS\n')
-        for input_id, songs in songs_by_input.items():
-            song_name = next(
-                (s[1] for s in songs_info if s[0] == input_id), "Unknown")
-            f.write(f"{input_id} - {song_name}\n")
+        for artist, songs in songs_by_input.items():
+            f.write(f"{artist}\n")
             sorted_songs = sorted(
                 songs.items(), key=lambda x: x[1], reverse=True)
             unique_artists_written = set()
