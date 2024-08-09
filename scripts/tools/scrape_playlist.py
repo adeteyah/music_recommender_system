@@ -19,9 +19,9 @@ config.read('config.cfg')
 DB = config['rs']['db_path']
 CLIENT_ID = config['api']['client_id']
 CLIENT_SECRET = config['api']['client_secret']
-DELAY_TIME = float(config['api']['delay_time'])
-N_MINIMUM = int(config['rs']['n_minimum_playlist_songs'])
-N_SCRAPE = int(config['rs']['n_scrape'])
+DELAY_TIME = float(config['scrape']['delay_time'])
+N_MINIMUM = int(config['scrape']['n_minimum_playlist_songs'])
+N_SCRAPE = int(config['scrape']['n_scrape'])
 
 # Spotify API credentials
 client_credentials_manager = SpotifyClientCredentials(
