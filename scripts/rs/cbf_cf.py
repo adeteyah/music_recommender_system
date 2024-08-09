@@ -262,10 +262,6 @@ def cbf_cf(ids):
 
 
 if __name__ == "__main__":
-    ids = [
-        '1BxfuPKGuaTgP7aM0Bbdwr',
-        '4xqrdfXkTW4T0RauPLv3WA',
-        '7JIuqL4ZqkpfGKQhYlrirs',
-        '5dTHtzHFPyi8TlTtzoz1J9',
-    ]
+    ids = ['1yKAqZoi8xWGLCf5vajroL',
+           '5VGlqQANWDKJFl0MBG3sg2', '0lP4HYLmvowOKdsQ7CVkuq']
     cbf_cf(ids)
