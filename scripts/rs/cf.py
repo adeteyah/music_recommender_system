@@ -109,8 +109,8 @@ def cf(ids):
             else:
                 sorted_songs = sorted(song_count.items(),
                                       key=lambda x: x[1], reverse=True)
-                for (song_id, artist_name, song_name), count in sorted_songs:
-                    f.write(f"  - https://open.spotify.com/track/{song_id} {
+                for song_idx, (song_id, artist_name, song_name), count in enumerate(sorted_songs, 1):
+                    f.write(f"{song_idx}. https://open.spotify.com/track/{song_id} {
                             artist_name} - {song_name} | Count: {count}\n")
 
     conn.close()
