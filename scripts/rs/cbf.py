@@ -10,10 +10,16 @@ DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cbf_output']
 CBF_FEATURES = config['rs']['cbf_features'].split(', ')
 REAL_BOUND_VAL = float(config['rs']['cbf_real_bound'])
-INTEGER_BOUND_VAL = int(config['rs']['cbf_integer_bound'])
+MODE_BOUND_VAL = int(config['rs']['cbf_mode_bound'])
+TIME_SIGNATURE_BOUND_VAL = int(config['rs']['cbf_time_signature_bound'])
+TEMPO_BOUND_VAL = float(config['rs']['cbf_tempo_bound'])
 
-# Define which features are integers
-INTEGER_FEATURES = {'tempo', 'time_signature', 'key', 'mode'}
+# Define specific bound values for features
+SEPARATE_BOUNDS = {
+    'mode': MODE_BOUND_VAL,
+    'time_signature': TIME_SIGNATURE_BOUND_VAL,
+    'tempo': TEMPO_BOUND_VAL
+}
 
 
 def get_song_info(conn, song_id, features):
@@ -35,11 +41,16 @@ def calculate_similarity(song_features, input_features):
 
 
 def get_similar_audio_features(conn, features, input_audio_features, inputted_ids, inputted_songs):
-    feature_conditions = [
-        f"{feature.split('.')[-1]} BETWEEN {input_audio_features[i] - (REAL_BOUND_VAL if feature.split('.')[-1] not in INTEGER_FEATURES else INTEGER_BOUND_VAL)
-                                            } AND {input_audio_features[i] + (REAL_BOUND_VAL if feature.split('.')[-1] not in INTEGER_FEATURES else INTEGER_BOUND_VAL)}"
-        for i, feature in enumerate(features)
-    ]
+    feature_conditions = []
+    for i, feature in enumerate(features):
+        feature_name = feature.split('.')[-1]
+        # Use specific bound if defined, else use general bound
+        bound_val = SEPARATE_BOUNDS.get(feature_name, REAL_BOUND_VAL)
+        lower_bound = input_audio_features[i] - bound_val
+        upper_bound = input_audio_features[i] + bound_val
+        feature_conditions.append(f"{feature_name} BETWEEN {
+                                  lower_bound} AND {upper_bound}")
+
     conditions_sql = ' AND '.join(feature_conditions)
 
     features_sql = ', '.join(features)
