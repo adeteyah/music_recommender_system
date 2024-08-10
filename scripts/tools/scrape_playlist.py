@@ -1,8 +1,6 @@
 import sqlite3
 import configparser
 import spotipy
-import time
-import collections
 from spotipy.oauth2 import SpotifyClientCredentials
 
 # Load configuration
@@ -17,6 +15,7 @@ DELAY_TIME = float(config['scrape']['delay_time'])
 # Spotify API credentials
 client_credentials_manager = SpotifyClientCredentials(
     client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
+
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 # Connect to SQLite database
