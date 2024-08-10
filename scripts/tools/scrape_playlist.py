@@ -67,23 +67,33 @@ def fetch_playlist_tracks(playlist_id):
 
 
 def fetch_track_details_and_audio_features(track_ids):
-    """Fetch track details and audio features."""
-    logger.info(f'Fetching track details and audio features for {
+    logger.info(f'Fetch track & af for {
                 len(track_ids)} tracks')
-    try:
-        tracks = sp.tracks(track_ids)['tracks']
-        audio_features = sp.audio_features(track_ids)
-        return [
-            (track['id'], track['name'], ','.join(artist['id'] for artist in track['artists']),
-             *[features[key] for key in [
-                 'acousticness', 'danceability', 'energy', 'instrumentalness',
-                 'key', 'liveness', 'loudness', 'mode', 'speechiness',
-                 'tempo', 'time_signature', 'valence']])
-            for track, features in zip(tracks, audio_features) if track and features
-        ]
-    except SpotifyException as e:
-        logger.error(f"Error fetching track details and audio features: {e}")
-        return []
+    valid_track_data = []
+
+    for track_id in track_ids:
+        try:
+            # Fetch track details and audio features for each individual track ID
+            track = sp.track(track_id)
+            features = sp.audio_features([track_id])[0]
+
+            if track and features:
+                track_data = (
+                    track['id'], track['name'],
+                    ','.join(artist['id'] for artist in track['artists']),
+                    *[features[key] for key in [
+                        'acousticness', 'danceability', 'energy', 'instrumentalness',
+                        'key', 'liveness', 'loudness', 'mode', 'speechiness',
+                        'tempo', 'time_signature', 'valence']]
+                )
+                valid_track_data.append(track_data)
+
+        except SpotifyException as e:
+            # Log the error and skip this track
+            logger.error(f"Can't fetch. Skipped. {
+                         track_id}: {e}")
+
+    return valid_track_data
 
 
 def fetch_artist_details(artist_id):
