@@ -4,26 +4,39 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
 # Load configuration
-config = configparser.ConfigParser()
-config.read('config.cfg')
 
+
+def load_config(config_file='config.cfg'):
+    config = configparser.ConfigParser()
+    config.read(config_file)
+    return config
+
+
+config = load_config()
 DB = config['rs']['db_path']
 CLIENT_ID = config['api']['client_id']
 CLIENT_SECRET = config['api']['client_secret']
 DELAY_TIME = float(config['scrape']['delay_time'])
 
-# Spotify API credentials
-client_credentials_manager = SpotifyClientCredentials(
-    client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
+# Initialize Spotify API credentials
 
-sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+
+def init_spotify(client_id, client_secret):
+    credentials_manager = SpotifyClientCredentials(
+        client_id=client_id, client_secret=client_secret)
+    return spotipy.Spotify(client_credentials_manager=credentials_manager)
+
+
+sp = init_spotify(CLIENT_ID, CLIENT_SECRET)
 
 # Connect to SQLite database
 conn = sqlite3.connect(DB)
 cursor = conn.cursor()
 
+# Load existing IDs from the database
 
-def load_existing_ids():
+
+def load_existing_ids(cursor):
     existing_songs = {row[0]
                       for row in cursor.execute('SELECT song_id FROM songs')}
     existing_artists = {row[0] for row in cursor.execute(
@@ -33,41 +46,51 @@ def load_existing_ids():
     return existing_songs, existing_artists, existing_playlists
 
 
-existing_songs, existing_artists, existing_playlists = load_existing_ids()
+existing_songs, existing_artists, existing_playlists = load_existing_ids(
+    cursor)
+
+# Insert song data into the database
 
 
-def insert_song(song_data):
+def insert_song(cursor, song_data):
     cursor.execute('''
         INSERT OR REPLACE INTO songs (song_id, song_name, artist_ids, acousticness, danceability, energy,
                                       instrumentalness, key, liveness, loudness, mode, speechiness, tempo,
                                       time_signature, valence)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (song_data['song_id'], song_data['song_name'], song_data['artist_ids'],
-          song_data['acousticness'], song_data['danceability'], song_data['energy'],
-          song_data['instrumentalness'], song_data['key'], song_data['liveness'],
-          song_data['loudness'], song_data['mode'], song_data['speechiness'],
-          song_data['tempo'], song_data['time_signature'], song_data['valence']))
-
+    ''', (
+        song_data['song_id'], song_data['song_name'], song_data['artist_ids'],
+        song_data['acousticness'], song_data['danceability'], song_data['energy'],
+        song_data['instrumentalness'], song_data['key'], song_data['liveness'],
+        song_data['loudness'], song_data['mode'], song_data['speechiness'],
+        song_data['tempo'], song_data['time_signature'], song_data['valence']
+    ))
     existing_songs.add(song_data['song_id'])  # Add to existing_songs set
 
+# Insert artist data into the database
 
-def insert_artist(artist):
+
+def insert_artist(cursor, artist):
     cursor.execute('''
         INSERT OR REPLACE INTO artists (artist_id, artist_name, artist_genres)
         VALUES (?, ?, ?)
     ''', artist)
     conn.commit()
 
+# Insert playlist data into the database
 
-def insert_playlist(playlist):
+
+def insert_playlist(cursor, playlist):
     cursor.execute('''
         INSERT INTO playlists (playlist_id, playlist_creator_id, playlist_original_items, playlist_items)
         VALUES (?, ?, ?, ?)
     ''', playlist)
     conn.commit()
 
+# Update playlist metadata in the database
 
-def update_playlist_metadata(playlist_id, metadata):
+
+def update_playlist_metadata(cursor, playlist_id, metadata):
     cursor.execute('''
         UPDATE playlists 
         SET playlist_items_fetched = ?, 
@@ -101,20 +124,20 @@ def update_playlist_metadata(playlist_id, metadata):
     ''', (*metadata, playlist_id))
     conn.commit()
 
+# Scrape Spotify playlist data
 
-def scrape(ids):
+
+def scrape_playlists(sp, cursor, ids):
     for playlist_id in ids:
-        try:
-            # Skip if playlist already exists
-            if playlist_id in existing_playlists:
-                print(f"Skipping playlist {playlist_id} as it already exists.")
-                continue
+        if playlist_id in existing_playlists:
+            print(f"Skipping playlist {playlist_id} as it already exists.")
+            continue
 
+        try:
             playlist = sp.playlist(playlist_id)
             playlist_creator_id = playlist['owner']['id']
             playlist_items = playlist['tracks']['items']
 
-            # Check if the playlist has at least 2 songs
             if len(playlist_items) < 2:
                 print(f"Skipping playlist {
                       playlist_id} because it has fewer than 2 songs.")
@@ -122,38 +145,28 @@ def scrape(ids):
 
             track_ids = []
             for item in playlist_items:
-                try:
-                    track = item['track']
-                    song_id = track['id']
-                    if not song_id:
-                        continue
+                track = item['track']
+                song_id = track['id']
 
-                    if song_id not in existing_songs:
-                        song_data = extract_song_data(track)
-                        if not song_data:
-                            continue
+                if song_id and song_id not in existing_songs:
+                    song_data = extract_song_data(sp, track)
+                    if song_data:
+                        insert_song(cursor, song_data)
 
-                        # Insert song data into the songs table
-                        insert_song(song_data)
-
-                    track_ids.append(song_id)
-                except Exception as e:
-                    print(f"Error processing song {song_id}: {e}")
-                    continue
+                track_ids.append(song_id)
 
             # Insert the playlist data
-            cursor.execute('''
-                INSERT INTO playlists (playlist_id, playlist_creator_id, playlist_original_items, playlist_items)
-                VALUES (?, ?, ?, ?)''', (playlist_id, playlist_creator_id, len(track_ids), ','.join(track_ids)))
-            conn.commit()
+            insert_playlist(cursor, (playlist_id, playlist_creator_id, len(
+                track_ids), ','.join(track_ids)))
             existing_playlists.add(playlist_id)
 
         except Exception as e:
             print(f"Error processing playlist {playlist_id}: {e}")
-            continue
+
+# Extract song data from Spotify API response
 
 
-def extract_song_data(track):
+def extract_song_data(sp, track):
     try:
         song_id = track['id']
         song_data = {
@@ -186,18 +199,20 @@ def extract_song_data(track):
         print(f"Error extracting song data: {e}")
         return None
 
+# Calculate and update playlist metadata in the database
 
-def calculate_playlist_metadata(playlist_id):
-    # Fetch the playlist items
+
+def calculate_and_update_playlist_metadata(cursor, playlist_id):
     cursor.execute(
         'SELECT playlist_items FROM playlists WHERE playlist_id = ?', (playlist_id,))
     result = cursor.fetchone()
+
     if not result:
         print(f"Playlist {playlist_id} not found in database.")
         return
+
     song_ids = result[0].split(',')
 
-    # Fetch audio features for all songs in the playlist
     cursor.execute(f'''
         SELECT acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo,
                time_signature, valence, artist_ids
@@ -209,55 +224,18 @@ def calculate_playlist_metadata(playlist_id):
         print(f"No songs found for playlist {playlist_id}.")
         return
 
-    # Initialize min/max variables
-    min_acousticness, max_acousticness = float('inf'), float('-inf')
-    min_danceability, max_danceability = float('inf'), float('-inf')
-    min_energy, max_energy = float('inf'), float('-inf')
-    min_instrumentalness, max_instrumentalness = float('inf'), float('-inf')
-    min_key, max_key = float('inf'), float('-inf')
-    min_liveness, max_liveness = float('inf'), float('-inf')
-    min_loudness, max_loudness = float('inf'), float('-inf')
-    min_mode, max_mode = float('inf'), float('-inf')
-    min_speechiness, max_speechiness = float('inf'), float('-inf')
-    min_tempo, max_tempo = float('inf'), float('-inf')
-    min_time_signature, max_time_signature = float('inf'), float('-inf')
-    min_valence, max_valence = float('inf'), float('-inf')
-
-    # Collect artist and genre information
-    artist_counts = {}
-    genre_counts = {}
+    # Initialize min/max variables and other counters
+    min_max_values = {key: [float('inf'), float('-inf')] for key in
+                      ['acousticness', 'danceability', 'energy', 'instrumentalness', 'key', 'liveness', 'loudness',
+                       'mode', 'speechiness', 'tempo', 'time_signature', 'valence']}
+    artist_counts, genre_counts = {}, {}
 
     for row in rows:
-        acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo, time_signature, valence, artist_ids = row
+        for i, key in enumerate(min_max_values.keys()):
+            min_max_values[key][0] = min(min_max_values[key][0], row[i])
+            min_max_values[key][1] = max(min_max_values[key][1], row[i])
 
-        # Update min/max values
-        min_acousticness = min(min_acousticness, acousticness)
-        max_acousticness = max(max_acousticness, acousticness)
-        min_danceability = min(min_danceability, danceability)
-        max_danceability = max(max_danceability, danceability)
-        min_energy = min(min_energy, energy)
-        max_energy = max(max_energy, energy)
-        min_instrumentalness = min(min_instrumentalness, instrumentalness)
-        max_instrumentalness = max(max_instrumentalness, instrumentalness)
-        min_key = min(min_key, key)
-        max_key = max(max_key, key)
-        min_liveness = min(min_liveness, liveness)
-        max_liveness = max(max_liveness, liveness)
-        min_loudness = min(min_loudness, loudness)
-        max_loudness = max(max_loudness, loudness)
-        min_mode = min(min_mode, mode)
-        max_mode = max(max_mode, mode)
-        min_speechiness = min(min_speechiness, speechiness)
-        max_speechiness = max(max_speechiness, speechiness)
-        min_tempo = min(min_tempo, tempo)
-        max_tempo = max(max_tempo, tempo)
-        min_time_signature = min(min_time_signature, time_signature)
-        max_time_signature = max(max_time_signature, time_signature)
-        min_valence = min(min_valence, valence)
-        max_valence = max(max_valence, valence)
-
-        # Update artist and genre counts
-        artist_ids_list = artist_ids.split(',')
+        artist_ids_list = row[-1].split(',')
         for artist_id in artist_ids_list:
             cursor.execute(
                 'SELECT artist_genres FROM artists WHERE artist_id = ?', (artist_id,))
@@ -269,57 +247,28 @@ def calculate_playlist_metadata(playlist_id):
 
             artist_counts[artist_id] = artist_counts.get(artist_id, 0) + 1
 
-    # Find top 20 artists and genres
-    top_artists = sorted(artist_counts.items(),
-                         key=lambda x: x[1], reverse=True)[:20]
-    top_genres = sorted(genre_counts.items(),
-                        key=lambda x: x[1], reverse=True)[:20]
+    top_artists = ','.join([artist[0] for artist in sorted(
+        artist_counts.items(), key=lambda x: x[1], reverse=True)[:20]])
+    top_genres = ','.join([genre[0] for genre in sorted(
+        genre_counts.items(), key=lambda x: x[1], reverse=True)[:20]])
 
-    top_artist_ids = ','.join([artist[0] for artist in top_artists])
-    top_genres_list = ','.join([genre[0] for genre in top_genres])
+    metadata = (
+        top_artists, top_genres, len(song_ids),
+        *[value for min_max in min_max_values.values() for value in min_max]
+    )
 
-    # Update the playlist record with calculated values
-    cursor.execute('''
-        UPDATE playlists
-        SET playlist_top_artist_ids = ?, playlist_top_genres = ?, playlist_items_fetched = ?,
-            min_acousticness = ?, max_acousticness = ?,
-            min_danceability = ?, max_danceability = ?,
-            min_energy = ?, max_energy = ?,
-            min_instrumentalness = ?, max_instrumentalness = ?,
-            min_key = ?, max_key = ?,
-            min_liveness = ?, max_liveness = ?,
-            min_loudness = ?, max_loudness = ?,
-            min_mode = ?, max_mode = ?,
-            min_speechiness = ?, max_speechiness = ?,
-            min_tempo = ?, max_tempo = ?,
-            min_time_signature = ?, max_time_signature = ?,
-            min_valence = ?, max_valence = ?
-        WHERE playlist_id = ?
-    ''', (
-        top_artist_ids, top_genres_list, len(song_ids),
-        min_acousticness, max_acousticness,
-        min_danceability, max_danceability,
-        min_energy, max_energy,
-        min_instrumentalness, max_instrumentalness,
-        min_key, max_key,
-        min_liveness, max_liveness,
-        min_loudness, max_loudness,
-        min_mode, max_mode,
-        min_speechiness, max_speechiness,
-        min_tempo, max_tempo,
-        min_time_signature, max_time_signature,
-        min_valence, max_valence,
-        playlist_id
-    ))
-
-    conn.commit()
+    update_playlist_metadata(cursor, playlist_id, metadata)
     print(f"Metadata for playlist {playlist_id} updated successfully.")
 
 
+# Main script
 if __name__ == "__main__":
-    ids = ['77upN7XYbweAUVcT6xo5lf', '5i8Fva3ezh8kKdMusGaIAy', '1Pf8cB6QegbAsJft7hQliz', '7KZB37IRZcbNEIJkmDYJ4D', '3AbFZ7awkFbSRMdVG4a5Uh', '1y2AVgn8XHIyqUEsubUf8q', '2K3IS3uRGqWmfdXaMEvKZ3', '50BaWkucoch2d7htodVvWg', '6aPemTZ8bx1gS0StGKKSfh', '2FnzHLgRojDJSQCmMwOy0O', '0ml6XrpZyQoGwgF40Z4LUw', '1TGjEgeMreDuCD7itIBKQW', '1zvj5Ovu28GR32Z3ZWTO8Q', '1xK1dZC91G9qLUOoxeA4Sj', '1vQ4FvPya39ff8SOGK9Dg9', '42J1Kj66rheFPLlV793fG3', '1GqeSqiGBnxLhtRpi9jbPz', '3kxzsCC2VrJLDmmkC0jaQU', '4hMw676gBE47LgFJ9besjN', '1fqLr89HNgpxZtphGfQrE6', '2oNgpLgMohUn5vpRjSIl0b', '7imN9ra0n6ZYaVRIqJNu2I', '5dPnPC98nwQgpZhULp9BUS', '0YYq6IIdB6m1Ec5JS4FzAg', '7cZsaeIuICAFDAPyk4suYs', '2bWgQNbLBqzsbJrUKNYCkh', '4oeap4O7HfjrqytrZdmPwl',
-           '4iDP51wMIQzPbpa9VRUrU4', '4pq3UdlMTrvenmlwlMHgkn', '3jpYkBNkAf2xv9tzORrI7U', '2fyn0MY1s0hcZjV8PnJ0vH', '5zc4njUpVEIymv4C0RXA9R', '1Wq07CFac4Mk0JjbbxWTHP', '6XnoyH9CgZaG5zbuKg6FpA', '008nxlpV3qXI5lxcfhWsDh', '2o9kcl8dDvxfaWtOLJUV8T', '08YjRzE6G8B7qdv6hNSm4O', '2n3mF5TsR9zfKKVyJrE9nx', '4KRsDF7rO4vaK8njldLBnd', '6XeMKFSPpIzviyLuD3xLE7', '2Ommd0HYiS0Wq5Wknf4wNp', '1svlNVVQVzQQ1sD1vJzaX0', '7ii49QRHRrQwXjs9PG3Mqw', '73qDfNsm32OJm0rtrvw8ro', '5qXRKUDH4k2Z4mfegqHjTT', '17mIXPwdLS4piVL3OzSirt', '2pNAHMsOp4OUVej0foJqeY', '112T4NeLRFqIhR1LVonV95', '37i9dQZF1E8PVdOo3OE5nV', '3mgQE41HdgweMihea0NhJe', '1dykzQCgKyFpnmbZBZFVV0', '1hsKAP7tcyWccdmQHIxIqM', '29P60CHB8QNSjXGWE4jiDy', '7jIfLeouYwXSD1RlVE6Lvn', '5QHK4phckDgVxoDTBZZbck']
-    scrape(ids)
-    for playlist_id in ids:
-        calculate_playlist_metadata(playlist_id)
-        print(f"Updated metadata for playlist {playlist_id}")
+    playlist_ids = ['4oeap4O7HfjrqytrZdmPwl', '112T4NeLRFqIhR1LVonV95', '1zvj5Ovu28GR32Z3ZWTO8Q', '6aPemTZ8bx1gS0StGKKSfh', '5zc4njUpVEIymv4C0RXA9R', '3jpYkBNkAf2xv9tzORrI7U', '4pq3UdlMTrvenmlwlMHgkn', '2fyn0MY1s0hcZjV8PnJ0vH', '7cZsaeIuICAFDAPyk4suYs', '0ml6XrpZyQoGwgF40Z4LUw', '7KZB37IRZcbNEIJkmDYJ4D', '4hMw676gBE47LgFJ9besjN', '7ii49QRHRrQwXjs9PG3Mqw', '42J1Kj66rheFPLlV793fG3', '5i8Fva3ezh8kKdMusGaIAy', '1Wq07CFac4Mk0JjbbxWTHP', '1hsKAP7tcyWccdmQHIxIqM', '2oNgpLgMohUn5vpRjSIl0b', '1svlNVVQVzQQ1sD1vJzaX0', '77upN7XYbweAUVcT6xo5lf', '008nxlpV3qXI5lxcfhWsDh', '3kxzsCC2VrJLDmmkC0jaQU', '17mIXPwdLS4piVL3OzSirt', '1TGjEgeMreDuCD7itIBKQW', '1fqLr89HNgpxZtphGfQrE6', '0YYq6IIdB6m1Ec5JS4FzAg', '37i9dQZF1E8PVdOo3OE5nV',
+                    '4iDP51wMIQzPbpa9VRUrU4', '3AbFZ7awkFbSRMdVG4a5Uh', '50BaWkucoch2d7htodVvWg', '5dPnPC98nwQgpZhULp9BUS', '2bWgQNbLBqzsbJrUKNYCkh', '2n3mF5TsR9zfKKVyJrE9nx', '29P60CHB8QNSjXGWE4jiDy', '1dykzQCgKyFpnmbZBZFVV0', '1xK1dZC91G9qLUOoxeA4Sj', '1Pf8cB6QegbAsJft7hQliz', '2pNAHMsOp4OUVej0foJqeY', '2FnzHLgRojDJSQCmMwOy0O', '6XeMKFSPpIzviyLuD3xLE7', '5QHK4phckDgVxoDTBZZbck', '08YjRzE6G8B7qdv6hNSm4O', '1GqeSqiGBnxLhtRpi9jbPz', '4KRsDF7rO4vaK8njldLBnd', '1vQ4FvPya39ff8SOGK9Dg9', '73qDfNsm32OJm0rtrvw8ro', '2K3IS3uRGqWmfdXaMEvKZ3', '2Ommd0HYiS0Wq5Wknf4wNp', '7imN9ra0n6ZYaVRIqJNu2I', '1y2AVgn8XHIyqUEsubUf8q', '3mgQE41HdgweMihea0NhJe', '2o9kcl8dDvxfaWtOLJUV8T', '7jIfLeouYwXSD1RlVE6Lvn', '5qXRKUDH4k2Z4mfegqHjTT', '6XnoyH9CgZaG5zbuKg6FpA']
+    scrape_playlists(sp, cursor, playlist_ids)
+
+    # Assuming you want to calculate metadata for the same playlists after scraping
+    for playlist_id in playlist_ids:
+        calculate_and_update_playlist_metadata(cursor, playlist_id)
+
+    conn.close()
