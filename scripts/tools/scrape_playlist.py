@@ -185,43 +185,47 @@ def scrape(ids):
 
 
 def calculate_playlist_metadata(playlist_id):
-    # Fetch playlist items
+    # Fetch the playlist items
     cursor.execute(
-        "SELECT playlist_items FROM playlists WHERE playlist_id = ?", (playlist_id,))
+        'SELECT playlist_items FROM playlists WHERE playlist_id = ?', (playlist_id,))
     result = cursor.fetchone()
     if not result:
-        print(f"No playlist items found for playlist {playlist_id}.")
+        print(f"Playlist {playlist_id} not found in database.")
+        return
+    song_ids = result[0].split(',')
+
+    # Fetch audio features for all songs in the playlist
+    cursor.execute(f'''
+        SELECT acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo,
+               time_signature, valence, artist_ids
+        FROM songs WHERE song_id IN ({','.join(['?'] * len(song_ids))})
+    ''', song_ids)
+    rows = cursor.fetchall()
+
+    if not rows:
+        print(f"No songs found for playlist {playlist_id}.")
         return
 
-    playlist_items = result[0].split(',')
+    # Initialize min/max variables
+    min_acousticness, max_acousticness = float('inf'), float('-inf')
+    min_danceability, max_danceability = float('inf'), float('-inf')
+    min_energy, max_energy = float('inf'), float('-inf')
+    min_instrumentalness, max_instrumentalness = float('inf'), float('-inf')
+    min_key, max_key = float('inf'), float('-inf')
+    min_liveness, max_liveness = float('inf'), float('-inf')
+    min_loudness, max_loudness = float('inf'), float('-inf')
+    min_mode, max_mode = float('inf'), float('-inf')
+    min_speechiness, max_speechiness = float('inf'), float('-inf')
+    min_tempo, max_tempo = float('inf'), float('-inf')
+    min_time_signature, max_time_signature = float('inf'), float('-inf')
+    min_valence, max_valence = float('inf'), float('-inf')
 
-    if len(playlist_items) < 2:
-        print(f"Skipping metadata calculation for playlist {
-              playlist_id} as it has fewer than 2 songs.")
-        return
-
-    # Initialize min/max values
-    min_acousticness = min_danceability = min_energy = min_instrumentalness = float(
-        'inf')
-    max_acousticness = max_danceability = max_energy = max_instrumentalness = float(
-        '-inf')
-    min_key = min_liveness = min_loudness = min_mode = min_speechiness = min_tempo = min_time_signature = min_valence = float(
-        'inf')
-    max_key = max_liveness = max_loudness = max_mode = max_speechiness = max_tempo = max_time_signature = max_valence = float(
-        '-inf')
-
-    artist_genres = {}
+    # Collect artist and genre information
     artist_counts = {}
+    genre_counts = {}
 
-    # Process each song in the playlist
-    for song_id in playlist_items:
-        cursor.execute("SELECT * FROM songs WHERE song_id = ?", (song_id,))
-        song_data = cursor.fetchone()
-        if not song_data:
-            print(f"Song {song_id} not found in the songs table.")
-            continue
-
-        _, _, artist_ids, acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo, time_signature, valence = song_data
+    for row in rows:
+        acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo, time_signature, valence, artist_ids = row
 
         # Update min/max values
         min_acousticness = min(min_acousticness, acousticness)
@@ -249,30 +253,32 @@ def calculate_playlist_metadata(playlist_id):
         min_valence = min(min_valence, valence)
         max_valence = max(max_valence, valence)
 
-        # Count artist appearances and genres
-        for artist_id in artist_ids.split(','):
+        # Update artist and genre counts
+        artist_ids_list = artist_ids.split(',')
+        for artist_id in artist_ids_list:
             cursor.execute(
-                "SELECT artist_name, artist_genres FROM artists WHERE artist_id = ?", (artist_id,))
-            artist_info = cursor.fetchone()
-            if artist_info:
-                artist_name, genres = artist_info
-                artist_counts[artist_name] = artist_counts.get(
-                    artist_name, 0) + 1
+                'SELECT artist_genres FROM artists WHERE artist_id = ?', (artist_id,))
+            result = cursor.fetchone()
+            if result:
+                genres = result[0].split(',')
+                for genre in genres:
+                    genre_counts[genre] = genre_counts.get(genre, 0) + 1
 
-                if genres:
-                    for genre in genres.split(','):
-                        artist_genres[genre] = artist_genres.get(genre, 0) + 1
+            artist_counts[artist_id] = artist_counts.get(artist_id, 0) + 1
 
-    # Sort and select top 20 artists and genres
-    top_artists = sorted(
-        artist_counts, key=artist_counts.get, reverse=True)[:20]
-    top_genres = sorted(
-        artist_genres, key=artist_genres.get, reverse=True)[:20]
+    # Find top 20 artists and genres
+    top_artists = sorted(artist_counts.items(),
+                         key=lambda x: x[1], reverse=True)[:20]
+    top_genres = sorted(genre_counts.items(),
+                        key=lambda x: x[1], reverse=True)[:20]
 
-    # Update playlist metadata
+    top_artist_ids = ','.join([artist[0] for artist in top_artists])
+    top_genres_list = ','.join([genre[0] for genre in top_genres])
+
+    # Update the playlist record with calculated values
     cursor.execute('''
         UPDATE playlists
-        SET playlist_items_fetched = ?, playlist_top_artist_ids = ?, playlist_top_genres = ?,
+        SET playlist_top_artist_ids = ?, playlist_top_genres = ?, playlist_items_fetched = ?,
             min_acousticness = ?, max_acousticness = ?,
             min_danceability = ?, max_danceability = ?,
             min_energy = ?, max_energy = ?,
@@ -285,27 +291,40 @@ def calculate_playlist_metadata(playlist_id):
             min_tempo = ?, max_tempo = ?,
             min_time_signature = ?, max_time_signature = ?,
             min_valence = ?, max_valence = ?
-        WHERE playlist_id = ?''',
-                   (len(playlist_items), ','.join(top_artists), ','.join(top_genres),
-                    min_acousticness, max_acousticness,
-                    min_danceability, max_danceability,
-                    min_energy, max_energy,
-                    min_instrumentalness, max_instrumentalness,
-                    min_key, max_key,
-                    min_liveness, max_liveness,
-                    min_loudness, max_loudness,
-                    min_mode, max_mode,
-                    min_speechiness, max_speechiness,
-                    min_tempo, max_tempo,
-                    min_time_signature, max_time_signature,
-                    min_valence, max_valence,
-                    playlist_id))
+        WHERE playlist_id = ?
+    ''', (
+        top_artist_ids, top_genres_list, len(song_ids),
+        min_acousticness, max_acousticness,
+        min_danceability, max_danceability,
+        min_energy, max_energy,
+        min_instrumentalness, max_instrumentalness,
+        min_key, max_key,
+        min_liveness, max_liveness,
+        min_loudness, max_loudness,
+        min_mode, max_mode,
+        min_speechiness, max_speechiness,
+        min_tempo, max_tempo,
+        min_time_signature, max_time_signature,
+        min_valence, max_valence,
+        playlist_id
+    ))
+
     conn.commit()
+    print(f"Metadata for playlist {playlist_id} updated successfully.")
 
 
 if __name__ == "__main__":
-    ids = ['5reCpCSw8NgB5QjGILvrhX', '1Uon4YjxrFKECs3cxuq0s7', '3DtdtaTZfZPNEqttZ2vVG0', '70mJkUkq5bIP6w6BI25cov', '6mqJU05sWmXTuY1iO1RXmK', '7vq57TiBTpm5IMfiWs5PBh', '7E8T698a0KyfUuXyE5Wrve', '6vBkuOkhUAu77sBYdMAVDJ', '1YXxGeLWtd8qeHJTc6zW6u',
-           '5xl6pngUNTpJkMEcgq70an', '15NJtngbNqxyN47NV7ssXJ', '29xqS54FRT6qeWDXnYLwOE', '4BFbPoGAwZsEJJKW7c0IUF', '4yNUxofGRcnw7UknxONOYC', '3iuP5ovrQcGkfRtLk11zau', '2S9qc8q5xU9M9HtLWKHFRJ', '64L6MntymuqQRuif9nVM6c', '2JsYYV1eTQsHjznasUIaru', '4x9Id1MUfg681SR5tR40vV']
+    ids = [
+        '2pX1fAX4EkSb14SPHAZndB',
+        '0yEJHHdRIIWceGp0Rt1JT1',
+        '3oCfnySxTQekvcKUH40XVQ',
+        '1yBCx8xJgXEIJ9HrNvclr0',
+        '6z9SVGrNP6YtIqb6z9ESrZ',
+        '0T3gfPSkP2be5qHij1LOd5',
+        '1Hk4si22NV4TW0RDLcCdRG',
+        '5reCpCSw8NgB5QjGILvrhX',
+        '3DtdtaTZfZPNEqttZ2vVG0',
+        '70mJkUkq5bIP6w6BI25cov']
     scrape(ids)
     for playlist_id in ids:
         calculate_playlist_metadata(playlist_id)
