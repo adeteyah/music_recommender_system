@@ -28,12 +28,8 @@ client_credentials_manager = SpotifyClientCredentials(
     client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-# Connect to SQLite database
-conn = sqlite3.connect(DB)
-cursor = conn.cursor()
 
-
-def load_existing_ids():
+def load_existing_ids(cursor):
     existing_songs = {row[0]
                       for row in cursor.execute('SELECT song_id FROM songs')}
     existing_artists = {row[0] for row in cursor.execute(
@@ -43,29 +39,20 @@ def load_existing_ids():
     return existing_songs, existing_artists, existing_playlists
 
 
-existing_songs, existing_artists, existing_playlists = load_existing_ids()
-
-
-def fetch_playlist_tracks(playlist_id):
+def fetch_playlist_tracks(playlist_id, limit):
     logger.info(f'Fetching tracks from playlist {
-                playlist_id} with a limit of {N_SCRAPE} items')
+                playlist_id} with a limit of {limit} items')
     track_ids = []
-    limit = N_SCRAPE
 
     try:
-        results = sp.playlist_tracks(playlist_id)
-        while results and len(track_ids) < limit:
-            for item in results['items']:
-                track = item.get('track')
-                if track:
-                    track_id = track.get('id')
-                    if track_id:
-                        track_ids.append(track_id)
-                else:
-                    logger.warning(f'Unexpected track item structure: {item}')
-            if len(track_ids) >= limit or not results['next']:
-                break
+        results = sp.playlist_tracks(playlist_id, limit=limit)
+        track_ids = [item['track']['id'] for item in results['items']
+                     if item.get('track') and item['track'].get('id')]
+
+        while len(track_ids) < limit and results.get('next'):
             results = sp.next(results)
+            track_ids.extend([item['track']['id'] for item in results['items'] if item.get(
+                'track') and item['track'].get('id')])
             time.sleep(DELAY_TIME)
     except SpotifyException as e:
         logger.error(f"Error fetching playlist tracks: {e}")
@@ -76,17 +63,16 @@ def fetch_playlist_tracks(playlist_id):
 def fetch_track_details_and_audio_features(track_ids):
     logger.info(f'Fetching track details and audio features for {
                 len(track_ids)} tracks')
+
     try:
-        tracks = sp.tracks(track_ids)
+        tracks = sp.tracks(track_ids)['tracks']
         audio_features = sp.audio_features(track_ids)
 
         track_data = []
-        for track, features in zip(tracks['tracks'], audio_features):
+        for track, features in zip(tracks, audio_features):
             if not track or not features:
-                if not track:
-                    logger.warning(f"No track found for given ID.")
-                if not features:
-                    logger.warning(f"No audio features found for track ID.")
+                logger.warning(f"Missing track or audio features for track ID: {
+                               track.get('id', 'Unknown')}")
                 continue
 
             feature_values = [features[key] for key in [
@@ -96,14 +82,15 @@ def fetch_track_details_and_audio_features(track_ids):
 
             track_data.append((
                 track['id'], track['name'],
-                [artist['id'] for artist in track['artists']],
+                # Convert list to a comma-separated string
+                ','.join([artist['id'] for artist in track['artists']]),
                 *feature_values
             ))
 
         return track_data
     except SpotifyException as e:
         logger.error(f"Error fetching track details and audio features: {e}")
-        return None
+        return []
 
 
 def fetch_artist_details(artist_id):
@@ -116,21 +103,14 @@ def fetch_artist_details(artist_id):
         return None
 
 
-def record_exists(table_name, record_id):
-    cursor.execute(f'SELECT 1 FROM {table_name} WHERE {
-                   table_name[:-1]}_id = ?', (record_id,))
-    return cursor.fetchone() is not None
-
-
-def update_playlist_metrics(playlist_id, track_ids):
+def update_playlist_metrics(cursor, playlist_id, track_ids):
     logger.info(f'Updating metrics for playlist {playlist_id}')
     if not track_ids:
         return
 
-    track_details = []
-    for track_id in track_ids:
-        cursor.execute('SELECT * FROM songs WHERE song_id = ?', (track_id,))
-        track_details.append(cursor.fetchone())
+    cursor.execute('SELECT * FROM songs WHERE song_id IN ({})'.format(
+        ','.join(['?']*len(track_ids))), track_ids)
+    track_details = cursor.fetchall()
 
     artist_counts = Counter()
     genre_counts = Counter()
@@ -159,19 +139,8 @@ def update_playlist_metrics(playlist_id, track_ids):
 
     most_common_genres = set(genre for genre, _ in genre_counts.most_common(1))
 
-    minority_track_ids = set()
-    for details in track_details:
-        if details:
-            _, _, artist_ids, *features = details
-            artist_ids = artist_ids.split(',')
-            for artist_id in artist_ids:
-                cursor.execute(
-                    'SELECT artist_genres FROM artists WHERE artist_id = ?', (artist_id,))
-                artist_genres = cursor.fetchone()
-                if artist_genres:
-                    genres = set(artist_genres[0].split(','))
-                    if not genres & most_common_genres:
-                        minority_track_ids.add(details[0])
+    minority_track_ids = {details[0] for details in track_details if details and not set(cursor.execute(
+        'SELECT artist_genres FROM artists WHERE artist_id = ?', (details[2].split(',')[0],)).fetchone()[0].split(',')).intersection(most_common_genres)}
 
     filtered_track_ids = [
         track_id for track_id in track_ids if track_id not in minority_track_ids]
@@ -215,14 +184,9 @@ def update_playlist_metrics(playlist_id, track_ids):
         ','.join(filtered_track_ids),
         playlist_id
     ))
-    conn.commit()
-
-    cursor.execute(
-        'DELETE FROM playlists WHERE playlist_items is NULL OR playlist_items is NULL')
-    conn.commit()
 
 
-def process_playlist(playlist_id):
+def process_playlist(cursor, playlist_id, existing_songs, existing_artists, existing_playlists):
     logger.info(f'Processing playlist {playlist_id}')
     try:
         if playlist_id in existing_playlists:
@@ -234,72 +198,86 @@ def process_playlist(playlist_id):
         creator_id = playlist_details['owner']['id']
 
         if total_tracks >= N_MINIMUM:
-            track_ids = fetch_playlist_tracks(playlist_id)
+            track_ids = fetch_playlist_tracks(playlist_id, N_SCRAPE)
             new_song_ids = set()
-            valid_track_ids = []
 
-            unique_artist_ids = set()
-            tracks_to_fetch = []
-            for track_id in track_ids:
-                if track_id not in existing_songs:
-                    tracks_to_fetch.append(track_id)
-                valid_track_ids.append(track_id)
+            tracks_to_fetch = [
+                track_id for track_id in track_ids if track_id not in existing_songs]
 
             track_data = fetch_track_details_and_audio_features(
                 tracks_to_fetch)
 
             if track_data:
-                for track_details in track_data:
-                    song_id, song_name, artist_ids, *track_features = track_details
+                cursor.executemany('''
+                    INSERT OR REPLACE INTO songs (
+                        song_id, song_name, artist_ids, acousticness,
+                        danceability, energy, instrumentalness,
+                        key, liveness, loudness, mode,
+                        speechiness, tempo, time_signature, valence
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ''', track_data)
+                new_song_ids.update([track[0] for track in track_data])
+
+            new_artist_ids = set()
+
+            for track in track_data:
+                artist_ids = track[2].split(',')
+                new_artist_ids.update(artist_ids)
+
+            artists_to_fetch = [
+                artist_id for artist_id in new_artist_ids if artist_id not in existing_artists]
+
+            for artist_id in artists_to_fetch:
+                artist_details = fetch_artist_details(artist_id)
+                if artist_details:
                     cursor.execute('''
-                        INSERT OR REPLACE INTO songs (
-                            song_id, song_name, artist_ids, acousticness,
-                            danceability, energy, instrumentalness,
-                            key, liveness, loudness, mode,
-                            speechiness, tempo, time_signature, valence
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    ''', (song_id, song_name, ','.join(artist_ids), *track_features))
+                        INSERT OR REPLACE INTO artists (artist_id, artist_name, artist_genres)
+                        VALUES (?, ?, ?)
+                    ''', artist_details)
 
-                    new_song_ids.add(song_id)
-                    valid_track_ids.append(song_id)
-
-                    unique_artist_ids.update(artist_ids)
-
-                    for artist_id in artist_ids:
-                        if artist_id not in existing_artists:
-                            artist_details = fetch_artist_details(artist_id)
-                            if artist_details:
-                                cursor.execute('''
-                                    INSERT OR REPLACE INTO artists (
-                                        artist_id, artist_name, artist_genres
-                                    ) VALUES (?, ?, ?)
-                                ''', artist_details)
-                                existing_artists.add(artist_id)
-
-                    existing_songs.add(track_id)
-
-                time.sleep(DELAY_TIME)
+            update_playlist_metrics(cursor, playlist_id, track_ids)
 
             cursor.execute('''
                 INSERT OR REPLACE INTO playlists (
-                    playlist_id, playlist_creator_id, playlist_original_items
-                ) VALUES (?, ?, ?)
-            ''', (playlist_id, creator_id, total_tracks))
-            conn.commit()
-
-            existing_playlists.add(playlist_id)
-            update_playlist_metrics(playlist_id, valid_track_ids)
+                    playlist_id, playlist_name, playlist_description,
+                    creator_id, playlist_num_tracks, playlist_num_followers,
+                    playlist_top_artist_ids, playlist_top_genres,
+                    min_acousticness, max_acousticness, min_danceability, max_danceability,
+                    min_energy, max_energy, min_instrumentalness, max_instrumentalness,
+                    min_key, max_key, min_liveness, max_liveness,
+                    min_loudness, max_loudness, min_mode, max_mode,
+                    min_speechiness, max_speechiness, min_tempo, max_tempo,
+                    min_time_signature, max_time_signature, min_valence, max_valence,
+                    playlist_items_fetched, playlist_items
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                playlist_id, playlist_details['name'], playlist_details['description'],
+                creator_id, total_tracks, playlist_details['followers']['total'],
+                None, None, None, None, None, None, None, None, None, None, None, None,
+                None, None, None, None, None, None, None, None, None, None,
+                len(track_ids), ','.join(track_ids)
+            ))
         else:
-            logger.info(f"Playlist {playlist_id} has less than {
-                        N_MINIMUM} tracks and will be skipped.")
+            logger.info(f"Playlist with ID: {
+                        playlist_id} has less than the minimum required tracks.")
+
     except SpotifyException as e:
         logger.error(f"Error processing playlist {playlist_id}: {e}")
 
 
-if __name__ == '__main__':
-    playlist_ids = ['2JxUwUXaY8OhgfIuozMcG2', '3qCLY1QE58gwSrpRS18osm', '022fvQXuJQDeACz9mUkDFw', '2Wwoknwx4fyX8OpL8ePtNT',
-                    '7h3lfQ3r6XGAvbNM3kquXX', '4FcSwayjqyAnQytCzcnpIT', '2QxrPkOTlVdtY8HU0ohlNb', '4DhYEdh4Oj7CzijDcD99tk', '5vSCsBRotGGzEMI3lr9Kk6']
-    for playlist_id in playlist_ids:
-        process_playlist(playlist_id)
+def main():
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+        existing_songs, existing_artists, existing_playlists = load_existing_ids(
+            cursor)
 
-    logger.info("Processing completed.")
+        playlist_ids = ['your_playlist_ids']
+        for playlist_id in playlist_ids:
+            process_playlist(cursor, playlist_id, existing_songs,
+                             existing_artists, existing_playlists)
+
+        conn.commit()
+
+
+if __name__ == "__main__":
+    main()
