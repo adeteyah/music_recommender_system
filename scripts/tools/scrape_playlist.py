@@ -206,13 +206,12 @@ def calculate_and_update_playlist_metadata(cursor, playlist_id):
     cursor.execute(
         'SELECT playlist_items FROM playlists WHERE playlist_id = ?', (playlist_id,))
     result = cursor.fetchone()
-
     if not result:
         print(f"Playlist {playlist_id} not found in database.")
         return
-
     song_ids = result[0].split(',')
 
+    # Fetch audio features for all songs in the playlist
     cursor.execute(f'''
         SELECT acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo,
                time_signature, valence, artist_ids
@@ -224,18 +223,55 @@ def calculate_and_update_playlist_metadata(cursor, playlist_id):
         print(f"No songs found for playlist {playlist_id}.")
         return
 
-    # Initialize min/max variables and other counters
-    min_max_values = {key: [float('inf'), float('-inf')] for key in
-                      ['acousticness', 'danceability', 'energy', 'instrumentalness', 'key', 'liveness', 'loudness',
-                       'mode', 'speechiness', 'tempo', 'time_signature', 'valence']}
-    artist_counts, genre_counts = {}, {}
+    # Initialize min/max variables
+    min_acousticness, max_acousticness = float('inf'), float('-inf')
+    min_danceability, max_danceability = float('inf'), float('-inf')
+    min_energy, max_energy = float('inf'), float('-inf')
+    min_instrumentalness, max_instrumentalness = float('inf'), float('-inf')
+    min_key, max_key = float('inf'), float('-inf')
+    min_liveness, max_liveness = float('inf'), float('-inf')
+    min_loudness, max_loudness = float('inf'), float('-inf')
+    min_mode, max_mode = float('inf'), float('-inf')
+    min_speechiness, max_speechiness = float('inf'), float('-inf')
+    min_tempo, max_tempo = float('inf'), float('-inf')
+    min_time_signature, max_time_signature = float('inf'), float('-inf')
+    min_valence, max_valence = float('inf'), float('-inf')
+
+    # Collect artist and genre information
+    artist_counts = {}
+    genre_counts = {}
 
     for row in rows:
-        for i, key in enumerate(min_max_values.keys()):
-            min_max_values[key][0] = min(min_max_values[key][0], row[i])
-            min_max_values[key][1] = max(min_max_values[key][1], row[i])
+        acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo, time_signature, valence, artist_ids = row
 
-        artist_ids_list = row[-1].split(',')
+        # Update min/max values
+        min_acousticness = min(min_acousticness, acousticness)
+        max_acousticness = max(max_acousticness, acousticness)
+        min_danceability = min(min_danceability, danceability)
+        max_danceability = max(max_danceability, danceability)
+        min_energy = min(min_energy, energy)
+        max_energy = max(max_energy, energy)
+        min_instrumentalness = min(min_instrumentalness, instrumentalness)
+        max_instrumentalness = max(max_instrumentalness, instrumentalness)
+        min_key = min(min_key, key)
+        max_key = max(max_key, key)
+        min_liveness = min(min_liveness, liveness)
+        max_liveness = max(max_liveness, liveness)
+        min_loudness = min(min_loudness, loudness)
+        max_loudness = max(max_loudness, loudness)
+        min_mode = min(min_mode, mode)
+        max_mode = max(max_mode, mode)
+        min_speechiness = min(min_speechiness, speechiness)
+        max_speechiness = max(max_speechiness, speechiness)
+        min_tempo = min(min_tempo, tempo)
+        max_tempo = max(max_tempo, tempo)
+        min_time_signature = min(min_time_signature, time_signature)
+        max_time_signature = max(max_time_signature, time_signature)
+        min_valence = min(min_valence, valence)
+        max_valence = max(max_valence, valence)
+
+        # Update artist and genre counts
+        artist_ids_list = artist_ids.split(',')
         for artist_id in artist_ids_list:
             cursor.execute(
                 'SELECT artist_genres FROM artists WHERE artist_id = ?', (artist_id,))
@@ -247,17 +283,54 @@ def calculate_and_update_playlist_metadata(cursor, playlist_id):
 
             artist_counts[artist_id] = artist_counts.get(artist_id, 0) + 1
 
-    top_artists = ','.join([artist[0] for artist in sorted(
-        artist_counts.items(), key=lambda x: x[1], reverse=True)[:20]])
-    top_genres = ','.join([genre[0] for genre in sorted(
-        genre_counts.items(), key=lambda x: x[1], reverse=True)[:20]])
+    # Find top 20 artists and genres
+    top_artists = sorted(artist_counts.items(),
+                         key=lambda x: x[1], reverse=True)[:20]
+    top_genres = sorted(genre_counts.items(),
+                        key=lambda x: x[1], reverse=True)[:20]
 
-    metadata = (
-        top_artists, top_genres, len(song_ids),
-        *[value for min_max in min_max_values.values() for value in min_max]
-    )
+    top_artist_ids = ','.join([artist[0] for artist in top_artists])
+    top_genres_list = ','.join([genre[0] for genre in top_genres])
 
-    update_playlist_metadata(cursor, playlist_id, metadata)
+    # Corrected order of values in the update statement
+    cursor.execute('''
+        UPDATE playlists
+        SET playlist_items_fetched = ?, 
+            playlist_top_artist_ids = ?, 
+            playlist_top_genres = ?, 
+            min_acousticness = ?, max_acousticness = ?, 
+            min_danceability = ?, max_danceability = ?, 
+            min_energy = ?, max_energy = ?, 
+            min_instrumentalness = ?, max_instrumentalness = ?, 
+            min_key = ?, max_key = ?, 
+            min_liveness = ?, max_liveness = ?, 
+            min_loudness = ?, max_loudness = ?, 
+            min_mode = ?, max_mode = ?, 
+            min_speechiness = ?, max_speechiness = ?, 
+            min_tempo = ?, max_tempo = ?, 
+            min_time_signature = ?, max_time_signature = ?, 
+            min_valence = ?, max_valence = ?
+        WHERE playlist_id = ?
+    ''', (
+        len(song_ids),
+        top_artist_ids,
+        top_genres_list,
+        min_acousticness, max_acousticness,
+        min_danceability, max_danceability,
+        min_energy, max_energy,
+        min_instrumentalness, max_instrumentalness,
+        min_key, max_key,
+        min_liveness, max_liveness,
+        min_loudness, max_loudness,
+        min_mode, max_mode,
+        min_speechiness, max_speechiness,
+        min_tempo, max_tempo,
+        min_time_signature, max_time_signature,
+        min_valence, max_valence,
+        playlist_id
+    ))
+
+    conn.commit()
     print(f"Metadata for playlist {playlist_id} updated successfully.")
 
 
