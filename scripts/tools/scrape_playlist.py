@@ -106,6 +106,11 @@ def update_playlist_metadata(playlist_id, metadata):
 def scrape(ids):
     for playlist_id in ids:
         try:
+            # Skip if playlist already exists
+            if playlist_id in existing_playlists:
+                print(f"Skipping playlist {playlist_id} as it already exists.")
+                continue
+
             playlist = sp.playlist(playlist_id)
             playlist_creator_id = playlist['owner']['id']
             playlist_items = playlist['tracks']['items']
@@ -114,7 +119,7 @@ def scrape(ids):
             if len(playlist_items) < 2:
                 print(f"Skipping playlist {
                       playlist_id} because it has fewer than 2 songs.")
-                continue  # Skip this playlist
+                continue
 
             track_ids = []
             for item in playlist_items:
@@ -122,58 +127,65 @@ def scrape(ids):
                     track = item['track']
                     song_id = track['id']
                     if not song_id:
-                        continue  # Skip if song_id is None or invalid
+                        continue
 
                     if song_id not in existing_songs:
-                        # Prepare song data as a dictionary
-                        song_data = {
-                            'song_id': song_id,
-                            'song_name': track['name'],
-                            'artist_ids': ','.join([artist['id'] for artist in track['artists']]),
-                        }
-
-                        # Fetch audio features
-                        features = sp.audio_features([song_id])[0]
-                        if features is None:
-                            continue  # Skip if audio features are not available
-
-                        song_data.update({
-                            'acousticness': features.get('acousticness', 0.0),
-                            'danceability': features.get('danceability', 0.0),
-                            'energy': features.get('energy', 0.0),
-                            'instrumentalness': features.get('instrumentalness', 0.0),
-                            'key': features.get('key', 0),
-                            'liveness': features.get('liveness', 0.0),
-                            'loudness': features.get('loudness', 0.0),
-                            'mode': features.get('mode', 0),
-                            'speechiness': features.get('speechiness', 0.0),
-                            'tempo': features.get('tempo', 0.0),
-                            'time_signature': features.get('time_signature', 4),
-                            'valence': features.get('valence', 0.0)
-                        })
+                        song_data = extract_song_data(track)
+                        if not song_data:
+                            continue
 
                         # Insert song data into the songs table
                         insert_song(song_data)
 
                     track_ids.append(song_id)
-
                 except Exception as e:
                     print(f"Error processing song {song_id}: {e}")
-                    continue  # Skip to the next song if there's an error
+                    continue
 
             # Insert the playlist data
-            if playlist_id not in existing_playlists:
-                cursor.execute('''
-                    INSERT INTO playlists (playlist_id, playlist_creator_id, playlist_original_items, playlist_items)
-                    VALUES (?, ?, ?, ?)''',
-                               (playlist_id, playlist_creator_id, len(track_ids), ','.join(track_ids)))
-                existing_playlists.add(playlist_id)
+            cursor.execute('''
+                INSERT INTO playlists (playlist_id, playlist_creator_id, playlist_original_items, playlist_items)
+                VALUES (?, ?, ?, ?)''', (playlist_id, playlist_creator_id, len(track_ids), ','.join(track_ids)))
+            conn.commit()
+            existing_playlists.add(playlist_id)
 
         except Exception as e:
             print(f"Error processing playlist {playlist_id}: {e}")
-            continue  # Skip to the next playlist if there's an error
+            continue
 
-    conn.commit()
+
+def extract_song_data(track):
+    try:
+        song_id = track['id']
+        song_data = {
+            'song_id': song_id,
+            'song_name': track['name'],
+            'artist_ids': ','.join([artist['id'] for artist in track['artists']]),
+        }
+
+        # Fetch audio features
+        features = sp.audio_features([song_id])[0]
+        if features is None:
+            return None
+
+        song_data.update({
+            'acousticness': features.get('acousticness', 0.0),
+            'danceability': features.get('danceability', 0.0),
+            'energy': features.get('energy', 0.0),
+            'instrumentalness': features.get('instrumentalness', 0.0),
+            'key': features.get('key', 0),
+            'liveness': features.get('liveness', 0.0),
+            'loudness': features.get('loudness', 0.0),
+            'mode': features.get('mode', 0),
+            'speechiness': features.get('speechiness', 0.0),
+            'tempo': features.get('tempo', 0.0),
+            'time_signature': features.get('time_signature', 4),
+            'valence': features.get('valence', 0.0)
+        })
+        return song_data
+    except Exception as e:
+        print(f"Error extracting song data: {e}")
+        return None
 
 
 def calculate_playlist_metadata(playlist_id):
@@ -306,8 +318,7 @@ def calculate_playlist_metadata(playlist_id):
 
 
 if __name__ == "__main__":
-    ids = ['77upN7XYbweAUVcT6xo5lf', '6XeMKFSPpIzviyLuD3xLE7', '5qXRKUDH4k2Z4mfegqHjTT', '6XnoyH9CgZaG5zbuKg6FpA', '1hsKAP7tcyWccdmQHIxIqM', '1GqeSqiGBnxLhtRpi9jbPz', '7imN9ra0n6ZYaVRIqJNu2I', '4iDP51wMIQzPbpa9VRUrU4', '4pq3UdlMTrvenmlwlMHgkn', '7ii49QRHRrQwXjs9PG3Mqw', '4hMw676gBE47LgFJ9besjN', '1TGjEgeMreDuCD7itIBKQW', '5QHK4phckDgVxoDTBZZbck', '6aPemTZ8bx1gS0StGKKSfh', '008nxlpV3qXI5lxcfhWsDh', '08YjRzE6G8B7qdv6hNSm4O', '2fyn0MY1s0hcZjV8PnJ0vH', '1y2AVgn8XHIyqUEsubUf8q', '7jIfLeouYwXSD1RlVE6Lvn', '2pNAHMsOp4OUVej0foJqeY', '29P60CHB8QNSjXGWE4jiDy', '1zvj5Ovu28GR32Z3ZWTO8Q', '112T4NeLRFqIhR1LVonV95', '1svlNVVQVzQQ1sD1vJzaX0', '4KRsDF7rO4vaK8njldLBnd', '5dPnPC98nwQgpZhULp9BUS', '0YYq6IIdB6m1Ec5JS4FzAg',
-           '2Ommd0HYiS0Wq5Wknf4wNp', '0ml6XrpZyQoGwgF40Z4LUw', '50BaWkucoch2d7htodVvWg', '3jpYkBNkAf2xv9tzORrI7U', '37i9dQZF1E8PVdOo3OE5nV', '2K3IS3uRGqWmfdXaMEvKZ3', '2bWgQNbLBqzsbJrUKNYCkh', '5zc4njUpVEIymv4C0RXA9R', '3AbFZ7awkFbSRMdVG4a5Uh', '2FnzHLgRojDJSQCmMwOy0O', '2o9kcl8dDvxfaWtOLJUV8T', '17mIXPwdLS4piVL3OzSirt', '7cZsaeIuICAFDAPyk4suYs', '1fqLr89HNgpxZtphGfQrE6', '1Wq07CFac4Mk0JjbbxWTHP', '73qDfNsm32OJm0rtrvw8ro', '2n3mF5TsR9zfKKVyJrE9nx', '42J1Kj66rheFPLlV793fG3', '1dykzQCgKyFpnmbZBZFVV0', '2oNgpLgMohUn5vpRjSIl0b', '3kxzsCC2VrJLDmmkC0jaQU', '4oeap4O7HfjrqytrZdmPwl', '1vQ4FvPya39ff8SOGK9Dg9', '7KZB37IRZcbNEIJkmDYJ4D', '5i8Fva3ezh8kKdMusGaIAy', '3mgQE41HdgweMihea0NhJe', '1xK1dZC91G9qLUOoxeA4Sj', '1Pf8cB6QegbAsJft7hQliz']
+    ids = ['3OGtvL5mc7z1kIK7QUdnx6', '6XcpGfuYtCpTPSKzpsuPON']
     scrape(ids)
     for playlist_id in ids:
         calculate_playlist_metadata(playlist_id)
