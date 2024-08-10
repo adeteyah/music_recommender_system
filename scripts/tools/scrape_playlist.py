@@ -306,7 +306,7 @@ def calculate_playlist_metadata(playlist_id):
 
 
 if __name__ == "__main__":
-    ids = ['5jo2aWgpyDOjusbVLvaGzc', '7oKfi7K8WUOetawBJGuUNV']
+    ids = ['3OGtvL5mc7z1kIK7QUdnx6', '6XcpGfuYtCpTPSKzpsuPON']
     scrape(ids)
     for playlist_id in ids:
         calculate_playlist_metadata(playlist_id)
