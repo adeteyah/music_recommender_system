@@ -175,7 +175,12 @@ def scrape(ids):
 def calculate_playlist_metadata(playlist_id):
     cursor.execute(
         'SELECT playlist_items FROM playlists WHERE playlist_id = ?', (playlist_id,))
-    track_ids = cursor.fetchone()[0].split(',')
+    playlist_items = cursor.fetchone()[0]
+
+    if not playlist_items:
+        return
+
+    track_ids = playlist_items.split(',')
 
     if not track_ids:
         return
