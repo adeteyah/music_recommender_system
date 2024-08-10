@@ -32,8 +32,7 @@ sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(
 conn = sqlite3.connect(DB)
 cursor = conn.cursor()
 
-IDS = ['5tg0VHViwlCRayFmZEb89a', '2V8mpK05BVsMPEWx1cEpG9', '2CjnaMVrNh3NJaFmDNKHMj', '0FKSk9sjaHsNVUVYswpx9p', '0ptCCEWuYh1wgKaHSAtkeB', '37i9dQZF1E4xFviXynxYbB', '0Qy8n31ndQcDYMBXBP4g5P', '1COUHhhrqMcoe90qn2EWiH', '78QB58T7RSHnHAQQjLtoWA', '25PIacuEBRtcyhygXzV0U6', '4KIOolK4mCsjG1grjd7jXN', '2y5W549SOvoXkmKV5ruDDb', '2XNzKHS14q8zik7YtBdUEi', '7CRDwHmFIWIFakS8whUz5e', '6jkBTwKqoI9RIavyXfKvDa', '3BrGODBakPhEIHyR5kSCsV', '1GoBCL2tGsDYb8w4m9XTEt', '0LADki212SVjINOgJP0VUw', '2TI7DRbHGKN19uRnXFKWfF', '6bw7e3xgXp5vvKG8UC6KYM', '5shCdZFhwo2PqRYfE62AWI', '0zNakzrvsAdoiXELta1Cfv', '0HYqwURYvhkcmy7AqnXpTh', '3yuhAxr6DzD8G9RxdWZq9F',
-       '2Bpa4HFfIx40AHulclotZH', '3oOyEJnrgNOv4AxiMWimNt', '3FlH406IC8CiVAi1MKmqVa', '3hrrAThqaEkcTi7swVwbOK', '7z3sSuBECJNcWAHwrLcLyQ', '6AiEY0DPXzmA27mLk6cQ13', '5xQq0MwAAmDj8Uf0VoqjB1', '37i9dQZF1E4Br0HS2FHp4J', '29ZnOCY80NlBGMuTGdVbHc', '0lQKHzupvlwYzfxUFuwnvc', '5RI20Ct0QlIV6REv9neVCS', '1pL4wy7kkh5HM0l2YesCDS', '72btHatYgasyS7hhy3VrXK', '5pKglxKhR3DiFrPNHSKpGN', '1JVP02FYKSm08iciezMybx', '2db0y17l9Dw0FMEvIH5c83', '37JUrZGesBv1BoJQpbWsnv', '41cU4G49XQlcpTJa6I5wfu', '3gY62YegpVZDU2OCNvpXqI', '5Lo7a936yE5kqutpNt4i7c', '7p4qH3gGsrTHpwmsby0awh', '3wli5NEUYQyBtH7zkIkqPB', '3TbA86BfTc0HiwzwSOLznG', '3PBsUVcXZz8wK70UwruDG9']
+IDS = []
 
 
 def load_existing_ids():
@@ -70,7 +69,7 @@ def fetch_playlist_tracks(playlist_id):
 
 
 def fetch_track_details_and_audio_features(track_ids):
-    logger.info(f'Fetch track & af for {
+    logger.info(f'Fetching track details and audio features for {
                 len(track_ids)} tracks')
     valid_track_data = []
 
@@ -93,8 +92,11 @@ def fetch_track_details_and_audio_features(track_ids):
 
         except SpotifyException as e:
             # Log the error and skip this track
-            logger.error(f"Can't fetch. Skipped. {
-                         track_id}: {e}")
+            logger.error(f"Can't fetch track. Skipping track {track_id}: {e}")
+        except Exception as e:
+            # Catch any other potential errors and skip the track
+            logger.error(f"Unexpected error occurred while fetching track {
+                         track_id}. Skipping track: {e}")
 
     return valid_track_data
 
