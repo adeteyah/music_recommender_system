@@ -25,17 +25,24 @@ SEPARATE_BOUNDS = {
 
 def get_song_info(conn, song_id, features):
     features_sql = ', '.join(features)
-    # Join with the artists table, handle multiple artists by splitting artist_ids
     query = f"""
-        SELECT s.song_id, s.song_name, group_concat(a.artist_name, ', ') as artist_name,
-               group_concat(a.artist_genres, ', ') as artist_genres, {features_sql}
+        SELECT s.song_id, s.song_name, s.artist_ids, {features_sql}
         FROM songs s
-        LEFT JOIN artists a ON ',' || s.artist_ids || ',' LIKE '%,' || a.artist_id || ',%'
         WHERE s.song_id = ?
-        GROUP BY s.song_id
     """
     cursor = conn.cursor()
     cursor.execute(query, (song_id,))
+    return cursor.fetchone()
+
+
+def get_artist_info(conn, artist_id):
+    query = f"""
+        SELECT artist_name, artist_genres
+        FROM artists
+        WHERE artist_id = ?
+    """
+    cursor = conn.cursor()
+    cursor.execute(query, (artist_id,))
     return cursor.fetchone()
 
 
@@ -44,7 +51,6 @@ def calculate_similarity(song_features, input_features):
 
 
 def normalize_song_name(song_name):
-    # Normalize song names by removing any parenthetical text (e.g., "(Remastered)", "(Live)", etc.)
     return re.sub(r'\(.*?\)', '', song_name).strip().lower()
 
 
@@ -52,7 +58,6 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     feature_conditions = []
     for i, feature in enumerate(features):
         feature_name = feature.split('.')[-1]
-        # Use specific bound if defined, else use general bound
         bound_val = SEPARATE_BOUNDS.get(feature_name, REAL_BOUND_VAL)
         lower_bound = input_audio_features[i] - bound_val
         upper_bound = input_audio_features[i] + bound_val
@@ -60,63 +65,49 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
                                   lower_bound} AND {upper_bound}")
 
     conditions_sql = ' AND '.join(feature_conditions)
-
-    # Extract first genre as mandatory
     genre_conditions = f"a.artist_genres LIKE '%{mandatory_genre}%'"
 
-    # Combine feature conditions with genre filtering
     combined_conditions_sql = f"{conditions_sql} AND ({genre_conditions})"
-
     features_sql = ', '.join(features)
+
     query = f"""
-        SELECT s.song_id, s.song_name, group_concat(a.artist_name, ', ') as artist_name,
-               group_concat(a.artist_genres, ', ') as artist_genres, {features_sql}
+        SELECT s.song_id, s.song_name, s.artist_ids, {features_sql}
         FROM songs s
-        LEFT JOIN artists a ON ',' || s.artist_ids || ',' LIKE '%,' || a.artist_id || ',%'
+        JOIN artists a ON s.artist_ids = a.artist_id
         WHERE {combined_conditions_sql}
-        GROUP BY s.song_id
     """
     cursor = conn.cursor()
     cursor.execute(query)
     songs = cursor.fetchall()
 
-    # Filter out inputted IDs and ensure only two songs per artist, excluding same artist and song names
     seen_artists = {}
-    seen_song_artist_names = {(normalize_song_name(info[1]), (info[2] or 'N/A').lower(
-    )) for info in inputted_songs}  # (normalized_song_name, artist_name)
+    seen_song_artist_names = {(normalize_song_name(
+        info[1]), info[2].lower()) for info in inputted_songs}
     filtered_songs = []
     seen_song_artist_pairs = set()
 
     for song in songs:
-        song_id, song_name, artist_name, artist_genres = song[:4]
-
-        # Use placeholders if artist_name or artist_ids is None
-        normalized_name = normalize_song_name(
-            song_name) if song_name else 'N/A'
-        artist_name_lower = (artist_name or 'N/A').lower()
-
-        if song_id in inputted_ids or (normalized_name, artist_name_lower) in seen_song_artist_names:
+        song_id, song_name, artist_ids = song[:3]
+        normalized_name = normalize_song_name(song_name)
+        if song_id in inputted_ids or (normalized_name, artist_ids) in seen_song_artist_names:
             continue
 
-        # Normalize and use case insensitive comparison
-        song_artist_pair = (normalized_name, artist_name_lower)
+        song_artist_pair = (normalized_name, artist_ids)
         if song_artist_pair in seen_song_artist_pairs:
             continue
 
-        # Check if the artist has already added two songs
-        if artist_name_lower in seen_artists:
-            if seen_artists[artist_name_lower] >= 2:
+        if artist_ids in seen_artists:
+            if seen_artists[artist_ids] >= 2:
                 continue
-            seen_artists[artist_name_lower] += 1
+            seen_artists[artist_ids] += 1
         else:
-            seen_artists[artist_name_lower] = 1
+            seen_artists[artist_ids] = 1
 
         filtered_songs.append(song)
         seen_song_artist_pairs.add(song_artist_pair)
 
-    # Sort songs by similarity
     filtered_songs.sort(key=lambda song: calculate_similarity(
-        song[4:], input_audio_features))
+        song[3:], input_audio_features))
     return filtered_songs
 
 
@@ -134,44 +125,50 @@ def cbf(ids):
             if not song_info:
                 continue
 
-            base_info = song_info[:4]
-            audio_features = song_info[4:]
+            song_id, song_name, artist_ids, *audio_features = song_info
             input_audio_features_list.append(audio_features)
-            song_url = f"https://open.spotify.com/track/{base_info[0]}"
+            song_url = f"https://open.spotify.com/track/{song_id}"
             features_str = ', '.join(
                 [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
-            artist_name = base_info[2] if base_info[2] else 'N/A'
-            song_name = base_info[1] if base_info[1] else 'N/A'
-            line = (f"{idx}. {song_url} {artist_name} - {song_name} | "
-                    f"Genres: {base_info[3] if base_info[3] else 'N/A'} | {features_str}\n")
+
+            artist_info = get_artist_info(conn, artist_ids.split(
+                ',')[0]) if artist_ids else ('N/A', 'N/A')
+            artist_name = artist_info[0] if artist_info[0] else 'N/A'
+            genres = artist_info[1] if artist_info[1] else 'N/A'
+
+            line = (f"{idx}. {song_url} {artist_name} - {song_name if song_name else 'N/A'} | "
+                    f"Genres: {genres} | {features_str}\n")
             f.write(line)
 
-        # SIMILAR AUDIO FEATURES
         f.write('\nSIMILAR AUDIO FEATURES\n')
         for input_audio_features, song_info in zip(input_audio_features_list, songs_info):
-            header_artist_name = song_info[2] if song_info[2] else 'N/A'
-            header_song_name = song_info[1] if song_info[1] else 'N/A'
-            header_genres = song_info[3] if song_info[3] else 'N/A'
-            header = f"{
-                header_artist_name} - {header_song_name} | Genres: {header_genres}"
+            artist_info = get_artist_info(conn, song_info[2].split(
+                ',')[0]) if song_info[2] else ('N/A', 'N/A')
+            artist_name = artist_info[0] if artist_info[0] else 'N/A'
+            genres = artist_info[1] if artist_info[1] else 'N/A'
+
+            header = f"{artist_name} - {song_info[1]} | Genres: {genres}"
             f.write(f"\n{header}\n")
 
-            # Use the first artist's genre as the mandatory genre
-            mandatory_genre = header_genres.split(',')[0].strip()
-            similar_songs_info = get_similar_audio_features(
-                conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genre)
+            mandatory_genre = genres.split(
+                ',')[0].strip() if genres != 'N/A' else None
+            if mandatory_genre:
+                similar_songs_info = get_similar_audio_features(
+                    conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genre)
+                for idx, song in enumerate(similar_songs_info, start=1):
+                    song_id, song_name, artist_ids, *audio_features = song
+                    song_url = f"https://open.spotify.com/track/{song_id}"
+                    features_str = ', '.join(
+                        [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
 
-            for idx, song_info in enumerate(similar_songs_info, start=1):
-                base_info = song_info[:4]
-                audio_features = song_info[4:]
-                song_url = f"https://open.spotify.com/track/{base_info[0]}"
-                features_str = ', '.join(
-                    [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
-                artist_name = base_info[2] if base_info[2] else 'N/A'
-                song_name = base_info[1] if base_info[1] else 'N/A'
-                line = (f"{idx}. {song_url} {artist_name} - {song_name} | "
-                        f"Genres: {base_info[3] if base_info[3] else 'N/A'} | {features_str}\n")
-                f.write(line)
+                    artist_info = get_artist_info(conn, artist_ids.split(
+                        ',')[0]) if artist_ids else ('N/A', 'N/A')
+                    artist_name = artist_info[0] if artist_info[0] else 'N/A'
+                    genres = artist_info[1] if artist_info[1] else 'N/A'
+
+                    line = (f"{idx}. {song_url} {artist_name} - {song_name if song_name else 'N/A'} | "
+                            f"Genres: {genres} | {features_str}\n")
+                    f.write(line)
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
