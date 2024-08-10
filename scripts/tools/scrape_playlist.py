@@ -100,74 +100,74 @@ def update_playlist_metadata(playlist_id, metadata):
 
 def scrape(ids):
     for playlist_id in ids:
-        if playlist_id in existing_playlists:
-            print(f"Playlist {playlist_id} already exists. Skipping...")
-            continue
+        try:
+            playlist = sp.playlist(playlist_id)
+            playlist_creator_id = playlist['owner']['id']
+            playlist_items = playlist['tracks']['items']
 
-        playlist = sp.playlist(playlist_id)
-        playlist_creator_id = playlist['owner']['id']
-        playlist_original_items = len(playlist['tracks']['items'])
-        track_ids = []
-        artist_ids_set = set()
+            track_ids = []
+            for item in playlist_items:
+                try:
+                    track = item['track']
+                    song_id = track['id']
+                    if not song_id:
+                        continue  # Skip if song_id is None or invalid
 
-        for item in playlist['tracks']['items']:
-            track = item['track']
-            if not track:
-                continue
+                    if song_id not in existing_songs:
+                        # Process and insert song data into the songs table
+                        song_name = track['name']
+                        artist_ids = ','.join([artist['id']
+                                              for artist in track['artists']])
 
-            song_id = track['id']
-            if song_id in existing_songs:
-                track_ids.append(song_id)
-                continue
+                        # Fetch audio features
+                        features = sp.audio_features([song_id])[0]
+                        if features is None:
+                            continue  # Skip if audio features are not available
 
-            song_name = track['name']
-            artist_ids = ','.join([artist['id']
-                                  for artist in track['artists']])
-            artist_ids_set.update(artist['id'] for artist in track['artists'])
+                        acousticness = features.get('acousticness', 0.0)
+                        danceability = features.get('danceability', 0.0)
+                        energy = features.get('energy', 0.0)
+                        instrumentalness = features.get(
+                            'instrumentalness', 0.0)
+                        key = features.get('key', 0)
+                        liveness = features.get('liveness', 0.0)
+                        loudness = features.get('loudness', 0.0)
+                        mode = features.get('mode', 0)
+                        speechiness = features.get('speechiness', 0.0)
+                        tempo = features.get('tempo', 0.0)
+                        time_signature = features.get('time_signature', 4)
+                        valence = features.get('valence', 0.0)
 
-            # Fetch audio features
-            audio_features = sp.audio_features([song_id])[0]
-            if audio_features is None:
-                print(f"Audio features not found for song: {song_id}")
-                continue
+                        cursor.execute('''
+                            INSERT INTO songs (song_id, song_name, artist_ids, acousticness, danceability, energy,
+                                               instrumentalness, key, liveness, loudness, mode, speechiness, tempo,
+                                               time_signature, valence)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                                       (song_id, song_name, artist_ids, acousticness, danceability, energy,
+                                        instrumentalness, key, liveness, loudness, mode, speechiness, tempo,
+                                        time_signature, valence))
+                        # Add to existing_songs set
+                        existing_songs.add(song_id)
 
-            # Extract audio features
-            acousticness = audio_features.get('acousticness', None)
-            danceability = audio_features.get('danceability', None)
-            energy = audio_features.get('energy', None)
-            instrumentalness = audio_features.get('instrumentalness', None)
-            key = audio_features.get('key', None)
-            liveness = audio_features.get('liveness', None)
-            loudness = audio_features.get('loudness', None)
-            mode = audio_features.get('mode', None)
-            speechiness = audio_features.get('speechiness', None)
-            tempo = audio_features.get('tempo', None)
-            time_signature = audio_features.get('time_signature', None)
-            valence = audio_features.get('valence', None)
+                    track_ids.append(song_id)
 
-            song_data = (song_id, song_name, artist_ids, acousticness, danceability, energy,
-                         instrumentalness, key, liveness, loudness, mode, speechiness, tempo,
-                         time_signature, valence)
-            insert_song(song_data)
-            track_ids.append(song_id)
+                except Exception as e:
+                    print(f"Error processing song {song_id}: {e}")
+                    continue  # Skip to the next song if there's an error
 
-        for artist_id in artist_ids_set:
-            if artist_id in existing_artists:
-                continue
+            # Insert the playlist data
+            if playlist_id not in existing_playlists:
+                cursor.execute('''
+                    INSERT INTO playlists (playlist_id, playlist_creator_id, playlist_original_items, playlist_items)
+                    VALUES (?, ?, ?, ?)''',
+                               (playlist_id, playlist_creator_id, len(track_ids), ','.join(track_ids)))
+                existing_playlists.add(playlist_id)
 
-            artist = sp.artist(artist_id)
-            artist_name = artist['name']
-            artist_genres = ','.join(artist['genres'])
+        except Exception as e:
+            print(f"Error processing playlist {playlist_id}: {e}")
+            continue  # Skip to the next playlist if there's an error
 
-            artist_data = (artist_id, artist_name, artist_genres)
-            insert_artist(artist_data)
-
-        playlist_data = (playlist_id, playlist_creator_id,
-                         playlist_original_items, ','.join(track_ids))
-        insert_playlist(playlist_data)
-
-        print(f"Finished scraping playlist {playlist_id}")
-        time.sleep(DELAY_TIME)
+    conn.commit()
 
 
 def calculate_playlist_metadata(playlist_id):
