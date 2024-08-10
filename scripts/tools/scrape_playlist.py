@@ -318,7 +318,8 @@ def calculate_playlist_metadata(playlist_id):
 
 
 if __name__ == "__main__":
-    ids = ['3OGtvL5mc7z1kIK7QUdnx6', '6XcpGfuYtCpTPSKzpsuPON']
+    ids = ['77upN7XYbweAUVcT6xo5lf', '5i8Fva3ezh8kKdMusGaIAy', '1Pf8cB6QegbAsJft7hQliz', '7KZB37IRZcbNEIJkmDYJ4D', '3AbFZ7awkFbSRMdVG4a5Uh', '1y2AVgn8XHIyqUEsubUf8q', '2K3IS3uRGqWmfdXaMEvKZ3', '50BaWkucoch2d7htodVvWg', '6aPemTZ8bx1gS0StGKKSfh', '2FnzHLgRojDJSQCmMwOy0O', '0ml6XrpZyQoGwgF40Z4LUw', '1TGjEgeMreDuCD7itIBKQW', '1zvj5Ovu28GR32Z3ZWTO8Q', '1xK1dZC91G9qLUOoxeA4Sj', '1vQ4FvPya39ff8SOGK9Dg9', '42J1Kj66rheFPLlV793fG3', '1GqeSqiGBnxLhtRpi9jbPz', '3kxzsCC2VrJLDmmkC0jaQU', '4hMw676gBE47LgFJ9besjN', '1fqLr89HNgpxZtphGfQrE6', '2oNgpLgMohUn5vpRjSIl0b', '7imN9ra0n6ZYaVRIqJNu2I', '5dPnPC98nwQgpZhULp9BUS', '0YYq6IIdB6m1Ec5JS4FzAg', '7cZsaeIuICAFDAPyk4suYs', '2bWgQNbLBqzsbJrUKNYCkh', '4oeap4O7HfjrqytrZdmPwl',
+           '4iDP51wMIQzPbpa9VRUrU4', '4pq3UdlMTrvenmlwlMHgkn', '3jpYkBNkAf2xv9tzORrI7U', '2fyn0MY1s0hcZjV8PnJ0vH', '5zc4njUpVEIymv4C0RXA9R', '1Wq07CFac4Mk0JjbbxWTHP', '6XnoyH9CgZaG5zbuKg6FpA', '008nxlpV3qXI5lxcfhWsDh', '2o9kcl8dDvxfaWtOLJUV8T', '08YjRzE6G8B7qdv6hNSm4O', '2n3mF5TsR9zfKKVyJrE9nx', '4KRsDF7rO4vaK8njldLBnd', '6XeMKFSPpIzviyLuD3xLE7', '2Ommd0HYiS0Wq5Wknf4wNp', '1svlNVVQVzQQ1sD1vJzaX0', '7ii49QRHRrQwXjs9PG3Mqw', '73qDfNsm32OJm0rtrvw8ro', '5qXRKUDH4k2Z4mfegqHjTT', '17mIXPwdLS4piVL3OzSirt', '2pNAHMsOp4OUVej0foJqeY', '112T4NeLRFqIhR1LVonV95', '37i9dQZF1E8PVdOo3OE5nV', '3mgQE41HdgweMihea0NhJe', '1dykzQCgKyFpnmbZBZFVV0', '1hsKAP7tcyWccdmQHIxIqM', '29P60CHB8QNSjXGWE4jiDy', '7jIfLeouYwXSD1RlVE6Lvn', '5QHK4phckDgVxoDTBZZbck']
     scrape(ids)
     for playlist_id in ids:
         calculate_playlist_metadata(playlist_id)
