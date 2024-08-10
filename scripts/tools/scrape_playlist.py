@@ -32,6 +32,9 @@ sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(
 conn = sqlite3.connect(DB)
 cursor = conn.cursor()
 
+IDS = ['2WvUOkJZZRBofeMQzIpPwt', '7sMerhMCG0DGLTHJg3wxnx', '7pAeOmjIkPcIZkxfgGN8sT', '0FCatX58mfH9ELGIAoPF7g', '2IZvQ43MXV6TrwMy4TWirt', '1Mu6QdrIEk9bNkk1bBW4X0', '2xz5sr95lUcqFnRr1gWeYc',
+       '1iD4oLyiTH1w1B9neIrxtN', '1a7oOOBs9p9ib50SHd6nWf', '0uHJpG7IDUf7JIfsRIKWeq', '76FgbOAhbGGDYNXRci2iS9', '64e4GpdJUJdOxy9pfXlTJ0', '37i9dQZF1EIfEvNEw1FAvr', '6AACbfnDjOKf21e1RSJpvW', '0wgSBwjwNynF5hIysOBYDe']
+
 
 def load_existing_ids():
     """Load existing IDs from the database."""
@@ -228,8 +231,6 @@ def process_playlist(playlist_id):
 
 
 if __name__ == '__main__':
-    playlist_ids = ['5w15kmo03vurAm8g2wT34c', '5KVjiEr9v2Qy0kuD6227cz', '04rREDiHtruOKqq4zSl4H8', '5KcSmqijnFDyFTqDdr4QNz', '0w5O7O6RVk479XrVyosLSH', '1Fcg7hNoJ5LtwYM8yOPDYm', '3a0h2rnDAboudVYu6aqgRo', '1GXRoQWlxTNQiMNkOe7RqA', '7EZHWvnmRstApKcNkPsFv9', '5cyDpvbfBQmLSJOQwTqWQk', '1DLZTD5ANcNBQy8AFUGMOt', '4nw4ZMYkoPoZu4HYdkN7VJ', '5NWD2pOGBYtcOG4kvHM4fu', '7nAeJJEjmovQMp5rPDhchd', '2PtWsAccOJBzNcjXGOjo06', '0nZsRUSK2l9knzLuEySw8I', '3s0PAK76prh5be8UhW7sfD', '7DgPQwzEoUVfQYBiMLER9Z', '5DbG43JvL8S5AqUBMcbNYI', '2DW2OSfjGOWLEDnV0vfyoH', '4LWEtQg7bluwJdCFMkJ5MU',
-                    '2DxMYnLncCqgEryVVn0cQ7', '3Q5I41rLqz3EwYODPMUFXr', '2B0MOFCoaOOeHU1hy7OOWq', '2aE3crv7lrl4VMdsR7g8Oz', '50KJWq4mpnUwofCDysvreU', '61WkMGqjhLKOgvMwfXc8tS', '1LoaUK8r21Wfn8dlw7j6OZ', '3Gd025NKDIZQuT9aj0PTbL', '5ildE24iDDIhyfkavBvoYp', '0NvvaMiyRetzt9jupbFYNM', '50nNxCc7ZB7CUK1skmwHg0', '4UBNUes6dhYGWQr2k8Ltfo', '63LbOL6wnQilTuBhsLIuF8', '27guQWIZg4kArVFff7BsjF', '13CGS5YwiFvMyK3nhV65zH', '0PVaskCvkHqB44COOb4xUe', '0SjD3C9qWCzmo1KafmUGjM', '4QdDFN4F3GcHllBt2loOw3', '1ZliBwZNuYLnMkfQJVGGLe', '2XXdE3Nboq3b6KTuBU47Z2', '0tNebzSnS9Ypx4Jj0XuWjC', '6tUoLGh3ueIMVoYbBVZpKQ']
-    for playlist_id in playlist_ids:
+    for playlist_id in IDS:
         process_playlist(playlist_id)
     logger.info("Processing completed.")
