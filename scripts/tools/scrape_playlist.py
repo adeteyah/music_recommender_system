@@ -32,8 +32,8 @@ sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(
 conn = sqlite3.connect(DB)
 cursor = conn.cursor()
 
-IDS = ['2WvUOkJZZRBofeMQzIpPwt', '7sMerhMCG0DGLTHJg3wxnx', '7pAeOmjIkPcIZkxfgGN8sT', '0FCatX58mfH9ELGIAoPF7g', '2IZvQ43MXV6TrwMy4TWirt', '1Mu6QdrIEk9bNkk1bBW4X0', '2xz5sr95lUcqFnRr1gWeYc',
-       '1iD4oLyiTH1w1B9neIrxtN', '1a7oOOBs9p9ib50SHd6nWf', '0uHJpG7IDUf7JIfsRIKWeq', '76FgbOAhbGGDYNXRci2iS9', '64e4GpdJUJdOxy9pfXlTJ0', '37i9dQZF1EIfEvNEw1FAvr', '6AACbfnDjOKf21e1RSJpvW', '0wgSBwjwNynF5hIysOBYDe']
+IDS = ['3FlH406IC8CiVAi1MKmqVa', '3yuhAxr6DzD8G9RxdWZq9F', '1JVP02FYKSm08iciezMybx', '3oOyEJnrgNOv4AxiMWimNt', '5xQq0MwAAmDj8Uf0VoqjB1', '2Bpa4HFfIx40AHulclotZH', '7CRDwHmFIWIFakS8whUz5e', '1pL4wy7kkh5HM0l2YesCDS', '1COUHhhrqMcoe90qn2EWiH', '0FKSk9sjaHsNVUVYswpx9p', '5RI20Ct0QlIV6REv9neVCS', '3hrrAThqaEkcTi7swVwbOK', '2y5W549SOvoXkmKV5ruDDb', '0lQKHzupvlwYzfxUFuwnvc', '7z3sSuBECJNcWAHwrLcLyQ', '72btHatYgasyS7hhy3VrXK',
+       '0Qy8n31ndQcDYMBXBP4g5P', '25PIacuEBRtcyhygXzV0U6', '2V8mpK05BVsMPEWx1cEpG9', '6AiEY0DPXzmA27mLk6cQ13', '5shCdZFhwo2PqRYfE62AWI', '3wli5NEUYQyBtH7zkIkqPB', '0ptCCEWuYh1wgKaHSAtkeB', '5Lo7a936yE5kqutpNt4i7c', '0HYqwURYvhkcmy7AqnXpTh', '5tg0VHViwlCRayFmZEb89a', '2CjnaMVrNh3NJaFmDNKHMj', '2db0y17l9Dw0FMEvIH5c83', '2XNzKHS14q8zik7YtBdUEi', '6bw7e3xgXp5vvKG8UC6KYM', '3BrGODBakPhEIHyR5kSCsV', '7p4qH3gGsrTHpwmsby0awh', '1GoBCL2tGsDYb8w4m9XTEt']
 
 
 def load_existing_ids():
