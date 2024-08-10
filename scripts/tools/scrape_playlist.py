@@ -87,22 +87,29 @@ def scrape(ids):
                 continue
 
             song_name = track['name']
-            acousticness = track['acousticness']
-            danceability = track['danceability']
-            energy = track['energy']
-            instrumentalness = track['instrumentalness']
-            key = track['key']
-            liveness = track['liveness']
-            loudness = track['loudness']
-            mode = track['mode']
-            speechiness = track['speechiness']
-            tempo = track['tempo']
-            time_signature = track['time_signature']
-            valence = track['valence']
-
             artist_ids = ','.join([artist['id']
                                   for artist in track['artists']])
             artist_ids_set.update(artist['id'] for artist in track['artists'])
+
+            # Fetch audio features
+            audio_features = sp.audio_features([song_id])[0]
+            if audio_features is None:
+                print(f"Audio features not found for song: {song_id}")
+                continue
+
+            # Extract audio features
+            acousticness = audio_features.get('acousticness', None)
+            danceability = audio_features.get('danceability', None)
+            energy = audio_features.get('energy', None)
+            instrumentalness = audio_features.get('instrumentalness', None)
+            key = audio_features.get('key', None)
+            liveness = audio_features.get('liveness', None)
+            loudness = audio_features.get('loudness', None)
+            mode = audio_features.get('mode', None)
+            speechiness = audio_features.get('speechiness', None)
+            tempo = audio_features.get('tempo', None)
+            time_signature = audio_features.get('time_signature', None)
+            valence = audio_features.get('valence', None)
 
             song_data = (song_id, song_name, artist_ids, acousticness, danceability, energy,
                          instrumentalness, key, liveness, loudness, mode, speechiness, tempo,
