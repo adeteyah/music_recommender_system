@@ -36,8 +36,11 @@ def load_existing_ids():
 existing_songs, existing_artists, existing_playlists = load_existing_ids()
 
 
+def scrape(ids):
+    pass
+
+
 if __name__ == "__main__":
-    playlist_ids_to_process = [
+    ids = [
         '2pX1fAX4EkSb14SPHAZndB', '0yEJHHdRIIWceGp0Rt1JT1']
-    for playlist_id in playlist_ids_to_process:
-        scrape(playlist_id)
+    scrape(ids)
