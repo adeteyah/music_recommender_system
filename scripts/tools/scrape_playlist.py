@@ -223,7 +223,8 @@ def process_playlist(playlist_id, existing_ids):
 # Entry Point
 if __name__ == '__main__':
     existing_ids = load_existing_ids()
-    IDS = []  # Add playlist IDs to process
+    IDS = ['0zNakzrvsAdoiXELta1Cfv', '1COUHhhrqMcoe90qn2EWiH', '2XNzKHS14q8zik7YtBdUEi', '0LADki212SVjINOgJP0VUw', '2y5W549SOvoXkmKV5ruDDb', '25PIacuEBRtcyhygXzV0U6', '3BrGODBakPhEIHyR5kSCsV', '5tg0VHViwlCRayFmZEb89a', '3FlH406IC8CiVAi1MKmqVa', '5shCdZFhwo2PqRYfE62AWI', '6bw7e3xgXp5vvKG8UC6KYM', '78QB58T7RSHnHAQQjLtoWA', '7p4qH3gGsrTHpwmsby0awh', '37i9dQZF1E4xFviXynxYbB', '5Lo7a936yE5kqutpNt4i7c', '0ptCCEWuYh1wgKaHSAtkeB', '37JUrZGesBv1BoJQpbWsnv', '7CRDwHmFIWIFakS8whUz5e', '6jkBTwKqoI9RIavyXfKvDa', '5pKglxKhR3DiFrPNHSKpGN', '3TbA86BfTc0HiwzwSOLznG', '72btHatYgasyS7hhy3VrXK', '0HYqwURYvhkcmy7AqnXpTh', '7z3sSuBECJNcWAHwrLcLyQ',
+           '1JVP02FYKSm08iciezMybx', '2Bpa4HFfIx40AHulclotZH', '2db0y17l9Dw0FMEvIH5c83', '2V8mpK05BVsMPEWx1cEpG9', '3hrrAThqaEkcTi7swVwbOK', '1GoBCL2tGsDYb8w4m9XTEt', '0Qy8n31ndQcDYMBXBP4g5P', '1pL4wy7kkh5HM0l2YesCDS', '5RI20Ct0QlIV6REv9neVCS', '37i9dQZF1E4Br0HS2FHp4J', '4KIOolK4mCsjG1grjd7jXN', '2CjnaMVrNh3NJaFmDNKHMj', '3PBsUVcXZz8wK70UwruDG9', '6AiEY0DPXzmA27mLk6cQ13', '41cU4G49XQlcpTJa6I5wfu', '3oOyEJnrgNOv4AxiMWimNt', '0FKSk9sjaHsNVUVYswpx9p', '29ZnOCY80NlBGMuTGdVbHc', '2TI7DRbHGKN19uRnXFKWfF', '3yuhAxr6DzD8G9RxdWZq9F', '0lQKHzupvlwYzfxUFuwnvc', '3wli5NEUYQyBtH7zkIkqPB', '5xQq0MwAAmDj8Uf0VoqjB1', '3gY62YegpVZDU2OCNvpXqI']  # Add playlist IDs to process
     for playlist_id in IDS:
         process_playlist(playlist_id, existing_ids)
     logger.info("Processing complete.")
