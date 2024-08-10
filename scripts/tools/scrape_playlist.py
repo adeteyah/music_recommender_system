@@ -306,8 +306,7 @@ def calculate_playlist_metadata(playlist_id):
 
 
 if __name__ == "__main__":
-    ids = ['5jo2aWgpyDOjusbVLvaGzc', '7oKfi7K8WUOetawBJGuUNV', '62bQfeMgV6b1HAZkK4moGK', '3U9eNgeDJVOGvzB1p3tghQ', '2it5i6BVpH4DYJLROfdAWz', '6faz8QGOyWuKCr0ly5zM0k',
-           '6R289Js63LzdasMGQfATub', '4QGUHviS3DILPEIY3pr4vV', '01RXJbRpOHQxM1aWTucark', '1F4SkGrLM2IIux7TSoSGY7', '3XF957ddALWqbfXkbNsP5l', '2E8UqyyJIjylb5YTvvRZMM']
+    ids = ['5jo2aWgpyDOjusbVLvaGzc', '7oKfi7K8WUOetawBJGuUNV']
     scrape(ids)
     for playlist_id in ids:
         calculate_playlist_metadata(playlist_id)
