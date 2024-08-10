@@ -59,19 +59,25 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
 
     conditions_sql = ' AND '.join(feature_conditions)
 
-    # Extract first genre as mandatory and second genre as optional from the current song
-    input_genres = song_genres.split(',')[:2]  # Take first two genres
-    mandatory_genre = input_genres[0].strip()
-    optional_genre = input_genres[1].strip() if len(input_genres) > 1 else None
+    # Check if song_genres is None
+    if song_genres:
+        # Extract first genre as mandatory and second genre as optional from the current song
+        input_genres = song_genres.split(',')[:2]  # Take first two genres
+        mandatory_genre = input_genres[0].strip()
+        optional_genre = input_genres[1].strip() if len(
+            input_genres) > 1 else None
 
-    # Genre conditions
-    genre_conditions = f"a.artist_genres LIKE '%{mandatory_genre}%'"
-    if optional_genre:
-        genre_conditions += f" AND (a.artist_genres LIKE '%{
-            mandatory_genre}%' OR a.artist_genres LIKE '%{optional_genre}%')"
+        # Genre conditions
+        genre_conditions = f"a.artist_genres LIKE '%{mandatory_genre}%'"
+        if optional_genre:
+            genre_conditions += f" AND (a.artist_genres LIKE '%{
+                mandatory_genre}%' OR a.artist_genres LIKE '%{optional_genre}%')"
 
-    # Combine feature conditions with genre filtering
-    combined_conditions_sql = f"{conditions_sql} AND ({genre_conditions})"
+        # Combine feature conditions with genre filtering
+        combined_conditions_sql = f"{conditions_sql} AND ({genre_conditions})"
+    else:
+        # Only use feature conditions if no genres are available
+        combined_conditions_sql = conditions_sql
 
     features_sql = ', '.join(features)
     query = f"""
@@ -178,5 +184,5 @@ def cbf(ids):
 
 if __name__ == "__main__":
     ids = ['5Z2DNRAhs6r4VdINVkRhYY', '6YFzL1910P0fRFh865HmI3',
-           '1zxfRSZcaonV1VXcY0PgY5', '6LF44wAs3h0K67RitTAfr5']
+           '1zxfRSZcaonV1VXcY0PgY5', '6LF44wAs3h0K67RitTAfr5', '65fpYBrI8o2cfrwf2US4gq']
     cbf(ids)
