@@ -1,4 +1,3 @@
-
 import sqlite3
 import configparser
 import spotipy
@@ -20,9 +19,9 @@ config.read('config.cfg')
 DB = config['rs']['db_path']
 CLIENT_ID = config['api']['client_id']
 CLIENT_SECRET = config['api']['client_secret']
-DELAY_TIME = float(config['scrape']['delay_time'])
-N_MINIMUM = int(config['scrape']['n_minimum_playlist_songs'])
-N_SCRAPE = int(config['scrape']['n_scrape'])
+DELAY_TIME = float(config['api']['delay_time'])
+N_MINIMUM = int(config['rs']['n_minimum_playlist_songs'])
+N_SCRAPE = int(config['rs']['n_scrape'])
 
 # Spotify API credentials
 client_credentials_manager = SpotifyClientCredentials(
@@ -48,7 +47,6 @@ existing_songs, existing_artists, existing_playlists = load_existing_ids()
 
 
 def fetch_playlist_tracks(playlist_id):
-    """Fetch tracks from a Spotify playlist."""
     logger.info(f'Fetching tracks from playlist {
                 playlist_id} with a limit of {N_SCRAPE} items')
     track_ids = []
@@ -59,11 +57,12 @@ def fetch_playlist_tracks(playlist_id):
         while results and len(track_ids) < limit:
             for item in results['items']:
                 track = item.get('track')
-                if track and track.get('id'):
-                    track_ids.append(track['id'])
+                if track:
+                    track_id = track.get('id')
+                    if track_id:
+                        track_ids.append(track_id)
                 else:
-                    logger.warning(f'Invalid or missing track ID in playlist {
-                                   playlist_id}, item: {item}')
+                    logger.warning(f'Unexpected track item structure: {item}')
             if len(track_ids) >= limit or not results['next']:
                 break
             results = sp.next(results)
@@ -75,42 +74,36 @@ def fetch_playlist_tracks(playlist_id):
 
 
 def fetch_track_details_and_audio_features(track_ids):
-    """Fetch track details and audio features from Spotify API."""
-    if not track_ids:
-        logger.warning("No valid track IDs to fetch.")
-        return []
-
     logger.info(f'Fetching track details and audio features for {
                 len(track_ids)} tracks')
-    valid_track_data = []
+    try:
+        tracks = sp.tracks(track_ids)
+        audio_features = sp.audio_features(track_ids)
 
-    for track_id in track_ids:
-        if not track_id:
-            logger.warning("Encountered empty track ID, skipping.")
-            continue
+        track_data = []
+        for track, features in zip(tracks['tracks'], audio_features):
+            if not track or not features:
+                if not track:
+                    logger.warning(f"No track found for given ID.")
+                if not features:
+                    logger.warning(f"No audio features found for track ID.")
+                continue
 
-        try:
-            # Fetch track details and audio features for each individual track ID
-            track = sp.track(track_id)
-            features = sp.audio_features([track_id])[0]
+            feature_values = [features[key] for key in [
+                'acousticness', 'danceability', 'energy', 'instrumentalness',
+                'key', 'liveness', 'loudness', 'mode', 'speechiness',
+                'tempo', 'time_signature', 'valence']]
 
-            if track and features:
-                track_data = (
-                    track['id'], track['name'],
-                    ','.join(artist['id'] for artist in track['artists']),
-                    *[features[key] for key in [
-                        'acousticness', 'danceability', 'energy', 'instrumentalness',
-                        'key', 'liveness', 'loudness', 'mode', 'speechiness',
-                        'tempo', 'time_signature', 'valence']]
-                )
-                valid_track_data.append(track_data)
+            track_data.append((
+                track['id'], track['name'],
+                [artist['id'] for artist in track['artists']],
+                *feature_values
+            ))
 
-        except SpotifyException as e:
-            # Log the error and skip this track
-            logger.error(f"Error fetching track details for track ID {
-                         track_id}: {e}")
-
-    return valid_track_data
+        return track_data
+    except SpotifyException as e:
+        logger.error(f"Error fetching track details and audio features: {e}")
+        return None
 
 
 def fetch_artist_details(artist_id):
@@ -258,9 +251,6 @@ def process_playlist(playlist_id):
             if track_data:
                 for track_details in track_data:
                     song_id, song_name, artist_ids, *track_features = track_details
-                    # Convert artist_ids list to a comma-separated string
-                    artist_ids_str = ','.join(artist_ids)
-
                     cursor.execute('''
                         INSERT OR REPLACE INTO songs (
                             song_id, song_name, artist_ids, acousticness,
@@ -268,7 +258,7 @@ def process_playlist(playlist_id):
                             key, liveness, loudness, mode,
                             speechiness, tempo, time_signature, valence
                         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    ''', (song_id, song_name, artist_ids_str, *track_features))
+                    ''', (song_id, song_name, ','.join(artist_ids), *track_features))
 
                     new_song_ids.add(song_id)
                     valid_track_ids.append(song_id)
@@ -307,8 +297,8 @@ def process_playlist(playlist_id):
 
 
 if __name__ == '__main__':
-    playlist_ids = ['022fvQXuJQDeACz9mUkDFw', '2QxrPkOTlVdtY8HU0ohlNb', '2Wwoknwx4fyX8OpL8ePtNT', '5vSCsBRotGGzEMI3lr9Kk6',
-                    '3qCLY1QE58gwSrpRS18osm', '4DhYEdh4Oj7CzijDcD99tk', '4FcSwayjqyAnQytCzcnpIT', '7h3lfQ3r6XGAvbNM3kquXX', '2JxUwUXaY8OhgfIuozMcG2']
+    playlist_ids = ['2JxUwUXaY8OhgfIuozMcG2', '3qCLY1QE58gwSrpRS18osm', '022fvQXuJQDeACz9mUkDFw', '2Wwoknwx4fyX8OpL8ePtNT',
+                    '7h3lfQ3r6XGAvbNM3kquXX', '4FcSwayjqyAnQytCzcnpIT', '2QxrPkOTlVdtY8HU0ohlNb', '4DhYEdh4Oj7CzijDcD99tk', '5vSCsBRotGGzEMI3lr9Kk6']
     for playlist_id in playlist_ids:
         process_playlist(playlist_id)
 
