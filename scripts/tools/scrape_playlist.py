@@ -271,7 +271,8 @@ def main():
         existing_songs, existing_artists, existing_playlists = load_existing_ids(
             cursor)
 
-        playlist_ids = ['your_playlist_ids']
+        playlist_ids = ['2pX1fAX4EkSb14SPHAZndB', '0yEJHHdRIIWceGp0Rt1JT1', '6cB00x9bpjzbIWua0Nt58l', '1EXiX8R5G6H2XHDy37Ufdj', '64FkxTLLTbbPG3B0AAsErs', '5plMEplzpwP6iUJjYOsVqv',
+                        '5vSGXhW33I9KFtKTslVdzg', '4nnhWjcavAqdFGHkRrxPuX', '3NraeakOx8Ms5x3LDekFFk', '6jeJcuvFUVEo3JXYA49gms', '6QtUzZuHzFPxUcIo1U8lSh', '2yIJO3lKN5h3lbayRXXm38', '4aIG2sbsxzAoKRCLrKx6x4']
         for playlist_id in playlist_ids:
             process_playlist(cursor, playlist_id, existing_songs,
                              existing_artists, existing_playlists)

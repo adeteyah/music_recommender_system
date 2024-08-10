@@ -2,9 +2,8 @@ import re
 
 text = """
 
-https://open.spotify.com/playlist/022fvQXuJQDeACz9mUkDFw?si=bc9c912093224fd9 https://open.spotify.com/playlist/5vSCsBRotGGzEMI3lr9Kk6?si=d3614f9b17774773 https://open.spotify.com/playlist/4DhYEdh4Oj7CzijDcD99tk?si=58854a3148a24c8d https://open.spotify.com/playlist/2QxrPkOTlVdtY8HU0ohlNb?si=4be0546aeefb4c7a https://open.spotify.com/playlist/4FcSwayjqyAnQytCzcnpIT?si=6b1e61d790484c3e https://open.spotify.com/playlist/2Wwoknwx4fyX8OpL8ePtNT?si=0f550c06b8e640a2 https://open.spotify.com/playlist/2JxUwUXaY8OhgfIuozMcG2?si=cf7c2527495e452d https://open.spotify.com/playlist/7h3lfQ3r6XGAvbNM3kquXX?si=4a92960134cf4b61 https://open.spotify.com/playlist/3qCLY1QE58gwSrpRS18osm?si=8f546013f412481d https://open.spotify.com/playlist/2JxUwUXaY8OhgfIuozMcG2?si=6f2e1967771b47d1
-
-
+https://open.spotify.com/playlist/0yEJHHdRIIWceGp0Rt1JT1?play=true&utm_source=open.spotify.com&utm_medium=open&fb_action_ids=685153528199177%2C685151228199407%2C685151014866095%2C685146524866544&fb_action_types=music.listens&fb_source=other_multiline&action_object_map=%5B10150394495675341%2C10150280119582801%2C10150168325958601%2C10151124840875501%5D&action_type_map=%5B%22music.listens%22%2C%22music.listens%22%2C%22music.listens%22%2C%22music.listens%22%5D&action_ref_map=%5B%5D
+https://open.spotify.com/playlist/2yIJO3lKN5h3lbayRXXm38?utm_content=buffer9e0b8&u=  https://open.spotify.com/playlist/5vSGXhW33I9KFtKTslVdzg https://open.spotify.com/playlist/6jeJcuvFUVEo3JXYA49gms https://open.spotify.com/playlist/64FkxTLLTbbPG3B0AAsErs https://open.spotify.com/playlist/6QtUzZuHzFPxUcIo1U8lSh https://open.spotify.com/playlist/3NraeakOx8Ms5x3LDekFFk https://open.spotify.com/playlist/1EXiX8R5G6H2XHDy37Ufdj https://open.spotify.com/playlist/4nnhWjcavAqdFGHkRrxPuX https://open.spotify.com/playlist/4aIG2sbsxzAoKRCLrKx6x4 https://open.spotify.com/playlist/2pX1fAX4EkSb14SPHAZndB https://open.spotify.com/playlist/5plMEplzpwP6iUJjYOsVqv https://open.spotify.com/playlist/6cB00x9bpjzbIWua0Nt58l
 
 
 
