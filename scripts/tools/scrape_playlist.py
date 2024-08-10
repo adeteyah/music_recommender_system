@@ -171,120 +171,130 @@ def scrape(ids):
 
 
 def calculate_playlist_metadata(playlist_id):
+    # Fetch playlist items
     cursor.execute(
-        'SELECT playlist_items FROM playlists WHERE playlist_id = ?', (playlist_id,))
-    playlist_items = cursor.fetchone()[0]
-
-    if not playlist_items:
+        "SELECT playlist_items FROM playlists WHERE playlist_id = ?", (playlist_id,))
+    result = cursor.fetchone()
+    if not result:
+        print(f"No playlist items found for playlist {playlist_id}.")
         return
 
-    track_ids = playlist_items.split(',')
+    playlist_items = result[0].split(',')
 
-    if not track_ids:
+    if len(playlist_items) < 2:
+        print(f"Skipping metadata calculation for playlist {
+              playlist_id} as it has fewer than 2 songs.")
         return
 
-    # Initialize min/max with extreme values
-    min_max_values = {
-        'acousticness': [float('inf'), float('-inf')],
-        'danceability': [float('inf'), float('-inf')],
-        'energy': [float('inf'), float('-inf')],
-        'instrumentalness': [float('inf'), float('-inf')],
-        'key': [float('inf'), float('-inf')],
-        'liveness': [float('inf'), float('-inf')],
-        'loudness': [float('inf'), float('-inf')],
-        'mode': [float('inf'), float('-inf')],
-        'speechiness': [float('inf'), float('-inf')],
-        'tempo': [float('inf'), float('-inf')],
-        'time_signature': [float('inf'), float('-inf')],
-        'valence': [float('inf'), float('-inf')]
-    }
+    # Initialize min/max values
+    min_acousticness = min_danceability = min_energy = min_instrumentalness = float(
+        'inf')
+    max_acousticness = max_danceability = max_energy = max_instrumentalness = float(
+        '-inf')
+    min_key = min_liveness = min_loudness = min_mode = min_speechiness = min_tempo = min_time_signature = min_valence = float(
+        'inf')
+    max_key = max_liveness = max_loudness = max_mode = max_speechiness = max_tempo = max_time_signature = max_valence = float(
+        '-inf')
 
-    artist_counter = collections.Counter()
-    genre_counter = collections.Counter()
+    artist_genres = {}
+    artist_counts = {}
 
-    for track_id in track_ids:
-        cursor.execute('SELECT * FROM songs WHERE song_id = ?', (track_id,))
-        song = cursor.fetchone()
-        if not song:
+    # Process each song in the playlist
+    for song_id in playlist_items:
+        cursor.execute("SELECT * FROM songs WHERE song_id = ?", (song_id,))
+        song_data = cursor.fetchone()
+        if not song_data:
+            print(f"Song {song_id} not found in the songs table.")
             continue
 
-        (song_id, song_name, artist_ids, acousticness, danceability, energy, instrumentalness,
-         key, liveness, loudness, mode, speechiness, tempo, time_signature, valence) = song
+        _, _, artist_ids, acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo, time_signature, valence = song_data
 
         # Update min/max values
-        min_max_values['acousticness'][0] = min(
-            min_max_values['acousticness'][0], acousticness)
-        min_max_values['acousticness'][1] = max(
-            min_max_values['acousticness'][1], acousticness)
-        min_max_values['danceability'][0] = min(
-            min_max_values['danceability'][0], danceability)
-        min_max_values['danceability'][1] = max(
-            min_max_values['danceability'][1], danceability)
-        min_max_values['energy'][0] = min(min_max_values['energy'][0], energy)
-        min_max_values['energy'][1] = max(min_max_values['energy'][1], energy)
-        min_max_values['instrumentalness'][0] = min(
-            min_max_values['instrumentalness'][0], instrumentalness)
-        min_max_values['instrumentalness'][1] = max(
-            min_max_values['instrumentalness'][1], instrumentalness)
-        min_max_values['key'][0] = min(min_max_values['key'][0], key)
-        min_max_values['key'][1] = max(min_max_values['key'][1], key)
-        min_max_values['liveness'][0] = min(
-            min_max_values['liveness'][0], liveness)
-        min_max_values['liveness'][1] = max(
-            min_max_values['liveness'][1], liveness)
-        min_max_values['loudness'][0] = min(
-            min_max_values['loudness'][0], loudness)
-        min_max_values['loudness'][1] = max(
-            min_max_values['loudness'][1], loudness)
-        min_max_values['mode'][0] = min(min_max_values['mode'][0], mode)
-        min_max_values['mode'][1] = max(min_max_values['mode'][1], mode)
-        min_max_values['speechiness'][0] = min(
-            min_max_values['speechiness'][0], speechiness)
-        min_max_values['speechiness'][1] = max(
-            min_max_values['speechiness'][1], speechiness)
-        min_max_values['tempo'][0] = min(min_max_values['tempo'][0], tempo)
-        min_max_values['tempo'][1] = max(min_max_values['tempo'][1], tempo)
-        min_max_values['time_signature'][0] = min(
-            min_max_values['time_signature'][0], time_signature)
-        min_max_values['time_signature'][1] = max(
-            min_max_values['time_signature'][1], time_signature)
-        min_max_values['valence'][0] = min(
-            min_max_values['valence'][0], valence)
-        min_max_values['valence'][1] = max(
-            min_max_values['valence'][1], valence)
+        min_acousticness = min(min_acousticness, acousticness)
+        max_acousticness = max(max_acousticness, acousticness)
+        min_danceability = min(min_danceability, danceability)
+        max_danceability = max(max_danceability, danceability)
+        min_energy = min(min_energy, energy)
+        max_energy = max(max_energy, energy)
+        min_instrumentalness = min(min_instrumentalness, instrumentalness)
+        max_instrumentalness = max(max_instrumentalness, instrumentalness)
+        min_key = min(min_key, key)
+        max_key = max(max_key, key)
+        min_liveness = min(min_liveness, liveness)
+        max_liveness = max(max_liveness, liveness)
+        min_loudness = min(min_loudness, loudness)
+        max_loudness = max(max_loudness, loudness)
+        min_mode = min(min_mode, mode)
+        max_mode = max(max_mode, mode)
+        min_speechiness = min(min_speechiness, speechiness)
+        max_speechiness = max(max_speechiness, speechiness)
+        min_tempo = min(min_tempo, tempo)
+        max_tempo = max(max_tempo, tempo)
+        min_time_signature = min(min_time_signature, time_signature)
+        max_time_signature = max(max_time_signature, time_signature)
+        min_valence = min(min_valence, valence)
+        max_valence = max(max_valence, valence)
 
-        # Update artist and genre counters
-        artist_ids_list = artist_ids.split(',')
-        for artist_id in artist_ids_list:
+        # Count artist appearances and genres
+        for artist_id in artist_ids.split(','):
             cursor.execute(
-                'SELECT artist_genres FROM artists WHERE artist_id = ?', (artist_id,))
-            genres = cursor.fetchone()[0]
-            genre_list = genres.split(',')
-            genre_counter.update(genre_list)
-            artist_counter.update([artist_id])
+                "SELECT artist_name, artist_genres FROM artists WHERE artist_id = ?", (artist_id,))
+            artist_info = cursor.fetchone()
+            if artist_info:
+                artist_name, genres = artist_info
+                artist_counts[artist_name] = artist_counts.get(
+                    artist_name, 0) + 1
 
-    # Get top 20 artists and genres
-    top_artists = [artist for artist, _ in artist_counter.most_common(20)]
-    top_genres = [genre for genre, _ in genre_counter.most_common(20)]
+                if genres:
+                    for genre in genres.split(','):
+                        artist_genres[genre] = artist_genres.get(genre, 0) + 1
 
-    metadata = (
-        len(track_ids),
-        ','.join(top_artists),
-        ','.join(top_genres),
-        min_max_values['acousticness'][0], min_max_values['acousticness'][1],
-        min_max_values['danceability'][0], min_max_values['danceability'][1],
-        min_max_values['energy'][0], min_max_values['energy'][1],
-        min_max_values['instrumentalness'][0], min_max_values['instrumentalness'][1],
-        min_max_values['key'][0], min_max_values['key'][1],
-        min_max_values['liveness'][0], min_max_values['liveness'][1],
-        min_max_values['loudness'][0], min_max_values['loudness'][1],
-        min_max_values['mode'][0], min_max_values['mode'][1],
-        min_max_values['speechiness'][0], min_max_values['speechiness'][1],
-        min_max_values['tempo'][0], min_max_values['tempo'][1],
-        min_max_values['time_signature'][0], min_max_values['time_signature'][1],
-        min_max_values['valence'][0], min_max_values['valence'][1]
-    )
-    update_playlist_metadata(playlist_id, metadata)
+    # Sort and select top 20 artists and genres
+    top_artists = sorted(
+        artist_counts, key=artist_counts.get, reverse=True)[:20]
+    top_genres = sorted(
+        artist_genres, key=artist_genres.get, reverse=True)[:20]
+
+    # Update playlist metadata
+    cursor.execute('''
+        UPDATE playlists
+        SET playlist_items_fetched = ?, playlist_top_artist_ids = ?, playlist_top_genres = ?,
+            min_acousticness = ?, max_acousticness = ?,
+            min_danceability = ?, max_danceability = ?,
+            min_energy = ?, max_energy = ?,
+            min_instrumentalness = ?, max_instrumentalness = ?,
+            min_key = ?, max_key = ?,
+            min_liveness = ?, max_liveness = ?,
+            min_loudness = ?, max_loudness = ?,
+            min_mode = ?, max_mode = ?,
+            min_speechiness = ?, max_speechiness = ?,
+            min_tempo = ?, max_tempo = ?,
+            min_time_signature = ?, max_time_signature = ?,
+            min_valence = ?, max_valence = ?
+        WHERE playlist_id = ?''',
+                   (len(playlist_items), ','.join(top_artists), ','.join(top_genres),
+                    min_acousticness, max_acousticness,
+                    min_danceability, max_danceability,
+                    min_energy, max_energy,
+                    min_instrumentalness, max_instrumentalness,
+                    min_key, max_key,
+                    min_liveness, max_liveness,
+                    min_loudness, max_loudness,
+                    min_mode, max_mode,
+                    min_speechiness, max_speechiness,
+                    min_tempo, max_tempo,
+                    min_time_signature, max_time_signature,
+                    min_valence, max_valence,
+                    playlist_id))
+    conn.commit()
+
+
+if __name__ == "__main__":
+    ids = ['2pX1fAX4EkSb14SPHAZndB', '0yEJHHdRIIWceGp0Rt1JT1']
+    scrape(ids)
+    for playlist_id in ids:
+        calculate_playlist_metadata(playlist_id)
+        print(f"Updated metadata for playlist {playlist_id}")
 
 
 if __name__ == "__main__":
