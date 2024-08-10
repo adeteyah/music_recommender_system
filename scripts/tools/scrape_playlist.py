@@ -1,7 +1,9 @@
 import sqlite3
 import configparser
 import spotipy
+import time
 from spotipy.oauth2 import SpotifyClientCredentials
+
 # Load configuration
 config = configparser.ConfigParser()
 config.read('config.cfg')
@@ -36,11 +38,97 @@ def load_existing_ids():
 existing_songs, existing_artists, existing_playlists = load_existing_ids()
 
 
+def insert_song(song):
+    cursor.execute('''
+        INSERT INTO songs (song_id, song_name, artist_ids, acousticness, danceability, energy, 
+                           instrumentalness, key, liveness, loudness, mode, speechiness, tempo, 
+                           time_signature, valence)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', song)
+    conn.commit()
+
+
+def insert_artist(artist):
+    cursor.execute('''
+        INSERT INTO artists (artist_id, artist_name, artist_genres)
+        VALUES (?, ?, ?)
+    ''', artist)
+    conn.commit()
+
+
+def insert_playlist(playlist):
+    cursor.execute('''
+        INSERT INTO playlists (playlist_id, playlist_creator_id, playlist_original_items, playlist_items)
+        VALUES (?, ?, ?, ?)
+    ''', playlist)
+    conn.commit()
+
+
 def scrape(ids):
-    pass
+    for playlist_id in ids:
+        if playlist_id in existing_playlists:
+            print(f"Playlist {playlist_id} already exists. Skipping...")
+            continue
+
+        playlist = sp.playlist(playlist_id)
+        playlist_creator_id = playlist['owner']['id']
+        playlist_original_items = len(playlist['tracks']['items'])
+        track_ids = []
+        artist_ids_set = set()
+
+        for item in playlist['tracks']['items']:
+            track = item['track']
+            if not track:
+                continue
+
+            song_id = track['id']
+            if song_id in existing_songs:
+                track_ids.append(song_id)
+                continue
+
+            song_name = track['name']
+            acousticness = track['acousticness']
+            danceability = track['danceability']
+            energy = track['energy']
+            instrumentalness = track['instrumentalness']
+            key = track['key']
+            liveness = track['liveness']
+            loudness = track['loudness']
+            mode = track['mode']
+            speechiness = track['speechiness']
+            tempo = track['tempo']
+            time_signature = track['time_signature']
+            valence = track['valence']
+
+            artist_ids = ','.join([artist['id']
+                                  for artist in track['artists']])
+            artist_ids_set.update(artist['id'] for artist in track['artists'])
+
+            song_data = (song_id, song_name, artist_ids, acousticness, danceability, energy,
+                         instrumentalness, key, liveness, loudness, mode, speechiness, tempo,
+                         time_signature, valence)
+            insert_song(song_data)
+            track_ids.append(song_id)
+
+        for artist_id in artist_ids_set:
+            if artist_id in existing_artists:
+                continue
+
+            artist = sp.artist(artist_id)
+            artist_name = artist['name']
+            artist_genres = ','.join(artist['genres'])
+
+            artist_data = (artist_id, artist_name, artist_genres)
+            insert_artist(artist_data)
+
+        playlist_data = (playlist_id, playlist_creator_id,
+                         playlist_original_items, ','.join(track_ids))
+        insert_playlist(playlist_data)
+
+        print(f"Finished scraping playlist {playlist_id}")
+        time.sleep(DELAY_TIME)
 
 
 if __name__ == "__main__":
-    ids = [
-        '2pX1fAX4EkSb14SPHAZndB', '0yEJHHdRIIWceGp0Rt1JT1']
+    ids = ['2pX1fAX4EkSb14SPHAZndB', '0yEJHHdRIIWceGp0Rt1JT1']
     scrape(ids)
