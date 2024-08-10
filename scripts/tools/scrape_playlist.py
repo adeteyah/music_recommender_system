@@ -266,7 +266,7 @@ def process_playlist(playlist_id):
 
             cursor.execute('''
                 INSERT OR REPLACE INTO playlists (
-                    playlist_id, creator_id, total_tracks, playlist_items
+                    playlist_id, playlist_creator_id, playlist_total_tracks, playlist_items
                 ) VALUES (?, ?, ?, ?)
             ''', (playlist_id, creator_id, total_tracks, ','.join(valid_track_ids)))
             conn.commit()
