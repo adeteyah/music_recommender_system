@@ -38,31 +38,23 @@ existing_songs, existing_artists, existing_playlists = load_existing_ids()
 
 
 def insert_song(song_data):
-    song_id = song_data['song_id']
-
-    # Check if the song already exists
-    cursor.execute("SELECT 1 FROM songs WHERE song_id = ?", (song_id,))
-    if cursor.fetchone():
-        print(f"Song {song_id} already exists, skipping insertion.")
-        return  # Skip insertion if the song already exists
-
     cursor.execute('''
-        INSERT INTO songs (song_id, song_name, artist_ids, acousticness, danceability, energy,
-                           instrumentalness, key, liveness, loudness, mode, speechiness, tempo,
-                           time_signature, valence)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
-                   (song_data['song_id'], song_data['song_name'], song_data['artist_ids'],
-                    song_data['acousticness'], song_data['danceability'], song_data['energy'],
-                    song_data['instrumentalness'], song_data['key'], song_data['liveness'],
-                    song_data['loudness'], song_data['mode'], song_data['speechiness'],
-                    song_data['tempo'], song_data['time_signature'], song_data['valence']))
+        INSERT OR REPLACE INTO songs (song_id, song_name, artist_ids, acousticness, danceability, energy,
+                                      instrumentalness, key, liveness, loudness, mode, speechiness, tempo,
+                                      time_signature, valence)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (song_data['song_id'], song_data['song_name'], song_data['artist_ids'],
+          song_data['acousticness'], song_data['danceability'], song_data['energy'],
+          song_data['instrumentalness'], song_data['key'], song_data['liveness'],
+          song_data['loudness'], song_data['mode'], song_data['speechiness'],
+          song_data['tempo'], song_data['time_signature'], song_data['valence']))
 
-    existing_songs.add(song_id)  # Add to existing_songs set
+    existing_songs.add(song_data['song_id'])  # Add to existing_songs set
 
 
 def insert_artist(artist):
     cursor.execute('''
-        INSERT INTO artists (artist_id, artist_name, artist_genres)
+        INSERT OR REPLACE INTO artists (artist_id, artist_name, artist_genres)
         VALUES (?, ?, ?)
     ''', artist)
     conn.commit()
