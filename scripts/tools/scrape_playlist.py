@@ -2,16 +2,6 @@ import sqlite3
 import configparser
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
-from spotipy.exceptions import SpotifyException
-import time
-from collections import Counter
-import logging
-
-# Setup logging
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
-
 # Load configuration
 config = configparser.ConfigParser()
 config.read('config.cfg')
