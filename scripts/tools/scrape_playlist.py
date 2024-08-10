@@ -48,6 +48,7 @@ existing_songs, existing_artists, existing_playlists = load_existing_ids()
 
 
 def fetch_playlist_tracks(playlist_id):
+    """Fetch tracks from a Spotify playlist."""
     logger.info(f'Fetching tracks from playlist {
                 playlist_id} with a limit of {N_SCRAPE} items')
     track_ids = []
@@ -58,12 +59,11 @@ def fetch_playlist_tracks(playlist_id):
         while results and len(track_ids) < limit:
             for item in results['items']:
                 track = item.get('track')
-                if track:
-                    track_id = track.get('id')
-                    if track_id:
-                        track_ids.append(track_id)
+                if track and track.get('id'):
+                    track_ids.append(track['id'])
                 else:
-                    logger.warning(f'Unexpected track item structure: {item}')
+                    logger.warning(f'Invalid or missing track ID in playlist {
+                                   playlist_id}, item: {item}')
             if len(track_ids) >= limit or not results['next']:
                 break
             results = sp.next(results)
@@ -75,36 +75,42 @@ def fetch_playlist_tracks(playlist_id):
 
 
 def fetch_track_details_and_audio_features(track_ids):
+    """Fetch track details and audio features from Spotify API."""
+    if not track_ids:
+        logger.warning("No valid track IDs to fetch.")
+        return []
+
     logger.info(f'Fetching track details and audio features for {
                 len(track_ids)} tracks')
-    try:
-        tracks = sp.tracks(track_ids)
-        audio_features = sp.audio_features(track_ids)
+    valid_track_data = []
 
-        track_data = []
-        for track, features in zip(tracks['tracks'], audio_features):
-            if not track or not features:
-                if not track:
-                    logger.warning(f"No track found for given ID.")
-                if not features:
-                    logger.warning(f"No audio features found for track ID.")
-                continue
+    for track_id in track_ids:
+        if not track_id:
+            logger.warning("Encountered empty track ID, skipping.")
+            continue
 
-            feature_values = [features[key] for key in [
-                'acousticness', 'danceability', 'energy', 'instrumentalness',
-                'key', 'liveness', 'loudness', 'mode', 'speechiness',
-                'tempo', 'time_signature', 'valence']]
+        try:
+            # Fetch track details and audio features for each individual track ID
+            track = sp.track(track_id)
+            features = sp.audio_features([track_id])[0]
 
-            track_data.append((
-                track['id'], track['name'],
-                [artist['id'] for artist in track['artists']],
-                *feature_values
-            ))
+            if track and features:
+                track_data = (
+                    track['id'], track['name'],
+                    ','.join(artist['id'] for artist in track['artists']),
+                    *[features[key] for key in [
+                        'acousticness', 'danceability', 'energy', 'instrumentalness',
+                        'key', 'liveness', 'loudness', 'mode', 'speechiness',
+                        'tempo', 'time_signature', 'valence']]
+                )
+                valid_track_data.append(track_data)
 
-        return track_data
-    except SpotifyException as e:
-        logger.error(f"Error fetching track details and audio features: {e}")
-        return None
+        except SpotifyException as e:
+            # Log the error and skip this track
+            logger.error(f"Error fetching track details for track ID {
+                         track_id}: {e}")
+
+    return valid_track_data
 
 
 def fetch_artist_details(artist_id):
