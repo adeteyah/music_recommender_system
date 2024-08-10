@@ -290,14 +290,6 @@ def calculate_playlist_metadata(playlist_id):
 
 
 if __name__ == "__main__":
-    ids = ['2pX1fAX4EkSb14SPHAZndB', '0yEJHHdRIIWceGp0Rt1JT1']
-    scrape(ids)
-    for playlist_id in ids:
-        calculate_playlist_metadata(playlist_id)
-        print(f"Updated metadata for playlist {playlist_id}")
-
-
-if __name__ == "__main__":
     ids = ['5reCpCSw8NgB5QjGILvrhX', '1Uon4YjxrFKECs3cxuq0s7', '3DtdtaTZfZPNEqttZ2vVG0', '70mJkUkq5bIP6w6BI25cov', '6mqJU05sWmXTuY1iO1RXmK', '7vq57TiBTpm5IMfiWs5PBh', '7E8T698a0KyfUuXyE5Wrve', '6vBkuOkhUAu77sBYdMAVDJ', '1YXxGeLWtd8qeHJTc6zW6u',
            '5xl6pngUNTpJkMEcgq70an', '15NJtngbNqxyN47NV7ssXJ', '29xqS54FRT6qeWDXnYLwOE', '4BFbPoGAwZsEJJKW7c0IUF', '4yNUxofGRcnw7UknxONOYC', '3iuP5ovrQcGkfRtLk11zau', '2S9qc8q5xU9M9HtLWKHFRJ', '64L6MntymuqQRuif9nVM6c', '2JsYYV1eTQsHjznasUIaru', '4x9Id1MUfg681SR5tR40vV']
     scrape(ids)
