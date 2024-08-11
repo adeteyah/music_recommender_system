@@ -9,11 +9,11 @@ config.read('config.cfg')
 MODEL = 'Content-based Filtering + Collaborative Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cbf_cf_output']
-CBF_FEATURES = config['hp']['cbf_features'].split(', ')
-REAL_BOUND_VAL = 0.1
-MODE_BOUND_VAL = int(config['hp']['cbf_mode_bound'])
-TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cbf_time_signature_bound'])
-TEMPO_BOUND_VAL = float(config['hp']['cbf_tempo_bound'])
+CBF_FEATURES = config['hp']['cbf_cf_features'].split(', ')
+REAL_BOUND_VAL = float(config['hp']['cbf_cf_real_bound'])
+MODE_BOUND_VAL = int(config['hp']['cbf_cf_mode_bound'])
+TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cbf_cf_time_signature_bound'])
+TEMPO_BOUND_VAL = float(config['hp']['cbf_cf_tempo_bound'])
 
 # Define specific bound values for features
 SEPARATE_BOUNDS = {
