@@ -336,7 +336,8 @@ def calculate_and_update_playlist_metadata(cursor, playlist_id):
 
 # Main script
 if __name__ == "__main__":
-    playlist_ids = ['5lubzlfVf4fnCyhDtGiVtC']
+    playlist_ids = ['0W4Becbl7WgXre2YuQlF6Q', '2jGJ6mtKuMBqIZsC2A8WYU',
+                    '5hOH3HcnQon0lWreL9Tfwx', '7ioNIqTcZfMCF6a730PZXS', '3BnhVf03cMI7vvJnbaVcpv']
     scrape_playlists(sp, cursor, playlist_ids)
 
     # Assuming you want to calculate metadata for the same playlists after scraping
