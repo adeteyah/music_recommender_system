@@ -11,11 +11,14 @@ DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cf_cbf_output']
 
 # Read and parse the features used for Content-based Filtering
-FEATURE_SELECT = config['hp']['cbf_features'].split(', ')
-REAL_BOUND_VAL = float(config['hp']['cbf_real_bound'])
-MODE_BOUND_VAL = int(config['hp']['cbf_mode_bound'])
-TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cbf_time_signature_bound'])
+FEATURE_SELECT = config['hp']['cbf_cf_features'].split(', ')
+REAL_BOUND_VAL = float(config['hp']['cbf_cf_real_bound'])
+MODE_BOUND_VAL = int(config['hp']['cbf_cf_mode_bound'])
+TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cbf_cf_time_signature_bound'])
 TEMPO_BOUND_VAL = float(config['hp']['cbf_tempo_bound'])
+
+AF_WEIGHT = 0.7
+COUNT_WEIGHT = 0.3
 
 
 def get_song_info(conn, song_id):
@@ -206,7 +209,7 @@ def cf_cbf(ids):
                         similarity_score = 1  # Apply a simple similarity score
 
                     count = recommended_songs.get(song_id, 0)
-                    return 0.7 * similarity_score + 0.3 * count
+                    return AF_WEIGHT * similarity_score + COUNT_WEIGHT * count
 
                 # Sort by weighted score
                 sorted_recommended_songs = sorted(
