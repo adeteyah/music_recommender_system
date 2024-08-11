@@ -18,9 +18,9 @@ TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cf_cbf_time_signature_bound'])
 TEMPO_BOUND_VAL = float(config['hp']['cf_cbf_tempo_bound'])
 
 # Weights for sorting
-GENRE_WEIGHT = 0.6
-AF_WEIGHT = 0.2
-COUNT_WEIGHT = 0.2
+GENRE_WEIGHT = 0.2
+AF_WEIGHT = 0.5
+COUNT_WEIGHT = 0.3
 
 
 def get_song_info(conn, song_id):
