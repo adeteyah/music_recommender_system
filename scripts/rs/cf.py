@@ -64,6 +64,7 @@ def get_related_playlists(cursor, artist_name):
 
 def extract_songs_from_playlists(related_playlists, cursor, inputted_ids, inputted_songs):
     song_count = defaultdict(int)
+    song_id_map = {}
 
     for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in related_playlists:
         for song_id in playlist_items:
@@ -71,12 +72,15 @@ def extract_songs_from_playlists(related_playlists, cursor, inputted_ids, inputt
             if song_info:
                 song_name, artist_name = song_info[1], song_info[3]
 
-                # Check if the song is a variation of the input songs
+                # Skip variations of the input songs
                 if (song_id not in inputted_ids) and (song_name, artist_name) not in inputted_songs:
                     # Accumulate count for songs with the same name and artist
                     song_count[(song_name, artist_name)] += 1
+                    # Store one of the song IDs for this song
+                    if (song_name, artist_name) not in song_id_map:
+                        song_id_map[(song_name, artist_name)] = song_id
 
-    return song_count
+    return song_count, song_id_map
 
 
 def cf(ids):
@@ -113,7 +117,7 @@ def cf(ids):
             f.write(f"\nRecommendations for Input Song: {
                     artist_name} - {song_name}\n")
             related_playlists = get_related_playlists(cursor, artist_name)
-            song_count = extract_songs_from_playlists(
+            song_count, song_id_map = extract_songs_from_playlists(
                 related_playlists, cursor, inputted_ids, inputted_songs)
 
             if not song_count:
@@ -126,9 +130,9 @@ def cf(ids):
                     if rec_artist_name not in artist_song_count:
                         artist_song_count[rec_artist_name] = 0
                     if artist_song_count[rec_artist_name] < 2:
-                        # Get one of the song IDs corresponding to this name and artist
-                        rec_song_id = next(song_id for song_id in inputted_ids if get_song_info(cursor, song_id)[
-                                           1] == rec_song_name and get_song_info(cursor, song_id)[3] == rec_artist_name)
+                        # Retrieve the stored song ID from song_id_map
+                        rec_song_id = song_id_map[(
+                            rec_song_name, rec_artist_name)]
                         f.write(f"{rec_idx}. https://open.spotify.com/track/{rec_song_id} {
                                 rec_artist_name} - {rec_song_name} | Count: {count}\n")
                         artist_song_count[rec_artist_name] += 1
