@@ -28,6 +28,7 @@ def read_inputted_ids(cursor, ids):
         JOIN artists a ON s.artist_ids = a.artist_id
         WHERE s.song_id IN ({})
     """.format(','.join('?' for _ in ids)), ids)
+    print()
 
     return cursor.fetchall()
 
