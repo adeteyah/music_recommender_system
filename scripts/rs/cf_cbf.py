@@ -12,11 +12,11 @@ DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cf_cbf_output']
 
 # Read and parse the features used for Content-based Filtering
-FEATURE_SELECT = config['hp']['cbf_features'].split(', ')
-REAL_BOUND_VAL = float(config['hp']['cbf_real_bound'])
-MODE_BOUND_VAL = int(config['hp']['cbf_mode_bound'])
-TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cbf_time_signature_bound'])
-TEMPO_BOUND_VAL = float(config['hp']['cbf_tempo_bound'])
+FEATURE_SELECT = config['hp']['cf_cbf_features'].split(', ')
+REAL_BOUND_VAL = float(config['hp']['cf_cbf_real_bound'])
+MODE_BOUND_VAL = int(config['hp']['cf_cbf_mode_bound'])
+TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cf_cbf_time_signature_bound'])
+TEMPO_BOUND_VAL = float(config['hp']['cf_cbf_tempo_bound'])
 
 
 def get_song_info(conn, song_id):
