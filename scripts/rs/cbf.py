@@ -140,7 +140,7 @@ def cbf(ids):
                     f"Genres: {genres} | {features_str}\n")
             f.write(line)
 
-        f.write('\nSIMILAR AUDIO FEATURES\n')
+        f.write('\nSONGS RECOMMENDATION\n')
         for input_audio_features, song_info in zip(input_audio_features_list, songs_info):
             artist_info = get_artist_info(conn, song_info[2].split(
                 ',')[0]) if song_info[2] else ('N/A', 'N/A')
