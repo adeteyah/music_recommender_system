@@ -67,7 +67,8 @@ def get_related_playlists(cursor, artist_name, inputted_ids):
 
         # Add playlists that match the song ID
         for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in playlists:
-            playlist_items_list = playlist_items.split(',')
+            playlist_items_list = playlist_items.split(',') if isinstance(
+                playlist_items, str) else playlist_items
 
             related_playlists.append(
                 (playlist_id, playlist_creator_id,
@@ -89,7 +90,8 @@ def get_related_playlists(cursor, artist_name, inputted_ids):
     artist_related_playlists = cursor.fetchall()
 
     for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in artist_related_playlists:
-        playlist_items_list = playlist_items.split(',')
+        playlist_items_list = playlist_items.split(',') if isinstance(
+            playlist_items, str) else playlist_items
 
         related_playlists.append(
             (playlist_id, playlist_creator_id,
@@ -103,7 +105,8 @@ def extract_songs_from_playlists(related_playlists, cursor, inputted_ids):
     song_count = Counter()
 
     for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in related_playlists:
-        playlist_items_list = playlist_items.split(',')
+        playlist_items_list = playlist_items if isinstance(
+            playlist_items, list) else playlist_items.split(',')
 
         for song_id in playlist_items_list:
             song_info = get_song_info(cursor, song_id)
