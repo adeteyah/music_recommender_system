@@ -10,6 +10,13 @@ MODEL = 'Collaborative Filtering + Content-based Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cf_cbf_output']
 
+# Read and parse the features used for Content-based Filtering
+FEATURE_SELECT = config['hp']['cbf_features'].split(', ')
+REAL_BOUND_VAL = float(config['hp']['cbf_real_bound'])
+MODE_BOUND_VAL = int(config['hp']['cbf_mode_bound'])
+TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cbf_time_signature_bound'])
+TEMPO_BOUND_VAL = float(config['hp']['cbf_tempo_bound'])
+
 
 def get_song_info(conn, song_id):
     cursor = conn.cursor()
@@ -98,29 +105,33 @@ def read_inputted_ids(ids, conn):
     return [get_song_info(conn, song_id) for song_id in ids]
 
 
-def is_similar_song(song_info, input_song_info):
-    (song_id, song_name, artist_ids, artist_name, artist_genres, acousticness,
-     danceability, energy, instrumentalness, key, liveness, loudness, mode,
-     speechiness, tempo, time_signature, valence) = song_info
+def is_similar_song(song_info, input_song_info, cbf_features):
+    feature_ranges = {
+        'acousticness': 0.3,
+        'danceability': 0.3,
+        'energy': 0.3,
+        'instrumentalness': 0.3,
+        'key': 1,
+        'liveness': 0.3,
+        'loudness': 0.3,
+        'mode': 1,
+        'speechiness': 0.3,
+        'tempo': 10.0,
+        'time_signature': 1,
+        'valence': 0.3,
+    }
 
-    (_, _, _, _, _, input_acousticness, input_danceability, input_energy,
-     input_instrumentalness, input_key, input_liveness, input_loudness,
-     input_mode, input_speechiness, input_tempo, input_time_signature,
-     input_valence) = input_song_info
+    for feature in cbf_features:
+        # Get the feature index from song_info and input_song_info based on the feature name
+        idx = ['song_id', 'song_name', 'artist_ids', 'artist_name', 'artist_genres',
+               'acousticness', 'danceability', 'energy', 'instrumentalness', 'key',
+               'liveness', 'loudness', 'mode', 'speechiness', 'tempo', 'time_signature',
+               'valence'].index(feature)
 
-    # Check the differences against the provided criteria
-    return (abs(acousticness - input_acousticness) <= 0.3 and
-            abs(danceability - input_danceability) <= 0.3 and
-            abs(energy - input_energy) <= 0.3 and
-            abs(instrumentalness - input_instrumentalness) <= 0.3 and
-            abs(key - input_key) <= 1 and
-            abs(liveness - input_liveness) <= 0.3 and
-            abs(loudness - input_loudness) <= 0.3 and
-            abs(mode - input_mode) <= 1 and
-            abs(speechiness - input_speechiness) <= 0.3 and
-            abs(tempo - input_tempo) <= 10.0 and
-            abs(time_signature - input_time_signature) <= 1 and
-            abs(valence - input_valence) <= 0.3)
+        if abs(song_info[idx] - input_song_info[idx]) > feature_ranges[feature]:
+            return False
+
+    return True
 
 
 def cf_cbf(ids):
