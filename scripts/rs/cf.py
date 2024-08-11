@@ -112,7 +112,8 @@ def cf(ids):
         f.write('\nRELATED PLAYLISTS\n')
         for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
             f.write(f"\nFor Input Song: {artist_name} - {song_name}\n")
-            related_playlists = get_related_playlists(cursor, artist_name)
+            related_playlists = get_related_playlists(
+                cursor, artist_name, inputted_ids)
             if not related_playlists:
                 f.write("No related playlists found.\n")
             else:
@@ -125,7 +126,8 @@ def cf(ids):
         for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
             f.write(f"\nRecommendations for Input Song: {
                     artist_name} - {song_name}\n")
-            related_playlists = get_related_playlists(cursor, artist_name)
+            related_playlists = get_related_playlists(
+                cursor, artist_name, inputted_ids)
             song_count = extract_songs_from_playlists(
                 related_playlists, cursor, inputted_ids)
 
