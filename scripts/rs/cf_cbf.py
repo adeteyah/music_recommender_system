@@ -108,18 +108,18 @@ def read_inputted_ids(ids, conn):
 
 def is_similar_song(song_info, input_song_info, FEATURE_SELECT):
     feature_ranges = {
-        'acousticness': 0.3,
-        'danceability': 0.3,
-        'energy': 0.3,
-        'instrumentalness': 0.3,
+        'acousticness': REAL_BOUND_VAL,
+        'danceability': REAL_BOUND_VAL,
+        'energy': REAL_BOUND_VAL,
+        'instrumentalness': REAL_BOUND_VAL,
         'key': 1,
-        'liveness': 0.3,
-        'loudness': 0.3,
-        'mode': 1,
-        'speechiness': 0.3,
-        'tempo': 10.0,
+        'liveness': REAL_BOUND_VAL,
+        'loudness': REAL_BOUND_VAL,
+        'mode': MODE_BOUND_VAL,
+        'speechiness': REAL_BOUND_VAL,
+        'tempo': TEMPO_BOUND_VAL,
         'time_signature': 1,
-        'valence': 0.3,
+        'valence': REAL_BOUND_VAL,
     }
 
     for feature in FEATURE_SELECT:
