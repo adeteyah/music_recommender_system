@@ -1,7 +1,6 @@
 import sqlite3
 import configparser
 import re
-from collections import defaultdict
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -49,13 +48,6 @@ def get_artist_info(conn, artist_id):
 
 def calculate_similarity(song_features, input_features):
     return sum(abs(song_feature - input_feature) for song_feature, input_feature in zip(song_features, input_features))
-
-
-def calculate_genre_weight(song_genres, input_genres):
-    song_genres_set = set(song_genres.split(', '))
-    input_genres_set = set(input_genres.split(', '))
-    matching_words = song_genres_set.intersection(input_genres_set)
-    return len(matching_words)
 
 
 def normalize_song_name(song_name):
@@ -114,6 +106,8 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
         filtered_songs.append(song)
         seen_song_artist_pairs.add(song_artist_pair)
 
+    filtered_songs.sort(key=lambda song: calculate_similarity(
+        song[3:], input_audio_features))
     return filtered_songs
 
 
@@ -122,12 +116,11 @@ def cbf_cf(ids):
     features = ['s.' + feature for feature in CBF_FEATURES]
     songs_info = [get_song_info(conn, song_id, features) for song_id in ids]
 
-    input_audio_features_list = []
-    inputted_ids_set = set(ids)
-    genre_weights = defaultdict(int)
-
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('INPUTTED IDS\n')
+        input_audio_features_list = []
+        inputted_ids_set = set(ids)
+
         for idx, song_info in enumerate(songs_info, start=1):
             if not song_info:
                 continue
@@ -162,10 +155,7 @@ def cbf_cf(ids):
             if mandatory_genre:
                 similar_songs_info = get_similar_audio_features(
                     conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genre)
-
-                # Calculate weights and sort
-                weighted_songs = []
-                for song in similar_songs_info:
+                for idx, song in enumerate(similar_songs_info, start=1):
                     song_id, song_name, artist_ids, *audio_features = song
                     song_url = f"https://open.spotify.com/track/{song_id}"
                     features_str = ', '.join(
@@ -174,28 +164,10 @@ def cbf_cf(ids):
                     artist_info = get_artist_info(conn, artist_ids.split(
                         ',')[0]) if artist_ids else ('N/A', 'N/A')
                     artist_name = artist_info[0] if artist_info[0] else 'N/A'
-                    song_genres = artist_info[1] if artist_info[1] else 'N/A'
-
-                    genre_weight = calculate_genre_weight(song_genres, genres)
-                    audio_similarity = calculate_similarity(
-                        audio_features, input_audio_features)
-                    # Or an appropriate method to get count
-                    count = similar_songs_info.count(song_id)
-
-                    total_weight = genre_weight + \
-                        (1 / (audio_similarity + 1)) + count  # Example formula
-                    weighted_songs.append(
-                        (total_weight, song_id, song_name, artist_ids, audio_features, artist_name, song_genres))
-
-                weighted_songs.sort(reverse=True, key=lambda x: x[0])
-
-                for idx, (total_weight, song_id, song_name, artist_ids, audio_features, artist_name, song_genres) in enumerate(weighted_songs, start=1):
-                    song_url = f"https://open.spotify.com/track/{song_id}"
-                    features_str = ', '.join(
-                        [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
+                    genres = artist_info[1] if artist_info[1] else 'N/A'
 
                     line = (f"{idx}. {song_url} {artist_name} - {song_name if song_name else 'N/A'} | "
-                            f"Genres: {song_genres} | {features_str}\n")
+                            f"Genres: {genres} | {features_str}\n")
                     f.write(line)
 
     conn.close()
