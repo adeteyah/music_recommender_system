@@ -1,6 +1,7 @@
 import sqlite3
 import configparser
 import re
+from collections import defaultdict
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -85,6 +86,7 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
         info[1]), info[2].lower()) for info in inputted_songs}
     filtered_songs = []
     seen_song_artist_pairs = set()
+    song_frequency = defaultdict(int)
 
     for song in songs:
         song_id, song_name, artist_ids = song[:3]
@@ -103,11 +105,14 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
         else:
             seen_artists[artist_ids] = 1
 
+        # Count song frequency
+        song_frequency[song_id] += 1
         filtered_songs.append(song)
         seen_song_artist_pairs.add(song_artist_pair)
 
-    filtered_songs.sort(key=lambda song: calculate_similarity(
-        song[3:], input_audio_features))
+    # Sort first by frequency, then by similarity
+    filtered_songs.sort(key=lambda song: (
+        song_frequency[song[0]], -calculate_similarity(song[3:], input_audio_features)), reverse=True)
     return filtered_songs
 
 
@@ -175,6 +180,6 @@ def cbf_cf(ids):
 
 
 if __name__ == "__main__":
-    ids = ['3wlLknnMtD8yZ0pCtCeeK4',
-           '6EIMUjQ7Q8Zr2VtIUik4He', '30Z12rJpW0M0u8HMFpigTB']
+    ids = ['3wlLknnMtD8yZ0pCtCeeK4', '6EIMUjQ7Q8Zr2VtIUik4He',
+           '30Z12rJpW0M0u8HMFpigTB']
     cbf_cf(ids)
