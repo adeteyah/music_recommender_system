@@ -13,21 +13,30 @@ OUTPUT_PATH = config['rs']['cf_output']
 
 def get_song_info(cursor, song_id):
     query = """
-        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, 
+               COALESCE(NULLIF(a.artist_genres, ''), 'N/A') as artist_genres
         FROM songs s
-        JOIN artists a ON s.artist_ids = a.artist_id
+        JOIN artists a ON instr(s.artist_ids, a.artist_id) > 0
         WHERE s.song_id = ?
     """
     cursor.execute(query, (song_id,))
-    result = cursor.fetchone()
+    results = cursor.fetchall()
 
-    if result:
+    # If multiple artists, select the one with valid artist_genres
+    if results:
+        for result in results:
+            if result[4] != 'N/A':  # Check if artist_genres is not "N/A"
+                print(f"DEBUG: Found song info for {
+                      song_id} - {result[1]} by {result[3]} with valid genres")
+                return result
+
+        # If none of the artists had a valid genre, return the first one with "N/A"
         print(f"DEBUG: Found song info for {
-              song_id} - {result[1]} by {result[3]}")
+              song_id} - {results[0][1]} by {results[0][3]} but all genres are 'N/A'")
+        return results[0]
     else:
         print(f"DEBUG: No song info found for {song_id}")
-
-    return result
+        return None
 
 
 def read_inputted_ids(cursor, ids):
