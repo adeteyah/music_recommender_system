@@ -122,11 +122,12 @@ def cf(ids):
             playlists = get_playlists_for_song(conn, song_info[0])
             playlist_ids = [playlist_id for playlist_id, _, _ in playlists]
             for j, (playlist_id, playlist_creator_id, _) in enumerate(playlists, 1):
-                file.write(f"{j}. {playlist_id} by {playlist_creator_id}\n")
+                file.write(f"{j}. https://open.spotify.com/playlist/{
+                           playlist_id} by https://open.spotify.com/user/{playlist_creator_id}\n")
 
             # Add SONGS RECOMMENDATION section with a specific title
             if playlist_ids:
-                file.write(f"\nSONGS RECOMMENDATION FOR {formatted_info}\n")
+                file.write(f"\nSONGS RECOMMENDATION: {formatted_info}\n")
                 recommended_songs = get_songs_from_playlists(
                     conn, playlist_ids)
 
