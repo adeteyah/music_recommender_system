@@ -10,7 +10,11 @@ MODEL = 'Collaborative Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cf_output']
 
-REAL_BOUND_VAL = 0.1
+SELECTED_AF = config['hp']['cf_features'].split(', ')
+REAL_BOUND_VAL = float(config['hp']['cf_real_bound'])
+MODE_BOUND_VAL = int(config['hp']['cf_mode_bound'])
+TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cf_time_signature_bound'])
+TEMPO_BOUND_VAL = float(config['hp']['cf_tempo_bound'])
 
 
 def get_song_info(conn, song_id):
