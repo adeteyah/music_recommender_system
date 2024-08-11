@@ -114,6 +114,26 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     return filtered_songs
 
 
+def get_playlist_songs(conn, song_id):
+    query = """
+        SELECT playlist_items
+        FROM playlists
+        WHERE ? IN (playlist_items)
+    """
+    cursor = conn.cursor()
+    cursor.execute(query, (song_id,))
+    playlists = cursor.fetchall()
+
+    playlist_songs = set()
+    for playlist in playlists:
+        songs_in_playlist = playlist[0].split(',')
+        playlist_songs.update(songs_in_playlist)
+
+    # Remove the original song_id from the set
+    playlist_songs.discard(song_id)
+    return playlist_songs
+
+
 def cbf_cf(ids):
     conn = sqlite3.connect(DB)
     features = ['s.' + feature for feature in CBF_FEATURES]
@@ -134,8 +154,7 @@ def cbf_cf(ids):
             features_str = ', '.join(
                 [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
 
-            artist_info = get_artist_info(conn, artist_ids.split(
-                ',')[0]) if artist_ids else ('N/A', 'N/A')
+            artist_info = get_artist_info(conn, artist_ids.split(',')[0])
             artist_name = artist_info[0] if artist_info[0] else 'N/A'
             genres = artist_info[1] if artist_info[1] else 'N/A'
 
@@ -145,8 +164,7 @@ def cbf_cf(ids):
 
         f.write('\nSIMILAR AUDIO FEATURES\n')
         for input_audio_features, song_info in zip(input_audio_features_list, songs_info):
-            artist_info = get_artist_info(conn, song_info[2].split(
-                ',')[0]) if song_info[2] else ('N/A', 'N/A')
+            artist_info = get_artist_info(conn, song_info[2].split(',')[0])
             artist_name = artist_info[0] if artist_info[0] else 'N/A'
             genres = artist_info[1] if artist_info[1] else 'N/A'
 
@@ -164,8 +182,8 @@ def cbf_cf(ids):
                     features_str = ', '.join(
                         [f"{CBF_FEATURES[i]}: {audio_features[i]}" for i in range(len(audio_features))])
 
-                    artist_info = get_artist_info(conn, artist_ids.split(
-                        ',')[0]) if artist_ids else ('N/A', 'N/A')
+                    artist_info = get_artist_info(
+                        conn, artist_ids.split(',')[0])
                     artist_name = artist_info[0] if artist_info[0] else 'N/A'
                     genres = artist_info[1] if artist_info[1] else 'N/A'
 
@@ -173,6 +191,23 @@ def cbf_cf(ids):
                             f"Genres: {genres} | {features_str}\n")
                     f.write(line)
 
+                    # Find playlists containing this song and list other songs in those playlists
+                    playlist_songs = get_playlist_songs(conn, song_id)
+                    if playlist_songs:
+                        f.write(
+                            "  Other songs in playlists containing this track:\n")
+                        for p_idx, p_song_id in enumerate(playlist_songs, start=1):
+                            p_song_info = get_song_info(
+                                conn, p_song_id, features)
+                            if p_song_info:
+                                p_song_name = p_song_info[1]
+                                p_artist_info = get_artist_info(
+                                    conn, p_song_info[2].split(',')[0])
+                                p_artist_name = p_artist_info[0] if p_artist_info[0] else 'N/A'
+                                p_song_url = f"https://open.spotify.com/track/{
+                                    p_song_id}"
+                                f.write(f"    {p_idx}. {p_song_url} {
+                                        p_artist_name} - {p_song_name}\n")
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
 
