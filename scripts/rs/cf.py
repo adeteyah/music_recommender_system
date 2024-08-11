@@ -1,3 +1,4 @@
+import re
 import sqlite3
 import configparser
 from collections import Counter
@@ -79,6 +80,11 @@ def extract_songs_from_playlists(related_playlists, cursor, inputted_ids):
     return song_count
 
 
+def normalize_song_title(title):
+    # Remove anything in parentheses and trim extra spaces
+    return re.sub(r'\s*\(.*?\)\s*', '', title).strip()
+
+
 def cf(ids):
     conn = sqlite3.connect(DB)
     cursor = conn.cursor()
@@ -86,8 +92,8 @@ def cf(ids):
     # 1. INPUTTED IDS
     songs_info = read_inputted_ids(cursor, ids)
     inputted_ids = {song_id for song_id, *_ in songs_info}
-    inputted_songs = {(artist_name, song_name)
-                      for _, _, _, artist_name, song_name in songs_info}
+    inputted_songs = {(artist_name, normalize_song_title(song_name))
+                      for _, song_name, artist_ids, artist_name, song_name in songs_info}
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('\nINPUTTED IDS\n')
@@ -123,12 +129,14 @@ def cf(ids):
                                       key=lambda x: x[1], reverse=True)
                 artist_song_count = {}  # Dictionary to track song counts per artist
                 for rec_idx, ((rec_song_id, rec_artist_name, rec_song_name), count) in enumerate(sorted_songs, 1):
+                    normalized_rec_song_name = normalize_song_title(
+                        rec_song_name)
                     if (rec_song_id not in inputted_ids and
-                        (rec_artist_name, rec_song_name) not in inputted_songs and
+                        (rec_artist_name, normalized_rec_song_name) not in inputted_songs and
                             rec_artist_name not in artist_song_count):
                         artist_song_count[rec_artist_name] = 0
                     if (rec_song_id not in inputted_ids and
-                        (rec_artist_name, rec_song_name) not in inputted_songs and
+                        (rec_artist_name, normalized_rec_song_name) not in inputted_songs and
                             artist_song_count[rec_artist_name] < 2):
                         f.write(f"{rec_idx}. https://open.spotify.com/track/{rec_song_id} {
                                 rec_artist_name} - {rec_song_name} | Count: {count}\n")
