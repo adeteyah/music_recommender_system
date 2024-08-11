@@ -98,18 +98,22 @@ def cf(ids):
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('\nINPUTTED IDS\n')
-        for idx, song_info in enumerate(songs_info, 1):
-            (song_id, song_name, artist_ids, artist_name, artist_genres,
-             acousticness, danceability, energy, instrumentalness, key,
-             liveness, loudness, mode, speechiness, tempo, time_signature,
-             valence) = get_song_info(cursor, song_id)
+        for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
+            # Fetch the audio features along with the song and artist details
+            song_info = get_song_info(cursor, song_id)
+            if song_info:
+                (song_id, song_name, artist_ids, artist_name, artist_genres,
+                 acousticness, danceability, energy, instrumentalness, key,
+                 liveness, loudness, mode, speechiness, tempo, time_signature,
+                 valence) = song_info
 
-            f.write(f"{idx}. https://open.spotify.com/track/{song_id} {artist_name} - {song_name} | Genre: {artist_genres} | "
-                    f"Acousticness: {acousticness}, Danceability: {danceability}, Energy: {
-                        energy}, Instrumentalness: {instrumentalness}, Key: {key}, "
-                    f"Liveness: {liveness}, Loudness: {loudness}, Mode: {
-                        mode}, Speechiness: {speechiness}, Tempo: {tempo}, "
-                    f"Time Signature: {time_signature}, Valence: {valence}\n")
+                # Write the inputted song details with audio features
+                f.write(f"{idx}. https://open.spotify.com/track/{song_id} {artist_name} - {song_name} | Genre: {artist_genres} | "
+                        f"Acousticness: {acousticness}, Danceability: {danceability}, Energy: {
+                            energy}, Instrumentalness: {instrumentalness}, Key: {key}, "
+                        f"Liveness: {liveness}, Loudness: {loudness}, Mode: {
+                            mode}, Speechiness: {speechiness}, Tempo: {tempo}, "
+                        f"Time Signature: {time_signature}, Valence: {valence}\n")
 
         # 2. RELATED PLAYLISTS
         f.write('\nRELATED PLAYLISTS\n')
