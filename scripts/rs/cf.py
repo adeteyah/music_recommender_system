@@ -10,7 +10,6 @@ MODEL = 'Collaborative Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cf_output']
 
-# Read feature boundaries
 SELECTED_AF = config['hp']['cf_features'].split(', ')
 REAL_BOUND_VAL = float(config['hp']['cf_real_bound'])
 MODE_BOUND_VAL = int(config['hp']['cf_mode_bound'])
@@ -89,12 +88,14 @@ def format_song_info(song_info, count=None):
      speechiness, tempo, time_signature, valence) = song_info
 
     base_info = (f"https://open.spotify.com/track/{song_id} {artist_name} - {song_name} | "
-                 f"Genre: {artist_genres} | Acousticness: {acousticness}, "
-                 f"Danceability: {danceability}, Energy: {energy}, "
-                 f"Instrumentalness: {instrumentalness}, Key: {key}, "
+                 f"Genre: {artist_genres} | Acousticness: {
+                     acousticness}, Danceability: {danceability}, "
+                 f"Energy: {energy}, Instrumentalness: {
+                     instrumentalness}, Key: {key}, "
                  f"Liveness: {liveness}, Loudness: {loudness}, Mode: {mode}, "
-                 f"Speechiness: {speechiness}, Tempo: {tempo}, "
-                 f"Time Signature: {time_signature}, Valence: {valence}")
+                 f"Speechiness: {speechiness}, Tempo: {
+                     tempo}, Time Signature: {time_signature}, "
+                 f"Valence: {valence}")
 
     return base_info + (f" | COUNT: {count}" if count is not None else "")
 
@@ -147,51 +148,11 @@ def cf(ids):
                     song_recommendation_info = get_song_info(
                         conn, recommended_song_id)
                     if song_recommendation_info:  # Ensure the song exists
-                        # Get recommended song info
-                        (rec_song_id, rec_song_name, rec_artist_ids, rec_artist_name, rec_artist_genres,
-                         rec_acousticness, rec_danceability, rec_energy, rec_instrumentalness, rec_key,
-                         rec_liveness, rec_loudness, rec_mode, rec_speechiness, rec_tempo,
-                         rec_time_signature, rec_valence) = song_recommendation_info
-
-                        # Check if recommended song falls within acceptable range for audio features
-                        is_valid = True
-                        for feature in SELECTED_AF:
-                            if feature in ('acousticness', 'danceability', 'energy', 'instrumentalness',
-                                           'liveness', 'loudness', 'speechiness', 'valence'):
-                                input_value = getattr(song_info, feature)
-                                rec_value = getattr(
-                                    song_recommendation_info, feature)
-                                if not (input_value - REAL_BOUND_VAL <= rec_value <= input_value + REAL_BOUND_VAL):
-                                    is_valid = False
-                                    break
-                            elif feature == 'key':
-                                # Compare key directly
-                                if rec_key != song_info[8]:
-                                    is_valid = False
-                                    break
-                            elif feature == 'mode':
-                                # Compare mode directly
-                                if rec_mode != song_info[13]:
-                                    is_valid = False
-                                    break
-                            elif feature == 'time_signature':
-                                # Compare time signature directly
-                                if rec_time_signature != song_info[14]:
-                                    is_valid = False
-                                    break
-                            elif feature == 'tempo':
-                                if not (song_info[12] - TEMPO_BOUND_VAL <= rec_tempo <= song_info[12] + TEMPO_BOUND_VAL):
-                                    is_valid = False
-                                    break
-
-                        if not is_valid:
-                            continue
-
-                        song_title = rec_song_name
-                        artist_name = rec_artist_name
+                        song_title = song_recommendation_info[1]
+                        artist_name = song_recommendation_info[3]
 
                         # Skip songs that are input songs or have the same title and artist as input songs
-                        if (rec_song_id in input_song_ids or
+                        if (recommended_song_id in input_song_ids or
                                 (song_title, artist_name) in input_song_titles_artists):
                             continue
 
