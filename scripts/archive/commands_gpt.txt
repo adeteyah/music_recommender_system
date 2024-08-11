@@ -82,15 +82,36 @@ existing database
 
 OUTPUT FORMAT
 INPUTTED IDS (Inputted IDS are song_id)
-1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ...
-2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ...
-3. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ...
-4. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ...
-5. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ...
-6. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ...
-7. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ...
+1. https://open.spotify.com/track/song_id artist_name - song_name 1 | Genre: artist_genres | Acousticness: n, ...
+2. https://open.spotify.com/track/song_id artist_name - song_name 2 | Genre: artist_genres | Acousticness: n, ...
+3. https://open.spotify.com/track/song_id artist_name - song_name 3 | Genre: artist_genres | Acousticness: n, ...
+
+RELATIONS
+For Input https://open.spotify.com/track/song_id artist_name - song_name 1
+1. playlist_id by playlist_creator_id
+2. playlist_id by playlist_creator_id
+3. playlist_id by playlist_creator_id
+
+For Input https://open.spotify.com/track/song_id artist_name - song_name 2
+1. playlist_id by playlist_creator_id
+2. playlist_id by playlist_creator_id
+3. playlist_id by playlist_creator_id
+
+For Input https://open.spotify.com/track/song_id artist_name - song_name 3
+1. playlist_id by playlist_creator_id
+2. playlist_id by playlist_creator_id
+3. playlist_id by playlist_creator_id
 
 SONGS RECOMMENDATION
+For Input https://open.spotify.com/track/song_id artist_name - song_name 1
+1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ... | Count: {N <- how many this duplicate songs merged} | From:  {array of playlist id that contains this songs}
+2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ... | Count: {N <- how many this duplicate songs merged} | From:  {array of playlist id that contains this songs}
+
+For Input https://open.spotify.com/track/song_id artist_name - song_name 2
+1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ... | Count: {N <- how many this duplicate songs merged} | From:  {array of playlist id that contains this songs}
+2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ... | Count: {N <- how many this duplicate songs merged} | From:  {array of playlist id that contains this songs}
+
+For Input https://open.spotify.com/track/song_id artist_name - song_name 3
 1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ... | Count: {N <- how many this duplicate songs merged} | From:  {array of playlist id that contains this songs}
 2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ... | Count: {N <- how many this duplicate songs merged} | From:  {array of playlist id that contains this songs}
 
@@ -103,7 +124,7 @@ config.read('config.cfg')
 
 MODEL = 'Collaborative Filtering'
 DB = config['rs']['db_path']
-OUTPUT_PATH = config['rs']['cbf_output']
+OUTPUT_PATH = config['rs']['cf_output']
 
 # code here
 
