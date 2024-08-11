@@ -22,59 +22,95 @@ def get_song_info(cursor, song_id):
     cursor.execute(query, (song_id,))
     results = cursor.fetchall()
 
+    # If multiple artists, select the one with valid artist_genres
     if results:
         for result in results:
-            if result[4] != 'N/A':
+            if result[4] != 'N/A':  # Check if artist_genres is not "N/A"
+                print(f"DEBUG: Found song info for {
+                      song_id} - {result[1]} by {result[3]} with valid genres")
                 return result
+
+        # If none of the artists had a valid genre, return the first one with "N/A"
+        print(f"DEBUG: Found song info for {
+              song_id} - {results[0][1]} by {results[0][3]} but all genres are 'N/A'")
         return results[0]
     else:
+        print(f"DEBUG: No song info found for {song_id}")
         return None
 
 
 def read_inputted_ids(cursor, ids):
-    query = """
-        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, 
-               COALESCE(NULLIF(a.artist_genres, ''), 'N/A') as artist_genres
-        FROM songs s
-        JOIN artists a ON instr(s.artist_ids, a.artist_id) > 0
-        WHERE s.song_id IN ({seq})
-    """.format(seq=','.join(['?']*len(ids)))
+    songs_info = []
+    for song_id in ids:
+        info = get_song_info(cursor, song_id)
+        if info:
+            songs_info.append(info)
 
-    cursor.execute(query, ids)
-    return cursor.fetchall()
+    print(f"DEBUG: Retrieved {len(songs_info)
+                              } songs from the database for input IDs: {ids}")
+    return songs_info
 
 
 def get_related_playlists(cursor, artist_name, inputted_ids):
-    # Prepare placeholders for the SQL query
-    placeholders = ','.join('?' for _ in inputted_ids)
+    related_playlists = []
 
-    query = """
-        SELECT DISTINCT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
+    # Use a query to fetch playlists containing any of the inputted songs directly
+    for song_id in inputted_ids:
+        cursor.execute("""
+            SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
+            FROM playlists p
+            WHERE p.playlist_items LIKE ?
+        """, (f'%{song_id}%',))
+
+        playlists = cursor.fetchall()
+
+        # Add playlists that match the song ID
+        for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in playlists:
+            playlist_items_list = playlist_items.split(',')
+
+            related_playlists.append(
+                (playlist_id, playlist_creator_id,
+                 playlist_top_genres, playlist_items_list)
+            )
+
+    # Add playlists containing songs by the specific artist
+    cursor.execute("""
+        SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
         FROM playlists p
-        LEFT JOIN songs s ON instr(p.playlist_items, s.song_id) > 0
+        JOIN songs s ON instr(p.playlist_items, s.song_id) > 0
         WHERE s.artist_ids IN (
             SELECT a.artist_id
             FROM artists a
             WHERE a.artist_name = ?
         )
-        OR p.playlist_items LIKE ? 
-    """
+    """, (artist_name,))
 
-    cursor.execute(query, (artist_name, f'%{",".join(inputted_ids)}%'))
-    return cursor.fetchall()
+    artist_related_playlists = cursor.fetchall()
+
+    for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in artist_related_playlists:
+        playlist_items_list = playlist_items.split(',')
+
+        related_playlists.append(
+            (playlist_id, playlist_creator_id,
+             playlist_top_genres, playlist_items_list)
+        )
+
+    return related_playlists
 
 
 def extract_songs_from_playlists(related_playlists, cursor, inputted_ids):
     song_count = Counter()
 
     for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in related_playlists:
-        playlist_items_list = playlist_items.split(',')
-        songs_info = get_song_info(cursor, playlist_items_list)
-        for song_id, song_name, artist_ids, artist_name, artist_genres in songs_info:
-            if song_id in inputted_ids:
-                song_count[(song_id, artist_name, song_name)] += 2
-            else:
-                song_count[(song_id, artist_name, song_name)] += 1
+        for song_id in playlist_items:
+            song_info = get_song_info(cursor, song_id)
+            if song_info:
+                if song_id in inputted_ids:
+                    # Count +2 for same inputted song ID
+                    song_count[(song_id, song_info[3], song_info[1])] += 2
+                elif song_id not in inputted_ids:
+                    song_count[(song_id, song_info[3], song_info[1])
+                               ] += 1  # Count +1 for other songs
 
     return song_count
 
@@ -92,6 +128,8 @@ def cf(ids):
         for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
             f.write(f"{idx}. https://open.spotify.com/track/{song_id} {
                     artist_name} - {song_name} | Genre: {artist_genres}\n")
+            print(f"DEBUG: Writing song info for {
+                  song_id} - {song_name} by {artist_name}")
 
         # 2. RELATED PLAYLISTS
         f.write('\nRELATED PLAYLISTS\n')
