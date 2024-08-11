@@ -30,29 +30,50 @@ def read_inputted_ids(cursor, ids):
     return songs_info
 
 
-def get_related_playlists(cursor, artist_name):
-    cursor.execute("""
-        SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
-        FROM playlists p
-    """)
-    playlists = cursor.fetchall()
-
+def get_related_playlists(cursor, artist_name, inputted_ids):
     related_playlists = []
-    for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in playlists:
-        playlist_items_list = playlist_items.split(',')
 
-        # Find playlists that contain songs by the specific artist
-        artist_names = set()
-        for song_id in playlist_items_list:
-            song_info = get_song_info(cursor, song_id)
-            if song_info and song_info[3] == artist_name:
-                artist_names.add(song_info[3])
+    # Use a query to fetch playlists containing any of the inputted songs directly
+    for song_id in inputted_ids:
+        cursor.execute("""
+            SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
+            FROM playlists p
+            WHERE p.playlist_items LIKE ?
+        """, (f'%{song_id}%',))
 
-        if artist_names:
+        playlists = cursor.fetchall()
+
+        # Add playlists that match the song ID
+        for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in playlists:
+            playlist_items_list = playlist_items.split(',')
+
             related_playlists.append(
                 (playlist_id, playlist_creator_id,
                  playlist_top_genres, playlist_items_list)
             )
+
+    # Add playlists containing songs by the specific artist
+    cursor.execute("""
+        SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
+        FROM playlists p
+        JOIN songs s ON instr(p.playlist_items, s.song_id) > 0
+        WHERE s.artist_ids IN (
+            SELECT a.artist_id
+            FROM artists a
+            WHERE a.artist_name = ?
+        )
+    """, (artist_name,))
+
+    artist_related_playlists = cursor.fetchall()
+
+    for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in artist_related_playlists:
+        playlist_items_list = playlist_items.split(',')
+
+        related_playlists.append(
+            (playlist_id, playlist_creator_id,
+             playlist_top_genres, playlist_items_list)
+        )
+
     return related_playlists
 
 
