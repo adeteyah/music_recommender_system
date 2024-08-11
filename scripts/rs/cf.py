@@ -22,16 +22,12 @@ def get_song_info(cursor, song_id):
     result = cursor.fetchone()
 
     if result:
-        song_id, song_name, artist_ids, artist_name, artist_genres = result
-        # Handle missing artist_genres
-        if artist_genres is None or artist_genres.strip() == '':
-            artist_genres = 'Unknown Genre'
         print(f"DEBUG: Found song info for {
-              song_id} - {song_name} by {artist_name} | Genre: {artist_genres}")
-        return song_id, song_name, artist_ids, artist_name, artist_genres
+              song_id} - {result[1]} by {result[3]}")
     else:
         print(f"DEBUG: No song info found for {song_id}")
-        return None
+
+    return result
 
 
 def read_inputted_ids(cursor, ids):
@@ -100,12 +96,11 @@ def extract_songs_from_playlists(related_playlists, cursor, inputted_ids):
         for song_id in playlist_items:
             song_info = get_song_info(cursor, song_id)
             if song_info:
-                song_id, song_name, artist_ids, artist_name, artist_genres = song_info
                 if song_id in inputted_ids:
                     # Count +2 for same inputted song ID
-                    song_count[(song_id, artist_name, song_name)] += 2
+                    song_count[(song_id, song_info[3], song_info[1])] += 2
                 elif song_id not in inputted_ids:
-                    song_count[(song_id, artist_name, song_name)
+                    song_count[(song_id, song_info[3], song_info[1])
                                ] += 1  # Count +1 for other songs
 
     return song_count
