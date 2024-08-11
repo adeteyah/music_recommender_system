@@ -16,6 +16,7 @@ REAL_BOUND_VAL = float(config['hp']['cf_cbf_real_bound'])
 MODE_BOUND_VAL = int(config['hp']['cf_cbf_mode_bound'])
 TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cf_cbf_time_signature_bound'])
 TEMPO_BOUND_VAL = float(config['hp']['cf_cbf_tempo_bound'])
+VALENCE_ADDERAL = float(config['hp']['cf_cbf_valence_adderal'])
 
 # Weights for sorting
 GENRE_WEIGHT = 0.2
@@ -117,13 +118,13 @@ def calculate_similarity(song_info, input_song_info):
         'danceability': REAL_BOUND_VAL,
         'energy': REAL_BOUND_VAL,
         'instrumentalness': REAL_BOUND_VAL,
-        'key': 1,
+        # 'key': 1,
         'liveness': REAL_BOUND_VAL,
         'loudness': REAL_BOUND_VAL,
         'mode': MODE_BOUND_VAL,
         'speechiness': REAL_BOUND_VAL,
         'tempo': TEMPO_BOUND_VAL,
-        'time_signature': 1,
+        # 'time_signature': 1,
         'valence': REAL_BOUND_VAL,
     }
 
@@ -153,7 +154,7 @@ def is_similar_song(song_info, input_song_info, FEATURE_SELECT):
         'speechiness': REAL_BOUND_VAL,
         'tempo': TEMPO_BOUND_VAL,
         'time_signature': 1,
-        'valence': REAL_BOUND_VAL,
+        'valence': REAL_BOUND_VAL - 0.05,
     }
 
     for feature in FEATURE_SELECT:
