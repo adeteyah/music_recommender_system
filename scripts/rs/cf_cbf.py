@@ -206,7 +206,7 @@ def cf_cbf(ids):
                         similarity_score = 1  # Apply a simple similarity score
 
                     count = recommended_songs.get(song_id, 0)
-                    return 0.6 * similarity_score + 0.4 * count
+                    return 0.7 * similarity_score + 0.3 * count
 
                 # Sort by weighted score
                 sorted_recommended_songs = sorted(
