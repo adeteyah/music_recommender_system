@@ -5,7 +5,7 @@ import configparser
 config = configparser.ConfigParser()
 config.read('config.cfg')
 
-MODEL = 'Content-based Filtering'
+MODEL = 'Collaborative Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cf_output']
 
@@ -48,7 +48,7 @@ def format_playlist_relations(playlists):
     return [f"{playlist_id} by {playlist_creator_id}" for playlist_id, playlist_creator_id in playlists]
 
 
-def cbf(ids):
+def cf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
 
@@ -59,8 +59,8 @@ def cbf(ids):
             file.write(f"{i}. {formatted_info}\n")
 
             # Add RELATIONS section
-            playlists = get_playlists_for_song(conn, song_info[0])
             file.write(f"RELATIONS\n")
+            playlists = get_playlists_for_song(conn, song_info[0])
             for playlist_id, playlist_creator_id in playlists:
                 file.write(f"{i}. {playlist_id} by {playlist_creator_id}\n")
 
@@ -75,4 +75,4 @@ if __name__ == "__main__":
         '7JIuqL4ZqkpfGKQhYlrirs',
         '5dTHtzHFPyi8TlTtzoz1J9',
     ]
-    cbf(ids)
+    cf(ids)
