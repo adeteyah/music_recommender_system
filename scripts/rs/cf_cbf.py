@@ -13,7 +13,9 @@ OUTPUT_PATH = config['rs']['cf_cbf_output']
 
 def get_song_info(cursor, song_id):
     cursor.execute("""
-        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres,
+               s.acousticness, s.danceability, s.energy, s.instrumentalness,
+               s.key, s.liveness, s.loudness, s.mode, s.speechiness, s.tempo, s.time_signature, s.valence
         FROM songs s
         JOIN artists a ON a.artist_id = (
             SELECT substr(s.artist_ids, 1, instr(s.artist_ids || ',', ',') - 1)
@@ -23,18 +25,11 @@ def get_song_info(cursor, song_id):
     return cursor.fetchone()
 
 
-def get_audio_features(cursor, song_id):
-    cursor.execute("""
-        SELECT danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo
-        FROM audio_features
-        WHERE song_id = ?
-    """, (song_id,))
-    return cursor.fetchone()
-
-
 def read_inputted_ids(cursor, ids):
     cursor.execute("""
-        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres,
+               s.acousticness, s.danceability, s.energy, s.instrumentalness,
+               s.key, s.liveness, s.loudness, s.mode, s.speechiness, s.tempo, s.time_signature, s.valence
         FROM songs s
         JOIN artists a ON a.artist_id = (
             SELECT substr(s.artist_ids, 1, instr(s.artist_ids || ',', ',') - 1)
@@ -79,7 +74,7 @@ def extract_songs_from_playlists(related_playlists, cursor, inputted_ids, inputt
         for song_id in playlist_items:
             song_info = get_song_info(cursor, song_id)
             if song_info:
-                song_name, artist_name = song_info[1], song_info[3]
+                song_name, artist_name = song_info[1], song_info[4]
 
                 # Skip variations of the input songs
                 if (song_id not in inputted_ids) and (song_name, artist_name) not in inputted_songs:
@@ -87,7 +82,7 @@ def extract_songs_from_playlists(related_playlists, cursor, inputted_ids, inputt
                     song_count[(song_name, artist_name)] += 1
                     # Store one of the song IDs for this song
                     if (song_name, artist_name) not in song_id_map:
-                        song_id_map[(song_name, artist_name)] = song_id
+                        song_id_map[(song_name, artist_name)] = song_info
 
     return song_count, song_id_map
 
@@ -104,13 +99,15 @@ def cf_cbf(ids):
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('\nINPUTTED IDS\n')
-        for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
+        for idx, song in enumerate(songs_info, 1):
+            song_id, song_name, artist_ids, artist_name, artist_genres = song[:5]
             f.write(f"{idx}. https://open.spotify.com/track/{song_id} {
                     artist_name} - {song_name} | Genre: {artist_genres}\n")
 
         # 2. RELATED PLAYLISTS
         f.write('\nRELATED PLAYLISTS\n')
-        for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
+        for idx, song in enumerate(songs_info, 1):
+            song_id, song_name, artist_ids, artist_name, artist_genres = song[:5]
             f.write(f"\nFor Input Song: {artist_name} - {song_name}\n")
             related_playlists = get_related_playlists(cursor, artist_name)
             if not related_playlists:
@@ -122,7 +119,8 @@ def cf_cbf(ids):
 
         # 3. SONG RECOMMENDATION
         f.write('\nSONG RECOMMENDATION\n')
-        for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
+        for idx, song in enumerate(songs_info, 1):
+            song_id, song_name, artist_ids, artist_name, artist_genres = song[:5]
             f.write(f"\nRecommendations for Input Song: {
                     artist_name} - {song_name}\n")
             related_playlists = get_related_playlists(cursor, artist_name)
@@ -139,21 +137,25 @@ def cf_cbf(ids):
                     if rec_artist_name not in artist_song_count:
                         artist_song_count[rec_artist_name] = 0
                     if artist_song_count[rec_artist_name] < 2:
-                        # Retrieve the stored song ID from song_id_map
-                        rec_song_id = song_id_map[(
+                        # Retrieve the stored song info from song_id_map
+                        rec_song_info = song_id_map[(
                             rec_song_name, rec_artist_name)]
+                        rec_song_id, rec_song_name, rec_artist_ids, rec_artist_name, rec_artist_genres = rec_song_info[
+                            :5]
+                        rec_audio_features = rec_song_info[5:]
 
-                        # Get audio features
-                        audio_features = get_audio_features(
-                            cursor, rec_song_id)
-                        if audio_features:
-                            features_str = ', '.join([f"{feat}: {val:.2f}" for feat, val in zip(
-                                ['Danceability', 'Energy', 'Key', 'Loudness', 'Mode', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence', 'Tempo'], audio_features)])
-                        else:
-                            features_str = "No audio features available"
+                        # Format the audio features for output
+                        audio_features_str = ", ".join(
+                            f"{name}: {value:.2f}" for name, value in zip(
+                                ["Acousticness", "Danceability", "Energy", "Instrumentalness", "Key",
+                                 "Liveness", "Loudness", "Mode", "Speechiness", "Tempo", "Time Signature", "Valence"],
+                                rec_audio_features
+                            )
+                        )
 
                         f.write(f"{rec_idx}. https://open.spotify.com/track/{rec_song_id} {
-                                rec_artist_name} - {rec_song_name} | Count: {count} | Features: {features_str}\n")
+                                rec_artist_name} - {rec_song_name} | Count: {count}\n")
+                        f.write(f"    Audio Features: {audio_features_str}\n")
                         artist_song_count[rec_artist_name] += 1
 
     conn.close()
