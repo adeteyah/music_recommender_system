@@ -1,5 +1,6 @@
 import sqlite3
 import configparser
+from collections import Counter
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -45,12 +46,12 @@ def get_songs_from_playlists(conn, playlist_ids):
         """, (playlist_id,))
         items = cursor.fetchone()[0].split(',')
         all_songs.extend(items)
-    return list(set(all_songs))  # Return unique song IDs
+    return Counter(all_songs)  # Return a counter of song IDs
 
 
-def format_song_info(song_info):
+def format_song_info(song_info, count):
     song_id, song_name, artist_ids, artist_name, artist_genres, acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo, time_signature, valence = song_info
-    return f"https://open.spotify.com/track/{song_id} {artist_name} - {song_name} | Genre: {artist_genres} | Acousticness: {acousticness}, Danceability: {danceability}, Energy: {energy}, Instrumentalness: {instrumentalness}, Key: {key}, Liveness: {liveness}, Loudness: {loudness}, Mode: {mode}, Speechiness: {speechiness}, Tempo: {tempo}, Time Signature: {time_signature}, Valence: {valence}"
+    return f"https://open.spotify.com/track/{song_id} {artist_name} - {song_name} | Genre: {artist_genres} | Acousticness: {acousticness}, Danceability: {danceability}, Energy: {energy}, Instrumentalness: {instrumentalness}, Key: {key}, Liveness: {liveness}, Loudness: {loudness}, Mode: {mode}, Speechiness: {speechiness}, Tempo: {tempo}, Time Signature: {time_signature}, Valence: {valence} | COUNT: {count}"
 
 
 def read_inputted_ids(ids, conn):
@@ -64,7 +65,7 @@ def cf(ids):
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as file:
         file.write('INPUTTED IDS\n')
         for i, song_info in enumerate(songs_info, 1):
-            formatted_info = format_song_info(song_info)
+            formatted_info = format_song_info(song_info, count=1)
             file.write(f"{i}. {formatted_info}\n")
 
             # Add FOUND IN section
@@ -79,12 +80,12 @@ def cf(ids):
                 file.write(f"\nSONGS RECOMMENDATION\n")
                 recommended_songs = get_songs_from_playlists(
                     conn, playlist_ids)
-                for k, recommended_song_id in enumerate(recommended_songs, 1):
+                for k, (recommended_song_id, count) in enumerate(recommended_songs.items(), 1):
                     song_recommendation_info = get_song_info(
                         conn, recommended_song_id)
                     if song_recommendation_info:  # Ensure the song exists
                         formatted_recommendation = format_song_info(
-                            song_recommendation_info)
+                            song_recommendation_info, count)
                         file.write(f"{k}. {formatted_recommendation}\n")
             file.write('\n')
 
