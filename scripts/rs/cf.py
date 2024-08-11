@@ -38,27 +38,15 @@ def read_inputted_ids(cursor, ids):
 
 
 def get_related_playlists(cursor, artist_name, inputted_ids):
-    # Query related playlists for the given artist_name and each inputted song_id
-    query = """
-        SELECT DISTINCT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
+    cursor.execute("""
+        SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
         FROM playlists p
         WHERE EXISTS (
-            SELECT 1
-            FROM songs s
-            WHERE s.song_id IN ({}) AND instr(p.playlist_items, s.song_id) > 0
+            SELECT 1 FROM songs s WHERE s.song_id IN ({}) AND instr(p.playlist_items, s.song_id) > 0
         )
         OR p.playlist_items LIKE ?
-        OR p.playlist_items IN (
-            SELECT s.song_id
-            FROM songs s
-            JOIN artists a ON a.artist_id = (
-                SELECT substr(s.artist_ids, 1, instr(s.artist_ids || ',', ',') - 1)
-            )
-            WHERE a.artist_name = ?
-        )
-    """.format(','.join('?' for _ in inputted_ids))
+    """.format(','.join('?' for _ in inputted_ids)), (*inputted_ids, f'%{artist_name}%'))
 
-    cursor.execute(query, (*inputted_ids, f'%{artist_name}%', artist_name))
     return cursor.fetchall()
 
 
