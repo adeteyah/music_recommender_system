@@ -22,24 +22,7 @@ def get_song_info(conn, song_id):
         JOIN artists a ON s.artist_ids = a.artist_id
         WHERE s.song_id = ?
     """, (song_id,))
-    song_info = cursor.fetchone()
-
-    if song_info:
-        # Extract the first artist_id if there are multiple
-        artist_ids = song_info[2].split(
-            ',')[0] if ',' in song_info[2] else song_info[2]
-        cursor.execute("""
-            SELECT artist_name, artist_genres
-            FROM artists
-            WHERE artist_id = ?
-        """, (artist_ids,))
-        artist_info = cursor.fetchone()
-
-        if artist_info:
-            # Replace the artist_name and artist_genres in the original song_info
-            song_info = song_info[:3] + artist_info + song_info[5:]
-
-    return song_info
+    return cursor.fetchone()
 
 
 def get_playlists_for_song(conn, song_id):
@@ -85,6 +68,10 @@ def cf(ids):
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as file:
         file.write('INPUTTED IDS\n')
         for i, song_info in enumerate(songs_info, 1):
+            if song_info is None:  # Check if the song was found
+                file.write(f"{i}. Song ID not found in the database.\n")
+                continue
+
             formatted_info = format_song_info(song_info)
             file.write(f"{i}. {formatted_info}\n")
 
