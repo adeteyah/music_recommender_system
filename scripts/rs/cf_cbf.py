@@ -110,29 +110,42 @@ def read_inputted_ids(ids, conn):
 
 def is_similar_song(song_info, input_song_info, FEATURE_SELECT):
     feature_ranges = {
-        'acousticness': 0.3,
-        'danceability': 0.3,
-        'energy': 0.3,
-        'instrumentalness': 0.3,
-        'key': 1,
-        'liveness': 0.3,
-        'loudness': 0.3,
-        'mode': 1,
-        'speechiness': 0.3,
-        'tempo': 10.0,
-        'time_signature': 1,
-        'valence': 0.3,
+        'acousticness': REAL_BOUND_VAL,
+        'danceability': REAL_BOUND_VAL,
+        'energy': REAL_BOUND_VAL,
+        'instrumentalness': REAL_BOUND_VAL,
+        'key': MODE_BOUND_VAL,
+        'liveness': REAL_BOUND_VAL,
+        'loudness': REAL_BOUND_VAL,
+        'mode': MODE_BOUND_VAL,
+        'speechiness': REAL_BOUND_VAL,
+        'tempo': TEMPO_BOUND_VAL,
+        'time_signature': TIME_SIGNATURE_BOUND_VAL,
+        'valence': REAL_BOUND_VAL,
+    }
+
+    # Get feature indexes from the list
+    feature_indexes = {
+        'acousticness': 6,
+        'danceability': 7,
+        'energy': 8,
+        'instrumentalness': 9,
+        'key': 10,
+        'liveness': 11,
+        'loudness': 12,
+        'mode': 13,
+        'speechiness': 14,
+        'tempo': 15,
+        'time_signature': 16,
+        'valence': 17
     }
 
     for feature in FEATURE_SELECT:
-        # Get the feature index from song_info and input_song_info based on the feature name
-        idx = ['song_id', 'song_name', 'artist_ids', 'artist_name', 'artist_genres',
-               'acousticness', 'danceability', 'energy', 'instrumentalness', 'key',
-               'liveness', 'loudness', 'mode', 'speechiness', 'tempo', 'time_signature',
-               'valence'].index(feature)
-
-        if abs(song_info[idx] - input_song_info[idx]) > feature_ranges[feature]:
-            return False
+        if feature in feature_indexes:
+            idx = feature_indexes[feature]
+            range_value = feature_ranges[feature]
+            if abs(song_info[idx] - input_song_info[idx]) > range_value:
+                return False
 
     return True
 
