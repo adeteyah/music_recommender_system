@@ -139,6 +139,35 @@ def calculate_similarity(song_info, input_song_info):
     return similarity_score
 
 
+def is_similar_song(song_info, input_song_info, FEATURE_SELECT):
+    similarity_score = 0
+    feature_ranges = {
+        'acousticness': REAL_BOUND_VAL,
+        'danceability': REAL_BOUND_VAL,
+        'energy': REAL_BOUND_VAL,
+        'instrumentalness': REAL_BOUND_VAL,
+        'key': 1,
+        'liveness': REAL_BOUND_VAL,
+        'loudness': REAL_BOUND_VAL,
+        'mode': MODE_BOUND_VAL,
+        'speechiness': REAL_BOUND_VAL,
+        'tempo': TEMPO_BOUND_VAL,
+        'time_signature': 1,
+        'valence': REAL_BOUND_VAL,
+    }
+
+    for feature in FEATURE_SELECT:
+        idx = ['song_id', 'song_name', 'artist_ids', 'artist_name', 'artist_genres',
+               'acousticness', 'danceability', 'energy', 'instrumentalness', 'key',
+               'liveness', 'loudness', 'mode', 'speechiness', 'tempo', 'time_signature',
+               'valence'].index(feature)
+
+        if abs(song_info[idx] - input_song_info[idx]) > feature_ranges[feature]:
+            return False
+
+    return True
+
+
 def cf_cbf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
