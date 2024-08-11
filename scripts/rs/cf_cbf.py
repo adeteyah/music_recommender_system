@@ -23,6 +23,15 @@ def get_song_info(cursor, song_id):
     return cursor.fetchone()
 
 
+def get_audio_features(cursor, song_id):
+    cursor.execute("""
+        SELECT danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo
+        FROM audio_features
+        WHERE song_id = ?
+    """, (song_id,))
+    return cursor.fetchone()
+
+
 def read_inputted_ids(cursor, ids):
     cursor.execute("""
         SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
@@ -133,8 +142,18 @@ def cf_cbf(ids):
                         # Retrieve the stored song ID from song_id_map
                         rec_song_id = song_id_map[(
                             rec_song_name, rec_artist_name)]
+
+                        # Get audio features
+                        audio_features = get_audio_features(
+                            cursor, rec_song_id)
+                        if audio_features:
+                            features_str = ', '.join([f"{feat}: {val:.2f}" for feat, val in zip(
+                                ['Danceability', 'Energy', 'Key', 'Loudness', 'Mode', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence', 'Tempo'], audio_features)])
+                        else:
+                            features_str = "No audio features available"
+
                         f.write(f"{rec_idx}. https://open.spotify.com/track/{rec_song_id} {
-                                rec_artist_name} - {rec_song_name} | Count: {count}\n")
+                                rec_artist_name} - {rec_song_name} | Count: {count} | Features: {features_str}\n")
                         artist_song_count[rec_artist_name] += 1
 
     conn.close()
