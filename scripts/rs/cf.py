@@ -1,7 +1,6 @@
 import sqlite3
 import configparser
 from collections import defaultdict
-import re
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -99,45 +98,14 @@ def read_inputted_ids(ids, conn):
     return [get_song_info(conn, song_id) for song_id in ids]
 
 
-def is_similar_song(song_info, existing_songs):
-    song_id, song_name, artist_ids, _, _, _, _, _, _, _, _, _, _, _, _, _ = song_info
-    artist_name = existing_songs.get(song_id, {}).get('artist_name', '')
-    existing_song_name = existing_songs.get(song_id, {}).get('song_name', '')
-
-    if song_id in existing_songs:
-        return True
-
-    for key, info in existing_songs.items():
-        if artist_name == info['artist_name'] and song_name == info['song_name']:
-            return True
-        if artist_name == info['artist_name'] and similar_title(song_name, info['song_name']):
-            return True
-
-    return False
-
-
-def similar_title(title1, title2):
-    # Function to check if titles are similar (e.g., same song with different variations like remix, cover, etc.)
-    variations = ['remix', 'remaster', 'cover', 'version', 'edit', 'live']
-    title1 = title1.lower()
-    title2 = title2.lower()
-
-    for var in variations:
-        if var in title1 and var in title2:
-            return True
-
-    return title1 == title2
-
-
 def cf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
 
-    # Create a dictionary of inputted songs
-    input_songs = {song_info[0]: {
-        'song_name': song_info[1],
-        'artist_name': song_info[3]
-    } for song_info in songs_info if song_info}
+    # Prepare to track excluded songs
+    input_song_ids = set(song_info[0] for song_info in songs_info if song_info)
+    input_song_titles_artists = {
+        (song_info[1], song_info[3]) for song_info in songs_info if song_info}
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as file:
         file.write('INPUTTED IDS\n')
@@ -169,28 +137,26 @@ def cf(ids):
                 # Track song count per artist
                 artist_song_count = defaultdict(int)
                 k = 1
-                existing_songs = {}
-
                 for recommended_song_id, count in sorted_recommended_songs:
                     song_recommendation_info = get_song_info(
                         conn, recommended_song_id)
                     if song_recommendation_info:  # Ensure the song exists
-                        if not is_similar_song(song_recommendation_info, input_songs):
-                            # Artist name from get_song_info
-                            artist_name = song_recommendation_info[3]
-                            # Allow only 2 songs per artist
-                            if artist_song_count[artist_name] < 2:
-                                formatted_recommendation = format_song_info(
-                                    song_recommendation_info, count)
-                                file.write(
-                                    f"{k}. {formatted_recommendation}\n")
-                                # Increment the count for the artist
-                                artist_song_count[artist_name] += 1
-                                k += 1
-                                existing_songs[recommended_song_id] = {
-                                    'song_name': song_recommendation_info[1],
-                                    'artist_name': artist_name
-                                }
+                        song_title = song_recommendation_info[1]
+                        artist_name = song_recommendation_info[3]
+
+                        # Skip songs that are input songs or have the same title and artist as input songs
+                        if (recommended_song_id in input_song_ids or
+                                (song_title, artist_name) in input_song_titles_artists):
+                            continue
+
+                        # Allow only 2 songs per artist
+                        if artist_song_count[artist_name] < 2:
+                            formatted_recommendation = format_song_info(
+                                song_recommendation_info, count)
+                            file.write(f"{k}. {formatted_recommendation}\n")
+                            # Increment the count for the artist
+                            artist_song_count[artist_name] += 1
+                            k += 1
             file.write('\n')
 
     conn.close()
