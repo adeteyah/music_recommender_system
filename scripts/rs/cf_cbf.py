@@ -105,7 +105,7 @@ def read_inputted_ids(ids, conn):
     return [get_song_info(conn, song_id) for song_id in ids]
 
 
-def is_similar_song(song_info, input_song_info, cbf_features):
+def is_similar_song(song_info, input_song_info, FEATURE_SELECT):
     feature_ranges = {
         'acousticness': 0.3,
         'danceability': 0.3,
@@ -121,7 +121,7 @@ def is_similar_song(song_info, input_song_info, cbf_features):
         'valence': 0.3,
     }
 
-    for feature in cbf_features:
+    for feature in FEATURE_SELECT:
         # Get the feature index from song_info and input_song_info based on the feature name
         idx = ['song_id', 'song_name', 'artist_ids', 'artist_name', 'artist_genres',
                'acousticness', 'danceability', 'energy', 'instrumentalness', 'key',
@@ -186,8 +186,8 @@ def cf_cbf(ids):
                                 (song_title, artist_name) in input_song_titles_artists):
                             continue
 
-                        # Check if the song is similar enough
-                        if is_similar_song(song_recommendation_info, song_info):
+                        # Check if the song is similar enough based on selected features
+                        if is_similar_song(song_recommendation_info, song_info, cbf_features):
                             # Allow only 2 songs per artist
                             if artist_song_count[artist_name] < 2:
                                 formatted_recommendation = format_song_info(
