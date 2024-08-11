@@ -9,7 +9,8 @@ config.read('config.cfg')
 MODEL = 'Collaborative Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cf_output']
-CF_BOUND = config['rs']['cf_bound']
+
+REAL_BOUND_VAL = 0.1
 
 
 def get_song_info(conn, song_id):
