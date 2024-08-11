@@ -89,6 +89,8 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     for song in songs:
         song_id, song_name, artist_ids = song[:3]
         normalized_name = normalize_song_name(song_name)
+
+        # Skip songs that are in the input list or are duplicates
         if song_id in inputted_ids or (normalized_name, artist_ids) in seen_song_artist_names:
             continue
 
@@ -106,6 +108,7 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
         filtered_songs.append(song)
         seen_song_artist_pairs.add(song_artist_pair)
 
+    # Sort the remaining songs based on similarity
     filtered_songs.sort(key=lambda song: calculate_similarity(
         song[3:], input_audio_features))
     return filtered_songs
