@@ -1,6 +1,6 @@
 import sqlite3
 import configparser
-from collections import Counter
+from collections import Counter, defaultdict
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -105,9 +105,21 @@ def cf(ids):
             if not song_count:
                 f.write("No song recommendations found.\n")
             else:
+                # Filter and sort the songs
+                artist_song_limit = defaultdict(int)
+                limited_songs = []
+
                 sorted_songs = sorted(song_count.items(),
                                       key=lambda x: x[1], reverse=True)
                 for rec_idx, ((rec_song_id, rec_artist_name, rec_song_name), count) in enumerate(sorted_songs, 1):
+                    # Limit to 2 songs per artist
+                    if artist_song_limit[rec_artist_name] < 2:
+                        limited_songs.append(
+                            (rec_idx, rec_song_id, rec_artist_name, rec_song_name, count))
+                        artist_song_limit[rec_artist_name] += 1
+
+                # Write the limited songs to the output
+                for rec_idx, rec_song_id, rec_artist_name, rec_song_name, count in limited_songs:
                     f.write(f"{rec_idx}. https://open.spotify.com/track/{rec_song_id} {
                             rec_artist_name} - {rec_song_name} | Count: {count}\n")
 
