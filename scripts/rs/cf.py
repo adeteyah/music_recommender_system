@@ -45,7 +45,7 @@ def read_inputted_ids(ids, conn):
 
 
 def format_playlist_relations(playlists):
-    return [f"{playlist_id} by {playlist_creator_id}" for playlist_id, playlist_creator_id in playlists]
+    return [f"{i + 1}. {playlist_id} by {playlist_creator_id}" for i, (playlist_id, playlist_creator_id) in enumerate(playlists)]
 
 
 def cf(ids):
@@ -59,10 +59,11 @@ def cf(ids):
             file.write(f"{i}. {formatted_info}\n")
 
             # Add RELATIONS section
-            file.write(f"RELATIONS\n")
+            file.write(f"\nFOUND IN:\n")
             playlists = get_playlists_for_song(conn, song_info[0])
-            for playlist_id, playlist_creator_id in playlists:
-                file.write(f"{i}. {playlist_id} by {playlist_creator_id}\n")
+            for j, (playlist_id, playlist_creator_id) in enumerate(playlists, 1):
+                file.write(f"{j}. {playlist_id} by {playlist_creator_id}\n")
+            file.write('\n')
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
