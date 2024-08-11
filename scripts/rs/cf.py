@@ -1,4 +1,3 @@
-
 import sqlite3
 import configparser
 
@@ -28,25 +27,34 @@ def get_song_info(conn, song_id):
 def get_playlists_for_song(conn, song_id):
     cursor = conn.cursor()
     cursor.execute("""
-        SELECT playlist_id, playlist_creator_id
+        SELECT playlist_id, playlist_creator_id, playlist_items
         FROM playlists
         WHERE playlist_items LIKE ?
     """, (f'%{song_id}%',))
     return cursor.fetchall()
 
 
+def get_songs_from_playlists(conn, playlist_ids):
+    all_songs = []
+    for playlist_id in playlist_ids:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT playlist_items
+            FROM playlists
+            WHERE playlist_id = ?
+        """, (playlist_id,))
+        items = cursor.fetchone()[0].split(',')
+        all_songs.extend(items)
+    return list(set(all_songs))  # Return unique song IDs
+
+
 def format_song_info(song_info):
     song_id, song_name, artist_ids, artist_name, artist_genres, acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo, time_signature, valence = song_info
-
     return f"https://open.spotify.com/track/{song_id} {artist_name} - {song_name} | Genre: {artist_genres} | Acousticness: {acousticness}, Danceability: {danceability}, Energy: {energy}, Instrumentalness: {instrumentalness}, Key: {key}, Liveness: {liveness}, Loudness: {loudness}, Mode: {mode}, Speechiness: {speechiness}, Tempo: {tempo}, Time Signature: {time_signature}, Valence: {valence}"
 
 
 def read_inputted_ids(ids, conn):
     return [get_song_info(conn, song_id) for song_id in ids]
-
-
-def format_playlist_relations(playlists):
-    return [f"{i + 1}. {playlist_id} by {playlist_creator_id}" for i, (playlist_id, playlist_creator_id) in enumerate(playlists)]
 
 
 def cf(ids):
@@ -59,11 +67,25 @@ def cf(ids):
             formatted_info = format_song_info(song_info)
             file.write(f"{i}. {formatted_info}\n")
 
-            # Add RELATIONS section
+            # Add FOUND IN section
             file.write(f"\nFOUND IN:\n")
             playlists = get_playlists_for_song(conn, song_info[0])
-            for j, (playlist_id, playlist_creator_id) in enumerate(playlists, 1):
+            playlist_ids = [playlist_id for playlist_id, _, _ in playlists]
+            for j, (playlist_id, playlist_creator_id, _) in enumerate(playlists, 1):
                 file.write(f"{j}. {playlist_id} by {playlist_creator_id}\n")
+
+            # Add SONGS RECOMMENDATION section
+            if playlist_ids:
+                file.write(f"\nSONGS RECOMMENDATION\n")
+                recommended_songs = get_songs_from_playlists(
+                    conn, playlist_ids)
+                for k, recommended_song_id in enumerate(recommended_songs, 1):
+                    song_recommendation_info = get_song_info(
+                        conn, recommended_song_id)
+                    if song_recommendation_info:  # Ensure the song exists
+                        formatted_recommendation = format_song_info(
+                            song_recommendation_info)
+                        file.write(f"{k}. {formatted_recommendation}\n")
             file.write('\n')
 
     conn.close()
