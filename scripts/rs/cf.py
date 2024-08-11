@@ -33,23 +33,22 @@ def read_inputted_ids(cursor, ids):
         WHERE s.song_id IN ({})
     """.format(','.join('?' for _ in ids))
 
-    # Execute the query with the song IDs as parameters
     cursor.execute(query, ids)
-
     return cursor.fetchall()
 
 
 def get_related_playlists(cursor, artist_name, inputted_ids):
     # Query all related playlists in a single query
-    cursor.execute("""
+    query = """
         SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
         FROM playlists p
         WHERE EXISTS (
             SELECT 1 FROM songs s WHERE s.song_id IN ({}) AND instr(p.playlist_items, s.song_id) > 0
         )
         OR p.playlist_items LIKE ?
-    """.format(','.join('?' for _ in inputted_ids)), (*inputted_ids, f'%{artist_name}%'))
+    """.format(','.join('?' for _ in inputted_ids))
 
+    cursor.execute(query, (*inputted_ids, f'%{artist_name}%'))
     return cursor.fetchall()
 
 
@@ -135,6 +134,6 @@ def cf(ids):
 
 
 if __name__ == "__main__":
-    ids = ['1yKAqZoi8xWGLCf5vajroL',
-           '5VGlqQANWDKJFl0MBG3sg2', '0lP4HYLmvowOKdsQ7CVkuq']
+    ids = ['6EIMUjQ7Q8Zr2VtIUik4He',
+           '30Z12rJpW0M0u8HMFpigTB', '3wlLknnMtD8yZ0pCtCeeK4']
     cf(ids)
