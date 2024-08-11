@@ -97,6 +97,13 @@ CREATE TABLE IF NOT EXISTS playlists (
 
 CREATE INDEX IF NOT EXISTS idx_playlists_playlist_creator_id ON playlists (playlist_creator_id);
 CREATE INDEX IF NOT EXISTS idx_playlists_playlist_top_artist_ids ON playlists (playlist_top_artist_ids);
+
+
+CREATE INDEX IF NOT EXISTS idx_songs_song_id ON songs(song_id);
+CREATE INDEX IF NOT EXISTS idx_songs_artist_ids ON songs(artist_ids);
+CREATE INDEX IF NOT EXISTS idx_playlists_playlist_items ON playlists(playlist_items);
+CREATE INDEX IF NOT EXISTS idx_artists_artist_id ON artists(artist_id);
+CREATE INDEX IF NOT EXISTS idx_artists_artist_name ON artists(artist_name);
 """
 
 views = """
