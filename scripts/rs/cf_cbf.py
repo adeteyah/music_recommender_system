@@ -17,8 +17,8 @@ MODE_BOUND_VAL = int(config['hp']['cbf_cf_mode_bound'])
 TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cbf_cf_time_signature_bound'])
 TEMPO_BOUND_VAL = float(config['hp']['cbf_tempo_bound'])
 
-AF_WEIGHT = 0.7
-COUNT_WEIGHT = 0.3
+AF_WEIGHT = 0.5
+COUNT_WEIGHT = 0.5
 
 
 def get_song_info(conn, song_id):
