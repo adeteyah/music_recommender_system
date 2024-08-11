@@ -34,6 +34,16 @@ def get_playlists_for_song(conn, song_id):
     return cursor.fetchall()
 
 
+def get_songs_from_playlist(conn, playlist_id):
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT song_id
+        FROM playlists
+        WHERE playlist_id = ?
+    """, (playlist_id,))
+    return cursor.fetchall()
+
+
 def format_song_info(song_info):
     song_id, song_name, artist_ids, artist_name, artist_genres, acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo, time_signature, valence = song_info
 
@@ -48,6 +58,16 @@ def format_playlist_relations(playlists):
     return [f"{i + 1}. {playlist_id} by {playlist_creator_id}" for i, (playlist_id, playlist_creator_id) in enumerate(playlists)]
 
 
+def format_song_recommendations(songs, conn):
+    recommendations = []
+    for song_id in songs:
+        song_info = get_song_info(conn, song_id[0])
+        if song_info:
+            formatted_info = format_song_info(song_info)
+            recommendations.append(formatted_info)
+    return recommendations
+
+
 def cf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
@@ -58,12 +78,20 @@ def cf(ids):
             formatted_info = format_song_info(song_info)
             file.write(f"{i}. {formatted_info}\n")
 
-            # Add RELATIONS section
+            # Add FOUND IN section
             file.write(f"\nFOUND IN:\n")
             playlists = get_playlists_for_song(conn, song_info[0])
             for j, (playlist_id, playlist_creator_id) in enumerate(playlists, 1):
                 file.write(f"{j}. {playlist_id} by {playlist_creator_id}\n")
-            file.write('\n')
+
+                # Add SONGS RECOMMENDATION section
+                file.write(f"\nSONGS RECOMMENDATION:\n")
+                playlist_songs = get_songs_from_playlist(conn, playlist_id)
+                recommended_songs = format_song_recommendations(
+                    playlist_songs, conn)
+                for k, recommendation in enumerate(recommended_songs, 1):
+                    file.write(f"{k}. {recommendation}\n")
+                file.write('\n')
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
