@@ -55,44 +55,44 @@ existing database
 -- CF --
 existing database
 1. songs table
-    song_id TEXT PRIMARY KEY,
+    song_id TEXT PRIMARY KEY, (individual id)
     song_name TEXT,
-    artist_ids TEXT,
+    artist_ids TEXT,(array of artist_id (individual artist_id is on artists table))
+    acousticness REAL, <- audio feature
+    danceability REAL, <- audio feature
+    energy REAL, <- audio feature
+    instrumentalness REAL, <- audio feature
+    key INTEGER, <- audio feature
+    liveness REAL, <- audio feature
+    loudness REAL, <- audio feature
+    mode INTEGER, <- audio feature
+    speechiness REAL, <- audio feature
+    tempo REAL, <- audio feature
+    time_signature INTEGER, <- audio feature
+    valence REAL <- audio feature
 2. playlists table
     playlist_id TEXT PRIMARY KEY,
     playlist_creator_id TEXT,
     playlist_top_genres TEXT,
-    playlist_items TEXT, (array of song_id)
+    playlist_items TEXT, (array of song_id (individual song_id is on songs table))
 3. artists table
     artist_id TEXT PRIMARY KEY,
     artist_name TEXT,
-    artist_genres TEXT (genres)
+    artist_genres TEXT (array of genres separated by comma, example: rock,indie rock,rockabilly)
 
 OUTPUT FORMAT
 INPUTTED IDS (Inputted IDS are song_id)
-1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
-2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
-3. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
-4. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
-5. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
-6. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
-7. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres
+1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ...
+2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ...
+3. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ...
+4. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ...
+5. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ...
+6. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ...
+7. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ...
 
-PLAYLIST CATEGORY (1,2,3,4,5<-array of playlist_id that has artist_id from inputted ids): {array of artists id} (Category Playlist that contains artists of inputted ids)
-1. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | Genres: {playlist_top_genres} | 88 songs from this playlist <- count how many songs in this playlist is filtered to the SONGS
-2. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | Genres: {playlist_top_genres} | 22 songs from this playlist
-
-PLAYLIST CATEGORY: (6) {array of artist id} (Category Playlist that contains artists of inputted ids)
-1. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | Genres: {playlist_top_genres} | 63 songs from this playlist
-2. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | Genres: {playlist_top_genres} | 1 songs from this playlist
-
-PLAYLIST CATEGORY: (7) {array of artist id} (Category Playlist that contains artists of inputted ids)
-1. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | Genres: {playlist_top_genres} | 1 songs from this playlist
-2. https://open.spotify.com/playlist/playlist_id - https://open.spotify.com/user/Creator_ID | Genres: {playlist_top_genres} | 6 songs from this playlist
-
-SONGS (Print songs from all playlists_result other than artist_id from the inputted ids)
-1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N <- count this song show up in playlists from PLAYLIST CATEGORY} | From:  {array of playlist id that contains this songs}
-2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Count: {N <- count this song show up in playlists from PLAYLIST CATEGORY} | From:  {array of playlist id that contains this songs}
+SONGS RECOMMENDATION
+1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ... | Count: {N <- how many this duplicate songs merged} | From:  {array of playlist id that contains this songs}
+2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ... | Count: {N <- how many this duplicate songs merged} | From:  {array of playlist id that contains this songs}
 
 import sqlite3
 import configparser
@@ -104,42 +104,19 @@ config.read('config.cfg')
 MODEL = 'Collaborative Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cbf_output']
-N_RESULT = int(config['rs']['cbf_n_result'])
 
-def get_song_info(conn, song_id):
-    cursor = conn.cursor()
-    cursor.execute("""
-        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
-        FROM songs s
-        JOIN artists a ON s.artist_ids = a.artist_id
-        WHERE s.song_id = ?
-    """, (song_id,))
-    return cursor.fetchone()
-
-#add procedural function here if needed
+# code here
 
 cf():
     conn = sqlite3.connect(DB)
-    songs_info = read_inputted_ids(ids, conn)
-    inputted_ids = set(id for id, *_ in songs_info)
 
     # print result to OUTPUT_PATH (.txt with utf-8 encoding)
 
     conn.close()
     print('Result for', MODEL, 'stored at', OUTPUT_PATH)
 if __name__ == "__main__":
-    ids = [
-        '1BxfuPKGuaTgP7aM0Bbdwr',
-        '4xqrdfXkTW4T0RauPLv3WA',
-        '7JIuqL4ZqkpfGKQhYlrirs',
-        '5dTHtzHFPyi8TlTtzoz1J9',
-        '4cluDES4hQEUhmXj6TXkSo',
-        '4ZtFanR9U6ndgddUvNcjcG',
-        '2QjOHCTQ1Jl3zawyYOpxh6',
-        '0nJW01T7XtvILxQgC5J7Wh',
-        '7nQoDLkzCcoIpKPQt3eCdN',
-        '72MEldEAmz3WMJ2MkII3kP',
-    ]
+    ids = ['6EIMUjQ7Q8Zr2VtIUik4He',
+           '30Z12rJpW0M0u8HMFpigTB', '3wlLknnMtD8yZ0pCtCeeK4']
     cf(ids)
 
 -- CBF --
