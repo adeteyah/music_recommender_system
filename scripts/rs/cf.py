@@ -64,17 +64,31 @@ def get_related_playlists(cursor, artist_name):
 
 def extract_songs_from_playlists(related_playlists, cursor, inputted_ids):
     song_count = Counter()
+    input_songs_info = {song_id: song_name for song_id, song_name,
+                        _, _, _ in read_inputted_ids(cursor, inputted_ids)}
 
     for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in related_playlists:
         for song_id in playlist_items:
             song_info = get_song_info(cursor, song_id)
             if song_info:
-                if song_id in inputted_ids:
-                    # Count +2 for same inputted song ID
-                    song_count[(song_id, song_info[3], song_info[1])] += 2
-                elif song_id not in inputted_ids:
-                    song_count[(song_id, song_info[3], song_info[1])
-                               ] += 1  # Count +1 for other songs
+                rec_song_id, rec_song_name, rec_artist_ids, rec_artist_name, rec_artist_genres = song_info
+
+                # Check if the recommended song is a variation of any inputted song
+                is_variation = False
+                for input_song_id, input_song_name in input_songs_info.items():
+                    if input_song_name.lower() in rec_song_name.lower() and rec_artist_name == input_songs_info[input_song_id]:
+                        is_variation = True
+                        break
+
+                if not is_variation:
+                    if song_id in inputted_ids:
+                        # Count +2 for same inputted song ID
+                        song_count[(song_id, rec_artist_name,
+                                    rec_song_name)] += 2
+                    else:
+                        # Count +1 for other songs
+                        song_count[(song_id, rec_artist_name,
+                                    rec_song_name)] += 1
 
     return song_count
 
