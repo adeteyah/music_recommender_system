@@ -98,6 +98,31 @@ def read_inputted_ids(ids, conn):
     return [get_song_info(conn, song_id) for song_id in ids]
 
 
+def is_similar_song(song_info, input_song_info):
+    (song_id, song_name, artist_ids, artist_name, artist_genres, acousticness,
+     danceability, energy, instrumentalness, key, liveness, loudness, mode,
+     speechiness, tempo, time_signature, valence) = song_info
+
+    (_, _, _, _, _, input_acousticness, input_danceability, input_energy,
+     input_instrumentalness, input_key, input_liveness, input_loudness,
+     input_mode, input_speechiness, input_tempo, input_time_signature,
+     input_valence) = input_song_info
+
+    # Check the differences against the provided criteria
+    return (abs(acousticness - input_acousticness) <= 0.3 and
+            abs(danceability - input_danceability) <= 0.3 and
+            abs(energy - input_energy) <= 0.3 and
+            abs(instrumentalness - input_instrumentalness) <= 0.3 and
+            abs(key - input_key) <= 1 and
+            abs(liveness - input_liveness) <= 0.3 and
+            abs(loudness - input_loudness) <= 0.3 and
+            abs(mode - input_mode) <= 1 and
+            abs(speechiness - input_speechiness) <= 0.3 and
+            abs(tempo - input_tempo) <= 10.0 and
+            abs(time_signature - input_time_signature) <= 1 and
+            abs(valence - input_valence) <= 0.3)
+
+
 def cf_cbf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
@@ -150,14 +175,17 @@ def cf_cbf(ids):
                                 (song_title, artist_name) in input_song_titles_artists):
                             continue
 
-                        # Allow only 2 songs per artist
-                        if artist_song_count[artist_name] < 2:
-                            formatted_recommendation = format_song_info(
-                                song_recommendation_info, count)
-                            file.write(f"{k}. {formatted_recommendation}\n")
-                            # Increment the count for the artist
-                            artist_song_count[artist_name] += 1
-                            k += 1
+                        # Check if the song is similar enough
+                        if is_similar_song(song_recommendation_info, song_info):
+                            # Allow only 2 songs per artist
+                            if artist_song_count[artist_name] < 2:
+                                formatted_recommendation = format_song_info(
+                                    song_recommendation_info, count)
+                                file.write(
+                                    f"{k}. {formatted_recommendation}\n")
+                                # Increment the count for the artist
+                                artist_song_count[artist_name] += 1
+                                k += 1
             file.write('\n')
 
     conn.close()
