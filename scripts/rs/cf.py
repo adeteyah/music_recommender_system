@@ -38,19 +38,27 @@ def read_inputted_ids(cursor, ids):
 
 
 def get_related_playlists(cursor, artist_name, inputted_ids):
-    # Construct query to fetch playlists related to input song IDs
+    # Query related playlists for the given artist_name and each inputted song_id
     query = """
-        SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
+        SELECT DISTINCT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
         FROM playlists p
         WHERE EXISTS (
-            SELECT 1 FROM songs s
-            WHERE s.song_id IN ({})
-            AND instr(p.playlist_items, s.song_id) > 0
+            SELECT 1
+            FROM songs s
+            WHERE s.song_id IN ({}) AND instr(p.playlist_items, s.song_id) > 0
         )
         OR p.playlist_items LIKE ?
+        OR p.playlist_items IN (
+            SELECT s.song_id
+            FROM songs s
+            JOIN artists a ON a.artist_id = (
+                SELECT substr(s.artist_ids, 1, instr(s.artist_ids || ',', ',') - 1)
+            )
+            WHERE a.artist_name = ?
+        )
     """.format(','.join('?' for _ in inputted_ids))
 
-    cursor.execute(query, (*inputted_ids, f'%{artist_name}%'))
+    cursor.execute(query, (*inputted_ids, f'%{artist_name}%', artist_name))
     return cursor.fetchall()
 
 
@@ -89,7 +97,7 @@ def cf(ids):
 
         # 2. RELATED PLAYLISTS
         f.write('\nRELATED PLAYLISTS\n')
-        for song_id, song_name, artist_ids, artist_name, artist_genres in songs_info:
+        for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
             f.write(f"\nFor Input Song: {artist_name} - {song_name}\n")
             related_playlists = get_related_playlists(
                 cursor, artist_name, inputted_ids)
@@ -102,7 +110,7 @@ def cf(ids):
 
         # 3. SONG RECOMMENDATION
         f.write('\nSONG RECOMMENDATION\n')
-        for song_id, song_name, artist_ids, artist_name, artist_genres in songs_info:
+        for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
             f.write(f"\nRecommendations for Input Song: {
                     artist_name} - {song_name}\n")
             related_playlists = get_related_playlists(
