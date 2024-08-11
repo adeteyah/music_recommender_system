@@ -38,7 +38,6 @@ def read_inputted_ids(cursor, ids):
 
 
 def get_related_playlists(cursor, artist_name, inputted_ids):
-    # Query all related playlists in a single query
     query = """
         SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
         FROM playlists p
@@ -79,6 +78,10 @@ def cf(ids):
     songs_info = read_inputted_ids(cursor, ids)
     inputted_ids = {song_id for song_id, *_ in songs_info}
 
+    # Fetch all related playlists once
+    related_playlists = get_related_playlists(
+        cursor, '', inputted_ids)  # artist_name not used here
+
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('\nINPUTTED IDS\n')
         for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
@@ -89,12 +92,16 @@ def cf(ids):
         f.write('\nRELATED PLAYLISTS\n')
         for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
             f.write(f"\nFor Input Song: {artist_name} - {song_name}\n")
-            related_playlists = get_related_playlists(
-                cursor, artist_name, inputted_ids)
-            if not related_playlists:
+            filtered_playlists = [
+                (playlist_id, playlist_creator_id,
+                 playlist_top_genres, playlist_items)
+                for (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items) in related_playlists
+                if artist_name in playlist_items
+            ]
+            if not filtered_playlists:
                 f.write("No related playlists found.\n")
             else:
-                for playlist_idx, (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items) in enumerate(related_playlists, 1):
+                for playlist_idx, (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items) in enumerate(filtered_playlists, 1):
                     f.write(f"{playlist_idx}. https://open.spotify.com/playlist/{playlist_id} by https://open.spotify.com/user/{
                             playlist_creator_id}, Top Genres: {playlist_top_genres}, Items: {', '.join(playlist_items.split(','))}\n")
 
@@ -103,8 +110,6 @@ def cf(ids):
         for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
             f.write(f"\nRecommendations for Input Song: {
                     artist_name} - {song_name}\n")
-            related_playlists = get_related_playlists(
-                cursor, artist_name, inputted_ids)
             song_count = extract_songs_from_playlists(
                 related_playlists, cursor, inputted_ids)
 
