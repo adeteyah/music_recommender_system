@@ -120,17 +120,13 @@ def cf(ids):
                 sorted_songs = sorted(song_count.items(),
                                       key=lambda x: x[1], reverse=True)
                 artist_song_count = {}  # Dictionary to track song counts per artist
-                recommended_songs = set()  # Set to track already recommended songs
-
                 for rec_idx, ((rec_song_id, rec_artist_name, rec_song_name), count) in enumerate(sorted_songs, 1):
-                    if rec_song_id not in recommended_songs:
-                        if rec_artist_name not in artist_song_count:
-                            artist_song_count[rec_artist_name] = 0
-                        if artist_song_count[rec_artist_name] < 2:
-                            f.write(f"{rec_idx}. https://open.spotify.com/track/{rec_song_id} {
-                                    rec_artist_name} - {rec_song_name} | Count: {count}\n")
-                            artist_song_count[rec_artist_name] += 1
-                            recommended_songs.add(rec_song_id)
+                    if rec_song_id not in inputted_ids and rec_artist_name not in artist_song_count:
+                        artist_song_count[rec_artist_name] = 0
+                    if rec_song_id not in inputted_ids and artist_song_count[rec_artist_name] < 2:
+                        f.write(f"{rec_idx}. https://open.spotify.com/track/{rec_song_id} {
+                                rec_artist_name} - {rec_song_name} | Count: {count}\n")
+                        artist_song_count[rec_artist_name] += 1
 
     conn.close()
     print(f'Result for {MODEL} stored at {OUTPUT_PATH}')
