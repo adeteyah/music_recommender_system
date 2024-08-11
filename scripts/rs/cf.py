@@ -12,29 +12,35 @@ OUTPUT_PATH = config['rs']['cf_output']
 
 
 def get_song_info(cursor, song_id):
-    cursor.execute("""
-        SELECT s.song_id, s.song_name, s.artist_ids, 
-               GROUP_CONCAT(a.artist_name, ', ') AS artist_name, 
-               COALESCE(GROUP_CONCAT(NULLIF(a.artist_genres, ''), ', '), 'N/A') AS artist_genres
+    query = """
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, 
+               COALESCE(NULLIF(a.artist_genres, ''), 'N/A') as artist_genres
         FROM songs s
         JOIN artists a ON instr(s.artist_ids, a.artist_id) > 0
         WHERE s.song_id = ?
-        GROUP BY s.song_id
-    """, (song_id,))
-    return cursor.fetchone()
+    """
+    cursor.execute(query, (song_id,))
+    results = cursor.fetchall()
+
+    # If multiple artists, select the one with valid artist_genres
+    if results:
+        for result in results:
+            if result[4] != 'N/A':  # Check if artist_genres is not "N/A"
+                return result
+
+        # If none of the artists had a valid genre, return the first one with "N/A"
+        return results[0]
+    else:
+        return None
 
 
 def read_inputted_ids(cursor, ids):
-    cursor.execute("""
-        SELECT s.song_id, s.song_name, s.artist_ids, 
-               GROUP_CONCAT(a.artist_name, ', ') AS artist_name, 
-               COALESCE(GROUP_CONCAT(NULLIF(a.artist_genres, ''), ', '), 'N/A') AS artist_genres
-        FROM songs s
-        JOIN artists a ON instr(s.artist_ids, a.artist_id) > 0
-        WHERE s.song_id IN ({})
-        GROUP BY s.song_id
-    """.format(','.join('?' for _ in ids)), ids)
-    return cursor.fetchall()
+    songs_info = []
+    for song_id in ids:
+        info = get_song_info(cursor, song_id)
+        if info:
+            songs_info.append(info)
+    return songs_info
 
 
 def get_related_playlists(cursor, artist_name, inputted_ids):
