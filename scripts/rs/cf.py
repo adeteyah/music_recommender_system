@@ -1,6 +1,6 @@
 import sqlite3
 import configparser
-from collections import Counter
+from collections import Counter, defaultdict
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -80,13 +80,22 @@ def cf(ids):
                 file.write(f"\nSONGS RECOMMENDATION\n")
                 recommended_songs = get_songs_from_playlists(
                     conn, playlist_ids)
+                # Track song count per artist
+                artist_song_count = defaultdict(int)
+
                 for k, (recommended_song_id, count) in enumerate(recommended_songs.items(), 1):
                     song_recommendation_info = get_song_info(
                         conn, recommended_song_id)
                     if song_recommendation_info:  # Ensure the song exists
-                        formatted_recommendation = format_song_info(
-                            song_recommendation_info, count)
-                        file.write(f"{k}. {formatted_recommendation}\n")
+                        # Artist name from get_song_info
+                        artist_name = song_recommendation_info[3]
+                        # Allow only 2 songs per artist
+                        if artist_song_count[artist_name] < 2:
+                            formatted_recommendation = format_song_info(
+                                song_recommendation_info, count)
+                            file.write(f"{k}. {formatted_recommendation}\n")
+                            # Increment the count for the artist
+                            artist_song_count[artist_name] += 1
             file.write('\n')
 
     conn.close()
