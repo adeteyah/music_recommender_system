@@ -117,8 +117,8 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
         filtered_songs.append(song)
         seen_song_artist_pairs.add(song_artist_pair)
 
-    filtered_songs.sort(key=lambda song: calculate_similarity(
-        song[3:], input_audio_features))
+    filtered_songs.sort(key=lambda song: (
+        calculate_similarity(song[3:], input_audio_features), song[3:]))
     return filtered_songs
 
 
@@ -166,7 +166,10 @@ def cbf_cf(ids):
             if mandatory_genre:
                 similar_songs_info = get_similar_audio_features(
                     conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genre)
-                for idx, song in enumerate(similar_songs_info, start=1):
+
+                # Store songs with their count and audio features in a list
+                songs_with_count = []
+                for song in similar_songs_info:
                     song_id, song_name, artist_ids, *audio_features = song
                     song_url = f"https://open.spotify.com/track/{song_id}"
                     features_str = ', '.join(
@@ -180,6 +183,15 @@ def cbf_cf(ids):
                     # Count the number of playlists containing the song
                     playlist_count = count_song_in_playlists(conn, song_id)
 
+                    # Append the song info along with the count and audio features to the list
+                    songs_with_count.append(
+                        (song_url, artist_name, song_name, genres, features_str, playlist_count, audio_features))
+
+                # Sort the songs by playlist count in descending order, and then by audio features
+                songs_with_count.sort(key=lambda x: (-x[5], x[6]))
+
+                # Write the sorted songs to the file
+                for idx, (song_url, artist_name, song_name, genres, features_str, playlist_count, _) in enumerate(songs_with_count, start=1):
                     line = (f"{idx}. {song_url} {artist_name} - {song_name if song_name else 'N/A'} | "
                             f"Genres: {genres} | {features_str} | Count: {playlist_count}\n")
                     f.write(line)
