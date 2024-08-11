@@ -6,7 +6,7 @@ import re
 config = configparser.ConfigParser()
 config.read('config.cfg')
 
-MODEL = 'Content-based Filtering + Collaborative Filtering'
+MODEL = 'Content-based Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cbf_cf_output']
 CBF_FEATURES = config['hp']['cbf_cf_features'].split(', ')
@@ -175,6 +175,6 @@ def cbf_cf(ids):
 
 
 if __name__ == "__main__":
-    ids = ['3wlLknnMtD8yZ0pCtCeeK4', '6EIMUjQ7Q8Zr2VtIUik4He',
-           '30Z12rJpW0M0u8HMFpigTB']
+    ids = ['3wlLknnMtD8yZ0pCtCeeK4',
+           '6EIMUjQ7Q8Zr2VtIUik4He', '30Z12rJpW0M0u8HMFpigTB']
     cbf_cf(ids)
