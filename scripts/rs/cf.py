@@ -13,22 +13,26 @@ OUTPUT_PATH = config['rs']['cf_output']
 
 def get_song_info(cursor, song_id):
     cursor.execute("""
-        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, 
-               COALESCE(NULLIF(a.artist_genres, ''), 'N/A') as artist_genres
+        SELECT s.song_id, s.song_name, s.artist_ids, 
+               GROUP_CONCAT(a.artist_name, ', ') AS artist_name, 
+               COALESCE(GROUP_CONCAT(NULLIF(a.artist_genres, ''), ', '), 'N/A') AS artist_genres
         FROM songs s
-        JOIN artists a ON s.artist_ids = a.artist_id
+        JOIN artists a ON instr(s.artist_ids, a.artist_id) > 0
         WHERE s.song_id = ?
+        GROUP BY s.song_id
     """, (song_id,))
     return cursor.fetchone()
 
 
 def read_inputted_ids(cursor, ids):
     cursor.execute("""
-        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, 
-               COALESCE(NULLIF(a.artist_genres, ''), 'N/A') as artist_genres
+        SELECT s.song_id, s.song_name, s.artist_ids, 
+               GROUP_CONCAT(a.artist_name, ', ') AS artist_name, 
+               COALESCE(GROUP_CONCAT(NULLIF(a.artist_genres, ''), ', '), 'N/A') AS artist_genres
         FROM songs s
-        JOIN artists a ON s.artist_ids = a.artist_id
+        JOIN artists a ON instr(s.artist_ids, a.artist_id) > 0
         WHERE s.song_id IN ({})
+        GROUP BY s.song_id
     """.format(','.join('?' for _ in ids)), ids)
     return cursor.fetchall()
 
