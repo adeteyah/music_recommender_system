@@ -1,6 +1,6 @@
 import sqlite3
 import configparser
-from collections import Counter, defaultdict
+from collections import defaultdict
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -36,7 +36,7 @@ def get_playlists_for_song(conn, song_id):
 
 
 def get_songs_from_playlists(conn, playlist_ids):
-    all_songs = []
+    song_counts = defaultdict(int)
     for playlist_id in playlist_ids:
         cursor = conn.cursor()
         cursor.execute("""
@@ -45,8 +45,9 @@ def get_songs_from_playlists(conn, playlist_ids):
             WHERE playlist_id = ?
         """, (playlist_id,))
         items = cursor.fetchone()[0].split(',')
-        all_songs.extend(items)
-    return Counter(all_songs)  # Return a counter of song IDs
+        for song_id in items:
+            song_counts[song_id] += 1
+    return song_counts
 
 
 def format_song_info(song_info, count):
@@ -80,10 +81,15 @@ def cf(ids):
                 file.write(f"\nSONGS RECOMMENDATION\n")
                 recommended_songs = get_songs_from_playlists(
                     conn, playlist_ids)
+
+                # Sort by count in descending order
+                sorted_recommended_songs = sorted(
+                    recommended_songs.items(), key=lambda x: x[1], reverse=True)
+
                 # Track song count per artist
                 artist_song_count = defaultdict(int)
-
-                for k, (recommended_song_id, count) in enumerate(recommended_songs.items(), 1):
+                k = 1
+                for recommended_song_id, count in sorted_recommended_songs:
                     song_recommendation_info = get_song_info(
                         conn, recommended_song_id)
                     if song_recommendation_info:  # Ensure the song exists
@@ -96,6 +102,7 @@ def cf(ids):
                             file.write(f"{k}. {formatted_recommendation}\n")
                             # Increment the count for the artist
                             artist_song_count[artist_name] += 1
+                            k += 1
             file.write('\n')
 
     conn.close()
