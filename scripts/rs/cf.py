@@ -13,24 +13,24 @@ OUTPUT_PATH = config['rs']['cf_output']
 
 def get_song_info(cursor, song_id):
     query = """
-        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, 
-               COALESCE(NULLIF(a.artist_genres, ''), 'N/A') as artist_genres
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
         FROM songs s
-        JOIN artists a ON instr(s.artist_ids, a.artist_id) > 0
+        JOIN artists a ON s.artist_ids = a.artist_id
         WHERE s.song_id = ?
     """
     cursor.execute(query, (song_id,))
-    results = cursor.fetchall()
+    result = cursor.fetchone()
 
-    # If multiple artists, select the one with valid artist_genres
-    if results:
-        for result in results:
-            if result[4] != 'N/A':  # Check if artist_genres is not "N/A"
-                return result
-
-        # If none of the artists had a valid genre, return the first one with "N/A"
-        return results[0]
+    if result:
+        song_id, song_name, artist_ids, artist_name, artist_genres = result
+        # Handle missing artist_genres
+        if artist_genres is None or artist_genres.strip() == '':
+            artist_genres = 'Unknown Genre'
+        print(f"DEBUG: Found song info for {
+              song_id} - {song_name} by {artist_name} | Genre: {artist_genres}")
+        return song_id, song_name, artist_ids, artist_name, artist_genres
     else:
+        print(f"DEBUG: No song info found for {song_id}")
         return None
 
 
@@ -40,6 +40,9 @@ def read_inputted_ids(cursor, ids):
         info = get_song_info(cursor, song_id)
         if info:
             songs_info.append(info)
+
+    print(f"DEBUG: Retrieved {len(songs_info)
+                              } songs from the database for input IDs: {ids}")
     return songs_info
 
 
@@ -97,11 +100,12 @@ def extract_songs_from_playlists(related_playlists, cursor, inputted_ids):
         for song_id in playlist_items:
             song_info = get_song_info(cursor, song_id)
             if song_info:
+                song_id, song_name, artist_ids, artist_name, artist_genres = song_info
                 if song_id in inputted_ids:
                     # Count +2 for same inputted song ID
-                    song_count[(song_id, song_info[3], song_info[1])] += 2
+                    song_count[(song_id, artist_name, song_name)] += 2
                 elif song_id not in inputted_ids:
-                    song_count[(song_id, song_info[3], song_info[1])
+                    song_count[(song_id, artist_name, song_name)
                                ] += 1  # Count +1 for other songs
 
     return song_count
@@ -120,6 +124,8 @@ def cf(ids):
         for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
             f.write(f"{idx}. https://open.spotify.com/track/{song_id} {
                     artist_name} - {song_name} | Genre: {artist_genres}\n")
+            print(f"DEBUG: Writing song info for {
+                  song_id} - {song_name} by {artist_name}")
 
         # 2. RELATED PLAYLISTS
         f.write('\nRELATED PLAYLISTS\n')
