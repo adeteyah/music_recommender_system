@@ -54,6 +54,17 @@ def normalize_song_name(song_name):
     return re.sub(r'\(.*?\)', '', song_name).strip().lower()
 
 
+def count_song_in_playlists(conn, song_id):
+    query = f"""
+        SELECT COUNT(*)
+        FROM playlists
+        WHERE playlist_items LIKE ?
+    """
+    cursor = conn.cursor()
+    cursor.execute(query, (f'%{song_id}%',))
+    return cursor.fetchone()[0]
+
+
 def get_similar_audio_features(conn, features, input_audio_features, inputted_ids, inputted_songs, mandatory_genre):
     feature_conditions = []
     for i, feature in enumerate(features):
@@ -166,8 +177,11 @@ def cbf_cf(ids):
                     artist_name = artist_info[0] if artist_info[0] else 'N/A'
                     genres = artist_info[1] if artist_info[1] else 'N/A'
 
+                    # Count the number of playlists containing the song
+                    playlist_count = count_song_in_playlists(conn, song_id)
+
                     line = (f"{idx}. {song_url} {artist_name} - {song_name if song_name else 'N/A'} | "
-                            f"Genres: {genres} | {features_str}\n")
+                            f"Genres: {genres} | {features_str} | Count: {playlist_count}\n")
                     f.write(line)
 
     conn.close()
@@ -175,6 +189,6 @@ def cbf_cf(ids):
 
 
 if __name__ == "__main__":
-    ids = ['3wlLknnMtD8yZ0pCtCeeK4', '6EIMUjQ7Q8Zr2VtIUik4He',
-           '30Z12rJpW0M0u8HMFpigTB']
+    ids = ['3wlLknnMtD8yZ0pCtCeeK4',
+           '6EIMUjQ7Q8Zr2VtIUik4He', '30Z12rJpW0M0u8HMFpigTB']
     cbf_cf(ids)
