@@ -15,20 +15,26 @@ def get_song_info(cursor, song_id):
     cursor.execute("""
         SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
         FROM songs s
-        JOIN artists a ON s.artist_ids = a.artist_id
+        JOIN artists a ON a.artist_id = (
+            SELECT substr(s.artist_ids, 1, instr(s.artist_ids || ',', ',') - 1)
+        )
         WHERE s.song_id = ?
     """, (song_id,))
     return cursor.fetchone()
 
 
 def read_inputted_ids(cursor, ids):
-    cursor.execute("""
+    query = """
         SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
         FROM songs s
-        JOIN artists a ON s.artist_ids = a.artist_id
+        JOIN artists a ON a.artist_id = (
+            SELECT substr(s.artist_ids, 1, instr(s.artist_ids || ',', ',') - 1)
+        )
         WHERE s.song_id IN ({})
-    """.format(','.join('?' for _ in ids)), ids)
-    print()
+    """.format(','.join('?' for _ in ids))
+
+    # Execute the query with the song IDs as parameters
+    cursor.execute(query, ids)
 
     return cursor.fetchall()
 
