@@ -26,16 +26,11 @@ def get_song_info(cursor, song_id):
     if results:
         for result in results:
             if result[4] != 'N/A':  # Check if artist_genres is not "N/A"
-                print(f"DEBUG: Found song info for {
-                      song_id} - {result[1]} by {result[3]} with valid genres")
                 return result
 
         # If none of the artists had a valid genre, return the first one with "N/A"
-        print(f"DEBUG: Found song info for {
-              song_id} - {results[0][1]} by {results[0][3]} but all genres are 'N/A'")
         return results[0]
     else:
-        print(f"DEBUG: No song info found for {song_id}")
         return None
 
 
@@ -45,9 +40,6 @@ def read_inputted_ids(cursor, ids):
         info = get_song_info(cursor, song_id)
         if info:
             songs_info.append(info)
-
-    print(f"DEBUG: Retrieved {len(songs_info)
-                              } songs from the database for input IDs: {ids}")
     return songs_info
 
 
@@ -128,8 +120,6 @@ def cf(ids):
         for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
             f.write(f"{idx}. https://open.spotify.com/track/{song_id} {
                     artist_name} - {song_name} | Genre: {artist_genres}\n")
-            print(f"DEBUG: Writing song info for {
-                  song_id} - {song_name} by {artist_name}")
 
         # 2. RELATED PLAYLISTS
         f.write('\nRELATED PLAYLISTS\n')
