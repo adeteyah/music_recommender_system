@@ -29,7 +29,10 @@ def read_inputted_ids(cursor, ids):
         WHERE s.song_id IN ({})
     """.format(','.join('?' for _ in ids)), ids)
 
-    return cursor.fetchall()
+    results = cursor.fetchall()
+    print(f"DEBUG: Retrieved {len(results)
+                              } songs from the database for input IDs: {ids}")
+    return results
 
 
 def get_related_playlists(cursor, artist_name, inputted_ids):
@@ -78,6 +81,8 @@ def cf(ids):
         for idx, (song_id, song_name, artist_ids, artist_name, artist_genres) in enumerate(songs_info, 1):
             f.write(f"{idx}. https://open.spotify.com/track/{song_id} {
                     artist_name} - {song_name} | Genre: {artist_genres}\n")
+            print(f"DEBUG: Writing song info for {
+                  song_id} - {song_name} by {artist_name}")
 
         # 2. RELATED PLAYLISTS
         f.write('\nRELATED PLAYLISTS\n')
@@ -128,6 +133,6 @@ def cf(ids):
 
 
 if __name__ == "__main__":
-    ids = ['1yKAqZoi8xWGLCf5vajroL',
-           '5VGlqQANWDKJFl0MBG3sg2', '0lP4HYLmvowOKdsQ7CVkuq']
+    ids = ['6EIMUjQ7Q8Zr2VtIUik4He',
+           '30Z12rJpW0M0u8HMFpigTB', '3wlLknnMtD8yZ0pCtCeeK4']
     cf(ids)
