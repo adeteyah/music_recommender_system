@@ -18,7 +18,6 @@ cf_cbf.cf_cbf(ids)
 end = time.time()
 print("Time: ", end - start)
 
-
 start = time.time()  # DONE
 cbf.cbf(ids)
 end = time.time()
