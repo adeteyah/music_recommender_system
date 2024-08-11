@@ -134,6 +134,34 @@ def is_similar_song(song_info, input_song_info, FEATURE_SELECT):
     return True
 
 
+def is_similar_song(song_info, input_song_info, FEATURE_SELECT):
+    feature_ranges = {
+        'acousticness': REAL_BOUND_VAL,
+        'danceability': REAL_BOUND_VAL,
+        'energy': REAL_BOUND_VAL,
+        'instrumentalness': REAL_BOUND_VAL,
+        'key': MODE_BOUND_VAL,
+        'liveness': REAL_BOUND_VAL,
+        'loudness': REAL_BOUND_VAL,
+        'mode': MODE_BOUND_VAL,
+        'speechiness': REAL_BOUND_VAL,
+        'tempo': TEMPO_BOUND_VAL,
+        'time_signature': TIME_SIGNATURE_BOUND_VAL,
+        'valence': REAL_BOUND_VAL,
+    }
+
+    for feature in FEATURE_SELECT:
+        idx = ['song_id', 'song_name', 'artist_ids', 'artist_name', 'artist_genres',
+               'acousticness', 'danceability', 'energy', 'instrumentalness', 'key',
+               'liveness', 'loudness', 'mode', 'speechiness', 'tempo', 'time_signature',
+               'valence'].index(feature)
+
+        if abs(song_info[idx] - input_song_info[idx]) > feature_ranges[feature]:
+            return False
+
+    return True
+
+
 def cf_cbf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
@@ -167,14 +195,28 @@ def cf_cbf(ids):
                 recommended_songs = get_songs_from_playlists(
                     conn, playlist_ids)
 
-                # Sort by count in descending order
+                # Calculate the feature similarity score
+                def calculate_score(song_id):
+                    song_recommendation_info = get_song_info(conn, song_id)
+                    if not song_recommendation_info:
+                        return 0
+
+                    similarity_score = 0
+                    if is_similar_song(song_recommendation_info, song_info, FEATURE_SELECT):
+                        similarity_score = 1  # Apply a simple similarity score
+
+                    count = recommended_songs.get(song_id, 0)
+                    return 0.6 * similarity_score + 0.4 * count
+
+                # Sort by weighted score
                 sorted_recommended_songs = sorted(
-                    recommended_songs.items(), key=lambda x: x[1], reverse=True)
+                    recommended_songs.keys(), key=calculate_score, reverse=True)
 
                 # Track song count per artist
                 artist_song_count = defaultdict(int)
                 k = 1
-                for recommended_song_id, count in sorted_recommended_songs:
+                for recommended_song_id in sorted_recommended_songs:
+                    count = recommended_songs[recommended_song_id]
                     song_recommendation_info = get_song_info(
                         conn, recommended_song_id)
                     if song_recommendation_info:  # Ensure the song exists
@@ -186,17 +228,14 @@ def cf_cbf(ids):
                                 (song_title, artist_name) in input_song_titles_artists):
                             continue
 
-                        # Check if the song is similar enough based on selected features
-                        if is_similar_song(song_recommendation_info, song_info, FEATURE_SELECT):
-                            # Allow only 2 songs per artist
-                            if artist_song_count[artist_name] < 2:
-                                formatted_recommendation = format_song_info(
-                                    song_recommendation_info, count)
-                                file.write(
-                                    f"{k}. {formatted_recommendation}\n")
-                                # Increment the count for the artist
-                                artist_song_count[artist_name] += 1
-                                k += 1
+                        # Allow only 2 songs per artist
+                        if artist_song_count[artist_name] < 2:
+                            formatted_recommendation = format_song_info(
+                                song_recommendation_info, count)
+                            file.write(f"{k}. {formatted_recommendation}\n")
+                            # Increment the count for the artist
+                            artist_song_count[artist_name] += 1
+                            k += 1
             file.write('\n')
 
     conn.close()
