@@ -1,6 +1,6 @@
 import sqlite3
 import configparser
-from collections import Counter
+from collections import defaultdict
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -63,7 +63,7 @@ def get_related_playlists(cursor, artist_name):
 
 
 def extract_songs_from_playlists(related_playlists, cursor, inputted_ids, inputted_songs):
-    song_count = Counter()
+    song_count = defaultdict(int)
 
     for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in related_playlists:
         for song_id in playlist_items:
@@ -73,7 +73,8 @@ def extract_songs_from_playlists(related_playlists, cursor, inputted_ids, inputt
 
                 # Check if the song is a variation of the input songs
                 if (song_id not in inputted_ids) and (song_name, artist_name) not in inputted_songs:
-                    song_count[(song_id, artist_name, song_name)] += 1
+                    # Accumulate count for songs with the same name and artist
+                    song_count[(song_name, artist_name)] += 1
 
     return song_count
 
@@ -121,10 +122,13 @@ def cf(ids):
                 sorted_songs = sorted(song_count.items(),
                                       key=lambda x: x[1], reverse=True)
                 artist_song_count = {}  # Dictionary to track song counts per artist
-                for rec_idx, ((rec_song_id, rec_artist_name, rec_song_name), count) in enumerate(sorted_songs, 1):
+                for rec_idx, ((rec_song_name, rec_artist_name), count) in enumerate(sorted_songs, 1):
                     if rec_artist_name not in artist_song_count:
                         artist_song_count[rec_artist_name] = 0
                     if artist_song_count[rec_artist_name] < 2:
+                        # Get one of the song IDs corresponding to this name and artist
+                        rec_song_id = next(song_id for song_id in inputted_ids if get_song_info(cursor, song_id)[
+                                           1] == rec_song_name and get_song_info(cursor, song_id)[3] == rec_artist_name)
                         f.write(f"{rec_idx}. https://open.spotify.com/track/{rec_song_id} {
                                 rec_artist_name} - {rec_song_name} | Count: {count}\n")
                         artist_song_count[rec_artist_name] += 1
@@ -135,5 +139,5 @@ def cf(ids):
 
 if __name__ == "__main__":
     ids = ['6EIMUjQ7Q8Zr2VtIUik4He',
-           '30Z12rJpW0M0u8HMFpigTB',]
+           '30Z12rJpW0M0u8HMFpigTB', '3wlLknnMtD8yZ0pCtCeeK4']
     cf(ids)
