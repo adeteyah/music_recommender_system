@@ -50,9 +50,11 @@ def get_songs_from_playlists(conn, playlist_ids):
     return song_counts
 
 
-def format_song_info(song_info, count):
+def format_song_info(song_info, count=None):
     song_id, song_name, artist_ids, artist_name, artist_genres, acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo, time_signature, valence = song_info
-    return f"https://open.spotify.com/track/{song_id} {artist_name} - {song_name} | Genre: {artist_genres} | Acousticness: {acousticness}, Danceability: {danceability}, Energy: {energy}, Instrumentalness: {instrumentalness}, Key: {key}, Liveness: {liveness}, Loudness: {loudness}, Mode: {mode}, Speechiness: {speechiness}, Tempo: {tempo}, Time Signature: {time_signature}, Valence: {valence} | COUNT: {count}"
+    base_info = f"https://open.spotify.com/track/{song_id} {artist_name} - {song_name} | Genre: {artist_genres} | Acousticness: {acousticness}, Danceability: {danceability}, Energy: {energy}, Instrumentalness: {
+        instrumentalness}, Key: {key}, Liveness: {liveness}, Loudness: {loudness}, Mode: {mode}, Speechiness: {speechiness}, Tempo: {tempo}, Time Signature: {time_signature}, Valence: {valence}"
+    return base_info + (f" | COUNT: {count}" if count is not None else "")
 
 
 def read_inputted_ids(ids, conn):
@@ -66,7 +68,7 @@ def cf(ids):
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as file:
         file.write('INPUTTED IDS\n')
         for i, song_info in enumerate(songs_info, 1):
-            formatted_info = format_song_info(song_info, count=1)
+            formatted_info = format_song_info(song_info)
             file.write(f"{i}. {formatted_info}\n")
 
             # Add FOUND IN section
@@ -76,9 +78,9 @@ def cf(ids):
             for j, (playlist_id, playlist_creator_id, _) in enumerate(playlists, 1):
                 file.write(f"{j}. {playlist_id} by {playlist_creator_id}\n")
 
-            # Add SONGS RECOMMENDATION section
+            # Add SONGS RECOMMENDATION section with a specific title
             if playlist_ids:
-                file.write(f"\nSONGS RECOMMENDATION\n")
+                file.write(f"\nRECOMMENDATION FOR: {formatted_info}\n\n")
                 recommended_songs = get_songs_from_playlists(
                     conn, playlist_ids)
 
@@ -110,10 +112,6 @@ def cf(ids):
 
 
 if __name__ == "__main__":
-    ids = [
-        '1BxfuPKGuaTgP7aM0Bbdwr',
-        '4xqrdfXkTW4T0RauPLv3WA',
-        '7JIuqL4ZqkpfGKQhYlrirs',
-        '5dTHtzHFPyi8TlTtzoz1J9',
-    ]
+    ids = ['3wlLknnMtD8yZ0pCtCeeK4', '6EIMUjQ7Q8Zr2VtIUik4He',
+           '30Z12rJpW0M0u8HMFpigTB']
     cf(ids)
