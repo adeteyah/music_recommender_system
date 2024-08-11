@@ -15,19 +15,25 @@ def get_song_info(cursor, song_id):
     cursor.execute("""
         SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
         FROM songs s
-        JOIN artists a ON s.artist_ids = a.artist_id
+        JOIN artists a ON a.artist_id = (
+            SELECT substr(s.artist_ids, 1, instr(s.artist_ids || ',', ',') - 1)
+        )
         WHERE s.song_id = ?
     """, (song_id,))
     return cursor.fetchone()
 
 
 def read_inputted_ids(cursor, ids):
-    songs_info = []
-    for song_id in ids:
-        info = get_song_info(cursor, song_id)
-        if info:
-            songs_info.append(info)
-    return songs_info
+    cursor.execute("""
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
+        FROM songs s
+        JOIN artists a ON a.artist_id = (
+            SELECT substr(s.artist_ids, 1, instr(s.artist_ids || ',', ',') - 1)
+        )
+        WHERE s.song_id IN ({})
+    """.format(','.join('?' for _ in ids)), ids)
+
+    return cursor.fetchall()
 
 
 def get_related_playlists(cursor, artist_name):
@@ -123,6 +129,6 @@ def cf(ids):
 
 if __name__ == "__main__":
 
-    ids = ['1yKAqZoi8xWGLCf5vajroL',
-           '5VGlqQANWDKJFl0MBG3sg2', '0lP4HYLmvowOKdsQ7CVkuq']
+    ids = ['6EIMUjQ7Q8Zr2VtIUik4He',
+           '30Z12rJpW0M0u8HMFpigTB', '3wlLknnMtD8yZ0pCtCeeK4']
     cf(ids)
