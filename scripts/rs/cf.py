@@ -33,50 +33,17 @@ def read_inputted_ids(cursor, ids):
 
 
 def get_related_playlists(cursor, artist_name, inputted_ids):
-    related_playlists = []
-
-    # Find playlists that contain any of the inputted songs
-    for song_id in inputted_ids:
-        cursor.execute("""
-            SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
-            FROM playlists p
-            WHERE p.playlist_items LIKE ?
-        """, (f'%{song_id}%',))
-
-        playlists = cursor.fetchall()
-
-        # Add playlists that match the song ID
-        for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in playlists:
-            playlist_items_list = playlist_items.split(',')
-
-            related_playlists.append(
-                (playlist_id, playlist_creator_id,
-                 playlist_top_genres, playlist_items_list)
-            )
-
-    # Find playlists containing songs by the specific artist
+    # Query all related playlists in a single query
     cursor.execute("""
         SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
         FROM playlists p
-        JOIN songs s ON instr(p.playlist_items, s.song_id) > 0
-        WHERE s.artist_ids IN (
-            SELECT a.artist_id
-            FROM artists a
-            WHERE a.artist_name = ?
+        WHERE EXISTS (
+            SELECT 1 FROM songs s WHERE s.song_id IN ({}) AND instr(p.playlist_items, s.song_id) > 0
         )
-    """, (artist_name,))
+        OR p.playlist_items LIKE ?
+    """.format(','.join('?' for _ in inputted_ids)), (*inputted_ids, f'%{artist_name}%'))
 
-    artist_related_playlists = cursor.fetchall()
-
-    for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in artist_related_playlists:
-        playlist_items_list = playlist_items.split(',')
-
-        related_playlists.append(
-            (playlist_id, playlist_creator_id,
-             playlist_top_genres, playlist_items_list)
-        )
-
-    return related_playlists
+    return cursor.fetchall()
 
 
 def extract_songs_from_playlists(related_playlists, cursor, inputted_ids):
@@ -123,7 +90,7 @@ def cf(ids):
             else:
                 for playlist_idx, (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items) in enumerate(related_playlists, 1):
                     f.write(f"{playlist_idx}. https://open.spotify.com/playlist/{playlist_id} by https://open.spotify.com/user/{
-                            playlist_creator_id}, Top Genres: {playlist_top_genres}, Items: {', '.join(playlist_items)}\n")
+                            playlist_creator_id}, Top Genres: {playlist_top_genres}, Items: {', '.join(playlist_items.split(','))}\n")
 
         # 3. SONG RECOMMENDATION
         f.write('\nSONG RECOMMENDATION\n')
@@ -161,6 +128,6 @@ def cf(ids):
 
 
 if __name__ == "__main__":
-    ids = ['6EIMUjQ7Q8Zr2VtIUik4He',
-           '30Z12rJpW0M0u8HMFpigTB', '3wlLknnMtD8yZ0pCtCeeK4']
+    ids = ['1yKAqZoi8xWGLCf5vajroL',
+           '5VGlqQANWDKJFl0MBG3sg2', '0lP4HYLmvowOKdsQ7CVkuq']
     cf(ids)
