@@ -14,6 +14,7 @@ REAL_BOUND_VAL = float(config['hp']['cbf_real_bound'])
 MODE_BOUND_VAL = int(config['hp']['cbf_mode_bound'])
 TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cbf_time_signature_bound'])
 TEMPO_BOUND_VAL = float(config['hp']['cbf_tempo_bound'])
+SONGS_PER_ARTIST = int(config['hp']['songs_per_artist'])
 
 # Define specific bound values for features
 SEPARATE_BOUNDS = {
@@ -99,7 +100,7 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
             continue
 
         if artist_ids in seen_artists:
-            if seen_artists[artist_ids] >= 2:
+            if seen_artists[artist_ids] >= SONGS_PER_ARTIST:
                 continue
             seen_artists[artist_ids] += 1
         else:

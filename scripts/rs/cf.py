@@ -9,6 +9,7 @@ config.read('config.cfg')
 MODEL = 'Collaborative Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cf_output']
+SONGS_PER_ARTIST = int(config['hp']['songs_per_artist'])
 
 
 def get_song_info(conn, song_id):
@@ -151,7 +152,7 @@ def cf(ids):
                             continue
 
                         # Allow only 2 songs per artist
-                        if artist_song_count[artist_name] < 2:
+                        if artist_song_count[artist_name] < SONGS_PER_ARTIST:
                             formatted_recommendation = format_song_info(
                                 song_recommendation_info, count)
                             file.write(f"{k}. {formatted_recommendation}\n")

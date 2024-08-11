@@ -18,6 +18,7 @@ TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cf_cbf_time_signature_bound'])
 TEMPO_BOUND_VAL = float(config['hp']['cf_cbf_tempo_bound'])
 ENERGY_ADDERAL = float(config['hp']['cf_cbf_energy_adderal'])
 VALENCE_ADDERAL = float(config['hp']['cf_cbf_valence_adderal'])
+SONGS_PER_ARTIST = int(config['hp']['songs_per_artist'])
 
 # Weights for sorting
 GENRE_WEIGHT = 0.2
@@ -246,7 +247,7 @@ def cf_cbf(ids):
                         artist_name = song_recommendation_info[3]
 
                         # Allow only 2 songs per artist
-                        if artist_song_count[artist_name] < 2:
+                        if artist_song_count[artist_name] < SONGS_PER_ARTIST:
                             formatted_recommendation = format_song_info(
                                 song_recommendation_info, count)
                             file.write(f"{k}. {formatted_recommendation}\n")
