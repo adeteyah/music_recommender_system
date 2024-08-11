@@ -187,7 +187,7 @@ def cf_cbf(ids):
                             continue
 
                         # Check if the song is similar enough based on selected features
-                        if is_similar_song(song_recommendation_info, song_info, cbf_features):
+                        if is_similar_song(song_recommendation_info, song_info, FEATURE_SELECT):
                             # Allow only 2 songs per artist
                             if artist_song_count[artist_name] < 2:
                                 formatted_recommendation = format_song_info(
