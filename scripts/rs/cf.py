@@ -22,7 +22,24 @@ def get_song_info(conn, song_id):
         JOIN artists a ON s.artist_ids = a.artist_id
         WHERE s.song_id = ?
     """, (song_id,))
-    return cursor.fetchone()
+    song_info = cursor.fetchone()
+
+    if song_info:
+        # Extract the first artist_id if there are multiple
+        artist_ids = song_info[2].split(
+            ',')[0] if ',' in song_info[2] else song_info[2]
+        cursor.execute("""
+            SELECT artist_name, artist_genres
+            FROM artists
+            WHERE artist_id = ?
+        """, (artist_ids,))
+        artist_info = cursor.fetchone()
+
+        if artist_info:
+            # Replace the artist_name and artist_genres in the original song_info
+            song_info = song_info[:3] + artist_info + song_info[5:]
+
+    return song_info
 
 
 def get_playlists_for_song(conn, song_id):
@@ -80,7 +97,7 @@ def cf(ids):
 
             # Add SONGS RECOMMENDATION section with a specific title
             if playlist_ids:
-                file.write(f"\nRECOMMENDATION FOR: {formatted_info}\n\n")
+                file.write(f"\nSONGS RECOMMENDATION FOR {formatted_info}\n")
                 recommended_songs = get_songs_from_playlists(
                     conn, playlist_ids)
 
