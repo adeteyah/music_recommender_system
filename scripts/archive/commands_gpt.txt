@@ -86,7 +86,7 @@ INPUTTED IDS (Inputted IDS are song_id)
 2. https://open.spotify.com/track/song_id artist_name - song_name 2 | Genre: artist_genres | Acousticness: n, ...
 3. https://open.spotify.com/track/song_id artist_name - song_name 3 | Genre: artist_genres | Acousticness: n, ...
 
-RELATIONS
+RELATIONS <-finding each input on column playlist_items on table playlists
 For Input https://open.spotify.com/track/song_id artist_name - song_name 1
 1. playlist_id by playlist_creator_id
 2. playlist_id by playlist_creator_id
@@ -102,7 +102,7 @@ For Input https://open.spotify.com/track/song_id artist_name - song_name 3
 2. playlist_id by playlist_creator_id
 3. playlist_id by playlist_creator_id
 
-SONGS RECOMMENDATION
+SONGS RECOMMENDATION <-extracted songs from RELATIONS
 For Input https://open.spotify.com/track/song_id artist_name - song_name 1
 1. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ... | Count: {N <- how many this duplicate songs merged} | From:  {array of playlist id that contains this songs}
 2. https://open.spotify.com/track/song_id artist_name - song_name | Genre: artist_genres | Acousticness: n, ... | Count: {N <- how many this duplicate songs merged} | From:  {array of playlist id that contains this songs}
