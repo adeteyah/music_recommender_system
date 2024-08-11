@@ -1,6 +1,6 @@
 import sqlite3
 import configparser
-from collections import Counter
+from collections import Counter, defaultdict
 
 # Read configuration file
 config = configparser.ConfigParser()
@@ -19,89 +19,54 @@ def get_song_info(cursor, song_id):
         WHERE s.song_id = ?
     """
     cursor.execute(query, (song_id,))
-    result = cursor.fetchone()
-
-    if result:
-        print(f"DEBUG: Found song info for {
-              song_id} - {result[1]} by {result[3]}")
-    else:
-        print(f"DEBUG: No song info found for {song_id}")
-
-    return result
+    return cursor.fetchone()
 
 
 def read_inputted_ids(cursor, ids):
-    songs_info = []
-    for song_id in ids:
-        info = get_song_info(cursor, song_id)
-        if info:
-            songs_info.append(info)
+    placeholders = ','.join('?' for _ in ids)
+    cursor.execute(f"""
+        SELECT s.song_id, s.song_name, s.artist_ids, a.artist_name, a.artist_genres
+        FROM songs s
+        JOIN artists a ON s.artist_ids = a.artist_id
+        WHERE s.song_id IN ({placeholders})
+    """, ids)
 
-    print(f"DEBUG: Retrieved {len(songs_info)
+    results = cursor.fetchall()
+    print(f"DEBUG: Retrieved {len(results)
                               } songs from the database for input IDs: {ids}")
-    return songs_info
+    return results
 
 
 def get_related_playlists(cursor, artist_name, inputted_ids):
-    related_playlists = []
-
-    # Use a query to fetch playlists containing any of the inputted songs directly
-    for song_id in inputted_ids:
-        cursor.execute("""
-            SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
-            FROM playlists p
-            WHERE p.playlist_items LIKE ?
-        """, (f'%{song_id}%',))
-
-        playlists = cursor.fetchall()
-
-        # Add playlists that match the song ID
-        for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in playlists:
-            playlist_items_list = playlist_items.split(',')
-
-            related_playlists.append(
-                (playlist_id, playlist_creator_id,
-                 playlist_top_genres, playlist_items_list)
-            )
-
-    # Add playlists containing songs by the specific artist
-    cursor.execute("""
+    # Query for playlists containing any of the inputted songs
+    placeholders = ','.join('?' for _ in inputted_ids)
+    cursor.execute(f"""
         SELECT p.playlist_id, p.playlist_creator_id, p.playlist_top_genres, p.playlist_items
         FROM playlists p
-        JOIN songs s ON instr(p.playlist_items, s.song_id) > 0
-        WHERE s.artist_ids IN (
-            SELECT a.artist_id
-            FROM artists a
-            WHERE a.artist_name = ?
+        WHERE EXISTS (
+            SELECT 1 FROM songs s WHERE s.song_id IN ({placeholders}) AND instr(p.playlist_items, s.song_id) > 0
         )
-    """, (artist_name,))
+        OR p.playlist_items LIKE ?
+    """, (*inputted_ids, f'%{artist_name}%'))
 
-    artist_related_playlists = cursor.fetchall()
-
-    for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in artist_related_playlists:
-        playlist_items_list = playlist_items.split(',')
-
-        related_playlists.append(
-            (playlist_id, playlist_creator_id,
-             playlist_top_genres, playlist_items_list)
-        )
-
-    return related_playlists
+    return cursor.fetchall()
 
 
 def extract_songs_from_playlists(related_playlists, cursor, inputted_ids):
     song_count = Counter()
 
     for playlist_id, playlist_creator_id, playlist_top_genres, playlist_items in related_playlists:
-        for song_id in playlist_items:
+        playlist_items_list = playlist_items.split(',')
+
+        for song_id in playlist_items_list:
             song_info = get_song_info(cursor, song_id)
             if song_info:
                 if song_id in inputted_ids:
                     # Count +2 for same inputted song ID
                     song_count[(song_id, song_info[3], song_info[1])] += 2
-                elif song_id not in inputted_ids:
-                    song_count[(song_id, song_info[3], song_info[1])
-                               ] += 1  # Count +1 for other songs
+                else:
+                    # Count +1 for other songs
+                    song_count[(song_id, song_info[3], song_info[1])] += 1
 
     return song_count
 
@@ -133,7 +98,7 @@ def cf(ids):
             else:
                 for playlist_idx, (playlist_id, playlist_creator_id, playlist_top_genres, playlist_items) in enumerate(related_playlists, 1):
                     f.write(f"{playlist_idx}. https://open.spotify.com/playlist/{playlist_id} by https://open.spotify.com/user/{
-                            playlist_creator_id}, Top Genres: {playlist_top_genres}, Items: {', '.join(playlist_items)}\n")
+                            playlist_creator_id}, Top Genres: {playlist_top_genres}, Items: {', '.join(playlist_items.split(','))}\n")
 
         # 3. SONG RECOMMENDATION
         f.write('\nSONG RECOMMENDATION\n')
@@ -148,18 +113,23 @@ def cf(ids):
             if not song_count:
                 f.write("No song recommendations found.\n")
             else:
+                # Filter and sort the songs
+                artist_song_limit = defaultdict(int)
+                limited_songs = []
+
                 sorted_songs = sorted(song_count.items(),
                                       key=lambda x: x[1], reverse=True)
-                song_artist_counter = {}
+                for ((rec_song_id, rec_artist_name, rec_song_name), count) in sorted_songs:
+                    # Limit to 2 songs per artist
+                    if artist_song_limit[rec_artist_name] < 2:
+                        limited_songs.append(
+                            (rec_song_id, rec_artist_name, rec_song_name, count))
+                        artist_song_limit[rec_artist_name] += 1
 
-                for rec_idx, ((rec_song_id, rec_artist_name, rec_song_name), count) in enumerate(sorted_songs, 1):
-                    if rec_artist_name not in song_artist_counter:
-                        song_artist_counter[rec_artist_name] = 0
-
-                    if song_artist_counter[rec_artist_name] < 2:
-                        f.write(f"{rec_idx}. https://open.spotify.com/track/{rec_song_id} {
-                                rec_artist_name} - {rec_song_name} | Count: {count}\n")
-                        song_artist_counter[rec_artist_name] += 1
+                # Write the limited songs to the output with proper enumeration
+                for rec_idx, (rec_song_id, rec_artist_name, rec_song_name, count) in enumerate(limited_songs, 1):
+                    f.write(f"{rec_idx}. https://open.spotify.com/track/{rec_song_id} {
+                            rec_artist_name} - {rec_song_name} | Count: {count}\n")
 
     conn.close()
     print(f'Result for {MODEL} stored at {OUTPUT_PATH}')
