@@ -36,7 +36,7 @@ for filename in os.listdir(input_dir):
                 content = block[len(header):]
 
                 # Find and format the list items
-                pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^|]+)'
+                pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^\n]+)'
                 matches = re.findall(pattern, content)
 
                 # Debugging: Check if the matches are being captured correctly
