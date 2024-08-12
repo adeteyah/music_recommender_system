@@ -18,7 +18,8 @@ CLIENT_ID = config['api']['client_id']
 CLIENT_SECRET = config['api']['client_secret']
 DELAY_TIME = float(config['scrape']['delay_time'])
 
-IDS = ['56nlMoRIBAiaQm9FW6hAnu']
+IDS = ['7qlkESHAzMS77g5gRRPPjq', '37i9dQZF1E4wB4mNICRyWd', '3L1FtMJdLbb03cfZY0VZCg', '61ZtcGhXlr0NbFLUxpNSiG',
+       '56fgGUnEurFxPo0TVN4Nb2', '37i9dQZF1DWXRPjCBAuFj3', '7zEWvS6PXlniZTflSTpKln', '5OjJ9uqpYSKnLGJVfRPWub']
 
 
 def init_spotify(client_id, client_secret):
