@@ -112,14 +112,14 @@ def cf(ids):
         file.write('INPUTTED IDS\n')
         for i, song_info in enumerate(songs_info, 1):
             if song_info is None:  # Check if the song was found
-                file.write(f"{i}. Song ID not found in the database.\n")
+                file.write(f"Song ID not found in the database.\n")
                 continue
 
             formatted_info = format_song_info(song_info)
-            file.write(f"{i}. {formatted_info}\n")
+            file.write(f"SONGS RECOMMENDATION: {formatted_info}\n")
 
             # Add FOUND IN section
-            file.write(f"\nSONGS RECOMMENDATION:\n")
+            file.write(f"\nRELATED PLAYLISTS:\n")
             playlists = get_playlists_for_song(conn, song_info[0])
             playlist_ids = [playlist_id for playlist_id, _, _ in playlists]
             for j, (playlist_id, playlist_creator_id, _) in enumerate(playlists, 1):
@@ -128,7 +128,7 @@ def cf(ids):
 
             # Add SONGS RECOMMENDATION section with a specific title
             if playlist_ids:
-                file.write(f"\nSONGS EXTRACTED & COUNTED: {formatted_info}\n")
+                file.write(f"\n{formatted_info}")
                 recommended_songs = get_songs_from_playlists(
                     conn, playlist_ids)
 
