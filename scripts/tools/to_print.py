@@ -1,49 +1,65 @@
 import re
+import os
 
-# Read the content of the .txt file into the 'text' variable
-with open('result/cbf.txt', 'r', encoding='utf-8') as file:
-    text = file.read()
+# Define the input and output directories
+input_dir = 'result'
+output_dir = 'result/to_recommend'
 
-# Split the text into separate blocks by using the pattern 'SONGS RECOMMENDATION:'
-blocks = re.split(r'(SONGS RECOMMENDATION:)', text)
+# Ensure the output directory exists
+os.makedirs(output_dir, exist_ok=True)
 
-# Initialize a list to hold the results
-results = []
+# Process each .txt file in the input directory
+for filename in os.listdir(input_dir):
+    if filename.endswith('.txt'):
+        input_path = os.path.join(input_dir, filename)
+        output_path = os.path.join(output_dir, filename)
 
-# Process each block
-for i in range(1, len(blocks), 2):
-    # Combine 'SONGS RECOMMENDATION:' with the block content
-    block = blocks[i-1] + blocks[i]
+        # Read the content of the .txt file into the 'text' variable
+        with open(input_path, 'r', encoding='utf-8') as file:
+            text = file.read()
 
-    # Extract the SONGS RECOMMENDATION: part
-    match = re.search(r'(SONGS RECOMMENDATION:)', block)
-    if match:
-        header = match.group(0)
-        content = block[len(header):]
+        # Split the text into separate blocks by using the pattern 'SONGS RECOMMENDATION:'
+        blocks = re.split(r'(SONGS RECOMMENDATION:)', text)
 
-        # Find and format the list items
-        pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^|]+)'
-        matches = re.findall(pattern, content)
+        # Initialize a list to hold the results
+        results = []
 
-        # Debugging: Check if the matches are being captured correctly
-        if not matches:
-            # Print a snippet of the content for debugging
-            print(f"No matches found in block: {content[:200]}")
+        # Process each block
+        for i in range(1, len(blocks), 2):
+            # Combine 'SONGS RECOMMENDATION:' with the block content
+            block = blocks[i-1] + blocks[i]
 
-        # Limit the number of entries to 10
-        limited_result = matches[:10]
+            # Extract the SONGS RECOMMENDATION: part
+            match = re.search(r'(SONGS RECOMMENDATION:)', block)
+            if match:
+                header = match.group(0)
+                content = block[len(header):]
 
-        # Combine header with limited results
-        result = f"{header}\n" + "\n".join(limited_result)
-        results.append(result)
-    else:
-        # Print a snippet of the block for debugging
-        print(f"No header found in block: {block[:100]}")
+                # Find and format the list items
+                pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^|]+)'
+                matches = re.findall(pattern, content)
 
-# Combine all the processed blocks
-output = "\n\n".join(results)
-print(output)
+                # Debugging: Check if the matches are being captured correctly
+                if not matches:
+                    # Print a snippet of the content for debugging
+                    print(f"No matches found in block: {content[:200]}")
 
-# Optionally, you can write the output back to a new file
-with open('result/to_recommend/cbf.txt', 'w', encoding='utf-8') as output_file:
-    output_file.write(output)
+                # Limit the number of entries to 10
+                limited_result = matches[:10]
+
+                # Combine header with limited results
+                result = f"{header}\n" + "\n".join(limited_result)
+                results.append(result)
+            else:
+                # Print a snippet of the block for debugging
+                print(f"No header found in block: {block[:100]}")
+
+        # Combine all the processed blocks
+        output = "\n\n".join(results)
+        print(f"Processed {filename}")
+
+        # Write the output to a new file
+        with open(output_path, 'w', encoding='utf-8') as output_file:
+            output_file.write(output)
+
+print("Processing complete.")
