@@ -43,7 +43,6 @@ def get_song_info(conn, song_id):
     if not song_details:
         return None
 
-    # Extract the artist_ids and use only the first one
     song_id, song_name, artist_ids, acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo, time_signature, valence = song_details
     first_artist_id = artist_ids.split(',')[0]  # Get the first artist ID
 
@@ -59,8 +58,10 @@ def get_song_info(conn, song_id):
         return None
 
     artist_name, artist_genres = artist_details
+    # Only keep the first two genres
+    top_two_genres = ','.join(artist_genres.split(',')[:2])
 
-    return (song_id, song_name, artist_ids, artist_name, artist_genres,
+    return (song_id, song_name, artist_ids, artist_name, top_two_genres,
             acousticness, danceability, energy, instrumentalness, key,
             liveness, loudness, mode, speechiness, tempo, time_signature,
             valence)
