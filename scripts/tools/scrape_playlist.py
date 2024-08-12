@@ -18,8 +18,8 @@ CLIENT_ID = config['api']['client_id']
 CLIENT_SECRET = config['api']['client_secret']
 DELAY_TIME = float(config['scrape']['delay_time'])
 
-IDS = ['5MFWwI5QlYF4nNQNGDF6OA', '5qGTMQmMjR7Unr4XI46LZO', '4vrgFTiLAl1IDpT3VhPNSa', '37i9dQZF1DWVhQ5d3I6DeF', '7CBt3vWKuOTuv26y1484w3', '4zk6tSTpmD3phE5xD6xLbC', '09Zl93SjNQhB31qh6MmV1Q', '46K3PelJkUZ5bw9XfOGQSZ', '6dqyGai7V55RF5ZFsHya8Q', '0vy3NyuXs9dPGfT0l7x2tA', '0PxoUaBBMlWVN0C4DevtZA', '19tPdLjqLVJh1dlYJ47qqB', '3HPdjlIukH0P9WTAlvKSOR', '4ogMUNCtu62gbtYIlEm2t6', '5lzMxpevuZKb0zW9cl5Jv5', '73200flaII681XAUiLwn7u', '3IeWVkyZVGdW8GeaKaNcXS', '4WgPdrrJraQUzZVfPMyEdM', '4el8gH4PkK2wMNtI571ESZ', '66iXh3TVTFwQE36nmcaN5s', '111uMmVpD1BAsZEi0tMa4q', '37i9dQZF1E4z1uiJyTeQbp', '30EBpYQ6IkjLphFu79JOPP', '2RbP5Daopih8qsKEUwXa7x', '37i9dQZF1DX7iB3RCnBnN4', '3SXhSRYZhJgiZ5RX6o0h5u', '5BMjBOpscMw5vX44NeZU5k', '7CwV47IyBcLuKrPe0WMAiI', '18RViKIp06x5HCozrfPzFW', '44UZkxjlOUA8csSzUc93W5', '4AYsczr8y6fpMWH1GqRQFk', '5uZ3bfnXg3fXeUuBWYOHuH', '1rGr9soAOxBSQ7DuZIfIvQ', '06WwEDfvn0nz3jNUSClI8u', '0eQpFbdl3TW6BEtoc0IjzN', '17CpViK9a5uTi38kC9bStN', '2q8Cxint7rwS4FUr67ViGS', '5HqVpKssBwy1giBm1g0V2e', '6xcHJ3bSM0tQXP4L7N2GYH', '0rmxqVGbsBjP5oiFAyFnY3', '37i9dQZF1DWU7oFJkRIANi', '37i9dQZF1E4tXL5JyySTC2', '3NvUMIZ0hYOD4ayor3OLez', '2TRz3V4R4AeRrV8JYZ9OAK', '1yU8IowPsYPlImez5uxE0a', '1csCiPOUAeCjrqMdxUNXcc', '6dl1wyhhmonijS2kHBxCP3', '5EMlxbEmQpcA9bMDZawvfN', '5rn9VnH8guLyar3HOOnrXt', '4VfU8AtAgVFwmsZjtqP9N1', '4auzaMbqLCIOw0VzftItXn', '4HiBEF8Phd9hnzAOBKUSeq', '5GCbRp0vdKfg6NYS5jU8kA', '4Apjw3ursbRBSha1Y6NS6m', '1AY7UyAK8irpFEIvo3fAyd', '4jnS6lV5ywqbl8kyOFTurz', '37i9dQZF1DWWHW9jMSvcWf',
-       '37i9dQZF1EtfyNiHdP0XQZ', '7aFfYmFbLWolmHcYk7KZdW', '1z5S5cHsduPuWFdsd1rCPX', '5SXblfNvdQnrS2NYm45N5r', '34fVpm1sPLwOTeKD6jLuS4']
+IDS = ['37i9dQZF1E4vbz4swHVKWX', '2Vi2H4BhJVG0PFnzYB8sgb', '5p2Z31GzqJruqYlZXj8Poj',
+       '7K5i9JD92Shn7A5MWh7h4v', '37i9dQZF1EIXNLRz8j6IGJ', '20R8anptqFQTGk4P2X6dRp']
 # Initialize Spotify API credentials
 
 
