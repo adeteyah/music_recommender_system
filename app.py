@@ -13,7 +13,7 @@ cf.cf(ids)
 end = time.time()
 print("Time: ", end - start)
 
-start = time.time()  # TODO: AF BOUND BY FEATURE SELECT & SORT BY AUDIO FEATURES
+start = time.time()  # DONE
 cf_cbf.cf_cbf(ids)
 end = time.time()
 print("Time: ", end - start)
