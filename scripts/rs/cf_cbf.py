@@ -21,9 +21,9 @@ VALENCE_ADDERAL = float(config['hp']['cf_cbf_valence_adderal'])
 SONGS_PER_ARTIST = int(config['hp']['songs_per_artist'])
 
 # Weights for sorting
-GENRE_WEIGHT = 0.2
-AF_WEIGHT = 0.5
-COUNT_WEIGHT = 0.3
+GENRE_WEIGHT = 0.7
+AF_WEIGHT = 0.2
+COUNT_WEIGHT = 0.1
 
 
 def get_song_info(conn, song_id):
