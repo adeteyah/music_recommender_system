@@ -97,14 +97,12 @@ def format_song_info(song_info, count=None):
      speechiness, tempo, time_signature, valence) = song_info
 
     base_info = (f"https://open.spotify.com/track/{song_id} {artist_name} - {song_name} | "
-                 f"Genre: {artist_genres} | Acousticness: {
-                     acousticness}, Danceability: {danceability}, "
-                 f"Energy: {energy}, Instrumentalness: {
-                     instrumentalness}, Key: {key}, "
+                 f"Genre: {artist_genres} | Acousticness: {acousticness}, "
+                 f"Danceability: {danceability}, Energy: {energy}, "
+                 f"Instrumentalness: {instrumentalness}, Key: {key}, "
                  f"Liveness: {liveness}, Loudness: {loudness}, Mode: {mode}, "
-                 f"Speechiness: {speechiness}, Tempo: {
-                     tempo}, Time Signature: {time_signature}, "
-                 f"Valence: {valence}")
+                 f"Speechiness: {speechiness}, Tempo: {tempo}, "
+                 f"Time Signature: {time_signature}, Valence: {valence}")
 
     return base_info + (f" | COUNT: {count}" if count is not None else "")
 
@@ -120,13 +118,11 @@ def calculate_similarity(song_info, input_song_info):
         'danceability': REAL_BOUND_VAL,
         'energy': REAL_BOUND_VAL,
         'instrumentalness': REAL_BOUND_VAL,
-        # 'key': 1,
         'liveness': REAL_BOUND_VAL,
         'loudness': REAL_BOUND_VAL,
         'mode': MODE_BOUND_VAL,
         'speechiness': REAL_BOUND_VAL,
         'tempo': TEMPO_BOUND_VAL,
-        # 'time_signature': 1,
         'valence': REAL_BOUND_VAL,
     }
 
@@ -224,8 +220,14 @@ def cf_cbf(ids):
                             similarity_score = calculate_similarity(
                                 song_recommendation_info, song_info)
 
-                            # Calculate the weighted score
-                            weighted_score = (GENRE_WEIGHT * (1 if song_recommendation_info[4] == song_info[4] else 0) +
+                            # Allow partial genre match (e.g., "k-pop ballad" matches with "k-pop")
+                            genre_similarity = any(
+                                genre in song_info[4].lower().split(", ")
+                                for genre in song_recommendation_info[4].lower().split(", ")
+                            )
+
+                            # Calculate the weighted score with partial genre match
+                            weighted_score = (GENRE_WEIGHT * genre_similarity +
                                               AF_WEIGHT * (1 / (1 + similarity_score)) +
                                               COUNT_WEIGHT * count)
 
