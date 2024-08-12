@@ -154,6 +154,7 @@ def cbf(ids):
             header = f"{artist_name} - {song_info[1]} | Genres: {genres}"
             f.write(f"\n{header}\n")
 
+            # Pass all genres split into a list to use OR condition
             mandatory_genres = [genre.strip() for genre in genres.split(
                 ',')] if genres != 'N/A' else []
             if mandatory_genres:
