@@ -11,20 +11,27 @@ def process_file(input_path, output_path):
     results = []
 
     # Find all instances of SONGS RECOMMENDATION: and their following lines
-    pattern = r'(SONGS RECOMMENDATION:)(.*?)(?=SONGS RECOMMENDATION:|$)'
+    pattern = r'(SONGS RECOMMENDATION:.*?)(?=SONGS RECOMMENDATION:|$)'
     blocks = re.findall(pattern, text, re.DOTALL)
 
-    for header, content in blocks:
-        # Find and limit the numbered list items to 10
-        list_pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^\|]+)'
-        matches = re.findall(list_pattern, content)
+    for block in blocks:
+        # Extract the header and content
+        header_pattern = r'(SONGS RECOMMENDATION:.*?)(?:\n|$)'
+        header_match = re.match(header_pattern, block)
+        if header_match:
+            header = header_match.group(0).strip()
+            content = block[len(header):].strip()
 
-        # Limit the number of entries to 10
-        limited_result = matches[:10]
+            # Find and format the list items
+            list_pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^\|]+)'
+            matches = re.findall(list_pattern, content)
 
-        # Combine header with limited results
-        result = f"{header}\n" + "\n".join(limited_result)
-        results.append(result)
+            # Limit the number of entries to 10
+            limited_result = matches[:10]
+
+            # Combine header with limited results
+            result = f"{header}\n" + "\n".join(limited_result)
+            results.append(result)
 
     # Combine all the processed blocks
     output = "\n\n".join(results)
