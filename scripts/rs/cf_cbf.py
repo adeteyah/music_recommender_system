@@ -172,7 +172,6 @@ def cf_cbf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
 
-    # Prepare to track excluded songs
     input_song_ids = set(song_info[0] for song_info in songs_info if song_info)
     input_song_titles_artists = {
         (song_info[1], song_info[3]) for song_info in songs_info if song_info}
@@ -187,7 +186,6 @@ def cf_cbf(ids):
             formatted_info = format_song_info(song_info)
             file.write(f"{i}. {formatted_info}\n")
 
-            # Add FOUND IN section
             file.write(f"\nFOUND IN:\n")
             playlists = get_playlists_for_song(conn, song_info[0])
             playlist_ids = [playlist_id for playlist_id, _, _ in playlists]
@@ -195,66 +193,55 @@ def cf_cbf(ids):
                 file.write(f"{j}. https://open.spotify.com/playlist/{
                            playlist_id} by https://open.spotify.com/user/{playlist_creator_id}\n")
 
-            # Add SONGS RECOMMENDATION section with a specific title
             if playlist_ids:
                 file.write(f"\nSONGS RECOMMENDATION: {formatted_info}\n")
                 recommended_songs = get_songs_from_playlists(
                     conn, playlist_ids)
 
-                # Calculate a weighted score for each recommended song
                 weighted_recommendations = []
                 for recommended_song_id, count in recommended_songs.items():
                     song_recommendation_info = get_song_info(
                         conn, recommended_song_id)
-                    if song_recommendation_info:  # Ensure the song exists
+                    if song_recommendation_info:
                         song_title = song_recommendation_info[1]
                         artist_name = song_recommendation_info[3]
+                        recommended_genres = song_recommendation_info[4].split(
+                            ',')
 
-                        # Skip songs that are input songs or have the same title and artist as input songs
+                        # Check if the recommended song's genres match any of the first two genres of the input song
+                        input_genres = song_info[4].split(',')
+                        if not any(genre in recommended_genres for genre in input_genres):
+                            continue
+
                         if (recommended_song_id in input_song_ids or
                                 (song_title, artist_name) in input_song_titles_artists):
                             continue
 
-                        # Check if the song is similar enough based on selected features
                         if is_similar_song(song_recommendation_info, song_info, FEATURE_SELECT):
-                            # Calculate similarity score
                             similarity_score = calculate_similarity(
                                 song_recommendation_info, song_info)
-
-                            # Allow partial genre match (e.g., "k-pop ballad" matches with "k-pop")
-                            genre_similarity = any(
-                                genre in song_info[4].lower().split(", ")
-                                for genre in song_recommendation_info[4].lower().split(", ")
-                            )
-
-                            # Calculate the weighted score with partial genre match
-                            weighted_score = (GENRE_WEIGHT * genre_similarity +
+                            weighted_score = (GENRE_WEIGHT * (1 if song_recommendation_info[4] == song_info[4] else 0) +
                                               AF_WEIGHT * (1 / (1 + similarity_score)) +
                                               COUNT_WEIGHT * count)
-
                             weighted_recommendations.append(
                                 (recommended_song_id, weighted_score, count))
 
-                # Sort by weighted score in descending order
                 sorted_recommendations = sorted(
                     weighted_recommendations, key=lambda x: x[1], reverse=True)
 
-                # Track song count per artist
                 artist_song_count = defaultdict(int)
                 k = 1
                 for recommended_song_id, _, count in sorted_recommendations:
                     song_recommendation_info = get_song_info(
                         conn, recommended_song_id)
-                    if song_recommendation_info:  # Ensure the song exists
+                    if song_recommendation_info:
                         song_title = song_recommendation_info[1]
                         artist_name = song_recommendation_info[3]
 
-                        # Allow only 2 songs per artist
                         if artist_song_count[artist_name] < SONGS_PER_ARTIST:
                             formatted_recommendation = format_song_info(
                                 song_recommendation_info, count)
                             file.write(f"{k}. {formatted_recommendation}\n")
-                            # Increment the count for the artist
                             artist_song_count[artist_name] += 1
                             k += 1
             file.write('\n')
