@@ -15,15 +15,15 @@ def process_file(input_path, output_path):
     blocks = re.findall(pattern, text, re.DOTALL)
 
     for block in blocks:
-        # Extract the header and content
-        header_pattern = r'(SONGS RECOMMENDATION:.*?)(?:\n|$)'
+        # Extract the header (SONGS RECOMMENDATION:) and limit text after song title
+        header_pattern = r'(SONGS RECOMMENDATION: https://open\.spotify\.com/track/\w+ [^\|]+)'
         header_match = re.match(header_pattern, block)
         if header_match:
             header = header_match.group(0).strip()
             content = block[len(header):].strip()
 
-            # Find and format the list items, removing any text after the song title
-            list_pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^\n|]+)'
+            # Find and format the list items
+            list_pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^\|]+)'
             matches = re.findall(list_pattern, content)
 
             # Limit the number of entries to 10
