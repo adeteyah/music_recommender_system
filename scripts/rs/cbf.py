@@ -67,9 +67,9 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
 
     conditions_sql = ' AND '.join(feature_conditions)
 
-    # Extracting two mandatory genres
-    genre_conditions = " OR ".join(
-        [f"a.artist_genres LIKE '%{genre}%'" for genre in mandatory_genres if genre])
+    # Create genre conditions for OR logic
+    genre_conditions = ' OR '.join(
+        [f"a.artist_genres LIKE '%{genre}%'" for genre in mandatory_genres])
 
     combined_conditions_sql = f"{conditions_sql} AND ({genre_conditions})"
     features_sql = ', '.join(features)
@@ -145,7 +145,6 @@ def cbf(ids):
             f.write(line)
 
         f.write('\nSONGS RECOMMENDATION\n')
-
         for input_audio_features, song_info in zip(input_audio_features_list, songs_info):
             artist_info = get_artist_info(conn, song_info[2].split(
                 ',')[0]) if song_info[2] else ('N/A', 'N/A')
@@ -155,9 +154,8 @@ def cbf(ids):
             header = f"{artist_name} - {song_info[1]} | Genres: {genres}"
             f.write(f"\n{header}\n")
 
-            # Assuming you want to use the first two genres as mandatory genres
-            mandatory_genres = [genre.strip() for genre in genres.split(',')[
-                :2] if genre.strip() != 'N/A']
+            mandatory_genres = [genre.strip() for genre in genres.split(
+                ',')] if genres != 'N/A' else []
             if mandatory_genres:
                 similar_songs_info = get_similar_audio_features(
                     conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genres)
