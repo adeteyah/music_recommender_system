@@ -14,7 +14,7 @@ REAL_BOUND_VAL = float(config['hp']['cbf_cf_real_bound'])
 MODE_BOUND_VAL = int(config['hp']['cbf_cf_mode_bound'])
 TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cbf_cf_time_signature_bound'])
 TEMPO_BOUND_VAL = float(config['hp']['cbf_cf_tempo_bound'])
-SONGS_PER_ARTIST = int(config['hp']['songs_per_artist'])
+SONGS_PER_ARTIST = int(config['hp']['SONGS_PER_ARTIST'])
 
 # Define specific bound values for features
 SEPARATE_BOUNDS = {
@@ -66,7 +66,7 @@ def count_song_in_playlists(conn, song_id):
     return cursor.fetchone()[0]
 
 
-def get_similar_audio_features(conn, features, input_audio_features, inputted_ids, inputted_songs, mandatory_genres):
+def get_similar_audio_features(conn, features, input_audio_features, inputted_ids, inputted_songs, mandatory_genre):
     feature_conditions = []
     for i, feature in enumerate(features):
         feature_name = feature.split('.')[-1]
@@ -77,10 +77,7 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
                                   lower_bound} AND {upper_bound}")
 
     conditions_sql = ' AND '.join(feature_conditions)
-
-    # Create a genre condition that matches either of the mandatory genres
-    genre_conditions = ' OR '.join(
-        [f"a.artist_genres LIKE '%{genre}%'" for genre in mandatory_genres])
+    genre_conditions = f"a.artist_genres LIKE '%{mandatory_genre}%'"
 
     combined_conditions_sql = f"{conditions_sql} AND ({genre_conditions})"
     features_sql = ', '.join(features)
@@ -165,10 +162,11 @@ def cbf_cf(ids):
             header = f"{artist_name} - {song_info[1]} | Genres: {genres}"
             f.write(f"\n{header}\n")
 
-            if genres != 'N/A':
-                mandatory_genres = genres.split(', ')
+            mandatory_genre = genres.split(
+                ',')[0].strip() if genres != 'N/A' else None
+            if mandatory_genre:
                 similar_songs_info = get_similar_audio_features(
-                    conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genres)
+                    conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genre)
 
                 # Store songs with their count and audio features in a list
                 songs_with_count = []
