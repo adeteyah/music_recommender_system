@@ -148,7 +148,7 @@ def cbf(ids):
             genres = artist_info[1] if artist_info[1] else 'N/A'
 
             header = f"{artist_name} - {song_info[1]} | Genres: {genres}"
-            f.write(f"\n{header}\n")
+            f.write(f"\nSONGS RECOMMENDATION: {header}\n")
 
             mandatory_genre = genres.split(
                 ',')[0].strip() if genres != 'N/A' else None
