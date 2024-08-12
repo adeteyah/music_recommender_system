@@ -22,8 +22,8 @@ def process_file(input_path, output_path):
             header = header_match.group(0).strip()
             content = block[len(header):].strip()
 
-            # Find and format the list items
-            list_pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^\|]+)'
+            # Find and format the list items, removing any text after the song title
+            list_pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^\n|]+)'
             matches = re.findall(list_pattern, content)
 
             # Limit the number of entries to 10
