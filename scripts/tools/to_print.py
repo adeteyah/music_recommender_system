@@ -25,6 +25,11 @@ for i in range(1, len(blocks), 2):
         pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^|]+)'
         matches = re.findall(pattern, content)
 
+        # Debugging: Check if the matches are being captured correctly
+        if not matches:
+            # Print a snippet of the content for debugging
+            print(f"No matches found in block: {content[:200]}")
+
         # Limit the number of entries to 10
         limited_result = matches[:10]
 
