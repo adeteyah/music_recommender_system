@@ -16,19 +16,24 @@ for i in range(1, len(blocks), 2):
     block = blocks[i-1] + blocks[i]
 
     # Extract the SONGS RECOMMENDATION: part
-    header = re.match(r'(SONGS RECOMMENDATION:)', block).group(0)
-    content = block[len(header):]
+    match = re.search(r'(SONGS RECOMMENDATION:)', block)
+    if match:
+        header = match.group(0)
+        content = block[len(header):]
 
-    # Find and format the list items
-    pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^|]+)'
-    matches = re.findall(pattern, content)
+        # Find and format the list items
+        pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^|]+)'
+        matches = re.findall(pattern, content)
 
-    # Limit the number of entries to 10
-    limited_result = matches[:10]
+        # Limit the number of entries to 10
+        limited_result = matches[:10]
 
-    # Combine header with limited results
-    result = f"{header}\n" + "\n".join(limited_result)
-    results.append(result)
+        # Combine header with limited results
+        result = f"{header}\n" + "\n".join(limited_result)
+        results.append(result)
+    else:
+        # Print a snippet of the block for debugging
+        print(f"No header found in block: {block[:100]}")
 
 # Combine all the processed blocks
 output = "\n\n".join(results)
