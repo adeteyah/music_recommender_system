@@ -116,7 +116,7 @@ def cf(ids):
                 continue
 
             formatted_info = format_song_info(song_info)
-            file.write(f"SONGS RECOMMENDATION: {formatted_info}\n")
+            file.write(f"{formatted_info}\n")
 
             # Add FOUND IN section
             file.write(f"\nRELATED PLAYLISTS:\n")
@@ -128,7 +128,7 @@ def cf(ids):
 
             # Add SONGS RECOMMENDATION section with a specific title
             if playlist_ids:
-                file.write(f"\n{formatted_info}")
+                file.write(f"\nSONGS RECOMMENDATION: {formatted_info}")
                 recommended_songs = get_songs_from_playlists(
                     conn, playlist_ids)
 
