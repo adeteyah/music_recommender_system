@@ -66,7 +66,7 @@ def count_song_in_playlists(conn, song_id):
     return cursor.fetchone()[0]
 
 
-def get_similar_audio_features(conn, features, input_audio_features, inputted_ids, inputted_songs, mandatory_genre):
+def get_similar_audio_features(conn, features, input_audio_features, inputted_ids, inputted_songs, mandatory_genres):
     feature_conditions = []
     for i, feature in enumerate(features):
         feature_name = feature.split('.')[-1]
@@ -77,7 +77,10 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
                                   lower_bound} AND {upper_bound}")
 
     conditions_sql = ' AND '.join(feature_conditions)
-    genre_conditions = f"a.artist_genres LIKE '%{mandatory_genre}%'"
+
+    # Create a genre condition that matches either of the mandatory genres
+    genre_conditions = ' OR '.join(
+        [f"a.artist_genres LIKE '%{genre}%'" for genre in mandatory_genres])
 
     combined_conditions_sql = f"{conditions_sql} AND ({genre_conditions})"
     features_sql = ', '.join(features)
@@ -162,11 +165,10 @@ def cbf_cf(ids):
             header = f"{artist_name} - {song_info[1]} | Genres: {genres}"
             f.write(f"\n{header}\n")
 
-            mandatory_genre = genres.split(
-                ',')[0].strip() if genres != 'N/A' else None
-            if mandatory_genre:
+            if genres != 'N/A':
+                mandatory_genres = genres.split(', ')
                 similar_songs_info = get_similar_audio_features(
-                    conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genre)
+                    conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genres)
 
                 # Store songs with their count and audio features in a list
                 songs_with_count = []
