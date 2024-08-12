@@ -30,29 +30,24 @@ for filename in os.listdir(input_dir):
             block = blocks[i-1] + blocks[i]
 
             # Extract the SONGS RECOMMENDATION: part
-            match = re.search(r'(SONGS RECOMMENDATION:)', block)
-            if match:
-                header = match.group(0)
-                content = block[len(header):]
+            header = re.search(r'(SONGS RECOMMENDATION:)', block).group(0)
+            content = block[len(header):]
 
-                # Find and format the list items
-                pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^\n]+)'
-                matches = re.findall(pattern, content)
+            # Find and format the list items
+            pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^\n]+)'
+            matches = re.findall(pattern, content)
 
-                # Debugging: Check if the matches are being captured correctly
-                if not matches:
-                    # Print a snippet of the content for debugging
-                    print(f"No matches found in block: {content[:200]}")
+            # Debugging: Check if the matches are being captured correctly
+            if not matches:
+                # Print a snippet of the content for debugging
+                print(f"No matches found in block: {content[:200]}")
 
-                # Limit the number of entries to 10
-                limited_result = matches[:10]
+            # Limit the number of entries to 10
+            limited_result = matches[:10]
 
-                # Combine header with limited results
-                result = f"{header}\n" + "\n".join(limited_result)
-                results.append(result)
-            else:
-                # Print a snippet of the block for debugging
-                print(f"No header found in block: {block[:100]}")
+            # Combine header with limited results
+            result = f"{header}\n" + "\n".join(limited_result)
+            results.append(result)
 
         # Combine all the processed blocks
         output = "\n\n".join(results)
