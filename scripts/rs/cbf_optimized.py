@@ -150,7 +150,8 @@ def cbf(ids):
             artist_name = artist_info[0] if artist_info[0] else 'N/A'
             genres = artist_info[1] if artist_info[1] else 'N/A'
 
-            header = f"{artist_name} - {song_info[1]} | Genres: {genres}"
+            header = f"https://open.spotify.com/track/{song_id} {
+                artist_name} - {song_info[1]} | Genres: {genres}"
             f.write(f"\nSONGS RECOMMENDATION: {header}\n")
 
             mandatory_genres = [genre.strip() for genre in genres.split(
