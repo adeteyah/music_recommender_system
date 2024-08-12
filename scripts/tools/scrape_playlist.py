@@ -18,9 +18,8 @@ CLIENT_ID = config['api']['client_id']
 CLIENT_SECRET = config['api']['client_secret']
 DELAY_TIME = float(config['scrape']['delay_time'])
 
-IDS = ['3INYq8oYRfF0v6I86ym9B2', '6fmvjRaCoJVKwUv0gS5EyR', '37i9dQZF1E4vwnFBfv3Nxw', '7p4qH3gGsrTHpwmsby0awh', '3o5wI3QC2DEPzI1rlfbUQJ', '7zquYNTG2ikOeqWvJjwDio', '3hrrAThqaEkcTi7swVwbOK', '3yuhAxr6DzD8G9RxdWZq9F', '6hj4t3MvZMNp6x7rm9Wpwn', '2db0y17l9Dw0FMEvIH5c83',
-       '0ptCCEWuYh1wgKaHSAtkeB', '56fDocVoWCAsNSQh318BYJ', '7FXfjomkqzYq8e2ntiTcwi', '5Lo7a936yE5kqutpNt4i7c', '2GqDejkGwrGCyr1SZa4OaT', '37i9dQZF1E4y39GS3CWEyE', '3oOyEJnrgNOv4AxiMWimNt', '1JVP02FYKSm08iciezMybx', '2ZAcLK64XD4Ez7IU36ztiO', '4yKAiganW8SkHI7gGox52U']
-
+IDS = ['5MFWwI5QlYF4nNQNGDF6OA', '5qGTMQmMjR7Unr4XI46LZO', '4vrgFTiLAl1IDpT3VhPNSa', '37i9dQZF1DWVhQ5d3I6DeF', '7CBt3vWKuOTuv26y1484w3', '4zk6tSTpmD3phE5xD6xLbC', '09Zl93SjNQhB31qh6MmV1Q', '46K3PelJkUZ5bw9XfOGQSZ', '6dqyGai7V55RF5ZFsHya8Q', '0vy3NyuXs9dPGfT0l7x2tA', '0PxoUaBBMlWVN0C4DevtZA', '19tPdLjqLVJh1dlYJ47qqB', '3HPdjlIukH0P9WTAlvKSOR', '4ogMUNCtu62gbtYIlEm2t6', '5lzMxpevuZKb0zW9cl5Jv5', '73200flaII681XAUiLwn7u', '3IeWVkyZVGdW8GeaKaNcXS', '4WgPdrrJraQUzZVfPMyEdM', '4el8gH4PkK2wMNtI571ESZ', '66iXh3TVTFwQE36nmcaN5s', '111uMmVpD1BAsZEi0tMa4q', '37i9dQZF1E4z1uiJyTeQbp', '30EBpYQ6IkjLphFu79JOPP', '2RbP5Daopih8qsKEUwXa7x', '37i9dQZF1DX7iB3RCnBnN4', '3SXhSRYZhJgiZ5RX6o0h5u', '5BMjBOpscMw5vX44NeZU5k', '7CwV47IyBcLuKrPe0WMAiI', '18RViKIp06x5HCozrfPzFW', '44UZkxjlOUA8csSzUc93W5', '4AYsczr8y6fpMWH1GqRQFk', '5uZ3bfnXg3fXeUuBWYOHuH', '1rGr9soAOxBSQ7DuZIfIvQ', '06WwEDfvn0nz3jNUSClI8u', '0eQpFbdl3TW6BEtoc0IjzN', '17CpViK9a5uTi38kC9bStN', '2q8Cxint7rwS4FUr67ViGS', '5HqVpKssBwy1giBm1g0V2e', '6xcHJ3bSM0tQXP4L7N2GYH', '0rmxqVGbsBjP5oiFAyFnY3', '37i9dQZF1DWU7oFJkRIANi', '37i9dQZF1E4tXL5JyySTC2', '3NvUMIZ0hYOD4ayor3OLez', '2TRz3V4R4AeRrV8JYZ9OAK', '1yU8IowPsYPlImez5uxE0a', '1csCiPOUAeCjrqMdxUNXcc', '6dl1wyhhmonijS2kHBxCP3', '5EMlxbEmQpcA9bMDZawvfN', '5rn9VnH8guLyar3HOOnrXt', '4VfU8AtAgVFwmsZjtqP9N1', '4auzaMbqLCIOw0VzftItXn', '4HiBEF8Phd9hnzAOBKUSeq', '5GCbRp0vdKfg6NYS5jU8kA', '4Apjw3ursbRBSha1Y6NS6m', '1AY7UyAK8irpFEIvo3fAyd', '4jnS6lV5ywqbl8kyOFTurz', '37i9dQZF1DWWHW9jMSvcWf',
+       '37i9dQZF1EtfyNiHdP0XQZ', '7aFfYmFbLWolmHcYk7KZdW', '1z5S5cHsduPuWFdsd1rCPX', '5SXblfNvdQnrS2NYm45N5r', '34fVpm1sPLwOTeKD6jLuS4']
 # Initialize Spotify API credentials
 
 

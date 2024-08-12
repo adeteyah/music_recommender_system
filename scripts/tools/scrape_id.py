@@ -21,9 +21,6 @@ text = """
 
 
 
-
-
-
 """
 user_pattern = re.compile(
     r"playlist/([a-zA-Z0-9]+)")
