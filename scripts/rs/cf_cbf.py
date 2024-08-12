@@ -98,7 +98,7 @@ def format_song_info(song_info, count=None):
      speechiness, tempo, time_signature, valence) = song_info
 
     base_info = (f"https://open.spotify.com/track/{song_id} {artist_name} - {song_name} | "
-                 f"Genre: {artist_genres} | Acousticness: {acousticness}, "
+                 f"Genres: {artist_genres} | Acousticness: {acousticness}, "
                  f"Danceability: {danceability}, Energy: {energy}, "
                  f"Instrumentalness: {instrumentalness}, Key: {key}, "
                  f"Liveness: {liveness}, Loudness: {loudness}, Mode: {mode}, "
