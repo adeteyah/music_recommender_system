@@ -18,8 +18,8 @@ CLIENT_ID = config['api']['client_id']
 CLIENT_SECRET = config['api']['client_secret']
 DELAY_TIME = float(config['scrape']['delay_time'])
 
-IDS = ['37i9dQZF1E4vbz4swHVKWX', '2Vi2H4BhJVG0PFnzYB8sgb', '5p2Z31GzqJruqYlZXj8Poj',
-       '7K5i9JD92Shn7A5MWh7h4v', '37i9dQZF1EIXNLRz8j6IGJ', '20R8anptqFQTGk4P2X6dRp']
+IDS = ['4Mkt4IhN69WjCXdVSzaXYQ', '5eULuHNg8JPGKCx6omYbYC', '4CtraFEp3JOXIugMp988KH', '37i9dQZF1EQoowv2cDraCW', '37i9dQZF1DX1hR3FYsyQKT', '37i9dQZF1E4w6NB717qQyN', '37i9dQZF1E4vQDUWpSqTA5', '5pwi4ruljjppc22LAofWY1', '0ooIgOLUHcDFl3ZC4rVo5g', '60uTeF7Jkcb1Yk9DkiCBLH', '30YiRidSYK9T9bTeJ2Uyja', '6WzeJ1NRrOfnWXVDEp7i00', '4osXbMi9ZYPXMicP8v0Yzv', '5vLquRfzFJsmQrhPvhKXY1', '53Opp1EdwfHij4PVHIW16F', '37i9dQZF1DXdPcuTtZNPGI', '2UMp4Iy7E16jnC68cez7UQ', '2xgzAb7YyksbpPn0Uj9pOO', '6nKLYWCwtv40Z9NP0Clkxf', '0u21GwkZrjV6b2lMjuu4ld',
+       '2CBTUQ8zQS4w8K7xSfPeLj', '0YYDw9b7wHpY0UtfSTdyaQ', '12O2R6OJdzQVbFfdcyzT5h', '5DplOloaREqktWIFeuvUTE', '11q3DYcR5gQHwiutWppkPs', '37i9dQZF1E4xYC2vFNvxhd', '0oRsA9kK8bn5UsqGNyHIdo', '0JyGfZ5SMnWyqYDN5UZD0O', '0tIalBclB1VV6UjuQ3ggFF', '410T2LhUEPMKdqM2lhJ2Nq', '7xfx1DRUdjLGcP0qtOChsC', '3BJgGChmcSxEy9Z8S5t8Xp', '0NWzYNPFvb4obJg004WBco', '5hIsnhpDjnXSA9nJqoUXva', '2y8eEJzgMmxMljV6mOFEJp', '44sjh9psENfjZh2R3Cm8ZL', '24wHmGufwWqTKNfyvoS3Kr', '1xNyUePVanBtjJU6llt72V', '73MvWCas8TtyQt8DYZFoxJ', '1k4gZo6XoKxhq4ME716sjX', '2VOTv2TlF25tJ3geI59Lc8',]
 # Initialize Spotify API credentials
 
 
