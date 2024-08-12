@@ -14,7 +14,6 @@ REAL_BOUND_VAL = float(config['hp']['cbf_real_bound'])
 MODE_BOUND_VAL = int(config['hp']['cbf_mode_bound'])
 TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cbf_time_signature_bound'])
 TEMPO_BOUND_VAL = float(config['hp']['cbf_tempo_bound'])
-SONGS_PER_ARTIST = int(config['hp']['songs_per_artist'])
 
 # Define specific bound values for features
 SEPARATE_BOUNDS = {
@@ -55,7 +54,7 @@ def normalize_song_name(song_name):
     return re.sub(r'\(.*?\)', '', song_name).strip().lower()
 
 
-def get_similar_audio_features(conn, features, input_audio_features, inputted_ids, inputted_songs, mandatory_genres):
+def get_similar_audio_features(conn, features, input_audio_features, inputted_ids, inputted_songs, mandatory_genre):
     feature_conditions = []
     for i, feature in enumerate(features):
         feature_name = feature.split('.')[-1]
@@ -66,10 +65,7 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
                                   lower_bound} AND {upper_bound}")
 
     conditions_sql = ' AND '.join(feature_conditions)
-
-    # Ensure genre conditions are combined with OR logic
-    genre_conditions = ' OR '.join(
-        [f"a.artist_genres LIKE '%{genre.strip()}%'" for genre in mandatory_genres])
+    genre_conditions = f"a.artist_genres LIKE '%{mandatory_genre}%'"
 
     combined_conditions_sql = f"{conditions_sql} AND ({genre_conditions})"
     features_sql = ', '.join(features)
@@ -101,7 +97,7 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
             continue
 
         if artist_ids in seen_artists:
-            if seen_artists[artist_ids] >= SONGS_PER_ARTIST:
+            if seen_artists[artist_ids] >= 2:
                 continue
             seen_artists[artist_ids] += 1
         else:
@@ -154,11 +150,11 @@ def cbf(ids):
             header = f"{artist_name} - {song_info[1]} | Genres: {genres}"
             f.write(f"\n{header}\n")
 
-            # Split the genres and pass them to the function
-            mandatory_genres = genres.split(',') if genres != 'N/A' else []
-            if mandatory_genres:
+            mandatory_genre = genres.split(
+                ',')[0].strip() if genres != 'N/A' else None
+            if mandatory_genre:
                 similar_songs_info = get_similar_audio_features(
-                    conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genres)
+                    conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genre)
                 for idx, song in enumerate(similar_songs_info, start=1):
                     song_id, song_name, artist_ids, *audio_features = song
                     song_url = f"https://open.spotify.com/track/{song_id}"
