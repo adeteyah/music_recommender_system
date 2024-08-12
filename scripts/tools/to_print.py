@@ -43,26 +43,41 @@ def process_file(input_path, output_path):
     with open(output_path, 'w', encoding='utf-8') as output_file:
         output_file.write(output)
 
-    print(f"Processed {output_path}")
+    # Return the processed output for compilation
+    return output
 
 
-def process_directory(input_dir, output_dir):
+def process_directory(input_dir, output_dir, compiled_file_path):
     # Ensure the output directory exists
     os.makedirs(output_dir, exist_ok=True)
+
+    # Initialize a list to store all outputs for the compiled file
+    compiled_results = []
 
     # Process each .txt file in the input directory
     for filename in os.listdir(input_dir):
         if filename.endswith('.txt'):
             input_path = os.path.join(input_dir, filename)
             output_path = os.path.join(output_dir, filename)
-            process_file(input_path, output_path)
 
-    print("Processing complete.")
+            # Process the file and get the output
+            file_output = process_file(input_path, output_path)
+
+            # Append the output to the compiled results
+            compiled_results.append(file_output)
+
+    # Combine all results and write to the compiled file
+    compiled_output = "\n\n".join(compiled_results)
+    with open(compiled_file_path, 'w', encoding='utf-8') as compiled_file:
+        compiled_file.write(compiled_output)
+
+    print("Processing complete. Compiled file created.")
 
 
-# Define the input and output directories
+# Define the input and output directories and the compiled file path
 input_dir = 'result'
 output_dir = 'result/to_recommend'
+compiled_file_path = os.path.join(output_dir, 'compiled.txt')
 
-# Process the directory
-process_directory(input_dir, output_dir)
+# Process the directory and create the compiled file
+process_directory(input_dir, output_dir, compiled_file_path)
