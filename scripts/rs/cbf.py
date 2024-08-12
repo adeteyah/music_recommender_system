@@ -67,9 +67,9 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
 
     conditions_sql = ' AND '.join(feature_conditions)
 
-    # Create genre conditions for OR logic
+    # Ensure genre conditions are combined with OR logic
     genre_conditions = ' OR '.join(
-        [f"a.artist_genres LIKE '%{genre}%'" for genre in mandatory_genres])
+        [f"a.artist_genres LIKE '%{genre.strip()}%'" for genre in mandatory_genres])
 
     combined_conditions_sql = f"{conditions_sql} AND ({genre_conditions})"
     features_sql = ', '.join(features)
@@ -154,9 +154,8 @@ def cbf(ids):
             header = f"{artist_name} - {song_info[1]} | Genres: {genres}"
             f.write(f"\n{header}\n")
 
-            # Pass all genres split into a list to use OR condition
-            mandatory_genres = [genre.strip() for genre in genres.split(
-                ',')] if genres != 'N/A' else []
+            # Split the genres and pass them to the function
+            mandatory_genres = genres.split(',') if genres != 'N/A' else []
             if mandatory_genres:
                 similar_songs_info = get_similar_audio_features(
                     conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genres)
