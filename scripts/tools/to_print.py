@@ -15,8 +15,8 @@ def process_file(input_path, output_path):
     blocks = re.findall(pattern, text, re.DOTALL)
 
     for block in blocks:
-        # Extract the header (SONGS RECOMMENDATION:) and limit text after song title
-        header_pattern = r'(SONGS RECOMMENDATION: https://open\.spotify\.com/track/\w+ [^\|]+)'
+        # Extract the header and content
+        header_pattern = r'(SONGS RECOMMENDATION:.*?)(?:\n|$)'
         header_match = re.match(header_pattern, block)
         if header_match:
             header = header_match.group(0).strip()
@@ -35,11 +35,12 @@ def process_file(input_path, output_path):
 
     # Combine all the processed blocks
     output = "\n\n".join(results)
-    print(f"Processed {input_path}")
 
     # Write the output to a new file
     with open(output_path, 'w', encoding='utf-8') as output_file:
         output_file.write(output)
+
+    print(f"Processed {output_path}")
 
 
 def process_directory(input_dir, output_dir):
