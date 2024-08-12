@@ -26,8 +26,8 @@ def process_file(input_path, output_path):
             list_pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^|]+)'
             matches = re.findall(list_pattern, content)
 
-            # Remove everything after the last '|' in the header
-            header = re.sub(r'\s*\|[^|]*$', '', header)
+            # Remove everything after ' | Genre: ' in the header
+            header = re.sub(r'\s*\| Genre:.*', '', header)
 
             limited_result = matches[:10]
             result = f"{header}\n" + "\n".join(limited_result)
