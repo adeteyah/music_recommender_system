@@ -2,37 +2,41 @@ import re
 import os
 
 
+def consolidate_ids(text):
+    # Define the pattern to find INPUTTED IDS and their following items
+    pattern = r'(INPUTTED IDS\s*[\s\S]*?)(?=INPUTTED IDS\s|$)'
+    blocks = re.findall(pattern, text)
+
+    consolidated_result = []
+
+    for block in blocks:
+        # Find and number items within each INPUTTED IDS block
+        item_pattern = r'(\d+\.)\s+([^\n]+)'
+        items = re.findall(item_pattern, block)
+
+        # Create the new consolidated block
+        if items:
+            consolidated_block = 'INPUTTED IDS'
+            for idx, (number, item) in enumerate(items, start=1):
+                consolidated_block += f'\n{idx}. {item}'
+            consolidated_result.append(consolidated_block)
+
+    return '\n\n'.join(consolidated_result)
+
+
 def process_file(input_path, output_path):
     # Read the content of the .txt file
     with open(input_path, 'r', encoding='utf-8') as file:
         text = file.read()
 
-    # Initialize a list to hold the results
-    results = []
+    # Consolidate the INPUTTED IDS blocks
+    consolidated_text = consolidate_ids(text)
 
-    # Find all instances of SONGS RECOMMENDATION: and their following lines
-    pattern = r'(SONGS RECOMMENDATION:)(.*?)(?=SONGS RECOMMENDATION:|$)'
-    blocks = re.findall(pattern, text, re.DOTALL)
-
-    for header, content in blocks:
-        # Find and limit the numbered list items to 10
-        list_pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^\n]+)'
-        matches = re.findall(list_pattern, content)
-
-        # Limit the number of entries to 10
-        limited_result = matches[:10]
-
-        # Combine header with limited results
-        result = f"{header}\n" + "\n".join(limited_result)
-        results.append(result)
-
-    # Combine all the processed blocks
-    output = "\n\n".join(results)
-    print(f"Processed {input_path}")
-
-    # Write the output to a new file
+    # Write the consolidated text to a new file
     with open(output_path, 'w', encoding='utf-8') as output_file:
-        output_file.write(output)
+        output_file.write(consolidated_text)
+
+    print(f"Processed {input_path}")
 
 
 def process_directory(input_dir, output_dir):
