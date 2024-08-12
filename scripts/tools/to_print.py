@@ -22,13 +22,18 @@ def process_file(input_path, output_path):
             header = header_match.group(0).strip()
             content = block[len(header):].strip()
 
+            # Find and format the list items
             list_pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^|]+)'
             matches = re.findall(list_pattern, content)
-            header = re.sub(r'\s*\| Genres :.*', '', header)
+
+            # Remove everything after ' | Genre: ' in the header
+            header = re.sub(r'\s*\| Genre:.*', '', header)
+
             limited_result = matches[:10]
             result = f"{header}\n" + "\n".join(limited_result)
             results.append(result)
 
+    # Add the file name as a header
     output = f"{file_name.upper()}\n\n" + "\n\n".join(results)
 
     with open(output_path, 'w', encoding='utf-8') as output_file:
