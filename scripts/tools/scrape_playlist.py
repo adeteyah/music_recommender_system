@@ -18,6 +18,9 @@ CLIENT_ID = config['api']['client_id']
 CLIENT_SECRET = config['api']['client_secret']
 DELAY_TIME = float(config['scrape']['delay_time'])
 
+IDS = ['5FNtcG4U1tzIgF0AWBEqAc', '56nlMoRIBAiaQm9FW6hAnu', '2NiCbCL7gCcrZjJzdrwMiK', '4mNRts0nEtwfQpB5Ceyqd1', '37i9dQZF1EIfOAUYCXVeOW', '6QgbTD7fGgAHM7QAz3MVW6', '0zqhsBFnMbfgGnlkN9qIxm', '37i9dQZF1DZ06evO2pFScU', '7z3sSuBECJNcWAHwrLcLyQ', '3web75XN1toudk58udAORe',
+       '3Y7bxmvY7ahyJUiRMxpKL6', '05PQmLY1JDvy543QkntSxC', '37i9dQZF1E4vwHOd8p2HiG', '0Qy8n31ndQcDYMBXBP4g5P', '5va0djGOyAE2SmfVIhSzPU', '1COUHhhrqMcoe90qn2EWiH', '3H6njhdAIEweucy7vSeF52', '37i9dQZF1E4y8NHHXWtyhk', '5fLvPWy9RW1Tc72N2dBDeV', '2HmL6tsByrzAkt55jXcdHJ']
+
 # Initialize Spotify API credentials
 
 
@@ -336,8 +339,7 @@ def calculate_and_update_playlist_metadata(cursor, playlist_id):
 
 # Main script
 if __name__ == "__main__":
-    playlist_ids = ['0nJTYwbU6VgewYBwYVQBqS', '6JISVM2jY9cSIDg0JGxhpO',
-                    '3dClDOdwkwIBXBl0E9oGfQ', '5m0ZeXgYo0uwKRgmkmjWQU']
+    playlist_ids = IDS
     scrape_playlists(sp, cursor, playlist_ids)
 
     # Assuming you want to calculate metadata for the same playlists after scraping
