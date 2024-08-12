@@ -16,7 +16,7 @@ def process_file(input_path, output_path):
 
     for header, content in blocks:
         # Find and limit the numbered list items to 10
-        list_pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^\n]+)'
+        list_pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^\|]+)'
         matches = re.findall(list_pattern, content)
 
         # Limit the number of entries to 10
