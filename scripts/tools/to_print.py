@@ -3,6 +3,9 @@ import os
 
 
 def process_file(input_path, output_path):
+    # Extract the file name without extension for the header
+    file_name = os.path.basename(input_path).replace('.txt', '')
+
     # Read the content of the .txt file
     with open(input_path, 'r', encoding='utf-8') as file:
         text = file.read()
@@ -33,8 +36,8 @@ def process_file(input_path, output_path):
             result = f"{header}\n" + "\n".join(limited_result)
             results.append(result)
 
-    # Combine all the processed blocks
-    output = "\n\n".join(results)
+    # Combine all the processed blocks with the filename header
+    output = f"{file_name.upper()}\n\n" + "\n\n".join(results)
 
     # Write the output to a new file
     with open(output_path, 'w', encoding='utf-8') as output_file:
