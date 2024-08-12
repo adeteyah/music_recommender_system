@@ -18,9 +18,8 @@ CLIENT_ID = config['api']['client_id']
 CLIENT_SECRET = config['api']['client_secret']
 DELAY_TIME = float(config['scrape']['delay_time'])
 
-IDS = ['4Mkt4IhN69WjCXdVSzaXYQ', '5eULuHNg8JPGKCx6omYbYC', '4CtraFEp3JOXIugMp988KH', '37i9dQZF1EQoowv2cDraCW', '37i9dQZF1DX1hR3FYsyQKT', '37i9dQZF1E4w6NB717qQyN', '37i9dQZF1E4vQDUWpSqTA5', '5pwi4ruljjppc22LAofWY1', '0ooIgOLUHcDFl3ZC4rVo5g', '60uTeF7Jkcb1Yk9DkiCBLH', '30YiRidSYK9T9bTeJ2Uyja', '6WzeJ1NRrOfnWXVDEp7i00', '4osXbMi9ZYPXMicP8v0Yzv', '5vLquRfzFJsmQrhPvhKXY1', '53Opp1EdwfHij4PVHIW16F', '37i9dQZF1DXdPcuTtZNPGI', '2UMp4Iy7E16jnC68cez7UQ', '2xgzAb7YyksbpPn0Uj9pOO', '6nKLYWCwtv40Z9NP0Clkxf', '0u21GwkZrjV6b2lMjuu4ld',
-       '2CBTUQ8zQS4w8K7xSfPeLj', '0YYDw9b7wHpY0UtfSTdyaQ', '12O2R6OJdzQVbFfdcyzT5h', '5DplOloaREqktWIFeuvUTE', '11q3DYcR5gQHwiutWppkPs', '37i9dQZF1E4xYC2vFNvxhd', '0oRsA9kK8bn5UsqGNyHIdo', '0JyGfZ5SMnWyqYDN5UZD0O', '0tIalBclB1VV6UjuQ3ggFF', '410T2LhUEPMKdqM2lhJ2Nq', '7xfx1DRUdjLGcP0qtOChsC', '3BJgGChmcSxEy9Z8S5t8Xp', '0NWzYNPFvb4obJg004WBco', '5hIsnhpDjnXSA9nJqoUXva', '2y8eEJzgMmxMljV6mOFEJp', '44sjh9psENfjZh2R3Cm8ZL', '24wHmGufwWqTKNfyvoS3Kr', '1xNyUePVanBtjJU6llt72V', '73MvWCas8TtyQt8DYZFoxJ', '1k4gZo6XoKxhq4ME716sjX', '2VOTv2TlF25tJ3geI59Lc8',]
-# Initialize Spotify API credentials
+IDS = ['37i9dQZF1E39hVGer1jGYj', '7ABa0dHeP5cOGCzueC1PXA', '6UL5TwSSfn76MbVvgf8cWt', '37i9dQZF1E4A4ZilZBfpyA', '1SSeXsBkFTkpHqmjAQ42s7', '3URrHVjMlIUtRFOyeOe00W', '0rtsNzXZfeE95QRwIDdw87', '0s6zYlI82d7IqtMciHALNc', '1zWSKyFlo4f24VWbhZYCX1', '2GswDZKJpCGLYoczEHg1s3', '2ttCXrIqSmcoFSaRLGEEyj', '4nRRtLi5O7ONpUR0dDr5AD', '2BWgpwopWokf5orqFJePPD', '4hK25gScGegOxXTV6u5E21', '3E3bE0w6BO1Cqeea4uNhHn', '5VwEpohYjLrV9UUp3pEDpy', '2rekOwzHvuEeR4Q0ivfDve', '6M14oz8xWgu8XzDv5OQB5Y', '5calF80tyoYmEhYeT66egu',
+       '37i9dQZF1DX5SrqpuffRKX', '2Nvgo2LAMu95B9fJAA85xw', '5v2SjsPFT8GmzPRSrBlRhO', '4TuwbqVymepWnxGhrYrJaQ', '5TjaZKdhyOHIodJPTnKnea', '2i46eQi2DIbqJxngmQOZu6', '1oBKBUrPn1ZzRMK5vGE5L5', '1fPEY5vA8hKdQi42QolInO', '4JK6nKGCQJKD1kKnLRlYew', '6pN60iqDffExRjw5gJyvFj', '6HQTl4QAji5kWZ4hqTwDvt', '37i9dQZF1EjiZvUO7Wf6vI', '7wwFt1hv7Me4PttN97sSsL', '1xJdks0Yhbgi9V22CZwsR7', '46ViOyzFjxYCXKnuHXL70h', '1qz25KaiKTON5qYzYcuWWn', '3t1BNBFDAINrcM07470pvz', '27cvlbFK8PNtuvZNYFTbBA', '2yLsbKiDiJlEittt4Wp81P']
 
 
 def init_spotify(client_id, client_secret):
@@ -94,34 +93,34 @@ def insert_playlist(cursor, playlist):
 
 def update_playlist_metadata(cursor, playlist_id, metadata):
     cursor.execute('''
-        UPDATE playlists 
-        SET playlist_items_fetched = ?, 
-            playlist_top_artist_ids = ?, 
-            playlist_top_genres = ?, 
-            min_acousticness = ?, 
-            max_acousticness = ?, 
-            min_danceability = ?, 
-            max_danceability = ?, 
-            min_energy = ?, 
-            max_energy = ?, 
-            min_instrumentalness = ?, 
-            max_instrumentalness = ?, 
-            min_key = ?, 
-            max_key = ?, 
-            min_liveness = ?, 
-            max_liveness = ?, 
-            min_loudness = ?, 
-            max_loudness = ?, 
-            min_mode = ?, 
-            max_mode = ?, 
-            min_speechiness = ?, 
-            max_speechiness = ?, 
-            min_tempo = ?, 
-            max_tempo = ?, 
-            min_time_signature = ?, 
-            max_time_signature = ?, 
-            min_valence = ?, 
-            max_valence = ? 
+        UPDATE playlists
+        SET playlist_items_fetched = ?,
+            playlist_top_artist_ids = ?,
+            playlist_top_genres = ?,
+            min_acousticness = ?,
+            max_acousticness = ?,
+            min_danceability = ?,
+            max_danceability = ?,
+            min_energy = ?,
+            max_energy = ?,
+            min_instrumentalness = ?,
+            max_instrumentalness = ?,
+            min_key = ?,
+            max_key = ?,
+            min_liveness = ?,
+            max_liveness = ?,
+            min_loudness = ?,
+            max_loudness = ?,
+            min_mode = ?,
+            max_mode = ?,
+            min_speechiness = ?,
+            max_speechiness = ?,
+            min_tempo = ?,
+            max_tempo = ?,
+            min_time_signature = ?,
+            max_time_signature = ?,
+            min_valence = ?,
+            max_valence = ?
         WHERE playlist_id = ?
     ''', (*metadata, playlist_id))
     conn.commit()
@@ -297,20 +296,20 @@ def calculate_and_update_playlist_metadata(cursor, playlist_id):
     # Corrected order of values in the update statement
     cursor.execute('''
         UPDATE playlists
-        SET playlist_items_fetched = ?, 
-            playlist_top_artist_ids = ?, 
-            playlist_top_genres = ?, 
-            min_acousticness = ?, max_acousticness = ?, 
-            min_danceability = ?, max_danceability = ?, 
-            min_energy = ?, max_energy = ?, 
-            min_instrumentalness = ?, max_instrumentalness = ?, 
-            min_key = ?, max_key = ?, 
-            min_liveness = ?, max_liveness = ?, 
-            min_loudness = ?, max_loudness = ?, 
-            min_mode = ?, max_mode = ?, 
-            min_speechiness = ?, max_speechiness = ?, 
-            min_tempo = ?, max_tempo = ?, 
-            min_time_signature = ?, max_time_signature = ?, 
+        SET playlist_items_fetched = ?,
+            playlist_top_artist_ids = ?,
+            playlist_top_genres = ?,
+            min_acousticness = ?, max_acousticness = ?,
+            min_danceability = ?, max_danceability = ?,
+            min_energy = ?, max_energy = ?,
+            min_instrumentalness = ?, max_instrumentalness = ?,
+            min_key = ?, max_key = ?,
+            min_liveness = ?, max_liveness = ?,
+            min_loudness = ?, max_loudness = ?,
+            min_mode = ?, max_mode = ?,
+            min_speechiness = ?, max_speechiness = ?,
+            min_tempo = ?, max_tempo = ?,
+            min_time_signature = ?, max_time_signature = ?,
             min_valence = ?, max_valence = ?
         WHERE playlist_id = ?
     ''', (
