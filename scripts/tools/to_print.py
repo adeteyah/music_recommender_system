@@ -15,27 +15,25 @@ for i in range(1, len(blocks), 2):
     # Combine 'SONGS RECOMMENDATION:' with the block content
     block = blocks[i-1] + blocks[i]
 
-    # Use re to find and remove everything after the song title
-    pattern = r'(SONGS RECOMMENDATION: https://open\.spotify\.com/track/\w+ [^|]+)|(\d+\. https://open\.spotify\.com/track/\w+ [^|]+)'
-    matches = re.findall(pattern, block)
+    # Extract the SONGS RECOMMENDATION: part
+    header = re.match(r'(SONGS RECOMMENDATION:)', block).group(0)
+    content = block[len(header):]
 
-    # Format the matches
-    result = []
-    for match in matches:
-        song_recommendation = match[0].strip(
-        ) if match[0] else match[1].strip()
-        result.append(song_recommendation)
+    # Find and format the list items
+    pattern = r'(\d+\. https://open\.spotify\.com/track/\w+ [^|]+)'
+    matches = re.findall(pattern, content)
 
     # Limit the number of entries to 10
-    limited_result = result[:10]
+    limited_result = matches[:10]
 
-    # Join the results into a single string
-    results.append("\n".join(limited_result))
+    # Combine header with limited results
+    result = f"{header}\n" + "\n".join(limited_result)
+    results.append(result)
 
 # Combine all the processed blocks
 output = "\n\n".join(results)
 print(output)
 
 # Optionally, you can write the output back to a new file
-with open('output.txt', 'w') as output_file:
+with open('result/to_recommend/cf.txt', 'w') as output_file:
     output_file.write(output)
