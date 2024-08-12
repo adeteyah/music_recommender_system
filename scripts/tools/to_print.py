@@ -37,7 +37,7 @@ def process_file(input_path, output_path):
     return output
 
 
-def process_directory(input_dir, output_dir, compiled_file_path):
+def process_directory():
     os.makedirs(output_dir, exist_ok=True)
     compiled_results = []
 
@@ -57,4 +57,4 @@ def process_directory(input_dir, output_dir, compiled_file_path):
 
 # Allow the script to be run independently
 if __name__ == "__main__":
-    process_directory(input_dir, output_dir, compiled_file_path)
+    process_directory()
