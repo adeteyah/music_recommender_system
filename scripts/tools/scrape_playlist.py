@@ -18,8 +18,8 @@ CLIENT_ID = config['api']['client_id']
 CLIENT_SECRET = config['api']['client_secret']
 DELAY_TIME = float(config['scrape']['delay_time'])
 
-IDS = ['37i9dQZF1E39hVGer1jGYj', '7ABa0dHeP5cOGCzueC1PXA', '6UL5TwSSfn76MbVvgf8cWt', '37i9dQZF1E4A4ZilZBfpyA', '1SSeXsBkFTkpHqmjAQ42s7', '3URrHVjMlIUtRFOyeOe00W', '0rtsNzXZfeE95QRwIDdw87', '0s6zYlI82d7IqtMciHALNc', '1zWSKyFlo4f24VWbhZYCX1', '2GswDZKJpCGLYoczEHg1s3', '2ttCXrIqSmcoFSaRLGEEyj', '4nRRtLi5O7ONpUR0dDr5AD', '2BWgpwopWokf5orqFJePPD', '4hK25gScGegOxXTV6u5E21', '3E3bE0w6BO1Cqeea4uNhHn', '5VwEpohYjLrV9UUp3pEDpy', '2rekOwzHvuEeR4Q0ivfDve', '6M14oz8xWgu8XzDv5OQB5Y', '5calF80tyoYmEhYeT66egu',
-       '37i9dQZF1DX5SrqpuffRKX', '2Nvgo2LAMu95B9fJAA85xw', '5v2SjsPFT8GmzPRSrBlRhO', '4TuwbqVymepWnxGhrYrJaQ', '5TjaZKdhyOHIodJPTnKnea', '2i46eQi2DIbqJxngmQOZu6', '1oBKBUrPn1ZzRMK5vGE5L5', '1fPEY5vA8hKdQi42QolInO', '4JK6nKGCQJKD1kKnLRlYew', '6pN60iqDffExRjw5gJyvFj', '6HQTl4QAji5kWZ4hqTwDvt', '37i9dQZF1EjiZvUO7Wf6vI', '7wwFt1hv7Me4PttN97sSsL', '1xJdks0Yhbgi9V22CZwsR7', '46ViOyzFjxYCXKnuHXL70h', '1qz25KaiKTON5qYzYcuWWn', '3t1BNBFDAINrcM07470pvz', '27cvlbFK8PNtuvZNYFTbBA', '2yLsbKiDiJlEittt4Wp81P']
+IDS = ['37i9dQZF1E39hVGer1jGYj', '7ABa0dHeP5cOGCzueC1PXA', '6UL5TwSSfn76MbVvgf8cWt', '37i9dQZF1E4A4ZilZBfpyA', '1SSeXsBkFTkpHqmjAQ42s7', '3URrHVjMlIUtRFOyeOe00W', '0rtsNzXZfeE95QRwIDdw87', '0s6zYlI82d7IqtMciHALNc', '1zWSKyFlo4f24VWbhZYCX1',
+       '2GswDZKJpCGLYoczEHg1s3', '2ttCXrIqSmcoFSaRLGEEyj', '4nRRtLi5O7ONpUR0dDr5AD', '2BWgpwopWokf5orqFJePPD', '4hK25gScGegOxXTV6u5E21', '3E3bE0w6BO1Cqeea4uNhHn', '5VwEpohYjLrV9UUp3pEDpy', '2rekOwzHvuEeR4Q0ivfDve', '6M14oz8xWgu8XzDv5OQB5Y']
 
 
 def init_spotify(client_id, client_secret):
