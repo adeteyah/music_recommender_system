@@ -6,7 +6,7 @@ from scripts.rs import cbf_optimized as cbf
 from scripts.rs import cbf_cf
 
 ids = ['6kxkMrPqppgT3TQjOyhAYk',
-       '7zOVh5fGpEwSbZd0g9z80B', '1XvOEvWtfa879Wk1wKHZ1M']
+       '47z98pKd71yIbgXwe9LPVC', '1XvOEvWtfa879Wk1wKHZ1M']
 
 start = time.time()  # DONE
 cf.cf(ids)
