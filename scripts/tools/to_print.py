@@ -1,7 +1,7 @@
 import re
 
 # Read the content of the .txt file into the 'text' variable
-with open('result/cf.txt', 'r') as file:
+with open('result/cbf.txt', 'r', encoding='utf-8') as file:
     text = file.read()
 
 # Split the text into separate blocks by using the pattern 'SONGS RECOMMENDATION:'
@@ -45,5 +45,5 @@ output = "\n\n".join(results)
 print(output)
 
 # Optionally, you can write the output back to a new file
-with open('result/to_recommend/cf.txt', 'w') as output_file:
+with open('result/to_recommend/cbf.txt', 'w', encoding='utf-8') as output_file:
     output_file.write(output)
