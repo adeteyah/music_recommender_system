@@ -18,8 +18,8 @@ CLIENT_ID = config['api']['client_id']
 CLIENT_SECRET = config['api']['client_secret']
 DELAY_TIME = float(config['scrape']['delay_time'])
 
-IDS = ['37i9dQZF1DXb9LIXaj5WhL', '573YJPqXVomZS0EInCFm2O', '37i9dQZF1E4kPhsdzm7WfR', '0J67sJRe631G4y2InsO6al', '7foMOGnptjwVrjoA9OhUMd', '37i9dQZF1DWYMvTygsLWlG', '37i9dQZF1DXauMQRH2JBCJ', '0h91jZ8sdCwRU5fa74Eq51', '37i9dQZF1DX6wk8dYln4y0', '37i9dQZF1E4x78nZLnU43g', '5cFLY57ARBmaVrTadhTtoS', '4dWxPx2WMAU5qroS0cwHUt', '1TkCnVCBt7HzhGaNzPj2Tg',
-       '3EkTYgtAW7wf1aiMhMAhHN', '37i9dQZF1DX5LEXW9eXA0n', '37i9dQZF1DXcRXFNfZr7Tp', '3pI9aYnz8aQzO0kBt3GQqD', '2KBnHowBwGM16AclTpypN4', '4oGQi0t86QDb3Y6XzTkI00', '0kXx0I95XZ1o1v1LDs9fRv', '37i9dQZF1DX0UetYTdFoTk', '37i9dQZF1E4zdxcvINYSUh', '4usse7jLmGjUuncl2qp71l', '37i9dQZF1DWXqpDKK4ed9O', '0ACfBjUrd8WWdAE5eSuJ2S', '34tAzYTpy7nxG9QNUzXX0Q', '10IBM4oUFpqGwbhWH2AuM1']
+IDS = ['3RUvmYSEo3BMxIT7jk5Z8a', '691vgok4JnJzVRFDiDzH9l',
+       '4hlICq8ApjDdbCGtNOVJ9J', '0qbMhlJCuyQrjQQ8RW2yQp', '2H99P17etjoiFCVBm5CXLI']
 
 
 def init_spotify(client_id, client_secret):
