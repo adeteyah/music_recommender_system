@@ -10,6 +10,7 @@ start = time.time()
 def install_directories():
     directories = [
         "data/",
+        "data/to_recommend/",
         "result/"
     ]
     for directory in directories:
