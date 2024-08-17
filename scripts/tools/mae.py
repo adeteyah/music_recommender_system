@@ -3,21 +3,19 @@ def calculate_mae(y_true, y_pred):
     return sum(absolute_errors) / len(y_true)
 
 
-# Example lists
+# Example y_true lists
 y_true_list = [
-    [1, 1, 1, 0, 1, 1, 1, 0, 1, 1],  # syifa
-    [1, 0, 1, 0, 1, 0, 1, 0, 1, 1]
+    [1, 1, 1, 0, 1, 1, 1, 0, 1, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+    [1, 1, 1, 1, 1, 1, 0, 0, 1, 1]
 ]
 
-y_pred_list = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-]
+# Fixed y_pred list
+y_pred = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
-# Calculate MAE for each pair
-mae_list = [calculate_mae(y_true, y_pred)
-            for y_true, y_pred in zip(y_true_list, y_pred_list)]
+# Calculate MAE for each y_true list
+mae_list = [calculate_mae(y_true, y_pred) for y_true in y_true_list]
 
-# Print MAE for each pair
+# Print MAE for each y_true list
 for i, mae in enumerate(mae_list, 1):
-    print(f"MAE for pair {i}: {mae}")
+    print(f"MAE for y_true list {i}: {mae}")
