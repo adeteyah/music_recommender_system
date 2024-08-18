@@ -1,8 +1,7 @@
 import re
 
 text = """
-https://open.spotify.com/playlist/65W5c6tHMl3J5Af8SmWV3c https://open.spotify.com/playlist/4GLP57gMtuw3k6y1tNz1PN https://open.spotify.com/playlist/2BMdQu1rDpMtXM91B3jClS https://open.spotify.com/playlist/5bmQ4nGngYUN0cHf01VRPa https://open.spotify.com/playlist/6GTlkQXnqZylQQou0SR3E1 https://open.spotify.com/playlist/6rLmHjDSDshQ7AgNNvnMF9?go=1&sp_cid=de85445594ac8aadee5d2460f3ecc2aa&intent=addToLibrary&utm_source=embed_player_v&utm_medium=desktop https://open.spotify.com/playlist/09Nh9lKyelPWWYePQRjqI5 https://open.spotify.com/playlist/3lpCRmNOO3eepOsifudXQh https://open.spotify.com/playlist/2E6fOraA1wbcvsCxHL3F1E https://open.spotify.com/playlist/257v1jXwmN4Uq1DRphtLhG https://open.spotify.com/playlist/5BxqiXdL315dDipxbfKXdr https://open.spotify.com/playlist/1PlfoubR8xBIqIx15tjXwR
-
+https://open.spotify.com/playlist/2QWMrIYAncJzfic0azi6eY https://open.spotify.com/playlist/3rLoX30DD6xuPzeoiUPGFA https://open.spotify.com/playlist/3lwKWtF0WgDUD9EySnywqZ?lf=&icon=play https://open.spotify.com/playlist/3ybC8Xi1uXYLgjUoWO5oSW?si=8029b2e88f8b4605 https://open.spotify.com/playlist/4qxjSmSSmXMZXJTymbbq3t https://open.spotify.com/playlist/3gP1iTYZC5EkhhiJ0hfOd2
 
 
 
