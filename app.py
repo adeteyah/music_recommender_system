@@ -6,8 +6,8 @@ from scripts.rs import cbf_optimized as cbf
 from scripts.rs import cbf_cf
 import scripts.tools.to_print as compile_result
 
-ids = ['2HovXsvcdJur52BOcYGydz',
-       '0rut2ibZ8jKEnXL4JncWJG', '2gMXnyrvIjhVBUZwvLZDMP']
+ids = ['4kPlQKwtPrnqLgrmmKFSlA',
+       '03qu1u4hDyepQQi2lNxCka', '0afhq8XCExXpqazXczTSve']
 
 start = time.time()  # DONE
 cf.cf(ids)
