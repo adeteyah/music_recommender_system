@@ -1,3 +1,5 @@
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
 import sqlite3
 import configparser
 from collections import defaultdict
@@ -99,11 +101,31 @@ def read_inputted_ids(ids, conn):
     return [get_song_info(conn, song_id) for song_id in ids]
 
 
+def get_song_vector(song_info):
+    # Extract relevant features and create a feature vector
+    return np.array([
+        song_info[5],  # acousticness
+        song_info[6],  # danceability
+        song_info[7],  # energy
+        song_info[8],  # instrumentalness
+        song_info[9],  # key
+        song_info[10],  # liveness
+        song_info[11],  # loudness
+        song_info[12],  # mode
+        song_info[13],  # speechiness
+        song_info[14],  # tempo
+        song_info[15]  # valence
+    ])
+
+
 def cf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
 
-    # Prepare to track excluded songs
+    # Get feature vectors for input songs
+    input_vectors = [get_song_vector(song_info)
+                     for song_info in songs_info if song_info]
+
     input_song_ids = set(song_info[0] for song_info in songs_info if song_info)
     input_song_titles_artists = {
         (song_info[1], song_info[3]) for song_info in songs_info if song_info}
@@ -111,52 +133,56 @@ def cf(ids):
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as file:
         file.write('INPUTTED IDS\n')
         for i, song_info in enumerate(songs_info, 1):
-            if song_info is None:  # Check if the song was found
+            if song_info is None:
                 file.write(f"{i}. Song ID not found in the database.\n")
                 continue
 
             formatted_info = format_song_info(song_info)
             file.write(f"{i}. {formatted_info}\n")
 
-            # Add FOUND IN section
-            file.write(f"\nRELATED PLAYLISTS:\n")
             playlists = get_playlists_for_song(conn, song_info[0])
             playlist_ids = [playlist_id for playlist_id, _, _ in playlists]
-            for j, (playlist_id, playlist_creator_id, _) in enumerate(playlists, 1):
-                file.write(f"{j}. https://open.spotify.com/playlist/{
-                           playlist_id} by https://open.spotify.com/user/{playlist_creator_id}\n")
 
-            # Add SONGS RECOMMENDATION section with a specific title
             if playlist_ids:
                 file.write(f"\nSONGS RECOMMENDATION: {formatted_info}\n")
                 recommended_songs = get_songs_from_playlists(
                     conn, playlist_ids)
 
-                # Sort by count in descending order
+                # Calculate cosine similarity for each recommended song
+                similarities = []
+                for recommended_song_id in recommended_songs:
+                    recommended_song_info = get_song_info(
+                        conn, recommended_song_id)
+                    if recommended_song_info:
+                        rec_vector = get_song_vector(recommended_song_info)
+                        similarity = cosine_similarity(
+                            np.array(input_vectors), rec_vector.reshape(1, -1)
+                            # Calculate mean similarity across all input songs
+                        ).mean()
+                        similarities.append((recommended_song_id, similarity))
+
+                # Sort by similarity in descending order
                 sorted_recommended_songs = sorted(
-                    recommended_songs.items(), key=lambda x: x[1], reverse=True)
+                    similarities, key=lambda x: x[1], reverse=True)
 
                 # Track song count per artist
                 artist_song_count = defaultdict(int)
                 k = 1
-                for recommended_song_id, count in sorted_recommended_songs:
+                for recommended_song_id, similarity in sorted_recommended_songs:
                     song_recommendation_info = get_song_info(
                         conn, recommended_song_id)
-                    if song_recommendation_info:  # Ensure the song exists
+                    if song_recommendation_info:
                         song_title = song_recommendation_info[1]
                         artist_name = song_recommendation_info[3]
 
-                        # Skip songs that are input songs or have the same title and artist as input songs
                         if (recommended_song_id in input_song_ids or
                                 (song_title, artist_name) in input_song_titles_artists):
                             continue
 
-                        # Allow only 2 songs per artist
                         if artist_song_count[artist_name] < SONGS_PER_ARTIST:
                             formatted_recommendation = format_song_info(
-                                song_recommendation_info, count)
+                                song_recommendation_info, similarity)
                             file.write(f"{k}. {formatted_recommendation}\n")
-                            # Increment the count for the artist
                             artist_song_count[artist_name] += 1
                             k += 1
             file.write('\n')
