@@ -15,6 +15,8 @@ MODE_BOUND_VAL = int(config['hp']['cbf_cf_mode_bound'])
 TIME_SIGNATURE_BOUND_VAL = int(config['hp']['cbf_cf_time_signature_bound'])
 TEMPO_BOUND_VAL = float(config['hp']['cbf_cf_tempo_bound'])
 SONGS_PER_ARTIST = int(config['hp']['songs_per_artist'])
+ALL_GENRES = ["pop", "rock", "hip hop", "jazz", "classical",
+              "electronic", "country", "blues", "reggae", "soul"]
 
 # Define specific bound values for features
 SEPARATE_BOUNDS = {
@@ -48,7 +50,12 @@ def get_artist_info(conn, artist_id):
 
 
 def calculate_similarity(song_features, input_features):
-    return sum(abs(song_feature - input_feature) for song_feature, input_feature in zip(song_features, input_features))
+    # Calculate similarity between numeric features
+    numeric_similarity = sum(abs(song_feature - input_feature)
+                             for song_feature, input_feature in zip(song_features, input_features))
+
+    # Return the sum of the differences
+    return numeric_similarity
 
 
 def normalize_song_name(song_name):
@@ -119,6 +126,7 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
         filtered_songs.append(song)
         seen_song_artist_pairs.add(song_artist_pair)
 
+    # Sort songs by similarity, considering both numeric features and genres
     filtered_songs.sort(key=lambda song: (
         calculate_similarity(song[3:], input_audio_features), song[3:]))
     return filtered_songs
@@ -203,6 +211,6 @@ def cbf_cf(ids):
 
 
 if __name__ == "__main__":
-    ids = ['3wlLknnMtD8yZ0pCtCeeK4',
-           '6EIMUjQ7Q8Zr2VtIUik4He', '30Z12rJpW0M0u8HMFpigTB']
+    ids = ['2kJwzbxV2ppxnQoYw4GLBZ',
+           '3Sbova9DAY3pc9GTAACT4b', '5O2P9iiztwhomNh8xkR9lJ']
     cbf_cf(ids)
