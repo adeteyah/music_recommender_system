@@ -86,7 +86,6 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     conditions_sql = ' AND '.join(feature_conditions)
     genre_conditions = ' OR '.join(
         [f"a.artist_genres LIKE '%{genre}%'" for genre in mandatory_genres])
-
     combined_conditions_sql = f"{conditions_sql} AND ({genre_conditions})"
     features_sql = ', '.join(features)
 
@@ -123,12 +122,15 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
         else:
             seen_artists[artist_ids] = 1
 
-        filtered_songs.append(song)
+        # Calculate similarity
+        similarity = calculate_similarity(song[3:], input_audio_features)
+
+        # Append the similarity score with the song information
+        filtered_songs.append((similarity, song))
         seen_song_artist_pairs.add(song_artist_pair)
 
-    # Sort songs by similarity, considering both numeric features and genres
-    filtered_songs.sort(key=lambda song: (
-        calculate_similarity(song[3:], input_audio_features), song[3:]))
+    # Sort songs by similarity
+    filtered_songs.sort(key=lambda x: (x[0], x[1][3:]))
     return filtered_songs
 
 
@@ -167,7 +169,7 @@ def cbf_cf(ids):
             artist_name = artist_info[0] if artist_info[0] else 'N/A'
             genres = artist_info[1] if artist_info[1] else 'N/A'
 
-            header = f"https://open.spotify.com/track/{song_id} {
+            header = f"https://open.spotify.com/track/{song_info[0]} {
                 artist_name} - {song_info[1]} | Genres: {genres}"
             f.write(f"\nSONGS RECOMMENDATION: {header}\n")
 
@@ -177,9 +179,9 @@ def cbf_cf(ids):
                 similar_songs_info = get_similar_audio_features(
                     conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genres)
 
-                # Store songs with their count and audio features in a list
-                songs_with_count = []
-                for song in similar_songs_info:
+                # Store songs with their count, similarity score, and audio features in a list
+                songs_with_count_and_similarity = []
+                for similarity, song in similar_songs_info:
                     song_id, song_name, artist_ids, *audio_features = song
                     song_url = f"https://open.spotify.com/track/{song_id}"
                     features_str = ', '.join(
@@ -193,17 +195,18 @@ def cbf_cf(ids):
                     # Count the number of playlists containing the song
                     playlist_count = count_song_in_playlists(conn, song_id)
 
-                    # Append the song info along with the count and audio features to the list
-                    songs_with_count.append(
-                        (song_url, artist_name, song_name, genres, features_str, playlist_count, audio_features))
+                    # Append the song info along with the similarity score, count, and audio features to the list
+                    songs_with_count_and_similarity.append(
+                        (song_url, artist_name, song_name, genres, features_str, playlist_count, similarity, audio_features))
 
-                # Sort the songs by playlist count in descending order, and then by audio features
-                songs_with_count.sort(key=lambda x: (-x[5], x[6]))
+                # Sort the songs by playlist count in descending order, then by similarity score
+                songs_with_count_and_similarity.sort(
+                    key=lambda x: (-x[5], x[6]))
 
-                # Write the sorted songs to the file
-                for idx, (song_url, artist_name, song_name, genres, features_str, playlist_count, _) in enumerate(songs_with_count, start=1):
+                # Write the sorted songs with similarity scores to the file
+                for idx, (song_url, artist_name, song_name, genres, features_str, playlist_count, similarity, _) in enumerate(songs_with_count_and_similarity, start=1):
                     line = (f"{idx}. {song_url} {artist_name} - {song_name if song_name else 'N/A'} | "
-                            f"Genres: {genres} | {features_str} | Count: {playlist_count}\n")
+                            f"Genres: {genres} | {features_str} | Count: {playlist_count} | Similarity: {similarity:.4f}\n")
                     f.write(line)
 
     conn.close()
