@@ -117,7 +117,7 @@ def get_song_vector(song_info):
 
     # Normalize numeric features (assuming they are between 0 and 1 or can be scaled)
     numeric_features = np.array(
-        [float(config['hp'][feature]) for feature in CF_FEATURES])
+        [config['hp'][feature] for feature in CF_FEATURES])
 
     # One-hot encode genres
     genre_vector = np.zeros(len(ALL_GENRES))
