@@ -50,7 +50,7 @@ existing database
 3. artists table
     artist_id TEXT PRIMARY KEY,
     artist_name TEXT,
-    artist_genres TEXT
+    artist_genres TEXT 
 
 -- CF --
 existing database
