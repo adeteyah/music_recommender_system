@@ -30,6 +30,9 @@ SEPARATE_BOUNDS = {
 
 
 def get_song_vector(song_info, all_genres):
+    if not song_info:
+        return None
+
     # Assuming the first 3 fields are song_id, song_name, artist_ids
     audio_features = np.array(song_info[3:])
     # Assuming single artist per song for simplicity
