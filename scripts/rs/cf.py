@@ -79,7 +79,7 @@ def get_songs_from_playlists(conn, playlist_ids):
     return song_counts
 
 
-def format_song_info(song_info, count=None):
+def format_song_info(song_info, count=None, similarity=None):
     (song_id, song_name, artist_ids, artist_name, artist_genres, acousticness,
      danceability, energy, instrumentalness, key, liveness, loudness, mode,
      speechiness, tempo, time_signature, valence) = song_info
@@ -94,7 +94,13 @@ def format_song_info(song_info, count=None):
                      tempo}, Time Signature: {time_signature}, "
                  f"Valence: {valence}")
 
-    return base_info + (f" | COUNT: {count}" if count is not None else "")
+    # Add count and similarity to the output if they are provided
+    if count is not None:
+        base_info += f" | COUNT: {count}"
+    if similarity is not None:
+        base_info += f" | SIMILARITY: {similarity:.4f}"
+
+    return base_info
 
 
 def read_inputted_ids(ids, conn):
