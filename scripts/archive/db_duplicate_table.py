@@ -39,4 +39,4 @@ def duplicate_table(db_file, old_table_name, new_table_name):
 
 
 # Call the function with the specified variables
-duplicate_table(db_file, 'songs_bckp', 'songs')
+duplicate_table(db_file, 'artists', 'artists_bckp')
