@@ -1,7 +1,5 @@
 import sqlite3
 import configparser
-import numpy as np
-from collections import defaultdict
 
 # Read configuration file
 config = configparser.ConfigParser()
