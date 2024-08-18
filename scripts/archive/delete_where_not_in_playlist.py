@@ -9,19 +9,30 @@ csv_file = 'data/playlist_items_ids.csv'
 df = pd.read_csv(csv_file, header=None, names=['song_id'])
 song_ids_to_keep = df['song_id'].tolist()
 
-# Define the batch size
-batch_size = 500  # Adjust as needed
-
 # Connect to the SQLite database
 conn = sqlite3.connect(db_file)
 cursor = conn.cursor()
 
-# Perform batch deletion
-for i in range(0, len(song_ids_to_keep), batch_size):
-    batch = song_ids_to_keep[i:i + batch_size]
-    placeholders = ','.join('?' for _ in batch)
-    query = f"DELETE FROM songs WHERE song_id NOT IN ({placeholders})"
-    cursor.execute(query, batch)
+# Print out some of the song_ids to keep for verification
+print("Sample song_ids to keep:", song_ids_to_keep[:10])
+
+# Create a temporary table to store song_ids to keep
+cursor.execute(
+    "CREATE TEMPORARY TABLE IF NOT EXISTS temp_song_ids (song_id TEXT)")
+cursor.executemany("INSERT INTO temp_song_ids (song_id) VALUES (?)", [
+                   (id,) for id in song_ids_to_keep])
+
+# Perform the deletion using the temporary table
+query = """
+DELETE FROM songs
+WHERE song_id NOT IN (
+    SELECT song_id FROM temp_song_ids
+)
+"""
+cursor.execute(query)
+
+# Drop the temporary table
+cursor.execute("DROP TABLE temp_song_ids")
 
 # Commit the changes and close the connection
 conn.commit()
