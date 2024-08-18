@@ -13,8 +13,13 @@ song_ids_to_keep = df['song_id'].tolist()
 conn = sqlite3.connect(db_file)
 cursor = conn.cursor()
 
-# Print out some of the song_ids to keep for verification
-print("Sample song_ids to keep:", song_ids_to_keep[:10])
+# Check the number of rows in the songs table before deletion
+cursor.execute("SELECT COUNT(*) FROM songs")
+initial_count = cursor.fetchone()[0]
+print(f"Initial number of songs: {initial_count}")
+
+# Check the number of song_ids to keep
+print(f"Number of song_ids in CSV: {len(song_ids_to_keep)}")
 
 # Create a temporary table to store song_ids to keep
 cursor.execute(
@@ -34,6 +39,12 @@ cursor.execute(query)
 # Drop the temporary table
 cursor.execute("DROP TABLE temp_song_ids")
 
-# Commit the changes and close the connection
+# Commit the changes and check the number of rows after deletion
 conn.commit()
+
+cursor.execute("SELECT COUNT(*) FROM songs")
+final_count = cursor.fetchone()[0]
+print(f"Final number of songs: {final_count}")
+
+# Close the connection
 conn.close()
