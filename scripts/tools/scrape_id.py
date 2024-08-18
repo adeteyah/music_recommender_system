@@ -1,8 +1,7 @@
 import re
 
 text = """
-https://open.spotify.com/playlist/0dXFgLEEjRr9t8Wa10xEog https://open.spotify.com/playlist/5WqHfJDRG5Gmyw65LR8Uqo https://open.spotify.com/playlist/39tv8YyHEVv3KahBgnFgu0 https://open.spotify.com/playlist/1vAMUOtqw8QpsoBUZdflxU https://open.spotify.com/playlist/1ucG6SKrmHR2AErk2jMg0I https://open.spotify.com/playlist/5gos3UzDEqKzFwhHckA3n3
-
+https://open.spotify.com/playlist/0P3ieWY6Ri33FzP1suHakC?go=1&sp_cid=a4a40a3999a979f7b5cb2bfe719bf5e3&intent=addToLibrary&utm_source=embed_player_v&utm_medium=desktop
 
 
 """
