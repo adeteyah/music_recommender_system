@@ -141,6 +141,10 @@ def cbf(ids):
             f.write(line)
 
         for input_audio_features, song_info in zip(input_audio_features_list, songs_info):
+            if not song_info:
+                continue
+
+            song_id = song_info[0]  # Ensure correct song ID is used
             artist_info = get_artist_info(conn, song_info[2].split(
                 ',')[0]) if song_info[2] else ('N/A', 'N/A')
             artist_name = artist_info[0] if artist_info[0] else 'N/A'
