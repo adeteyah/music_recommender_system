@@ -129,8 +129,8 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
         filtered_songs.append((similarity, song))
         seen_song_artist_pairs.add(song_artist_pair)
 
-    # Sort songs by similarity
-    filtered_songs.sort(key=lambda x: (x[0], x[1][3:]))
+    # Sort songs by similarity in descending order
+    filtered_songs.sort(key=lambda x: -x[0])
     return filtered_songs
 
 
@@ -199,9 +199,9 @@ def cbf_cf(ids):
                     songs_with_count_and_similarity.append(
                         (song_url, artist_name, song_name, genres, features_str, playlist_count, similarity, audio_features))
 
-                # Sort the songs by playlist count in descending order, then by similarity score
+                # Sort the songs by similarity score in descending order, and then by playlist count
                 songs_with_count_and_similarity.sort(
-                    key=lambda x: (-x[5], x[6]))
+                    key=lambda x: (-x[6], -x[5]))
 
                 # Write the sorted songs with similarity scores to the file
                 for idx, (song_url, artist_name, song_name, genres, features_str, playlist_count, similarity, _) in enumerate(songs_with_count_and_similarity, start=1):
