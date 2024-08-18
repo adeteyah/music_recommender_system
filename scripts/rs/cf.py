@@ -97,9 +97,9 @@ def format_song_info(song_info, count=None, similarity=None):
 
     # Add count and similarity to the output if they are provided
     if count is not None:
-        base_info += f" | COUNT: {count}"
+        base_info += f" | Count: {count}"
     if similarity is not None:
-        base_info += f" | SIMILARITY: {similarity:.4f}"
+        base_info += f" | Cosine Sim: {similarity:.4f}"
 
     return base_info
 
@@ -116,8 +116,7 @@ def get_song_vector(song_info):
 
     # Normalize numeric features (assuming they are between 0 and 1 or can be scaled)
     numeric_features = np.array([
-        acousticness, danceability, energy, instrumentalness, liveness,
-        loudness, mode, speechiness, tempo, time_signature, valence
+        tempo, instrumentalness, acousticness, valence
     ])
 
     # One-hot encode genres
