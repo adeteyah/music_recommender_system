@@ -12,6 +12,8 @@ MODEL = 'Collaborative Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cf_output']
 SONGS_PER_ARTIST = int(config['hp']['songs_per_artist'])
+ALL_GENRES = ["pop", "rock", "hip hop", "jazz", "classical",
+              "electronic", "country", "blues", "reggae", "soul"]
 
 
 def get_song_info(conn, song_id):
@@ -108,27 +110,33 @@ def read_inputted_ids(ids, conn):
 
 
 def get_song_vector(song_info):
-    # Extract relevant features and create a feature vector
-    return np.array([
-        song_info[5],  # acousticness
-        song_info[6],  # danceability
-        song_info[7],  # energy
-        song_info[8],  # instrumentalness
-        song_info[9],  # key
-        song_info[10],  # liveness
-        song_info[11],  # loudness
-        song_info[12],  # mode
-        song_info[13],  # speechiness
-        song_info[14],  # tempo
-        song_info[15]  # valence
+    # Unpack the song info tuple
+    (_, _, _, _, artist_genres, acousticness, danceability, energy,
+     instrumentalness, key, liveness, loudness, mode, speechiness,
+     tempo, time_signature, valence) = song_info
+
+    # Normalize numeric features (assuming they are between 0 and 1 or can be scaled)
+    numeric_features = np.array([
+        acousticness, danceability, energy, instrumentalness, liveness,
+        loudness, mode, speechiness, tempo, time_signature, valence
     ])
+
+    # One-hot encode genres
+    genre_vector = np.zeros(len(ALL_GENRES))
+    for genre in artist_genres.split(","):
+        genre = genre.strip().lower()  # Ensure the genre matches the list format
+        if genre in ALL_GENRES:
+            genre_vector[ALL_GENRES.index(genre)] = 1
+
+    # Combine numeric features with genre vector
+    return np.concatenate([numeric_features, genre_vector])
 
 
 def cf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
 
-    # Get feature vectors for input songs
+    # Get feature vectors for input songs, now including genres
     input_vectors = [get_song_vector(song_info)
                      for song_info in songs_info if song_info]
 
@@ -187,7 +195,7 @@ def cf(ids):
 
                         if artist_song_count[artist_name] < SONGS_PER_ARTIST:
                             formatted_recommendation = format_song_info(
-                                song_recommendation_info, similarity)
+                                song_recommendation_info, count=None, similarity=similarity)
                             file.write(f"{k}. {formatted_recommendation}\n")
                             artist_song_count[artist_name] += 1
                             k += 1
