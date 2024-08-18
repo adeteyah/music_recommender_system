@@ -13,7 +13,6 @@ DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cf_output']
 SONGS_PER_ARTIST = int(config['hp']['songs_per_artist'])
 ALL_GENRES = config['hp']['genres']
-CF_FEATURES = config['hp']['cf_features'].split(', ')
 
 
 def get_song_info(conn, song_id):
@@ -116,8 +115,10 @@ def get_song_vector(song_info):
      tempo, time_signature, valence) = song_info
 
     # Normalize numeric features (assuming they are between 0 and 1 or can be scaled)
-    numeric_features = np.array(
-        [config['hp'][feature] for feature in CF_FEATURES])
+    numeric_features = np.array([
+        acousticness, danceability, energy, instrumentalness, liveness,
+        loudness, mode, speechiness, tempo, time_signature, valence
+    ])
 
     # One-hot encode genres
     genre_vector = np.zeros(len(ALL_GENRES))
