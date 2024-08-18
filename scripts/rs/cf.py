@@ -12,8 +12,7 @@ MODEL = 'Collaborative Filtering'
 DB = config['rs']['db_path']
 OUTPUT_PATH = config['rs']['cf_output']
 SONGS_PER_ARTIST = int(config['hp']['songs_per_artist'])
-ALL_GENRES = ["pop", "rock", "hip hop", "jazz", "classical",
-              "electronic", "country", "blues", "reggae", "soul"]
+ALL_GENRES = config['hp']['genres']
 
 
 def get_song_info(conn, song_id):
