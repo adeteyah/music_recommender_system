@@ -1,3 +1,6 @@
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
+from collections import defaultdict
 import sqlite3
 import configparser
 import re
@@ -26,6 +29,36 @@ SEPARATE_BOUNDS = {
 }
 
 
+def get_song_vector(song_info, all_genres):
+    # Assuming the first 3 fields are song_id, song_name, artist_ids
+    audio_features = np.array(song_info[3:])
+    # Assuming single artist per song for simplicity
+    artist_id = song_info[2].split(',')[0]
+    genres = get_artist_info(conn, artist_id)[1].split(',')
+    genre_vector = generate_genre_vector(genres, all_genres)
+    return np.concatenate([audio_features, genre_vector])
+
+
+def generate_genre_vector(genres, all_genres):
+    genre_vector = np.zeros(len(all_genres))
+    for genre in genres:
+        if genre in all_genres:
+            genre_vector[all_genres.index(genre)] = 1
+    return genre_vector
+
+
+def get_all_genres(conn):
+    query = "SELECT DISTINCT artist_genres FROM artists"
+    cursor = conn.cursor()
+    cursor.execute(query)
+    all_genres_set = set()
+    for row in cursor.fetchall():
+        genres = row[0].split(',')
+        all_genres_set.update([genre.strip()
+                              for genre in genres if genre.strip()])
+    return sorted(all_genres_set)
+
+
 def get_song_info(conn, song_id, features):
     features_sql = ', '.join(features)
     query = f"""
@@ -49,13 +82,11 @@ def get_artist_info(conn, artist_id):
     return cursor.fetchone()
 
 
-def calculate_similarity(song_features, input_features):
-    # Calculate similarity between numeric features
-    numeric_similarity = sum(abs(song_feature - input_feature)
-                             for song_feature, input_feature in zip(song_features, input_features))
-
-    # Return the sum of the differences
-    return numeric_similarity
+def calculate_similarity(song_vector, input_vector):
+    song_vector = song_vector.reshape(1, -1)
+    input_vector = input_vector.reshape(1, -1)
+    similarity = cosine_similarity(song_vector, input_vector)[0][0]
+    return similarity
 
 
 def normalize_song_name(song_name):
@@ -73,7 +104,7 @@ def count_song_in_playlists(conn, song_id):
     return cursor.fetchone()[0]
 
 
-def get_similar_audio_features(conn, features, input_audio_features, inputted_ids, inputted_songs, mandatory_genres):
+def get_similar_audio_features(conn, features, input_audio_features, inputted_ids, inputted_songs, mandatory_genres, all_genres):
     feature_conditions = []
     for i, feature in enumerate(features):
         feature_name = feature.split('.')[-1]
@@ -99,38 +130,18 @@ def get_similar_audio_features(conn, features, input_audio_features, inputted_id
     cursor.execute(query)
     songs = cursor.fetchall()
 
-    seen_artists = {}
-    seen_song_artist_names = {(normalize_song_name(
-        info[1]), info[2].lower()) for info in inputted_songs}
+    input_vector = get_song_vector(
+        (None, None, None, *input_audio_features), all_genres)
     filtered_songs = []
-    seen_song_artist_pairs = set()
 
     for song in songs:
         song_id, song_name, artist_ids = song[:3]
-        normalized_name = normalize_song_name(song_name)
-        if song_id in inputted_ids or (normalized_name, artist_ids) in seen_song_artist_names:
-            continue
-
-        song_artist_pair = (normalized_name, artist_ids)
-        if song_artist_pair in seen_song_artist_pairs:
-            continue
-
-        if artist_ids in seen_artists:
-            if seen_artists[artist_ids] >= SONGS_PER_ARTIST:
-                continue
-            seen_artists[artist_ids] += 1
-        else:
-            seen_artists[artist_ids] = 1
-
-        # Calculate similarity
-        similarity = calculate_similarity(song[3:], input_audio_features)
-
-        # Append the similarity score with the song information
+        song_vector = get_song_vector(song, all_genres)
+        similarity = calculate_similarity(song_vector, input_vector)
         filtered_songs.append((similarity, song))
-        seen_song_artist_pairs.add(song_artist_pair)
 
-    # Sort songs by similarity in ascending order (closest first)
-    filtered_songs.sort(key=lambda x: x[0])
+    # Sort songs by similarity (highest first, i.e., closer to 1)
+    filtered_songs.sort(key=lambda x: -x[0])
     return filtered_songs
 
 
@@ -138,6 +149,7 @@ def cbf_cf(ids):
     conn = sqlite3.connect(DB)
     features = ['s.' + feature for feature in CBF_FEATURES]
     songs_info = [get_song_info(conn, song_id, features) for song_id in ids]
+    all_genres = get_all_genres(conn)
 
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         f.write('INPUTTED IDS\n')
@@ -177,7 +189,7 @@ def cbf_cf(ids):
                 ',') if genre.strip() != 'N/A']
             if mandatory_genres:
                 similar_songs_info = get_similar_audio_features(
-                    conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genres)
+                    conn, features, input_audio_features, inputted_ids_set, songs_info, mandatory_genres, all_genres)
 
                 # Store songs with their count, similarity score, and audio features in a list
                 songs_with_count_and_similarity = []
