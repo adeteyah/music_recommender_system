@@ -29,7 +29,7 @@ def process_file(input_path, output_path):
             # Remove everything after ' | Genres: ' in the header
             header = re.sub(r'\s*\| Genres:.*', '', header)
 
-            limited_result = matches[:10]
+            limited_result = matches[:5]
             result = f"{header}\n" + "\n".join(limited_result)
             results.append(result)
 
