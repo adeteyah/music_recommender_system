@@ -1,30 +1,32 @@
 import sqlite3
 
-# Define the database file
+# Define the path to the database
 db_file = 'data/main.db'
 
 # Connect to the SQLite database
 conn = sqlite3.connect(db_file)
 cursor = conn.cursor()
 
-# Fetch all rows with the playlist_items column
-cursor.execute("SELECT rowid, playlist_items FROM songs")
+# Select all rows from the playlists table
+cursor.execute("SELECT playlist_id, playlist_items FROM playlists")
 rows = cursor.fetchall()
 
-# Loop through the rows and update the playlist_items_fetched column
+# Iterate through each row
 for row in rows:
-    rowid = row[0]
+    playlist_id = row[0]
     playlist_items = row[1]
 
-    # Count the number of items in the playlist_items column
+    # Count the number of items by splitting the comma-separated string
     if playlist_items:
         item_count = len(playlist_items.split(','))
     else:
-        item_count = 0  # In case playlist_items is empty or None
+        item_count = 0
 
-    # Update the playlist_items_fetched column with the count
+    # Update the playlist_items_fetched column with the counted items
     cursor.execute(
-        "UPDATE songs SET playlist_items_fetched = ? WHERE rowid = ?", (item_count, rowid))
+        "UPDATE playlists SET playlist_items_fetched = ? WHERE playlist_id = ?",
+        (item_count, playlist_id)
+    )
 
 # Commit the changes and close the connection
 conn.commit()
