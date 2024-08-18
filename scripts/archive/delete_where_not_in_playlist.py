@@ -1,12 +1,13 @@
+
 import sqlite3
 import pandas as pd
 
 # Define file paths
 db_file = 'data/main.db'
 csv_file = 'data/playlist_items_ids.csv'
-chunk_size = 900  # Adjust the chunk size if needed
+chunk_size = 300  # Adjust the chunk size if needed
 
-# Load the list of IDs from the CSV file
+# Load the list of IDs from the CSV file (newline-separated)
 id_df = pd.read_csv(csv_file, header=None, names=['song_id'])
 id_list = id_df['song_id'].tolist()
 
