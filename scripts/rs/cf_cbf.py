@@ -255,6 +255,10 @@ def cf_cbf(ids):
                     write_playlist_info(file, playlists)
 
                     file.write(f"\nSONGS RECOMMENDATION:\n")
+
+                    # Include the inputted song in the recommendations
+                    write_song_info(file, 1, song_info)
+
                     write_recommendations(
                         file, conn, song_info, playlist_ids, input_song_ids, input_song_titles_artists)
 
@@ -263,6 +267,11 @@ def cf_cbf(ids):
     conn.close()
     print(f'Result for {MODEL} stored at {OUTPUT_PATH}')
 
+
+if __name__ == "__main__":
+    ids = ['3wlLknnMtD8yZ0pCtCeeK4',
+           '0KpWiHVmIFDTvai20likX4', '30Z12rJpW0M0u8HMFpigTB']
+    cf_cbf(ids)
 
 if __name__ == "__main__":
     ids = ['3wlLknnMtD8yZ0pCtCeeK4',
