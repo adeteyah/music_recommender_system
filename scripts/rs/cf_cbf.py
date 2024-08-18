@@ -238,12 +238,14 @@ def cf_cbf(ids):
                         song_title = song_recommendation_info[1]
                         artist_name = song_recommendation_info[3]
 
+                        # Only increment k when a valid song is added
                         if artist_song_count[artist_name] < SONGS_PER_ARTIST:
                             formatted_recommendation = format_song_info(
                                 song_recommendation_info, count)
                             file.write(f"{k}. {formatted_recommendation}\n")
                             artist_song_count[artist_name] += 1
-                            k += 1
+                            k += 1  # Increment after writing a valid song
+
             file.write('\n')
 
     conn.close()
