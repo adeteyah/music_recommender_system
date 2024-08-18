@@ -1,41 +1,28 @@
-
 import sqlite3
 import pandas as pd
 
 # Define file paths
 db_file = 'data/main.db'
 csv_file = 'data/playlist_items_ids.csv'
-chunk_size = 900  # Adjust the chunk size if needed
 
-# Load the list of IDs from the CSV file (newline-separated)
-id_df = pd.read_csv(csv_file, header=None, names=['song_id'])
-id_list = id_df['song_id'].tolist()
+# Read the CSV file to get the list of song_ids to keep
+df = pd.read_csv(csv_file, header=None, names=['song_id'])
+song_ids_to_keep = df['song_id'].tolist()
+
+# Define the batch size
+batch_size = 500  # Adjust as needed
 
 # Connect to the SQLite database
 conn = sqlite3.connect(db_file)
 cursor = conn.cursor()
 
-# Function to delete rows where song_id is not in the list
-
-
-def delete_not_in_list(id_list, chunk_size):
-    for i in range(0, len(id_list), chunk_size):
-        chunk = id_list[i:i + chunk_size]
-        id_placeholder = ','.join(['?'] * len(chunk))
-        # Delete rows where song_id is NOT in the chunk
-        delete_query = f"DELETE FROM songs WHERE song_id NOT IN ({
-            id_placeholder})"
-        cursor.execute(delete_query, chunk)
-        print(f"Deleted rows where song_id is not in chunk {
-              i // chunk_size + 1}")
-
-
-# Perform the deletion
-delete_not_in_list(id_list, chunk_size)
+# Perform batch deletion
+for i in range(0, len(song_ids_to_keep), batch_size):
+    batch = song_ids_to_keep[i:i + batch_size]
+    placeholders = ','.join('?' for _ in batch)
+    query = f"DELETE FROM songs WHERE song_id NOT IN ({placeholders})"
+    cursor.execute(query, batch)
 
 # Commit the changes and close the connection
 conn.commit()
 conn.close()
-
-print(f"Deletion complete. Rows where song_id is not in {
-      csv_file} have been deleted.")
