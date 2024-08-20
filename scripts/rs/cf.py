@@ -163,16 +163,20 @@ def cf(ids):
 
                 # Calculate cosine similarity for each recommended song
                 similarities = []
-                for recommended_song_id in recommended_songs:
-                    recommended_song_info = get_song_info(
-                        conn, recommended_song_id)
-                    if recommended_song_info:
-                        rec_vector = get_song_vector(recommended_song_info)
-                        similarity = cosine_similarity(
-                            np.array(input_vectors), rec_vector.reshape(1, -1)
-                            # Calculate mean similarity across all input songs
-                        ).mean()
-                        similarities.append((recommended_song_id, similarity))
+                for recommended_song_id, count in recommended_songs.items():
+                    # Only consider songs that appear more than once across playlists
+                    if count > 1:
+                        recommended_song_info = get_song_info(
+                            conn, recommended_song_id)
+                        if recommended_song_info:
+                            rec_vector = get_song_vector(recommended_song_info)
+                            similarity = cosine_similarity(
+                                np.array(input_vectors), rec_vector.reshape(
+                                    1, -1)
+                                # Calculate mean similarity across all input songs
+                            ).mean()
+                            similarities.append(
+                                (recommended_song_id, similarity, count))
 
                 # Sort by similarity in descending order
                 sorted_recommended_songs = sorted(
@@ -181,7 +185,7 @@ def cf(ids):
                 # Track song count per artist
                 artist_song_count = defaultdict(int)
                 k = 1
-                for recommended_song_id, similarity in sorted_recommended_songs:
+                for recommended_song_id, similarity, count in sorted_recommended_songs:
                     song_recommendation_info = get_song_info(
                         conn, recommended_song_id)
                     if song_recommendation_info:
@@ -194,7 +198,7 @@ def cf(ids):
 
                         if artist_song_count[artist_name] < SONGS_PER_ARTIST:
                             formatted_recommendation = format_song_info(
-                                song_recommendation_info, count=None, similarity=similarity)
+                                song_recommendation_info, count=count, similarity=similarity)
                             file.write(f"{k}. {formatted_recommendation}\n")
                             artist_song_count[artist_name] += 1
                             k += 1
