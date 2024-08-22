@@ -7,9 +7,9 @@ from scripts.rs import cbf_cf
 import scripts.tools.to_print as compile_result
 
 ids = [
-    '04S1pkp1VaIqjg8zZqknR5',
-    '7fBv7CLKzipRk6EC6TWHOB',
-    '3GYlZ7tbxLOxe6ewMNVTkw',
+    '1zxfRSZcaonV1VXcY0PgY5',
+    '1ZPVEo8RfmrEz8YAD5n6rW',
+    '3wlLknnMtD8yZ0pCtCeeK4',
 ]
 
 start = time.time()  # DONE
