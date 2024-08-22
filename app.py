@@ -13,15 +13,15 @@ ids = [
     '6AI3ezQ4o3HUoP6Dhudph3',
 ]
 
-start = time.time()  # DONE
-cf_cosine.cf(ids)
-end = time.time()
-print("Time: ", end - start)
-
 # start = time.time()  # DONE
-# cf_count.cf(ids)
+# cf_cosine.cf(ids)
 # end = time.time()
 # print("Time: ", end - start)
+
+start = time.time()  # DONE
+cf_count.cf(ids)
+end = time.time()
+print("Time: ", end - start)
 
 start = time.time()  # DONE
 cf_cbf.cf_cbf(ids)
