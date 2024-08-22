@@ -7,10 +7,10 @@ from scripts.rs import cbf_cf
 import scripts.tools.to_print as compile_result
 
 ids = [
-    '1f3yAtsJtY87CTmM8RLnxf',
-    '48UPSzbZjgc449aqz8bxox',
+    '04S1pkp1VaIqjg8zZqknR5',
+    '7fBv7CLKzipRk6EC6TWHOB',
+    '3GYlZ7tbxLOxe6ewMNVTkw',
 ]
-
 
 start = time.time()  # DONE
 cf.cf(ids)
