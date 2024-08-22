@@ -199,7 +199,7 @@ def cbf_cf(ids):
 
                 # Sort the songs by similarity score (closest first) and then by playlist count
                 songs_with_count_and_similarity.sort(
-                    key=lambda x: (x[6], -x[5]))
+                    key=lambda x: (-x[5], x[6]))
 
                 # Write the sorted songs with similarity scores to the file
                 for idx, (song_url, artist_name, song_name, genres, features_str, playlist_count, similarity, _) in enumerate(songs_with_count_and_similarity, start=1):
