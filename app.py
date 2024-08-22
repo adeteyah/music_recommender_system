@@ -32,4 +32,6 @@ cbf_cf.cbf_cf(ids)
 end = time.time()
 print("Time: ", end - start)
 
+print('Compiled: result/to_recommend/compiled.txt')
+
 compile_result.process_directory()
