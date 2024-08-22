@@ -1,6 +1,6 @@
 import time
 
-from scripts.rs import cf
+from scripts.rs import cf_count
 from scripts.rs import cf_cbf
 from scripts.rs import cbf_optimized as cbf
 from scripts.rs import cbf_cf
@@ -13,7 +13,7 @@ ids = [
 ]
 
 start = time.time()  # DONE
-cf.cf(ids)
+cf_count.cf(ids)
 end = time.time()
 print("Time: ", end - start)
 

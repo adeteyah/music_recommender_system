@@ -1,5 +1,3 @@
-from sklearn.metrics.pairwise import cosine_similarity
-import numpy as np
 import sqlite3
 import configparser
 from collections import defaultdict
@@ -85,26 +83,6 @@ def get_songs_from_playlists(conn, playlist_ids):
     return song_counts
 
 
-def get_song_vector(song_info):
-    """Convert song details into a vector combining numeric features and genre encoding."""
-    _, _, _, _, artist_genres, acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo, time_signature, valence = song_info
-
-    # Numeric features
-    numeric_features = np.array([
-        danceability, energy,
-        loudness, valence
-    ])
-
-    # Genre encoding
-    genre_vector = np.zeros(len(ALL_GENRES))
-    for genre in artist_genres.split(","):
-        genre = genre.strip().lower()
-        if genre in ALL_GENRES:
-            genre_vector[ALL_GENRES.index(genre)] = 1
-
-    return np.concatenate([numeric_features, genre_vector])
-
-
 def format_song_info(song_info, count=None):
     """Format song details for output, including optional count."""
     song_id, song_name, _, artist_name, artist_genres, acousticness, danceability, energy, instrumentalness, key, liveness, loudness, mode, speechiness, tempo, time_signature, valence = song_info
@@ -137,8 +115,6 @@ def cf(ids):
     conn = sqlite3.connect(DB)
     songs_info = read_inputted_ids(ids, conn)
 
-    input_vectors = [get_song_vector(song_info)
-                     for song_info in songs_info if song_info]
     input_song_ids = set(song_info[0] for song_info in songs_info if song_info)
     input_song_titles_artists = {
         (song_info[1], song_info[3]) for song_info in songs_info if song_info}
