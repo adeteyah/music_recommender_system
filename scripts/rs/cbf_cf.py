@@ -197,7 +197,7 @@ def cbf_cf(ids):
                     songs_with_count_and_similarity.append(
                         (song_url, artist_name, song_name, genres, features_str, playlist_count, similarity, audio_features))
 
-                # Sort the songs by similarity score (closest first) and then by playlist count
+                # Sort the songs by playlist count first and then by  similarity score (closest first)
                 songs_with_count_and_similarity.sort(
                     key=lambda x: (-x[5], x[6]))
 
