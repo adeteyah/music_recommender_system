@@ -7,8 +7,8 @@ from scripts.rs import cbf_cf
 import scripts.tools.to_print as compile_result
 
 ids = [
-    '7FSzJQV6thyoQptFCUTV9c',
-    '2qQpFbqqkLOGySgNK8wBXt',
+    '1f3yAtsJtY87CTmM8RLnxf',
+    '48UPSzbZjgc449aqz8bxox',
 ]
 
 
