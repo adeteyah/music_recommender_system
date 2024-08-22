@@ -91,8 +91,8 @@ def get_song_vector(song_info):
 
     # Numeric features
     numeric_features = np.array([
-        acousticness, danceability, energy, instrumentalness, liveness,
-        loudness, mode, speechiness, tempo, time_signature, valence
+        danceability, energy,
+        loudness, valence
     ])
 
     # Genre encoding
