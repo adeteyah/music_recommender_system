@@ -137,8 +137,11 @@ def cf(ids):
                 recommended_songs = get_songs_from_playlists(
                     conn, playlist_ids)
 
+                # Filter out songs with count <= 1 and sort by count
+                filtered_recommended_songs = {
+                    song_id: count for song_id, count in recommended_songs.items() if count > 1}
                 sorted_recommended_songs = sorted(
-                    recommended_songs.items(), key=lambda x: x[1], reverse=True)
+                    filtered_recommended_songs.items(), key=lambda x: x[1], reverse=True)
 
                 artist_song_count = defaultdict(int)
                 k = 1

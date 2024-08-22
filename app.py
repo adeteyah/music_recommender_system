@@ -1,7 +1,6 @@
 import time
 
-from scripts.rs import cf_cosine
-from scripts.rs import cf_count
+from scripts.rs import cf
 from scripts.rs import cf_cbf
 from scripts.rs import cbf_optimized as cbf
 from scripts.rs import cbf_cf
@@ -13,13 +12,8 @@ ids = [
     '6AI3ezQ4o3HUoP6Dhudph3',
 ]
 
-# start = time.time()  # DONE
-# cf_cosine.cf(ids)
-# end = time.time()
-# print("Time: ", end - start)
-
 start = time.time()  # DONE
-cf_count.cf(ids)
+cf.cf(ids)
 end = time.time()
 print("Time: ", end - start)
 
