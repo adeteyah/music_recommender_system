@@ -97,95 +97,95 @@ def main(data):
 data = """
 CBF
 
-JP Saxe - If the World Was Ending (feat. Julia Michaels)
-1. The Futurelics - Down N' Out 
-2. The Weeknd - True Colors (v)
-3. Ed Sheeran - Moving - Bonus Track (v)
-4. RealestK - Confessions (v)
-5. Sasha Alex Sloan - Dancing With Your Ghost (v)
+Travis Scott - FE!N (feat. Playboi Carti)
+1. A$AP Rocky - Houston Old Head 
+2. Iwan Fals & NOAH - Yang Terlupakan 
+3. Juice WRLD - Black & White 
+4. Gerard Way - Maya the Psychic 
+5. NF - Let You Down (v)
 
-Yahya - keepyousafe
-1. Yahya - keepyousafe (v)
-2. Jinan Laetitia - POV 
-3. Skyline - How Do You Heal a Broken Heart? (v) 
-4. Jan Metternich archive - Supermarket Flowers - Acoustic Version 
-5. Noni - Things I Could Never Say to You (v)
+Billie Eilish - bad guy
+1. Doja Cat - Love To Dream (v)
+2. Dreane - Pathetic 
+3. Petitb - Gohou 
+4. Jan Metternich - Mistakes & Heartbreaks 
+5. Jayesslee - That's What I Like 
 
-One Direction - Night Changes
-1. Deborah Cox - Nobody's Supposed to Be Here 
-2. Jaden - BYE (v)
-3. Plastic Plastic - With Me 
-4. PVRIS - Death of Me 
-5. Daniel Bedingfield - If You're Not The One (v)
+Dewa 19 - Separuh Nafas
+1. Dewa 19 - Separuh Nafas (v)
+2. T.R.I.A.D - Kuingin Terus Lama Pacaran Disini (Neng Neng Nong Neng) 
+3. T.R.I.A.D - Ku Ingin Terus Lama Pacaran Disini - Neng Neng Nong Neng 
+4. The SIGIT - Horse 
+5. Rocket Rockers - Bangkit 
 
 CBF_CF
 
-JP Saxe - If the World Was Ending (feat. Julia Michaels)
-1. The Futurelics - Down N' Out 
-2. The Weeknd - True Colors (v)
-3. RealestK - Confessions (v)
-4. Sasha Alex Sloan - Dancing With Your Ghost 
-5. Drow$y - Under The Pipes (v)
+Travis Scott - FE!N (feat. Playboi Carti)
+1. A$AP Rocky - Houston Old Head (v)
+2. Iwan Fals & NOAH - Yang Terlupakan 
+3. Juice WRLD - Black & White 
+4. Gerard Way - Maya the Psychic 
+5. NF - Let You Down (v)
 
-Yahya - keepyousafe
-1. Yahya - keepyousafe (v)
-2. Jinan Laetitia - POV 
-3. Skyline - How Do You Heal a Broken Heart? 
-4. Jan Metternich archive - Supermarket Flowers - Acoustic Version 
-5. Noni - Things I Could Never Say to You (v)
+Billie Eilish - bad guy
+1. Doja Cat - Love To Dream (v)
+2. Dreane - Pathetic 
+3. Petitb - Gohou 
+4. Jan Metternich - Mistakes & Heartbreaks 
+5. Jayesslee - That's What I Like 
 
-One Direction - Night Changes
-1. Deborah Cox - Nobody's Supposed to Be Here 
-2. Jaden - BYE (v)
-3. Plastic Plastic - With Me 
-4. PVRIS - Death of Me (v)
-5. Daniel Bedingfield - If You're Not The One (v)
+Dewa 19 - Separuh Nafas
+1. Dewa 19 - Separuh Nafas (v)
+2. T.R.I.A.D - Kuingin Terus Lama Pacaran Disini (Neng Neng Nong Neng) 
+3. The SIGIT - Horse 
+4. Rocket Rockers - Bangkit 
+5. Rocket Rockers - Pesta 
 
 CF
 
-JP Saxe - If the World Was Ending (feat. Julia Michaels)
-1. Gabrielle Aplin - Please Don't Say You Love Me (v)
-2. Ardhito Pramono - I Just Couldn't Save You Tonight - Story of Kale - Original Motion Picture Soundtrack (v)
-3. Cody Fry - I Hear a Symphony 
-4. Genevieve Stokes - Habits 
-5. Cigarettes After Sex - K. (v)
+Travis Scott - FE!N (feat. Playboi Carti)
+1. A Boogie Wit da Hoodie - Still Think About You 
+2. BlocBoy JB - Look Alive (feat. Drake) 
+3. Yeat - My wrist (with Young Thug) 
+4. Yeat - Monëy so big (v)
+5. Travis Scott - CIRCUS MAXIMUS (feat. The Weeknd & Swae Lee) (v)
 
-Yahya - keepyousafe
-1. Isyana Sarasvati - Heaven (v)
-2. Kurosuke - Fantasy 
-3. Ardhito Pramono - I Just Couldn't Save You Tonight - Story of Kale - Original Motion Picture Soundtrack (v)
-4. Sal Priadi - Bulan Yang Baik 
-5. NIKI - La La Lost You - Acoustic Version (v)
+Billie Eilish - bad guy
+1. Riton - Rinse & Repeat (feat. Kah-Lo) - Radio Edit 
+2. Zac Efron - Rewrite The Stars 
+3. Kenshi Yonezu - 死神 
+4. Steve Lacy - N Side 
+5. BlocBoy JB - Look Alive (feat. Drake) (v)
 
-One Direction - Night Changes
-1. Isyana Sarasvati - Heaven 
-2. Tulus - Monokrom (v)
-3. Sickick - Mind Games 
-4. Idgitaf - Takut (v)
-5. The Lumineers - Ho Hey 
+Dewa 19 - Separuh Nafas
+1. Ungu - Saat Bahagia 
+2. Dewa 19 - Tak Kan Ada Cinta Yang Lain 
+3. Hivi! - Satu-Satunya 
+4. Armada - Mabuk Cinta 
+5. Dewa - Arjuna (v)
 
 CF_CBF
 
-JP Saxe - If the World Was Ending (feat. Julia Michaels)
-1. BANNERS - Someone To You (v)
-2. The Lumineers - Ophelia 
-3. The Walters - I Love You So (v)
-4. Cody Fry - I Hear a Symphony (v)
-5. Ariana Grande - supernatural (v)
+Travis Scott - FE!N (feat. Playboi Carti)
+1. Travis Scott - CAN'T SAY (v)
+2. Travis Scott - NO BYSTANDERS (v)
+3. ¥$ - CARNIVAL (v)
+4. Kanye West - Bound 2 (v)
+5. Megan Thee Stallion - BOA 
 
-Yahya - keepyousafe
-1. Olivia Rodrigo - enough for you (v)
-2. Jung Kook - Still With You (v)
-3. Isyana Sarasvati - Heaven (v)
-4. Lana Del Rey - Born To Die 
-5. Sal Priadi - Bulan Yang Baik 
+Billie Eilish - bad guy
+1. Billie Eilish - bad guy (with Justin Bieber) 
+2. Billie Eilish - Lo Vas A Olvidar (with ROSALÍA) 
+3. Lana Del Rey - Money Power Glory (v)
+4. Lil Nas X - Old Town Road - Remix 
+5. Cardi B - I Like It (v)
 
-One Direction - Night Changes
-1. One Direction - Right Now (v)
-2. One Direction - Story of My Life (v)
-3. 5 Seconds of Summer - Youngblood 
-4. Billie Eilish - Bored 
-5. Harry Styles - Sign of the Times
+Dewa 19 - Separuh Nafas
+1. Dewa 19 - Format Masa Depan 
+2. Dewa - Separuh Nafas (v)
+3. Dewa - Cinta Adalah Misteri (v)
+4. T.R.I.A.D - Separuh Nafas (v)
+5. Taylor Swift - Fearless (Taylor’s Version)
 """
 
 if __name__ == "__main__":
