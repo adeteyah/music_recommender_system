@@ -89,94 +89,95 @@ def main(data):
 data = """
 CBF
 
-Yuuri - ドライフラワー
-1. Yuuri - ドライフラワー (v)
-2. Ado - ドライフラワー (v)
-3. Tani Yuuki - Aikotoba (v)
-4. Tani Yuuki - 愛言葉 (v)
-5. ONE OK ROCK - We Are (v)
+Input: Sabrina Carpenter - Espresso
+1. Doja Cat - Rules 
+2. Dominic Fike - Chicken Tenders 
+3. Diskoria - Balada Insan Muda  (v)
+4. RÜFÜS DU SOL - You Were Right 
+5. 5 Seconds of Summer - BLENDER 
 
-Lee Mujin - Traffic light
-1. KyoungSeo - 120BPM (v)
-2. CHEEZE - Mood Indigo 
-3. Lee Mujin - Propose (v)
-4. BIG Naughty - IMFP 
-5. DAY6 (Even of Day) - so this is love 
+Input: Mahalini - Mati-Matian
+1. Glenn Fredly - Kisah Yang Salah  (v)
+2. Peterpan - Semua Tentang Kita (v) 
+3. Fourtwnty - Nyanyian Surau 
+4. Mahalini - Sisa Rasa  (v)
+5. Kahitna - Takkan Terganti 
 
-Ed Sheeran - Galway Girl
-1. Citra Scholastika - Pasti Bisa 
-2. NewJeans - Hype Boy 
-3. Ariana Grande - Focus (v)
-4. Vance Joy - Saturday Sun (v)
-5. Pierce The Veil - Floral & Fading 
+Input: Sabrina Carpenter - Please Please Please
+1. TLC - Unpretty 
+2. Super 7 - BFF - Sahabat 
+3. MALIQ & D'Essentials - Yang Pertama  (v)
+4. Tokyo Tea Room - Half the Man 
+5. もさを。 - 恋色 
 
 CBF_CF
 
-Yuuri - ドライフラワー
-1. Yuuri - ドライフラワー (v)
-2. Ado - ドライフラワー (v)
-3. Tani Yuuki - Aikotoba (v)
-4. Tani Yuuki - 愛言葉 (v)
-5. ONE OK ROCK - We Are (v)
+Input: Sabrina Carpenter - Espresso
+1. Taylor Swift - Cruel Summer  (v)
+2. One Direction - Right Now 
+3. The 1975 - It's Not Living (If It's Not With You) 
+4. Sheila On 7 - Seberapa Pantas  (v)
+5. Conan Gray - Wish You Were Sober 
 
-Lee Mujin - Traffic light(v)
-1. KyoungSeo - 120BPM (v)
-2. CHEEZE - Mood Indigo 
-3. Lee Mujin - Propose (v)
-4. BIG Naughty - IMFP 
-5. DAY6 (Even of Day) - so this is love 
+Input: Mahalini - Mati-Matian
+1. Dewa - Risalah Hati 
+2. Ari Lasso - Hampa 
+3. Pamungkas - One Only  (v)
+4. Aziz Hedra - Somebody's Pleasure  (v)
+5. RAN - Dekat Di Hati  (v)
 
-Ed Sheeran - Galway Girl 
-1. Citra Scholastika - Pasti Bisa 
-2. NewJeans - Hype Boy 
-3. Ariana Grande - Focus (v)
-4. Vance Joy - Saturday Sun (v)
-5. Pierce The Veil - Floral & Fading 
+Input: Sabrina Carpenter - Please Please Please
+1. Taylor Swift - Cruel Summer  (v)
+2. Ed Sheeran - Perfect 
+3. Pamungkas - To the Bone  (v)
+4. Conan Gray - Memories 
+5. Sheila On 7 - Seberapa Pantas  (v)
 
 CF
 
-Yuuri - ドライフラワー
-1. SPITZ - 空も飛べるはず 
-2. Mrs. GREEN APPLE - Magic (v)
-3. Little by Little - 悲しみをやさしさに (v)
-4. fromis_9 - Love Me Back 
-5. CHiCO with HoneyWorks - 世界は恋に落ちている 
+Input: Sabrina Carpenter - Espresso
+1. Billie Eilish - BIRDS OF A FEATHER 
+2. SZA - Saturn 
+3. Sabrina Carpenter - Feather 
+4. Tate McRae - greedy 
+5. Hozier - Too Sweet 
 
-Lee Mujin - Traffic light
-1. Lee Sun Hee - Beautiful Landscape (v)
-2. Lee Mujin - Episode (v)
-3. PATEKO - It's Gone 
-4. Lee Mujin - No MBTI 
-5. iKON - LOVE SCENARIO 
+Input: Mahalini - Mati-Matian
+1. Mahalini - Bawa Dia Kembali  (v)
+2. Tiara Andini - Janji Setia 
+3. Yovie & Nuno - Tanpa Cinta 
+4. Juicy Luicy - Tampar  (v)
+5. Lyodra - Tak Dianggap  (v)
 
-Ed Sheeran - Galway Girl
-1. Jonas Blue - Perfect Strangers (v)
-2. Taylor Swift - Love Story (Taylor’s Version) (v)
-3. Sean Kingston - Eenie Meenie (v)
-4. Carly Rae Jepsen - I Really Like You (v)
-5. ZAYN - PILLOWTALK 
+Input: Sabrina Carpenter - Please Please Please
+1. Billie Eilish - BIRDS OF A FEATHER 
+2. SZA - Saturn 
+3. Tate McRae - greedy  (v)
+4. Sabrina Carpenter - Feather  (v)
+5. Charli xcx - 360 
 
 CF_CBF
 
-Yuuri - ドライフラワー
-1. Mrs. GREEN APPLE - ライラック (v)
-2. RADWIMPS - Confession (v)
-3. Sukima Switch - 奏(かなで) 
-2. Lee Mujin - Traffic light (v)
+Input: Sabrina Carpenter - Espresso
+1. Sabrina Carpenter - Feather (v)
+2. Taylor Swift - Cruel Summer (v) 
+3. Ariana Grande - the boy is mine (v) 
+4. Harry Styles - As It Was  (v)
+5. The Chainsmokers - Closer  (v)
 
-Lee Mujin - Traffic light
-1. Lee Mujin - Propose (v)
-2. Lee Mujin - When it snows(Feat.Heize) (v)
-3. Alessia Cara - Scars To Your Beautiful 
-4. BLACKPINK - PLAYING WITH FIRE 
-5. Jay Park - All I Wanna Do (K) (Feat. Hoody & Loco) 
+Input: Mahalini - Mati-Matian
+1. Mahalini - Bawa Dia Kembali  (v)
+2. Tiara Andini - Janji Setia  (v)
+3. Lyodra - Tak Dianggap  (v)
+4. Juicy Luicy - Lantas  (v)
+5. Vionita - Dia Masa Lalumu, Aku Masa Depanmu  (v)
 
-Ed Sheeran - Galway Girl
-1. Ed Sheeran - Drunk (v)
-2. Ed Sheeran - Barcelona (v)
-3. Kygo - It Ain't Me (with Selena Gomez) (v)
-4. The Chainsmokers - Paris 
-5. Justin Bieber - Love Yourself (v)
+Input: Sabrina Carpenter - Please Please Please
+1. Sabrina Carpenter - Feather  (v)
+2. Ariana Grande - the boy is mine  (v)
+3. Taylor Swift - Cruel Summer  (v)
+4. Olivia Rodrigo - get him back! 
+5. Harry Styles - As It Was (v)
 """
 
 if __name__ == "__main__":
