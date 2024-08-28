@@ -87,99 +87,97 @@ def main(data):
 
 # Example input
 data = """
-piw, yang punya korelasi sama musik yang di kirim kemarin kasih (v) ya di belakang
-contoh: 1. artis - judul (v)
-
 CBF
 
-My Chemical Romance - Disenchanted (v)
-1. Dashboard Confessional - Stolen 
-2. The Script - For the First Time 
-3. Marilyn Manson - They Said That Hell's Not Hot 
-4. ONE OK ROCK - Wherever you are (v)
-5. Sunday (1994) - Tired Boy 
+mitei - excuses for losing touch
+1. Naomi Scott - Speechless (Full) 
+2. American Authors - Deep Water - Acoustic 
+3. Cavetown - Home 
+4. Shawn Mendes - Use Somebody - Recorded at Spotify Studios NYC 
+5. Our Story - Kisah Kelam 
 
-Bon Jovi - It's My Life (v)
-1. Hippo Campus - Way It Goes 
-2. Marilyn Manson - Cupid Carries A Gun 
-3. Sylvan Esso - Radio 
-4. Twenty One Pilots - We Don't Believe What's on TV (v)
-5. The Cure - The End Of The World 
+Bring Me The Horizon - DiE4u
+1. Hollywood Undead - Coming Home 
+2. Bloc Party - This Modern Love 
+3. A Day To Remember - All I Want 
+4. Bring Me The Horizon - Avalanche (v)
+5. Florence + The Machine - Heavy In Your Arms 
 
-Avenged Sevenfold - A Little Piece of Heaven
-1. Avenged Sevenfold - A Little Piece of Heaven (v)
-2. Falling In Reverse - The Drug In Me Is You 
-3. Foo Fighters - DOA (v)
-4. 311 - Whiskey And Wine 
-5. Mike Repic - Alive 
+Porter Robinson - Get Your Wish
+1. Madeon - Be Fine (v)
+2. Alison Wonderland - Church 
+3. WHENSDAY - Alright 
+4. Madeon - No Fear No More
+5. Switch - Angels We Have Heard On High 
 
 CBF_CF
 
-My Chemical Romance - Disenchanted
-1. Dashboard Confessional - Stolen 
-2. The Script - For the First Time 
-3. Marilyn Manson - They Said That Hell's Not Hot 
-4. ONE OK ROCK - Wherever you are (v)
-5. Sunday (1994) - Tired Boy 
+mitei - excuses for losing touch
+1. Naomi Scott - Speechless (Full) 
+2. American Authors - Deep Water - Acoustic 
+3. Cavetown - Home 
+4. Shawn Mendes - Use Somebody - Recorded at Spotify Studios NYC 
+5. Our Story - Kisah Kelam 
 
-Bon Jovi - It's My Life
-1. Hippo Campus - Way It Goes 
-2. Marilyn Manson - Cupid Carries A Gun 
-3. Sylvan Esso - Radio 
-4. Twenty One Pilots - We Don't Believe What's on TV 
-5. The Cure - The End Of The World 
+Bring Me The Horizon - DiE4u
+1. Hollywood Undead - Coming Home 
+2. Bloc Party - This Modern Love 
+3. A Day To Remember - All I Want 
+4. Bring Me The Horizon - Avalanche (v) 
+5. Florence + The Machine - Heavy In Your Arms 
 
-Avenged Sevenfold - A Little Piece of Heaven
-1. Avenged Sevenfold - A Little Piece of Heaven 
-2. Falling In Reverse - The Drug In Me Is You 
-3. Foo Fighters - DOA 
-4. 311 - Whiskey And Wine 
-5. Mike Repic - Alive 
+Porter Robinson - Get Your Wish
+1. Madeon - Be Fine (v)
+2. Alison Wonderland - Church 
+3. WHENSDAY - Alright 
+4. Madeon - No Fear No More 
+5. Switch - Angels We Have Heard On High 
 
 CF
 
-My Chemical Romance - Disenchanted
-1. AC/DC - Girls Got Rhythm (v)
-2. Three Days Grace - Never Too Late 
-3. Bring Me The Horizon - Doomed (v)
-4. Deftones - Change (In the House of Flies) 
-5. Bring Me The Horizon - sugar honey ice & tea 
+mitei - excuses for losing touch
+1. a r u k a. - caustics (v)
+2. D'art- - Paper cup telephone (v)
+3. a r u k a. - smells like earth (v)
+4. Neck Deep - Empty House 
+5. Kogane - Around You - lalanoi Remix (v)
 
-Bon Jovi - It's My Life
-1. Bring Me The Horizon - Doomed 
-2. Bring Me The Horizon - sugar honey ice & tea 
-3. Bon Jovi - Runaway 
-4. The Cure - Lovesong 
-5. Nirvana - About A Girl 
+Bring Me The Horizon - DiE4u
+1. MIKA - Yo Yo 
+2. Trevor Daniel - Falling (feat. blackbear) - blackbear Remix 
+3. Call Me Karizma - I Fell in Love with My Best Friend 
+4. Gotye - Somebody That I Used To Know 
+5. Taylor Swift - Wildest Dreams 
 
-Avenged Sevenfold - A Little Piece of Heaven
-1. Green Day - 21 Guns (v)
-2. The Cure - Boys Don't Cry 
-3. Avenged Sevenfold - So Far Away (v)
-4. Arctic Monkeys - When The Sun Goes Down 
-5. Oasis - Wonderwall (v)
+Porter Robinson - Get Your Wish
+1. Porter Robinson - Lionhearted (v)
+2. Lucas & Steve - I Want It All 
+3. Bag Raiders - Shooting Stars 
+4. Clean Bandit - Rather Be (feat. Jess Glynne) 
+5. Mat Zo - Easy - Extended Remix 
 
 CF_CBF
 
-My Chemical Romance - Disenchanted
-1. My Chemical Romance - The End. (V)
-2. Oasis - Wonderwall - Remastered 
-3. Paramore - Misery Business (v)
-4. Lord Huron - The Night We Met 
-5. Coldplay - Yellow (v)
+mitei - excuses for losing touch
+1. D'art- - Paper cup telephone (v)
+2. small house in spain - tether weight ₊˚✧•° .* (v)
+3. N33T - jellyfish (v)
+4. phritz - look at the sky (v)
+2. Bring Me The Horizon - DiE4u 
 
-Bon Jovi - It's My Life
-1. Green Day - Last Night on Earth (v)
-2. Guns N' Roses - Patience (v)
-3. Aerosmith - I Don't Want to Miss a Thing - From "Armageddon" Soundtrack (v)
-4. Nirvana - Come As You Are 
-5. Queen - Radio Ga Ga - Live Aid (v)
+Bring Me The Horizon - DiE4u
+1. Bring Me The Horizon - Avalanche (v)
+2. Bring Me The Horizon - Avalanche (v)
+3. Hollywood Undead - Coming Home 
+4. AFI - Twisted Tongues (v)
+5. Daughtry - Heavy Is The Crown (v)
 
-Avenged Sevenfold - A Little Piece of Heaven
-1. Avenged Sevenfold - 4:00 AM 
-2. Mr. Big - Wild World - 2009 Remastered Version 
-3. Liam Gallagher - For What It's Worth 
-4. Slipknot - Duality (v)
+Porter Robinson - Get Your Wish
+1. Porter Robinson - Goodbye To A World (v)
+2. Porter Robinson - Polygon Dust (v)
+3. Madeon - The Prince 
+4. Madeon - Be Fine (v)
+5. Martin Garrix - There For You - Lione Remix
 """
 
 if __name__ == "__main__":
