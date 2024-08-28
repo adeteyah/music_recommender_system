@@ -73,24 +73,28 @@ def main(data):
                 model_data[model_name])
             results[model_name] = (tps, totals, tp_fp_array)
 
-    # Output results in the specified order
+    # Output results in a readable format
     for model_name in model_order:
         if model_name in results:
             tps, totals, tp_fp_array = results[model_name]
             print(f"{model_name}:")
             for i, (tp, total) in enumerate(zip(tps, totals)):
+                print(f"  - Item {i+1}:")
+                print(f"    * True Positives: {tp}")
+                print(f"    * Total Recommendations: {total}")
                 print(
-                    f"  Item {i+1}: True Positives = {tp}, Total Recommendations = {total}")
-            print(f"  Total Recommendations for {model_name}: {sum(totals)}")
-            print(f"  True Positives Array: {tp_fp_array}\n")
+                    f"    * TP/FP Array: {tp_fp_array[sum(totals[:i]):sum(totals[:i + 1])]}")
+            print(f"  Total Recommendations across all items for {
+                  model_name}: {sum(totals)}\n")
 
-    # Total True Positives for each model
+    # Total True Positives and Recommendations across all models
     for model_name in model_order:
         if model_name in results:
             tps, totals, tp_fp_array = results[model_name]
-            print(f"{model_name}: True Positives (all items) = {
-                  tps}, Total Recommendations (all items) = {sum(totals)}")
-            print(f"{model_name}: TP/FP Array = {tp_fp_array}")
+            print(f"{model_name}:")
+            print(f"  - Total True Positives (all items): {tps}")
+            print(f"  - Total Recommendations (all items): {sum(totals)}")
+            print(f"  - Complete TP/FP Array: {tp_fp_array}\n")
 
 
 # Example input
