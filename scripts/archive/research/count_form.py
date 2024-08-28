@@ -89,89 +89,81 @@ def main(data):
 data = """
 CBF
 
-Doja Cat - Agora Hills
-1. Daya - Insomnia (v)
-2. Ofenbach - Be Mine 
-3. Michael Bublé - Everything 
-4. Isyana Sarasvati - Cinta Pertama 
-5. Kaskade - Atmosphere 
+Avenged Sevenfold - Save Me
+1. Atreyu - Becoming the Bull 
+2. Linkin Park - From the Inside (v)
+3. Evanescence - Everybody's Fool (v)
+4. Evanescence - Bring Me To Life 
+5. Mötley Crüe - Shout At The Devil 
 
-Redbone - Come and Get Your Love - Single Version
-1. Redbone - Come and Get Your Love 
-2. Link Wray - Fire And Brimstone 
+Kendrick Lamar - Not Like Us
+1. Blu DeTiger - Cotton Candy Lemonade 
+2. Joey Bada$$ - FOR MY PEOPLE (v)
+3. J. Cole - No Role Modelz(v) 
+4. Powfu - The Story of the Paper Boy (v)
+5. Ella Mai - My Way 
 
-Electric Light Orchestra - Mr. Blue Sky
-1. Electric Light Orchestra - Mr. Blue Sky 
-2. Billy Joel - Piano Man (v)
-3. Secondhand Serenade - Fall for You (Acoustic) 
-4. Geisha - Remuk Jantungku 
-5. Slank - Bali Bagus 
+Travis Scott - MY EYES
+1. Savanna Leigh - unfamiliar (v)
+2. Fressivoir - Summer Fever 
+3. Cati Landry - Riptide 
+4. Trippie Redd - Love Scars (v)
+5. Kodie Osborne - People Change 
 
 CBF_CF
 
-Doja Cat - Agora Hills
-1. Daya - Insomnia 
-2. Ofenbach - Be Mine 
-3. Michael Bublé - Everything 
-4. Isyana Sarasvati - Cinta Pertama 
-5. Kaskade - Atmosphere 
+Avenged Sevenfold - Save Me
+1. Atreyu - Becoming the Bull 
+2. Linkin Park - From the Inside (v)
+3. Evanescence - Everybody's Fool (v)
+4. Evanescence - Bring Me To Life 
+5. Mötley Crüe - Shout At The Devil 
 
-Redbone - Come and Get Your Love - Single Version
-1. Redbone - Come and Get Your Love 
-2. Link Wray - Fire And Brimstone 
+Kendrick Lamar - Not Like Us
+1. Blu DeTiger - Cotton Candy Lemonade 
+2. Joey Bada$$ - FOR MY PEOPLE (v)
+3. J. Cole - No Role Modelz (v)
+4. Powfu - The Story of the Paper Boy (v)
+5. Ella Mai - My Way 
 
-Electric Light Orchestra - Mr. Blue Sky
-1. Electric Light Orchestra - Mr. Blue Sky 
-2. Billy Joel - Piano Man 
-3. Secondhand Serenade - Fall for You (Acoustic) 
-4. Geisha - Remuk Jantungku 
-5. Slank - Bali Bagus 
+Travis Scott - MY EYES
+1. Savanna Leigh - unfamiliar (v)
+2. Fressivoir - Summer Fever 
+3. Cati Landry - Riptide 
+4. Trippie Redd - Love Scars (v)
+5. Kodie Osborne - People Change 
 
 CF
 
-Doja Cat - Agora Hills
-1. The Weeknd - Is There Someone Else? 
-2. Chase Atlantic - Friends 
-3. Lana Del Rey - West Coast 
-4. Kanii - I Know - PR1SVX Edit (v)
-5. Brent Faiyaz - ALL MINE 
+Kendrick Lamar - Not Like Us
+1. Metro Boomin - Trance (with Travis Scott & Young Thug) (v)
+2. Juice WRLD - Let Me Know (I Wonder Why Freestyle) (v)
+3. Lil Baby - Drip Too Hard (Lil Baby & Gunna) 
+4. Future - All to Myself 
+5. Future - Young Metro (v)
 
-Redbone - Come and Get Your Love - Single Version
-1. The Runaways - Cherry Bomb 
-2. Ram Jam - Black Betty 
-3. khai dreams - Sunkissed 
-4. Neil Diamond - Cracklin' Rosie (v)
-5. Jason Mraz - I'm Yours 
-
-Electric Light Orchestra - Mr. Blue Sky
-1. Spandau Ballet - Gold 
-2. Tsuko G. - Deja Vu (Initial D) 
-3. The Beatles - Day Tripper - Remastered 2015 (v)
-4. Kylie Minogue - Can't Get You out of My Head 
-5. The Runaways - Cherry Bomb 
+Travis Scott - MY EYES
+1. XXXTENTACION - FUXK (feat. Ski Mask the Slump God) (v)
+2. Metro Boomin - Trance (with Travis Scott & Young Thug) (v)
+3. Juice WRLD - Let Me Know (I Wonder Why Freestyle) (v)
+4. Lil Baby - Drip Too Hard (Lil Baby & Gunna) 
+5. Future - All to Myself 
 
 CF_CBF
 
-Doja Cat - Agora Hills
-1. Doja Cat - Ain't Shit 
-2. Lana Del Rey - West Coast 
-3. The Neighbourhood - Sweater Weather 
-4. Megan Thee Stallion - Sweetest Pie 
-5. Selena Gomez - Fetish (feat. Gucci Mane) 
+Kendrick Lamar - Not Like Us
+1. J. Cole - No Role Modelz (v)
+2. Mustard - Parking Lot (v)
+3. Offset - Ric Flair Drip (& Metro Boomin) 
+4. Mustard - Parking Lot 
+5. SZA - Nobody Gets Me 
 
-Redbone - Come and Get Your Love - Single Version
-1. Redbone - Come and Get Your Love 
-2. No Doubt - Just A Girl 
-3. Dexys Midnight Runners - Come On Eileen 
-4. Marvin Gaye - Trouble Man 
-5. Zedd - The Middle 
-
-Electric Light Orchestra - Mr. Blue Sky
-1. Creedence Clearwater Revival - Bad Moon Rising 
-2. Ramones - Blitzkrieg Bop - 2016 Remaster 
-3. Billy Joel - Piano Man 
-4. The Brook & The Bluff - Halfway Up 
-5. The Beatles - Norwegian Wood (This Bird Has Flown) - Remastered 2009
+Travis Scott - MY EYES
+1. Travis Scott - I KNOW ? (v)
+2. Travis Scott - way back (v)
+3. Metro Boomin - Trance (with Travis Scott & Young Thug) 
+4. Lil Baby - Freestyle 
+5. Kanye West - Praise God
 """
 
 if __name__ == "__main__":
