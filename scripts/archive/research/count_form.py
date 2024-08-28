@@ -87,7 +87,7 @@ def main(data):
 
 # Example input
 data = """
-Mode1 - CBF
+CBF
 
 My Chemical Romance - The Ghost of You
 1. Barenaked Ladies - Too Little Too Late (v)
