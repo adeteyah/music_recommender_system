@@ -87,78 +87,97 @@ def main(data):
 
 # Example input
 data = """
-CBF
+CBF 
 
-My Chemical Romance - The Ghost of You
-1. Barenaked Ladies - Too Little Too Late (v)
-2. ⁠Rush - Red Barchetta (v)
-3. ⁠The Proclaimers - Then It Comes to Me (v)
+D.O. - Popcorn
+1. D.O. - Popcorn (v)
+2. SHINee - Sleepless Night 
+3. BOL4 - My Trouble (v)
+4. Eric Nam - Before the Sunset 
+5. MINNIE - Like A Dream 
 
-Kings of Leon - Use Somebody
-1. Ty Segall - The Connection Man (v)
-2. ⁠The Cure - Dredd Song (v)
+Bernadya - Satu Bulan
+1. Sal Priadi - Bulan Yang Baik (v)
+2. Chrisye - Seperti Yang Kau Minta 
+3. Angga Candra - Sedihku (Sekecewa Itu 2) 
+4. Tulus - Ingkar (v)
+5. raissa anggiani - Lagi Lagi (v) 
 
-Thirty Seconds to Mars - The Kill
-1. Breaking Benjamin - Breath (v)
-2. ⁠The Used - About You (v)
-3. ⁠Good Charlotte - Prayers (v)
-4. ⁠Staind - This Is It (v)
-5. ⁠Puddle of Mudd - Slide Away (v)
+SEVENTEEN - Cheers to youth
+1. TRI.BE - LORO 
+2. AKMU - Be With You 
+3. NCT 127 - Elevator (127F) (v)
+4. George Ezra - Blame It on Me 
+5. Apink - Be Myself 
 
-CBF_CF
+CBF_CF 
 
-My Chemical Romance - The Ghost of You
-1. Oasis - Champagne Supernova (v)
-2. ⁠Deftones - Change (v)
-3. ⁠The Killers - Mr Brightside (v)
+D.O. - Popcorn
+1. D.O. - Popcorn (v)
+2. SHINee - Sleepless Night 
+3. BOL4 - My Trouble (v)
+4. Eric Nam - Before the Sunset 
+5. MINNIE - Like A Dream 
 
-Kings of Leon - Use Somebody
-1. Deftones - Change (v)
+Bernadya - Satu Bulan
+1. Sal Priadi - Bulan Yang Baik 
+2. Angga Candra - Sedihku (Sekecewa Itu 2) 
+3. Tulus - Ingkar (v)
+4. raissa anggiani - Lagi Lagi (v)
+5. Andmesh - Andaikan Kau Datang - From "Miracle in Cell No. 7" 
 
-Thirty Seconds to Mars - The Kill
-1. My Chemical Romance - I'm Not Okay (v)
-2. Sum 41 - With Me (v)
-3. Muse - Hysteria (v)
-4. Good Charlotte - Prayers (v)
-5. Thirty Seconds To Mars - Attack  (v)
+SEVENTEEN - Cheers to youth
+1. TRI.BE - LORO 
+2. AKMU - Be With You (v)
+3. George Ezra - Blame It on Me 
+4. Apink - Be Myself 
+5. LE SSERAFIM - FEARLESS (2023 Ver.) (v) 
 
-CF
+CF 
 
-My Chemical Romance - The Ghost of You
-1. My Chemical Romance - Helena (v)
-2. blink-182 - All The Small Things (v)
-3. Fall Out Boy - Dance, Dance (v)
-4. Paramore - Misery Business (v)
-5. All Time Low - Dear Maria, Count Me In (v)
+D.O. - Popcorn
+1. BIG Naughty - IMFP 
+2. EXO - Sweet Lies (v)
+3. Jimmy Brown - Let Me Know 
+4. D.O. - That's okay (v)
+5. EXO - Miracles in December (v) 
 
-Kings of Leon - Use Somebody
-1. Kings of Leon - Waste A Moment (v)
-2. The Killers - When You Were Young (v)
+Bernadya - Satu Bulan
+1. Boyz II Men - On Bended Knee 
+2. raissa anggiani - Losing Us. (v)
+3. Mocca - I Remember - 2017 Version (v)
+4. Nadin Amizah - Beranjak Dewasa (v)
+5. Hanin Dhiya - Biar Waktu Hapus Sedihku 
 
-Thirty Seconds to Mars - The Kill
-1. Fall Out Boy - Sugar, We're Goin Down (v)
-2. Foo Fighters - Everlong (v)
-3. Evanescence - Bring Me To Life (v)
-4. Linkin Park - Numb (v)
-5. Thirty Seconds To Mars - Closer To The Edge (v))
+SEVENTEEN - Cheers to youth
+1. BSS - The Reasons of My Smiles (v)
+2. ENHYPEN - XO (Only If You Say Yes) 
+3. SEVENTEEN - Anyone (v)
+4. TOMORROW X TOGETHER - Deep Down 
+5. SEVENTEEN - Lie Again (v) 
 
-CF_CBF
+CF_CBF 
 
-My Chemical Romance - The Ghost of You
-1. My Chemical Romance - Helena (v)
-2. Fall Out Boy - Thnks fr th Mmrs (v)
-3. blink-182 - Adam's Song (v)
-4. Paramore - Decode (v)
-5. Green Day - 21 Guns (v)
+D.O. - Popcorn
+1. DAY6 - Welcome to the Show 
+2. ECLIPSE - Run Run 
+3. Pagaehun - Play With Me 
+4. EXO-CBX - Paper Cuts 
+5. CHEN - An Unfamiliar Day (v) 
 
-Kings of Leon - Use Somebody
-1. Kings of Leon - Sex on Fire (v)
-2. You Me At Six - Stay With Me (v)
-3. Muse - Resistance (v)
+Bernadya - Satu Bulan
+1. Juicy Luicy - Lantas 
+2. Hal - terima kasih 
+3. Juicy Luicy - Simak 
+4. raissa anggiani - Lagi Lagi (v)
+5. Ariana Grande - intro (end of the world) 
 
-Thirty Seconds to Mars - The Kill
-1. Thirty Seconds To Mars - Attack (v)
-2. Kings of Leon - On Call (v)
+SEVENTEEN - Cheers to youth
+1. Gyubin - Really Like You 
+2. TOMORROW X TOGETHER - 0X1=LOVESONG (I Know I Love You) feat. Seori 
+3. SEVENTEEN - BRING IT (v)
+4. DAY6 - days gone by 
+5. BTS - Telepathy (v)
 """
 
 if __name__ == "__main__":
