@@ -5,7 +5,7 @@ from collections import defaultdict
 def parse_input(data):
     """
     Function to parse the input data string into a structured format.
-    It returns a dictionary where keys are model names and (v)alues are lists of recommendations.
+    It returns a dictionary where keys are model names and values are lists of recommendations.
     """
     model_data = defaultdict(list)
     current_model = None
@@ -87,100 +87,78 @@ def main(data):
 
 # Example input
 data = """
-jang, yang punya korelasi sama musik yang di kirim kemarin kasih (v) ya di belakang
-contoh: 1. artis - judul (v)
+Mode1 - CBF
 
-CBF
+My Chemical Romance - The Ghost of You
+1. Barenaked Ladies - Too Little Too Late (v)
+2. ⁠Rush - Red Barchetta (v)
+3. ⁠The Proclaimers - Then It Comes to Me (v)
 
-Juicy Luicy - Lantas
-1. Juicy Luicy - Lantas (v)
-2. raissa anggiani - Lagi Lagi (v)
-3. Sal Priadi - Bulan Yang Baik 
-4. Donn - Deserve 
-5. Hindia - Evakuasi (v)
+Kings of Leon - Use Somebody
+1. Ty Segall - The Connection Man (v)
+2. ⁠The Cure - Dredd Song (v)
 
-Juicy Luicy - Asing
-1. Rizky Febian - Seperti Kisah (v)
-2. Sunday (1994) - Tired Boy 
-3. Payung Teduh - Di Ujung Malam 
-4. Tulus - Gajah (v)
-5. Juicy Luicy - HAHAHA (v)
-
-HYBS - Ride
-1. HYBS - Ride (v)
-2. Bruno Mars - Our First Time (v)
-3. Ten2Five - You 
-4. Ten2Five - You - 2007 Remaster 
-5. BRIGHT - Moveไปไหน (Unmovable) / Boys Don't Cry 
+Thirty Seconds to Mars - The Kill
+1. Breaking Benjamin - Breath (v)
+2. ⁠The Used - About You (v)
+3. ⁠Good Charlotte - Prayers (v)
+4. ⁠Staind - This Is It (v)
+5. ⁠Puddle of Mudd - Slide Away (v)
 
 CBF_CF
 
-Juicy Luicy - Lantas
-1. Juicy Luicy - Lantas (v)
-2. raissa anggiani - Lagi Lagi (v)
-3. Sal Priadi - Bulan Yang Baik 
-4. Donn - Deserve 
-5. Hindia - Evakuasi (v)
+My Chemical Romance - The Ghost of You
+1. Oasis - Champagne Supernova (v)
+2. ⁠Deftones - Change (v)
+3. ⁠The Killers - Mr Brightside (v)
 
-Juicy Luicy - Asing
-1. Rizky Febian - Seperti Kisah (v)
-2. Sunday (1994) - Tired Boy 
-3. Payung Teduh - Di Ujung Malam 
-4. Tulus - Gajah (v)
-5. Juicy Luicy - HAHAHA (v)
+Kings of Leon - Use Somebody
+1. Deftones - Change (v)
 
-HYBS - Ride
-1. HYBS - Ride (v)
-2. Bruno Mars - Our First Time 
-3. Ten2Five - You 
-4. Ten2Five - You - 2007 Remaster 
-5. BRIGHT - Moveไปไหน (Unmovable) / Boys Don't Cry 
+Thirty Seconds to Mars - The Kill
+1. My Chemical Romance - I'm Not Okay (v)
+2. Sum 41 - With Me (v)
+3. Muse - Hysteria (v)
+4. Good Charlotte - Prayers (v)
+5. Thirty Seconds To Mars - Attack  (v)
 
 CF
 
-Juicy Luicy - Lantas
-1. Yura Yunita - Cinta Dan Rahasia (v)
-2. Ghea Indrawari - Jiwa Yang Bersedih (v)
-3. Ghea Indrawari - Jiwa Yang Bersedih (v)
-4. Yovie Widianto - Mantan Terindah 
-5. Yovie Widianto - Mantan Terindah 
+My Chemical Romance - The Ghost of You
+1. My Chemical Romance - Helena (v)
+2. blink-182 - All The Small Things (v)
+3. Fall Out Boy - Dance, Dance (v)
+4. Paramore - Misery Business (v)
+5. All Time Low - Dear Maria, Count Me In (v)
 
-Juicy Luicy - Asing
-1. Yura Yunita - Cinta Dan Rahasia (v)
-2. Ghea Indrawari - Jiwa Yang Bersedih (v)
-3. Juicy Luicy - Di Balik Layar (v)
-4. Nadin Amizah - Rayuan Perempuan Gila (v)
-5. Jaz - Berdua Bersama (v)
+Kings of Leon - Use Somebody
+1. Kings of Leon - Waste A Moment (v)
+2. The Killers - When You Were Young (v)
 
-HYBS - Ride
-1. Jeff Bernat - This Time 
-2. H.E.R. - Every Kind Of Way (v)
-3. Lauv - I Like Me Better (v)
-4. HYBS - Dancing with my phone (v)
-5. Sleepy Soul - Hazy 
+Thirty Seconds to Mars - The Kill
+1. Fall Out Boy - Sugar, We're Goin Down (v)
+2. Foo Fighters - Everlong (v)
+3. Evanescence - Bring Me To Life (v)
+4. Linkin Park - Numb (v)
+5. Thirty Seconds To Mars - Closer To The Edge (v))
 
 CF_CBF
 
-Juicy Luicy - Lantas
-1. Hindia - Evakuasi (v)
-2. Andmesh - Andaikan Kau Datang - From "Miracle in Cell No. 7" 
-3. Juicy Luicy - Simak (v)
-4. Juicy Luicy - Insya Allah (v)
-5. Feby Putri - Halu 
+My Chemical Romance - The Ghost of You
+1. My Chemical Romance - Helena (v)
+2. Fall Out Boy - Thnks fr th Mmrs (v)
+3. blink-182 - Adam's Song (v)
+4. Paramore - Decode (v)
+5. Green Day - 21 Guns (v)
 
-Juicy Luicy - Asing
-1. Juicy Luicy - HAHAHA (v)
-2. Juicy Luicy - Lagu Nikah (v)
-3. Rizky Febian - Seperti Kisah (v)
-4. Sal Priadi - Mesra-mesraannya kecil-kecilan dulu 
-5. Lord Huron - The Night We Met 
+Kings of Leon - Use Somebody
+1. Kings of Leon - Sex on Fire (v)
+2. You Me At Six - Stay With Me (v)
+3. Muse - Resistance (v)
 
-HYBS - Ride
-1. MIKEY C - Daylight 
-2. Aaliyah - At Your Best (You Are Love) 
-3. Rainlord. - Call Me 
-4. wave to earth - light 
-5. Christina Aguilera - Beautiful
+Thirty Seconds to Mars - The Kill
+1. Thirty Seconds To Mars - Attack (v)
+2. Kings of Leon - On Call (v)
 """
 
 if __name__ == "__main__":
