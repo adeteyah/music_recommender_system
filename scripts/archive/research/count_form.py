@@ -87,93 +87,100 @@ def main(data):
 
 # Example input
 data = """
+dee, yang punya korelasi sama musik yang di kirim kemarin kasih (v) ya di belakang
+contoh: 1. artis - judul (v)
+
 CBF
 
-SONGS RECOMMENDATION: https://open.spotify.com/track/30Z12rJpW0M0u8HMFpigTB Troye Sivan - Angel Baby
-1. https://open.spotify.com/track/2m6Ko3CY1qXNNja8AlugNc Troye Sivan - Angel Baby (v)
-2. https://open.spotify.com/track/0k0SZljUKvFGGnWS3fHaU4 Everything Everything - Big Game (v)
-3. https://open.spotify.com/track/7p8GWclbwHuUxwom7c1oRz SiR - Love You 
-4. https://open.spotify.com/track/6l3vk93IWfe0wq396JTCM6 One Direction - Over Again (v)
-5. https://open.spotify.com/track/7Emma5nwTSZicLLAC7uS1m La Bouche - Say You'll Be Mine 
+ENHYPEN - SHOUT OUT
+1. THEIA - High 
+2. HUH YUNJIN - I ≠ DOLL 
+3. Wanna One - Beautiful (v)
+4. ASTRO - ONE&ONLY 
+5. DAY6 - Afraid 
 
-SONGS RECOMMENDATION: https://open.spotify.com/track/1PfpeMO6uUNGfs3VJOrdGH Henry Moodie - drunk text
-1. https://open.spotify.com/track/6EIMUjQ7Q8Zr2VtIUik4He Henry Moodie - drunk text (v)
-2. https://open.spotify.com/track/0tgVpDi06FyKpA1z0VMD4v Ed Sheeran - Perfect (v)
-3. https://open.spotify.com/track/4BIuY0oEopXizyP3WvkNrT Valley - Oh shit…are we in love? 
-4. https://open.spotify.com/track/4yNk9iz9WVJikRFle3XEvn JVKE - golden hour (v)
-5. https://open.spotify.com/track/7MOCaEUbfGyq1K96umNVwJ Jessie Murph - Pray 
+TREASURE - GOING CRAZY
+1. TOMORROW X TOGETHER - Sugar Rush Ride (v)
+2. Wanna One - Energetic (v)
+3. SUPER JUNIOR - 미인아 Bonamana 
+4. 2PM - Hands Up (v)
+5. Mathilde SPZ - (In Your Mind) I´m Naked 
 
-SONGS RECOMMENDATION: https://open.spotify.com/track/5Ho92lX5GVGgcJSkUA9sPi Wafia - Hurts (feat. Louis The Child & Whethan)
-1. https://open.spotify.com/track/05sp2EySV6DXsKLeBnjaK0 Backstreet Boys - Anywhere for You (v)
-2. https://open.spotify.com/track/4Ay9gCblPwpQBYkw0jpnNE Jennifer Love Hewitt - You (v)
-3. https://open.spotify.com/track/5u2TIRt6MDr1m6xQ9JNYp0 Lily Allen - Sheezus (v)
-4. https://open.spotify.com/track/4jJvCViucp63pJTOgJF0iG Melanie C - Good Enough 
-5. https://open.spotify.com/track/2rbDhOo9Fh61Bbu23T2qCk Lady Gaga - Always Remember Us This Way (v)
+NIKI - High School in Jakarta
+1. NIKI - High School in Jakarta (v)
+2. Susan Carol - Green and Brown 
+3. Raisa - Teka Teki (v)
+4. Isyana Sarasvati - Tetap Dalam Jiwa (v)
+5. Arash Buana - lmao i just broke up 
 
 CBF_CF
 
-SONGS RECOMMENDATION: https://open.spotify.com/track/30Z12rJpW0M0u8HMFpigTB Troye Sivan - Angel Baby
-1. https://open.spotify.com/track/0cc9lgdfHqeS8t9BzbFFmj Dewa - Risalah Hati (v)
-2. https://open.spotify.com/track/0GgN4MhR5GKn5IcKN0e0rG My Chemical Romance - Cancer 
-3. https://open.spotify.com/track/6bE0o9hYUPYlokZIH79oM0 Ari Lasso - Hampa (v)
-4. https://open.spotify.com/track/5h51lTy1jYDDkYLALQrzX9 Pamungkas - Risalah Hati 
-5. https://open.spotify.com/track/0InJPuWIYp8fwlBGIQglLf Maudy Ayunda - Perahu Kertas (v)
+ENHYPEN - SHOUT OUT
+1. THEIA - High 
+2. HUH YUNJIN - I ≠ DOLL 
+3. Wanna One - Beautiful (v)
+4. DAY6 - Afraid 
+5. Stray Kids - DOMINO 
 
-SONGS RECOMMENDATION: https://open.spotify.com/track/68QJLyclURexWWrjTAQMN2 Henry Moodie - drunk text
-1. https://open.spotify.com/track/0tgVpDi06FyKpA1z0VMD4v Ed Sheeran - Perfect (v)
-2. https://open.spotify.com/track/2QdVcmVPIxW826rRJDf58l Ruel - Face To Face 
-3. https://open.spotify.com/track/4yNk9iz9WVJikRFle3XEvn JVKE - golden hour (v)
-4. https://open.spotify.com/track/7MOCaEUbfGyq1K96umNVwJ Jessie Murph - Pray (v)
-5. https://open.spotify.com/track/6EIMUjQ7Q8Zr2VtIUik4He Henry Moodie - drunk text (v)
+TREASURE - GOING CRAZY
+1. TOMORROW X TOGETHER - Sugar Rush Ride (v)
+2. Wanna One - Energetic (v)
+3. SUPER JUNIOR - 미인아 Bonamana 
+4. 2PM - Hands Up (v)
+5. Mathilde SPZ - (In Your Mind) I´m Naked 
 
-SONGS RECOMMENDATION: https://open.spotify.com/track/00cBcYOlnHoXX9ver3cmdE Wafia - Hurts (feat. Louis The Child & Whethan)
-1. https://open.spotify.com/track/3Vi5XqYrmQgOYBajMWSvCi Doja Cat - Need to Know (v)
-2. https://open.spotify.com/track/2rbDhOo9Fh61Bbu23T2qCk Lady Gaga - Always Remember Us This Way (v)
-3. https://open.spotify.com/track/73ucpKq91TuejrLHgzDNHK Rita Ora - Poison (v)
-4. https://open.spotify.com/track/7o9uu2GDtVDr9nsR7ZRN73 Cyndi Lauper - Time After Time (v)
-5. https://open.spotify.com/track/1lkvpmrCaXK8QtliFDcHBO Colbie Caillat - Bubbly (v)
+NIKI - High School in Jakarta
+1. NIKI - High School in Jakarta (v)
+2. Susan Carol - Green and Brown 
+3. Raisa - Teka Teki (v)
+4. Isyana Sarasvati - Tetap Dalam Jiwa (v)
+5. Arash Buana - lmao i just broke up 
 
 CF
 
-SONGS RECOMMENDATION: https://open.spotify.com/track/3wlLknnMtD8yZ0pCtCeeK4 Troye Sivan - Angel Baby
-1. https://open.spotify.com/track/3afkJSKX0EAMsJXTZnDXXJ Troye Sivan - Strawberries & Cigarettes (v)
-2. https://open.spotify.com/track/4HBZA5flZLE435QTztThqH Ariana Grande - Stuck with U (with Justin Bieber) (v)
-3. https://open.spotify.com/track/5O2P9iiztwhomNh8xkR9lJ One Direction - Night Changes (v)
-4. https://open.spotify.com/track/0ClPIeT6MSgfSgQ9ZrJbAq Charlie Puth - Cheating on You (v)
-5. https://open.spotify.com/track/2eAvDnpXP5W0cVtiI0PUxV Ruth B. - Dandelions (v)
+ENHYPEN - SHOUT OUT
+1. ENHYPEN - Chaconne (v)
+2. ENHYPEN - Lucifer 
+3. I-LAND - Calling (Run To You) 
+4. I-LAND - Calling (Run To You) 
+5. Pamungkas - To the Bone (v)
 
-SONGS RECOMMENDATION: https://open.spotify.com/track/0KpWiHVmIFDTvai20likX4 Henry Moodie - drunk text
-1. https://open.spotify.com/track/2tGvwE8GcFKwNdAXMnlbfl Olivia Rodrigo - happier (v)
-2. https://open.spotify.com/track/5ajjAnNRh8bxFvaVHzpPjh Madison Beer - Reckless (v)
-3. https://open.spotify.com/track/5O2P9iiztwhomNh8xkR9lJ One Direction - Night Changes (v)
-4. https://open.spotify.com/track/1daDRI9ahBonbWD8YcxOIB Miley Cyrus - Angels Like You (v)
-5. https://open.spotify.com/track/1ei3hzQmrgealgRKFxIcWn Benson Boone - In The Stars (v)
+TREASURE - GOING CRAZY
+1. NCT 127 - Regular - Korean Version (v)
+2. ENHYPEN - Drunk-Dazed (v)
+3. NCT DREAM - Drippin' (v)
+4. TREASURE - HELLO (v)
+5. NCT 127 - Simon Says (v)
 
-SONGS RECOMMENDATION: https://open.spotify.com/track/30Z12rJpW0M0u8HMFpigTB Wafia - Hurts (feat. Louis The Child & Whethan)
-1. https://open.spotify.com/track/4kL66iksPrNaqzKYlzDgoa Louis The Child - Breaking News (with RAYE) (v)
-2. https://open.spotify.com/track/5YPfFN0EsuvOgisgC4tzBq Whethan - Summer Luv (feat. Crystal Fighters) (v)
-3. https://open.spotify.com/track/3yydZof4pq6N4zeyTzLwQk RAC - Passion 
-4. https://open.spotify.com/track/0qQCWMHz32bQd8gIKc8LFd Elderbrook - Dominoes 
-5. https://open.spotify.com/track/4JiuLIWKkLH2iluzOhXh5Y SG Lewis - Flames (feat. Ruel) (v)
+NIKI - High School in Jakarta
+1. Far East Movement - Freal Luv (feat. Marshmello, Chanyeol & Tinashe) 
+2. Westlife - Uptown Girl - Radio Edit 
+3. NewJeans - Super Shy (v)
+4. NIKI - Nightcrawlers 
+5. Mr. Big - Wild World - 2009 Remastered Version 
 
 CF_CBF
 
-SONGS RECOMMENDATION: https://open.spotify.com/track/3wlLknnMtD8yZ0pCtCeeK4 Troye Sivan - Angel Baby
-1. https://open.spotify.com/track/3afkJSKX0EAMsJXTZnDXXJ Troye Sivan - Strawberries & Cigarettes (v)
-2. https://open.spotify.com/track/2uEJanMvnA1dXgX1ASnPQm Charlie Puth - One Call Away (v)
-2. https://open.spotify.com/track/0KpWiHVmIFDTvai20likX4 Henry Moodie - drunk text (v)
+ENHYPEN - SHOUT OUT
+1. ENHYPEN - Forget Me Not 
+2. ENHYPEN - Outro : Cross the Line 
+3. Dreamcatcher - Silent Night 
+4. Dreamcatcher - Trap 
+5. Skinny Brown - No! Go Back (Feat. Han Yo Han) 
 
-SONGS RECOMMENDATION: https://open.spotify.com/track/0KpWiHVmIFDTvai20likX4 Henry Moodie - drunk text
-1. https://open.spotify.com/track/1ei3hzQmrgealgRKFxIcWn Benson Boone - In The Stars (v)
-2. https://open.spotify.com/track/5iKyrrKFZ9zHbW0mpW18GA Henry Moodie - closure (v)
-3. https://open.spotify.com/track/30Z12rJpW0M0u8HMFpigTB Wafia - Hurts (feat. Louis The Child & Whethan) (v)
+TREASURE - GOING CRAZY
+1. TOMORROW X TOGETHER - Sugar Rush Ride (v)
+2. IVE - After LIKE (v)
+3. aespa - YEPPI YEPPI 
+4. Red Velvet - Red Flavor (v)
+5. XODIAC - SPECIAL LOVE 
 
-SONGS RECOMMENDATION: https://open.spotify.com/track/30Z12rJpW0M0u8HMFpigTB Wafia - Hurts (feat. Louis The Child & Whethan)
-1. https://open.spotify.com/track/7Ga9ZSdPAcQXQvd1ObVFpm Galantis - Holy Water (v)
-2. https://open.spotify.com/track/0kEzNFvi5ZOlwn6ly5DR8i Doja Cat - Boss Bitch 
-3. https://open.spotify.com/track/7JHdotEeGSIbtFuo4dVvsC Alesso - In The Middle (v)
-4. https://open.spotify.com/track/5ZZrcH8ZMuCWCxGoWoyjey Robyn - Missing U (v)
-5. https://open.spotify.com/track/7qXRE8SYTVU74cUdBgFSvt Jax Jones - This is Real (v)
+NIKI - High School in Jakarta
+1. NIKI - Milk Teeth 
+2. NIKI - Milk Teeth 
+3. Carly Rae Jepsen - Call Me Maybe 
+4. Taylor Swift - How You Get The Girl 
+5. Rex Orange County - THE SHADE (v)
 """
 
 if __name__ == "__main__":
