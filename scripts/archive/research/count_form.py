@@ -87,97 +87,105 @@ def main(data):
 
 # Example input
 data = """
+dapp, yang punya korelasi sama musik yang di kirim kemarin kasih (v) ya di belakang
+contoh: 1. artis - judul (v)
+
 CBF
 
-Input: Sabrina Carpenter - Espresso
-1. Doja Cat - Rules 
-2. Dominic Fike - Chicken Tenders 
-3. Diskoria - Balada Insan Muda  (v)
-4. RÜFÜS DU SOL - You Were Right 
-5. 5 Seconds of Summer - BLENDER 
+NIKI - Take A Chance With Me
+1. NIKI - Take A Chance With Me (v)
+2. Faime - Feels Like You (v)
+3. NIKI - Pools 
+4. Nadhif Basalamah - Something More 
+5. Arash Buana - say you're done with me 
 
-Input: Mahalini - Mati-Matian
-1. Glenn Fredly - Kisah Yang Salah  (v)
-2. Peterpan - Semua Tentang Kita (v) 
-3. Fourtwnty - Nyanyian Surau 
-4. Mahalini - Sisa Rasa  (v)
-5. Kahitna - Takkan Terganti 
+John Denver - Take Me Home, Country Roads - Original Version
+1. Carpenters - I Won't Last A Day Without You 
+2. GoldFord - Walk With Me 
+3. Tom Petty and the Heartbreakers - Into The Great Wide Open 
+4. Nadya Fatira - Penyendiri 
+5. Raisa - Kali Kedua - Acoustic 
 
-Input: Sabrina Carpenter - Please Please Please
-1. TLC - Unpretty 
-2. Super 7 - BFF - Sahabat 
-3. MALIQ & D'Essentials - Yang Pertama  (v)
-4. Tokyo Tea Room - Half the Man 
-5. もさを。 - 恋色 
+Kendrick Lamar - Not Like Us
+1. Blu DeTiger - Cotton Candy Lemonade 
+2. Joey Bada$$ - FOR MY PEOPLE 
+3. J. Cole - No Role Modelz (v)
+4. Powfu - The Story of the Paper Boy 
+5. Ella Mai - My Way 
 
 CBF_CF
 
-Input: Sabrina Carpenter - Espresso
-1. Taylor Swift - Cruel Summer  (v)
-2. One Direction - Right Now 
-3. The 1975 - It's Not Living (If It's Not With You) 
-4. Sheila On 7 - Seberapa Pantas  (v)
-5. Conan Gray - Wish You Were Sober 
+NIKI - Take A Chance With Me
+1. NIKI - Take A Chance With Me 
+2. Faime - Feels Like You 
+3. Nadhif Basalamah - Something More 
+4. Arash Buana - say you're done with me (v)
+5. Ebony Loren - For The Best 
 
-Input: Mahalini - Mati-Matian
-1. Dewa - Risalah Hati 
-2. Ari Lasso - Hampa 
-3. Pamungkas - One Only  (v)
-4. Aziz Hedra - Somebody's Pleasure  (v)
-5. RAN - Dekat Di Hati  (v)
+John Denver - Take Me Home, Country Roads - Original Version
+1. Carpenters - I Won't Last A Day Without You 
+2. GoldFord - Walk With Me 
+3. Tom Petty and the Heartbreakers - Into The Great Wide Open 
+4. Nadya Fatira - Penyendiri 
+5. HAECHAN - Good Person (2022) 
 
-Input: Sabrina Carpenter - Please Please Please
-1. Taylor Swift - Cruel Summer  (v)
-2. Ed Sheeran - Perfect 
-3. Pamungkas - To the Bone  (v)
-4. Conan Gray - Memories 
-5. Sheila On 7 - Seberapa Pantas  (v)
+Kendrick Lamar - Not Like Us
+1. Blu DeTiger - Cotton Candy Lemonade 
+2. Joey Bada$$ - FOR MY PEOPLE 
+3. J. Cole - No Role Modelz 
+4. Powfu - The Story of the Paper Boy 
+5. Ella Mai - My Way 
 
 CF
 
-Input: Sabrina Carpenter - Espresso
-1. Billie Eilish - BIRDS OF A FEATHER 
-2. SZA - Saturn 
-3. Sabrina Carpenter - Feather 
-4. Tate McRae - greedy 
-5. Hozier - Too Sweet 
+NIKI - Take A Chance With Me
+1. NIKI - Plot Twist (v)
+2. NIKI - Plot Twist 
+3. Al James - Atin-Atin Lang 
+4. Calein - Umaasa 
+5. PinkPantheress - Nineteen 
 
-Input: Mahalini - Mati-Matian
-1. Mahalini - Bawa Dia Kembali  (v)
-2. Tiara Andini - Janji Setia 
-3. Yovie & Nuno - Tanpa Cinta 
-4. Juicy Luicy - Tampar  (v)
-5. Lyodra - Tak Dianggap  (v)
+John Denver - Take Me Home, Country Roads - Original Version
+1. Float - Pulang 
+2. Hank Locklin - Please Help Me, I'm Falling 
+3. Kings of Convenience - Homesick 
+4. Captain & Tennille - Do That To Me One More Time 
+5. Ed Sheeran - Photograph (v)
 
-Input: Sabrina Carpenter - Please Please Please
-1. Billie Eilish - BIRDS OF A FEATHER 
-2. SZA - Saturn 
-3. Tate McRae - greedy  (v)
-4. Sabrina Carpenter - Feather  (v)
-5. Charli xcx - 360 
+Kendrick Lamar - Not Like Us
+1. Pop Smoke - What You Know Bout Love 
+2. Drake - Passionfruit 
+3. Rick Ross - Champagne Moments 
+4. Yeat - Poppin 
+5. Lil Tecca - LOT OF ME 
 
 CF_CBF
 
-Input: Sabrina Carpenter - Espresso
-1. Sabrina Carpenter - Feather (v)
-2. Taylor Swift - Cruel Summer (v) 
-3. Ariana Grande - the boy is mine (v) 
-4. Harry Styles - As It Was  (v)
-5. The Chainsmokers - Closer  (v)
+NIKI - Take A Chance With Me
+1. NIKI - urs 
+2. NIKI - Oceans & Engines 
+3. The Cranberries - Linger 
+4. Taylor Swift - Guilty as Sin? 
+5. Henry Moodie - drunk text 
 
-Input: Mahalini - Mati-Matian
-1. Mahalini - Bawa Dia Kembali  (v)
-2. Tiara Andini - Janji Setia  (v)
-3. Lyodra - Tak Dianggap  (v)
-4. Juicy Luicy - Lantas  (v)
-5. Vionita - Dia Masa Lalumu, Aku Masa Depanmu  (v)
+John Denver - Take Me Home, Country Roads - Original Version
+1. ABBA - One Of Us 
+2. iKON - RHYTHM TA 
+3. Led Zeppelin - Stairway to Heaven - Remaster 
+4. Foreigner - I Want to Know What Love Is - 1999 Remaster 
+5. Wham! - Wake Me Up Before You Go-Go 
 
-Input: Sabrina Carpenter - Please Please Please
-1. Sabrina Carpenter - Feather  (v)
-2. Ariana Grande - the boy is mine  (v)
-3. Taylor Swift - Cruel Summer  (v)
-4. Olivia Rodrigo - get him back! 
-5. Harry Styles - As It Was (v)
+Kendrick Lamar - Not Like Us
+1. J. Cole - No Role Modelz 
+2. Mustard - Parking Lot 
+3. Offset - Ric Flair Drip (& Metro Boomin) 
+4. Mustard - Parking Lot 
+5. SZA - Nobody Gets Me
+
+Kendrik lamar - not like us
+1. Kendrik Lamar -Not like us (v)
+2. ⁠john denver - take me home (v)
+3. ⁠ Niki - take a chance (v)
 """
 
 if __name__ == "__main__":
