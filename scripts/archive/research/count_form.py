@@ -87,97 +87,96 @@ def main(data):
 
 # Example input
 data = """
-CBF 
+CBF
 
-D.O. - Popcorn
-1. D.O. - Popcorn (v)
-2. SHINee - Sleepless Night 
-3. BOL4 - My Trouble (v)
-4. Eric Nam - Before the Sunset 
-5. MINNIE - Like A Dream 
+Yuuri - ドライフラワー
+1. Yuuri - ドライフラワー (v)
+2. Ado - ドライフラワー (v)
+3. Tani Yuuki - Aikotoba (v)
+4. Tani Yuuki - 愛言葉 (v)
+5. ONE OK ROCK - We Are (v)
 
-Bernadya - Satu Bulan
-1. Sal Priadi - Bulan Yang Baik (v)
-2. Chrisye - Seperti Yang Kau Minta 
-3. Angga Candra - Sedihku (Sekecewa Itu 2) 
-4. Tulus - Ingkar (v)
-5. raissa anggiani - Lagi Lagi (v) 
+Lee Mujin - Traffic light
+1. KyoungSeo - 120BPM (v)
+2. CHEEZE - Mood Indigo 
+3. Lee Mujin - Propose (v)
+4. BIG Naughty - IMFP 
+5. DAY6 (Even of Day) - so this is love 
 
-SEVENTEEN - Cheers to youth
-1. TRI.BE - LORO 
-2. AKMU - Be With You 
-3. NCT 127 - Elevator (127F) (v)
-4. George Ezra - Blame It on Me 
-5. Apink - Be Myself 
+Ed Sheeran - Galway Girl
+1. Citra Scholastika - Pasti Bisa 
+2. NewJeans - Hype Boy 
+3. Ariana Grande - Focus (v)
+4. Vance Joy - Saturday Sun (v)
+5. Pierce The Veil - Floral & Fading 
 
-CBF_CF 
+CBF_CF
 
-D.O. - Popcorn
-1. D.O. - Popcorn (v)
-2. SHINee - Sleepless Night 
-3. BOL4 - My Trouble (v)
-4. Eric Nam - Before the Sunset 
-5. MINNIE - Like A Dream 
+Yuuri - ドライフラワー
+1. Yuuri - ドライフラワー (v)
+2. Ado - ドライフラワー (v)
+3. Tani Yuuki - Aikotoba (v)
+4. Tani Yuuki - 愛言葉 (v)
+5. ONE OK ROCK - We Are (v)
 
-Bernadya - Satu Bulan
-1. Sal Priadi - Bulan Yang Baik 
-2. Angga Candra - Sedihku (Sekecewa Itu 2) 
-3. Tulus - Ingkar (v)
-4. raissa anggiani - Lagi Lagi (v)
-5. Andmesh - Andaikan Kau Datang - From "Miracle in Cell No. 7" 
+Lee Mujin - Traffic light(v)
+1. KyoungSeo - 120BPM (v)
+2. CHEEZE - Mood Indigo 
+3. Lee Mujin - Propose (v)
+4. BIG Naughty - IMFP 
+5. DAY6 (Even of Day) - so this is love 
 
-SEVENTEEN - Cheers to youth
-1. TRI.BE - LORO 
-2. AKMU - Be With You (v)
-3. George Ezra - Blame It on Me 
-4. Apink - Be Myself 
-5. LE SSERAFIM - FEARLESS (2023 Ver.) (v) 
+Ed Sheeran - Galway Girl 
+1. Citra Scholastika - Pasti Bisa 
+2. NewJeans - Hype Boy 
+3. Ariana Grande - Focus (v)
+4. Vance Joy - Saturday Sun (v)
+5. Pierce The Veil - Floral & Fading 
 
-CF 
+CF
 
-D.O. - Popcorn
-1. BIG Naughty - IMFP 
-2. EXO - Sweet Lies (v)
-3. Jimmy Brown - Let Me Know 
-4. D.O. - That's okay (v)
-5. EXO - Miracles in December (v) 
+Yuuri - ドライフラワー
+1. SPITZ - 空も飛べるはず 
+2. Mrs. GREEN APPLE - Magic (v)
+3. Little by Little - 悲しみをやさしさに (v)
+4. fromis_9 - Love Me Back 
+5. CHiCO with HoneyWorks - 世界は恋に落ちている 
 
-Bernadya - Satu Bulan
-1. Boyz II Men - On Bended Knee 
-2. raissa anggiani - Losing Us. (v)
-3. Mocca - I Remember - 2017 Version (v)
-4. Nadin Amizah - Beranjak Dewasa (v)
-5. Hanin Dhiya - Biar Waktu Hapus Sedihku 
+Lee Mujin - Traffic light
+1. Lee Sun Hee - Beautiful Landscape (v)
+2. Lee Mujin - Episode (v)
+3. PATEKO - It's Gone 
+4. Lee Mujin - No MBTI 
+5. iKON - LOVE SCENARIO 
 
-SEVENTEEN - Cheers to youth
-1. BSS - The Reasons of My Smiles (v)
-2. ENHYPEN - XO (Only If You Say Yes) 
-3. SEVENTEEN - Anyone (v)
-4. TOMORROW X TOGETHER - Deep Down 
-5. SEVENTEEN - Lie Again (v) 
+Ed Sheeran - Galway Girl
+1. Jonas Blue - Perfect Strangers (v)
+2. Taylor Swift - Love Story (Taylor’s Version) (v)
+3. Sean Kingston - Eenie Meenie (v)
+4. Carly Rae Jepsen - I Really Like You (v)
+5. ZAYN - PILLOWTALK 
 
-CF_CBF 
+CF_CBF
 
-D.O. - Popcorn
-1. DAY6 - Welcome to the Show 
-2. ECLIPSE - Run Run 
-3. Pagaehun - Play With Me 
-4. EXO-CBX - Paper Cuts 
-5. CHEN - An Unfamiliar Day (v) 
+Yuuri - ドライフラワー
+1. Mrs. GREEN APPLE - ライラック (v)
+2. RADWIMPS - Confession (v)
+3. Sukima Switch - 奏(かなで) 
+2. Lee Mujin - Traffic light (v)
 
-Bernadya - Satu Bulan
-1. Juicy Luicy - Lantas 
-2. Hal - terima kasih 
-3. Juicy Luicy - Simak 
-4. raissa anggiani - Lagi Lagi (v)
-5. Ariana Grande - intro (end of the world) 
+Lee Mujin - Traffic light
+1. Lee Mujin - Propose (v)
+2. Lee Mujin - When it snows(Feat.Heize) (v)
+3. Alessia Cara - Scars To Your Beautiful 
+4. BLACKPINK - PLAYING WITH FIRE 
+5. Jay Park - All I Wanna Do (K) (Feat. Hoody & Loco) 
 
-SEVENTEEN - Cheers to youth
-1. Gyubin - Really Like You 
-2. TOMORROW X TOGETHER - 0X1=LOVESONG (I Know I Love You) feat. Seori 
-3. SEVENTEEN - BRING IT (v)
-4. DAY6 - days gone by 
-5. BTS - Telepathy (v)
+Ed Sheeran - Galway Girl
+1. Ed Sheeran - Drunk (v)
+2. Ed Sheeran - Barcelona (v)
+3. Kygo - It Ain't Me (with Selena Gomez) (v)
+4. The Chainsmokers - Paris 
+5. Justin Bieber - Love Yourself (v)
 """
 
 if __name__ == "__main__":
