@@ -89,88 +89,81 @@ def main(data):
 data = """
 CBF
 
-Input: Linkin Park - Leave Out All The Rest
-1. Linkin Park - Leave Out All The Rest (v)
-2. James - Getting Away With It (All Messed Up) 
-3. Barasuara - Bahas Bahasa 
-4. SafetySuit - These Times (v)
-5. DIIV - Taker 
+Avenged Sevenfold - Save Me
+1. Atreyu - Becoming the Bull 
+2. Linkin Park - From the Inside (v)
+3. Evanescence - Everybody's Fool (v)
+4. Evanescence - Bring Me To Life 
+5. Mötley Crüe - Shout At The Devil 
 
-Input: ヨルシカ - 春ひさぎ
-1. ONE OK ROCK - Outta Sight (v)
-2. Hikaru Utada - Simple And Clean 
-3. TOKYO CITYPOP CANDY - Just You and I 
-4. LiSA - シルシ (v)
-5. ZONE - secret base ～君がくれたもの～ (v)
+Kendrick Lamar - Not Like Us
+1. Blu DeTiger - Cotton Candy Lemonade 
+2. Joey Bada$$ - FOR MY PEOPLE (v)
+3. J. Cole - No Role Modelz(v) 
+4. Powfu - The Story of the Paper Boy (v)
+5. Ella Mai - My Way 
 
-Input: Linkin Park - Leave Out All The Rest
-1. Linkin Park - Leave Out All The Rest (v)
-2. James - Getting Away With It (All Messed Up) 
-3. Barasuara - Bahas Bahasa 
-4. SafetySuit - These Times (v)
-5. DIIV - Taker 
+Travis Scott - MY EYES
+1. Savanna Leigh - unfamiliar (v)
+2. Fressivoir - Summer Fever 
+3. Cati Landry - Riptide 
+4. Trippie Redd - Love Scars (v)
+5. Kodie Osborne - People Change 
 
 CBF_CF
 
-Input: Linkin Park - Leave Out All The Rest
-1. The 1975 - Robbers 
-2. Dewa - Risalah Hati (v)
-3. Ari Lasso - Hampa (v)
-4. The Neighbourhood - You Get Me So High 
-5. Paramore - The Only Exception 
+Avenged Sevenfold - Save Me
+1. Atreyu - Becoming the Bull 
+2. Linkin Park - From the Inside (v)
+3. Evanescence - Everybody's Fool (v)
+4. Evanescence - Bring Me To Life 
+5. Mötley Crüe - Shout At The Devil 
 
-Input: ヨルシカ - 春ひさぎ
-1. YOASOBI - あの夢をなぞって (v)
-2. ヨルシカ - 言って。 (v)
-3. Aimer - 残響散歌 (v)
-4. King Gnu - SPECIALZ 
-5. Yuuri - ベテルギウス (v)
+Kendrick Lamar - Not Like Us
+1. Blu DeTiger - Cotton Candy Lemonade 
+2. Joey Bada$$ - FOR MY PEOPLE (v)
+3. J. Cole - No Role Modelz (v)
+4. Powfu - The Story of the Paper Boy (v)
+5. Ella Mai - My Way 
 
-Input: Linkin Park - Leave Out All The Rest
-1. The 1975 - Robbers 
-2. Dewa - Risalah Hati (v)
-3. Ari Lasso - Hampa (v)
-4. The Neighbourhood - You Get Me So High 
-5. Paramore - The Only Exception 
+Travis Scott - MY EYES
+1. Savanna Leigh - unfamiliar (v)
+2. Fressivoir - Summer Fever 
+3. Cati Landry - Riptide 
+4. Trippie Redd - Love Scars (v)
+5. Kodie Osborne - People Change 
 
 CF
 
-Input: Linkin Park - Leave Out All The Rest
-1. Linkin Park - Shadow of the Day (v)
-2. The Red Jumpsuit Apparatus - Your Guardian Angel 
-3. Kings of Leon - Use Somebody 
-4. Green Day - Wake Me up When September Ends (v)
-5. My Chemical Romance - Cancer (v)
+Kendrick Lamar - Not Like Us
+1. Metro Boomin - Trance (with Travis Scott & Young Thug) (v)
+2. Juice WRLD - Let Me Know (I Wonder Why Freestyle) (v)
+3. Lil Baby - Drip Too Hard (Lil Baby & Gunna) 
+4. Future - All to Myself 
+5. Future - Young Metro (v)
 
-Input: ヨルシカ - 春ひさぎ
-3. Linkin Park - Leave Out All The Rest 
-
-Input: Linkin Park - Leave Out All The Rest
-1. Linkin Park - Shadow of the Day (v)
-2. The Red Jumpsuit Apparatus - Your Guardian Angel 
-3. Kings of Leon - Use Somebody 
-4. Green Day - Wake Me up When September Ends (v)
-5. My Chemical Romance - Cancer (v)
+Travis Scott - MY EYES
+1. XXXTENTACION - FUXK (feat. Ski Mask the Slump God) (v)
+2. Metro Boomin - Trance (with Travis Scott & Young Thug) (v)
+3. Juice WRLD - Let Me Know (I Wonder Why Freestyle) (v)
+4. Lil Baby - Drip Too Hard (Lil Baby & Gunna) 
+5. Future - All to Myself 
 
 CF_CBF
 
-Input: Linkin Park - Leave Out All The Rest
-1. Linkin Park - Shadow of the Day (v)
-2. 3 Doors Down - Be Like That 
-3. Alter Bridge - In Loving Memory 
-4. Creed - One Last Breath (v)
-5. Slipknot - Snuff 
+Kendrick Lamar - Not Like Us
+1. J. Cole - No Role Modelz (v)
+2. Mustard - Parking Lot (v)
+3. Offset - Ric Flair Drip (& Metro Boomin) 
+4. Mustard - Parking Lot 
+5. SZA - Nobody Gets Me 
 
-Input: ヨルシカ - 春ひさぎ
-1. ヨルシカ - 藍二乗 (v)
-3. Linkin Park - Leave Out All The Rest 
-
-Input: Linkin Park - Leave Out All The Rest
-1. Linkin Park - Shadow of the Day (v)
-2. 3 Doors Down - Be Like That 
-3. Alter Bridge - In Loving Memory 
-4. Creed - One Last Breath (v)
-5. Slipknot - Snuff
+Travis Scott - MY EYES
+1. Travis Scott - I KNOW ? (v)
+2. Travis Scott - way back (v)
+3. Metro Boomin - Trance (with Travis Scott & Young Thug) 
+4. Lil Baby - Freestyle 
+5. Kanye West - Praise God
 """
 
 if __name__ == "__main__":
