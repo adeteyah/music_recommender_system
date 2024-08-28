@@ -87,100 +87,100 @@ def main(data):
 
 # Example input
 data = """
-dapp, yang punya korelasi sama musik yang di kirim kemarin kasih (v) ya di belakang
+xenn, yang punya korelasi sama musik yang di kirim kemarin kasih (v) ya di belakang
 contoh: 1. artis - judul (v)
 
 CBF
 
-NIKI - Take A Chance With Me
-1. NIKI - Take A Chance With Me (v)
-2. Faime - Feels Like You (v)
-3. NIKI - Pools 
-4. Nadhif Basalamah - Something More 
-5. Arash Buana - say you're done with me 
+Aimer - カタオモイ
+1. Aimer - カタオモイ (v)
+2. Vaundy - 東京フラッシュ 
+3. 이경섭 - Title 허밍 
+4. eldon - Pink cheeks 
+5. ヨルシカ - ブレーメン 
 
-John Denver - Take Me Home, Country Roads - Original Version
-1. Carpenters - I Won't Last A Day Without You 
-2. GoldFord - Walk With Me 
-3. Tom Petty and the Heartbreakers - Into The Great Wide Open 
-4. Nadya Fatira - Penyendiri 
-5. Raisa - Kali Kedua - Acoustic 
+Juicy Luicy - Jemari
+1. HAECHAN - Good Person (2022) 
+2. Nadya Fatira - Penyendiri 
+3. Raisa - Kali Kedua - Acoustic 
+4. Katie - Yang Telah Merelakanmu X Jaga Selalu Hatimu 
+5. Slank - Terbunuh Sepi 
 
-Kendrick Lamar - Not Like Us
-1. Blu DeTiger - Cotton Candy Lemonade 
-2. Joey Bada$$ - FOR MY PEOPLE 
-3. J. Cole - No Role Modelz (v)
-4. Powfu - The Story of the Paper Boy 
-5. Ella Mai - My Way 
+Lewis Capaldi - Before You Go
+1. Lewis Capaldi - Before You Go (v)
+2. Hawthorne Heights - Niki Fm 
+3. Ada Band - Yang Terbaik Bagimu 
+4. Ada Band - Yang Terbaik Bagimu - Jangan Lupakan Ayah 
+5. Rex Orange County - Apricot Princess 
 
 CBF_CF
 
-NIKI - Take A Chance With Me
-1. NIKI - Take A Chance With Me 
-2. Faime - Feels Like You 
-3. Nadhif Basalamah - Something More 
-4. Arash Buana - say you're done with me (v)
-5. Ebony Loren - For The Best 
+Aimer - カタオモイ
+1. Aimer - カタオモイ (v)
+2. Vaundy - 東京フラッシュ 
+3. 이경섭 - Title 허밍 
+4. eldon - Pink cheeks 
+5. ヨルシカ - ブレーメン 
 
-John Denver - Take Me Home, Country Roads - Original Version
-1. Carpenters - I Won't Last A Day Without You 
-2. GoldFord - Walk With Me 
-3. Tom Petty and the Heartbreakers - Into The Great Wide Open 
-4. Nadya Fatira - Penyendiri 
-5. HAECHAN - Good Person (2022) 
+Juicy Luicy - Jemari
+1. HAECHAN - Good Person (2022) 
+2. Nadya Fatira - Penyendiri 
+3. Katie - Yang Telah Merelakanmu X Jaga Selalu Hatimu 
+4. Slank - Terbunuh Sepi 
+5. Dere - Rumah 
 
-Kendrick Lamar - Not Like Us
-1. Blu DeTiger - Cotton Candy Lemonade 
-2. Joey Bada$$ - FOR MY PEOPLE 
-3. J. Cole - No Role Modelz 
-4. Powfu - The Story of the Paper Boy 
-5. Ella Mai - My Way 
+Lewis Capaldi - Before You Go
+1. Lewis Capaldi - Before You Go (v)
+2. Hawthorne Heights - Niki Fm 
+3. Ada Band - Yang Terbaik Bagimu 
+4. Ada Band - Yang Terbaik Bagimu - Jangan Lupakan Ayah 
+5. Rex Orange County - Apricot Princess 
 
 CF
 
-NIKI - Take A Chance With Me
-1. NIKI - Plot Twist (v)
-2. NIKI - Plot Twist 
-3. Al James - Atin-Atin Lang 
-4. Calein - Umaasa 
-5. PinkPantheress - Nineteen 
+Aimer - カタオモイ
+1. ヨルシカ - 花に亡霊 
+2. Yuuri - ミズキリ-piano ver.- 
+3. Motohiro Hata - ひまわりの約束 (v)
+4. YOASOBI - たぶん (v)
+5. Yuuri - レオ 
 
-John Denver - Take Me Home, Country Roads - Original Version
-1. Float - Pulang 
-2. Hank Locklin - Please Help Me, I'm Falling 
-3. Kings of Convenience - Homesick 
-4. Captain & Tennille - Do That To Me One More Time 
-5. Ed Sheeran - Photograph (v)
+Juicy Luicy - Jemari
+1. Hindia - Setengah Tahun Ini 
+2. Juicy Luicy - Tanpa Tergesa (v) 
+3. Lalahuta - 1 2 3 
+4. Hindia - Besok Mungkin Kita Sampai 
+5. Yovie Widianto - Mantan Terindah 
 
-Kendrick Lamar - Not Like Us
-1. Pop Smoke - What You Know Bout Love 
-2. Drake - Passionfruit 
-3. Rick Ross - Champagne Moments 
-4. Yeat - Poppin 
-5. Lil Tecca - LOT OF ME 
+Lewis Capaldi - Before You Go
+1. James Arthur - Say You Won't Let Go (v)
+2. Freddie Mercury - Love Me Like There's No Tomorrow - Special Edition 
+3. Maroon 5 - Memories (v)
+4. Sam Smith - Stay With Me (v)
+5. Maroon 5 - Memories (v)
 
 CF_CBF
 
-NIKI - Take A Chance With Me
-1. NIKI - urs 
-2. NIKI - Oceans & Engines 
-3. The Cranberries - Linger 
-4. Taylor Swift - Guilty as Sin? 
-5. Henry Moodie - drunk text 
+Aimer - カタオモイ
+1. Fujii Kaze - Matsuri (v)
+2. Ado - ギラギラ 
+3. Mrs. GREEN APPLE - 私は最強 
+4. Tate McRae - stupid 
+5. Daoko - 打上花火 
 
-John Denver - Take Me Home, Country Roads - Original Version
-1. ABBA - One Of Us 
-2. iKON - RHYTHM TA 
-3. Led Zeppelin - Stairway to Heaven - Remaster 
-4. Foreigner - I Want to Know What Love Is - 1999 Remaster 
-5. Wham! - Wake Me Up Before You Go-Go 
+Juicy Luicy - Jemari
+1. Juicy Luicy - Kembali Kesepian 
+2. Juicy Luicy - H-5 
+3. Rossa - Aku Bukan Untukmu 
+4. Fatin - Salahkah Aku Terlalu Mencintaimu 
+3. Lewis Capaldi - Before You Go (v)
 
-Kendrick Lamar - Not Like Us
-1. J. Cole - No Role Modelz 
-2. Mustard - Parking Lot 
-1. Kendrik Lamar -Not like us (v)
-2. ⁠john denver - take me home (v)
-3. ⁠ Niki - take a chance (v)
+Lewis Capaldi - Before You Go
+1. Lewis Capaldi - Bruises 
+2. Conan Gray - Memories (v)
+3. Niall Horan - This Town (v)
+4. Bazzi - Why 
+5. Lana Del Rey - Summertime Sadness (v)
 """
 
 if __name__ == "__main__":
