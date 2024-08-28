@@ -89,95 +89,95 @@ def main(data):
 data = """
 CBF
 
-mitei - excuses for losing touch
-1. Naomi Scott - Speechless (Full) 
-2. American Authors - Deep Water - Acoustic 
-3. Cavetown - Home 
-4. Shawn Mendes - Use Somebody - Recorded at Spotify Studios NYC 
-5. Our Story - Kisah Kelam 
+The Weeknd - Call Out My Name
+1. Glee Cast - I'll Stand By You (Glee Cast Version) 
+2. Jeon Sang Keun - Love is 
+3. Nancy Ajram - Baddi Hada Hebbou 
+4. Cocteau Twins - Cico Buff 
+5. Jung Yong Hwa - Because I Miss You (Band Ver.) (v)
 
-Bring Me The Horizon - DiE4u
-1. Hollywood Undead - Coming Home 
-2. Bloc Party - This Modern Love 
-3. A Day To Remember - All I Want 
-4. Bring Me The Horizon - Avalanche (v)
-5. Florence + The Machine - Heavy In Your Arms 
+The Weeknd - One Of The Girls (with JENNIE, Lily Rose Depp)
+1. Joji - XNXX 
+2. Olivia O'Brien - Josslyn 
+3. Trey Songz - Use Somebody - Unplugged 
+4. Keenan Nasution - Nuansa Bening 
+5. ASTRO - Stay With Me (v)
 
-Porter Robinson - Get Your Wish
-1. Madeon - Be Fine (v)
-2. Alison Wonderland - Church 
-3. WHENSDAY - Alright 
-4. Madeon - No Fear No More
-5. Switch - Angels We Have Heard On High 
+The Weeknd - Popular (with Playboi Carti & Madonna) - From The Idol Vol. 1 (Music from the HBO Original Series)
+1. RAN - Selamat Pagi (v)
+2. Kero Kero Bonito - Sick Beat 
+3. Matta - Jambu (Janjimu Busuk) (v)
+4. Ruby - Leih Beydary Keda 
+5. BTS - Anpanman 
 
 CBF_CF
 
-mitei - excuses for losing touch
-1. Naomi Scott - Speechless (Full) 
-2. American Authors - Deep Water - Acoustic 
-3. Cavetown - Home 
-4. Shawn Mendes - Use Somebody - Recorded at Spotify Studios NYC 
-5. Our Story - Kisah Kelam 
+The Weeknd - Call Out My Name
+1. Glee Cast - I'll Stand By You (Glee Cast Version) 
+2. Jeon Sang Keun - Love is 
+3. Nancy Ajram - Baddi Hada Hebbou 
+4. Cocteau Twins - Cico Buff 
+5. Jung Yong Hwa - Because I Miss You (Band Ver.) (v)
 
-Bring Me The Horizon - DiE4u
-1. Hollywood Undead - Coming Home 
-2. Bloc Party - This Modern Love 
-3. A Day To Remember - All I Want 
-4. Bring Me The Horizon - Avalanche (v) 
-5. Florence + The Machine - Heavy In Your Arms 
+The Weeknd - One Of The Girls (with JENNIE, Lily Rose Depp)
+1. Joji - XNXX (v)
+2. Olivia O'Brien - Josslyn 
+3. Trey Songz - Use Somebody - Unplugged 
+4. Keenan Nasution - Nuansa Bening 
+5. ASTRO - Stay With Me 
 
-Porter Robinson - Get Your Wish
-1. Madeon - Be Fine (v)
-2. Alison Wonderland - Church 
-3. WHENSDAY - Alright 
-4. Madeon - No Fear No More 
-5. Switch - Angels We Have Heard On High 
+The Weeknd - Popular (with Playboi Carti & Madonna) - From The Idol Vol. 1 (Music from the HBO Original Series)
+1. RAN - Selamat Pagi (v)
+2. Kero Kero Bonito - Sick Beat 
+3. Matta - Jambu (Janjimu Busuk) (v)
+4. Ruby - Leih Beydary Keda 
+5. ITZY - Cheshire 
 
 CF
 
-mitei - excuses for losing touch
-1. a r u k a. - caustics (v)
-2. D'art- - Paper cup telephone (v)
-3. a r u k a. - smells like earth (v)
-4. Neck Deep - Empty House 
-5. Kogane - Around You - lalanoi Remix (v)
+The Weeknd - Call Out My Name
+1. The Weeknd - Wicked Games (v) 
+2. Ariana Grande - Into You (v)
+3. Ariana Grande - 34+35 (v)
+4. Conan Gray - Memories 
+5. Conan Gray - Memories 
 
-Bring Me The Horizon - DiE4u
-1. MIKA - Yo Yo 
-2. Trevor Daniel - Falling (feat. blackbear) - blackbear Remix 
-3. Call Me Karizma - I Fell in Love with My Best Friend 
-4. Gotye - Somebody That I Used To Know 
-5. Taylor Swift - Wildest Dreams 
+The Weeknd - One Of The Girls (with JENNIE, Lily Rose Depp)
+1. The Weeknd - Wicked Games (v) 
+2. Sabrina Carpenter - Espresso (v)
+3. Taylor Swift - Style (v)
+4. Taylor Swift - Blank Space (v)
+5. Lana Del Rey - Brooklyn Baby 
 
-Porter Robinson - Get Your Wish
-1. Porter Robinson - Lionhearted (v)
-2. Lucas & Steve - I Want It All 
-3. Bag Raiders - Shooting Stars 
-4. Clean Bandit - Rather Be (feat. Jess Glynne) 
-5. Mat Zo - Easy - Extended Remix 
+The Weeknd - Popular (with Playboi Carti & Madonna) - From The Idol Vol. 1 (Music from the HBO Original Series)
+1. Sabrina Carpenter - Please Please Please (v)
+2. Lana Del Rey - Brooklyn Baby 
+3. The Chainsmokers - Closer 
+4. Coldplay - A Sky Full of Stars (v)
+5. Taylor Swift - Fearless (v)(Taylor’s Version) 
 
 CF_CBF
 
-mitei - excuses for losing touch
-1. D'art- - Paper cup telephone (v)
-2. small house in spain - tether weight ₊˚✧•° .* (v)
-3. N33T - jellyfish (v)
-4. phritz - look at the sky (v)
-2. Bring Me The Horizon - DiE4u 
+The Weeknd - Call Out My Name
+1. The Weeknd - Is There Someone Else? (V)
+2. The Weeknd - Die For You (v)
+3. Ariana Grande - Dangerous Woman (v)
+4. Bruno Mars - That's What I Like (v)
+5. Adele - Someone Like You (v)
 
-Bring Me The Horizon - DiE4u
-1. Bring Me The Horizon - Avalanche (v)
-2. Bring Me The Horizon - Avalanche (v)
-3. Hollywood Undead - Coming Home 
-4. AFI - Twisted Tongues (v)
-5. Daughtry - Heavy Is The Crown (v)
+The Weeknd - One Of The Girls (with JENNIE, Lily Rose Depp)
+1. Arctic Monkeys - Do I Wanna Know? (V)
+2. The Neighbourhood - Daddy Issues 
+3. Eminem - Mockingbird (v)
+4. Kanye West - Runaway 
+5. Quavo - Tough 
 
-Porter Robinson - Get Your Wish
-1. Porter Robinson - Goodbye To A World (v)
-2. Porter Robinson - Polygon Dust (v)
-3. Madeon - The Prince 
-4. Madeon - Be Fine (v)
-5. Martin Garrix - There For You - Lione Remix
+The Weeknd - Popular (with Playboi Carti & Madonna) - From The Idol Vol. 1 (Music from the HBO Original Series)
+1. The Weeknd - Pray For Me (with Kendrick Lamar) (v)
+2. Metro Boomin - Creepin' (with The Weeknd & 21 Savage) (v)
+3. Ombre2Choc Remix - Unforgettable - Remix 
+4. Chase Atlantic - Falling 
+5. Lil Mosey - Blueberry Faygo
 """
 
 if __name__ == "__main__":
