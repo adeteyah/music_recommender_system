@@ -87,83 +87,100 @@ def main(data):
 
 # Example input
 data = """
+jang, yang punya korelasi sama musik yang di kirim kemarin kasih (v) ya di belakang
+contoh: 1. artis - judul (v)
+
 CBF
 
-Avenged Sevenfold - Save Me
-1. Atreyu - Becoming the Bull 
-2. Linkin Park - From the Inside (v)
-3. Evanescence - Everybody's Fool (v)
-4. Evanescence - Bring Me To Life 
-5. Mötley Crüe - Shout At The Devil 
+Juicy Luicy - Lantas
+1. Juicy Luicy - Lantas v
+2. raissa anggiani - Lagi Lagi v
+3. Sal Priadi - Bulan Yang Baik 
+4. Donn - Deserve 
+5. Hindia - Evakuasi v
 
-Kendrick Lamar - Not Like Us
-1. Blu DeTiger - Cotton Candy Lemonade 
-2. Joey Bada$$ - FOR MY PEOPLE (v)
-3. J. Cole - No Role Modelz(v) 
-4. Powfu - The Story of the Paper Boy (v)
-5. Ella Mai - My Way 
+Juicy Luicy - Asing
+1. Rizky Febian - Seperti Kisah v
+2. Sunday (1994) - Tired Boy 
+3. Payung Teduh - Di Ujung Malam 
+4. Tulus - Gajah v
+5. Juicy Luicy - HAHAHA v
 
-Travis Scott - MY EYES
-1. Savanna Leigh - unfamiliar (v)
-2. Fressivoir - Summer Fever 
-3. Cati Landry - Riptide 
-4. Trippie Redd - Love Scars (v)
-5. Kodie Osborne - People Change 
+HYBS - Ride
+1. HYBS - Ride v
+2. Bruno Mars - Our First Time v
+3. Ten2Five - You 
+4. Ten2Five - You - 2007 Remaster 
+5. BRIGHT - Moveไปไหน (Unmovable) / Boys Don't Cry 
 
 CBF_CF
 
-Avenged Sevenfold - Save Me
-1. Atreyu - Becoming the Bull 
-2. Linkin Park - From the Inside (v)
-3. Evanescence - Everybody's Fool (v)
-4. Evanescence - Bring Me To Life 
-5. Mötley Crüe - Shout At The Devil 
+Juicy Luicy - Lantas
+1. Juicy Luicy - Lantas v
+2. raissa anggiani - Lagi Lagi v
+3. Sal Priadi - Bulan Yang Baik 
+4. Donn - Deserve 
+5. Hindia - Evakuasi v
 
-Kendrick Lamar - Not Like Us
-1. Blu DeTiger - Cotton Candy Lemonade 
-2. Joey Bada$$ - FOR MY PEOPLE (v)
-3. J. Cole - No Role Modelz (v)
-4. Powfu - The Story of the Paper Boy (v)
-5. Ella Mai - My Way 
+Juicy Luicy - Asing
+1. Rizky Febian - Seperti Kisah v
+2. Sunday (1994) - Tired Boy 
+3. Payung Teduh - Di Ujung Malam 
+4. Tulus - Gajah v
+5. Juicy Luicy - HAHAHA v
 
-Travis Scott - MY EYES
-1. Savanna Leigh - unfamiliar (v)
-2. Fressivoir - Summer Fever 
-3. Cati Landry - Riptide 
-4. Trippie Redd - Love Scars (v)
-5. Kodie Osborne - People Change 
+HYBS - Ride
+1. HYBS - Ride v
+2. Bruno Mars - Our First Time 
+3. Ten2Five - You 
+4. Ten2Five - You - 2007 Remaster 
+5. BRIGHT - Moveไปไหน (Unmovable) / Boys Don't Cry 
 
 CF
 
-Kendrick Lamar - Not Like Us
-1. Metro Boomin - Trance (with Travis Scott & Young Thug) (v)
-2. Juice WRLD - Let Me Know (I Wonder Why Freestyle) (v)
-3. Lil Baby - Drip Too Hard (Lil Baby & Gunna) 
-4. Future - All to Myself 
-5. Future - Young Metro (v)
+Juicy Luicy - Lantas
+1. Yura Yunita - Cinta Dan Rahasia v
+2. Ghea Indrawari - Jiwa Yang Bersedih v
+3. Ghea Indrawari - Jiwa Yang Bersedih v
+4. Yovie Widianto - Mantan Terindah 
+5. Yovie Widianto - Mantan Terindah 
 
-Travis Scott - MY EYES
-1. XXXTENTACION - FUXK (feat. Ski Mask the Slump God) (v)
-2. Metro Boomin - Trance (with Travis Scott & Young Thug) (v)
-3. Juice WRLD - Let Me Know (I Wonder Why Freestyle) (v)
-4. Lil Baby - Drip Too Hard (Lil Baby & Gunna) 
-5. Future - All to Myself 
+Juicy Luicy - Asing
+1. Yura Yunita - Cinta Dan Rahasia v
+2. Ghea Indrawari - Jiwa Yang Bersedih v
+3. Juicy Luicy - Di Balik Layar v
+4. Nadin Amizah - Rayuan Perempuan Gila v
+5. Jaz - Berdua Bersama v
+
+HYBS - Ride
+1. Jeff Bernat - This Time 
+2. H.E.R. - Every Kind Of Way v
+3. Lauv - I Like Me Better v
+4. HYBS - Dancing with my phone v
+5. Sleepy Soul - Hazy 
 
 CF_CBF
 
-Kendrick Lamar - Not Like Us
-1. J. Cole - No Role Modelz (v)
-2. Mustard - Parking Lot (v)
-3. Offset - Ric Flair Drip (& Metro Boomin) 
-4. Mustard - Parking Lot 
-5. SZA - Nobody Gets Me 
+Juicy Luicy - Lantas
+1. Hindia - Evakuasi v
+2. Andmesh - Andaikan Kau Datang - From "Miracle in Cell No. 7" 
+3. Juicy Luicy - Simak v
+4. Juicy Luicy - Insya Allah v
+5. Feby Putri - Halu 
 
-Travis Scott - MY EYES
-1. Travis Scott - I KNOW ? (v)
-2. Travis Scott - way back (v)
-3. Metro Boomin - Trance (with Travis Scott & Young Thug) 
-4. Lil Baby - Freestyle 
-5. Kanye West - Praise God
+Juicy Luicy - Asing
+1. Juicy Luicy - HAHAHA v
+2. Juicy Luicy - Lagu Nikah v
+3. Rizky Febian - Seperti Kisah v
+4. Sal Priadi - Mesra-mesraannya kecil-kecilan dulu 
+5. Lord Huron - The Night We Met 
+
+HYBS - Ride
+1. MIKEY C - Daylight 
+2. Aaliyah - At Your Best (You Are Love) 
+3. Rainlord. - Call Me 
+4. wave to earth - light 
+5. Christina Aguilera - Beautiful
 """
 
 if __name__ == "__main__":
