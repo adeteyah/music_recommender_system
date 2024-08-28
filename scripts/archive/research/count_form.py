@@ -5,7 +5,7 @@ from collections import defaultdict
 def parse_input(data):
     """
     Function to parse the input data string into a structured format.
-    It returns a dictionary where keys are model names and values are lists of recommendations.
+    It returns a dictionary where keys are model names and (v)alues are lists of recommendations.
     """
     model_data = defaultdict(list)
     current_model = None
@@ -93,22 +93,22 @@ contoh: 1. artis - judul (v)
 CBF
 
 Juicy Luicy - Lantas
-1. Juicy Luicy - Lantas v
-2. raissa anggiani - Lagi Lagi v
+1. Juicy Luicy - Lantas (v)
+2. raissa anggiani - Lagi Lagi (v)
 3. Sal Priadi - Bulan Yang Baik 
 4. Donn - Deserve 
-5. Hindia - Evakuasi v
+5. Hindia - Evakuasi (v)
 
 Juicy Luicy - Asing
-1. Rizky Febian - Seperti Kisah v
+1. Rizky Febian - Seperti Kisah (v)
 2. Sunday (1994) - Tired Boy 
 3. Payung Teduh - Di Ujung Malam 
-4. Tulus - Gajah v
-5. Juicy Luicy - HAHAHA v
+4. Tulus - Gajah (v)
+5. Juicy Luicy - HAHAHA (v)
 
 HYBS - Ride
-1. HYBS - Ride v
-2. Bruno Mars - Our First Time v
+1. HYBS - Ride (v)
+2. Bruno Mars - Our First Time (v)
 3. Ten2Five - You 
 4. Ten2Five - You - 2007 Remaster 
 5. BRIGHT - Moveไปไหน (Unmovable) / Boys Don't Cry 
@@ -116,21 +116,21 @@ HYBS - Ride
 CBF_CF
 
 Juicy Luicy - Lantas
-1. Juicy Luicy - Lantas v
-2. raissa anggiani - Lagi Lagi v
+1. Juicy Luicy - Lantas (v)
+2. raissa anggiani - Lagi Lagi (v)
 3. Sal Priadi - Bulan Yang Baik 
 4. Donn - Deserve 
-5. Hindia - Evakuasi v
+5. Hindia - Evakuasi (v)
 
 Juicy Luicy - Asing
-1. Rizky Febian - Seperti Kisah v
+1. Rizky Febian - Seperti Kisah (v)
 2. Sunday (1994) - Tired Boy 
 3. Payung Teduh - Di Ujung Malam 
-4. Tulus - Gajah v
-5. Juicy Luicy - HAHAHA v
+4. Tulus - Gajah (v)
+5. Juicy Luicy - HAHAHA (v)
 
 HYBS - Ride
-1. HYBS - Ride v
+1. HYBS - Ride (v)
 2. Bruno Mars - Our First Time 
 3. Ten2Five - You 
 4. Ten2Five - You - 2007 Remaster 
@@ -139,39 +139,39 @@ HYBS - Ride
 CF
 
 Juicy Luicy - Lantas
-1. Yura Yunita - Cinta Dan Rahasia v
-2. Ghea Indrawari - Jiwa Yang Bersedih v
-3. Ghea Indrawari - Jiwa Yang Bersedih v
+1. Yura Yunita - Cinta Dan Rahasia (v)
+2. Ghea Indrawari - Jiwa Yang Bersedih (v)
+3. Ghea Indrawari - Jiwa Yang Bersedih (v)
 4. Yovie Widianto - Mantan Terindah 
 5. Yovie Widianto - Mantan Terindah 
 
 Juicy Luicy - Asing
-1. Yura Yunita - Cinta Dan Rahasia v
-2. Ghea Indrawari - Jiwa Yang Bersedih v
-3. Juicy Luicy - Di Balik Layar v
-4. Nadin Amizah - Rayuan Perempuan Gila v
-5. Jaz - Berdua Bersama v
+1. Yura Yunita - Cinta Dan Rahasia (v)
+2. Ghea Indrawari - Jiwa Yang Bersedih (v)
+3. Juicy Luicy - Di Balik Layar (v)
+4. Nadin Amizah - Rayuan Perempuan Gila (v)
+5. Jaz - Berdua Bersama (v)
 
 HYBS - Ride
 1. Jeff Bernat - This Time 
-2. H.E.R. - Every Kind Of Way v
-3. Lauv - I Like Me Better v
-4. HYBS - Dancing with my phone v
+2. H.E.R. - Every Kind Of Way (v)
+3. Lauv - I Like Me Better (v)
+4. HYBS - Dancing with my phone (v)
 5. Sleepy Soul - Hazy 
 
 CF_CBF
 
 Juicy Luicy - Lantas
-1. Hindia - Evakuasi v
+1. Hindia - Evakuasi (v)
 2. Andmesh - Andaikan Kau Datang - From "Miracle in Cell No. 7" 
-3. Juicy Luicy - Simak v
-4. Juicy Luicy - Insya Allah v
+3. Juicy Luicy - Simak (v)
+4. Juicy Luicy - Insya Allah (v)
 5. Feby Putri - Halu 
 
 Juicy Luicy - Asing
-1. Juicy Luicy - HAHAHA v
-2. Juicy Luicy - Lagu Nikah v
-3. Rizky Febian - Seperti Kisah v
+1. Juicy Luicy - HAHAHA (v)
+2. Juicy Luicy - Lagu Nikah (v)
+3. Rizky Febian - Seperti Kisah (v)
 4. Sal Priadi - Mesra-mesraannya kecil-kecilan dulu 
 5. Lord Huron - The Night We Met 
 
