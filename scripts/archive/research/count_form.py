@@ -87,87 +87,90 @@ def main(data):
 
 # Example input
 data = """
-
 CBF
 
-Dhika Fawaz - Hilmira
-1. Dimas M - Sekarang Hingga Nanti Kita Tua 
-2. Hanin Dhiya - Pupus (v) 
-3. Nathaniel Constantin - Why Can't I 
+Input: Linkin Park - Leave Out All The Rest
+1. Linkin Park - Leave Out All The Rest (v)
+2. James - Getting Away With It (All Messed Up) 
+3. Barasuara - Bahas Bahasa 
+4. SafetySuit - These Times (v)
+5. DIIV - Taker 
 
-Mocca - Let Me Go
-1. Theresia Margaretha Gultom - Tanah Airku 
-2. Arash Buana - i'll be friend's with you - phone recorded (v) 
-3. Mikha Angelo - Amateur (v) 
-4. Yura Yunita - Tutur Batin (v) 
-5. Sal Priadi - Episode 
+Input: ヨルシカ - 春ひさぎ
+1. ONE OK ROCK - Outta Sight (v)
+2. Hikaru Utada - Simple And Clean 
+3. TOKYO CITYPOP CANDY - Just You and I 
+4. LiSA - シルシ (v)
+5. ZONE - secret base ～君がくれたもの～ (v)
 
-Endah N Rhesa - Wish You Were Here
-1. Liv Harland - What a Lie 
-2. Elephant Kind - Something Better (v) 
-3. Danilla - Wahai Kau 
-4. Tarasinta - Summer in France 
-5. Rendy Pandugo - Hampir Sempurna (v) 
+Input: Linkin Park - Leave Out All The Rest
+1. Linkin Park - Leave Out All The Rest (v)
+2. James - Getting Away With It (All Messed Up) 
+3. Barasuara - Bahas Bahasa 
+4. SafetySuit - These Times (v)
+5. DIIV - Taker 
 
 CBF_CF
 
-Dhika Fawaz - Hilmira
-1. Dimas M - Sekarang Hingga Nanti Kita Tua 
-2. Hanin Dhiya - Pupus (v) 
-3. Nathaniel Constantin - Why Can't I 
-4. Mikha Angelo - Amateur 
-5. Chrisye - Kisah Kasih Di Sekolah 
+Input: Linkin Park - Leave Out All The Rest
+1. The 1975 - Robbers 
+2. Dewa - Risalah Hati (v)
+3. Ari Lasso - Hampa (v)
+4. The Neighbourhood - You Get Me So High 
+5. Paramore - The Only Exception 
 
-Mocca - Let Me Go
-1. Theresia Margaretha Gultom - Tanah Airku 
-2. Arash Buana - i'll be friend's with you - phone recorded (v) 
-3. Mikha Angelo - Amateur (v) 
-4. Yura Yunita - Tutur Batin (v) 
-5. Sal Priadi - Episode 
+Input: ヨルシカ - 春ひさぎ
+1. YOASOBI - あの夢をなぞって (v)
+2. ヨルシカ - 言って。 (v)
+3. Aimer - 残響散歌 (v)
+4. King Gnu - SPECIALZ 
+5. Yuuri - ベテルギウス (v)
 
-Endah N Rhesa - Wish You Were Here
-1. Liv Harland - What a Lie 
-2. Elephant Kind - Something Better (v) 
-3. Danilla - Wahai Kau 
-4. Tarasinta - Summer in France 
-5. Rendy Pandugo - Hampir Sempurna (v)
+Input: Linkin Park - Leave Out All The Rest
+1. The 1975 - Robbers 
+2. Dewa - Risalah Hati (v)
+3. Ari Lasso - Hampa (v)
+4. The Neighbourhood - You Get Me So High 
+5. Paramore - The Only Exception 
 
 CF
 
-Dhika Fawaz - Hilmira
-1. Tulus - Teman Hidup 
-2. Hindia - Evaluasi (Reprise) 
-3. Tulus - Hati-Hati di Jalan (v)
-4. Nadin Amizah - Taruh (v)
-5. Feby Putri - Halu (v)
+Input: Linkin Park - Leave Out All The Rest
+1. Linkin Park - Shadow of the Day (v)
+2. The Red Jumpsuit Apparatus - Your Guardian Angel 
+3. Kings of Leon - Use Somebody 
+4. Green Day - Wake Me up When September Ends (v)
+5. My Chemical Romance - Cancer (v)
 
-Mocca - Let Me Go
-1. Deredia - Kisah Mencari Seorang Raja 
-2. Vira Talisa - He's Got Me Singing Again 
-3. Danilla - Reste Avec Moi (v)
-4. Mocca - Ketika Semua Telah Berakhir (v)
-5. Isyana Sarasvati - Luruh (v)
+Input: ヨルシカ - 春ひさぎ
+3. Linkin Park - Leave Out All The Rest 
 
-Endah N Rhesa - Wish You Were Here
-1. Endah N Rhesa - Ssslow (v)
-2. Danilla - Reste Avec Moi (v)
-3. Kunto Aji - Rehat 
-4. Kunto Aji - Rehat 
-5. Daramuda - Growing Up (Rara Sekar) 
+Input: Linkin Park - Leave Out All The Rest
+1. Linkin Park - Shadow of the Day (v)
+2. The Red Jumpsuit Apparatus - Your Guardian Angel 
+3. Kings of Leon - Use Somebody 
+4. Green Day - Wake Me up When September Ends (v)
+5. My Chemical Romance - Cancer (v)
 
 CF_CBF
 
-Dhika Fawaz - Hilmira
-1. Rendy Pandugo - By My Side 
-2. Mocca - Let Me Go (v)
+Input: Linkin Park - Leave Out All The Rest
+1. Linkin Park - Shadow of the Day (v)
+2. 3 Doors Down - Be Like That 
+3. Alter Bridge - In Loving Memory 
+4. Creed - One Last Breath (v)
+5. Slipknot - Snuff 
 
-Mocca - Let Me Go
-3. Endah N Rhesa - Wish You Were Here (v) 
+Input: ヨルシカ - 春ひさぎ
+1. ヨルシカ - 藍二乗 (v)
+3. Linkin Park - Leave Out All The Rest 
 
-Endah N Rhesa - Wish You Were Here
-1. Figura Renata - Hingga Tenang 
-2. Matter Halo - Travel (v)
-3. Danilla - Wahai Kau (v)
+Input: Linkin Park - Leave Out All The Rest
+1. Linkin Park - Shadow of the Day (v)
+2. 3 Doors Down - Be Like That 
+3. Alter Bridge - In Loving Memory 
+4. Creed - One Last Breath (v)
+5. Slipknot - Snuff
 """
 
 if __name__ == "__main__":
