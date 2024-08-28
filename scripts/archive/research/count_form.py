@@ -87,93 +87,87 @@ def main(data):
 
 # Example input
 data = """
+
 CBF
 
-SadBoyProlific - Dead and Cold
-1. SadBoyProlific - Dead and Cold (v)
-2. Josh A - Pain 
-3. Happily Sad - Why Am I Still Here 
-4. Kuzu Mellow - Interstellar 
-5. Zach Farache - Sweeterman 
+Dhika Fawaz - Hilmira
+1. Dimas M - Sekarang Hingga Nanti Kita Tua 
+2. Hanin Dhiya - Pupus (v) 
+3. Nathaniel Constantin - Why Can't I 
 
-Radiohead - No Surprises
-1. Radiohead - No Surprises (v) 
-2. Franz Ferdinand - Eleanor Put Your Boots On 
-3. Meat Loaf - I'd Do Anything For Love (But I Won't Do That) - Live From The Beacon Theatre, New York, U.S.A./1995 
-4. Ari Lasso - Perbedaan 
-5. Local Natives - Mt. Washington 
+Mocca - Let Me Go
+1. Theresia Margaretha Gultom - Tanah Airku 
+2. Arash Buana - i'll be friend's with you - phone recorded (v) 
+3. Mikha Angelo - Amateur (v) 
+4. Yura Yunita - Tutur Batin (v) 
+5. Sal Priadi - Episode 
 
-Cigarettes After Sex - K.
-1. Jirapah - Matahari 
-2. Slowdive - When the Sun Hits 
-3. Cigarettes After Sex - Apocalypse (v)
-4. my bloody valentine - only tomorrow 
-5. Spiritualized - Step into the Breeze 
+Endah N Rhesa - Wish You Were Here
+1. Liv Harland - What a Lie 
+2. Elephant Kind - Something Better (v) 
+3. Danilla - Wahai Kau 
+4. Tarasinta - Summer in France 
+5. Rendy Pandugo - Hampir Sempurna (v) 
 
 CBF_CF
 
-SadBoyProlific - Dead and Cold
-1. SadBoyProlific - Dead and Cold (v)
-2. Josh A - Pain 
-3. Happily Sad - Why Am I Still Here 
-4. Kuzu Mellow - Interstellar 
-5. Zach Farache - Sweeterman 
+Dhika Fawaz - Hilmira
+1. Dimas M - Sekarang Hingga Nanti Kita Tua 
+2. Hanin Dhiya - Pupus (v) 
+3. Nathaniel Constantin - Why Can't I 
+4. Mikha Angelo - Amateur 
+5. Chrisye - Kisah Kasih Di Sekolah 
 
-Radiohead - No Surprises
-1. Radiohead - No Surprises (v)
-2. Franz Ferdinand - Eleanor Put Your Boots On 
-3. Meat Loaf - I'd Do Anything For Love (But I Won't Do That) - Live From The Beacon Theatre, New York, U.S.A./1995 
-4. Ari Lasso - Perbedaan 
-5. Local Natives - Mt. Washington 
+Mocca - Let Me Go
+1. Theresia Margaretha Gultom - Tanah Airku 
+2. Arash Buana - i'll be friend's with you - phone recorded (v) 
+3. Mikha Angelo - Amateur (v) 
+4. Yura Yunita - Tutur Batin (v) 
+5. Sal Priadi - Episode 
 
-Cigarettes After Sex - K.
-1. Jirapah - Matahari 
-2. Slowdive - When the Sun Hits 
-3. Cigarettes After Sex - Apocalypse (v)
-4. my bloody valentine - only tomorrow 
-5. Spiritualized - Step into the Breeze 
+Endah N Rhesa - Wish You Were Here
+1. Liv Harland - What a Lie 
+2. Elephant Kind - Something Better (v) 
+3. Danilla - Wahai Kau 
+4. Tarasinta - Summer in France 
+5. Rendy Pandugo - Hampir Sempurna (v)
 
 CF
 
-SadBoyProlific - Dead and Cold
-1. Blai$y - World Without You 
-2. Kina - Baby You're Worth It (v)
-3. Dibyo - Come Thru 
-4. Timmies - Loosing Interest 
-5. Mishaal Tamer - Kid Goku 
+Dhika Fawaz - Hilmira
+1. Tulus - Teman Hidup 
+2. Hindia - Evaluasi (Reprise) 
+3. Tulus - Hati-Hati di Jalan (v)
+4. Nadin Amizah - Taruh (v)
+5. Feby Putri - Halu (v)
 
-Radiohead - No Surprises
-1. Kane Strang - Two Hearts and No Brain 
-2. BUBBLE TEA AND CIGARETTES - 5AM Empanada with You 
-3. Yahya - keepyousafe 
-4. Radiohead - High And Dry 
-5. Radiohead - High and Dry 
+Mocca - Let Me Go
+1. Deredia - Kisah Mencari Seorang Raja 
+2. Vira Talisa - He's Got Me Singing Again 
+3. Danilla - Reste Avec Moi (v)
+4. Mocca - Ketika Semua Telah Berakhir (v)
+5. Isyana Sarasvati - Luruh (v)
 
-Cigarettes After Sex - K.
-1. Luthfi Aulia - Langit Favorit 
-2. Cigarettes After Sex - Silver Sable 
-3. Kodaline - Moving On 
-4. Cigarettes After Sex - Tejano Blue 
-5. Yahya - keepyousafe 
+Endah N Rhesa - Wish You Were Here
+1. Endah N Rhesa - Ssslow (v)
+2. Danilla - Reste Avec Moi (v)
+3. Kunto Aji - Rehat 
+4. Kunto Aji - Rehat 
+5. Daramuda - Growing Up (Rara Sekar) 
 
 CF_CBF
 
-SadBoyProlific - Dead and Cold
-2. Radiohead - No Surprises 
+Dhika Fawaz - Hilmira
+1. Rendy Pandugo - By My Side 
+2. Mocca - Let Me Go (v)
 
-Radiohead - No Surprises
-1. Radiohead - Karma Police 
-2. Radiohead - Pyramid Song 
-3. Cage The Elephant - Rubber Ball - Unpeeled 
-4. John Lennon - Imagine - Remastered 2010 
-5. Oasis - Stop Crying Your Heart Out 
+Mocca - Let Me Go
+3. Endah N Rhesa - Wish You Were Here (v) 
 
-Cigarettes After Sex - K.
-1. Cigarettes After Sex - Apocalypse (v)
-2. Cigarettes After Sex - Sesame Syrup 
-3. Arctic Monkeys - Why'd You Only Call Me When You're High? (v)
-4. Little Mix - Secret Love Song (feat. Jason Derulo) 
-5. Henry Moodie - drunk text
+Endah N Rhesa - Wish You Were Here
+1. Figura Renata - Hingga Tenang 
+2. Matter Halo - Travel (v)
+3. Danilla - Wahai Kau (v)
 """
 
 if __name__ == "__main__":
