@@ -178,11 +178,6 @@ John Denver - Take Me Home, Country Roads - Original Version
 Kendrick Lamar - Not Like Us
 1. J. Cole - No Role Modelz 
 2. Mustard - Parking Lot 
-3. Offset - Ric Flair Drip (& Metro Boomin) 
-4. Mustard - Parking Lot 
-5. SZA - Nobody Gets Me
-
-Kendrik lamar - not like us
 1. Kendrik Lamar -Not like us (v)
 2. ⁠john denver - take me home (v)
 3. ⁠ Niki - take a chance (v)
