@@ -89,95 +89,94 @@ def main(data):
 data = """
 CBF
 
-The Weeknd - Call Out My Name
-1. Glee Cast - I'll Stand By You (Glee Cast Version) 
-2. Jeon Sang Keun - Love is 
-3. Nancy Ajram - Baddi Hada Hebbou 
-4. Cocteau Twins - Cico Buff 
-5. Jung Yong Hwa - Because I Miss You (Band Ver.) (v)
+Lyodra - Tak Selalu Memiliki - Ipar Adalah Maut Original Soundtrack
+1. Orion 001 - Tentram - Original Motion Picture Soundtrack 
+2. Virgoun - Bukti (v)
+3. Ratu - Dear Diary (v)
+4. Ecoutez - Percayalah (v)
+5. Rio Febrian - Aku Bertahan (v)
 
-The Weeknd - One Of The Girls (with JENNIE, Lily Rose Depp)
-1. Joji - XNXX 
-2. Olivia O'Brien - Josslyn 
-3. Trey Songz - Use Somebody - Unplugged 
-4. Keenan Nasution - Nuansa Bening 
-5. ASTRO - Stay With Me (v)
+Sabrina Carpenter - Espresso
+1. With Confidence - Pâquerette (Without Me) (v)
+2. Stand Atlantic - Skinny Dipping (v)
+3. Jacob Sartorius - All My Friends (v)
+4. Apink - Be Myself 
+5. BOL4 - Some 
 
-The Weeknd - Popular (with Playboi Carti & Madonna) - From The Idol Vol. 1 (Music from the HBO Original Series)
-1. RAN - Selamat Pagi (v)
-2. Kero Kero Bonito - Sick Beat 
-3. Matta - Jambu (Janjimu Busuk) (v)
-4. Ruby - Leih Beydary Keda 
-5. BTS - Anpanman 
+Red Velvet - Cosmic
+1. Red Velvet - Color of Love (v)
+2. MONSTA X - If with U 
+3. NCT DOJAEJUNG - Perfume 
+4. IU - Blueming (v)
+5. WINNER - LOVE ME LOVE ME 
 
 CBF_CF
 
-The Weeknd - Call Out My Name
-1. Glee Cast - I'll Stand By You (Glee Cast Version) 
-2. Jeon Sang Keun - Love is 
-3. Nancy Ajram - Baddi Hada Hebbou 
-4. Cocteau Twins - Cico Buff 
-5. Jung Yong Hwa - Because I Miss You (Band Ver.) (v)
+Lyodra - Tak Selalu Memiliki - Ipar Adalah Maut Original Soundtrack
+1. Orion 001 - Tentram - Original Motion Picture Soundtrack 
+2. Virgoun - Bukti  (v)
+3. Ratu - Dear Diary  (v)
+4. Ecoutez - Percayalah  (v)
+5. Rio Febrian - Aku Bertahan  (v)
 
-The Weeknd - One Of The Girls (with JENNIE, Lily Rose Depp)
-1. Joji - XNXX (v)
-2. Olivia O'Brien - Josslyn 
-3. Trey Songz - Use Somebody - Unplugged 
-4. Keenan Nasution - Nuansa Bening 
-5. ASTRO - Stay With Me 
+Sabrina Carpenter - Espresso
+1. With Confidence - Pâquerette (Without Me)  (v)
+2. Stand Atlantic - Skinny Dipping  (v)
+3. Jacob Sartorius - All My Friends  (v)
+4. Apink - Be Myself 
+5. BOL4 - Some 
 
-The Weeknd - Popular (with Playboi Carti & Madonna) - From The Idol Vol. 1 (Music from the HBO Original Series)
-1. RAN - Selamat Pagi (v)
-2. Kero Kero Bonito - Sick Beat 
-3. Matta - Jambu (Janjimu Busuk) (v)
-4. Ruby - Leih Beydary Keda 
-5. ITZY - Cheshire 
+Red Velvet - Cosmic
+1. Red Velvet - Color of Love  (v)
+2. MONSTA X - If with U 
+3. NCT DOJAEJUNG - Perfume 
+4. IU - Blueming  (v)
+5. WINNER - LOVE ME LOVE ME 
 
 CF
 
-The Weeknd - Call Out My Name
-1. The Weeknd - Wicked Games (v) 
-2. Ariana Grande - Into You (v)
-3. Ariana Grande - 34+35 (v)
-4. Conan Gray - Memories 
-5. Conan Gray - Memories 
+Lyodra - Tak Selalu Memiliki - Ipar Adalah Maut Original Soundtrack
+1. Geisha - Karena Kamu  (v)
+2. SAMSONS - Kenangan Terindah  (v)
+3. Vionita - Dia Masa Lalumu, Aku Masa Depanmu (v)
+4. Judika - Putus Atau Terus  (v)
+5. Mahalini - Bohongi Hati  (v)
 
-The Weeknd - One Of The Girls (with JENNIE, Lily Rose Depp)
-1. The Weeknd - Wicked Games (v) 
-2. Sabrina Carpenter - Espresso (v)
-3. Taylor Swift - Style (v)
-4. Taylor Swift - Blank Space (v)
-5. Lana Del Rey - Brooklyn Baby 
+Sabrina Carpenter - Espresso
+1. d4vd - Feel It - From The Original Series “Invincible” (v)
+2. Regard - You (v)
+3. Ruel - Painkiller (v)
+4. Raphael DeLove - The Man Who Can't Be Moved (v)
+5. lovelytheband - broken 
 
-The Weeknd - Popular (with Playboi Carti & Madonna) - From The Idol Vol. 1 (Music from the HBO Original Series)
-1. Sabrina Carpenter - Please Please Please (v)
-2. Lana Del Rey - Brooklyn Baby 
-3. The Chainsmokers - Closer 
-4. Coldplay - A Sky Full of Stars (v)
-5. Taylor Swift - Fearless (v)(Taylor’s Version) 
+Red Velvet - Cosmic
+1. RIIZE - Get A Guitar 
+2. Lim Young Woong - Love Always Run Away 
+3. Kim MinSeok - DrunKen Confession 
+4. TAEYEON - Dream (v)
+5. RIIZE - Love 119 
 
 CF_CBF
 
-The Weeknd - Call Out My Name
-1. The Weeknd - Is There Someone Else? (V)
-2. The Weeknd - Die For You (v)
-3. Ariana Grande - Dangerous Woman (v)
-4. Bruno Mars - That's What I Like (v)
-5. Adele - Someone Like You (v)
+Lyodra - Tak Selalu Memiliki - Ipar Adalah Maut Original Soundtrack
+1. Virgoun - Orang Yang Sama (v)
+2. Yovie & Nuno - Mengejar Mimpi (v)
+3. Afgan - Bukan Cinta Biasa (v)
+4. Afgan - Kamu Yang Kutunggu (v)
+2. Sabrina Carpenter - Espresso 
 
-The Weeknd - One Of The Girls (with JENNIE, Lily Rose Depp)
-1. Arctic Monkeys - Do I Wanna Know? (V)
-2. The Neighbourhood - Daddy Issues 
-3. Eminem - Mockingbird (v)
-4. Kanye West - Runaway 
-5. Quavo - Tough 
+Sabrina Carpenter - Espresso
+1. Taylor Swift - 22 (v)
+2. The Chainsmokers - Something Just Like This (v)
+3. Taylor Swift - Picture To Burn (v)
+4. Sabrina Carpenter - bet u wanna (v)
+5. Ariana Grande - Moonlight (v)
 
-The Weeknd - Popular (with Playboi Carti & Madonna) - From The Idol Vol. 1 (Music from the HBO Original Series)
-1. The Weeknd - Pray For Me (with Kendrick Lamar) (v)
-2. Metro Boomin - Creepin' (with The Weeknd & 21 Savage) (v)
-3. Ombre2Choc Remix - Unforgettable - Remix 
-4. Chase Atlantic - Falling 
-5. Lil Mosey - Blueberry Faygo
+Red Velvet - Cosmic
+1. NewJeans - Attention (v)
+2. NewJeans - Bubble Gum (v)
+3. RIIZE - Siren 
+4. BTS - 봄날 (v)
 """
 
 if __name__ == "__main__":
