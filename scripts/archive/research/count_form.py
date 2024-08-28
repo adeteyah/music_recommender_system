@@ -89,81 +89,95 @@ def main(data):
 data = """
 CBF
 
-Avenged Sevenfold - Save Me
-1. Atreyu - Becoming the Bull 
-2. Linkin Park - From the Inside (v)
-3. Evanescence - Everybody's Fool (v)
-4. Evanescence - Bring Me To Life 
-5. Mötley Crüe - Shout At The Devil 
+SONGS RECOMMENDATION: https://open.spotify.com/track/7ovUcF5uHTBRzUpB6ZOmvt BABYMONSTER - SHEESH
+1. https://open.spotify.com/track/5uTprTAUORprODnl383LKx NCT 127 - Fly Away With Me 
+2. https://open.spotify.com/track/55UNoOCjEO5EvDpmSJQN76 iKON - LONG TIME NO SEE 
+3. https://open.spotify.com/track/30VA0uReR9jKiFU7ddriN6 STAYC - LOVE (v)
+4. https://open.spotify.com/track/2e3cJdJ8xWwydl8JIYlCqB WayV - Love Talk - English Version (v)
+5. https://open.spotify.com/track/6oEf7aR2iXAVbRG76bE9nQ Lone Tusker - Little While 
 
-Kendrick Lamar - Not Like Us
-1. Blu DeTiger - Cotton Candy Lemonade 
-2. Joey Bada$$ - FOR MY PEOPLE (v)
-3. J. Cole - No Role Modelz(v) 
-4. Powfu - The Story of the Paper Boy (v)
-5. Ella Mai - My Way 
+SONGS RECOMMENDATION: https://open.spotify.com/track/0ZSjUIhmsXaa9Vq7DfXCKL aespa - Supernova
+1. https://open.spotify.com/track/2VdSktBqFfkW7y6q5Ik4Z4 aespa - Supernova (v)
+2. https://open.spotify.com/track/3aGqHdZJusdhT3ZzfLRnO7 ITZY - KIDDING ME (v)
+3. https://open.spotify.com/track/6bvZRLLkBKkmgpBJTTj3QK BLACKPINK - How You Like That (v) 
+4. https://open.spotify.com/track/7HGKvoju3ucB7UqVt1GoJu STAYC - YOUNG LUV 
+5. https://open.spotify.com/track/1nMbZ9OsVNSLEyijI80EST TWICE - TT (v)
 
-Travis Scott - MY EYES
-1. Savanna Leigh - unfamiliar (v)
-2. Fressivoir - Summer Fever 
-3. Cati Landry - Riptide 
-4. Trippie Redd - Love Scars (v)
-5. Kodie Osborne - People Change 
+SONGS RECOMMENDATION: https://open.spotify.com/track/7mYwDmbbp8UPLlnRjTJ54X YOASOBI - アイドル
+1. https://open.spotify.com/track/1HHFCfMYMnCXM8T3iofubG Ado - 可愛くてごめん (v)
+2. https://open.spotify.com/track/4Z8WSP6i30vg05WTDyvw0X ヨルシカ - あの夏に咲け 
+3. https://open.spotify.com/track/45Qz90khfSW8AnaH9vNg5j RADWIMPS - 05410-(ん) 
+4. https://open.spotify.com/track/2XpV9sHBexcNrz0Gyf3l18 Ikimonogakari - ブルーバード 
+5. https://open.spotify.com/track/7ntInJEUj7yhOYVFLLKK4t AKB48 - Seventeen
 
 CBF_CF
 
-Avenged Sevenfold - Save Me
-1. Atreyu - Becoming the Bull 
-2. Linkin Park - From the Inside (v)
-3. Evanescence - Everybody's Fool (v)
-4. Evanescence - Bring Me To Life 
-5. Mötley Crüe - Shout At The Devil 
+SONGS RECOMMENDATION: https://open.spotify.com/track/1njlnn8ZKHI77Pe9szIONR BABYMONSTER - SHEESH
+1. https://open.spotify.com/track/0UzymivvUH5s8z4PeWZJaK ENHYPEN - FEVER (v)
+2. https://open.spotify.com/track/4dtmj7X21gunWoQf98hW5L Aisha Retno - W.H.U.T 
+3. https://open.spotify.com/track/6CdUgvL597jWmW4w8P5kHs TAEYEON - Fine 
+4. https://open.spotify.com/track/5xwBIieMMFUmLDgvG4DjFe Stacey Ryan - Fall In Love Alone 
+5. https://open.spotify.com/track/3VBj0lzjmhTzVFPEDOjNCG BABYMONSTER - BATTER UP (v)
 
-Kendrick Lamar - Not Like Us
-1. Blu DeTiger - Cotton Candy Lemonade 
-2. Joey Bada$$ - FOR MY PEOPLE (v)
-3. J. Cole - No Role Modelz (v)
-4. Powfu - The Story of the Paper Boy (v)
-5. Ella Mai - My Way 
+SONGS RECOMMENDATION: https://open.spotify.com/track/18nZWRpJIHzgb1SQr4ncwb aespa - Supernova
+1. https://open.spotify.com/track/65FftemJ1DbbZ45DUfHJXE NewJeans - OMG (v)
+2. https://open.spotify.com/track/0Q5VnK2DYzRyfqQRJuUtvi IVE - LOVE DIVE (v)
+3. https://open.spotify.com/track/618OKP1lBkNJL8uZdNSvQE VIVIZ - MANIAC (vvvvv)
+4. https://open.spotify.com/track/24nK8tW7Pt3Inh2utttuoG MAMAMOO - HIP (v)
+5. https://open.spotify.com/track/1t8sqIScEIP0B4bQzBuI2P (G)I-DLE - MY BAG (v)
 
-Travis Scott - MY EYES
-1. Savanna Leigh - unfamiliar (v)
-2. Fressivoir - Summer Fever 
-3. Cati Landry - Riptide 
-4. Trippie Redd - Love Scars (v)
-5. Kodie Osborne - People Change 
+SONGS RECOMMENDATION: https://open.spotify.com/track/7ovUcF5uHTBRzUpB6ZOmvt YOASOBI - アイドル
+1. https://open.spotify.com/track/2XpV9sHBexcNrz0Gyf3l18 Ikimonogakari - ブルーバード 
+2. https://open.spotify.com/track/2jdbZGFp8KVTuk0YxDNL4l back number - 高嶺の花子さん 
+3. https://open.spotify.com/track/3wJHCry960drNlAUGrJLmz ヨルシカ - ただ君に晴れ 
+4. https://open.spotify.com/track/1zd35Y44Blc1CwwVbW3Qnk YOASOBI - 群青 (v)
+5. https://open.spotify.com/track/45YBVp6zMwQZRbUDcPzmMB Kenshi Yonezu - アイネクライネ (v)
 
 CF
 
-Kendrick Lamar - Not Like Us
-1. Metro Boomin - Trance (with Travis Scott & Young Thug) (v)
-2. Juice WRLD - Let Me Know (I Wonder Why Freestyle) (v)
-3. Lil Baby - Drip Too Hard (Lil Baby & Gunna) 
-4. Future - All to Myself 
-5. Future - Young Metro (v)
+SONGS RECOMMENDATION: https://open.spotify.com/track/1njlnn8ZKHI77Pe9szIONR BABYMONSTER - SHEESH
+1. https://open.spotify.com/track/3VBj0lzjmhTzVFPEDOjNCG BABYMONSTER - BATTER UP (v)
+2. https://open.spotify.com/track/5XWlyfo0kZ8LF7VSyfS4Ew aespa - Drama (v)
+3. https://open.spotify.com/track/1aKvZDoLGkNMxoRYgkckZG ILLIT - Magnetic (v)
+4. https://open.spotify.com/track/0vaxYDAuAO1nPolC6bQp7V KISS OF LIFE - Midas Touch (v)
+5. https://open.spotify.com/track/74X2u8JMVooG2QbjRxXwR8 LE SSERAFIM - Perfect Night (v)
 
-Travis Scott - MY EYES
-1. XXXTENTACION - FUXK (feat. Ski Mask the Slump God) (v)
-2. Metro Boomin - Trance (with Travis Scott & Young Thug) (v)
-3. Juice WRLD - Let Me Know (I Wonder Why Freestyle) (v)
-4. Lil Baby - Drip Too Hard (Lil Baby & Gunna) 
-5. Future - All to Myself 
+SONGS RECOMMENDATION: https://open.spotify.com/track/18nZWRpJIHzgb1SQr4ncwb aespa - Supernova
+1. https://open.spotify.com/track/38tXZcL1gZRfbqfOG0VMTH NewJeans - How Sweet 
+2. https://open.spotify.com/track/5XWlyfo0kZ8LF7VSyfS4Ew aespa - Drama (v)
+3. https://open.spotify.com/track/1aKvZDoLGkNMxoRYgkckZG ILLIT - Magnetic (v)
+4. https://open.spotify.com/track/3VBj0lzjmhTzVFPEDOjNCG BABYMONSTER - BATTER UP (v)
+5. https://open.spotify.com/track/7uyeEbG6hyApgXuEypGcsZ IVE - Baddie 
+
+SONGS RECOMMENDATION: https://open.spotify.com/track/7ovUcF5uHTBRzUpB6ZOmvt YOASOBI - アイドル
+1. https://open.spotify.com/track/3dPtXHP0oXQ4HCWHsOA9js YOASOBI - 夜に駆ける (v)
+2. https://open.spotify.com/track/51oc6MEsXTpnPn6GOw5VuP Fujii Kaze - きらり (v)
+3. https://open.spotify.com/track/0F6nGXMCUbtk8FiXvKi6HK 『ユイカ』 - 好きだから。 
+4. https://open.spotify.com/track/6nqfKM9JvQIiuAuzWZFvGW もさを。 - ぎゅっと。 
+5. https://open.spotify.com/track/2Dzzhb1oV5ckgOjWZLraIB natori - Overdose (v)
 
 CF_CBF
 
-Kendrick Lamar - Not Like Us
-1. J. Cole - No Role Modelz (v)
-2. Mustard - Parking Lot (v)
-3. Offset - Ric Flair Drip (& Metro Boomin) 
-4. Mustard - Parking Lot 
-5. SZA - Nobody Gets Me 
+SONGS RECOMMENDATION: https://open.spotify.com/track/1njlnn8ZKHI77Pe9szIONR BABYMONSTER - SHEESH
+1. https://open.spotify.com/track/3VBj0lzjmhTzVFPEDOjNCG BABYMONSTER - BATTER UP (v)
+2. https://open.spotify.com/track/1aKvZDoLGkNMxoRYgkckZG ILLIT - Magnetic (v)
+3. https://open.spotify.com/track/2O4Bb2WCkjlTPO827OnBMI LE SSERAFIM - EASY (v)
+4. https://open.spotify.com/track/5sdQOyqq2IDhvmx2lHOpwd NewJeans - Super Shy (v)
+5. https://open.spotify.com/track/7uyeEbG6hyApgXuEypGcsZ IVE - Baddie 
 
-Travis Scott - MY EYES
-1. Travis Scott - I KNOW ? (v)
-2. Travis Scott - way back (v)
-3. Metro Boomin - Trance (with Travis Scott & Young Thug) 
-4. Lil Baby - Freestyle 
-5. Kanye West - Praise God
+SONGS RECOMMENDATION: https://open.spotify.com/track/18nZWRpJIHzgb1SQr4ncwb aespa - Supernova
+1. https://open.spotify.com/track/74X2u8JMVooG2QbjRxXwR8 LE SSERAFIM - Perfect Night (v)
+2. https://open.spotify.com/track/7uyeEbG6hyApgXuEypGcsZ IVE - Baddie 
+3. https://open.spotify.com/track/6zZWoHlF2zNSLUNLvx4GUl aespa - Better Things (v)
+4. https://open.spotify.com/track/34pKV56b6d7Nz1l6av1nZ1 (G)I-DLE - I Want That (v)
+5. https://open.spotify.com/track/3v5o91PrUtf0nmO6j8J7dZ XG - LEFT RIGHT (v)
+
+SONGS RECOMMENDATION: https://open.spotify.com/track/7ovUcF5uHTBRzUpB6ZOmvt YOASOBI - アイドル
+1. https://open.spotify.com/track/1zd35Y44Blc1CwwVbW3Qnk YOASOBI - 群青 (v)
+2. https://open.spotify.com/track/5Yiwmn4PZAzVAms9UDICU2 物語シリーズ - 白金ディスコ 
+3. https://open.spotify.com/track/7GoPAWftpQzN8euEs2mgM6 Tani Yuuki - おかえり 
+4. https://open.spotify.com/track/10zz9RZt9DnqcxNWksRNrx Vaundy - 怪獣の花唄 
+5. https://open.spotify.com/track/4NaaF28BeO9WzjDrSS71Nz Mrs. GREEN APPLE - ダンスホール
 """
 
 if __name__ == "__main__":
