@@ -89,94 +89,89 @@ def main(data):
 data = """
 CBF
 
-Lyodra - Tak Selalu Memiliki - Ipar Adalah Maut Original Soundtrack
-1. Orion 001 - Tentram - Original Motion Picture Soundtrack 
-2. Virgoun - Bukti (v)
-3. Ratu - Dear Diary (v)
-4. Ecoutez - Percayalah (v)
-5. Rio Febrian - Aku Bertahan (v)
+Doja Cat - Agora Hills
+1. Daya - Insomnia (v)
+2. Ofenbach - Be Mine 
+3. Michael Bublé - Everything 
+4. Isyana Sarasvati - Cinta Pertama 
+5. Kaskade - Atmosphere 
 
-Sabrina Carpenter - Espresso
-1. With Confidence - Pâquerette (Without Me) (v)
-2. Stand Atlantic - Skinny Dipping (v)
-3. Jacob Sartorius - All My Friends (v)
-4. Apink - Be Myself 
-5. BOL4 - Some 
+Redbone - Come and Get Your Love - Single Version
+1. Redbone - Come and Get Your Love 
+2. Link Wray - Fire And Brimstone 
 
-Red Velvet - Cosmic
-1. Red Velvet - Color of Love (v)
-2. MONSTA X - If with U 
-3. NCT DOJAEJUNG - Perfume 
-4. IU - Blueming (v)
-5. WINNER - LOVE ME LOVE ME 
+Electric Light Orchestra - Mr. Blue Sky
+1. Electric Light Orchestra - Mr. Blue Sky 
+2. Billy Joel - Piano Man (v)
+3. Secondhand Serenade - Fall for You (Acoustic) 
+4. Geisha - Remuk Jantungku 
+5. Slank - Bali Bagus 
 
 CBF_CF
 
-Lyodra - Tak Selalu Memiliki - Ipar Adalah Maut Original Soundtrack
-1. Orion 001 - Tentram - Original Motion Picture Soundtrack 
-2. Virgoun - Bukti  (v)
-3. Ratu - Dear Diary  (v)
-4. Ecoutez - Percayalah  (v)
-5. Rio Febrian - Aku Bertahan  (v)
+Doja Cat - Agora Hills
+1. Daya - Insomnia 
+2. Ofenbach - Be Mine 
+3. Michael Bublé - Everything 
+4. Isyana Sarasvati - Cinta Pertama 
+5. Kaskade - Atmosphere 
 
-Sabrina Carpenter - Espresso
-1. With Confidence - Pâquerette (Without Me)  (v)
-2. Stand Atlantic - Skinny Dipping  (v)
-3. Jacob Sartorius - All My Friends  (v)
-4. Apink - Be Myself 
-5. BOL4 - Some 
+Redbone - Come and Get Your Love - Single Version
+1. Redbone - Come and Get Your Love 
+2. Link Wray - Fire And Brimstone 
 
-Red Velvet - Cosmic
-1. Red Velvet - Color of Love  (v)
-2. MONSTA X - If with U 
-3. NCT DOJAEJUNG - Perfume 
-4. IU - Blueming  (v)
-5. WINNER - LOVE ME LOVE ME 
+Electric Light Orchestra - Mr. Blue Sky
+1. Electric Light Orchestra - Mr. Blue Sky 
+2. Billy Joel - Piano Man 
+3. Secondhand Serenade - Fall for You (Acoustic) 
+4. Geisha - Remuk Jantungku 
+5. Slank - Bali Bagus 
 
 CF
 
-Lyodra - Tak Selalu Memiliki - Ipar Adalah Maut Original Soundtrack
-1. Geisha - Karena Kamu  (v)
-2. SAMSONS - Kenangan Terindah  (v)
-3. Vionita - Dia Masa Lalumu, Aku Masa Depanmu (v)
-4. Judika - Putus Atau Terus  (v)
-5. Mahalini - Bohongi Hati  (v)
+Doja Cat - Agora Hills
+1. The Weeknd - Is There Someone Else? 
+2. Chase Atlantic - Friends 
+3. Lana Del Rey - West Coast 
+4. Kanii - I Know - PR1SVX Edit (v)
+5. Brent Faiyaz - ALL MINE 
 
-Sabrina Carpenter - Espresso
-1. d4vd - Feel It - From The Original Series “Invincible” (v)
-2. Regard - You (v)
-3. Ruel - Painkiller (v)
-4. Raphael DeLove - The Man Who Can't Be Moved (v)
-5. lovelytheband - broken 
+Redbone - Come and Get Your Love - Single Version
+1. The Runaways - Cherry Bomb 
+2. Ram Jam - Black Betty 
+3. khai dreams - Sunkissed 
+4. Neil Diamond - Cracklin' Rosie (v)
+5. Jason Mraz - I'm Yours 
 
-Red Velvet - Cosmic
-1. RIIZE - Get A Guitar 
-2. Lim Young Woong - Love Always Run Away 
-3. Kim MinSeok - DrunKen Confession 
-4. TAEYEON - Dream (v)
-5. RIIZE - Love 119 
+Electric Light Orchestra - Mr. Blue Sky
+1. Spandau Ballet - Gold 
+2. Tsuko G. - Deja Vu (Initial D) 
+3. The Beatles - Day Tripper - Remastered 2015 (v)
+4. Kylie Minogue - Can't Get You out of My Head 
+5. The Runaways - Cherry Bomb 
 
 CF_CBF
 
-Lyodra - Tak Selalu Memiliki - Ipar Adalah Maut Original Soundtrack
-1. Virgoun - Orang Yang Sama (v)
-2. Yovie & Nuno - Mengejar Mimpi (v)
-3. Afgan - Bukan Cinta Biasa (v)
-4. Afgan - Kamu Yang Kutunggu (v)
-2. Sabrina Carpenter - Espresso 
+Doja Cat - Agora Hills
+1. Doja Cat - Ain't Shit 
+2. Lana Del Rey - West Coast 
+3. The Neighbourhood - Sweater Weather 
+4. Megan Thee Stallion - Sweetest Pie 
+5. Selena Gomez - Fetish (feat. Gucci Mane) 
 
-Sabrina Carpenter - Espresso
-1. Taylor Swift - 22 (v)
-2. The Chainsmokers - Something Just Like This (v)
-3. Taylor Swift - Picture To Burn (v)
-4. Sabrina Carpenter - bet u wanna (v)
-5. Ariana Grande - Moonlight (v)
+Redbone - Come and Get Your Love - Single Version
+1. Redbone - Come and Get Your Love 
+2. No Doubt - Just A Girl 
+3. Dexys Midnight Runners - Come On Eileen 
+4. Marvin Gaye - Trouble Man 
+5. Zedd - The Middle 
 
-Red Velvet - Cosmic
-1. NewJeans - Attention (v)
-2. NewJeans - Bubble Gum (v)
-3. RIIZE - Siren 
-4. BTS - 봄날 (v)
+Electric Light Orchestra - Mr. Blue Sky
+1. Creedence Clearwater Revival - Bad Moon Rising 
+2. Ramones - Blitzkrieg Bop - 2016 Remaster 
+3. Billy Joel - Piano Man 
+4. The Brook & The Bluff - Halfway Up 
+5. The Beatles - Norwegian Wood (This Bird Has Flown) - Remastered 2009
 """
 
 if __name__ == "__main__":
