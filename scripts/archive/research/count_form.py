@@ -87,100 +87,93 @@ def main(data):
 
 # Example input
 data = """
-dee, yang punya korelasi sama musik yang di kirim kemarin kasih (v) ya di belakang
-contoh: 1. artis - judul (v)
-
 CBF
 
-ENHYPEN - SHOUT OUT
-1. THEIA - High 
-2. HUH YUNJIN - I ≠ DOLL 
-3. Wanna One - Beautiful (v)
-4. ASTRO - ONE&ONLY 
-5. DAY6 - Afraid 
+SadBoyProlific - Dead and Cold
+1. SadBoyProlific - Dead and Cold (v)
+2. Josh A - Pain 
+3. Happily Sad - Why Am I Still Here 
+4. Kuzu Mellow - Interstellar 
+5. Zach Farache - Sweeterman 
 
-TREASURE - GOING CRAZY
-1. TOMORROW X TOGETHER - Sugar Rush Ride (v)
-2. Wanna One - Energetic (v)
-3. SUPER JUNIOR - 미인아 Bonamana 
-4. 2PM - Hands Up (v)
-5. Mathilde SPZ - (In Your Mind) I´m Naked 
+Radiohead - No Surprises
+1. Radiohead - No Surprises (v) 
+2. Franz Ferdinand - Eleanor Put Your Boots On 
+3. Meat Loaf - I'd Do Anything For Love (But I Won't Do That) - Live From The Beacon Theatre, New York, U.S.A./1995 
+4. Ari Lasso - Perbedaan 
+5. Local Natives - Mt. Washington 
 
-NIKI - High School in Jakarta
-1. NIKI - High School in Jakarta (v)
-2. Susan Carol - Green and Brown 
-3. Raisa - Teka Teki (v)
-4. Isyana Sarasvati - Tetap Dalam Jiwa (v)
-5. Arash Buana - lmao i just broke up 
+Cigarettes After Sex - K.
+1. Jirapah - Matahari 
+2. Slowdive - When the Sun Hits 
+3. Cigarettes After Sex - Apocalypse (v)
+4. my bloody valentine - only tomorrow 
+5. Spiritualized - Step into the Breeze 
 
 CBF_CF
 
-ENHYPEN - SHOUT OUT
-1. THEIA - High 
-2. HUH YUNJIN - I ≠ DOLL 
-3. Wanna One - Beautiful (v)
-4. DAY6 - Afraid 
-5. Stray Kids - DOMINO 
+SadBoyProlific - Dead and Cold
+1. SadBoyProlific - Dead and Cold (v)
+2. Josh A - Pain 
+3. Happily Sad - Why Am I Still Here 
+4. Kuzu Mellow - Interstellar 
+5. Zach Farache - Sweeterman 
 
-TREASURE - GOING CRAZY
-1. TOMORROW X TOGETHER - Sugar Rush Ride (v)
-2. Wanna One - Energetic (v)
-3. SUPER JUNIOR - 미인아 Bonamana 
-4. 2PM - Hands Up (v)
-5. Mathilde SPZ - (In Your Mind) I´m Naked 
+Radiohead - No Surprises
+1. Radiohead - No Surprises (v)
+2. Franz Ferdinand - Eleanor Put Your Boots On 
+3. Meat Loaf - I'd Do Anything For Love (But I Won't Do That) - Live From The Beacon Theatre, New York, U.S.A./1995 
+4. Ari Lasso - Perbedaan 
+5. Local Natives - Mt. Washington 
 
-NIKI - High School in Jakarta
-1. NIKI - High School in Jakarta (v)
-2. Susan Carol - Green and Brown 
-3. Raisa - Teka Teki (v)
-4. Isyana Sarasvati - Tetap Dalam Jiwa (v)
-5. Arash Buana - lmao i just broke up 
+Cigarettes After Sex - K.
+1. Jirapah - Matahari 
+2. Slowdive - When the Sun Hits 
+3. Cigarettes After Sex - Apocalypse (v)
+4. my bloody valentine - only tomorrow 
+5. Spiritualized - Step into the Breeze 
 
 CF
 
-ENHYPEN - SHOUT OUT
-1. ENHYPEN - Chaconne (v)
-2. ENHYPEN - Lucifer 
-3. I-LAND - Calling (Run To You) 
-4. I-LAND - Calling (Run To You) 
-5. Pamungkas - To the Bone (v)
+SadBoyProlific - Dead and Cold
+1. Blai$y - World Without You 
+2. Kina - Baby You're Worth It (v)
+3. Dibyo - Come Thru 
+4. Timmies - Loosing Interest 
+5. Mishaal Tamer - Kid Goku 
 
-TREASURE - GOING CRAZY
-1. NCT 127 - Regular - Korean Version (v)
-2. ENHYPEN - Drunk-Dazed (v)
-3. NCT DREAM - Drippin' (v)
-4. TREASURE - HELLO (v)
-5. NCT 127 - Simon Says (v)
+Radiohead - No Surprises
+1. Kane Strang - Two Hearts and No Brain 
+2. BUBBLE TEA AND CIGARETTES - 5AM Empanada with You 
+3. Yahya - keepyousafe 
+4. Radiohead - High And Dry 
+5. Radiohead - High and Dry 
 
-NIKI - High School in Jakarta
-1. Far East Movement - Freal Luv (feat. Marshmello, Chanyeol & Tinashe) 
-2. Westlife - Uptown Girl - Radio Edit 
-3. NewJeans - Super Shy (v)
-4. NIKI - Nightcrawlers 
-5. Mr. Big - Wild World - 2009 Remastered Version 
+Cigarettes After Sex - K.
+1. Luthfi Aulia - Langit Favorit 
+2. Cigarettes After Sex - Silver Sable 
+3. Kodaline - Moving On 
+4. Cigarettes After Sex - Tejano Blue 
+5. Yahya - keepyousafe 
 
 CF_CBF
 
-ENHYPEN - SHOUT OUT
-1. ENHYPEN - Forget Me Not 
-2. ENHYPEN - Outro : Cross the Line 
-3. Dreamcatcher - Silent Night 
-4. Dreamcatcher - Trap 
-5. Skinny Brown - No! Go Back (Feat. Han Yo Han) 
+SadBoyProlific - Dead and Cold
+2. Radiohead - No Surprises 
 
-TREASURE - GOING CRAZY
-1. TOMORROW X TOGETHER - Sugar Rush Ride (v)
-2. IVE - After LIKE (v)
-3. aespa - YEPPI YEPPI 
-4. Red Velvet - Red Flavor (v)
-5. XODIAC - SPECIAL LOVE 
+Radiohead - No Surprises
+1. Radiohead - Karma Police 
+2. Radiohead - Pyramid Song 
+3. Cage The Elephant - Rubber Ball - Unpeeled 
+4. John Lennon - Imagine - Remastered 2010 
+5. Oasis - Stop Crying Your Heart Out 
 
-NIKI - High School in Jakarta
-1. NIKI - Milk Teeth 
-2. NIKI - Milk Teeth 
-3. Carly Rae Jepsen - Call Me Maybe 
-4. Taylor Swift - How You Get The Girl 
-5. Rex Orange County - THE SHADE (v)
+Cigarettes After Sex - K.
+1. Cigarettes After Sex - Apocalypse (v)
+2. Cigarettes After Sex - Sesame Syrup 
+3. Arctic Monkeys - Why'd You Only Call Me When You're High? (v)
+4. Little Mix - Secret Love Song (feat. Jason Derulo) 
+5. Henry Moodie - drunk text
 """
 
 if __name__ == "__main__":
